@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>dockwrap</title>
+<style>
+  :root { --bg:#0f1117; --fg:#e6e6e6; --accent:#0ea5e9; --muted:#8b8b8b; --card:#171a23; --border:#232733; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: system-ui,-apple-system,Segoe UI,sans-serif; background:var(--bg); color:var(--fg); padding:18px; }
+  h1 { font-size:18px; margin:0 0 2px; }
+  .sub { color:var(--muted); font-size:12px; margin-bottom:16px; }
+  .app { display:flex; align-items:center; justify-content:space-between; padding:10px 12px; background:var(--card); border:1px solid var(--border); border-radius:8px; margin-bottom:8px; }
+  .app .name { font-weight:600; font-size:14px; }
+  .app .url { color:var(--muted); font-size:11px; margin-top:2px; word-break:break-all; }
+  button { background:var(--accent); color:#04121b; border:none; padding:7px 14px; border-radius:6px; cursor:pointer; font-weight:600; font-size:13px; }
+  button:hover { filter:brightness(1.1); }
+  .add { margin-top:14px; display:flex; gap:6px; }
+  input { flex:1; min-width:0; background:var(--card); border:1px solid var(--border); color:var(--fg); padding:8px; border-radius:6px; font-size:13px; }
+  #msg { color:var(--accent); font-size:12px; min-height:16px; margin-top:8px; }
+</style>
+</head>
+<body>
+  <h1>dockwrap</h1>
+  <div class="sub">Native desktop shells for self-hosted apps</div>
+  <div id="apps"></div>
+  <div class="add">
+    <input id="name" placeholder="app name (e.g. penpot)" />
+    <input id="url" placeholder="url (http://localhost:9001)" />
+    <button onclick="addApp()">Add</button>
+  </div>
+  <div id="msg"></div>
+
+<script>
+  const api = window.__TAURI__.core;
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  function render(apps) {
+    const el = document.getElementById('apps');
+    el.innerHTML = '';
+    if (!apps || !apps.length) {
+      el.innerHTML = '<div class="sub">No apps yet. Add one above.</div>';
+      return;
+    }
+    apps.forEach(a => {
+      const row = document.createElement('div');
+      row.className = 'app';
+      const info = document.createElement('div');
+      info.innerHTML = '<div class="name">' + escapeHtml(a.name) + '</div><div class="url">' + escapeHtml(a.url) + '</div>';
+      const btn = document.createElement('button');
+      btn.textContent = 'Open';
+      btn.onclick = () => api.invoke('open_app', { name: a.name });
+      row.appendChild(info);
+      row.appendChild(btn);
+      el.appendChild(row);
+    });
+  }
+
+  function setMsg(m) { document.getElementById('msg').textContent = m; }
+
+  function addApp() {
+    const name = document.getElementById('name').value.trim();
+    const url = document.getElementById('url').value.trim();
+    if (!name || !url) { setMsg('name and url are required'); return; }
+    api.invoke('add_app', { name, url, icon: null })
+      .then(() => {
+        setMsg('added ' + name);
+        document.getElementById('name').value = '';
+        document.getElementById('url').value = '';
+        refresh();
+      })
+      .catch(e => setMsg('error: ' + e));
+  }
+
+  function refresh() {
+    api.invoke('list_apps').then(render).catch(e => setMsg('load error: ' + e));
+  }
+
+  // Instant render from the apps Rust injected at load, then live refresh.
+  render(window.__APPS__ || []);
+  refresh();
+</script>
+</body>
+</html>
