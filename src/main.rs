@@ -63,11 +63,20 @@ const LINK_BRIDGE_JS: &str = r#"
 "#;
 
 /// Open a URL in the user's default browser, hidden (no console flash).
+#[cfg(windows)]
 fn launch_browser(url: &str) {
     use std::os::windows::process::CommandExt;
     let _ = std::process::Command::new("cmd")
         .args(["/C", "start", "", url])
         .creation_flags(0x08000000)
+        .spawn();
+}
+
+#[cfg(not(windows))]
+fn launch_browser(url: &str) {
+    // Best-effort: xdg-open (Linux) / open (macOS). Fails silently if absent.
+    let _ = std::process::Command::new(if cfg!(target_os = "macos") { "open" } else { "xdg-open" })
+        .arg(url)
         .spawn();
 }
 
