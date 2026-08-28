@@ -223,8 +223,9 @@ fn build_window(app: &tauri::AppHandle, label: &str, url: &str, icon: Option<&st
 
 /// Register the `dockwrap://` URL scheme with the OS (best-effort; failures are
 /// logged but never fatal). Windows uses the registry; Linux uses xdg-settings
-/// against a .desktop file. macOS registration is done at build time via
-/// tauri.conf.json `bundle.macOS` and is skipped here.
+/// against a .desktop file. On macOS the scheme is registered at install time
+/// via the `CFBundleURLTypes` entry in tauri.conf.json `bundle.macOS` (the
+/// bundle's Info.plist), so no runtime step is needed there.
 fn register_protocol() {
     let bin = match std::env::current_exe() {
         Ok(p) => p.to_string_lossy().into_owned(),

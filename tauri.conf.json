@@ -24,6 +24,10 @@
       "icons/icon.ico",
       "icons/icon.icns"
     ],
+    "macOS": {
+      "minimumSystemVersion": "10.13",
+      "infoPlist": "src/Info.plist"
+    },
     "windows": {
       "wix": {
         "language": "en-US"
