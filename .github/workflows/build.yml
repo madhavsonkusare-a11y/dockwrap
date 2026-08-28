@@ -77,19 +77,18 @@ jobs:
         with:
           path: artifacts
           pattern: dockwrap-*
-          merge-multiple: true
 
       - name: Publish to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            artifacts/**/*.msi
-            artifacts/**/*setup.exe
-            artifacts/**/*.dmg
-            artifacts/**/*.deb
-            artifacts/**/*.rpm
-            artifacts/**/*.AppImage
-            artifacts/dockwrap
-            artifacts/dockwrap.exe
-            artifacts/dockwrap.pdb
-            artifacts/dockwrap.d
+            artifacts/dockwrap-windows-latest/**/*.msi
+            artifacts/dockwrap-windows-latest/**/*setup.exe
+            artifacts/dockwrap-macos-latest/**/*.dmg
+            artifacts/dockwrap-ubuntu-latest/**/*.deb
+            artifacts/dockwrap-ubuntu-latest/**/*.rpm
+            artifacts/dockwrap-ubuntu-latest/**/*.AppImage
+            artifacts/dockwrap-ubuntu-latest/dockwrap
+            artifacts/dockwrap-windows-latest/dockwrap.exe
+            artifacts/dockwrap-windows-latest/dockwrap.pdb
+            artifacts/dockwrap-windows-latest/dockwrap.d
