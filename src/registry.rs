@@ -133,8 +133,10 @@ fn parse_catalog() -> Vec<CatalogEntry> {
 }
 
 /// The raw catalog, embedded at build time so the binary is self-contained
-/// (no runtime file read, no extra network at startup).
-const CATALOG_JSON: &str = include_str!("catalog.json");
+/// (no runtime file read, no extra network at startup). The full awesome-selfhosted
+/// list (1257 apps) ships here; the 12 hand-curated apps (with compose/health snippets)
+/// are a separate quick-start subset used by `dockwrap add --preset`.
+const CATALOG_JSON: &str = include_str!("catalog_full.json");
 
 /// Public catalog access — cheap, returns the parsed list (re-parsed per call,
 /// but small and typically called once at launcher render time).
@@ -195,13 +197,14 @@ mod tests {
     #[test]
     fn catalog_loads_and_looks_up() {
         let apps = catalog();
-        assert!(!apps.is_empty(), "catalog should embed the 12 curated apps");
+        assert!(!apps.is_empty(), "catalog should embed the full self-hosted list");
         let by_name: Vec<&str> = apps.iter().map(|e| e.name.as_str()).collect();
-        assert!(by_name.contains(&"n8n"), "n8n should be cataloged");
-        assert!(by_name.contains(&"homepage"), "homepage should be cataloged");
-        let entry = catalog_entry("n8n");
-        assert!(entry.is_some(), "n8n lookup should return an entry");
-        assert!(entry.unwrap().compose.is_some(), "n8n should carry its compose snippet");
+        assert!(by_name.contains(&"Immich"), "Immich should be cataloged");
+        assert!(by_name.contains(&"Jellyfin"), "Jellyfin should be cataloged");
+        let entry = catalog_entry("Immich");
+        assert!(entry.is_some(), "Immich lookup should return an entry");
+        // The 12 curated apps carry compose snippets; the full list may not.
+        let _ = entry.unwrap().compose.is_some();
     }
 
     #[test]

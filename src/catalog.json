@@ -2,7 +2,7 @@
   {
     "name": "homepage",
     "url": "http://localhost:3000",
-    "icon": "https://raw.githubusercontent.com/gethomepage/dashboard/master/docs/assets/logo.png",
+    "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/png/homepage.png",
     "health": "http://localhost:3000",
     "category": "dashboard",
     "description": "A highly customizable homepage for your homelab services.",
@@ -11,7 +11,7 @@
   {
     "name": "n8n",
     "url": "http://localhost:5678",
-    "icon": "https://raw.githubusercontent.com/n8n-io/n8n/master/docs/assets/n8n-logo.png",
+    "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/n8n.svg",
     "health": "http://localhost:5678/healthz",
     "category": "automation",
     "description": "Fair-code workflow automation platform.",
@@ -20,7 +20,7 @@
   {
     "name": "open-webui",
     "url": "http://localhost:8080",
-    "icon": "https://raw.githubusercontent.com/openwebui/openwebui/main/static/logo.svg",
+    "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/open-webui.svg",
     "health": "http://localhost:8080/api/health",
     "category": "ai",
     "description": "WebUI for LLMs — run Ollama or use your own model endpoint.",
@@ -29,7 +29,7 @@
   {
     "name": "immich",
     "url": "http://localhost:30049",
-    "icon": "https://raw.githubusercontent.com/immich-app/immich/main/design/Immich%20Logo.svg",
+    "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/immich.svg",
     "health": "http://localhost:30049/api",
     "category": "media",
     "description": "Open-source photo and video management solution.",
@@ -38,7 +38,7 @@
   {
     "name": "paperless-ngx",
     "url": "http://localhost:8000",
-    "icon": "https://raw.githubusercontent.com/paperless-ngx/paperless-ngx/master/docs/assets/logo.png",
+    "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/paperless-ngx.svg",
     "health": "http://localhost:8000",
     "category": "productivity",
     "description": "Document management system for scanning, OCR, and archival.",
@@ -47,7 +47,7 @@
   {
     "name": "memos",
     "url": "http://localhost:5230",
-    "icon": "https://raw.githubusercontent.com/usememos/memos/main/logo.svg",
+    "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/memos.svg",
     "health": "http://localhost:5230",
     "category": "productivity",
     "description": "A privacy-first, open-source memo app.",
@@ -56,7 +56,7 @@
   {
     "name": "stirling-pdf",
     "url": "http://localhost:8080",
-    "icon": "https://raw.githubusercontent.com/stirlingtools/stirling-pdf/main/docs/images/stirling-logo.svg",
+    "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/stirling-pdf.svg",
     "health": "http://localhost:8080",
     "category": "productivity",
     "description": "Free, open-source PDF manipulation tools (split, merge, OCR, compress).",
@@ -65,7 +65,7 @@
   {
     "name": "uptime-kuma",
     "url": "http://localhost:3001",
-    "icon": "https://raw.githubusercontent.com/louislam/uptime-kuma/master/public/kuma-fav.png",
+    "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/uptime-kuma.svg",
     "health": "http://localhost:3001",
     "category": "monitoring",
     "description": "Fancy self-hosted monitoring tool with an Uptime Robot-like UI.",
@@ -74,7 +74,7 @@
   {
     "name": "changedetection",
     "url": "http://localhost:5000",
-    "icon": "https://raw.githubusercontent.com/dgtlmoon/changedetection.io/master/changedetectionio/static/images/favicon.ico",
+    "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/changedetection.svg",
     "health": "http://localhost:5000",
     "category": "monitoring",
     "description": "Track webpage changes and get notifications on updates.",
@@ -83,7 +83,7 @@
   {
     "name": "filebrowser",
     "url": "http://localhost:80",
-    "icon": "https://raw.githubusercontent.com/filebrowser/filebrowser/master/frontend/public/favicon/apple-touch-icon.png",
+    "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/filebrowser.svg",
     "health": "http://localhost:80",
     "category": "file-management",
     "description": "Manage files on your server via a web UI.",
@@ -92,7 +92,7 @@
   {
     "name": "glance",
     "url": "http://localhost:8080",
-    "icon": "https://raw.githubusercontent.com/glance-hq/glance/master/docs/images/logo.png",
+    "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/glance.svg",
     "health": "http://localhost:8080",
     "category": "dashboard",
     "description": "Dashboard for your home monitoring — simple, fast, privacy-focused.",
@@ -101,7 +101,7 @@
   {
     "name": "coolify",
     "url": "http://localhost:8000",
-    "icon": "https://raw.githubusercontent.com/coollabs-io/coolify/master/frontend/public/favicon.png",
+    "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/coolify.svg",
     "health": "http://localhost:8000",
     "category": "deployment",
     "description": "Open-source & self-hostable PaaS — deploy apps, databases, and more.",

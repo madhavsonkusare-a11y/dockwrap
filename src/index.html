@@ -268,6 +268,16 @@
   .wizard .catalog-card:active { border-color: var(--accent-hover); transition: none; }
   .wizard .catalog-card .cat-name { font-size: 12px; font-weight: 600; }
   .wizard .catalog-card .cat-cat { font-size: 9px; color: var(--muted); text-transform: uppercase; }
+  /* Category filter dropdown (step 1 catalog) */
+  .wizard .cat-filter {
+    display: flex; align-items: center; gap: var(--space-1);
+    margin: var(--space-2) 0 var(--space-2); font-size: 11px; color: var(--muted);
+  }
+  .wizard .cat-filter select {
+    flex: 1; background: var(--bg); border: 1px solid var(--border);
+    color: var(--fg); padding: 4px 8px; border-radius: var(--radius-sm);
+    font-family: inherit; font-size: 11px; cursor: pointer;
+  }
 </style>
 </head>
 <body>
@@ -492,9 +502,18 @@
   function htmlCatalogSection() {
     const apps = window.__CATALOG || [];
     if (!apps.length) return '';
-    const parts = ['<p class="catalog-hint">Or pick a popular app to auto-fill:</p><div class="catalog-grid">'];
+    // Distinct categories (sorted), with "All" first
+    const cats = ['All', ...new Set(apps.map(a => a.category).filter(Boolean).sort())];
+    let parts = [
+      '<p class="catalog-hint">Or pick a popular app to auto-fill:</p>',
+      '<div class="cat-filter"><label for="catSelect">Filter:</label>',
+      '<select id="catSelect">',
+      cats.map(c => '<option value="' + escapeHtml(c) + '">' + escapeHtml(c) + '</option>').join(''),
+      '</select></div>',
+      '<div class="catalog-grid">'
+    ];
     apps.forEach(a => {
-      parts.push('<div class="catalog-card" data-app="' + escapeHtml(a.name) + '">' +
+      parts.push('<div class="catalog-card" data-cat="' + escapeHtml(a.category || '') + '" data-name="' + escapeHtml(a.name) + '">' +
         '<span class="cat-name">' + escapeHtml(a.name) + '</span>' +
         '<span class="cat-cat">' + escapeHtml(a.category || 'app') + '</span>' +
         '</div>');
@@ -547,9 +566,20 @@
   $('wizardBody').addEventListener('click', e => {
     const card = e.target.closest('.catalog-card');
     if (!card) return;
-    const name = card.dataset.app;
+    const name = card.dataset.name;
     const found = (window.__CATALOG || []).find(a => a.name === name);
     if (found) pickCatalogApp(found);
+  });
+
+  // Category filter: hide cards not matching the selected category.
+  $('wizardBody').addEventListener('change', e => {
+    if (e.target.id !== 'catSelect') return;
+    const val = e.target.value;
+    const cards = document.querySelectorAll('#wizardBody .catalog-card');
+    cards.forEach(c => {
+      const show = val === 'All' || c.dataset.cat === val;
+      c.style.display = show ? '' : 'none';
+    });
   });
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && $('wizardBackdrop').style.display === 'flex') closeWizard();
