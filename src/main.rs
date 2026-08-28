@@ -1,13 +1,22 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use serde::Deserialize;
-use tauri::{WebviewUrl, WebviewWindowBuilder};
+use tauri::{
+    menu::{Menu, MenuItem},
+    tray::TrayIconBuilder,
+    Manager, WebviewUrl, WebviewWindowBuilder,
+};
 
 #[derive(Deserialize, Clone, serde::Serialize)]
 struct AppDef {
     name: String,
     url: String,
     icon: Option<String>,
+    /// When true the app's window has NO taskbar button — it lives only as a
+    /// tray-pinned window (e.g. a long-running local service like Penpot's
+    /// Docker stack). Defaults to false for normal apps.
+    #[serde(default)]
+    skip_taskbar: bool,
 }
 
 const EXAMPLE_URL: &str = "http://localhost:9001/#/workspace/3364d985-c11e-8197-8008-89bcbd1341e9/3364d985-c11e-8197-8008-89c3aa739819";
@@ -100,9 +109,51 @@ fn percent_decode_str(s: &str) -> String {
     String::from_utf8_lossy(&out).into_owned()
 }
 
-fn build_window(app: &tauri::AppHandle, label: &str, url: &str) {
-    if let Ok(parsed) = url.parse::<tauri::Url>() {
-        let _ = WebviewWindowBuilder::new(app, label, WebviewUrl::External(parsed))
+#[cfg(windows)]
+fn set_window_toolwindow(hwnd: isize) {
+    use std::os::raw::c_void;
+    use windows_sys::Win32::UI::WindowsAndMessaging::{
+        GetWindowLongPtrW, SetWindowLongPtrW, GWL_EXSTYLE, WS_EX_APPWINDOW, WS_EX_TOOLWINDOW,
+    };
+    unsafe {
+        let h = hwnd as *mut c_void;
+        let ex = GetWindowLongPtrW(h, GWL_EXSTYLE) as u32;
+        // Drop the taskbar button (WS_EX_APPWINDOW) and adopt the tool-window
+        // style. This is the reliable Windows hide that Tauri's skip_taskbar
+        // sometimes misses (tauri-apps/tauri#10422). Tradeoff: the window also
+        // leaves Alt+Tab.
+        let new_ex = (ex & !WS_EX_APPWINDOW) | WS_EX_TOOLWINDOW;
+        SetWindowLongPtrW(h, GWL_EXSTYLE, new_ex as isize);
+    }
+}
+
+/// Apply the chosen taskbar behavior to a freshly built window.
+/// - `skip_taskbar == true`: window gets NO taskbar button. On Windows we set
+///   WS_EX_TOOLWINDOW directly (reliable); on other platforms we use Tauri's
+///   skip_taskbar. macOS ignores it (unsupported), which is fine.
+fn apply_taskbar_visibility(win: &tauri::WebviewWindow, skip_taskbar: bool) {
+    if !skip_taskbar {
+        return;
+    }
+    #[cfg(windows)]
+    {
+        use raw_window_handle::HasWindowHandle;
+        if let Ok(handle) = win.window_handle() {
+            use raw_window_handle::RawWindowHandle;
+            if let RawWindowHandle::Win32(w) = handle.into() {
+                set_window_toolwindow(w.hwnd.get() as isize);
+            }
+        }
+    }
+    #[cfg(not(windows))]
+    {
+        let _ = win.skip_taskbar(true);
+    }
+}
+
+fn build_window(app: &tauri::AppHandle, label: &str, appdef: &AppDef) {
+    if let Ok(parsed) = appdef.url.parse::<tauri::Url>() {
+        if let Some(win) = WebviewWindowBuilder::new(app, label, WebviewUrl::External(parsed))
             .title(label)
             .inner_size(1600.0, 900.0)
             .resizable(true)
@@ -116,7 +167,11 @@ fn build_window(app: &tauri::AppHandle, label: &str, url: &str) {
                 true
             })
             .build()
-            .and_then(|w| w.set_focus());
+            .ok()
+        {
+            apply_taskbar_visibility(&win, appdef.skip_taskbar);
+            let _ = win.set_focus();
+        }
     }
 }
 
@@ -129,15 +184,59 @@ fn list_apps() -> Vec<AppDef> {
 fn add_app(name: String, url: String, icon: Option<String>) {
     let mut apps = load_apps();
     apps.retain(|a| a.name != name);
-    apps.push(AppDef { name, url, icon });
+    apps.push(AppDef { name, url, icon, skip_taskbar: false });
     save_apps(&apps);
 }
 
 #[tauri::command]
 fn open_app(app_handle: tauri::AppHandle, name: String) {
     if let Some(appdef) = load_apps().iter().find(|a| a.name == name) {
-        build_window(&app_handle, &appdef.name, &appdef.url);
+        build_window(&app_handle, &appdef.name, appdef);
     }
+}
+
+/// Build the dockwrap system tray. The tray icon is what sits in the
+/// notification / hidden-icons area; from its menu the user can open any
+/// registered app, open the launcher, or quit.
+fn build_tray(app: &tauri::AppHandle) -> tauri::Result<()> {
+    let open_penpot = MenuItem::with_id(app, "open_penpot", "Open Penpot", true, None::<&str>)?;
+    let open_launcher =
+        MenuItem::with_id(app, "open_launcher", "Open Launcher", true, None::<&str>)?;
+    let quit = MenuItem::with_id(app, "quit", "Quit dockwrap", true, None::<&str>)?;
+    let menu = Menu::with_items(app, &[&open_penpot, &open_launcher, &quit])?;
+
+    let _tray = TrayIconBuilder::with_id("dockwrap-main")
+        .tooltip("dockwrap")
+        .icon(app.default_window_icon().cloned().unwrap())
+        .menu(&menu)
+        .show_menu_on_left_click(false)
+        .on_menu_event(|app, event| match event.id.as_ref() {
+            "open_penpot" => {
+                if let Some(appdef) = load_apps().iter().find(|a| a.name == "penpot") {
+                    build_window(app, &appdef.name, appdef);
+                }
+            }
+            "open_launcher" => {
+                if let Some(win) = app.get_webview_window("launcher") {
+                    let _ = win.show();
+                    let _ = win.set_focus();
+                } else {
+                    let _ = WebviewWindowBuilder::new(
+                        app,
+                        "launcher",
+                        WebviewUrl::App("index.html".into()),
+                    )
+                    .title("dockwrap")
+                    .inner_size(460.0, 340.0)
+                    .resizable(true)
+                    .build();
+                }
+            }
+            "quit" => app.exit(0),
+            _ => {}
+        })
+        .build(app)?;
+    Ok(())
 }
 
 fn main() {
@@ -149,8 +248,14 @@ fn main() {
                     name: "penpot".into(),
                     url: EXAMPLE_URL.into(),
                     icon: None,
+                    // Long-running local service: tray-pinned, no taskbar button.
+                    skip_taskbar: true,
                 }]);
             }
+            // Build the dockwrap system tray (the thing that lives in the
+            // hidden-icons / notification area). It lets the user re-open any
+            // app and quit cleanly.
+            build_tray(app.handle())?;
             let apps_json =
                 serde_json::to_string(&load_apps()).unwrap_or_else(|_| "[]".into());
             let init = format!("window.__APPS__ = {};", apps_json);
