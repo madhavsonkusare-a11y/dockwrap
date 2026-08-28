@@ -5,27 +5,128 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>dockwrap</title>
 <style>
-  :root { --bg:#0f1117; --fg:#e6e6e6; --accent:#0ea5e9; --muted:#8b8b8b; --card:#171a23; --border:#232733; }
+  /* HeroUI v3 visual language, translated to vanilla CSS (no React/Tailwind). */
+  :root {
+    /* Surfaces (matches HeroUI dark theme) */
+    --bg: #0f0f0f;            /* --heroui-background */
+    --card: #171a23;           /* --heroui-card (elevated) */
+    --border: #232733;        /* ~rgba(255 255 255 / 0.06) */
+    --fg: #e6e6e6;            /* --heroui-foreground */
+    --muted: #8b8b8b;         /* --heroui-muted */
+    --accent: #3b82f6;        /* --heroui-primary (blue-500) */
+
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
   * { box-sizing: border-box; }
-  body { margin:0; font-family: system-ui,-apple-system,Segoe UI,sans-serif; background:var(--bg); color:var(--fg); padding:18px; }
-  h1 { font-size:18px; margin:0 0 2px; }
-  .sub { color:var(--muted); font-size:12px; margin-bottom:16px; }
-  .app { display:flex; align-items:center; justify-content:space-between; padding:10px 12px; background:var(--card); border:1px solid var(--border); border-radius:8px; margin-bottom:8px; }
-  .app .info { display:flex; align-items:center; gap:10px; min-width:0; }
-  .app .logo { width:28px; height:28px; border-radius:6px; object-fit:cover; flex:0 0 auto; background:var(--border); }
-  .app .meta { min-width:0; }
-  .app .name { font-weight:600; font-size:14px; }
-  .app .url { color:var(--muted); font-size:11px; margin-top:2px; word-break:break-all; }
-  .badge { display:inline-block; font-size:10px; color:#7dd3fc; border:1px solid #0c4a6e; border-radius:4px; padding:0 4px; margin-left:6px; vertical-align:middle; }
-  button { background:var(--accent); color:#04121b; border:none; padding:7px 14px; border-radius:6px; cursor:pointer; font-weight:600; font-size:13px; }
-  button:hover { filter:brightness(1.1); }
-  .actions { display:flex; gap:6px; flex:0 0 auto; }
-  .actions .ghost { background:var(--card); color:var(--fg); border:1px solid var(--border); }
-  .add { margin-top:14px; display:flex; flex-wrap:wrap; gap:6px; }
-  input { flex:1; min-width:120px; background:var(--card); border:1px solid var(--border); color:var(--fg); padding:8px; border-radius:6px; font-size:13px; }
-  details.adv { margin-top:8px; }
-  details.adv summary { cursor:pointer; color:var(--muted); font-size:12px; }
-  #msg { color:var(--accent); font-size:12px; min-height:16px; margin-top:8px; }
+
+  body {
+    margin: 0;
+    padding: 22px;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+    min-width: 460px;
+  }
+
+  h1 { font-size: 18px; font-weight: 600; margin: 0 0 2px; }
+  .sub { color: var(--muted); font-size: 12px; margin-bottom: 18px; }
+
+  /* ---- App card (mirrors HeroUI Card: surface + border + elevation) ---- */
+  .app {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 14px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: 0 4px 30px 0 rgba(0, 0, 0, 0.20);
+    margin-bottom: 8px;
+  }
+
+  .app .info { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
+  .app .logo {
+    width: 32px; height: 32px;
+    border-radius: 6px;
+    object-fit: cover;
+    flex: 0 0 auto;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .app .meta { min-width: 0; }
+  .app .name { font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 6px; }
+  .app .url { color: var(--muted); font-size: 11px; margin-top: 2px; word-break: break-all; }
+
+  /* ---- Badge (HeroUI-style pill) ---- */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 10px;
+    font-weight: 600;
+    color: #7dd3fc;            /* sky-300 */
+    background: rgba(30, 64, 175, 0.18);  /* blue-900/35 */
+    border: 1px solid rgba(59, 130, 246, 0.30);
+    border-radius: 999px;
+    padding: 2px 8px;
+  }
+
+  /* ---- Buttons (HeroUI Primary + Ghost variants) ---- */
+  button {
+    background: var(--accent);
+    color: #04121b;
+    border: none;
+    padding: 7px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px;
+    transition: filter 150ms ease, opacity 150ms ease;
+    flex: 0 0 auto;
+  }
+  button:hover { filter: brightness(1.1); }
+  button:active { filter: brightness(0.95); }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* Ghost variant — for secondary actions (Shortcut / Remove) */
+  button.ghost {
+    background: var(--card);
+    color: var(--fg);
+    border: 1px solid var(--border);
+  }
+  button.ghost:hover { background: #1f2430; }
+
+  .actions { display: flex; gap: 6px; align-items: center; }
+
+  /* ---- Add form ---- */
+  .add { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px; }
+  input {
+    flex: 1; min-width: 120px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--fg);
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 13px;
+  }
+  input::placeholder { color: var(--muted); }
+
+  /* ---- Advanced section ---- */
+  details.adv {
+    margin-top: 10px;
+  }
+  details.adv summary {
+    cursor: pointer;
+    color: var(--muted);
+    font-size: 12px;
+    user-select: none;
+  }
+
+  #msg { color: var(--accent); font-size: 12px; min-height: 16px; margin-top: 8px; }
 </style>
 </head>
 <body>
@@ -51,7 +152,7 @@
   const api = window.__TAURI__.core;
 
   function escapeHtml(s) {
-    return String(s).replace(/[&<>\"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   }
 
   function render(apps) {
@@ -76,31 +177,36 @@
       const meta = document.createElement('div');
       meta.className = 'meta';
       const composeBadge = a.compose ? '<span class="badge">🐳 compose</span>' : '';
-      meta.innerHTML = '<div class="name">' + escapeHtml(a.name) + composeBadge + '</div>' +
-                       '<div class="url">' + escapeHtml(a.url) + '</div>';
+      meta.innerHTML =
+        '<div class="name">' + escapeHtml(a.name) + composeBadge + '</div>' +
+        '<div class="url">' + escapeHtml(a.url) + '</div>';
       info.appendChild(meta);
       row.appendChild(info);
 
       const actions = document.createElement('div');
       actions.className = 'actions';
-      const btn = document.createElement('button');
-      btn.textContent = 'Open';
-      btn.onclick = () => api.invoke('open_app', { name: a.name });
-      const sc = document.createElement('button');
-      sc.textContent = 'Shortcut';
-      sc.className = 'ghost';
-      sc.onclick = () => api.invoke('create_shortcut', { name: a.name })
+
+      const openBtn = document.createElement('button');
+      openBtn.textContent = 'Open';
+      openBtn.onclick = () => api.invoke('open_app', { name: a.name });
+
+      const scBtn = document.createElement('button');
+      scBtn.textContent = 'Shortcut';
+      scBtn.className = 'ghost';
+      scBtn.onclick = () => api.invoke('create_shortcut', { name: a.name })
         .then(p => setMsg('shortcut: ' + p))
         .catch(e => setMsg('shortcut error: ' + e));
-      const rm = document.createElement('button');
-      rm.textContent = 'Remove';
-      rm.className = 'ghost';
-      rm.onclick = () => api.invoke('remove_app_cmd', { name: a.name })
+
+      const rmBtn = document.createElement('button');
+      rmBtn.textContent = 'Remove';
+      rmBtn.className = 'ghost';
+      rmBtn.onclick = () => api.invoke('remove_app_cmd', { name: a.name })
         .then(ok => { if (ok) { setMsg('removed ' + a.name); refresh(); } else setMsg('not found: ' + a.name); })
         .catch(e => setMsg('remove error: ' + e));
-      actions.appendChild(btn);
-      actions.appendChild(sc);
-      actions.appendChild(rm);
+
+      actions.appendChild(openBtn);
+      actions.appendChild(scBtn);
+      actions.appendChild(rmBtn);
       row.appendChild(actions);
 
       el.appendChild(row);
