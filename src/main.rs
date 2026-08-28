@@ -277,6 +277,11 @@ fn add_app(
 }
 
 #[tauri::command]
+fn remove_app_cmd(name: String) -> bool {
+    registry::remove_app(&name)
+}
+
+#[tauri::command]
 fn create_shortcut(name: String) -> Result<String, String> {
     let apps = registry::load_apps();
     let appdef = apps
@@ -370,7 +375,13 @@ fn main() {
             let _ = win.set_focus();
             Ok(())
         })
-        .invoke_handler(tauri::generate_handler![list_apps, add_app, open_app, create_shortcut])
+        .invoke_handler(tauri::generate_handler![
+            list_apps,
+            add_app,
+            open_app,
+            create_shortcut,
+            remove_app_cmd
+        ])
         .run(tauri::generate_context!())
         .expect("error while running dockwrap");
 }
