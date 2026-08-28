@@ -7,16 +7,31 @@
 <style>
   /* HeroUI v3 visual language, translated to vanilla CSS (no React/Tailwind). */
   :root {
-    /* Surfaces (matches HeroUI dark theme) */
+    /* --- Design tokens (single source of truth) --- */
     --bg: #0f0f0f;            /* --heroui-background */
-    --card: #171a23;           /* --heroui-card (elevated) */
+    --card: #171a23;          /* --heroui-card (elevated) */
     --border: #232733;        /* ~rgba(255 255 255 / 0.06) */
     --fg: #e6e6e6;            /* --heroui-foreground */
-    --muted: #8b8b8b;         /* --heroui-muted */
+    --muted: #8b8b8b;         /* --heroui-muted (passes WCAG AA on --bg) */
     --accent: #3b82f6;        /* --heroui-primary (blue-500) */
+    --accent-hover: #60a5fa;  /* blue-400 */
+    --danger: #f87171;        /* red-400 — destructive affordance */
+    --danger-strong: #ef4444; /* red-500 */
 
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-    font-size: 13px;
+    --font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --font-size: 13px;
+
+    --radius: 8px;
+    --radius-sm: 6px;
+
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+
+    font-family: var(--font-family);
+    font-size: var(--font-size);
     line-height: 1.5;
   }
 
@@ -24,35 +39,38 @@
 
   body {
     margin: 0;
-    padding: 22px;
+    padding: var(--space-5);
+    max-width: 460px;
     background: var(--bg);
     color: var(--fg);
     font-family: var(--font-family);
     font-size: var(--font-size);
-    min-width: 460px;
   }
 
-  h1 { font-size: 18px; font-weight: 600; margin: 0 0 2px; }
-  .sub { color: var(--muted); font-size: 12px; margin-bottom: 18px; }
+  h1 { font-size: 18px; font-weight: 600; margin: 0 0 var(--space-1); }
+  .sub { color: var(--muted); font-size: 12px; margin-bottom: var(--space-4); }
+
+  /* ---- App list (semantic <ul>) ---- */
+  ul.app-list { list-style: none; margin: 0; padding: 0; }
 
   /* ---- App card (mirrors HeroUI Card: surface + border + elevation) ---- */
   .app {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
-    padding: 12px 14px;
+    gap: var(--space-3);
+    padding: var(--space-3) 14px;
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: var(--radius);
     box-shadow: 0 4px 30px 0 rgba(0, 0, 0, 0.20);
-    margin-bottom: 8px;
+    margin-bottom: var(--space-2);
   }
 
   .app .info { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
   .app .logo {
     width: 32px; height: 32px;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     object-fit: cover;
     flex: 0 0 auto;
     background: var(--border);
@@ -60,7 +78,7 @@
   }
   .app .meta { min-width: 0; }
   .app .name { font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 6px; }
-  .app .url { color: var(--muted); font-size: 11px; margin-top: 2px; word-break: break-all; }
+  .app .url { color: var(--muted); font-size: 11px; margin-top: var(--space-1); word-break: break-all; }
 
   /* ---- Badge (HeroUI-style pill) ---- */
   .badge {
@@ -72,27 +90,28 @@
     background: rgba(30, 64, 175, 0.18);  /* blue-900/35 */
     border: 1px solid rgba(59, 130, 246, 0.30);
     border-radius: 999px;
-    padding: 2px 8px;
+    padding: var(--space-1) 8px;
   }
 
-  /* ---- Buttons (HeroUI Primary + Ghost variants) ---- */
+  /* ---- Buttons (HeroUI Primary + Ghost + Danger variants) ---- */
   button {
     background: var(--accent);
     color: #04121b;
-    border: none;
+    border: 1px solid transparent;
     padding: 7px 14px;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     cursor: pointer;
+    font-family: inherit;
     font-weight: 600;
     font-size: 13px;
-    transition: filter 150ms ease, opacity 150ms ease;
+    transition: filter 150ms ease, background-color 150ms ease, border-color 150ms ease;
     flex: 0 0 auto;
   }
   button:hover { filter: brightness(1.1); }
   button:active { filter: brightness(0.95); }
   button:disabled { opacity: 0.5; cursor: not-allowed; }
 
-  /* Ghost variant — for secondary actions (Shortcut / Remove) */
+  /* Ghost variant — for secondary actions (Shortcut) */
   button.ghost {
     background: var(--card);
     color: var(--fg);
@@ -100,45 +119,75 @@
   }
   button.ghost:hover { background: #1f2430; }
 
-  .actions { display: flex; gap: 6px; align-items: center; }
+  /* Danger (ghost) variant — for destructive action (Remove).
+     Distinct from Shortcut so a slip doesn't delete an app. */
+  button.danger {
+    background: var(--card);
+    color: var(--danger);
+    border: 1px solid var(--border);
+  }
+  button.danger:hover {
+    background: rgba(248, 113, 113, 0.12);
+    border-color: var(--danger);
+    color: var(--danger-strong);
+  }
+
+  .actions { display: flex; gap: var(--space-2); align-items: center; }
 
   /* ---- Add form ---- */
-  .add { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px; }
-  input {
-    flex: 1; min-width: 120px;
+  .add { margin-top: var(--space-4); display: flex; flex-wrap: wrap; gap: var(--space-2); }
+  .add input {
+    flex: 1 1 120px;
+    min-width: 0;
     background: var(--card);
     border: 1px solid var(--border);
     color: var(--fg);
     padding: 8px;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
+    font-family: inherit;
     font-size: 13px;
   }
-  input::placeholder { color: var(--muted); }
+  .add input::placeholder { color: var(--muted); }
+  .add button { flex: 0 0 auto; }
 
-  /* ---- Advanced section ---- */
-  details.adv {
-    margin-top: 10px;
-  }
+  /* ---- Advanced section (progressive disclosure) ---- */
+  details.adv { margin-top: var(--space-2); }
   details.adv summary {
     cursor: pointer;
     color: var(--muted);
     font-size: 12px;
     user-select: none;
+    padding: var(--space-1) 0;
   }
 
-  #msg { color: var(--accent); font-size: 12px; min-height: 16px; margin-top: 8px; }
+  /* ---- Status / feedback line (success vs error are color-distinct) ---- */
+  #msg { font-size: 12px; min-height: 16px; margin-top: var(--space-2); color: var(--accent); }
+  #msg.err { color: var(--danger); }
+
+  /* ---- Accessibility: visible keyboard focus (WCAG 2.4.7) ---- */
+  button:focus-visible,
+  input:focus-visible,
+  summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* ---- Respect reduced-motion preference ---- */
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
 </style>
 </head>
 <body>
   <h1>dockwrap</h1>
   <div class="sub">Native desktop shells for self-hosted apps</div>
-  <div id="apps"></div>
-  <div class="add">
+  <ul id="apps" class="app-list"></ul>
+  <form id="addForm" class="add" onsubmit="return false;">
     <input id="name" placeholder="app name (e.g. penpot)" />
     <input id="url" placeholder="url (http://localhost:9001)" />
     <input id="icon" placeholder="icon path (optional)" />
-    <button onclick="addApp()">Add</button>
-  </div>
+    <button type="submit">Add</button>
+  </form>
   <details class="adv">
     <summary>Advanced (Docker Compose boot)</summary>
     <div class="add">
@@ -155,15 +204,24 @@
     return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   }
 
+  function setMsg(m, isError) {
+    const el = document.getElementById('msg');
+    el.textContent = m;
+    el.className = isError ? 'err' : '';
+  }
+
   function render(apps) {
     const el = document.getElementById('apps');
     el.innerHTML = '';
     if (!apps || !apps.length) {
-      el.innerHTML = '<div class="sub">No apps yet. Add one above.</div>';
+      const empty = document.createElement('li');
+      empty.className = 'sub';
+      empty.textContent = 'No apps yet. Add one below.';
+      el.appendChild(empty);
       return;
     }
     apps.forEach(a => {
-      const row = document.createElement('div');
+      const row = document.createElement('li');
       row.className = 'app';
 
       const info = document.createElement('div');
@@ -195,14 +253,18 @@
       scBtn.className = 'ghost';
       scBtn.onclick = () => api.invoke('create_shortcut', { name: a.name })
         .then(p => setMsg('shortcut: ' + p))
-        .catch(e => setMsg('shortcut error: ' + e));
+        .catch(e => setMsg('shortcut error: ' + e, true));
 
       const rmBtn = document.createElement('button');
       rmBtn.textContent = 'Remove';
-      rmBtn.className = 'ghost';
-      rmBtn.onclick = () => api.invoke('remove_app_cmd', { name: a.name })
-        .then(ok => { if (ok) { setMsg('removed ' + a.name); refresh(); } else setMsg('not found: ' + a.name); })
-        .catch(e => setMsg('remove error: ' + e));
+      rmBtn.className = 'danger';
+      rmBtn.onclick = () => {
+        // Defense-in-depth: destructive action needs explicit confirmation.
+        if (!window.confirm('Remove "' + a.name + '"? This cannot be undone.')) return;
+        api.invoke('remove_app_cmd', { name: a.name })
+          .then(ok => { if (ok) { setMsg('removed ' + a.name); refresh(); } else setMsg('not found: ' + a.name, true); })
+          .catch(e => setMsg('remove error: ' + e, true));
+      };
 
       actions.appendChild(openBtn);
       actions.appendChild(scBtn);
@@ -213,12 +275,10 @@
     });
   }
 
-  function setMsg(m) { document.getElementById('msg').textContent = m; }
-
   function addApp() {
     const name = document.getElementById('name').value.trim();
     const url = document.getElementById('url').value.trim();
-    if (!name || !url) { setMsg('name and url are required'); return; }
+    if (!name || !url) { setMsg('name and url are required', true); return; }
     const icon = document.getElementById('icon').value.trim();
     const compose = document.getElementById('compose').value.trim();
     const health = document.getElementById('health').value.trim();
@@ -237,11 +297,13 @@
         document.getElementById('health').value = '';
         refresh();
       })
-      .catch(e => setMsg('error: ' + e));
+      .catch(e => setMsg('error: ' + e, true));
   }
 
+  document.getElementById('addForm').addEventListener('submit', addApp);
+
   function refresh() {
-    api.invoke('list_apps').then(render).catch(e => setMsg('load error: ' + e));
+    api.invoke('list_apps').then(render).catch(e => setMsg('load error: ' + e, true));
   }
 
   // Instant render from the apps Rust injected at load, then live refresh.

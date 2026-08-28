@@ -369,7 +369,7 @@ fn main() {
                 WebviewUrl::App("index.html".into()),
             )
             .title("dockwrap")
-            .inner_size(460.0, 340.0)
+            .inner_size(480.0, 420.0)
             .resizable(true)
             .initialization_script(&script)
             .build()?;
