@@ -55,11 +55,23 @@ jobs:
             target/release/dockwrap.exe
           if-no-files-found: ignore
 
+  # Single publish job: collects artifacts from every platform and creates the
+  # GitHub Release once, avoiding the softprops/action-gh-release concurrency
+  # race that happens when each matrix job publishes to the same tag at once.
+  release:
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v5
+        with:
+          path: artifacts
+          pattern: dockwrap-*
+          merge-multiple: true
+
       - name: Publish to GitHub Release
-        if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            target/release/bundle/**/*
-            target/release/dockwrap*
-            target/release/dockwrap.exe
+            artifacts/**/*
