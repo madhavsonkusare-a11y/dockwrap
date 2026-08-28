@@ -2,6 +2,7 @@
 //! Used by BOTH the GUI (Tauri commands) and the CLI (standalone mode).
 
 use serde::{Deserialize, Serialize};
+use std::path::PathBuf;
 
 #[derive(Deserialize, Clone, Serialize, Default)]
 pub struct AppDef {
@@ -50,7 +51,10 @@ pub fn resolve_config() -> String {
                 .map(|h| format!("{}/.config", h))
         })
         .unwrap_or_else(|| ".".to_string());
-    format!("{}\\dockwrap\\apps.json", base)
+    let mut p = PathBuf::from(base);
+    p.push("dockwrap");
+    p.push("apps.json");
+    p.to_string_lossy().into_owned()
 }
 
 pub fn load_apps() -> Vec<AppDef> {
@@ -103,4 +107,37 @@ pub fn preset_url(name: &str) -> Option<&'static str> {
         .iter()
         .find(|(n, _)| *n == name)
         .map(|(_, u)| *u)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn config_path_uses_native_separator() {
+        let p = resolve_config();
+        if cfg!(windows) {
+            assert!(p.ends_with("dockwrap\\apps.json"), "got: {}", p);
+        } else {
+            assert!(!p.contains('\\'), "path must use native separator: {}", p);
+            assert!(p.ends_with("dockwrap/apps.json"), "got: {}", p);
+        }
+    }
+
+    #[test]
+    fn upsert_dedups_by_name() {
+        let mut apps: Vec<AppDef> = vec![];
+        apps.push(AppDef { name: "x".into(), url: "http://a".into(), icon: None, compose: None, health: None });
+        apps.push(AppDef { name: "x".into(), url: "http://b".into(), icon: None, compose: None, health: None });
+        apps.retain(|a| a.name != "x");
+        apps.push(AppDef { name: "x".into(), url: "http://c".into(), icon: None, compose: None, health: None });
+        assert_eq!(apps.len(), 1);
+        assert_eq!(apps[0].url, "http://c");
+    }
+
+    #[test]
+    fn preset_lookup_works() {
+        assert_eq!(preset_url("n8n"), Some("http://localhost:5678"));
+        assert_eq!(preset_url("penpot"), None);
+    }
 }
