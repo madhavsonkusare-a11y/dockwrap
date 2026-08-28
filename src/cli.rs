@@ -26,6 +26,26 @@ fn ensure_console() {
 #[cfg(not(windows))]
 fn ensure_console() {}
 
+/// Extract the single `<name>` positional arg common to several subcommands,
+/// or print `usage` and return an exit code. Replaces the repeated
+/// `match args.get(1) { Some(n) if !n.starts_with("--") => ... }` block.
+fn name_arg(args: &[String], usage: &str) -> Result<String, i32> {
+    match args.get(1) {
+        Some(n) if !n.starts_with("--") => Ok(n.clone()),
+        _ => {
+            eprintln!("{}", usage);
+            Err(1)
+        }
+    }
+}
+
+/// Look up a registered app by name, returning an owned clone so callers don't
+/// borrow the `load_apps()` temporary. Replaces the repeated
+/// `registry::load_apps().iter().find(...)` + "No app named" block.
+fn find_app(name: &str) -> Option<AppDef> {
+    registry::load_apps().iter().find(|a| a.name == name).cloned()
+}
+
 fn usage() -> String {
     "Usage:\n  \
      dockwrap add <name> --url <url> [--icon <path>] [--compose <path>] [--health <url>] [--preset <name>]\n  \
@@ -116,18 +136,15 @@ pub fn run_cli() -> i32 {
             0
         }
         "open" => {
-            let name = match args.get(1) {
-                Some(n) if !n.starts_with("--") => n.clone(),
-                _ => {
-                    eprintln!("Usage: dockwrap open <name>");
-                    return 1;
-                }
+            let name = match name_arg(&args, "Usage: dockwrap open <name>") {
+                Ok(n) => n,
+                Err(ec) => return ec,
             };
-            match registry::load_apps().iter().find(|a| a.name == name) {
+            match find_app(&name) {
                 Some(appdef) => {
                     // In CLI mode there's no GUI window to open; boot compose and
                     // report the URL (the GUI `open_app` opens the actual window).
-                    if let Err(e) = crate::boot_and_wait(appdef) {
+                    if let Err(e) = crate::boot_and_wait(&appdef) {
                         eprintln!("warn: {}", e);
                     }
                     println!("Opened \"{}\" at {}", name, appdef.url);
@@ -140,14 +157,11 @@ pub fn run_cli() -> i32 {
             }
         }
         "shortcut" => {
-            let name = match args.get(1) {
-                Some(n) if !n.starts_with("--") => n.clone(),
-                _ => {
-                    eprintln!("Usage: dockwrap shortcut <name>");
-                    return 1;
-                }
+            let name = match name_arg(&args, "Usage: dockwrap shortcut <name>") {
+                Ok(n) => n,
+                Err(ec) => return ec,
             };
-            match registry::load_apps().iter().find(|a| a.name == name) {
+            match find_app(&name) {
                 Some(appdef) => {
                     let bin = std::env::current_exe()
                         .map(|p| p.to_string_lossy().into_owned())
@@ -170,12 +184,9 @@ pub fn run_cli() -> i32 {
             }
         }
         "remove" => {
-            let name = match args.get(1) {
-                Some(n) if !n.starts_with("--") => n.clone(),
-                _ => {
-                    eprintln!("Usage: dockwrap remove <name>");
-                    return 1;
-                }
+            let name = match name_arg(&args, "Usage: dockwrap remove <name>") {
+                Ok(n) => n,
+                Err(ec) => return ec,
             };
             if registry::remove_app(&name) {
                 println!("Removed \"{}\".", name);
