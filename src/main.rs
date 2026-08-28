@@ -147,7 +147,7 @@ fn apply_taskbar_visibility(win: &tauri::WebviewWindow, skip_taskbar: bool) {
     }
     #[cfg(not(windows))]
     {
-        let _ = win.skip_taskbar(true);
+        let _ = win.set_skip_taskbar(true);
     }
 }
 
