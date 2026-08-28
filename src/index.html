@@ -188,9 +188,74 @@
   }
   /* Frostier surfaces for users who opt out of transparency (Apple §14). */
   @media (prefers-reduced-transparency: reduce) {
-    .app, .badge, input, button, details.adv { backdrop-filter: none; }
+    .app, .badge, input, button, details.adv, .wizard-overlay { backdrop-filter: none; }
     .app { background: #13161d; }
   }
+
+  /* ---- Setup wizard (Configure surface: modal + progressive disclosure) ---- */
+  .wizard-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4);
+    z-index: 100;
+  }
+  .wizard {
+    width: 100%;
+    max-width: 420px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 20px 60px 0 rgba(0, 0, 0, 0.35);
+    padding: var(--space-5);
+  }
+  .wizard-header { display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-4); }
+  .wizard-step-indicator {
+    display: flex;
+    gap: var(--space-1);
+    flex: 1;
+    height: 3px;
+    background: var(--border);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+  .wizard-step-bar {
+    height: 100%;
+    background: var(--accent);
+    border-radius: var(--radius-sm);
+    transition: width 150ms ease;
+  }
+  .wizard .step-pill {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--border);
+    color: var(--muted);
+  }
+  .wizard .step-pill.active { background: var(--accent); color: #04121b; }
+  .wizard h2 { font-size: 16px; font-weight: 600; margin: 0; letter-spacing: -0.01em; flex: 1; }
+  .wizard .step-body { min-height: 160px; }
+  .wizard .field { display: flex; flex-direction: column; gap: var(--space-1); margin-bottom: var(--space-3); }
+  .wizard .field label { font-size: 11px; font-weight: 600; color: var(--muted); }
+  .wizard input {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--fg);
+    padding: 8px;
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 13px;
+  }
+  .wizard .hint { font-size: 11px; color: var(--muted); }
+  .wizard .error { color: var(--danger); font-size: 11px; min-height: 14px; }
+  .wizard .nav { display: flex; justify-content: flex-end; gap: var(--space-2); margin-top: var(--space-4); }
+  .wizard-backdrop button:active { transition: none; }
 </style>
 </head>
 <body>
@@ -231,14 +296,22 @@
     if (!apps || !apps.length) {
       const empty = document.createElement('li');
       empty.className = 'sub';
-      empty.textContent = 'No apps yet. Add one below.';
+      const text = document.createElement('span');
+      text.textContent = 'No apps yet. ';
+      empty.appendChild(text);
+      const link = document.createElement('a');
+      link.href = '#';
+      link.textContent = 'Get Started';
+      link.style.color = 'var(--accent)';
+      link.style.fontWeight = '600';
+      link.onclick = e => { e.preventDefault(); openWizard(); };
+      empty.appendChild(link);
       el.appendChild(empty);
       return;
     }
     apps.forEach(a => {
       const row = document.createElement('li');
       row.className = 'app';
-
       const info = document.createElement('div');
       info.className = 'info';
       if (a.icon) {
@@ -321,9 +394,153 @@
     api.invoke('list_apps').then(render).catch(e => setMsg('load error: ' + e, true));
   }
 
+  // ---- Setup wizard logic ----
+  // Configure surface: 3-step modal that reuses the existing add_app invoke.
+  const WIZARD_TOTAL = 3;
+  let wizardState = { name: '', url: '', icon: '', compose: '', health: '' };
+  let wizardStep = 1;
+
+  function $(id) { return document.getElementById(id); }
+
+  function openWizard() {
+    wizardState = { name: '', url: '', icon: '', compose: '', health: '' };
+    wizardStep = 1;
+    $('wizardError').textContent = '';
+    renderWizardStep();
+    $('wizardBackdrop').style.display = 'flex';
+    $('wizardNext').focus();
+    trapFocus($('wizardBackdrop'));
+  }
+
+  function closeWizard() {
+    $('wizardBackdrop').style.display = 'none';
+    releaseFocus();
+    $('wizardError').textContent = '';
+  }
+
+  function renderWizardStep() {
+    const body = $('wizardBody');
+    let html = '';
+    if (wizardStep === 1) {
+      $('wizardTitle').textContent = 'Add app';
+      html = wizardField('App name', 'name', 'e.g. penpot') +
+             wizardField('URL', 'url', 'http://localhost:9001');
+    } else if (wizardStep === 2) {
+      $('wizardTitle').textContent = 'Connect';
+      html = '<p class="hint">Optional: boot a local Docker Compose stack.</p>' +
+             wizardField('Compose file / dir', 'compose', './docker-compose.yml') +
+             wizardField('Health check', 'health', 'http://localhost:9001/health');
+    } else {
+      $('wizardTitle').textContent = 'Review';
+      const composeBadge = wizardState.compose ? '<span class="badge">🐳 compose</span>' : '';
+      html = '<div style="margin-bottom:var(--space-3)"><span class="name" style="display:flex;align-items:center;gap:6px">' +
+             escapeHtml(wizardState.name || '—') + composeBadge + '</span>' +
+             '<div class="url" style="color:var(--muted);font-size:11px">' + escapeHtml(wizardState.url || '—') + '</div></div>';
+      if (wizardState.icon) html += '<p class="hint">Icon: ' + escapeHtml(wizardState.icon) + '</p>';
+    }
+    body.innerHTML = html;
+    $('wizardStepBar').style.width = Math.round((wizardStep / WIZARD_TOTAL) * 100) + '%';
+    $('wizardStepPill').textContent = wizardStep + ' of ' + WIZARD_TOTAL;
+    $('wizardBack').style.display = wizardStep === 1 ? 'none' : 'inline-flex';
+    $('wizardNext').textContent = wizardStep === WIZARD_TOTAL ? 'Add' : 'Next';
+  }
+
+  function wizardField(label, id, placeholder) {
+    return '<div class="field">' +
+      '<label for="' + id + '">' + label + '</label>' +
+      '<input id="' + id + '" type="text" placeholder="' + placeholder + '" ' +
+      'value="' + escapeHtml(wizardState[id] || '') + '" ' +
+      'oninput="wizardState.' + id + ' = this.value"/>' +
+      '</div>';
+  }
+
+  function validateStep() {
+    if (wizardStep === 1) {
+      if (!wizardState.name.trim() || !wizardState.url.trim()) {
+        return 'Name and URL are required.';
+      }
+      if (!/^https?:\/\//i.test(wizardState.url.trim())) {
+        return 'URL must start with http:// or https://.';
+      }
+    }
+    return null;
+  }
+
+  $('wizardBack').addEventListener('click', () => {
+    if (wizardStep > 1) { wizardStep--; renderWizardStep(); }
+  });
+
+  $('wizardNext').addEventListener('click', () => {
+    const err = validateStep();
+    if (err) { $('wizardError').textContent = err; return; }
+    $('wizardError').textContent = '';
+    if (wizardStep === WIZARD_TOTAL) {
+      api.invoke('add_app', {
+        name: wizardState.name.trim(),
+        url: wizardState.url.trim(),
+        icon: wizardState.icon.trim() || null,
+        compose: wizardState.compose.trim() || null,
+        health: wizardState.health.trim() || null
+      }).then(() => {
+        closeWizard();
+        setMsg('added ' + wizardState.name);
+        // clear the flat form too
+        ['name','url','icon','compose','health'].forEach(id => $(id).value = '');
+        refresh();
+      }).catch(e => { $('wizardError').textContent = 'error: ' + e; });
+    } else {
+      wizardStep++;
+      renderWizardStep();
+    }
+  });
+
+  $('wizardCancel').addEventListener('click', closeWizard);
+  $('wizardBackdrop').addEventListener('click', e => { if (e.target === $('wizardBackdrop')) closeWizard(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && $('wizardBackdrop').style.display === 'flex') closeWizard();
+  });
+
+  // focus trap
+  function trapFocus(container) {
+    const ff = container;
+    ff._trap = true;
+    const focusables = () => ff.querySelectorAll('button, input, [href], a, summary');
+    const first = focusables()[0];
+    const last = focusables()[focusables().length - 1];
+    const onKey = e => {
+      if (e.key !== 'Tab') return;
+      if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
+      else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
+    };
+    ff._onKey = onKey;
+    ff.addEventListener('keydown', onKey);
+  }
+  function releaseFocus() {
+    const b = $('wizardBackdrop');
+    if (b._onKey) { b.removeEventListener('keydown', b._onKey); b._onKey = null; }
+  }
+
   // Instant render from the apps Rust injected at load, then live refresh.
   render(window.__APPS__ || []);
   refresh();
 </script>
+
+<!-- Setup wizard (built in JS, appended to DOM by openWizard) -->
+<div id="wizardBackdrop" class="wizard-backdrop" style="display:none;" role="presentation">
+  <div class="wizard" role="dialog" aria-modal="true" aria-labelledby="wizardTitle">
+    <div class="wizard-header">
+      <h2 id="wizardTitle">Step 1</h2>
+      <div class="wizard-step-indicator"><div id="wizardStepBar" class="wizard-step-bar" style="width:33%"></div></div>
+      <span id="wizardStepPill" class="step-pill active">1 of 3</span>
+    </div>
+    <div id="wizardBody" class="step-body"></div>
+    <div id="wizardError" class="error"></div>
+    <div class="nav">
+      <button type="button" class="ghost" id="wizardBack">Back</button>
+      <button type="button" id="wizardNext">Next</button>
+      <button type="button" class="ghost" id="wizardCancel">Cancel</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
