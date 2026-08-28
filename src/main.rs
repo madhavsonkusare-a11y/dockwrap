@@ -1,35 +1,12 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use serde::Deserialize;
+mod cli;
+mod registry;
+
+use registry::AppDef;
 use tauri::{WebviewUrl, WebviewWindowBuilder};
 
-#[derive(Deserialize, Clone, serde::Serialize)]
-struct AppDef {
-    name: String,
-    url: String,
-    icon: Option<String>,
-}
-
 const EXAMPLE_URL: &str = "http://localhost:9001/#/workspace/3364d985-c11e-8197-8008-89bcbd1341e9/3364d985-c11e-8197-8008-89c3aa739819";
-
-/// Where registered apps live. Same location on every platform via APPDATA.
-fn resolve_config() -> String {
-    let env = std::env::var("APPDATA").unwrap_or_default();
-    env + "\\dockwrap\\apps.json"
-}
-
-fn load_apps() -> Vec<AppDef> {
-    let data = std::fs::read_to_string(&resolve_config()).unwrap_or_else(|_| "[]".to_string());
-    serde_json::from_str(&data).unwrap_or_default()
-}
-
-fn save_apps(apps: &[AppDef]) {
-    let path = resolve_config();
-    if let Some(parent) = std::path::Path::new(&path).parent() {
-        let _ = std::fs::create_dir_all(parent);
-    }
-    let _ = std::fs::write(&path, serde_json::to_string(apps).unwrap());
-}
 
 /// Injected into every webview. Intercepts window.open + clicks on external
 /// links and rewrites the navigation to a localhost marker URL that Rust
@@ -122,37 +99,36 @@ fn build_window(app: &tauri::AppHandle, label: &str, url: &str) {
 
 #[tauri::command]
 fn list_apps() -> Vec<AppDef> {
-    load_apps()
+    registry::load_apps()
 }
 
 #[tauri::command]
 fn add_app(name: String, url: String, icon: Option<String>) {
-    let mut apps = load_apps();
-    apps.retain(|a| a.name != name);
-    apps.push(AppDef { name, url, icon });
-    save_apps(&apps);
+    registry::upsert_app(&name, &url, icon);
 }
 
 #[tauri::command]
 fn open_app(app_handle: tauri::AppHandle, name: String) {
-    if let Some(appdef) = load_apps().iter().find(|a| a.name == name) {
+    if let Some(appdef) = registry::load_apps().iter().find(|a| a.name == name) {
         build_window(&app_handle, &appdef.name, &appdef.url);
     }
 }
 
 fn main() {
+    // If invoked with arguments (e.g. `dockwrap add ...`), run as a CLI and exit.
+    // GUI mode is launched only with no extra arguments.
+    if std::env::args().count() > 1 {
+        std::process::exit(cli::run_cli());
+    }
+
     tauri::Builder::default()
         .setup(|app| {
             // Seed an example app on first run so the tool is useful immediately.
-            if load_apps().is_empty() {
-                save_apps(&[AppDef {
-                    name: "penpot".into(),
-                    url: EXAMPLE_URL.into(),
-                    icon: None,
-                }]);
+            if registry::load_apps().is_empty() {
+                registry::upsert_app("penpot", EXAMPLE_URL, None);
             }
             let apps_json =
-                serde_json::to_string(&load_apps()).unwrap_or_else(|_| "[]".into());
+                serde_json::to_string(&registry::load_apps()).unwrap_or_else(|_| "[]".into());
             let init = format!("window.__APPS__ = {};", apps_json);
             let script = format!("{}\n{}", init, LINK_BRIDGE_JS);
             let win = WebviewWindowBuilder::new(
