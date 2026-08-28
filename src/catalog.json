@@ -1,0 +1,110 @@
+[
+  {
+    "name": "homepage",
+    "url": "http://localhost:3000",
+    "icon": "https://raw.githubusercontent.com/gethomepage/dashboard/master/docs/assets/logo.png",
+    "health": "http://localhost:3000",
+    "category": "dashboard",
+    "description": "A highly customizable homepage for your homelab services.",
+    "compose": "services:\n  homepage:\n    image: ghcr.io/gethomepage/dashboard:latest\n    container_name: homepage\n    restart: unless-stopped\n    ports:\n      - \"3000:3000\"\n    volumes:\n      - ./config:/app/config\n      - /var/run/docker.sock:/var/run/docker.sock:ro"
+  },
+  {
+    "name": "n8n",
+    "url": "http://localhost:5678",
+    "icon": "https://raw.githubusercontent.com/n8n-io/n8n/master/docs/assets/n8n-logo.png",
+    "health": "http://localhost:5678/healthz",
+    "category": "automation",
+    "description": "Fair-code workflow automation platform.",
+    "compose": "services:\n  n8n:\n    image: docker.n8n.io/n8nio/n8n\n    container_name: n8n\n    restart: unless-stopped\n    ports:\n      - \"5678:5678\"\n    environment:\n      - N8N_HOST=localhost\n      - N8N_PORT=5678\n      - N8N_BASIC_AUTH_ACTIVE=false\n    volumes:\n      - ./n8n:/home/node/.n8n"
+  },
+  {
+    "name": "open-webui",
+    "url": "http://localhost:8080",
+    "icon": "https://raw.githubusercontent.com/openwebui/openwebui/main/static/logo.svg",
+    "health": "http://localhost:8080/api/health",
+    "category": "ai",
+    "description": "WebUI for LLMs — run Ollama or use your own model endpoint.",
+    "compose": "services:\n  open-webui:\n    image: ghcr.io/open-webui/open-webui:main\n    container_name: open-webui\n    restart: unless-stopped\n    ports:\n      - \"8080:8080\"\n    volumes:\n      - ./open-webui:/app/backend/data"
+  },
+  {
+    "name": "immich",
+    "url": "http://localhost:30049",
+    "icon": "https://raw.githubusercontent.com/immich-app/immich/main/design/Immich%20Logo.svg",
+    "health": "http://localhost:30049/api",
+    "category": "media",
+    "description": "Open-source photo and video management solution.",
+    "compose": "services:\n  immich-server:\n    image: immich-app/immich-server:latest\n    container_name: immich-server\n    restart: unless-stopped\n    depends_on:\n      - redis\n      - database\n    env_file:\n      - .env\n    volumes:\n      - ./upload:/usr/src/app/upload\n  redis:\n    image: docker.io/redis:6\n    container_name: immich-redis\n  database:\n    image: docker.io/postgres:14\n    container_name: immich-postgres"
+  },
+  {
+    "name": "paperless-ngx",
+    "url": "http://localhost:8000",
+    "icon": "https://raw.githubusercontent.com/paperless-ngx/paperless-ngx/master/docs/assets/logo.png",
+    "health": "http://localhost:8000",
+    "category": "productivity",
+    "description": "Document management system for scanning, OCR, and archival.",
+    "compose": "services:\n  paperless:\n    image: ghcr.io/paperless-ngx/paperless-ngx:latest\n    container_name: paperless-ngx\n    restart: unless-stopped\n    ports:\n      - \"8000:8000\"\n    environment:\n      - PUID=1000\n      - PGID=1000\n      - TZ=UTC\n      - REDIS_URL=redis://redis:6379\n      - DBHOST=postgres\n    volumes:\n      - ./data:/usr/src/paperless/data\n      - ./media:/usr/src/paperless/media"
+  },
+  {
+    "name": "memos",
+    "url": "http://localhost:5230",
+    "icon": "https://raw.githubusercontent.com/usememos/memos/main/logo.svg",
+    "health": "http://localhost:5230",
+    "category": "productivity",
+    "description": "A privacy-first, open-source memo app.",
+    "compose": "services:\n  memos:\n    image: ghcr.io/uscamlet/memos/memos:latest\n    container_name: memos\n    restart: unless-stopped\n    ports:\n      - \"5230:5230\"\n    volumes:\n      - ./memos:/var/opt/memos"
+  },
+  {
+    "name": "stirling-pdf",
+    "url": "http://localhost:8080",
+    "icon": "https://raw.githubusercontent.com/stirlingtools/stirling-pdf/main/docs/images/stirling-logo.svg",
+    "health": "http://localhost:8080",
+    "category": "productivity",
+    "description": "Free, open-source PDF manipulation tools (split, merge, OCR, compress).",
+    "compose": "services:\n  stirling-pdf:\n    image: ghcr.io/stirlingtools/stirling-pdf:latest\n    container_name: stirling-pdf\n    restart: unless-stopped\n    ports:\n      - \"8080:8080\"\n    environment:\n      - ENABLE_ORCA_MODE=false\n      - ENABLE_PDF_SERVICES=false\n      - ENABLE_UNGOTIATE=false\n      - ENABLE_STAPLER=false\n      - DISABLE_ADDONS=true\n    volumes:\n      - ./stirling:/usr/share/stirling"
+  },
+  {
+    "name": "uptime-kuma",
+    "url": "http://localhost:3001",
+    "icon": "https://raw.githubusercontent.com/louislam/uptime-kuma/master/public/kuma-fav.png",
+    "health": "http://localhost:3001",
+    "category": "monitoring",
+    "description": "Fancy self-hosted monitoring tool with an Uptime Robot-like UI.",
+    "compose": "services:\n  uptime-kuma:\n    image: louislam/uptime-kuma:latest\n    container_name: uptime-kuma\n    restart: unless-stopped\n    ports:\n      - \"3001:3001\"\n    volumes:\n      - ./uptime-kuma:/app/data"
+  },
+  {
+    "name": "changedetection",
+    "url": "http://localhost:5000",
+    "icon": "https://raw.githubusercontent.com/dgtlmoon/changedetection.io/master/changedetectionio/static/images/favicon.ico",
+    "health": "http://localhost:5000",
+    "category": "monitoring",
+    "description": "Track webpage changes and get notifications on updates.",
+    "compose": "services:\n  changedetection:\n    image: dgtlmoon/changedetection.io:latest\n    container_name: changedetection\n    restart: unless-stopped\n    ports:\n      - \"5000:5000\"\n    volumes:\n      - ./changedetection:/datastore"
+  },
+  {
+    "name": "filebrowser",
+    "url": "http://localhost:80",
+    "icon": "https://raw.githubusercontent.com/filebrowser/filebrowser/master/frontend/public/favicon/apple-touch-icon.png",
+    "health": "http://localhost:80",
+    "category": "file-management",
+    "description": "Manage files on your server via a web UI.",
+    "compose": "services:\n  filebrowser:\n    image: filebrowser/filebrowser:latest\n    container_name: filebrowser\n    restart: unless-stopped\n    ports:\n      - \"80:80\"\n    environment:\n      - FB_ENGINES=sqlite3\n    volumes:\n      - ./filebrowser:/var/lib/filebrowser\n      - /:/app/files:ro"
+  },
+  {
+    "name": "glance",
+    "url": "http://localhost:8080",
+    "icon": "https://raw.githubusercontent.com/glance-hq/glance/master/docs/images/logo.png",
+    "health": "http://localhost:8080",
+    "category": "dashboard",
+    "description": "Dashboard for your home monitoring — simple, fast, privacy-focused.",
+    "compose": "services:\n  glance:\n    image: ghcr.io/glance-hq/glance:latest\n    container_name: glance\n    restart: unless-stopped\n    ports:\n      - \"8080:8080\"\n    volumes:\n      - ./config:/app/config\n      - /etc/localtime:/etc/localtime:ro"
+  },
+  {
+    "name": "coolify",
+    "url": "http://localhost:8000",
+    "icon": "https://raw.githubusercontent.com/coollabs-io/coolify/master/frontend/public/favicon.png",
+    "health": "http://localhost:8000",
+    "category": "deployment",
+    "description": "Open-source & self-hostable PaaS — deploy apps, databases, and more.",
+    "compose": "services:\n  coolify:\n    image: docker.io/coolify/coolify:4\n    container_name: coolify\n    restart: unless-stopped\n    ports:\n      - \"8000:3000\"\n    volumes:\n      - ./coolify:/app/data\n      - /var/run/docker.sock:/var/run/docker.sock:rw"
+  }
+]

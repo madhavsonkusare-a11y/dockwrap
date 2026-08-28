@@ -256,6 +256,18 @@
   .wizard .error { color: var(--danger); font-size: 11px; min-height: 14px; }
   .wizard .nav { display: flex; justify-content: flex-end; gap: var(--space-2); margin-top: var(--space-4); }
   .wizard-backdrop button:active { transition: none; }
+  /* Catalog app cards shown on step 1 — pick a popular app to autofill */
+  .wizard .catalog-hint { font-size: 11px; color: var(--muted); margin: var(--space-2) 0 var(--space-2); }
+  .wizard .catalog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-2); }
+  .wizard .catalog-card {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    padding: var(--space-2); border: 1px solid var(--border); border-radius: var(--radius-sm);
+    background: var(--bg); cursor: pointer; text-align: center; transition: border-color 150ms ease;
+  }
+  .wizard .catalog-card:hover { border-color: var(--accent); }
+  .wizard .catalog-card:active { border-color: var(--accent-hover); transition: none; }
+  .wizard .catalog-card .cat-name { font-size: 12px; font-weight: 600; }
+  .wizard .catalog-card .cat-cat { font-size: 9px; color: var(--muted); text-transform: uppercase; }
 </style>
 </head>
 <body>
@@ -406,10 +418,17 @@
     wizardState = { name: '', url: '', icon: '', compose: '', health: '' };
     wizardStep = 1;
     $('wizardError').textContent = '';
+    window.__CATALOG_LOADED = false;
     renderWizardStep();
     $('wizardBackdrop').style.display = 'flex';
     $('wizardNext').focus();
     trapFocus($('wizardBackdrop'));
+    // Pre-fill from the baked-in catalog so step 1 can offer "pick popular app".
+    api.invoke('catalog').then(cats => {
+      window.__CATALOG = Array.isArray(cats) ? cats : [];
+      window.__CATALOG_LOADED = true;
+      if (wizardStep === 1) renderWizardStep();
+    }).catch(() => { window.__CATALOG = []; window.__CATALOG_LOADED = true; });
   }
 
   function closeWizard() {
@@ -425,6 +444,8 @@
       $('wizardTitle').textContent = 'Add app';
       html = wizardField('App name', 'name', 'e.g. penpot') +
              wizardField('URL', 'url', 'http://localhost:9001');
+      // Offer to pre-fill from the curated catalog (if loaded).
+      if (window.__CATALOG_LOADED) html += htmlCatalogSection();
     } else if (wizardStep === 2) {
       $('wizardTitle').textContent = 'Connect';
       html = '<p class="hint">Optional: boot a local Docker Compose stack.</p>' +
@@ -466,6 +487,31 @@
     return null;
   }
 
+  // --- Catalog cards: render curated apps on step 1, click to auto-fill ---
+  // Returns an HTML string (matches renderWizardStep's innerHTML usage).
+  function htmlCatalogSection() {
+    const apps = window.__CATALOG || [];
+    if (!apps.length) return '';
+    const parts = ['<p class="catalog-hint">Or pick a popular app to auto-fill:</p><div class="catalog-grid">'];
+    apps.forEach(a => {
+      parts.push('<div class="catalog-card" data-app="' + escapeHtml(a.name) + '">' +
+        '<span class="cat-name">' + escapeHtml(a.name) + '</span>' +
+        '<span class="cat-cat">' + escapeHtml(a.category || 'app') + '</span>' +
+        '</div>');
+    });
+    parts.push('</div>');
+    return parts.join('');
+  }
+
+  function pickCatalogApp(a) {
+    wizardState.name    = a.name || '';
+    wizardState.url     = a.url || '';
+    wizardState.compose = a.compose || '';
+    wizardState.health  = a.health || '';
+    wizardState.icon    = a.icon || '';
+    renderWizardStep();
+  }
+
   $('wizardBack').addEventListener('click', () => {
     if (wizardStep > 1) { wizardStep--; renderWizardStep(); }
   });
@@ -496,6 +542,15 @@
 
   $('wizardCancel').addEventListener('click', closeWizard);
   $('wizardBackdrop').addEventListener('click', e => { if (e.target === $('wizardBackdrop')) closeWizard(); });
+
+  // Delegated listener for catalog cards rendered via innerHTML on step 1.
+  $('wizardBody').addEventListener('click', e => {
+    const card = e.target.closest('.catalog-card');
+    if (!card) return;
+    const name = card.dataset.app;
+    const found = (window.__CATALOG || []).find(a => a.name === name);
+    if (found) pickCatalogApp(found);
+  });
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && $('wizardBackdrop').style.display === 'flex') closeWizard();
   });

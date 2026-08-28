@@ -266,6 +266,13 @@ fn list_apps() -> Vec<AppDef> {
     registry::load_apps()
 }
 
+/// Curated self-hosted app catalog (baked into the binary). Lets the GUI offer
+/// a "pick a popular app" shortcut instead of typing URLs.
+#[tauri::command]
+fn catalog() -> Vec<registry::CatalogEntry> {
+    registry::catalog()
+}
+
 #[tauri::command]
 fn add_app(
     name: String,
@@ -381,7 +388,8 @@ fn main() {
             add_app,
             open_app,
             create_shortcut,
-            remove_app_cmd
+            remove_app_cmd,
+            catalog
         ])
         .run(tauri::generate_context!())
         .expect("error while running dockwrap");

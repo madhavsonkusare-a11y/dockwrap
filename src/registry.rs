@@ -109,6 +109,57 @@ pub fn preset_url(name: &str) -> Option<&'static str> {
         .map(|(_, u)| *u)
 }
 
+// ---- Curated self-hosted app catalog (baked into the binary at compile time). ----
+// Ships as src/catalog.json (also lives in the webview bundle via frontendDist: src).
+// Lets the GUI wizard offer a "pick a popular app" catalog instead of typing URLs.
+
+/// One catalog entry — a fuller AppDef + a human description + category.
+#[derive(Deserialize, Clone, Serialize, Default)]
+pub struct CatalogEntry {
+    pub name: String,
+    pub url: String,
+    pub icon: Option<String>,
+    #[serde(default)]
+    pub compose: Option<String>,
+    #[serde(default)]
+    pub health: Option<String>,
+    pub category: Option<String>,
+    pub description: Option<String>,
+}
+
+/// Parse the compile-time-embedded catalog JSON into structs.
+fn parse_catalog() -> Vec<CatalogEntry> {
+    serde_json::from_str(CATALOG_JSON).unwrap_or_default()
+}
+
+/// The raw catalog, embedded at build time so the binary is self-contained
+/// (no runtime file read, no extra network at startup).
+const CATALOG_JSON: &str = include_str!("catalog.json");
+
+/// Public catalog access — cheap, returns the parsed list (re-parsed per call,
+/// but small and typically called once at launcher render time).
+pub fn catalog() -> Vec<CatalogEntry> {
+    parse_catalog()
+}
+
+/// All distinct categories, in catalog order (owned so callers don't borrow locals).
+pub fn catalog_categories() -> Vec<String> {
+    let mut seen: Vec<String> = Vec::new();
+    for e in parse_catalog().iter() {
+        if let Some(cat) = &e.category {
+            if !seen.iter().any(|c: &String| c == cat) {
+                seen.push(cat.clone());
+            }
+        }
+    }
+    seen
+}
+
+/// Lookup a single catalog entry by name (exact match).
+pub fn catalog_entry(name: &str) -> Option<CatalogEntry> {
+    parse_catalog().into_iter().find(|e| e.name == name)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -139,5 +190,27 @@ mod tests {
     fn preset_lookup_works() {
         assert_eq!(preset_url("n8n"), Some("http://localhost:5678"));
         assert_eq!(preset_url("penpot"), None);
+    }
+
+    #[test]
+    fn catalog_loads_and_looks_up() {
+        let apps = catalog();
+        assert!(!apps.is_empty(), "catalog should embed the 12 curated apps");
+        let by_name: Vec<&str> = apps.iter().map(|e| e.name.as_str()).collect();
+        assert!(by_name.contains(&"n8n"), "n8n should be cataloged");
+        assert!(by_name.contains(&"homepage"), "homepage should be cataloged");
+        let entry = catalog_entry("n8n");
+        assert!(entry.is_some(), "n8n lookup should return an entry");
+        assert!(entry.unwrap().compose.is_some(), "n8n should carry its compose snippet");
+    }
+
+    #[test]
+    fn catalog_categories_distinct() {
+        let cats = catalog_categories();
+        assert!(!cats.is_empty());
+        let mut sorted = cats.clone();
+        sorted.sort();
+        sorted.dedup();
+        assert_eq!(sorted.len(), cats.len(), "categories must be distinct");
     }
 }
