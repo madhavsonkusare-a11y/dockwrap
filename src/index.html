@@ -47,7 +47,7 @@
     font-size: var(--font-size);
   }
 
-  h1 { font-size: 18px; font-weight: 600; margin: 0 0 var(--space-1); }
+  h1 { font-size: 18px; font-weight: 600; margin: 0 0 var(--space-1); letter-spacing: -0.015em; }
   .sub { color: var(--muted); font-size: 12px; margin-bottom: var(--space-4); }
 
   /* ---- App list (semantic <ul>) ---- */
@@ -107,8 +107,10 @@
     transition: filter 150ms ease, background-color 150ms ease, border-color 150ms ease;
     flex: 0 0 auto;
   }
+  /* Hover has a smooth ramp; the PRESS highlight is instant (Apple §1:
+     feedback lives on pointer-down, not release — a 150ms transition would lag). */
   button:hover { filter: brightness(1.1); }
-  button:active { filter: brightness(0.95); }
+  button:active { filter: brightness(0.92); transition: none; }
   button:disabled { opacity: 0.5; cursor: not-allowed; }
 
   /* Ghost variant — for secondary actions (Shortcut) */
@@ -172,9 +174,14 @@
     outline-offset: 2px;
   }
 
-  /* ---- Respect reduced-motion preference ---- */
+  /* ---- Respect reduced-motion preference (Apple §14) ---- */
   @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; }
+  }
+  /* Frostier surfaces for users who opt out of transparency (Apple §14). */
+  @media (prefers-reduced-transparency: reduce) {
+    .app, .badge, input, button, details.adv { backdrop-filter: none; }
+    .app { background: #13161d; }
   }
 </style>
 </head>
