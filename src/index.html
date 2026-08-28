@@ -53,8 +53,20 @@
       const btn = document.createElement('button');
       btn.textContent = 'Open';
       btn.onclick = () => api.invoke('open_app', { name: a.name });
+      const sc = document.createElement('button');
+      sc.textContent = 'Shortcut';
+      sc.style.marginLeft = '6px';
+      sc.style.background = 'var(--card)';
+      sc.style.color = 'var(--fg)';
+      sc.style.border = '1px solid var(--border)';
+      sc.onclick = () => api.invoke('create_shortcut', { name: a.name })
+        .then(p => setMsg('shortcut: ' + p))
+        .catch(e => setMsg('shortcut error: ' + e));
+      const actions = document.createElement('div');
+      actions.appendChild(btn);
+      actions.appendChild(sc);
       row.appendChild(info);
-      row.appendChild(btn);
+      row.appendChild(actions);
       el.appendChild(row);
     });
   }

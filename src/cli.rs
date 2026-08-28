@@ -28,10 +28,12 @@ fn ensure_console() {}
 
 fn usage() -> String {
     "Usage:\n  \
-     dockwrap add <name> --url <url> [--icon <path>] [--preset <name>]\n  \
+     dockwrap add <name> --url <url> [--icon <path>] [--compose <path>] [--health <url>] [--preset <name>]\n  \
      dockwrap add --preset <name>\n  \
      dockwrap list\n  \
      dockwrap remove <name>\n  \
+     dockwrap open <name>\n  \
+     dockwrap shortcut <name>\n  \
      dockwrap presets"
         .to_string()
 }
@@ -57,6 +59,8 @@ pub fn run_cli() -> i32 {
             let name_arg = args.get(1).cloned().filter(|s| !s.starts_with("--"));
             let url = get_flag(&args, "--url");
             let icon = get_flag(&args, "--icon");
+            let compose = get_flag(&args, "--compose");
+            let health = get_flag(&args, "--health");
 
             let (name, url) = match (name_arg, url, preset) {
                 (Some(n), Some(u), _) => (n, u),
@@ -80,10 +84,25 @@ pub fn run_cli() -> i32 {
                 }
             };
 
-            registry::upsert_app(&name, &url, icon.clone());
-            match icon {
-                Some(i) => println!("Registered \"{}\" -> {} (icon: {})", name, url, i),
-                None => println!("Registered \"{}\" -> {}", name, url),
+            registry::upsert_app(&name, &url, icon.clone(), compose.clone(), health.clone());
+            match (icon, compose) {
+                (Some(i), Some(c)) => println!(
+                    "Registered \"{}\" -> {} (icon: {}, compose: {}{})",
+                    name,
+                    url,
+                    i,
+                    c,
+                    health.map(|h| format!(", health: {}", h)).unwrap_or_default()
+                ),
+                (Some(i), None) => println!("Registered \"{}\" -> {} (icon: {})", name, url, i),
+                (None, Some(c)) => println!(
+                    "Registered \"{}\" -> {} (compose: {}{})",
+                    name,
+                    url,
+                    c,
+                    health.map(|h| format!(", health: {}", h)).unwrap_or_default()
+                ),
+                (None, None) => println!("Registered \"{}\" -> {}", name, url),
             }
             0
         }
@@ -95,6 +114,60 @@ pub fn run_cli() -> i32 {
                 println!("{}", serde_json::to_string_pretty(&apps).unwrap());
             }
             0
+        }
+        "open" => {
+            let name = match args.get(1) {
+                Some(n) if !n.starts_with("--") => n.clone(),
+                _ => {
+                    eprintln!("Usage: dockwrap open <name>");
+                    return 1;
+                }
+            };
+            match registry::load_apps().iter().find(|a| a.name == name) {
+                Some(appdef) => {
+                    // In CLI mode there's no GUI window to open; boot compose and
+                    // report the URL (the GUI `open_app` opens the actual window).
+                    if let Err(e) = crate::boot_and_wait(appdef) {
+                        eprintln!("warn: {}", e);
+                    }
+                    println!("Opened \"{}\" at {}", name, appdef.url);
+                    0
+                }
+                None => {
+                    eprintln!("No app named \"{}\" found.", name);
+                    1
+                }
+            }
+        }
+        "shortcut" => {
+            let name = match args.get(1) {
+                Some(n) if !n.starts_with("--") => n.clone(),
+                _ => {
+                    eprintln!("Usage: dockwrap shortcut <name>");
+                    return 1;
+                }
+            };
+            match registry::load_apps().iter().find(|a| a.name == name) {
+                Some(appdef) => {
+                    let bin = std::env::current_exe()
+                        .map(|p| p.to_string_lossy().into_owned())
+                        .unwrap_or_default();
+                    match crate::create_shortcut_for(&name, &bin, appdef.icon.as_deref()) {
+                        Ok(path) => {
+                            println!("Shortcut created: {}", path);
+                            0
+                        }
+                        Err(e) => {
+                            eprintln!("Failed to create shortcut: {}", e);
+                            1
+                        }
+                    }
+                }
+                None => {
+                    eprintln!("No app named \"{}\" found.", name);
+                    1
+                }
+            }
         }
         "remove" => {
             let name = match args.get(1) {

@@ -3,11 +3,19 @@
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Clone, Serialize)]
+#[derive(Deserialize, Clone, Serialize, Default)]
 pub struct AppDef {
     pub name: String,
     pub url: String,
     pub icon: Option<String>,
+    /// Optional path to a docker-compose.yml (or a directory containing one).
+    /// When set, opening the app runs `docker compose up -d` first.
+    #[serde(default)]
+    pub compose: Option<String>,
+    /// Optional health URL or host:port to poll after compose boot.
+    /// Defaults to `url` when omitted.
+    #[serde(default)]
+    pub health: Option<String>,
 }
 
 /// Curated, most-used self-hosted web apps (default localhost ports).
@@ -59,13 +67,21 @@ pub fn save_apps(apps: &[AppDef]) {
 }
 
 /// Insert or replace an app by name (dedup on name).
-pub fn upsert_app(name: &str, url: &str, icon: Option<String>) {
+pub fn upsert_app(
+    name: &str,
+    url: &str,
+    icon: Option<String>,
+    compose: Option<String>,
+    health: Option<String>,
+) {
     let mut apps = load_apps();
     apps.retain(|a| a.name != name);
     apps.push(AppDef {
         name: name.to_string(),
         url: url.to_string(),
         icon,
+        compose,
+        health,
     });
     save_apps(&apps);
 }
