@@ -16,3 +16,6 @@ Thumbs.db
 .idea/
 .vscode/
 *.swp
+
+# Hermes agent workspace (plans, etc. — not project code)
+.hermes/
