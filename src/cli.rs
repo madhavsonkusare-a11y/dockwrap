@@ -10,6 +10,8 @@
 
 use crate::registry::{self, AppDef};
 
+const VERSION: &str = env!("CARGO_PKG_VERSION");
+
 /// On Windows the binary is a GUI subsystem (no console allocated). When invoked
 /// with arguments from a terminal, attach to the parent's console so stdio is
 /// wired up and prints are visible. Harmless on non-Windows.
@@ -195,6 +197,10 @@ pub fn run_cli() -> i32 {
                 eprintln!("No app named \"{}\" found.", name);
                 1
             }
+        }
+        "version" | "--version" | "-V" => {
+            println!("dockwrap {}", VERSION);
+            0
         }
         "presets" => {
             println!("Built-in presets (name -> default url):");

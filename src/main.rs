@@ -337,6 +337,11 @@ fn main() {
 
     // If invoked with CLI subcommands (e.g. `dockwrap add ...`), run as CLI and exit.
     if args.len() > 1 {
+        let first = args[1].as_str();
+        if first == "--version" || first == "-V" {
+            println!("dockwrap {}", env!("CARGO_PKG_VERSION"));
+            return;
+        }
         std::process::exit(cli::run_cli());
     }
 
