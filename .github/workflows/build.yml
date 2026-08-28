@@ -45,17 +45,26 @@ jobs:
       - name: Build (release)
         run: cargo tauri build ${{ matrix.args }}
 
+      # Upload ONLY the distributable installers (not bundle internals like
+      # .app/Contents/* or AppImage .so libs) to keep the release asset count sane.
       - name: Upload artifacts
         uses: actions/upload-artifact@v5
         with:
           name: dockwrap-${{ matrix.platform }}
           path: |
-            target/release/bundle/**/*
-            target/release/dockwrap*
+            target/release/bundle/**/*.msi
+            target/release/bundle/**/*setup.exe
+            target/release/bundle/**/*.dmg
+            target/release/bundle/**/*.deb
+            target/release/bundle/**/*.rpm
+            target/release/bundle/**/*.AppImage
+            target/release/dockwrap
             target/release/dockwrap.exe
+            target/release/dockwrap.pdb
+            target/release/dockwrap.d
           if-no-files-found: ignore
 
-  # Single publish job: collects artifacts from every platform and creates the
+  # Single publish job: collects installers from every platform and creates the
   # GitHub Release once, avoiding the softprops/action-gh-release concurrency
   # race that happens when each matrix job publishes to the same tag at once.
   release:
@@ -74,4 +83,13 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            artifacts/**/*
+            artifacts/**/*.msi
+            artifacts/**/*setup.exe
+            artifacts/**/*.dmg
+            artifacts/**/*.deb
+            artifacts/**/*.rpm
+            artifacts/**/*.AppImage
+            artifacts/dockwrap
+            artifacts/dockwrap.exe
+            artifacts/dockwrap.pdb
+            artifacts/dockwrap.d
