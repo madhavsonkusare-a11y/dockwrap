@@ -648,14 +648,12 @@ dependencies = [
 
 [[package]]
 name = "dockwrap"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
- "raw-window-handle",
  "serde",
  "serde_json",
  "tauri",
  "tauri-build",
- "windows-sys 0.61.2",
 ]
 
 [[package]]
