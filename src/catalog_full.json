@@ -24,7 +24,8 @@
     "tags": "`GPL-3.0`",
     "category": "Analytics",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=awstats.org&sz=64"
   },
   {
     "name": "Countly Community Edition",
@@ -42,7 +43,8 @@
     "tags": "`MIT`",
     "category": "Analytics",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=d8a.tech&sz=64"
   },
   {
     "name": "Daily Stars Explorer",
@@ -51,7 +53,8 @@
     "tags": "`MIT`",
     "category": "Analytics",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=emanuelef.github.io&sz=64"
   },
   {
     "name": "Druid",
@@ -60,7 +63,8 @@
     "tags": "`Apache-2.0`",
     "category": "Analytics",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=druid.apache.org&sz=64"
   },
   {
     "name": "EDA",
@@ -69,7 +73,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Analytics",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "GoAccess",
@@ -150,7 +155,8 @@
     "tags": "`Apache-2.0`",
     "category": "Analytics",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=middlewarehq.com&sz=64"
   },
   {
     "name": "Netron",
@@ -159,7 +165,8 @@
     "tags": "`MIT`",
     "category": "Analytics",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=netron.app&sz=64"
   },
   {
     "name": "Offen",
@@ -168,7 +175,8 @@
     "tags": "`Apache-2.0`",
     "category": "Analytics",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=offen.dev&sz=64"
   },
   {
     "name": "Plausible Analytics",
@@ -204,7 +212,8 @@
     "tags": "`AGPL-3.0/MIT`",
     "category": "Analytics",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=prismeanalytics.com&sz=64"
   },
   {
     "name": "Redash",
@@ -213,7 +222,8 @@
     "tags": "`BSD-2-Clause`",
     "category": "Analytics",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=redash.io&sz=64"
   },
   {
     "name": "Rybbit",
@@ -231,7 +241,8 @@
     "tags": "`MPL-2.0`",
     "category": "Analytics",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=taleshape.com&sz=64"
   },
   {
     "name": "Socioboard",
@@ -240,7 +251,8 @@
     "tags": "`GPL-3.0`",
     "category": "Analytics",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Statistics for Strava",
@@ -303,7 +315,8 @@
     "tags": "`ECL-2.0`",
     "category": "Archiving and Digital Preservation (DP)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=archivesspace.org&sz=64"
   },
   {
     "name": "Bichon",
@@ -330,7 +343,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Archiving and Digital Preservation (DP)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=ckan.org&sz=64"
   },
   {
     "name": "Collective Access - Providence",
@@ -339,7 +353,8 @@
     "tags": "`GPL-3.0`",
     "category": "Archiving and Digital Preservation (DP)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=collectiveaccess.org&sz=64"
   },
   {
     "name": "Eonvelope",
@@ -375,7 +390,8 @@
     "tags": "`GPL-3.0`",
     "category": "Archiving and Digital Preservation (DP)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=omeka.org&sz=64"
   },
   {
     "name": "Open Archiver",
@@ -384,7 +400,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Archiving and Digital Preservation (DP)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=openarchiver.com&sz=64"
   },
   {
     "name": "Piler",
@@ -411,7 +428,8 @@
     "tags": "`GPL-3.0`",
     "category": "Archiving and Digital Preservation (DP)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Activepieces",
@@ -438,7 +456,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Automation",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=automatisch.io&sz=64"
   },
   {
     "name": "BookBounty",
@@ -447,7 +466,8 @@
     "tags": "`MPL-2.0`",
     "category": "Automation",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "changedetection.io",
@@ -501,7 +521,8 @@
     "tags": "`GPL-3.0`",
     "category": "Automation",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=discount-bandit.cybrarist.com&sz=64"
   },
   {
     "name": "Dittofeed",
@@ -510,7 +531,8 @@
     "tags": "`MIT`",
     "category": "Automation",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=dittofeed.com&sz=64"
   },
   {
     "name": "feedmixer",
@@ -519,7 +541,8 @@
     "tags": "`WTFPL`",
     "category": "Automation",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "flowctl",
@@ -528,7 +551,8 @@
     "tags": "`Apache-2.0`",
     "category": "Automation",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=flowctl.net&sz=64"
   },
   {
     "name": "Fredy",
@@ -537,7 +561,8 @@
     "tags": "`Apache-2.0`",
     "category": "Automation",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=fredy.orange-coding.net&sz=64"
   },
   {
     "name": "gocron",
@@ -546,7 +571,8 @@
     "tags": "`MIT`",
     "category": "Automation",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "HandBrake Web",
@@ -555,7 +581,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Automation",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Healthchecks",
@@ -591,7 +618,8 @@
     "tags": "`MIT`",
     "category": "Automation",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=kibitzr.github.io&sz=64"
   },
   {
     "name": "LazyLibrarian",
@@ -609,7 +637,8 @@
     "tags": "`MIT`",
     "category": "Automation",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=getleon.ai&sz=64"
   },
   {
     "name": "Matchering",
@@ -654,7 +683,8 @@
     "tags": "`Apache-2.0`",
     "category": "Automation",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=stackstorm.com&sz=64"
   },
   {
     "name": "µTask",
@@ -663,7 +693,8 @@
     "tags": "`BSD-3-Clause`",
     "category": "Automation",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Antville",
@@ -690,7 +721,8 @@
     "tags": "`BSD-3-Clause`",
     "category": "Blogging Platforms",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=chyrplite.net&sz=64"
   },
   {
     "name": "Dotclear",
@@ -699,7 +731,8 @@
     "tags": "`GPL-2.0`",
     "category": "Blogging Platforms",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=git.dotclear.org&sz=64"
   },
   {
     "name": "Ech0",
@@ -708,7 +741,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Blogging Platforms",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=ech0.app&sz=64"
   },
   {
     "name": "FlatPress",
@@ -717,7 +751,8 @@
     "tags": "`GPL-2.0`",
     "category": "Blogging Platforms",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=flatpress.org&sz=64"
   },
   {
     "name": "fx",
@@ -726,7 +761,8 @@
     "tags": "`MIT`",
     "category": "Blogging Platforms",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Ghost",
@@ -744,7 +780,8 @@
     "tags": "`MIT`",
     "category": "Blogging Platforms",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=havenweb.org&sz=64"
   },
   {
     "name": "HTMLy",
@@ -753,7 +790,8 @@
     "tags": "`GPL-2.0`",
     "category": "Blogging Platforms",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=htmly.com&sz=64"
   },
   {
     "name": "Known",
@@ -762,7 +800,8 @@
     "tags": "`Apache-2.0`",
     "category": "Blogging Platforms",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=withknown.com&sz=64"
   },
   {
     "name": "Mataroa",
@@ -771,7 +810,8 @@
     "tags": "`MIT`",
     "category": "Blogging Platforms",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=mataroa.blog&sz=64"
   },
   {
     "name": "PluXml",
@@ -780,7 +820,8 @@
     "tags": "`GPL-3.0`",
     "category": "Blogging Platforms",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=pluxml.org&sz=64"
   },
   {
     "name": "Serendipity",
@@ -789,7 +830,8 @@
     "tags": "`BSD-3-Clause`",
     "category": "Blogging Platforms",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=docs.s9y.org&sz=64"
   },
   {
     "name": "WriteFreely",
@@ -807,7 +849,8 @@
     "tags": "`GPL-3.0`",
     "category": "Booking and Scheduling",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=alf.io&sz=64"
   },
   {
     "name": "Cal.diy",
@@ -816,7 +859,8 @@
     "tags": "`MIT`",
     "category": "Booking and Scheduling",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=cal.diy&sz=64"
   },
   {
     "name": "Easy!Appointments",
@@ -825,7 +869,8 @@
     "tags": "`GPL-3.0`",
     "category": "Booking and Scheduling",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=easyappointments.org&sz=64"
   },
   {
     "name": "Hi.Events",
@@ -843,7 +888,8 @@
     "tags": "`GPL-3.0`",
     "category": "Booking and Scheduling",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=librebooking.readthedocs.io&sz=64"
   },
   {
     "name": "QloApps",
@@ -852,7 +898,8 @@
     "tags": "`OSL-3.0`",
     "category": "Booking and Scheduling",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=qloapps.com&sz=64"
   },
   {
     "name": "Rallly",
@@ -870,7 +917,8 @@
     "tags": "`GPL-3.0`",
     "category": "Booking and Scheduling",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=seatsurfing.app&sz=64"
   },
   {
     "name": "Betula",
@@ -879,7 +927,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Bookmarks and Link Sharing",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=joinbetula.org&sz=64"
   },
   {
     "name": "Buku",
@@ -888,7 +937,8 @@
     "tags": "`GPL-3.0`",
     "category": "Bookmarks and Link Sharing",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Digibunch",
@@ -897,7 +947,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Bookmarks and Link Sharing",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=ladigitale.dev&sz=64"
   },
   {
     "name": "Espial",
@@ -906,7 +957,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Bookmarks and Link Sharing",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Faved",
@@ -924,7 +976,8 @@
     "tags": "`MPL-2.0`",
     "category": "Bookmarks and Link Sharing",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=mozilla-services.readthedocs.io&sz=64"
   },
   {
     "name": "Karakeep",
@@ -987,7 +1040,8 @@
     "tags": "`GPL-3.0`",
     "category": "Bookmarks and Link Sharing",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Shaarli",
@@ -1023,7 +1077,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Bookmarks and Link Sharing",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=codeberg.org&sz=64"
   },
   {
     "name": "Baïkal",
@@ -1032,7 +1087,8 @@
     "tags": "`GPL-3.0`",
     "category": "Calendar & Contacts",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=sabre.io&sz=64"
   },
   {
     "name": "DAViCal",
@@ -1059,7 +1115,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Calendar & Contacts",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=keeper.sh&sz=64"
   },
   {
     "name": "Manage My Damn Life",
@@ -1068,7 +1125,8 @@
     "tags": "`GPL-3.0`",
     "category": "Calendar & Contacts",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=intri.in&sz=64"
   },
   {
     "name": "Radicale",
@@ -1086,7 +1144,8 @@
     "tags": "`MIT`",
     "category": "Calendar & Contacts",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=sabre.io&sz=64"
   },
   {
     "name": "Xandikos",
@@ -1122,7 +1181,8 @@
     "tags": "`MIT`",
     "category": "Communication - Custom Communication Systems",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=centrifugal.dev&sz=64"
   },
   {
     "name": "Chitchatter",
@@ -1158,7 +1218,8 @@
     "tags": "`Apache-2.0`",
     "category": "Communication - Custom Communication Systems",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Element",
@@ -1185,7 +1246,8 @@
     "tags": "`GPL-3.0`",
     "category": "Communication - Custom Communication Systems",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=gnunet.org&sz=64"
   },
   {
     "name": "Gotify",
@@ -1203,7 +1265,8 @@
     "tags": "`GPL-2.0`",
     "category": "Communication - Custom Communication Systems",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=hyphanet.org&sz=64"
   },
   {
     "name": "Jami",
@@ -1212,7 +1275,8 @@
     "tags": "`GPL-3.0`",
     "category": "Communication - Custom Communication Systems",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=jami.net&sz=64"
   },
   {
     "name": "Live Helper Chat",
@@ -1221,7 +1285,8 @@
     "tags": "`Apache-2.0`",
     "category": "Communication - Custom Communication Systems",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=livehelperchat.com&sz=64"
   },
   {
     "name": "Mumble",
@@ -1239,7 +1304,8 @@
     "tags": "`MIT`",
     "category": "Communication - Custom Communication Systems",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Novu",
@@ -1266,7 +1332,8 @@
     "tags": "`MIT`",
     "category": "Communication - Custom Communication Systems",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=docs.onetimesecret.com&sz=64"
   },
   {
     "name": "OTS",
@@ -1293,7 +1360,8 @@
     "tags": "`GPL-2.0`",
     "category": "Communication - Custom Communication Systems",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=retroshare.cc&sz=64"
   },
   {
     "name": "Rocket.Chat",
@@ -1311,7 +1379,8 @@
     "tags": "`GPL-3.0`",
     "category": "Communication - Custom Communication Systems",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=samacloud.io&sz=64"
   },
   {
     "name": "Screego",
@@ -1320,7 +1389,8 @@
     "tags": "`GPL-3.0`",
     "category": "Communication - Custom Communication Systems",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=screego.net&sz=64"
   },
   {
     "name": "Shhh",
@@ -1329,7 +1399,8 @@
     "tags": "`MIT`",
     "category": "Communication - Custom Communication Systems",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "SimpleX Chat",
@@ -1347,7 +1418,8 @@
     "tags": "`GPL-3.0`",
     "category": "Communication - Custom Communication Systems",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=spectrum.im&sz=64"
   },
   {
     "name": "Stoat",
@@ -1374,7 +1446,8 @@
     "tags": "`MIT`",
     "category": "Communication - Custom Communication Systems",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=tiledesk.com&sz=64"
   },
   {
     "name": "Tinode",
@@ -1383,7 +1456,8 @@
     "tags": "`GPL-3.0`",
     "category": "Communication - Custom Communication Systems",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Tox",
@@ -1392,7 +1466,8 @@
     "tags": "`GPL-3.0`",
     "category": "Communication - Custom Communication Systems",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=tox.chat&sz=64"
   },
   {
     "name": "Tuwunel",
@@ -1401,7 +1476,8 @@
     "tags": "`Apache-2.0`",
     "category": "Communication - Custom Communication Systems",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=tuwunel.chat&sz=64"
   },
   {
     "name": "Typebot",
@@ -1446,7 +1522,8 @@
     "tags": "`GPL-2.0`",
     "category": "Communication - Email - Complete Solutions",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=b1gmail.eu&sz=64"
   },
   {
     "name": "DebOps",
@@ -1455,7 +1532,8 @@
     "tags": "`GPL-3.0`",
     "category": "Communication - Email - Complete Solutions",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=docs.debops.org&sz=64"
   },
   {
     "name": "docker-mailserver",
@@ -1473,7 +1551,8 @@
     "tags": "`GPL-3.0`",
     "category": "Communication - Email - Complete Solutions",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=inboxen.org&sz=64"
   },
   {
     "name": "iRedMail",
@@ -1491,7 +1570,8 @@
     "tags": "`GPL-3.0`",
     "category": "Communication - Email - Complete Solutions",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=maddy.email&sz=64"
   },
   {
     "name": "Mail-in-a-Box",
@@ -1527,7 +1607,8 @@
     "tags": "`ISC`",
     "category": "Communication - Email - Complete Solutions",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=modoboa.org&sz=64"
   },
   {
     "name": "Mox",
@@ -1536,7 +1617,8 @@
     "tags": "`MIT`",
     "category": "Communication - Email - Complete Solutions",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=xmox.nl&sz=64"
   },
   {
     "name": "Postal",
@@ -1554,7 +1636,8 @@
     "tags": "`GPL-3.0`",
     "category": "Communication - Email - Complete Solutions",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=gitlab.com&sz=64"
   },
   {
     "name": "SimpleLogin",
@@ -1581,7 +1664,8 @@
     "tags": "`EUPL-1.2`",
     "category": "Communication - Email - Complete Solutions",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=wildduck.email&sz=64"
   },
   {
     "name": "Cyrus IMAP",
@@ -1590,7 +1674,8 @@
     "tags": "`BSD-3-Clause-Attribution`",
     "category": "Communication - Email - Mail Delivery Agents",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=cyrusimap.org&sz=64"
   },
   {
     "name": "DavMail",
@@ -1599,7 +1684,8 @@
     "tags": "`GPL-2.0`",
     "category": "Communication - Email - Mail Delivery Agents",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=davmail.sourceforge.net&sz=64"
   },
   {
     "name": "Dovecot",
@@ -1617,7 +1703,8 @@
     "tags": "`Apache-2.0`",
     "category": "Communication - Email - Mail Transfer Agents",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=blitiri.com.ar&sz=64"
   },
   {
     "name": "Courier MTA",
@@ -1626,7 +1713,8 @@
     "tags": "`GPL-3.0`",
     "category": "Communication - Email - Mail Transfer Agents",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=courier-mta.org&sz=64"
   },
   {
     "name": "DragonFly",
@@ -1635,7 +1723,8 @@
     "tags": "`BSD-3-Clause`",
     "category": "Communication - Email - Mail Transfer Agents",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "EmailRelay",
@@ -1644,7 +1733,8 @@
     "tags": "`GPL-3.0`",
     "category": "Communication - Email - Mail Transfer Agents",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=emailrelay.sourceforge.net&sz=64"
   },
   {
     "name": "Exim",
@@ -1653,7 +1743,8 @@
     "tags": "`GPL-3.0`",
     "category": "Communication - Email - Mail Transfer Agents",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=exim.org&sz=64"
   },
   {
     "name": "Haraka",
@@ -1662,7 +1753,8 @@
     "tags": "`MIT`",
     "category": "Communication - Email - Mail Transfer Agents",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=haraka.github.io&sz=64"
   },
   {
     "name": "OpenSMTPD",
@@ -1671,7 +1763,8 @@
     "tags": "`ISC`",
     "category": "Communication - Email - Mail Transfer Agents",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=opensmtpd.org&sz=64"
   },
   {
     "name": "Postfix",
@@ -1680,7 +1773,8 @@
     "tags": "`IPL-1.0`",
     "category": "Communication - Email - Mail Transfer Agents",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=postfix.org&sz=64"
   },
   {
     "name": "Sendmail",
@@ -1689,7 +1783,8 @@
     "tags": "`Sendmail`",
     "category": "Communication - Email - Mail Transfer Agents",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=proofpoint.com&sz=64"
   },
   {
     "name": "HyperKitty",
@@ -1698,7 +1793,8 @@
     "tags": "`GPL-3.0`",
     "category": "Communication - Email - Mailing Lists and Newsletters",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=wiki.list.org&sz=64"
   },
   {
     "name": "Keila",
@@ -1725,7 +1821,8 @@
     "tags": "`GPL-3.0`",
     "category": "Communication - Email - Mailing Lists and Newsletters",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=list.org&sz=64"
   },
   {
     "name": "Mautic",
@@ -1743,7 +1840,8 @@
     "tags": "`MIT`",
     "category": "Communication - Email - Mailing Lists and Newsletters",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=mlmmj.org&sz=64"
   },
   {
     "name": "phpList",
@@ -1752,7 +1850,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Communication - Email - Mailing Lists and Newsletters",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=phplist.org&sz=64"
   },
   {
     "name": "Postorius",
@@ -1761,7 +1860,8 @@
     "tags": "`GPL-3.0`",
     "category": "Communication - Email - Mailing Lists and Newsletters",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=docs.mailman3.org&sz=64"
   },
   {
     "name": "Schleuder",
@@ -1770,7 +1870,8 @@
     "tags": "`GPL-3.0`",
     "category": "Communication - Email - Mailing Lists and Newsletters",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=schleuder.nadir.org&sz=64"
   },
   {
     "name": "Sympa",
@@ -1815,7 +1916,8 @@
     "tags": "`GPL-2.0`",
     "category": "Communication - Email - Webmail Clients",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=squirrelmail.org&sz=64"
   },
   {
     "name": "Ergo",
@@ -1833,7 +1935,8 @@
     "tags": "`GPL-3.0`",
     "category": "Communication - IRC",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "InspIRCd",
@@ -1851,7 +1954,8 @@
     "tags": "`Apache-2.0`",
     "category": "Communication - IRC",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=kiwiirc.com&sz=64"
   },
   {
     "name": "ngircd",
@@ -1860,7 +1964,8 @@
     "tags": "`GPL-2.0`",
     "category": "Communication - IRC",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=ngircd.barton.de&sz=64"
   },
   {
     "name": "Quassel IRC",
@@ -1869,7 +1974,8 @@
     "tags": "`GPL-2.0`",
     "category": "Communication - IRC",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=quassel-irc.org&sz=64"
   },
   {
     "name": "Robust IRC",
@@ -1878,7 +1984,8 @@
     "tags": "`BSD-3-Clause`",
     "category": "Communication - IRC",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=robustirc.net&sz=64"
   },
   {
     "name": "The Lounge",
@@ -1896,7 +2003,8 @@
     "tags": "`GPL-2.0`",
     "category": "Communication - IRC",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=unrealircd.org&sz=64"
   },
   {
     "name": "Weechat",
@@ -1905,7 +2013,8 @@
     "tags": "`GPL-3.0`",
     "category": "Communication - IRC",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=weechat.org&sz=64"
   },
   {
     "name": "ZNC",
@@ -1932,7 +2041,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Communication - SIP",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=linphone.org&sz=64"
   },
   {
     "name": "Freepbx",
@@ -1950,7 +2060,8 @@
     "tags": "`MPL-2.0`",
     "category": "Communication - SIP",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=freeswitch.org&sz=64"
   },
   {
     "name": "FusionPBX",
@@ -1968,7 +2079,8 @@
     "tags": "`GPL-2.0`",
     "category": "Communication - SIP",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=kamailio.org&sz=64"
   },
   {
     "name": "openSIPS",
@@ -1977,7 +2089,8 @@
     "tags": "`GPL-2.0`",
     "category": "Communication - SIP",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=opensips.org&sz=64"
   },
   {
     "name": "Routr",
@@ -1986,7 +2099,8 @@
     "tags": "`MIT`",
     "category": "Communication - SIP",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=routr.io&sz=64"
   },
   {
     "name": "SIP3",
@@ -1995,7 +2109,8 @@
     "tags": "`Apache-2.0`",
     "category": "Communication - SIP",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=sip3.io&sz=64"
   },
   {
     "name": "SIPCAPTURE Homer",
@@ -2004,7 +2119,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Communication - SIP",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=sipcapture.org&sz=64"
   },
   {
     "name": "Wazo",
@@ -2013,7 +2129,8 @@
     "tags": "`GPL-3.0`",
     "category": "Communication - SIP",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=wazo-platform.org&sz=64"
   },
   {
     "name": "Yeti-Switch",
@@ -2022,7 +2139,8 @@
     "tags": "`GPL-2.0`",
     "category": "Communication - SIP",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=yeti-switch.org&sz=64"
   },
   {
     "name": "Akkoma",
@@ -2040,7 +2158,8 @@
     "tags": "`Apache-2.0`",
     "category": "Communication - Social Networks and Forums",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=answer.apache.org&sz=64"
   },
   {
     "name": "Artalk",
@@ -2049,7 +2168,8 @@
     "tags": "`MIT`",
     "category": "Communication - Social Networks and Forums",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=artalk.js.org&sz=64"
   },
   {
     "name": "AsmBB",
@@ -2058,7 +2178,8 @@
     "tags": "`EUPL-1.2`",
     "category": "Communication - Social Networks and Forums",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=board.asm32.info&sz=64"
   },
   {
     "name": "BuddyPress",
@@ -2067,7 +2188,8 @@
     "tags": "`GPL-2.0`",
     "category": "Communication - Social Networks and Forums",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=buddypress.org&sz=64"
   },
   {
     "name": "Coral",
@@ -2076,7 +2198,8 @@
     "tags": "`Apache-2.0`",
     "category": "Communication - Social Networks and Forums",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=coralproject.net&sz=64"
   },
   {
     "name": "diaspora*",
@@ -2085,7 +2208,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Communication - Social Networks and Forums",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=diasporafoundation.org&sz=64"
   },
   {
     "name": "Discourse",
@@ -2103,7 +2227,8 @@
     "tags": "`GPL-2.0`",
     "category": "Communication - Social Networks and Forums",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=elgg.org&sz=64"
   },
   {
     "name": "Enigma 1/2 BBS",
@@ -2112,7 +2237,8 @@
     "tags": "`BSD-2-Clause`",
     "category": "Communication - Social Networks and Forums",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=nuskooler.github.io&sz=64"
   },
   {
     "name": "Flarum",
@@ -2148,7 +2274,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Communication - Social Networks and Forums",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=gethabitat.org&sz=64"
   },
   {
     "name": "Hatsu",
@@ -2157,7 +2284,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Communication - Social Networks and Forums",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=hatsu.cli.rs&sz=64"
   },
   {
     "name": "Hubzilla",
@@ -2184,7 +2312,8 @@
     "tags": "`EUPL-1.2`",
     "category": "Communication - Social Networks and Forums",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=iceshrimp.net&sz=64"
   },
   {
     "name": "Isso",
@@ -2193,7 +2322,8 @@
     "tags": "`MIT`",
     "category": "Communication - Social Networks and Forums",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=isso-comments.de&sz=64"
   },
   {
     "name": "Lemmy",
@@ -2211,7 +2341,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Communication - Social Networks and Forums",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=loomio.org&sz=64"
   },
   {
     "name": "Mastodon",
@@ -2229,7 +2360,8 @@
     "tags": "`GPL-2.0`",
     "category": "Communication - Social Networks and Forums",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=misago-project.org&sz=64"
   },
   {
     "name": "Misskey",
@@ -2256,7 +2388,8 @@
     "tags": "`LGPL-3.0`",
     "category": "Communication - Social Networks and Forums",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=mybb.com&sz=64"
   },
   {
     "name": "NodeBB",
@@ -2274,7 +2407,8 @@
     "tags": "`CAL-1.0`",
     "category": "Communication - Social Networks and Forums",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=opensource-socialnetwork.org&sz=64"
   },
   {
     "name": "phpBB",
@@ -2283,7 +2417,8 @@
     "tags": "`GPL-2.0`",
     "category": "Communication - Social Networks and Forums",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=phpbb.com&sz=64"
   },
   {
     "name": "PieFed",
@@ -2319,7 +2454,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Communication - Social Networks and Forums",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=codidact.com&sz=64"
   },
   {
     "name": "Redlib",
@@ -2337,7 +2473,8 @@
     "tags": "`MIT`",
     "category": "Communication - Social Networks and Forums",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=remark42.com&sz=64"
   },
   {
     "name": "Scoold",
@@ -2346,7 +2483,8 @@
     "tags": "`Apache-2.0`",
     "category": "Communication - Social Networks and Forums",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=scoold.com&sz=64"
   },
   {
     "name": "Simple Machines Forum",
@@ -2355,7 +2493,8 @@
     "tags": "`BSD-3-Clause`",
     "category": "Communication - Social Networks and Forums",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=simplemachines.org&sz=64"
   },
   {
     "name": "Socialhome",
@@ -2373,7 +2512,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Communication - Social Networks and Forums",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=talkyard.io&sz=64"
   },
   {
     "name": "yarn.social",
@@ -2400,7 +2540,8 @@
     "tags": "`MIT`",
     "category": "Communication - Video Conferencing",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=galene.org&sz=64"
   },
   {
     "name": "Janus",
@@ -2409,7 +2550,8 @@
     "tags": "`GPL-3.0`",
     "category": "Communication - Video Conferencing",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=janus.conf.meetecho.com&sz=64"
   },
   {
     "name": "Jitsi Meet",
@@ -2427,7 +2569,8 @@
     "tags": "`Apache-2.0`",
     "category": "Communication - Video Conferencing",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=jitsi.org&sz=64"
   },
   {
     "name": "MiroTalk C2C",
@@ -2436,7 +2579,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Communication - Video Conferencing",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=c2c.mirotalk.com&sz=64"
   },
   {
     "name": "MiroTalk P2P",
@@ -2445,7 +2589,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Communication - Video Conferencing",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=p2p.mirotalk.com&sz=64"
   },
   {
     "name": "MiroTalk SFU",
@@ -2454,7 +2599,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Communication - Video Conferencing",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=sfu.mirotalk.com&sz=64"
   },
   {
     "name": "plugNmeet",
@@ -2463,7 +2609,8 @@
     "tags": "`MIT`",
     "category": "Communication - Video Conferencing",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=plugnmeet.org&sz=64"
   },
   {
     "name": "ejabberd",
@@ -2481,7 +2628,8 @@
     "tags": "`GPL-2.0`",
     "category": "Communication - XMPP - Servers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=erlang-solutions.com&sz=64"
   },
   {
     "name": "Openfire",
@@ -2490,7 +2638,8 @@
     "tags": "`Apache-2.0`",
     "category": "Communication - XMPP - Servers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=igniterealtime.org&sz=64"
   },
   {
     "name": "Prosody IM",
@@ -2499,7 +2648,8 @@
     "tags": "`MIT`",
     "category": "Communication - XMPP - Servers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=prosody.im&sz=64"
   },
   {
     "name": "Snikket",
@@ -2517,7 +2667,8 @@
     "tags": "`GPL-3.0`",
     "category": "Communication - XMPP - Servers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=tigase.net&sz=64"
   },
   {
     "name": "Converse.js",
@@ -2526,7 +2677,8 @@
     "tags": "`MPL-2.0`",
     "category": "Communication - XMPP - Web Clients",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=conversejs.org&sz=64"
   },
   {
     "name": "Libervia",
@@ -2535,7 +2687,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Communication - XMPP - Web Clients",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=repos.goffi.org&sz=64"
   },
   {
     "name": "Salut à Toi",
@@ -2544,7 +2697,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Communication - XMPP - Web Clients",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=salut-a-toi.org&sz=64"
   },
   {
     "name": "ACP Admin",
@@ -2553,7 +2707,8 @@
     "tags": "`MIT`",
     "category": "Community-Supported Agriculture (CSA)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=acp-admin.ch&sz=64"
   },
   {
     "name": "FoodCoopShop",
@@ -2562,7 +2717,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Community-Supported Agriculture (CSA)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=foodcoopshop.com&sz=64"
   },
   {
     "name": "Foodsoft",
@@ -2571,7 +2727,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Community-Supported Agriculture (CSA)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=foodcoops.net&sz=64"
   },
   {
     "name": "Hive-Pal",
@@ -2580,7 +2737,8 @@
     "tags": "`MIT`",
     "category": "Community-Supported Agriculture (CSA)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=hivepal.app&sz=64"
   },
   {
     "name": "juntagrico",
@@ -2589,7 +2747,8 @@
     "tags": "`LGPL-3.0`",
     "category": "Community-Supported Agriculture (CSA)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=juntagrico.org&sz=64"
   },
   {
     "name": "Open Food Network",
@@ -2598,7 +2757,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Community-Supported Agriculture (CSA)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=openfoodnetwork.org&sz=64"
   },
   {
     "name": "OpenOlitor",
@@ -2607,7 +2767,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Community-Supported Agriculture (CSA)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=openolitor.org&sz=64"
   },
   {
     "name": "teikei",
@@ -2616,7 +2777,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Community-Supported Agriculture (CSA)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "indico",
@@ -2625,7 +2787,8 @@
     "tags": "`MIT`",
     "category": "Conference Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=getindico.io&sz=64"
   },
   {
     "name": "motion.tools (Antragsgrün)",
@@ -2634,7 +2797,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Conference Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=motion.tools&sz=64"
   },
   {
     "name": "OpenSlides",
@@ -2643,7 +2807,8 @@
     "tags": "`MIT`",
     "category": "Conference Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=openslides.com&sz=64"
   },
   {
     "name": "osem",
@@ -2652,7 +2817,8 @@
     "tags": "`MIT`",
     "category": "Conference Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=osem.io&sz=64"
   },
   {
     "name": "pretalx",
@@ -2661,7 +2827,8 @@
     "tags": "`Apache-2.0`",
     "category": "Conference Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=pretalx.org&sz=64"
   },
   {
     "name": "Alfresco Community Edition",
@@ -2670,7 +2837,8 @@
     "tags": "`LGPL-3.0`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=alfresco.com&sz=64"
   },
   {
     "name": "Apostrophe",
@@ -2679,7 +2847,8 @@
     "tags": "`MIT`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=apostrophecms.com&sz=64"
   },
   {
     "name": "Automad",
@@ -2697,7 +2866,8 @@
     "tags": "`GPL-2.0`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=backdropcms.org&sz=64"
   },
   {
     "name": "Bludit",
@@ -2715,7 +2885,8 @@
     "tags": "`MIT`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=boltcms.io&sz=64"
   },
   {
     "name": "CMS Made Simple",
@@ -2724,7 +2895,8 @@
     "tags": "`GPL-2.0`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=cmsmadesimple.org&sz=64"
   },
   {
     "name": "Cockpit",
@@ -2742,7 +2914,8 @@
     "tags": "`MIT`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=concretecms.com&sz=64"
   },
   {
     "name": "Contao",
@@ -2760,7 +2933,8 @@
     "tags": "`CPAL-1.0`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=couchcms.com&sz=64"
   },
   {
     "name": "Drupal",
@@ -2787,7 +2961,8 @@
     "tags": "`MIT`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Joomla!",
@@ -2796,7 +2971,8 @@
     "tags": "`GPL-2.0`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=joomla.org&sz=64"
   },
   {
     "name": "KeystoneJS",
@@ -2805,7 +2981,8 @@
     "tags": "`MIT`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=keystonejs.com&sz=64"
   },
   {
     "name": "Localess",
@@ -2823,7 +3000,8 @@
     "tags": "`GPL-2.0`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=modx.com&sz=64"
   },
   {
     "name": "Neos",
@@ -2832,7 +3010,8 @@
     "tags": "`GPL-3.0`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=neos.io&sz=64"
   },
   {
     "name": "Noosfero",
@@ -2841,7 +3020,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=gitlab.com&sz=64"
   },
   {
     "name": "Omeka",
@@ -2850,7 +3030,8 @@
     "tags": "`GPL-3.0`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=omeka.org&sz=64"
   },
   {
     "name": "Payload CMS",
@@ -2859,7 +3040,8 @@
     "tags": "`MIT`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=payloadcms.com&sz=64"
   },
   {
     "name": "Pimcore",
@@ -2868,7 +3050,8 @@
     "tags": "`GPL-3.0`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=pimcore.com&sz=64"
   },
   {
     "name": "Plone",
@@ -2877,7 +3060,8 @@
     "tags": "`ZPL-2.0`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=plone.org&sz=64"
   },
   {
     "name": "Publify",
@@ -2886,7 +3070,8 @@
     "tags": "`MIT`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=publify.github.io&sz=64"
   },
   {
     "name": "Pushword",
@@ -2895,7 +3080,8 @@
     "tags": "`MIT`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=pushword.piedweb.com&sz=64"
   },
   {
     "name": "REDAXO",
@@ -2904,7 +3090,8 @@
     "tags": "`MIT`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=redaxo.org&sz=64"
   },
   {
     "name": "SilverStripe",
@@ -2913,7 +3100,8 @@
     "tags": "`BSD-3-Clause`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=silverstripe.org&sz=64"
   },
   {
     "name": "SPIP",
@@ -2949,7 +3137,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=superdesk.org&sz=64"
   },
   {
     "name": "Textpattern",
@@ -2958,7 +3147,8 @@
     "tags": "`GPL-2.0`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=textpattern.com&sz=64"
   },
   {
     "name": "Typemill",
@@ -2985,7 +3175,8 @@
     "tags": "`MIT`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=umbraco.com&sz=64"
   },
   {
     "name": "Vvveb CMS",
@@ -2994,7 +3185,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=vvveb.com&sz=64"
   },
   {
     "name": "Wagtail",
@@ -3003,7 +3195,8 @@
     "tags": "`BSD-3-Clause`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=wagtail.io&sz=64"
   },
   {
     "name": "WinterCMS",
@@ -3012,7 +3205,8 @@
     "tags": "`MIT`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=wintercms.com&sz=64"
   },
   {
     "name": "WonderCMS",
@@ -3021,7 +3215,8 @@
     "tags": "`MIT`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=wondercms.com&sz=64"
   },
   {
     "name": "WordPress",
@@ -3039,7 +3234,8 @@
     "tags": "`Apache-2.0`",
     "category": "Customer Relationship Management (CRM)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=docs.cortezaproject.org&sz=64"
   },
   {
     "name": "Django-CRM",
@@ -3048,7 +3244,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Customer Relationship Management (CRM)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=djangocrm.github.io&sz=64"
   },
   {
     "name": "EspoCRM",
@@ -3066,7 +3263,8 @@
     "tags": "`MIT`",
     "category": "Customer Relationship Management (CRM)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=krayincrm.com&sz=64"
   },
   {
     "name": "Monica",
@@ -3084,7 +3282,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Customer Relationship Management (CRM)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=suitecrm.com&sz=64"
   },
   {
     "name": "Twenty",
@@ -3093,7 +3292,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Customer Relationship Management (CRM)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=twenty.com&sz=64"
   },
   {
     "name": "Adminer",
@@ -3111,7 +3311,8 @@
     "tags": "`MIT`",
     "category": "Database Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=azimutt.app&sz=64"
   },
   {
     "name": "Baserow",
@@ -3129,7 +3330,8 @@
     "tags": "`MIT`",
     "category": "Database Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=bytebase.com&sz=64"
   },
   {
     "name": "Chartbrew",
@@ -3147,7 +3349,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Database Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=chartdb.io&sz=64"
   },
   {
     "name": "CloudBeaver",
@@ -3165,7 +3368,8 @@
     "tags": "`GPL-3.0`",
     "category": "Database Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=d9.webcapsule.io&sz=64"
   },
   {
     "name": "Databunker",
@@ -3174,7 +3378,8 @@
     "tags": "`MIT`",
     "category": "Database Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=databunker.org&sz=64"
   },
   {
     "name": "Datasette",
@@ -3192,7 +3397,8 @@
     "tags": "`MIT`",
     "category": "Database Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=evidence.dev&sz=64"
   },
   {
     "name": "LibreDB Studio",
@@ -3201,7 +3407,8 @@
     "tags": "`MIT`",
     "category": "Database Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=libredb.org&sz=64"
   },
   {
     "name": "Limbas",
@@ -3210,7 +3417,8 @@
     "tags": "`GPL-2.0`",
     "category": "Database Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=limbas.com&sz=64"
   },
   {
     "name": "Mathesar",
@@ -3228,7 +3436,8 @@
     "tags": "`MIT`",
     "category": "Database Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=orca-q.com&sz=64"
   },
   {
     "name": "StackRender",
@@ -3237,7 +3446,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Database Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=stackrender.io&sz=64"
   },
   {
     "name": "AdGuard Home",
@@ -3264,7 +3474,8 @@
     "tags": "`Apache-2.0`",
     "category": "DNS",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=maza-ad-blocking.andros.dev&sz=64"
   },
   {
     "name": "Numa",
@@ -3273,7 +3484,8 @@
     "tags": "`MIT`",
     "category": "DNS",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=numa.rs&sz=64"
   },
   {
     "name": "Pi-hole",
@@ -3291,7 +3503,8 @@
     "tags": "`GPL-3.0`",
     "category": "DNS",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=technitium.com&sz=64"
   },
   {
     "name": "BentoPDF",
@@ -3336,7 +3549,8 @@
     "tags": "`GPL-3.0`",
     "category": "Document Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Gotenberg",
@@ -3354,7 +3568,8 @@
     "tags": "`GPL-3.0`",
     "category": "Document Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=i-librarian.net&sz=64"
   },
   {
     "name": "Mayan EDMS",
@@ -3372,7 +3587,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Document Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=opensignlabs.com&sz=64"
   },
   {
     "name": "Paperless-ngx",
@@ -3417,7 +3633,8 @@
     "tags": "`GPL-2.0`",
     "category": "Document Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=seeddms.org&sz=64"
   },
   {
     "name": "Signature PDF",
@@ -3453,7 +3670,8 @@
     "tags": "`MIT`",
     "category": "Document Management - E-books",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=atsumeru.xyz&sz=64"
   },
   {
     "name": "Bindery",
@@ -3462,7 +3680,8 @@
     "tags": "`MIT`",
     "category": "Document Management - E-books",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "BookLogr",
@@ -3480,7 +3699,8 @@
     "tags": "`GPL-3.0`",
     "category": "Document Management - E-books",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Calibre Web",
@@ -3507,7 +3727,8 @@
     "tags": "`Apache-2.0`",
     "category": "Document Management - E-books",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=gitlab.com&sz=64"
   },
   {
     "name": "Kapowarr",
@@ -3534,7 +3755,8 @@
     "tags": "`GPL-3.0`",
     "category": "Document Management - E-books",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Komga",
@@ -3552,7 +3774,8 @@
     "tags": "`GPL-3.0`",
     "category": "Document Management - E-books",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Stump",
@@ -3570,7 +3793,8 @@
     "tags": "`BSD-3-Clause`",
     "category": "Document Management - Institutional Repository and Digital Library Software",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=dspace.org&sz=64"
   },
   {
     "name": "EPrints",
@@ -3579,7 +3803,8 @@
     "tags": "`GPL-3.0`",
     "category": "Document Management - Institutional Repository and Digital Library Software",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=eprints.org&sz=64"
   },
   {
     "name": "Fedora Commons Repository",
@@ -3588,7 +3813,8 @@
     "tags": "`Apache-2.0`",
     "category": "Document Management - Institutional Repository and Digital Library Software",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=wiki.lyrasis.org&sz=64"
   },
   {
     "name": "InvenioRDM",
@@ -3597,7 +3823,8 @@
     "tags": "`MIT`",
     "category": "Document Management - Institutional Repository and Digital Library Software",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=inveniordm.docs.cern.ch&sz=64"
   },
   {
     "name": "Islandora",
@@ -3606,7 +3833,8 @@
     "tags": "`GPL-3.0`",
     "category": "Document Management - Institutional Repository and Digital Library Software",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=islandora.ca&sz=64"
   },
   {
     "name": "Samvera Hyrax",
@@ -3615,7 +3843,8 @@
     "tags": "`Apache-2.0`",
     "category": "Document Management - Institutional Repository and Digital Library Software",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=samvera.org&sz=64"
   },
   {
     "name": "Evergreen",
@@ -3624,7 +3853,8 @@
     "tags": "`GPL-2.0`",
     "category": "Document Management - Integrated Library Systems (ILS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=evergreen-ils.org&sz=64"
   },
   {
     "name": "Koha",
@@ -3633,7 +3863,8 @@
     "tags": "`GPL-3.0`",
     "category": "Document Management - Integrated Library Systems (ILS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=koha-community.org&sz=64"
   },
   {
     "name": "RERO ILS",
@@ -3642,7 +3873,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Document Management - Integrated Library Systems (ILS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=rero21.ch&sz=64"
   },
   {
     "name": "Aimeos",
@@ -3651,7 +3883,8 @@
     "tags": "`LGPL-3.0/MIT`",
     "category": "E-commerce",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=aimeos.org&sz=64"
   },
   {
     "name": "Bagisto",
@@ -3669,7 +3902,8 @@
     "tags": "`GPL-3.0`",
     "category": "E-commerce",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=coreshop.org&sz=64"
   },
   {
     "name": "Drupal Commerce",
@@ -3678,7 +3912,8 @@
     "tags": "`GPL-2.0`",
     "category": "E-commerce",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=drupalcommerce.org&sz=64"
   },
   {
     "name": "EverShop",
@@ -3687,7 +3922,8 @@
     "tags": "`GPL-3.0`",
     "category": "E-commerce",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=evershop.io&sz=64"
   },
   {
     "name": "Magento Open Source",
@@ -3696,7 +3932,8 @@
     "tags": "`OSL-3.0`",
     "category": "E-commerce",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=business.adobe.com&sz=64"
   },
   {
     "name": "MedusaJs",
@@ -3705,7 +3942,8 @@
     "tags": "`MIT`",
     "category": "E-commerce",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=medusajs.com&sz=64"
   },
   {
     "name": "myCart",
@@ -3714,7 +3952,8 @@
     "tags": "`MIT`",
     "category": "E-commerce",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Open Source POS",
@@ -3732,7 +3971,8 @@
     "tags": "`GPL-3.0`",
     "category": "E-commerce",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=opencart.com&sz=64"
   },
   {
     "name": "PrestaShop",
@@ -3759,7 +3999,8 @@
     "tags": "`MIT`",
     "category": "E-commerce",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=s-cart.org&sz=64"
   },
   {
     "name": "Saleor",
@@ -3768,7 +4009,8 @@
     "tags": "`BSD-3-Clause`",
     "category": "E-commerce",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=saleor.io&sz=64"
   },
   {
     "name": "Shopware Community Edition",
@@ -3786,7 +4028,8 @@
     "tags": "`BSD-3-Clause`",
     "category": "E-commerce",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=solidus.io&sz=64"
   },
   {
     "name": "Spree Commerce",
@@ -3795,7 +4038,8 @@
     "tags": "`BSD-3-Clause`",
     "category": "E-commerce",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=spreecommerce.org&sz=64"
   },
   {
     "name": "Sylius",
@@ -3804,7 +4048,8 @@
     "tags": "`MIT`",
     "category": "E-commerce",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=sylius.com&sz=64"
   },
   {
     "name": "Thelia",
@@ -3813,7 +4058,8 @@
     "tags": "`LGPL-3.0`",
     "category": "E-commerce",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=thelia.net&sz=64"
   },
   {
     "name": "Vendure",
@@ -3822,7 +4068,8 @@
     "tags": "`MIT`",
     "category": "E-commerce",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=vendure.io&sz=64"
   },
   {
     "name": "WooCommerce",
@@ -3840,7 +4087,8 @@
     "tags": "`MIT`",
     "category": "Feed Readers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "CommaFeed",
@@ -3876,7 +4124,8 @@
     "tags": "`MIT`",
     "category": "Feed Readers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Goeland",
@@ -3885,7 +4134,8 @@
     "tags": "`MIT`",
     "category": "Feed Readers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "JARR",
@@ -3894,7 +4144,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Feed Readers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=1pxsolidblack.pl&sz=64"
   },
   {
     "name": "Kriss Feed",
@@ -3903,7 +4154,8 @@
     "tags": "`CC0-1.0`",
     "category": "Feed Readers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Leed",
@@ -3912,7 +4164,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Feed Readers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Miniflux",
@@ -3939,7 +4192,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Feed Readers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=git.sr.ht&sz=64"
   },
   {
     "name": "reader",
@@ -3948,7 +4202,8 @@
     "tags": "`BSD-3-Clause`",
     "category": "Feed Readers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Readflow",
@@ -3957,7 +4212,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Feed Readers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=readflow.app&sz=64"
   },
   {
     "name": "RSS-Bridge",
@@ -3975,7 +4231,8 @@
     "tags": "`MIT`",
     "category": "Feed Readers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "RSS2EMail",
@@ -3984,7 +4241,8 @@
     "tags": "`GPL-2.0`",
     "category": "Feed Readers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "RSSHub",
@@ -4002,7 +4260,8 @@
     "tags": "`GPL-3.0`",
     "category": "Feed Readers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=selfoss.aditu.de&sz=64"
   },
   {
     "name": "Stringer",
@@ -4011,7 +4270,8 @@
     "tags": "`MIT`",
     "category": "Feed Readers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Tiny Tiny RSS",
@@ -4074,7 +4334,8 @@
     "tags": "`GPL-3.0`",
     "category": "File Transfer & Synchronization",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=git-annex.branchable.com&sz=64"
   },
   {
     "name": "Kinto",
@@ -4110,7 +4371,8 @@
     "tags": "`BSD-2-Clause`",
     "category": "File Transfer & Synchronization",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=openssh.com&sz=64"
   },
   {
     "name": "ownCloud",
@@ -4128,7 +4390,8 @@
     "tags": "`AGPL-3.0`",
     "category": "File Transfer & Synchronization",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=peergos.org&sz=64"
   },
   {
     "name": "Puter",
@@ -4155,7 +4418,8 @@
     "tags": "`GPL-3.0`",
     "category": "File Transfer & Synchronization",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=samba.org&sz=64"
   },
   {
     "name": "Seafile",
@@ -4191,7 +4455,8 @@
     "tags": "`GPL-3.0`",
     "category": "File Transfer & Synchronization",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=cis.upenn.edu&sz=64"
   },
   {
     "name": "GarageHQ",
@@ -4200,7 +4465,8 @@
     "tags": "`AGPL-3.0`",
     "category": "File Transfer - Object Storage & File Servers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=garagehq.deuxfleurs.fr&sz=64"
   },
   {
     "name": "Harbor",
@@ -4227,7 +4493,8 @@
     "tags": "`Apache-2.0`",
     "category": "File Transfer - Object Storage & File Servers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=zenko.io&sz=64"
   },
   {
     "name": "ZOT OCI Registry",
@@ -4236,7 +4503,8 @@
     "tags": "`Apache-2.0`",
     "category": "File Transfer - Object Storage & File Servers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=zotregistry.dev&sz=64"
   },
   {
     "name": "bittorrent-tracker",
@@ -4245,7 +4513,8 @@
     "tags": "`MIT`",
     "category": "File Transfer - Peer-to-peer Filesharing",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=webtorrent.io&sz=64"
   },
   {
     "name": "Deluge",
@@ -4263,7 +4532,8 @@
     "tags": "`MIT`",
     "category": "File Transfer - Peer-to-peer Filesharing",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=privydrop.app&sz=64"
   },
   {
     "name": "qBittorrent",
@@ -4299,7 +4569,8 @@
     "tags": "`MIT`",
     "category": "File Transfer - Peer-to-peer Filesharing",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "015",
@@ -4308,7 +4579,8 @@
     "tags": "`AGPL-3.0`",
     "category": "File Transfer - Single-click & Drag-n-drop Upload",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=send.fudaoyuan.icu&sz=64"
   },
   {
     "name": "Chibisafe",
@@ -4326,7 +4598,8 @@
     "tags": "`AGPL-3.0`",
     "category": "File Transfer - Single-click & Drag-n-drop Upload",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=ladigitale.dev&sz=64"
   },
   {
     "name": "elixire",
@@ -4335,7 +4608,8 @@
     "tags": "`AGPL-3.0`",
     "category": "File Transfer - Single-click & Drag-n-drop Upload",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=gitlab.com&sz=64"
   },
   {
     "name": "Files Sharing",
@@ -4344,7 +4618,8 @@
     "tags": "`GPL-3.0`",
     "category": "File Transfer - Single-click & Drag-n-drop Upload",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Flare",
@@ -4353,7 +4628,8 @@
     "tags": "`MIT`",
     "category": "File Transfer - Single-click & Drag-n-drop Upload",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Gokapi",
@@ -4362,7 +4638,8 @@
     "tags": "`GPL-3.0`",
     "category": "File Transfer - Single-click & Drag-n-drop Upload",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "goploader",
@@ -4371,7 +4648,8 @@
     "tags": "`MIT`",
     "category": "File Transfer - Single-click & Drag-n-drop Upload",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=depado.github.io&sz=64"
   },
   {
     "name": "GoSƐ",
@@ -4380,7 +4658,8 @@
     "tags": "`Apache-2.0`",
     "category": "File Transfer - Single-click & Drag-n-drop Upload",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=codeberg.org&sz=64"
   },
   {
     "name": "Jirafeau",
@@ -4389,7 +4668,8 @@
     "tags": "`AGPL-3.0`",
     "category": "File Transfer - Single-click & Drag-n-drop Upload",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=gitlab.com&sz=64"
   },
   {
     "name": "OnionShare",
@@ -4398,7 +4678,8 @@
     "tags": "`GPL-3.0`",
     "category": "File Transfer - Single-click & Drag-n-drop Upload",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "PicoShare",
@@ -4425,7 +4706,8 @@
     "tags": "`Apache-2.0`",
     "category": "File Transfer - Single-click & Drag-n-drop Upload",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=pictshare.net&sz=64"
   },
   {
     "name": "Pingvin Share X",
@@ -4443,7 +4725,8 @@
     "tags": "`MIT`",
     "category": "File Transfer - Single-click & Drag-n-drop Upload",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "ProjectSend",
@@ -4479,7 +4762,8 @@
     "tags": "`Apache-2.0`",
     "category": "File Transfer - Single-click & Drag-n-drop Upload",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=docs.safebucket.io&sz=64"
   },
   {
     "name": "sE2EEnd",
@@ -4488,7 +4772,8 @@
     "tags": "`AGPL-3.0`",
     "category": "File Transfer - Single-click & Drag-n-drop Upload",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Sharry",
@@ -4506,7 +4791,8 @@
     "tags": "`MIT`",
     "category": "File Transfer - Single-click & Drag-n-drop Upload",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Slink",
@@ -4533,7 +4819,8 @@
     "tags": "`MIT`",
     "category": "File Transfer - Single-click & Drag-n-drop Upload",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Uguu",
@@ -4542,7 +4829,8 @@
     "tags": "`MIT`",
     "category": "File Transfer - Single-click & Drag-n-drop Upload",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "XBackBone",
@@ -4569,7 +4857,8 @@
     "tags": "`GPL-3.0`",
     "category": "File Transfer - Web-based File Managers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=oupala.github.io&sz=64"
   },
   {
     "name": "ClyoCloud",
@@ -4578,7 +4867,8 @@
     "tags": "`AGPL-3.0`",
     "category": "File Transfer - Web-based File Managers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=clyo.cloud&sz=64"
   },
   {
     "name": "copyparty",
@@ -4596,7 +4886,8 @@
     "tags": "`MIT`",
     "category": "File Transfer - Web-based File Managers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=directorylister.com&sz=64"
   },
   {
     "name": "filebrowser",
@@ -4641,7 +4932,8 @@
     "tags": "`MIT`",
     "category": "File Transfer - Web-based File Managers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "mikochi",
@@ -4650,7 +4942,8 @@
     "tags": "`MIT`",
     "category": "File Transfer - Web-based File Managers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "miniserve",
@@ -4659,7 +4952,8 @@
     "tags": "`MIT`",
     "category": "File Transfer - Web-based File Managers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "ResourceSpace",
@@ -4668,7 +4962,8 @@
     "tags": "`BSD-4-Clause`",
     "category": "File Transfer - Web-based File Managers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=resourcespace.com&sz=64"
   },
   {
     "name": "slcl",
@@ -4677,7 +4972,8 @@
     "tags": "`AGPL-3.0`",
     "category": "File Transfer - Web-based File Managers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=codeberg.org&sz=64"
   },
   {
     "name": "Surfer",
@@ -4686,7 +4982,8 @@
     "tags": "`MIT`",
     "category": "File Transfer - Web-based File Managers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=git.cloudron.io&sz=64"
   },
   {
     "name": "TagSpaces",
@@ -4695,7 +4992,8 @@
     "tags": "`AGPL-3.0`",
     "category": "File Transfer - Web-based File Managers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=tagspaces.org&sz=64"
   },
   {
     "name": "Tiny File Manager",
@@ -4704,7 +5002,8 @@
     "tags": "`GPL-3.0`",
     "category": "File Transfer - Web-based File Managers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=tinyfilemanager.github.io&sz=64"
   },
   {
     "name": "0 A.D.",
@@ -4713,7 +5012,8 @@
     "tags": "`MIT/GPL-2.0/Zlib`",
     "category": "Games",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=play0ad.com&sz=64"
   },
   {
     "name": "A Dark Room",
@@ -4731,7 +5031,8 @@
     "tags": "`Zlib`",
     "category": "Games",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=ddnet.org&sz=64"
   },
   {
     "name": "Digibuzzer",
@@ -4740,7 +5041,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Games",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=digibuzzer.app&sz=64"
   },
   {
     "name": "Hypersomnia",
@@ -4749,7 +5051,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Games",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Lila",
@@ -4758,7 +5061,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Games",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=lichess.org&sz=64"
   },
   {
     "name": "Luanti",
@@ -4767,7 +5071,8 @@
     "tags": "`LGPL-2.1/MIT/Zlib`",
     "category": "Games",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=luanti.org&sz=64"
   },
   {
     "name": "Mindustry",
@@ -4776,7 +5081,8 @@
     "tags": "`GPL-3.0`",
     "category": "Games",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=mindustrygame.github.io&sz=64"
   },
   {
     "name": "MTA:SA",
@@ -4785,7 +5091,8 @@
     "tags": "`GPL-3.0`",
     "category": "Games",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=multitheftauto.com&sz=64"
   },
   {
     "name": "OpenTTD",
@@ -4803,7 +5110,8 @@
     "tags": "`GPL-3.0`",
     "category": "Games",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Posio",
@@ -4812,7 +5120,8 @@
     "tags": "`MIT`",
     "category": "Games",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Razzia",
@@ -4830,7 +5139,8 @@
     "tags": "`Zlib/MIT/CC-BY-SA-4.0`",
     "category": "Games",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=redeclipse.net&sz=64"
   },
   {
     "name": "Scribble.rs",
@@ -4839,7 +5149,8 @@
     "tags": "`BSD-3-Clause`",
     "category": "Games",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Suroi",
@@ -4848,7 +5159,8 @@
     "tags": "`GPL-3.0`",
     "category": "Games",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=suroi.io&sz=64"
   },
   {
     "name": "The Battle for Wesnoth",
@@ -4857,7 +5169,8 @@
     "tags": "`GPL-2.0`",
     "category": "Games",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Veloren",
@@ -4866,7 +5179,8 @@
     "tags": "`GPL-3.0`",
     "category": "Games",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=veloren.net&sz=64"
   },
   {
     "name": "Zero-K",
@@ -4875,7 +5189,8 @@
     "tags": "`GPL-2.0`",
     "category": "Games",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=zero-k.info&sz=64"
   },
   {
     "name": "auto-mcs",
@@ -4920,7 +5235,8 @@
     "tags": "`GPL-3.0`",
     "category": "Games - Administrative Utilities & Control Panels",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=easy-wi.com&sz=64"
   },
   {
     "name": "GameAP",
@@ -4929,7 +5245,8 @@
     "tags": "`MIT`",
     "category": "Games - Administrative Utilities & Control Panels",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=gameap.com&sz=64"
   },
   {
     "name": "Gameyfin",
@@ -4974,7 +5291,8 @@
     "tags": "`MIT`",
     "category": "Games - Administrative Utilities & Control Panels",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=accessory.github.io&sz=64"
   },
   {
     "name": "Ownfoil",
@@ -5037,7 +5355,8 @@
     "tags": "`CC-BY-SA-4.0`",
     "category": "Games - Administrative Utilities & Control Panels",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=sbpp.github.io&sz=64"
   },
   {
     "name": "Sunshine",
@@ -5055,7 +5374,8 @@
     "tags": "`MIT`",
     "category": "Genealogy",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=genea.app&sz=64"
   },
   {
     "name": "Genealogy",
@@ -5064,7 +5384,8 @@
     "tags": "`MIT`",
     "category": "Genealogy",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=genealogy.kreaweb.be&sz=64"
   },
   {
     "name": "GeneWeb",
@@ -5073,7 +5394,8 @@
     "tags": "`GPL-2.0`",
     "category": "Genealogy",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Gramps Web",
@@ -5100,7 +5422,8 @@
     "tags": "`MIT`",
     "category": "Generative Artificial Intelligence (GenAI)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=agenta.ai&sz=64"
   },
   {
     "name": "AnythingLLM",
@@ -5118,7 +5441,8 @@
     "tags": "`MIT`",
     "category": "Generative Artificial Intelligence (GenAI)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=gomodel.enterpilot.io&sz=64"
   },
   {
     "name": "Khoj",
@@ -5145,7 +5469,8 @@
     "tags": "`Apache-2.0`",
     "category": "Generative Artificial Intelligence (GenAI)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "LLMKube",
@@ -5154,7 +5479,8 @@
     "tags": "`Apache-2.0`",
     "category": "Generative Artificial Intelligence (GenAI)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=llmkube.com&sz=64"
   },
   {
     "name": "Local Deep Research",
@@ -5163,7 +5489,8 @@
     "tags": "`MIT`",
     "category": "Generative Artificial Intelligence (GenAI)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "LocalAI",
@@ -5172,7 +5499,8 @@
     "tags": "`MIT`",
     "category": "Generative Artificial Intelligence (GenAI)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=localai.io&sz=64"
   },
   {
     "name": "Ollama",
@@ -5208,7 +5536,8 @@
     "tags": "`MIT`",
     "category": "Generative Artificial Intelligence (GenAI)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Citadel",
@@ -5217,7 +5546,8 @@
     "tags": "`GPL-3.0`",
     "category": "Groupware",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=citadel.org&sz=64"
   },
   {
     "name": "Colanode",
@@ -5235,7 +5565,8 @@
     "tags": "`GPL-3.0`",
     "category": "Groupware",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=cozy.io&sz=64"
   },
   {
     "name": "Digipad",
@@ -5244,7 +5575,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Groupware",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=digipad.app&sz=64"
   },
   {
     "name": "Digistorm",
@@ -5253,7 +5585,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Groupware",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=digistorm.app&sz=64"
   },
   {
     "name": "Digiwall",
@@ -5262,7 +5595,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Groupware",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=digiwall.app&sz=64"
   },
   {
     "name": "egroupware",
@@ -5271,7 +5605,8 @@
     "tags": "`GPL-2.0`",
     "category": "Groupware",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=egroupware.org&sz=64"
   },
   {
     "name": "Group Office",
@@ -5280,7 +5615,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Groupware",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=group-office.com&sz=64"
   },
   {
     "name": "Openmeetings",
@@ -5289,7 +5625,8 @@
     "tags": "`Apache-2.0`",
     "category": "Groupware",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=openmeetings.apache.org&sz=64"
   },
   {
     "name": "SOGo",
@@ -5307,7 +5644,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Groupware",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=tine-groupware.de&sz=64"
   },
   {
     "name": "Tracim",
@@ -5316,7 +5654,8 @@
     "tags": "`AGPL-3.0/LGPL-3.0/MIT`",
     "category": "Groupware",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Zimbra Collaboration",
@@ -5325,7 +5664,8 @@
     "tags": "`GPL-2.0/CPAL-1.0`",
     "category": "Groupware",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=zimbra.com&sz=64"
   },
   {
     "name": "Endurain",
@@ -5352,7 +5692,8 @@
     "tags": "`GPL-3.0`",
     "category": "Health and Fitness",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=meremedical.co&sz=64"
   },
   {
     "name": "OpenELIS Global",
@@ -5361,7 +5702,8 @@
     "tags": "`MPL-2.0`",
     "category": "Health and Fitness",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=openelis-global.org&sz=64"
   },
   {
     "name": "OpenEMR",
@@ -5388,7 +5730,8 @@
     "tags": "`GPL-2.0`",
     "category": "Human Resources Management (HRM)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=admidio.org&sz=64"
   },
   {
     "name": "Frappe HR",
@@ -5451,7 +5794,8 @@
     "tags": "`Apache-2.0`",
     "category": "Internet of Things (IoT)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=flowforge.com&sz=64"
   },
   {
     "name": "FMD Server",
@@ -5469,7 +5813,8 @@
     "tags": "`Apache-2.0`",
     "category": "Internet of Things (IoT)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=gladysassistant.com&sz=64"
   },
   {
     "name": "Home Assistant",
@@ -5496,7 +5841,8 @@
     "tags": "`MIT`",
     "category": "Internet of Things (IoT)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Node RED",
@@ -5514,7 +5860,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Internet of Things (IoT)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=onloc.app&sz=64"
   },
   {
     "name": "openHAB",
@@ -5532,7 +5879,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Internet of Things (IoT)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=openremote.io&sz=64"
   },
   {
     "name": "polluSensWeb",
@@ -5541,7 +5889,8 @@
     "tags": "`MIT`",
     "category": "Internet of Things (IoT)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=wespeakenglish.github.io&sz=64"
   },
   {
     "name": "SIP Irrigation Control",
@@ -5550,7 +5899,8 @@
     "tags": "`GPL-3.0`",
     "category": "Internet of Things (IoT)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=dan-in-ca.github.io&sz=64"
   },
   {
     "name": "SOLECTRUS",
@@ -5586,7 +5936,8 @@
     "tags": "`MPL-2.0`",
     "category": "Internet of Things (IoT)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=webthings.io&sz=64"
   },
   {
     "name": "Cannery",
@@ -5604,7 +5955,8 @@
     "tags": "`MIT`",
     "category": "Inventory Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "HomeBox (SysAdminsMedia)",
@@ -5613,7 +5965,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Inventory Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=homebox.software&sz=64"
   },
   {
     "name": "Inventaire",
@@ -5622,7 +5975,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Inventory Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=inventaire.io&sz=64"
   },
   {
     "name": "Inventree",
@@ -5640,7 +5994,8 @@
     "tags": "`GPL-3.0`",
     "category": "Inventory Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=openquartermaster.com&sz=64"
   },
   {
     "name": "Part-DB",
@@ -5685,7 +6040,8 @@
     "tags": "`MIT`",
     "category": "Knowledge Management Tools",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=atomicserver.eu&sz=64"
   },
   {
     "name": "Digimindmap",
@@ -5694,7 +6050,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Knowledge Management Tools",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=ladigitale.dev&sz=64"
   },
   {
     "name": "LibreKB",
@@ -5703,7 +6060,8 @@
     "tags": "`GPL-3.0`",
     "category": "Knowledge Management Tools",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=librekb.com&sz=64"
   },
   {
     "name": "memEx",
@@ -5712,7 +6070,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Knowledge Management Tools",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=codeberg.org&sz=64"
   },
   {
     "name": "SiYuan",
@@ -5730,7 +6089,8 @@
     "tags": "`MIT`",
     "category": "Knowledge Management Tools",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Canvas LMS",
@@ -5748,7 +6108,8 @@
     "tags": "`GPL-3.0`",
     "category": "Learning and Courses",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=chamilo.org&sz=64"
   },
   {
     "name": "Digiscreen",
@@ -5757,7 +6118,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Learning and Courses",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=ladigitale.dev&sz=64"
   },
   {
     "name": "Digitools",
@@ -5766,7 +6128,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Learning and Courses",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=ladigitale.dev&sz=64"
   },
   {
     "name": "edX",
@@ -5775,7 +6138,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Learning and Courses",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=edx.org&sz=64"
   },
   {
     "name": "Gibbon",
@@ -5784,7 +6148,8 @@
     "tags": "`GPL-3.0`",
     "category": "Learning and Courses",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=gibbonedu.org&sz=64"
   },
   {
     "name": "Helium",
@@ -5793,7 +6158,8 @@
     "tags": "`MIT`",
     "category": "Learning and Courses",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=heliumedu.com&sz=64"
   },
   {
     "name": "ILIAS",
@@ -5802,7 +6168,8 @@
     "tags": "`GPL-3.0`",
     "category": "Learning and Courses",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=ilias.de&sz=64"
   },
   {
     "name": "INGInious",
@@ -5811,7 +6178,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Learning and Courses",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=inginious.org&sz=64"
   },
   {
     "name": "Moodle",
@@ -5829,7 +6197,8 @@
     "tags": "`GPL-2.0`",
     "category": "Learning and Courses",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=openeclass.org&sz=64"
   },
   {
     "name": "OpenOLAT",
@@ -5838,7 +6207,8 @@
     "tags": "`Apache-2.0`",
     "category": "Learning and Courses",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=openolat.com&sz=64"
   },
   {
     "name": "QST",
@@ -5847,7 +6217,8 @@
     "tags": "`GPL-2.0`",
     "category": "Learning and Courses",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=qstonline.org&sz=64"
   },
   {
     "name": "RELATE",
@@ -5856,7 +6227,8 @@
     "tags": "`MIT`",
     "category": "Learning and Courses",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=documen.tician.de&sz=64"
   },
   {
     "name": "RosarioSIS",
@@ -5865,7 +6237,8 @@
     "tags": "`GPL-2.0`",
     "category": "Learning and Courses",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=rosariosis.org&sz=64"
   },
   {
     "name": "CNCjs",
@@ -5874,7 +6247,8 @@
     "tags": "`MIT`",
     "category": "Manufacturing",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=cnc.js.org&sz=64"
   },
   {
     "name": "Fluidd",
@@ -5892,7 +6266,8 @@
     "tags": "`GPL-2.0/LGPL-3.0`",
     "category": "Manufacturing",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=linuxcnc.org&sz=64"
   },
   {
     "name": "Mainsail",
@@ -5946,7 +6321,8 @@
     "tags": "`MIT`",
     "category": "Maps and Global Positioning System (GPS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Dawarich",
@@ -5964,7 +6340,8 @@
     "tags": "`MIT`",
     "category": "Maps and Global Positioning System (GPS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "GraphHopper",
@@ -5982,7 +6359,8 @@
     "tags": "`GPL-3.0`",
     "category": "Maps and Global Positioning System (GPS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=nextgis.com&sz=64"
   },
   {
     "name": "Nominatim",
@@ -5991,7 +6369,8 @@
     "tags": "`GPL-2.0`",
     "category": "Maps and Global Positioning System (GPS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=nominatim.org&sz=64"
   },
   {
     "name": "Open Source Routing Machine (OSRM)",
@@ -6000,7 +6379,8 @@
     "tags": "`BSD-2-Clause`",
     "category": "Maps and Global Positioning System (GPS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=project-osrm.org&sz=64"
   },
   {
     "name": "OpenRouteService",
@@ -6009,7 +6389,8 @@
     "tags": "`GPL-3.0`",
     "category": "Maps and Global Positioning System (GPS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=openrouteservice.org&sz=64"
   },
   {
     "name": "OpenStreetMap",
@@ -6027,7 +6408,8 @@
     "tags": "`LGPL-3.0`",
     "category": "Maps and Global Positioning System (GPS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=opentripplanner.org&sz=64"
   },
   {
     "name": "OwnTracks Recorder",
@@ -6036,7 +6418,8 @@
     "tags": "`GPL-2.0`",
     "category": "Maps and Global Positioning System (GPS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "TileServer GL",
@@ -6045,7 +6428,8 @@
     "tags": "`BSD-2-Clause`",
     "category": "Maps and Global Positioning System (GPS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=tileserver.readthedocs.io&sz=64"
   },
   {
     "name": "Traccar",
@@ -6063,7 +6447,8 @@
     "tags": "`MIT`",
     "category": "Maps and Global Positioning System (GPS)",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=itskovacs-trip.netlify.app&sz=64"
   },
   {
     "name": "wanderer",
@@ -6081,7 +6466,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Media Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Deleterr",
@@ -6090,7 +6476,8 @@
     "tags": "`MIT`",
     "category": "Media Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Downtify",
@@ -6117,7 +6504,8 @@
     "tags": "`GPL-3.0`",
     "category": "Media Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Lidify",
@@ -6126,7 +6514,8 @@
     "tags": "`MIT`",
     "category": "Media Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Lingarr",
@@ -6171,7 +6560,8 @@
     "tags": "`MIT`",
     "category": "Media Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "nefarious",
@@ -6180,7 +6570,8 @@
     "tags": "`GPL-3.0`",
     "category": "Media Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=lardbit.github.io&sz=64"
   },
   {
     "name": "Ombi",
@@ -6225,7 +6616,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Media Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=ratelog.org&sz=64"
   },
   {
     "name": "Reaparr",
@@ -6261,7 +6653,8 @@
     "tags": "`MIT`",
     "category": "Media Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=trackwatch.emlopezr.com&sz=64"
   },
   {
     "name": "tubesync",
@@ -6288,7 +6681,8 @@
     "tags": "`GPL-3.0`",
     "category": "Media Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Youtarr",
@@ -6306,7 +6700,8 @@
     "tags": "`MIT`",
     "category": "Media Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=hyeonsangjeon.github.io&sz=64"
   },
   {
     "name": "YoutubeDL-Server",
@@ -6315,7 +6710,8 @@
     "tags": "`MIT`",
     "category": "Media Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "yt-dlp Web UI",
@@ -6324,7 +6720,8 @@
     "tags": "`MPL-2.0`",
     "category": "Media Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Ampache",
@@ -6351,7 +6748,8 @@
     "tags": "`MIT`",
     "category": "Media Streaming - Audio Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "AzuraCast",
@@ -6387,7 +6785,8 @@
     "tags": "`GPL-3.0`",
     "category": "Media Streaming - Audio Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=botwave.dpip.lol&sz=64"
   },
   {
     "name": "Funkwhale",
@@ -6423,7 +6822,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Media Streaming - Audio Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=libretime.org&sz=64"
   },
   {
     "name": "LMS",
@@ -6432,7 +6832,8 @@
     "tags": "`GPL-3.0`",
     "category": "Media Streaming - Audio Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Lyrion Music Server",
@@ -6459,7 +6860,8 @@
     "tags": "`Apache-2.0`",
     "category": "Media Streaming - Audio Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=docs.mopidy.com&sz=64"
   },
   {
     "name": "mpd",
@@ -6468,7 +6870,8 @@
     "tags": "`GPL-2.0`",
     "category": "Media Streaming - Audio Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=musicpd.org&sz=64"
   },
   {
     "name": "mStream",
@@ -6495,7 +6898,8 @@
     "tags": "`BSD-3-Clause`",
     "category": "Media Streaming - Audio Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Navidrome Music Server",
@@ -6504,7 +6908,8 @@
     "tags": "`GPL-3.0`",
     "category": "Media Streaming - Audio Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=navidrome.org&sz=64"
   },
   {
     "name": "Pinepods",
@@ -6540,7 +6945,8 @@
     "tags": "`MIT`",
     "category": "Media Streaming - Audio Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Supysonic",
@@ -6549,7 +6955,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Media Streaming - Audio Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "SwingMusic",
@@ -6567,7 +6974,8 @@
     "tags": "`MIT`",
     "category": "Media Streaming - Audio Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "ClipBucket",
@@ -6576,7 +6984,8 @@
     "tags": "`AAL`",
     "category": "Media Streaming - Multimedia Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=clipbucket.fr&sz=64"
   },
   {
     "name": "cmyflix",
@@ -6585,7 +6994,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Media Streaming - Multimedia Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Gerbera",
@@ -6603,7 +7013,8 @@
     "tags": "`GPL-2.0`",
     "category": "Media Streaming - Multimedia Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=icecast.org&sz=64"
   },
   {
     "name": "Jellyfin",
@@ -6666,7 +7077,8 @@
     "tags": "`Unlicense`",
     "category": "Media Streaming - Multimedia Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=mistserver.org&sz=64"
   },
   {
     "name": "NymphCast",
@@ -6675,7 +7087,8 @@
     "tags": "`BSD-3-Clause`",
     "category": "Media Streaming - Multimedia Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=nyanko.ws&sz=64"
   },
   {
     "name": "Rygel",
@@ -6702,7 +7115,8 @@
     "tags": "`GPL-3.0`",
     "category": "Media Streaming - Multimedia Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "üWave",
@@ -6711,7 +7125,8 @@
     "tags": "`MIT`",
     "category": "Media Streaming - Multimedia Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=u-wave.net&sz=64"
   },
   {
     "name": "CyTube",
@@ -6720,7 +7135,8 @@
     "tags": "`MIT`",
     "category": "Media Streaming - Video Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Invidious",
@@ -6738,7 +7154,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Media Streaming - Video Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=mediacms.io&sz=64"
   },
   {
     "name": "OvenMediaEngine",
@@ -6747,7 +7164,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Media Streaming - Video Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Owncast",
@@ -6774,7 +7192,8 @@
     "tags": "`MIT`",
     "category": "Media Streaming - Video Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Restreamer",
@@ -6792,7 +7211,8 @@
     "tags": "`MIT`",
     "category": "Media Streaming - Video Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=ossrs.io&sz=64"
   },
   {
     "name": "SyncTube",
@@ -6801,7 +7221,8 @@
     "tags": "`MIT`",
     "category": "Media Streaming - Video Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Tiramisu",
@@ -6810,7 +7231,8 @@
     "tags": "`GPL-2.0`",
     "category": "Media Streaming - Video Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Tube Archivist",
@@ -6828,7 +7250,8 @@
     "tags": "`MIT`",
     "category": "Media Streaming - Video Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=git.mills.io&sz=64"
   },
   {
     "name": "VideoLAN Client (VLC)",
@@ -6837,7 +7260,8 @@
     "tags": "`GPL-2.0`",
     "category": "Media Streaming - Video Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=videolan.org&sz=64"
   },
   {
     "name": "2FAuth",
@@ -6900,7 +7324,8 @@
     "tags": "`MIT`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=magicbug.co.uk&sz=64"
   },
   {
     "name": "ConvertX",
@@ -6936,7 +7361,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=digiboard.app&sz=64"
   },
   {
     "name": "Digicard",
@@ -6945,7 +7371,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=codeberg.org&sz=64"
   },
   {
     "name": "Digicut",
@@ -6954,7 +7381,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=ladigitale.dev&sz=64"
   },
   {
     "name": "Digiface",
@@ -6963,7 +7391,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=ladigitale.dev&sz=64"
   },
   {
     "name": "Digiflashcards",
@@ -6972,7 +7401,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=ladigitale.dev&sz=64"
   },
   {
     "name": "Digimerge",
@@ -6981,7 +7411,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=ladigitale.dev&sz=64"
   },
   {
     "name": "Digiquiz",
@@ -6990,7 +7421,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=ladigitale.dev&sz=64"
   },
   {
     "name": "Digiread",
@@ -6999,7 +7431,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=ladigitale.dev&sz=64"
   },
   {
     "name": "Digisteps",
@@ -7008,7 +7441,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=ladigitale.dev&sz=64"
   },
   {
     "name": "Digitranscode",
@@ -7017,7 +7451,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=ladigitale.dev&sz=64"
   },
   {
     "name": "Digiview",
@@ -7026,7 +7461,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=ladigitale.dev&sz=64"
   },
   {
     "name": "Digiwords",
@@ -7035,7 +7471,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=ladigitale.dev&sz=64"
   },
   {
     "name": "DOCAT",
@@ -7044,7 +7481,8 @@
     "tags": "`MIT`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Domain Locker",
@@ -7062,7 +7500,8 @@
     "tags": "`GPL-2.0/BSD-3-Clause/MIT`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=domjudge.org&sz=64"
   },
   {
     "name": "ESMira",
@@ -7071,7 +7510,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=esmira.kl.ac.at&sz=64"
   },
   {
     "name": "F-Droid",
@@ -7089,7 +7529,8 @@
     "tags": "`MIT`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=flyimg.io&sz=64"
   },
   {
     "name": "Garlic-Hub",
@@ -7116,7 +7557,8 @@
     "tags": "`MIT`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Habitica",
@@ -7143,7 +7585,8 @@
     "tags": "`GPL-3.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=imgcompress.karimzouine.com&sz=64"
   },
   {
     "name": "Infisical Community Edition",
@@ -7161,7 +7604,8 @@
     "tags": "`GPL-3.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "IT-Tools by sharevb",
@@ -7188,7 +7632,8 @@
     "tags": "`GPL-2.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Kasm Workspaces",
@@ -7242,7 +7687,8 @@
     "tags": "`MIT`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=svdc1.github.io&sz=64"
   },
   {
     "name": "mosparo",
@@ -7251,7 +7697,8 @@
     "tags": "`MIT`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=mosparo.io&sz=64"
   },
   {
     "name": "Movary",
@@ -7278,7 +7725,8 @@
     "tags": "`MIT`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=omnitools.app&sz=64"
   },
   {
     "name": "Open-Meteo",
@@ -7287,7 +7735,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=open-meteo.com&sz=64"
   },
   {
     "name": "OpenReader",
@@ -7296,7 +7745,8 @@
     "tags": "`MIT`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=openreader.richardr.dev&sz=64"
   },
   {
     "name": "OpenZiti",
@@ -7314,7 +7764,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=operational.co&sz=64"
   },
   {
     "name": "penpot",
@@ -7332,7 +7783,8 @@
     "tags": "`GPL-2.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=password.oppetmoln.se&sz=64"
   },
   {
     "name": "Pønskelisten",
@@ -7341,7 +7793,8 @@
     "tags": "`GPL-3.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "re:Director",
@@ -7350,7 +7803,8 @@
     "tags": "`Apache-2.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=re-director.github.io&sz=64"
   },
   {
     "name": "Reactive Resume",
@@ -7368,7 +7822,8 @@
     "tags": "`MIT`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=revealjs.com&sz=64"
   },
   {
     "name": "Revive Adserver",
@@ -7377,7 +7832,8 @@
     "tags": "`GPL-2.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=revive-adserver.com&sz=64"
   },
   {
     "name": "SANE Network Scanning",
@@ -7386,7 +7842,8 @@
     "tags": "`GPL-2.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=sane-project.org&sz=64"
   },
   {
     "name": "string.is",
@@ -7431,7 +7888,8 @@
     "tags": "`MIT`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Usertour",
@@ -7467,7 +7925,8 @@
     "tags": "`GPL-3.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=weewx.com&sz=64"
   },
   {
     "name": "WeTTY",
@@ -7503,7 +7962,8 @@
     "tags": "`GPL-3.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=zero-totp.com&sz=64"
   },
   {
     "name": "Actual",
@@ -7512,7 +7972,8 @@
     "tags": "`MIT`",
     "category": "Money, Budgeting & Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=actualbudget.org&sz=64"
   },
   {
     "name": "Bigcapital",
@@ -7530,7 +7991,8 @@
     "tags": "`MIT`",
     "category": "Money, Budgeting & Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=bitcart.ai&sz=64"
   },
   {
     "name": "BTCPay Server",
@@ -7557,7 +8019,8 @@
     "tags": "`MIT`",
     "category": "Money, Budgeting & Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=depay.com&sz=64"
   },
   {
     "name": "Econumo",
@@ -7566,7 +8029,8 @@
     "tags": "`MIT`",
     "category": "Money, Budgeting & Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=econumo.com&sz=64"
   },
   {
     "name": "ExpenseOwl",
@@ -7575,7 +8039,8 @@
     "tags": "`MIT`",
     "category": "Money, Budgeting & Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "ezbookkeeping",
@@ -7593,7 +8058,8 @@
     "tags": "`Apache-2.0`",
     "category": "Money, Budgeting & Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Fava",
@@ -7620,7 +8086,8 @@
     "tags": "`Apache-2.0`",
     "category": "Money, Budgeting & Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=fossbilling.org&sz=64"
   },
   {
     "name": "Galette",
@@ -7629,7 +8096,8 @@
     "tags": "`GPL-3.0`",
     "category": "Money, Budgeting & Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=galette.eu&sz=64"
   },
   {
     "name": "Ghostfolio",
@@ -7647,7 +8115,8 @@
     "tags": "`GPL-2.0`",
     "category": "Money, Budgeting & Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=grr.devome.com&sz=64"
   },
   {
     "name": "HyperSwitch",
@@ -7656,7 +8125,8 @@
     "tags": "`Apache-2.0`",
     "category": "Money, Budgeting & Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=hyperswitch.io&sz=64"
   },
   {
     "name": "IHateMoney",
@@ -7692,7 +8162,8 @@
     "tags": "`Apache-2.0`",
     "category": "Money, Budgeting & Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=killbill.io&sz=64"
   },
   {
     "name": "Kresus",
@@ -7701,7 +8172,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Money, Budgeting & Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=kresus.org&sz=64"
   },
   {
     "name": "Lago",
@@ -7710,7 +8182,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Money, Budgeting & Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=getlago.com&sz=64"
   },
   {
     "name": "Mybucks.online",
@@ -7719,7 +8192,8 @@
     "tags": "`MIT`",
     "category": "Money, Budgeting & Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=mybucks.online&sz=64"
   },
   {
     "name": "MyFin Budget",
@@ -7728,7 +8202,8 @@
     "tags": "`GPL-3.0`",
     "category": "Money, Budgeting & Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=myfinbudget.com&sz=64"
   },
   {
     "name": "OctoBot",
@@ -7755,7 +8230,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Money, Budgeting & Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Receipt Wrangler",
@@ -7773,7 +8249,8 @@
     "tags": "`MIT`",
     "category": "Money, Budgeting & Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=rei3.de&sz=64"
   },
   {
     "name": "SHKeeper",
@@ -7782,7 +8259,8 @@
     "tags": "`GPL-3.0`",
     "category": "Money, Budgeting & Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=shkeeper.io&sz=64"
   },
   {
     "name": "SolidInvoice",
@@ -7791,7 +8269,8 @@
     "tags": "`MIT`",
     "category": "Money, Budgeting & Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=solidinvoice.co&sz=64"
   },
   {
     "name": "Sure",
@@ -7836,7 +8315,8 @@
     "tags": "`MIT`",
     "category": "Money, Budgeting & Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=yaffa.cc&sz=64"
   },
   {
     "name": "beelzebub",
@@ -7845,7 +8325,8 @@
     "tags": "`MIT`",
     "category": "Network Utilities",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=beelzebub-honeypot.com&sz=64"
   },
   {
     "name": "Canary Tokens",
@@ -7854,7 +8335,8 @@
     "tags": "`BSD-3-Clause`",
     "category": "Network Utilities",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=canarytokens.org&sz=64"
   },
   {
     "name": "MyIP",
@@ -7890,7 +8372,8 @@
     "tags": "`GPL-3.0`",
     "category": "Network Utilities",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=deepspace2.github.io&sz=64"
   },
   {
     "name": "Speed Test by OpenSpeedTest™",
@@ -7899,7 +8382,8 @@
     "tags": "`MIT`",
     "category": "Network Utilities",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=openspeedtest.com&sz=64"
   },
   {
     "name": "Speedtest Tracker",
@@ -7926,7 +8410,8 @@
     "tags": "`MIT`",
     "category": "Network Utilities",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "WatchYourLAN",
@@ -7944,7 +8429,8 @@
     "tags": "`MIT`",
     "category": "Network Utilities",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Blinko",
@@ -7971,7 +8457,8 @@
     "tags": "`MIT`",
     "category": "Note-taking & Editors",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=docs.numerique.gouv.fr&sz=64"
   },
   {
     "name": "draw.io",
@@ -8070,7 +8557,8 @@
     "tags": "`GPL-3.0`",
     "category": "Note-taking & Editors",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=alextselegidis.com&sz=64"
   },
   {
     "name": "plumio",
@@ -8106,7 +8594,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Note-taking & Editors",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Turtl",
@@ -8115,7 +8604,8 @@
     "tags": "`GPL-3.0`",
     "category": "Note-taking & Editors",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=turtl.it&sz=64"
   },
   {
     "name": "Writing",
@@ -8124,7 +8614,8 @@
     "tags": "`MIT`",
     "category": "Note-taking & Editors",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=josephernest.github.io&sz=64"
   },
   {
     "name": "Collabora Online Development Edition",
@@ -8133,7 +8624,8 @@
     "tags": "`MPL-2.0`",
     "category": "Office Suites",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=collaboraoffice.com&sz=64"
   },
   {
     "name": "CryptPad",
@@ -8151,7 +8643,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Office Suites",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=ladigitale.dev&sz=64"
   },
   {
     "name": "Etherpad",
@@ -8214,7 +8707,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Password Managers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=passit.io&sz=64"
   },
   {
     "name": "Psono",
@@ -8223,7 +8717,8 @@
     "tags": "`Apache-2.0`",
     "category": "Password Managers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=psono.com&sz=64"
   },
   {
     "name": "Teampass",
@@ -8232,7 +8727,8 @@
     "tags": "`GPL-3.0`",
     "category": "Password Managers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=teampass.net&sz=64"
   },
   {
     "name": "Vaultwarden",
@@ -8250,7 +8746,8 @@
     "tags": "`MIT`",
     "category": "Pastebins",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=1time.io&sz=64"
   },
   {
     "name": "BinPastes",
@@ -8259,7 +8756,8 @@
     "tags": "`Apache-2.0`",
     "category": "Pastebins",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "ByteStash",
@@ -8277,7 +8775,8 @@
     "tags": "`BSD-3-Clause`",
     "category": "Pastebins",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "dpaste",
@@ -8286,7 +8785,8 @@
     "tags": "`MIT`",
     "category": "Pastebins",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=dpaste.org&sz=64"
   },
   {
     "name": "Hemmelig",
@@ -8304,7 +8804,8 @@
     "tags": "`GPL-3.0`",
     "category": "Pastebins",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=lesma.eu&sz=64"
   },
   {
     "name": "Local Content Share",
@@ -8322,7 +8823,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Pastebins",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=not-th.re&sz=64"
   },
   {
     "name": "Opengist",
@@ -8340,7 +8842,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Pastebins",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=paaster.io&sz=64"
   },
   {
     "name": "pacebin",
@@ -8349,7 +8852,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Pastebins",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=git.crueter.xyz&sz=64"
   },
   {
     "name": "Password Pusher",
@@ -8385,7 +8889,8 @@
     "tags": "`MIT`",
     "category": "Pastebins",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Snipo",
@@ -8394,7 +8899,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Pastebins",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "SnyPy",
@@ -8403,7 +8909,8 @@
     "tags": "`MIT`",
     "category": "Pastebins",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=snypy.com&sz=64"
   },
   {
     "name": "Sup3rS3cretMes5age",
@@ -8412,7 +8919,8 @@
     "tags": "`MIT`",
     "category": "Pastebins",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Wastebin",
@@ -8511,7 +9019,8 @@
     "tags": "`MIT`",
     "category": "Personal Dashboards",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "LinkStack",
@@ -8547,7 +9056,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Personal Dashboards",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=nimbus.turboot.com&sz=64"
   },
   {
     "name": "Personal Management System",
@@ -8565,7 +9075,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Personal Dashboards",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=portkey.page&sz=64"
   },
   {
     "name": "ryot",
@@ -8610,7 +9121,8 @@
     "tags": "`MIT`",
     "category": "Photo Galleries",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=chronoframe.bh8.ga&sz=64"
   },
   {
     "name": "Damselfly",
@@ -8619,7 +9131,8 @@
     "tags": "`GPL-3.0`",
     "category": "Photo Galleries",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=damselfly.info&sz=64"
   },
   {
     "name": "Ente",
@@ -8628,7 +9141,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Photo Galleries",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=ente.com&sz=64"
   },
   {
     "name": "HomeGallery",
@@ -8637,7 +9151,8 @@
     "tags": "`MIT`",
     "category": "Photo Galleries",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=home-gallery.org&sz=64"
   },
   {
     "name": "Immich Kiosk",
@@ -8682,7 +9197,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Photo Galleries",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=mediagoblin.org&sz=64"
   },
   {
     "name": "Memtly",
@@ -8691,7 +9207,8 @@
     "tags": "`GPL-3.0`",
     "category": "Photo Galleries",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=docs.memtly.com&sz=64"
   },
   {
     "name": "Nextcloud Memories",
@@ -8700,7 +9217,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Photo Galleries",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=memories.gallery&sz=64"
   },
   {
     "name": "Photofield",
@@ -8709,7 +9227,8 @@
     "tags": "`MIT`",
     "category": "Photo Galleries",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "PhotoPrism",
@@ -8754,7 +9273,8 @@
     "tags": "`GPL-3.0`",
     "category": "Photo Galleries",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "This week in past",
@@ -8772,7 +9292,8 @@
     "tags": "`MIT`",
     "category": "Photo Galleries",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=thumbor.org&sz=64"
   },
   {
     "name": "Zenphoto",
@@ -8781,7 +9302,8 @@
     "tags": "`GPL-2.0`",
     "category": "Photo Galleries",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=zenphoto.org&sz=64"
   },
   {
     "name": "Bitpoll",
@@ -8790,7 +9312,8 @@
     "tags": "`GPL-3.0`",
     "category": "Polls and Events",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Bracket",
@@ -8808,7 +9331,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Polls and Events",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Claper",
@@ -8817,7 +9341,8 @@
     "tags": "`GPL-3.0`",
     "category": "Polls and Events",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=claper.co&sz=64"
   },
   {
     "name": "ClearFlask",
@@ -8826,7 +9351,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Polls and Events",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=clearflask.com&sz=64"
   },
   {
     "name": "docassemble",
@@ -8844,7 +9370,8 @@
     "tags": "`AAL`",
     "category": "Polls and Events",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=eventschedule.com&sz=64"
   },
   {
     "name": "Fider",
@@ -8880,7 +9407,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Polls and Events",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=gancio.org&sz=64"
   },
   {
     "name": "gathio",
@@ -8907,7 +9435,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Polls and Events",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=hitobito.com&sz=64"
   },
   {
     "name": "LimeSurvey",
@@ -8961,7 +9490,8 @@
     "tags": "`Apache-2.0`",
     "category": "Proxy",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=g3-project.readthedocs.io&sz=64"
   },
   {
     "name": "GitProxy",
@@ -8970,7 +9500,8 @@
     "tags": "`Apache-2.0`",
     "category": "Proxy",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=git-proxy.finos.org&sz=64"
   },
   {
     "name": "imgproxy",
@@ -8979,7 +9510,8 @@
     "tags": "`MIT`",
     "category": "Proxy",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=imgproxy.net&sz=64"
   },
   {
     "name": "iodine",
@@ -8988,7 +9520,8 @@
     "tags": "`ISC`",
     "category": "Proxy",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=code.kryo.se&sz=64"
   },
   {
     "name": "Outline Server",
@@ -9006,7 +9539,8 @@
     "tags": "`GPL-2.0`",
     "category": "Proxy",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=privoxy.org&sz=64"
   },
   {
     "name": "sish",
@@ -9015,7 +9549,8 @@
     "tags": "`MIT`",
     "category": "Proxy",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "socks5-proxy-server",
@@ -9024,7 +9559,8 @@
     "tags": "`Apache-2.0`",
     "category": "Proxy",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Squid",
@@ -9033,7 +9569,8 @@
     "tags": "`GPL-2.0`",
     "category": "Proxy",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=squid-cache.org&sz=64"
   },
   {
     "name": "Tinyproxy",
@@ -9042,7 +9579,8 @@
     "tags": "`GPL-2.0`",
     "category": "Proxy",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=tinyproxy.github.io&sz=64"
   },
   {
     "name": "Bar Assistant",
@@ -9069,7 +9607,8 @@
     "tags": "`BSD-3-Clause`",
     "category": "Recipe Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=mikebgrep.github.io&sz=64"
   },
   {
     "name": "ManageMeals",
@@ -9078,7 +9617,8 @@
     "tags": "`GPL-3.0`",
     "category": "Recipe Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=managemeals.com&sz=64"
   },
   {
     "name": "Mealie",
@@ -9114,7 +9654,8 @@
     "tags": "`GPL-3.0`",
     "category": "Recipe Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=tamariapp.com&sz=64"
   },
   {
     "name": "Vanilla Cookbook",
@@ -9132,7 +9673,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Recipe Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Cardea",
@@ -9141,7 +9683,8 @@
     "tags": "`EUPL-1.2`",
     "category": "Remote Access",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Engity's Bifröst",
@@ -9150,7 +9693,8 @@
     "tags": "`Apache-2.0`",
     "category": "Remote Access",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=bifroest.engity.org&sz=64"
   },
   {
     "name": "Firezone",
@@ -9231,7 +9775,8 @@
     "tags": "`GPL-3.0`",
     "category": "Resource Planning",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=frappe.io&sz=64"
   },
   {
     "name": "farmOS",
@@ -9240,7 +9785,8 @@
     "tags": "`GPL-2.0`",
     "category": "Resource Planning",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=farmos.org&sz=64"
   },
   {
     "name": "grocy",
@@ -9258,7 +9804,8 @@
     "tags": "`GPL-2.0`",
     "category": "Resource Planning",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=ledgersmb.org&sz=64"
   },
   {
     "name": "Odoo",
@@ -9276,7 +9823,8 @@
     "tags": "`Apache-2.0`",
     "category": "Resource Planning",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=ofbiz.apache.org&sz=64"
   },
   {
     "name": "Tryton",
@@ -9285,7 +9833,8 @@
     "tags": "`GPL-3.0`",
     "category": "Resource Planning",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=tryton.org&sz=64"
   },
   {
     "name": "Aleph",
@@ -9294,7 +9843,8 @@
     "tags": "`MIT`",
     "category": "Search Engines",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=aleph.occrp.org&sz=64"
   },
   {
     "name": "Amgix",
@@ -9303,7 +9853,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Search Engines",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=amgix.io&sz=64"
   },
   {
     "name": "Apache Solr",
@@ -9321,7 +9872,8 @@
     "tags": "`Apache-2.0`",
     "category": "Search Engines",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=fess.codelibs.org&sz=64"
   },
   {
     "name": "Hister",
@@ -9339,7 +9891,8 @@
     "tags": "`GPL-3.0`",
     "category": "Search Engines",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "MeiliSearch",
@@ -9402,7 +9955,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Search Engines",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Yacy",
@@ -9411,7 +9965,8 @@
     "tags": "`GPL-2.0`",
     "category": "Search Engines",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=yacy.net&sz=64"
   },
   {
     "name": "DietPi",
@@ -9438,7 +9993,8 @@
     "tags": "`Apache-2.0`",
     "category": "Self-hosting Solutions",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=dropserver.org&sz=64"
   },
   {
     "name": "FreedomBox",
@@ -9456,7 +10012,8 @@
     "tags": "`MIT`",
     "category": "Self-hosting Solutions",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=homebutler.dev&sz=64"
   },
   {
     "name": "HomelabOS",
@@ -9465,7 +10022,8 @@
     "tags": "`MIT`",
     "category": "Self-hosting Solutions",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=homelabos.com&sz=64"
   },
   {
     "name": "HomeServerHQ",
@@ -9474,7 +10032,8 @@
     "tags": "`GPL-3.0`",
     "category": "Self-hosting Solutions",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=homeserverhq.com&sz=64"
   },
   {
     "name": "LibreServer",
@@ -9483,7 +10042,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Self-hosting Solutions",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=libreserver.org&sz=64"
   },
   {
     "name": "NextCloudPi",
@@ -9528,7 +10088,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Self-hosting Solutions",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "StartOS",
@@ -9537,7 +10098,8 @@
     "tags": "`MIT`",
     "category": "Self-hosting Solutions",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=start9.com&sz=64"
   },
   {
     "name": "Syncloud",
@@ -9564,7 +10126,8 @@
     "tags": "`GPL-3.0`",
     "category": "Self-hosting Solutions",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=ubos.net&sz=64"
   },
   {
     "name": "Websoft9",
@@ -9573,7 +10136,8 @@
     "tags": "`LGPL-3.0`",
     "category": "Self-hosting Solutions",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=websoft9.com&sz=64"
   },
   {
     "name": "WikiSuite",
@@ -9582,7 +10146,8 @@
     "tags": "`GPL-3.0/LGPL-2.1/Apache-2.0/MPL-2.0/MPL-1.1/MIT/AGPL-3.0`",
     "category": "Self-hosting Solutions",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=wikisuite.org&sz=64"
   },
   {
     "name": "xsrv",
@@ -9591,7 +10156,8 @@
     "tags": "`GPL-3.0`",
     "category": "Self-hosting Solutions",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=xsrv.readthedocs.io&sz=64"
   },
   {
     "name": "YunoHost",
@@ -9609,7 +10175,8 @@
     "tags": "`Apache-2.0`",
     "category": "Software Development - API Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=starwalkn.github.io&sz=64"
   },
   {
     "name": "DreamFactory",
@@ -9618,7 +10185,8 @@
     "tags": "`Apache-2.0`",
     "category": "Software Development - API Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=dreamfactory.com&sz=64"
   },
   {
     "name": "form.io",
@@ -9627,7 +10195,8 @@
     "tags": "`MIT`",
     "category": "Software Development - API Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=form.io&sz=64"
   },
   {
     "name": "Fusio",
@@ -9636,7 +10205,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Software Development - API Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=fusio-project.org&sz=64"
   },
   {
     "name": "Graphweaver",
@@ -9645,7 +10215,8 @@
     "tags": "`MIT`",
     "category": "Software Development - API Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=graphweaver.com&sz=64"
   },
   {
     "name": "Hasura",
@@ -9681,7 +10252,8 @@
     "tags": "`Apache-2.0`",
     "category": "Software Development - API Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=luraproject.org&sz=64"
   },
   {
     "name": "Opik",
@@ -9690,7 +10262,8 @@
     "tags": "`Apache-2.0`",
     "category": "Software Development - API Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=comet.com&sz=64"
   },
   {
     "name": "Para",
@@ -9699,7 +10272,8 @@
     "tags": "`Apache-2.0`",
     "category": "Software Development - API Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=paraio.org&sz=64"
   },
   {
     "name": "Svix",
@@ -9708,7 +10282,8 @@
     "tags": "`MIT`",
     "category": "Software Development - API Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=svix.com&sz=64"
   },
   {
     "name": "Tyk",
@@ -9717,7 +10292,8 @@
     "tags": "`MPL-2.0`",
     "category": "Software Development - API Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=tyk.io&sz=64"
   },
   {
     "name": "Featbit",
@@ -9726,7 +10302,8 @@
     "tags": "`MIT`",
     "category": "Software Development - Feature Toggle",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=featbit.co&sz=64"
   },
   {
     "name": "Flagsmith",
@@ -9735,7 +10312,8 @@
     "tags": "`BSD-3-Clause`",
     "category": "Software Development - Feature Toggle",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=flagsmith.com&sz=64"
   },
   {
     "name": "Flipt",
@@ -9744,7 +10322,8 @@
     "tags": "`GPL-3.0`",
     "category": "Software Development - Feature Toggle",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=flipt.io&sz=64"
   },
   {
     "name": "GO Feature Flag",
@@ -9753,7 +10332,8 @@
     "tags": "`MIT`",
     "category": "Software Development - Feature Toggle",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=gofeatureflag.org&sz=64"
   },
   {
     "name": "Atheos",
@@ -9762,7 +10342,8 @@
     "tags": "`MIT`",
     "category": "Software Development - IDE & Tools",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=atheos.io&sz=64"
   },
   {
     "name": "code-server",
@@ -9789,7 +10370,8 @@
     "tags": "`EPL-1.0`",
     "category": "Software Development - IDE & Tools",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=eclipse.org&sz=64"
   },
   {
     "name": "Hopp",
@@ -9798,7 +10380,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Software Development - IDE & Tools",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=gethopp.app&sz=64"
   },
   {
     "name": "Judge0 CE",
@@ -9807,7 +10390,8 @@
     "tags": "`GPL-3.0`",
     "category": "Software Development - IDE & Tools",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=judge0.com&sz=64"
   },
   {
     "name": "JupyterLab",
@@ -9816,7 +10400,8 @@
     "tags": "`BSD-3-Clause`",
     "category": "Software Development - IDE & Tools",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=jupyterlab.readthedocs.io&sz=64"
   },
   {
     "name": "Langfuse",
@@ -9834,7 +10419,8 @@
     "tags": "`MIT`",
     "category": "Software Development - IDE & Tools",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=livecodes.io&sz=64"
   },
   {
     "name": "Lowdefy",
@@ -9843,7 +10429,8 @@
     "tags": "`Apache-2.0`",
     "category": "Software Development - IDE & Tools",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=lowdefy.com&sz=64"
   },
   {
     "name": "RapidForge",
@@ -9852,7 +10439,8 @@
     "tags": "`Apache-2.0`",
     "category": "Software Development - IDE & Tools",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=rapidforge.io&sz=64"
   },
   {
     "name": "RStudio Server",
@@ -9888,7 +10476,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Software Development - Localization",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=traduora.co&sz=64"
   },
   {
     "name": "Weblate",
@@ -9906,7 +10495,8 @@
     "tags": "`Apache-2.0`",
     "category": "Software Development - Low Code",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=appsmith.com&sz=64"
   },
   {
     "name": "Appwrite",
@@ -9924,7 +10514,8 @@
     "tags": "`GPL-3.0`",
     "category": "Software Development - Low Code",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=halo.run&sz=64"
   },
   {
     "name": "Manifest",
@@ -9960,7 +10551,8 @@
     "tags": "`MIT`",
     "category": "Software Development - Low Code",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=sql-page.com&sz=64"
   },
   {
     "name": "ToolJet",
@@ -9978,7 +10570,8 @@
     "tags": "`OSL-3.0`",
     "category": "Software Development - Low Code",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=trailbase.io&sz=64"
   },
   {
     "name": "Cgit",
@@ -9987,7 +10580,8 @@
     "tags": "`GPL-2.0`",
     "category": "Software Development - Project Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=git.zx2c4.com&sz=64"
   },
   {
     "name": "Forgejo",
@@ -10059,7 +10653,8 @@
     "tags": "`EPL-2.0`",
     "category": "Software Development - Project Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=huly.io&sz=64"
   },
   {
     "name": "Ideon",
@@ -10095,7 +10690,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Software Development - Project Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=mindwendel.com&sz=64"
   },
   {
     "name": "minimal-git-server",
@@ -10104,7 +10700,8 @@
     "tags": "`MIT`",
     "category": "Software Development - Project Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Octobox",
@@ -10113,7 +10710,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Software Development - Project Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=octobox.io&sz=64"
   },
   {
     "name": "OneDev",
@@ -10140,7 +10738,8 @@
     "tags": "`GPL-2.0`",
     "category": "Software Development - Project Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=pagure.io&sz=64"
   },
   {
     "name": "Phorge",
@@ -10167,7 +10766,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Software Development - Project Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=projeqtor.org&sz=64"
   },
   {
     "name": "Redmine",
@@ -10203,7 +10803,8 @@
     "tags": "`GPL-2.0`",
     "category": "Software Development - Project Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=rukovoditel.net&sz=64"
   },
   {
     "name": "SCM Manager",
@@ -10212,7 +10813,8 @@
     "tags": "`BSD-3-Clause`",
     "category": "Software Development - Project Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=scm-manager.org&sz=64"
   },
   {
     "name": "ShipShipShip",
@@ -10221,7 +10823,8 @@
     "tags": "`Apache-2.0`",
     "category": "Software Development - Project Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=shipshipship.io&sz=64"
   },
   {
     "name": "Smederee",
@@ -10230,7 +10833,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Software Development - Project Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=smeder.ee&sz=64"
   },
   {
     "name": "Sourcehut",
@@ -10257,7 +10861,8 @@
     "tags": "`GPL-3.0`",
     "category": "Software Development - Project Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=titra.io&sz=64"
   },
   {
     "name": "Trac",
@@ -10275,7 +10880,8 @@
     "tags": "`GPL-3.0`",
     "category": "Software Development - Project Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=traq.io&sz=64"
   },
   {
     "name": "Tuleap",
@@ -10284,7 +10890,8 @@
     "tags": "`GPL-2.0`",
     "category": "Software Development - Project Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=tuleap.org&sz=64"
   },
   {
     "name": "UVDesk",
@@ -10293,7 +10900,8 @@
     "tags": "`MIT`",
     "category": "Software Development - Project Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=uvdesk.com&sz=64"
   },
   {
     "name": "ZenTao",
@@ -10302,7 +10910,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Software Development - Project Management",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=zentao.pm&sz=64"
   },
   {
     "name": "Bencher",
@@ -10311,7 +10920,8 @@
     "tags": "`MIT/Apache-2.0`",
     "category": "Software Development - Testing",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=bencher.dev&sz=64"
   },
   {
     "name": "Request Inbox",
@@ -10320,7 +10930,8 @@
     "tags": "`Apache-2.0`",
     "category": "Software Development - Testing",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=request-inbox.com&sz=64"
   },
   {
     "name": "WebHook Tester",
@@ -10338,7 +10949,8 @@
     "tags": "`MIT`",
     "category": "Task Management & To-do Lists",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=4gaboards.com&sz=64"
   },
   {
     "name": "AppFlowy",
@@ -10356,7 +10968,8 @@
     "tags": "`MIT`",
     "category": "Task Management & To-do Lists",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=dayglance.app&sz=64"
   },
   {
     "name": "Donetick",
@@ -10374,7 +10987,8 @@
     "tags": "`MIT`",
     "category": "Task Management & To-do Lists",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "HamsterBase Tasks",
@@ -10383,7 +10997,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Task Management & To-do Lists",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=tasks.hamsterbase.com&sz=64"
   },
   {
     "name": "Kan",
@@ -10410,7 +11025,8 @@
     "tags": "`MIT`",
     "category": "Task Management & To-do Lists",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "myTinyTodo",
@@ -10419,7 +11035,8 @@
     "tags": "`GPL-2.0`",
     "category": "Task Management & To-do Lists",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=mytinytodo.net&sz=64"
   },
   {
     "name": "Nullboard",
@@ -10428,7 +11045,8 @@
     "tags": "`BSD-2-Clause`",
     "category": "Task Management & To-do Lists",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "OpenHabitTracker",
@@ -10437,7 +11055,8 @@
     "tags": "`GPL-3.0`",
     "category": "Task Management & To-do Lists",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=openhabittracker.net&sz=64"
   },
   {
     "name": "Our Shopping List",
@@ -10464,7 +11083,8 @@
     "tags": "`Apache-2.0`",
     "category": "Task Management & To-do Lists",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Tasks.md",
@@ -10491,7 +11111,8 @@
     "tags": "`MIT`",
     "category": "Task Management & To-do Lists",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=tellor.cc&sz=64"
   },
   {
     "name": "Tracks",
@@ -10500,7 +11121,8 @@
     "tags": "`GPL-2.0`",
     "category": "Task Management & To-do Lists",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=getontracks.org&sz=64"
   },
   {
     "name": "tududi",
@@ -10545,7 +11167,8 @@
     "tags": "`AGPL-3.0/MIT`",
     "category": "Ticketing",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=bugpin.io&sz=64"
   },
   {
     "name": "Bugzilla",
@@ -10554,7 +11177,8 @@
     "tags": "`MPL-2.0`",
     "category": "Ticketing",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=bugzilla.org&sz=64"
   },
   {
     "name": "Frappe Helpdesk",
@@ -10590,7 +11214,8 @@
     "tags": "`GPL-3.0`",
     "category": "Ticketing",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=itflow.org&sz=64"
   },
   {
     "name": "Libredesk",
@@ -10599,7 +11224,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Ticketing",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=libredesk.io&sz=64"
   },
   {
     "name": "MantisBT",
@@ -10617,7 +11243,8 @@
     "tags": "`GPL-3.0`",
     "category": "Ticketing",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=otobo.io&sz=64"
   },
   {
     "name": "Request Tracker",
@@ -10626,7 +11253,8 @@
     "tags": "`GPL-2.0`",
     "category": "Ticketing",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=bestpractical.com&sz=64"
   },
   {
     "name": "Roundup Issue Tracker",
@@ -10635,7 +11263,8 @@
     "tags": "`MIT/ZPL-2.0`",
     "category": "Ticketing",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=roundup-tracker.org&sz=64"
   },
   {
     "name": "Zammad",
@@ -10653,7 +11282,8 @@
     "tags": "`MPL-2.0`",
     "category": "Time Tracking",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=activitywatch.net&sz=64"
   },
   {
     "name": "Beaver Habit Tracker",
@@ -10671,7 +11301,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Time Tracking",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=gauzy.co&sz=64"
   },
   {
     "name": "Kimai",
@@ -10752,7 +11383,8 @@
     "tags": "`MIT`",
     "category": "URL Shorteners",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Chhoto URL",
@@ -10770,7 +11402,8 @@
     "tags": "`AGPL-3.0`",
     "category": "URL Shorteners",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=git.crueter.xyz&sz=64"
   },
   {
     "name": "Flink",
@@ -10779,7 +11412,8 @@
     "tags": "`MIT`",
     "category": "URL Shorteners",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=gitlab.com&sz=64"
   },
   {
     "name": "Kutt",
@@ -10797,7 +11431,8 @@
     "tags": "`MPL-2.0`",
     "category": "URL Shorteners",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=git.42l.fr&sz=64"
   },
   {
     "name": "Shlink",
@@ -10833,7 +11468,8 @@
     "tags": "`GPL-2.0`",
     "category": "Video Surveillance",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Frigate",
@@ -10869,7 +11505,8 @@
     "tags": "`GPL-2.0`",
     "category": "Video Surveillance",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=codeberg.org&sz=64"
   },
   {
     "name": "Strix",
@@ -10878,7 +11515,8 @@
     "tags": "`MIT`",
     "category": "Video Surveillance",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Viseron",
@@ -10905,7 +11543,8 @@
     "tags": "`BSD-3-Clause`",
     "category": "Web Servers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=algernon.roboticoverlords.org&sz=64"
   },
   {
     "name": "Apache HTTP Server",
@@ -10914,7 +11553,8 @@
     "tags": "`Apache-2.0`",
     "category": "Web Servers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=httpd.apache.org&sz=64"
   },
   {
     "name": "BunkerWeb",
@@ -11022,7 +11662,8 @@
     "tags": "`Apache-2.0/MIT`",
     "category": "Web Servers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=static-web-server.net&sz=64"
   },
   {
     "name": "SWAG (Secure Web Application Gateway)",
@@ -11031,7 +11672,8 @@
     "tags": "`GPL-3.0`",
     "category": "Web Servers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Traefik",
@@ -11049,7 +11691,8 @@
     "tags": "`GPL-3.0`",
     "category": "Web Servers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=waf.uusec.com&sz=64"
   },
   {
     "name": "Vinyl Cache",
@@ -11058,7 +11701,8 @@
     "tags": "`BSD-2-Clause`",
     "category": "Web Servers",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=vinyl-cache.org&sz=64"
   },
   {
     "name": "Zoraxy",
@@ -11076,7 +11720,8 @@
     "tags": "`GPL-1.0`",
     "category": "Wikis",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=amusewiki.org&sz=64"
   },
   {
     "name": "BookStack",
@@ -11094,7 +11739,8 @@
     "tags": "`GPL-3.0`",
     "category": "Wikis",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "docmost Community Edition",
@@ -11112,7 +11758,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Wikis",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=documize.com&sz=64"
   },
   {
     "name": "Dokuwiki",
@@ -11130,7 +11777,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Wikis",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=feather.wiki&sz=64"
   },
   {
     "name": "Gitit",
@@ -11139,7 +11787,8 @@
     "tags": "`GPL-2.0`",
     "category": "Wikis",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "Gollum",
@@ -11175,7 +11824,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Wikis",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=mycorrhiza.wiki&sz=64"
   },
   {
     "name": "Otter Wiki",
@@ -11193,7 +11843,8 @@
     "tags": "`GPL-3.0`",
     "category": "Wikis",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=pmwiki.org&sz=64"
   },
   {
     "name": "Raneto",
@@ -11220,7 +11871,8 @@
     "tags": "`LGPL-2.1`",
     "category": "Wikis",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=tiki.org&sz=64"
   },
   {
     "name": "W",
@@ -11229,7 +11881,8 @@
     "tags": "`AGPL-3.0`",
     "category": "Wikis",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=w.club1.fr&sz=64"
   },
   {
     "name": "WackoWiki",
@@ -11238,7 +11891,8 @@
     "tags": "`BSD-3-Clause`",
     "category": "Wikis",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=wackowiki.org&sz=64"
   },
   {
     "name": "Wiki-Go",
@@ -11274,7 +11928,8 @@
     "tags": "`GPL-2.0`",
     "category": "Wikis",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=wikiss.tuxfamily.org&sz=64"
   },
   {
     "name": "XWiki",
@@ -11292,7 +11947,8 @@
     "tags": "`GPL-2.0`",
     "category": "Wikis",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=zim-wiki.org&sz=64"
   },
   {
     "name": "Awesome Sysadmin",
@@ -11301,7 +11957,8 @@
     "tags": "",
     "category": "Wikis",
     "warning": false,
-    "icon": ""
+    "icon": "",
+    "favicon_url": "https://s2.googleusercontent.com/s2/favicons?domain=github.com&sz=64"
   },
   {
     "name": "theme.park",

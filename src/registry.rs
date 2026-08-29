@@ -120,6 +120,8 @@ pub struct CatalogEntry {
     pub url: String,
     pub icon: Option<String>,
     #[serde(default)]
+    pub favicon_url: Option<String>,
+    #[serde(default)]
     pub compose: Option<String>,
     #[serde(default)]
     pub health: Option<String>,

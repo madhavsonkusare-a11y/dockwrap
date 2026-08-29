@@ -337,10 +337,11 @@
       row.className = 'app';
       const info = document.createElement('div');
       info.className = 'info';
-      if (a.icon) {
+      if (a.icon || a.favicon_url) {
         const img = document.createElement('img');
         img.className = 'logo';
-        img.src = 'file://' + a.icon;
+        // Local file:// for bundled icons; https:// for SVH favicons.
+        img.src = a.icon ? 'file://' + a.icon : a.favicon_url;
         info.appendChild(img);
       }
       const meta = document.createElement('div');
@@ -514,7 +515,8 @@
       '<div class="catalog-grid">'
     ];
     apps.forEach(a => {
-      const img = a.icon ? '<img class="cat-icon" src="' + a.icon + '" alt="" onerror="this.style.display=\'none\'">' : '';
+      const iconUrl = a.icon || a.favicon_url;
+      const img = iconUrl ? '<img class="cat-icon" src="' + iconUrl + '" alt="" onerror="this.style.display=\'none\'">' : '';
       parts.push('<div class="catalog-card" data-cat="' + escapeHtml(a.category || '') + '" data-name="' + escapeHtml(a.name) + '">' +
         img +
         '<span class="cat-name">' + escapeHtml(a.name) + '</span>' +
@@ -530,7 +532,7 @@
     wizardState.url     = a.url || '';
     wizardState.compose = a.compose || '';
     wizardState.health  = a.health || '';
-    wizardState.icon    = a.icon || '';
+    wizardState.icon    = a.icon || a.favicon_url || '';
     renderWizardStep();
   }
 
