@@ -15,7 +15,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Analytics",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/aptabase.svg"
   },
   {
     "name": "AWStats",
@@ -33,7 +33,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Analytics",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/countly.svg"
   },
   {
     "name": "d8a.tech",
@@ -87,7 +87,7 @@
     "tags": "`EUPL-1.2`",
     "category": "Analytics",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/goatcounter.svg"
   },
   {
     "name": "HitKeep",
@@ -96,7 +96,7 @@
     "tags": "`MIT`",
     "category": "Analytics",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/hitkeep.svg"
   },
   {
     "name": "Litlyx",
@@ -105,7 +105,7 @@
     "tags": "`Apache-2.0`",
     "category": "Analytics",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/litlyx.svg"
   },
   {
     "name": "Liwan",
@@ -114,7 +114,7 @@
     "tags": "`Apache-2.0`",
     "category": "Analytics",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/liwan.svg"
   },
   {
     "name": "Matomo",
@@ -267,7 +267,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Analytics",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/swetrix.svg"
   },
   {
     "name": "Umami",
@@ -285,7 +285,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Analytics",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/vince.svg"
   },
   {
     "name": "ArchiveBox",
@@ -312,7 +312,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Archiving and Digital Preservation (DP)",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/bichon.svg"
   },
   {
     "name": "bitmagnet",
@@ -348,7 +348,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Archiving and Digital Preservation (DP)",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/eonvelope.svg"
   },
   {
     "name": "Ganymede",
@@ -393,7 +393,7 @@
     "tags": "`GPL-3.0`",
     "category": "Archiving and Digital Preservation (DP)",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/piler.svg"
   },
   {
     "name": "Wallabag",
@@ -492,7 +492,7 @@
     "tags": "`GPL-3.0`",
     "category": "Automation",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/dagu.svg"
   },
   {
     "name": "Discount Bandit",
@@ -672,7 +672,7 @@
     "tags": "`Apache-2.0`",
     "category": "Blogging Platforms",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/antville.svg"
   },
   {
     "name": "Castopod",
@@ -834,7 +834,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Booking and Scheduling",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/hi-events.svg"
   },
   {
     "name": "LibreBooking",
@@ -915,7 +915,7 @@
     "tags": "`MIT`",
     "category": "Bookmarks and Link Sharing",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/faved.svg"
   },
   {
     "name": "Firefox Account Server",
@@ -1104,7 +1104,7 @@
     "tags": "`MIT`",
     "category": "Communication - Custom Communication Systems",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/anycable.svg"
   },
   {
     "name": "Apprise",
@@ -1131,7 +1131,7 @@
     "tags": "`GPL-2.0`",
     "category": "Communication - Custom Communication Systems",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/chitchatter.svg"
   },
   {
     "name": "Conduit",
@@ -1140,7 +1140,7 @@
     "tags": "`Apache-2.0`",
     "category": "Communication - Custom Communication Systems",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/conduit.svg"
   },
   {
     "name": "Continuwuity",
@@ -1149,7 +1149,7 @@
     "tags": "`Apache-2.0`",
     "category": "Communication - Custom Communication Systems",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/continuwuity.svg"
   },
   {
     "name": "Databag",
@@ -1176,7 +1176,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Communication - Custom Communication Systems",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/globaleaks.svg"
   },
   {
     "name": "GNUnet",
@@ -1248,7 +1248,7 @@
     "tags": "`MIT`",
     "category": "Communication - Custom Communication Systems",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/novu.svg"
   },
   {
     "name": "ntfy",
@@ -1275,7 +1275,7 @@
     "tags": "`Apache-2.0`",
     "category": "Communication - Custom Communication Systems",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/ots.svg"
   },
   {
     "name": "PushBits",
@@ -1410,7 +1410,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Communication - Custom Communication Systems",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/typebot.svg"
   },
   {
     "name": "WBO",
@@ -1788,7 +1788,7 @@
     "tags": "`LGPL-2.1`",
     "category": "Communication - Email - Webmail Clients",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/cypht.svg"
   },
   {
     "name": "Roundcube",
@@ -1824,7 +1824,7 @@
     "tags": "`MIT`",
     "category": "Communication - IRC",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/ergo.svg"
   },
   {
     "name": "Glowing Bear",
@@ -1842,7 +1842,7 @@
     "tags": "`GPL-2.0`",
     "category": "Communication - IRC",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/inspircd.svg"
   },
   {
     "name": "Kiwi IRC",
@@ -2247,7 +2247,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Communication - Social Networks and Forums",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/movim.svg"
   },
   {
     "name": "MyBB",
@@ -2292,7 +2292,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Communication - Social Networks and Forums",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/piefed.svg"
   },
   {
     "name": "PixelFed",
@@ -2391,7 +2391,7 @@
     "tags": "`LGPL-3.0`",
     "category": "Communication - Video Conferencing",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/bigbluebutton.svg"
   },
   {
     "name": "Galene",
@@ -2472,7 +2472,7 @@
     "tags": "`GPL-2.0`",
     "category": "Communication - XMPP - Servers",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/ejabberd.svg"
   },
   {
     "name": "MongooseIM",
@@ -2706,7 +2706,7 @@
     "tags": "`MIT`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/bludit.svg"
   },
   {
     "name": "Bolt CMS",
@@ -2751,7 +2751,7 @@
     "tags": "`LGPL-3.0`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/contao.svg"
   },
   {
     "name": "CouchCMS",
@@ -2814,7 +2814,7 @@
     "tags": "`MIT`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/localess.svg"
   },
   {
     "name": "MODX",
@@ -2922,7 +2922,7 @@
     "tags": "`GPL-3.0`",
     "category": "Content Management Systems (CMS)",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/spip.svg"
   },
   {
     "name": "Squidex",
@@ -3138,7 +3138,7 @@
     "tags": "`MIT`",
     "category": "Database Management",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/chartbrew.svg"
   },
   {
     "name": "ChartDB",
@@ -3183,7 +3183,7 @@
     "tags": "`Apache-2.0`",
     "category": "Database Management",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/datasette.svg"
   },
   {
     "name": "Evidence",
@@ -3219,7 +3219,7 @@
     "tags": "`GPL-3.0`",
     "category": "Database Management",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/mathesar.svg"
   },
   {
     "name": "OrcaQ",
@@ -3435,7 +3435,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Document Management",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/simpledms.svg"
   },
   {
     "name": "Stirling-PDF",
@@ -3660,7 +3660,7 @@
     "tags": "`MIT`",
     "category": "E-commerce",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/bagisto.svg"
   },
   {
     "name": "CoreShop",
@@ -3741,7 +3741,7 @@
     "tags": "`OSL-3.0`",
     "category": "E-commerce",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/prestashop.svg"
   },
   {
     "name": "Pretix",
@@ -3777,7 +3777,7 @@
     "tags": "`MIT`",
     "category": "E-commerce",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/shopware.svg"
   },
   {
     "name": "Solidus",
@@ -3858,7 +3858,7 @@
     "tags": "`BSD-3-Clause`",
     "category": "Feed Readers",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/feeds-fun.svg"
   },
   {
     "name": "FreshRSS",
@@ -4029,7 +4029,7 @@
     "tags": "`MIT`",
     "category": "Feed Readers",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/tinyfeed.svg"
   },
   {
     "name": "Upvote RSS",
@@ -4101,7 +4101,7 @@
     "tags": "`Apache-2.0`",
     "category": "File Transfer & Synchronization",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/opencloud.svg"
   },
   {
     "name": "OpenSSH SFTP server",
@@ -4173,7 +4173,7 @@
     "tags": "`AGPL-3.0`",
     "category": "File Transfer & Synchronization",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/sync-in.svg"
   },
   {
     "name": "Syncthing",
@@ -4218,7 +4218,7 @@
     "tags": "`Apache-2.0`",
     "category": "File Transfer - Object Storage & File Servers",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/seaweedfs.svg"
   },
   {
     "name": "Zenko CloudServer",
@@ -4407,7 +4407,7 @@
     "tags": "`AGPL-3.0`",
     "category": "File Transfer - Single-click & Drag-n-drop Upload",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/picoshare.svg"
   },
   {
     "name": "Picsur",
@@ -4434,7 +4434,7 @@
     "tags": "`BSD-2-Clause`",
     "category": "File Transfer - Single-click & Drag-n-drop Upload",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/pingvin-share-x.svg"
   },
   {
     "name": "Plik",
@@ -4794,7 +4794,7 @@
     "tags": "`GPL-2.0`",
     "category": "Games",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/openttd.svg"
   },
   {
     "name": "piqueserver",
@@ -4893,7 +4893,7 @@
     "tags": "`MIT`",
     "category": "Games - Administrative Utilities & Control Panels",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/calagopus.svg"
   },
   {
     "name": "Crafty Controller",
@@ -4983,7 +4983,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Games - Administrative Utilities & Control Panels",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/ownfoil.svg"
   },
   {
     "name": "Pelican Panel",
@@ -5109,7 +5109,7 @@
     "tags": "`MIT`",
     "category": "Generative Artificial Intelligence (GenAI)",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/anythingllm.svg"
   },
   {
     "name": "GoModel",
@@ -5127,7 +5127,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Generative Artificial Intelligence (GenAI)",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/khoj.svg"
   },
   {
     "name": "LibreChat",
@@ -5190,7 +5190,7 @@
     "tags": "`MIT`",
     "category": "Generative Artificial Intelligence (GenAI)",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/onyx.svg"
   },
   {
     "name": "Open-WebUI",
@@ -5226,7 +5226,7 @@
     "tags": "`Apache-2.0`",
     "category": "Groupware",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/colanode.svg"
   },
   {
     "name": "Cozy Cloud",
@@ -5397,7 +5397,7 @@
     "tags": "`GPL-3.0`",
     "category": "Human Resources Management (HRM)",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/frappe-hr.svg"
   },
   {
     "name": "MintHCM",
@@ -5406,7 +5406,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Human Resources Management (HRM)",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/minthcm.svg"
   },
   {
     "name": "Domoticz",
@@ -5559,7 +5559,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Internet of Things (IoT)",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/solectrus.svg"
   },
   {
     "name": "Tasmota",
@@ -5595,7 +5595,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Inventory Management",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/cannery.svg"
   },
   {
     "name": "DVinyl",
@@ -5928,7 +5928,7 @@
     "tags": "`GPL-3.0`",
     "category": "Maps and Global Positioning System (GPS)",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/adventurelog.svg"
   },
   {
     "name": "AirTrail",
@@ -5937,7 +5937,7 @@
     "tags": "`GPL-3.0`",
     "category": "Maps and Global Positioning System (GPS)",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/airtrail.svg"
   },
   {
     "name": "Bicimon",
@@ -5973,7 +5973,7 @@
     "tags": "`Apache-2.0`",
     "category": "Maps and Global Positioning System (GPS)",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/graphhopper.svg"
   },
   {
     "name": "NextGIS Web",
@@ -6135,7 +6135,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Media Management",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/lingarr.svg"
   },
   {
     "name": "Medusa",
@@ -6162,7 +6162,7 @@
     "tags": "`MIT`",
     "category": "Media Management",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/mkvpriority.svg"
   },
   {
     "name": "MyTube",
@@ -6234,7 +6234,7 @@
     "tags": "`GPL-3.0`",
     "category": "Media Management",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/reaparr.svg"
   },
   {
     "name": "Seerr",
@@ -6378,7 +6378,7 @@
     "tags": "`MIT`",
     "category": "Media Streaming - Audio Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/black-candy.svg"
   },
   {
     "name": "BotWave",
@@ -6441,7 +6441,7 @@
     "tags": "`GPL-2.0`",
     "category": "Media Streaming - Audio Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/lyrion-music-server.svg"
   },
   {
     "name": "moOde Audio",
@@ -6648,7 +6648,7 @@
     "tags": "`MIT`",
     "category": "Media Streaming - Multimedia Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/mediamtx.svg"
   },
   {
     "name": "Meelo",
@@ -6657,7 +6657,7 @@
     "tags": "`GPL-3.0`",
     "category": "Media Streaming - Multimedia Streaming",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/meelo.svg"
   },
   {
     "name": "MistServer",
@@ -6855,7 +6855,7 @@
     "tags": "`GPL-3.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/anchr.svg"
   },
   {
     "name": "Anubis",
@@ -6891,7 +6891,7 @@
     "tags": "`GPL-3.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/clipcascade.svg"
   },
   {
     "name": "Cloudlog",
@@ -7053,7 +7053,7 @@
     "tags": "`MIT`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/domain-locker.svg"
   },
   {
     "name": "DOMJudge",
@@ -7098,7 +7098,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/garlic-hub.svg"
   },
   {
     "name": "Geeftlist",
@@ -7107,7 +7107,7 @@
     "tags": "`GPL-3.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/geeftlist.svg"
   },
   {
     "name": "google-webfonts-helper",
@@ -7215,7 +7215,7 @@
     "tags": "`LGPL-2.1`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/languagetool.svg"
   },
   {
     "name": "Libre Translate",
@@ -7260,7 +7260,7 @@
     "tags": "`MIT`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/movary.svg"
   },
   {
     "name": "Neko",
@@ -7395,7 +7395,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/string-is.svg"
   },
   {
     "name": "Teleport",
@@ -7422,7 +7422,7 @@
     "tags": "`MIT`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/transmute.svg"
   },
   {
     "name": "URL-to-PNG",
@@ -7440,7 +7440,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/usertour.svg"
   },
   {
     "name": "Warracker",
@@ -7602,7 +7602,7 @@
     "tags": "`MIT`",
     "category": "Money, Budgeting & Management",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/fava.svg"
   },
   {
     "name": "Firefly III",
@@ -7683,7 +7683,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Money, Budgeting & Management",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/invoiceshelf.svg"
   },
   {
     "name": "Kill Bill",
@@ -7737,7 +7737,7 @@
     "tags": "`GPL-3.0`",
     "category": "Money, Budgeting & Management",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/octobot.svg"
   },
   {
     "name": "Ocular",
@@ -7827,7 +7827,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Money, Budgeting & Management",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/wygiwyh.svg"
   },
   {
     "name": "YAFFA",
@@ -7863,7 +7863,7 @@
     "tags": "`MIT`",
     "category": "Network Utilities",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/myip.svg"
   },
   {
     "name": "MySpeed",
@@ -7953,7 +7953,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Note-taking & Editors",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/blinko.svg"
   },
   {
     "name": "DailyTxT",
@@ -7962,7 +7962,7 @@
     "tags": "`MIT`",
     "category": "Note-taking & Editors",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/dailytxt.svg"
   },
   {
     "name": "Docs",
@@ -8079,7 +8079,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Note-taking & Editors",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/plumio.svg"
   },
   {
     "name": "SilverBullet",
@@ -8367,7 +8367,7 @@
     "tags": "`MIT`",
     "category": "Pastebins",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/pastefy.svg"
   },
   {
     "name": "PrivateBin",
@@ -8421,7 +8421,7 @@
     "tags": "`MIT`",
     "category": "Pastebins",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/wastebin.svg"
   },
   {
     "name": "Yopass",
@@ -8529,7 +8529,7 @@
     "tags": "`MIT`",
     "category": "Personal Dashboards",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/littlelink.svg"
   },
   {
     "name": "Mafl",
@@ -8556,7 +8556,7 @@
     "tags": "`MIT`",
     "category": "Personal Dashboards",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/personal-management-system.svg"
   },
   {
     "name": "portkey",
@@ -8799,7 +8799,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Polls and Events",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/bracket.svg"
   },
   {
     "name": "Christmas Community",
@@ -8871,7 +8871,7 @@
     "tags": "`CECILL-B`",
     "category": "Polls and Events",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/framadate.svg"
   },
   {
     "name": "Gancio",
@@ -8889,7 +8889,7 @@
     "tags": "`GPL-3.0`",
     "category": "Polls and Events",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/gathio.svg"
   },
   {
     "name": "HeyForm",
@@ -8925,7 +8925,7 @@
     "tags": "`MIT`",
     "category": "Polls and Events",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/meetable.svg"
   },
   {
     "name": "Mobilizon",
@@ -8952,7 +8952,7 @@
     "tags": "`MIT`",
     "category": "Polls and Events",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/revel.svg"
   },
   {
     "name": "g3proxy",
@@ -9060,7 +9060,7 @@
     "tags": "`MIT`",
     "category": "Recipe Management",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/cookcli.svg"
   },
   {
     "name": "Fork Recipes",
@@ -9123,7 +9123,7 @@
     "tags": "`GPL-3.0`",
     "category": "Recipe Management",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/vanilla-cookbook.svg"
   },
   {
     "name": "What To Cook?",
@@ -9159,7 +9159,7 @@
     "tags": "`Apache-2.0`",
     "category": "Remote Access",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/firezone.svg"
   },
   {
     "name": "Guacamole",
@@ -9330,7 +9330,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Search Engines",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/hister.svg"
   },
   {
     "name": "Manticore Search",
@@ -9357,7 +9357,7 @@
     "tags": "`Apache-2.0`",
     "category": "Search Engines",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/meme-search.svg"
   },
   {
     "name": "OpenSearch",
@@ -9384,7 +9384,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Search Engines",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/sosse.svg"
   },
   {
     "name": "Typesense",
@@ -9501,7 +9501,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Self-hosting Solutions",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/nirvati.svg"
   },
   {
     "name": "OpenMediaVault",
@@ -9546,7 +9546,7 @@
     "tags": "`GPL-3.0`",
     "category": "Self-hosting Solutions",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/syncloud.svg"
   },
   {
     "name": "Tipi",
@@ -9825,7 +9825,7 @@
     "tags": "`MIT`",
     "category": "Software Development - IDE & Tools",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/langfuse.svg"
   },
   {
     "name": "LiveCodes",
@@ -9870,7 +9870,7 @@
     "tags": "`BSD-3-Clause`",
     "category": "Software Development - Localization",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/accent.svg"
   },
   {
     "name": "Tolgee",
@@ -9897,7 +9897,7 @@
     "tags": "`GPL-3.0`",
     "category": "Software Development - Localization",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/weblate.svg"
   },
   {
     "name": "Appsmith",
@@ -9933,7 +9933,7 @@
     "tags": "`MIT`",
     "category": "Software Development - Low Code",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/manifest.svg"
   },
   {
     "name": "PocketBase",
@@ -10068,7 +10068,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Software Development - Project Management",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/ideon.svg"
   },
   {
     "name": "Kaneo",
@@ -10077,7 +10077,7 @@
     "tags": "`MIT`",
     "category": "Software Development - Project Management",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/kaneo.svg"
   },
   {
     "name": "Leantime",
@@ -10185,7 +10185,7 @@
     "tags": "`MIT`",
     "category": "Software Development - Project Management",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/review-board.svg"
   },
   {
     "name": "RhodeCode",
@@ -10266,7 +10266,7 @@
     "tags": "`BSD-3-Clause`",
     "category": "Software Development - Project Management",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/trac.svg"
   },
   {
     "name": "Traq",
@@ -10329,7 +10329,7 @@
     "tags": "`MIT`",
     "category": "Software Development - Testing",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/webhook-tester.svg"
   },
   {
     "name": "4ga Boards",
@@ -10392,7 +10392,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Task Management & To-do Lists",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/kan.svg"
   },
   {
     "name": "Kanboard",
@@ -10536,7 +10536,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Task Management & To-do Lists",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/will-be-done.svg"
   },
   {
     "name": "BugPin",
@@ -10563,7 +10563,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Ticketing",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/frappe-helpdesk.svg"
   },
   {
     "name": "FreeScout",
@@ -10707,7 +10707,7 @@
     "tags": "`GPL-3.0`",
     "category": "Time Tracking",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/timetracker.svg"
   },
   {
     "name": "Traggo",
@@ -10734,7 +10734,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Time Tracking",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/ziit.svg"
   },
   {
     "name": "Surmai",
@@ -10743,7 +10743,7 @@
     "tags": "`MIT`",
     "category": "Travel Organization",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/surmai.svg"
   },
   {
     "name": "bit",
@@ -10860,7 +10860,7 @@
     "tags": "`GPL-3.0`",
     "category": "Video Surveillance",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/secluso.svg"
   },
   {
     "name": "SentryShot",
@@ -10941,7 +10941,7 @@
     "tags": "`MIT`",
     "category": "Web Servers",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/ferron.svg"
   },
   {
     "name": "go-doxy",
@@ -10950,7 +10950,7 @@
     "tags": "`MIT`",
     "category": "Web Servers",
     "warning": false,
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/png/godoxy.png"
   },
   {
     "name": "HAProxy",
@@ -11004,7 +11004,7 @@
     "tags": "`Apache-2.0`",
     "category": "Web Servers",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/pomerium.svg"
   },
   {
     "name": "SafeLine",
@@ -11157,7 +11157,7 @@
     "tags": "`MIT`",
     "category": "Wikis",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/leafwiki.svg"
   },
   {
     "name": "Mediawiki",
@@ -11310,6 +11310,6 @@
     "tags": "`MIT`",
     "category": "Wikis",
     "warning": false,
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/png/themepark.png"
   }
 ]
