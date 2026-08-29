@@ -125,6 +125,8 @@ pub struct CatalogEntry {
     pub health: Option<String>,
     pub category: Option<String>,
     pub description: Option<String>,
+    #[serde(default)]
+    pub tags: String,
 }
 
 /// Parse the compile-time-embedded catalog JSON into structs.
@@ -157,9 +159,11 @@ pub fn catalog_categories() -> Vec<String> {
     seen
 }
 
-/// Lookup a single catalog entry by name (exact match).
+/// Lookup a single catalog entry by name (case-insensitive — app names in the
+/// source list have inconsistent casing, e.g. "Immich" vs "n8n").
 pub fn catalog_entry(name: &str) -> Option<CatalogEntry> {
-    parse_catalog().into_iter().find(|e| e.name == name)
+    let lower = name.to_lowercase();
+    parse_catalog().into_iter().find(|e| e.name.to_lowercase() == lower)
 }
 
 #[cfg(test)]
@@ -215,5 +219,15 @@ mod tests {
         sorted.sort();
         sorted.dedup();
         assert_eq!(sorted.len(), cats.len(), "categories must be distinct");
+    }
+
+    /// `--preset immich` should resolve even though PRESETS and the catalog
+    /// both use different casing — the CLI passes lowercase.
+    #[test]
+    fn catalog_entry_case_insensitive() {
+        assert!(catalog_entry("immich").is_some());
+        assert!(catalog_entry("IMMICH").is_some());
+        assert!(catalog_entry("penpot").is_some());
+        assert!(catalog_entry("PENPOT").is_some());
     }
 }
