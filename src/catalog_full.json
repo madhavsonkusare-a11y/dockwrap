@@ -357,7 +357,7 @@
     "tags": "`GPL-3.0`",
     "category": "Archiving and Digital Preservation (DP)",
     "warning": false,
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/Zibbp/ganymede/main/.github/ganymede-logo.png"
   },
   {
     "name": "mail-archiver",
@@ -618,7 +618,7 @@
     "tags": "`GPL-3.0`",
     "category": "Automation",
     "warning": false,
-    "icon": ""
+    "icon": "https://cdn.jsdelivr.net/gh/sergree/matchering@master/images/logo.png"
   },
   {
     "name": "Mylar3",
