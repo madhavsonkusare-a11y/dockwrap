@@ -163,18 +163,28 @@ pub fn run_cli() -> i32 {
             0
         }
         "open" => {
-            let name = match name_arg(&args, "Usage: dockwrap open <name>") {
+            let browser = args.iter().any(|a| a == "--browser");
+            let args_no_flags: Vec<String> = args
+                .iter()
+                .skip(1)
+                .filter(|a| a.as_str() != "--browser")
+                .cloned()
+                .collect();
+            let name = match name_arg(&args_no_flags, "Usage: dockwrap open <name> [--browser]") {
                 Ok(n) => n,
                 Err(ec) => return ec,
             };
             match find_app(&name) {
                 Some(appdef) => {
-                    // In CLI mode there's no GUI window to open; boot compose and
-                    // report the URL (the GUI `open_app` opens the actual window).
                     if let Err(e) = crate::boot_and_wait(&appdef) {
                         eprintln!("warn: {}", e);
                     }
-                    println!("Opened \"{}\" at {}", name, appdef.url);
+                    if browser {
+                        crate::launch_browser(&appdef.url);
+                        println!("Opened \"{}\" in your browser at {}", name, appdef.url);
+                    } else {
+                        println!("Opened \"{}\" at {} (compose booted)", name, appdef.url);
+                    }
                     0
                 }
                 None => {
@@ -358,6 +368,38 @@ mod tests {
         assert!(!entries.is_empty());
         assert!(!cats.is_empty());
         assert_eq!(cats.len(), cats.iter().collect::<std::collections::HashSet<_>>().len());
+    }
+
+    /// `dockwrap open <name> --browser` parses the flag and strips it from args.
+    #[test]
+    fn open_browser_flag_is_stripped() {
+        let args: Vec<String> = vec![
+            "open".into(), "immich".into(), "--browser".into(),
+        ];
+        let browser = args.iter().any(|a| a == "--browser");
+        let args_no_flags: Vec<String> = args
+            .iter()
+            .skip(1)
+            .filter(|a| a.as_str() != "--browser")
+            .cloned()
+            .collect();
+        assert!(browser, "--browser should be detected");
+        assert_eq!(args_no_flags, vec!["immich".to_string()], "non-flag arg should remain");
+    }
+
+    /// `dockwrap open --browser` (flag before name) still parses the name.
+    #[test]
+    fn open_browser_flag_before_name() {
+        let args: Vec<String> = vec![
+            "open".into(), "--browser".into(), "immich".into(),
+        ];
+        let args_no_flags: Vec<String> = args
+            .iter()
+            .skip(1)
+            .filter(|a| a.as_str() != "--browser")
+            .cloned()
+            .collect();
+        assert_eq!(args_no_flags, vec!["immich".to_string()]);
     }
 
     /// `usage()` mentions the new catalog subcommand.
