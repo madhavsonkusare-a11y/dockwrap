@@ -456,7 +456,7 @@
     "tags": "`Apache-2.0`",
     "category": "Automation",
     "warning": false,
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/changedetection.svg"
   },
   {
     "name": "ChiefOnboarding",
@@ -627,7 +627,7 @@
     "tags": "`GPL-3.0`",
     "category": "Automation",
     "warning": false,
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/png/mylar.png"
   },
   {
     "name": "OliveTin",
@@ -1887,7 +1887,7 @@
     "tags": "`MIT`",
     "category": "Communication - IRC",
     "warning": false,
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/thelounge.svg"
   },
   {
     "name": "UnrealIRCd",
@@ -3426,7 +3426,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Document Management",
     "warning": false,
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/signaturepdf.svg"
   },
   {
     "name": "SimpleDMS",
@@ -4020,7 +4020,7 @@
     "tags": "`GPL-3.0`",
     "category": "Feed Readers",
     "warning": false,
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/png/tinytinyrss.png"
   },
   {
     "name": "TinyFeed",
@@ -5676,7 +5676,7 @@
     "tags": "`MIT/AGPL-3.0`",
     "category": "Knowledge Management Tools",
     "warning": false,
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/affine.svg"
   },
   {
     "name": "Atomic Server",
@@ -6882,7 +6882,7 @@
     "tags": "`BSD-2-Clause`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/png/babybuddy.png"
   },
   {
     "name": "ClipCascade",
@@ -7152,7 +7152,7 @@
     "tags": "`MIT`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/infisical.svg"
   },
   {
     "name": "iSponsorBlockTV",
@@ -7224,7 +7224,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/libretranslate.svg"
   },
   {
     "name": "LubeLogger",
@@ -8358,7 +8358,7 @@
     "tags": "`Apache-2.0`",
     "category": "Pastebins",
     "warning": false,
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/png/passwordpusher.png"
   },
   {
     "name": "Pastefy",
@@ -8736,7 +8736,7 @@
     "tags": "`MIT`",
     "category": "Photo Galleries",
     "warning": false,
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/pigallery2.svg"
   },
   {
     "name": "Piwigo",
@@ -9663,7 +9663,7 @@
     "tags": "`MIT`",
     "category": "Software Development - API Management",
     "warning": false,
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/svg/hoppscotch.svg"
   },
   {
     "name": "Kong",
@@ -11103,7 +11103,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Wikis",
     "warning": false,
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/png/docmost.png"
   },
   {
     "name": "Documize",
