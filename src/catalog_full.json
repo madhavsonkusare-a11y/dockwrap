@@ -6,7 +6,7 @@
     "tags": "`MIT`",
     "category": "Analytics",
     "warning": false,
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/orangecoloured/analog/main/public/favicon.svg"
   },
   {
     "name": "Aptabase",
@@ -1095,7 +1095,7 @@
     "tags": "`GPL-3.0`",
     "category": "Calendar & Contacts",
     "warning": false,
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/jelmer/xandikos/master/logo.png"
   },
   {
     "name": "AnyCable",
@@ -1284,7 +1284,7 @@
     "tags": "`ISC`",
     "category": "Communication - Custom Communication Systems",
     "warning": false,
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/pushbits/server/main/.github/logo.png"
   },
   {
     "name": "RetroShare",
@@ -3723,7 +3723,7 @@
     "tags": "`MIT`",
     "category": "E-commerce",
     "warning": false,
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/opensourcepos/opensourcepos/master/branding/logo.svg"
   },
   {
     "name": "OpenCart",
@@ -4722,7 +4722,7 @@
     "tags": "`MPL-2.0`",
     "category": "Games",
     "warning": false,
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/doublespeakgames/adarkroom/main/favicon.ico"
   },
   {
     "name": "DDraceNetwork",
@@ -4821,7 +4821,7 @@
     "tags": "`MIT`",
     "category": "Games",
     "warning": false,
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/Ralex91/Razzia/main/.github/logo.svg"
   },
   {
     "name": "Red Eclipse 2",
@@ -7170,7 +7170,7 @@
     "tags": "`GPL-3.0`",
     "category": "Miscellaneous",
     "warning": false,
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/sharevb/it-tools/master/public/logo.png"
   },
   {
     "name": "Jelu",
@@ -8457,7 +8457,7 @@
     "tags": "`AGPL-3.0`",
     "category": "Personal Dashboards",
     "warning": false,
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/arran4/gobookmarks/main/logo.png"
   },
   {
     "name": "Heimdall",
@@ -8583,7 +8583,7 @@
     "tags": "`MIT`",
     "category": "Personal Dashboards",
     "warning": false,
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/notclickable-jordan/starbase-80/main/public/logo.png"
   },
   {
     "name": "Your Spotify",
@@ -8763,7 +8763,7 @@
     "tags": "`MIT`",
     "category": "Photo Galleries",
     "warning": false,
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/RouHim/this-week-in-past/main/icon.png"
   },
   {
     "name": "Thumbor",
@@ -10473,7 +10473,7 @@
     "tags": "`MIT`",
     "category": "Task Management & To-do Lists",
     "warning": false,
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/BaldissaraMatheus/Tasks.md/main/public/logo.png"
   },
   {
     "name": "Taskwarrior",
@@ -10815,7 +10815,7 @@
     "tags": "`MIT`",
     "category": "URL Shorteners",
     "warning": false,
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/azlux/Simple-URL-Shortener/master/favicon.ico"
   },
   {
     "name": "YOURLS",
