@@ -19,3 +19,7 @@ Thumbs.db
 
 # Hermes agent workspace (plans, etc. — not project code)
 .hermes/
+
+# Windows null-device artifact (some tools write a literal 'nul' file)
+nul
+
