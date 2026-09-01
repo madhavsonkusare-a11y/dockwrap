@@ -8,7 +8,7 @@
 //!   dockwrap remove <name>
 //!   dockwrap presets                        (show built-in presets)
 
-use crate::registry::{self, AppDef};
+use dockwrap::{catalog, model::AppDef, platform, runtime, storage, windowing};
 
 const VERSION: &str = env!("CARGO_PKG_VERSION");
 
@@ -45,9 +45,9 @@ fn name_arg(args: &[String], usage: &str) -> Result<String, i32> {
 
 /// Look up a registered app by name, returning an owned clone so callers don't
 /// borrow the `load_apps()` temporary. Replaces the repeated
-/// `registry::load_apps().iter().find(...)` + "No app named" block.
+/// `storage::load_apps().iter().find(...)` + "No app named" block.
 fn find_app(name: &str) -> Option<AppDef> {
-    registry::load_apps()
+    storage::load_apps()
         .iter()
         .find(|a| a.name == name)
         .cloned()
@@ -77,10 +77,10 @@ fn get_flag(args: &[String], flag: &str) -> Option<String> {
 /// PRESETS table first, then the embedded 1257-app catalog as a fallback.
 /// If the preset is unknown everywhere, prints guidance and exits the CLI.
 fn resolve_preset(display_name: &str, preset: &str) -> (String, String) {
-    if let Some(u) = registry::preset_url(preset) {
+    if let Some(u) = catalog::preset_url(preset) {
         return (display_name.to_string(), u.to_string());
     }
-    if let Some(e) = registry::catalog_entry(preset) {
+    if let Some(e) = catalog::catalog_entry(preset) {
         return (e.name.clone(), e.url.clone());
     }
     eprintln!(
@@ -128,9 +128,8 @@ pub fn run_cli() -> i32 {
             // though PRESETS only stores the URL. Do NOT overwrite a URL the user
             // explicitly supplied via --url or --preset; the catalog may point at
             // the upstream site (e.g. immich.app) rather than localhost.
-            let resolved_icon =
-                registry::catalog_entry(&name).and_then(|e| e.icon.or(icon.clone()));
-            registry::upsert_app(&name, &url, resolved_icon, compose.clone(), health.clone());
+            let resolved_icon = catalog::catalog_entry(&name).and_then(|e| e.icon.or(icon.clone()));
+            storage::upsert_app(&name, &url, resolved_icon, compose.clone(), health.clone());
             match (icon, compose) {
                 (Some(i), Some(c)) => println!(
                     "Registered \"{}\" -> {} (icon: {}, compose: {}{})",
@@ -157,7 +156,7 @@ pub fn run_cli() -> i32 {
             0
         }
         "list" => {
-            let apps: Vec<AppDef> = registry::load_apps();
+            let apps: Vec<AppDef> = storage::load_apps();
             if apps.is_empty() {
                 println!("No apps registered.");
             } else {
@@ -179,11 +178,11 @@ pub fn run_cli() -> i32 {
             };
             match find_app(&name) {
                 Some(appdef) => {
-                    if let Err(e) = crate::boot_and_wait(&appdef) {
+                    if let Err(e) = runtime::boot_and_wait(&appdef) {
                         eprintln!("warn: {}", e);
                     }
                     if browser {
-                        crate::launch_browser(&appdef.url);
+                        windowing::launch_browser(&appdef.url);
                         println!("Opened \"{}\" in your browser at {}", name, appdef.url);
                     } else {
                         println!("Opened \"{}\" at {} (compose booted)", name, appdef.url);
@@ -206,7 +205,7 @@ pub fn run_cli() -> i32 {
                     let bin = std::env::current_exe()
                         .map(|p| p.to_string_lossy().into_owned())
                         .unwrap_or_default();
-                    match crate::create_shortcut_for(&name, &bin, appdef.icon.as_deref()) {
+                    match platform::create_shortcut_for(&name, &bin, appdef.icon.as_deref()) {
                         Ok(path) => {
                             println!("Shortcut created: {}", path);
                             0
@@ -225,10 +224,10 @@ pub fn run_cli() -> i32 {
         }
         "catalog" => {
             let query = args.get(1).cloned().filter(|s| !s.starts_with("--"));
-            let entries = registry::catalog();
+            let entries = catalog::catalog();
             match query {
                 None => {
-                    let cats = registry::catalog_categories();
+                    let cats = catalog::catalog_categories();
                     println!(
                         "dockwrap app catalog: {} apps in {} categories",
                         entries.len(),
@@ -286,7 +285,7 @@ pub fn run_cli() -> i32 {
                 Ok(n) => n,
                 Err(ec) => return ec,
             };
-            if registry::remove_app(&name) {
+            if storage::remove_app(&name) {
                 println!("Removed \"{}\".", name);
                 0
             } else {
@@ -300,7 +299,7 @@ pub fn run_cli() -> i32 {
         }
         "presets" => {
             println!("Built-in presets (name -> default url):");
-            for (n, u) in registry::PRESETS {
+            for (n, u) in catalog::PRESETS {
                 println!("  {} -> {}", n, u);
             }
             0
@@ -355,7 +354,7 @@ mod tests {
     #[test]
     fn preset_falls_back_to_catalog() {
         // immich is not in PRESETS — catalog_entry must resolve it.
-        let entry = registry::catalog_entry("Immich");
+        let entry = catalog::catalog_entry("Immich");
         assert!(entry.is_some(), "Immich must exist in the embedded catalog");
         let e = entry.unwrap();
         assert!(e.icon.is_some(), "catalog Immich should carry an icon");
@@ -369,21 +368,21 @@ mod tests {
     /// name/category/description/tags).
     #[test]
     fn catalog_search_finds_results() {
-        let entries = registry::catalog();
+        let entries = catalog::catalog();
         let ql = "media";
         let matches: Vec<_> = entries
             .iter()
             .filter(|e| {
-                e.name.to_lowercase().contains(&ql)
+                e.name.to_lowercase().contains(ql)
                     || e.category
                         .as_deref()
-                        .map(|c| c.to_lowercase().contains(&ql))
+                        .map(|c| c.to_lowercase().contains(ql))
                         .unwrap_or(false)
                     || e.description
                         .as_deref()
-                        .map(|d| d.to_lowercase().contains(&ql))
+                        .map(|d| d.to_lowercase().contains(ql))
                         .unwrap_or(false)
-                    || e.tags.to_lowercase().contains(&ql)
+                    || e.tags.to_lowercase().contains(ql)
             })
             .collect();
         assert!(
@@ -397,8 +396,8 @@ mod tests {
     fn catalog_subcommand_no_args_is_zero() {
         // run_cli reads std::env::args(), so we can't easily assert stdout.
         // Instead verify the underlying data the subcommand uses.
-        let entries = registry::catalog();
-        let cats = registry::catalog_categories();
+        let entries = catalog::catalog();
+        let cats = catalog::catalog_categories();
         assert!(!entries.is_empty());
         assert!(!cats.is_empty());
         assert_eq!(

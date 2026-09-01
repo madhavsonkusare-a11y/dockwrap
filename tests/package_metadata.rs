@@ -13,8 +13,9 @@ fn package_metadata_is_present_in_cargo_manifest() {
         .expect("[package] table present");
 
     let version = env!("CARGO_PKG_VERSION");
-    assert!(package.contains(&format!("name = \"dockwrap\"")));
-    assert!(package.contains(&format!("version = \"{version}\"")));
+    assert!(package.contains("name = \"dockwrap\""));
+    let version_line = format!("version = \"{version}\"");
+    assert!(package.contains(&version_line));
     assert!(package.contains("edition = \"2021\""));
     assert!(package.contains("rust-version = \"1.77.2\""));
     assert!(package.contains("license = \"MIT\""));
