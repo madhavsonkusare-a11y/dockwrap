@@ -61,13 +61,21 @@ dockwrap --version
 - [x] `dockwrap://open/<name>` protocol handler
 - [x] Per-app icon on the native window title bar
 
-### v0.3 (current)
+### v0.3 (shipped ✅)
 - [x] **Cross-platform registry path** — `apps.json` now uses `PathBuf` (was hardcoded `\`, broken on Linux/macOS)
 - [x] **Unit tests** for the registry (path, dedup, preset lookup)
 - [x] **`dockwrap --version`** / `dockwrap version` subcommand
 - [x] **GUI parity with CLI** — icon, compose, and health inputs; per-row Remove button; app icon + 🐳 compose badge in the launcher
 - [x] **macOS `dockwrap://`** registered via bundle `Info.plist` (`CFBundleURLTypes`)
-- [ ] (stretch, deferred) Tray minimize, export/import, auto-update, multi-window UI
+
+### v0.4 (shipped ✅ — current release)
+- [x] **Embedded app catalog** — 1,257 self-hosted app entries bundled into the binary
+- [x] **Catalog-backed setup wizard** — browse and configure catalog apps from the launcher
+- [x] **Curated runtime configurations** — selected entries include Compose and health-check metadata
+- [x] **Broad icon coverage** — verified icon sources plus favicon fallback for entries without one
+
+### Post-v0.4
+- [ ] Define the next roadmap after catalog feedback and maintenance work
 
 ## License
 

@@ -13,7 +13,8 @@ cargo tauri build    # release binary + installer in target/release/bundle
 
 ## Conventions
 
-- Keep it dependency-light. Tauri + serde only.
+- Keep it dependency-light. The current footprint is Tauri, serde, serde_json,
+  and narrowly scoped platform APIs; add dependencies only with a clear need.
 - External-link routing lives in `src/main.rs` (`LINK_BRIDGE_JS` + `on_navigation`).
   Don't break that contract — it's the one feature that separates dockwrap
   from a bare webview.
@@ -28,7 +29,8 @@ cargo tauri build    # release binary + installer in target/release/bundle
 - `cargo test` passes
 - README roadmap item checked off if you shipped a feature
 
-## Ideas (see README roadmap)
+## Current focus
 
-Docker Compose boot, Rust CLI, Start Menu shortcuts, protocol handler,
-per-app window icons.
+The v0.4.0 release added the embedded catalog and setup wizard. Keep follow-up
+work small and focused on catalog quality, reliability, or post-v0.4 roadmap
+items as they are defined in the README.
