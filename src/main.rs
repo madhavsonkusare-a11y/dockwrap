@@ -1,14 +1,14 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use dockwrap::{catalog, commands, model, platform, runtime, storage, windowing};
+use dockwrap::{catalog as catalog_module, commands, model, platform, runtime, storage, windowing};
 
 mod cli;
 
 const EXAMPLE_URL: &str = "http://localhost:9001/#/workspace/3364d985-c11e-8197-8008-89bcbd1341e9/3364d985-c11e-8197-8008-89c3aa739819";
 
 #[tauri::command]
-fn catalog_cmd() -> Vec<model::CatalogEntry> {
-    catalog::catalog()
+fn catalog() -> Vec<model::CatalogEntry> {
+    catalog_module::catalog()
 }
 
 #[tauri::command]
@@ -116,7 +116,7 @@ fn main() {
             open_app,
             create_shortcut,
             commands::remove_app_cmd,
-            catalog_cmd
+            catalog
         ])
         .run(tauri::generate_context!())
         .expect("error while running dockwrap");
