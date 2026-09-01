@@ -45,11 +45,7 @@ pub fn resolve_config() -> String {
                 .ok()
                 .filter(|v| !v.is_empty())
         })
-        .or_else(|| {
-            std::env::var("HOME")
-                .ok()
-                .map(|h| format!("{}/.config", h))
-        })
+        .or_else(|| std::env::var("HOME").ok().map(|h| format!("{}/.config", h)))
         .unwrap_or_else(|| ".".to_string());
     let mut p = PathBuf::from(base);
     p.push("dockwrap");
@@ -103,10 +99,7 @@ pub fn remove_app(name: &str) -> bool {
 }
 
 pub fn preset_url(name: &str) -> Option<&'static str> {
-    PRESETS
-        .iter()
-        .find(|(n, _)| *n == name)
-        .map(|(_, u)| *u)
+    PRESETS.iter().find(|(n, _)| *n == name).map(|(_, u)| *u)
 }
 
 // ---- Curated self-hosted app catalog (baked into the binary at compile time). ----
@@ -165,7 +158,9 @@ pub fn catalog_categories() -> Vec<String> {
 /// source list have inconsistent casing, e.g. "Immich" vs "n8n").
 pub fn catalog_entry(name: &str) -> Option<CatalogEntry> {
     let lower = name.to_lowercase();
-    parse_catalog().into_iter().find(|e| e.name.to_lowercase() == lower)
+    parse_catalog()
+        .into_iter()
+        .find(|e| e.name.to_lowercase() == lower)
 }
 
 #[cfg(test)]
@@ -186,10 +181,28 @@ mod tests {
     #[test]
     fn upsert_dedups_by_name() {
         let mut apps: Vec<AppDef> = vec![];
-        apps.push(AppDef { name: "x".into(), url: "http://a".into(), icon: None, compose: None, health: None });
-        apps.push(AppDef { name: "x".into(), url: "http://b".into(), icon: None, compose: None, health: None });
+        apps.push(AppDef {
+            name: "x".into(),
+            url: "http://a".into(),
+            icon: None,
+            compose: None,
+            health: None,
+        });
+        apps.push(AppDef {
+            name: "x".into(),
+            url: "http://b".into(),
+            icon: None,
+            compose: None,
+            health: None,
+        });
         apps.retain(|a| a.name != "x");
-        apps.push(AppDef { name: "x".into(), url: "http://c".into(), icon: None, compose: None, health: None });
+        apps.push(AppDef {
+            name: "x".into(),
+            url: "http://c".into(),
+            icon: None,
+            compose: None,
+            health: None,
+        });
         assert_eq!(apps.len(), 1);
         assert_eq!(apps[0].url, "http://c");
     }
@@ -203,10 +216,16 @@ mod tests {
     #[test]
     fn catalog_loads_and_looks_up() {
         let apps = catalog();
-        assert!(!apps.is_empty(), "catalog should embed the full self-hosted list");
+        assert!(
+            !apps.is_empty(),
+            "catalog should embed the full self-hosted list"
+        );
         let by_name: Vec<&str> = apps.iter().map(|e| e.name.as_str()).collect();
         assert!(by_name.contains(&"Immich"), "Immich should be cataloged");
-        assert!(by_name.contains(&"Jellyfin"), "Jellyfin should be cataloged");
+        assert!(
+            by_name.contains(&"Jellyfin"),
+            "Jellyfin should be cataloged"
+        );
         let entry = catalog_entry("Immich");
         assert!(entry.is_some(), "Immich lookup should return an entry");
         // The 12 curated apps carry compose snippets; the full list may not.

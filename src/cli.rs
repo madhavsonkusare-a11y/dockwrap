@@ -17,7 +17,9 @@ const VERSION: &str = env!("CARGO_PKG_VERSION");
 /// wired up and prints are visible. Harmless on non-Windows.
 #[cfg(windows)]
 fn ensure_console() {
-    use windows_sys::Win32::System::Console::{AttachConsole, ATTACH_PARENT_PROCESS, GetConsoleWindow};
+    use windows_sys::Win32::System::Console::{
+        AttachConsole, GetConsoleWindow, ATTACH_PARENT_PROCESS,
+    };
     unsafe {
         if GetConsoleWindow().is_null() {
             let _ = AttachConsole(ATTACH_PARENT_PROCESS);
@@ -45,7 +47,10 @@ fn name_arg(args: &[String], usage: &str) -> Result<String, i32> {
 /// borrow the `load_apps()` temporary. Replaces the repeated
 /// `registry::load_apps().iter().find(...)` + "No app named" block.
 fn find_app(name: &str) -> Option<AppDef> {
-    registry::load_apps().iter().find(|a| a.name == name).cloned()
+    registry::load_apps()
+        .iter()
+        .find(|a| a.name == name)
+        .cloned()
 }
 
 fn usage() -> String {
@@ -123,15 +128,9 @@ pub fn run_cli() -> i32 {
             // though PRESETS only stores the URL. Do NOT overwrite a URL the user
             // explicitly supplied via --url or --preset; the catalog may point at
             // the upstream site (e.g. immich.app) rather than localhost.
-            let resolved_icon = registry::catalog_entry(&name)
-                .and_then(|e| e.icon.or(icon.clone()));
-            registry::upsert_app(
-                &name,
-                &url,
-                resolved_icon,
-                compose.clone(),
-                health.clone(),
-            );
+            let resolved_icon =
+                registry::catalog_entry(&name).and_then(|e| e.icon.or(icon.clone()));
+            registry::upsert_app(&name, &url, resolved_icon, compose.clone(), health.clone());
             match (icon, compose) {
                 (Some(i), Some(c)) => println!(
                     "Registered \"{}\" -> {} (icon: {}, compose: {}{})",
@@ -139,7 +138,9 @@ pub fn run_cli() -> i32 {
                     url,
                     i,
                     c,
-                    health.map(|h| format!(", health: {}", h)).unwrap_or_default()
+                    health
+                        .map(|h| format!(", health: {}", h))
+                        .unwrap_or_default()
                 ),
                 (Some(i), None) => println!("Registered \"{}\" -> {} (icon: {})", name, url, i),
                 (None, Some(c)) => println!(
@@ -147,7 +148,9 @@ pub fn run_cli() -> i32 {
                     name,
                     url,
                     c,
-                    health.map(|h| format!(", health: {}", h)).unwrap_or_default()
+                    health
+                        .map(|h| format!(", health: {}", h))
+                        .unwrap_or_default()
                 ),
                 (None, None) => println!("Registered \"{}\" -> {}", name, url),
             }
@@ -226,13 +229,23 @@ pub fn run_cli() -> i32 {
             match query {
                 None => {
                     let cats = registry::catalog_categories();
-                    println!("dockwrap app catalog: {} apps in {} categories", entries.len(), cats.len());
+                    println!(
+                        "dockwrap app catalog: {} apps in {} categories",
+                        entries.len(),
+                        cats.len()
+                    );
                     for c in cats.iter().take(12) {
-                        let n = entries.iter().filter(|e| e.category.as_deref() == Some(c.as_str())).count();
+                        let n = entries
+                            .iter()
+                            .filter(|e| e.category.as_deref() == Some(c.as_str()))
+                            .count();
                         println!("  {} ({} apps)", c, n);
                     }
                     if cats.len() > 12 {
-                        println!("  ... and {} more categories. Use `dockwrap catalog search <q>`", cats.len() - 12);
+                        println!(
+                            "  ... and {} more categories. Use `dockwrap catalog search <q>`",
+                            cats.len() - 12
+                        );
                     }
                     0
                 }
@@ -242,8 +255,14 @@ pub fn run_cli() -> i32 {
                         .iter()
                         .filter(|e| {
                             e.name.to_lowercase().contains(&ql)
-                                || e.category.as_deref().map(|c| c.to_lowercase().contains(&ql)).unwrap_or(false)
-                                || e.description.as_deref().map(|d| d.to_lowercase().contains(&ql)).unwrap_or(false)
+                                || e.category
+                                    .as_deref()
+                                    .map(|c| c.to_lowercase().contains(&ql))
+                                    .unwrap_or(false)
+                                || e.description
+                                    .as_deref()
+                                    .map(|d| d.to_lowercase().contains(&ql))
+                                    .unwrap_or(false)
                                 || e.tags.to_lowercase().contains(&ql)
                         })
                         .collect();
@@ -315,7 +334,10 @@ mod tests {
     #[test]
     fn get_flag_returns_value() {
         let args: Vec<String> = vec![
-            "dockwrap".into(), "add".into(), "--url".into(), "http://x".into(),
+            "dockwrap".into(),
+            "add".into(),
+            "--url".into(),
+            "http://x".into(),
         ];
         assert_eq!(get_flag(&args, "--url"), Some("http://x".to_string()));
     }
@@ -337,7 +359,10 @@ mod tests {
         assert!(entry.is_some(), "Immich must exist in the embedded catalog");
         let e = entry.unwrap();
         assert!(e.icon.is_some(), "catalog Immich should carry an icon");
-        assert!(e.category.is_some(), "catalog Immich should carry a category");
+        assert!(
+            e.category.is_some(),
+            "catalog Immich should carry a category"
+        );
     }
 
     /// `dockwrap catalog search media` finds results (search is substring across
@@ -350,12 +375,21 @@ mod tests {
             .iter()
             .filter(|e| {
                 e.name.to_lowercase().contains(&ql)
-                    || e.category.as_deref().map(|c| c.to_lowercase().contains(&ql)).unwrap_or(false)
-                    || e.description.as_deref().map(|d| d.to_lowercase().contains(&ql)).unwrap_or(false)
+                    || e.category
+                        .as_deref()
+                        .map(|c| c.to_lowercase().contains(&ql))
+                        .unwrap_or(false)
+                    || e.description
+                        .as_deref()
+                        .map(|d| d.to_lowercase().contains(&ql))
+                        .unwrap_or(false)
                     || e.tags.to_lowercase().contains(&ql)
             })
             .collect();
-        assert!(!matches.is_empty(), "catalog search 'media' should match ≥1 app");
+        assert!(
+            !matches.is_empty(),
+            "catalog search 'media' should match ≥1 app"
+        );
     }
 
     /// `dockwrap catalog` (no args) returns 0 and prints stats.
@@ -367,15 +401,16 @@ mod tests {
         let cats = registry::catalog_categories();
         assert!(!entries.is_empty());
         assert!(!cats.is_empty());
-        assert_eq!(cats.len(), cats.iter().collect::<std::collections::HashSet<_>>().len());
+        assert_eq!(
+            cats.len(),
+            cats.iter().collect::<std::collections::HashSet<_>>().len()
+        );
     }
 
     /// `dockwrap open <name> --browser` parses the flag and strips it from args.
     #[test]
     fn open_browser_flag_is_stripped() {
-        let args: Vec<String> = vec![
-            "open".into(), "immich".into(), "--browser".into(),
-        ];
+        let args: Vec<String> = vec!["open".into(), "immich".into(), "--browser".into()];
         let browser = args.iter().any(|a| a == "--browser");
         let args_no_flags: Vec<String> = args
             .iter()
@@ -384,15 +419,17 @@ mod tests {
             .cloned()
             .collect();
         assert!(browser, "--browser should be detected");
-        assert_eq!(args_no_flags, vec!["immich".to_string()], "non-flag arg should remain");
+        assert_eq!(
+            args_no_flags,
+            vec!["immich".to_string()],
+            "non-flag arg should remain"
+        );
     }
 
     /// `dockwrap open --browser` (flag before name) still parses the name.
     #[test]
     fn open_browser_flag_before_name() {
-        let args: Vec<String> = vec![
-            "open".into(), "--browser".into(), "immich".into(),
-        ];
+        let args: Vec<String> = vec!["open".into(), "--browser".into(), "immich".into()];
         let args_no_flags: Vec<String> = args
             .iter()
             .skip(1)
@@ -406,7 +443,13 @@ mod tests {
     #[test]
     fn usage_mentions_catalog() {
         let u = usage();
-        assert!(u.contains("catalog"), "usage should document the catalog subcommand");
-        assert!(u.contains("search"), "usage should document `catalog search`");
+        assert!(
+            u.contains("catalog"),
+            "usage should document the catalog subcommand"
+        );
+        assert!(
+            u.contains("search"),
+            "usage should document `catalog search`"
+        );
     }
 }

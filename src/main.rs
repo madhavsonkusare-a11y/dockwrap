@@ -54,9 +54,13 @@ fn launch_browser(url: &str) {
 #[cfg(not(windows))]
 fn launch_browser(url: &str) {
     // Best-effort: xdg-open (Linux) / open (macOS). Fails silently if absent.
-    let _ = std::process::Command::new(if cfg!(target_os = "macos") { "open" } else { "xdg-open" })
-        .arg(url)
-        .spawn();
+    let _ = std::process::Command::new(if cfg!(target_os = "macos") {
+        "open"
+    } else {
+        "xdg-open"
+    })
+    .arg(url)
+    .spawn();
 }
 
 fn percent_decode_str(s: &str) -> String {
@@ -95,10 +99,7 @@ pub fn boot_and_wait(app: &AppDef) -> Result<(), String> {
         }
     }
 
-    let target = app
-        .health
-        .clone()
-        .unwrap_or_else(|| app.url.clone());
+    let target = app.health.clone().unwrap_or_else(|| app.url.clone());
     wait_for_health(&target, Duration::from_secs(60))
 }
 
@@ -142,8 +143,8 @@ pub fn create_shortcut_for(name: &str, bin: &str, icon: Option<&str>) -> Result<
 
 #[cfg(windows)]
 fn create_shortcut_windows(name: &str, bin: &str, icon: Option<&str>) -> Result<String, String> {
-    let start_menu = std::env::var("APPDATA").unwrap_or_default()
-        + "\\Microsoft\\Windows\\Start Menu\\Programs";
+    let start_menu =
+        std::env::var("APPDATA").unwrap_or_default() + "\\Microsoft\\Windows\\Start Menu\\Programs";
     let _ = std::fs::create_dir_all(&start_menu);
     let lnk_path = format!("{}\\dockwrap - {}.lnk", start_menu, name);
     // Use WScript.Shell COM (the standard, dependency-free way to write a .lnk)
@@ -187,7 +188,10 @@ fn create_shortcut_unix(name: &str, bin: &str, icon: Option<&str>) -> Result<Str
         "[Desktop Entry]\nType=Application\nName={name}\nExec=\"{bin}\" open {name}\n{icon_line}Terminal=false\nCategories=Utility;\n"
     );
     std::fs::write(&desktop, content).map_err(|e| e.to_string())?;
-    let _ = std::fs::set_permissions(&desktop, std::os::unix::fs::PermissionsExt::from_mode(0o755));
+    let _ = std::fs::set_permissions(
+        &desktop,
+        std::os::unix::fs::PermissionsExt::from_mode(0o755),
+    );
     Ok(desktop)
 }
 
@@ -240,13 +244,15 @@ fn register_protocol() {
              reg add HKCU\\Software\\Classes\\dockwrap\\shell\\open\\command /f /ve /t REG_SZ /d \"\\\"{}\\\" \\\"%1\\\"\"",
             bin, bin
         );
-        let _ = std::process::Command::new("cmd").args(["/C", &cmd]).status();
+        let _ = std::process::Command::new("cmd")
+            .args(["/C", &cmd])
+            .status();
     }
     #[cfg(all(unix, not(target_os = "macos")))]
     {
-        let dir = std::env::var("XDG_DATA_HOME")
-            .unwrap_or_else(|_| format!("{}/.local/share", std::env::var("HOME").unwrap_or_default()))
-            + "/applications";
+        let dir = std::env::var("XDG_DATA_HOME").unwrap_or_else(|_| {
+            format!("{}/.local/share", std::env::var("HOME").unwrap_or_default())
+        }) + "/applications";
         let _ = std::fs::create_dir_all(&dir);
         let desktop = format!("{}/dockwrap-urlhandler.desktop", dir);
         let content = format!(
@@ -311,7 +317,12 @@ fn open_app(app_handle: tauri::AppHandle, name: String) {
         if let Err(e) = crate::boot_and_wait(&appdef) {
             eprintln!("warn: {}", e);
         }
-        build_window(&app_handle, &appdef.name, &appdef.url, appdef.icon.as_deref());
+        build_window(
+            &app_handle,
+            &appdef.name,
+            &appdef.url,
+            appdef.icon.as_deref(),
+        );
     }
 }
 
@@ -370,16 +381,13 @@ fn main() {
                 serde_json::to_string(&registry::load_apps()).unwrap_or_else(|_| "[]".into());
             let init = format!("window.__APPS__ = {};", apps_json);
             let script = format!("{}\n{}", init, LINK_BRIDGE_JS);
-            let win = WebviewWindowBuilder::new(
-                app,
-                "launcher",
-                WebviewUrl::App("index.html".into()),
-            )
-            .title("dockwrap")
-            .inner_size(480.0, 420.0)
-            .resizable(true)
-            .initialization_script(&script)
-            .build()?;
+            let win =
+                WebviewWindowBuilder::new(app, "launcher", WebviewUrl::App("index.html".into()))
+                    .title("dockwrap")
+                    .inner_size(480.0, 420.0)
+                    .resizable(true)
+                    .initialization_script(&script)
+                    .build()?;
             let _ = win.set_focus();
             Ok(())
         })
