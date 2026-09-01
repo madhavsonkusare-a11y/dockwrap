@@ -45,10 +45,15 @@
 #     referenced from tauri.conf.json bundle.macOS.infoPlist.
 #
 # v0.4 (shipped as v0.4.0):
-#   - Embedded 1,257 self-hosted app catalog entries in the binary.
+#   - Embedded 1,257 self-hosted app catalog entries from src/catalog_full.json
+#     in the binary; runtime entries do not yet provide Compose/health values.
 #   - Added the catalog-backed launcher setup wizard.
-#   - Added curated Compose/health metadata for selected apps.
+#   - Added 12 reference recipes in src/catalog.json with Compose/health
+#     metadata for future runtime integration; the wizard does not consume them.
 #   - Expanded icon coverage with verified sources and favicon fallback.
+#
+# Post-v0.4:
+#   - Wire verified Compose/health recipes into the runtime catalog and wizard.
 #
 # Status: v0.4.0 — current released version; catalog-enhanced, cross-platform,
 # tested, and distributed through tag-triggered CI releases.

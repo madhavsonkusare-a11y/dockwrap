@@ -22,12 +22,17 @@ installers to the matching GitHub Release.
 ## Publish and verify
 
 ```bash
-git tag vX.Y.Z
-git push origin main --tags
+TAG=vX.Y.Z
+git tag "$TAG"
+git push origin main
+git push origin "$TAG"
 
-# Watch the tag workflow, then confirm the published release and installers.
-gh run list --branch vX.Y.Z
-gh release view vX.Y.Z
+# Watch the matching tag workflow, then confirm the release and installers.
+RUN_ID=$(gh run list --workflow build.yml --branch "$TAG" --event push --limit 1 \
+  --json databaseId --jq '.[0].databaseId')
+test -n "$RUN_ID"
+gh run watch "$RUN_ID" --exit-status
+gh release view "$TAG"
 ```
 
 Do not claim a release is shipped until the tag workflow succeeds and

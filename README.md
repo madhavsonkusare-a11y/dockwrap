@@ -71,10 +71,11 @@ dockwrap --version
 ### v0.4 (shipped ✅ — current release)
 - [x] **Embedded app catalog** — 1,257 self-hosted app entries bundled into the binary
 - [x] **Catalog-backed setup wizard** — browse and configure catalog apps from the launcher
-- [x] **Curated runtime configurations** — selected entries include Compose and health-check metadata
+- [x] **Reference recipe data** — 12 curated entries document Compose and health-check metadata for future integration
 - [x] **Broad icon coverage** — verified icon sources plus favicon fallback for entries without one
 
 ### Post-v0.4
+- [ ] Wire verified Compose and health-check recipes into the runtime catalog and setup wizard
 - [ ] Define the next roadmap after catalog feedback and maintenance work
 
 ## License
