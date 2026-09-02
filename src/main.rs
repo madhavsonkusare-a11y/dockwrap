@@ -45,21 +45,34 @@ fn open_app(app_handle: tauri::AppHandle, name: String) {
     }
 }
 
+fn parse_deep_link(input: &str) -> Option<(String, String)> {
+    let url = tauri::Url::parse(input).ok()?;
+    let scheme = url.scheme();
+    if scheme != URL_SCHEME && scheme != LEGACY_URL_SCHEME {
+        return None;
+    }
+    if url.host_str()? != "open"
+        || url.port().is_some()
+        || !url.username().is_empty()
+        || url.password().is_some()
+        || url.query().is_some()
+        || url.fragment().is_some()
+    {
+        return None;
+    }
+    let name_segment = url.path().strip_prefix('/')?;
+    if name_segment.is_empty() || name_segment.contains('/') {
+        return None;
+    }
+    let name = windowing::percent_decode_str(name_segment);
+    (!name.is_empty() && !name.contains('/')).then(|| (scheme.to_string(), name))
+}
+
 fn main() {
     let args: Vec<String> = std::env::args().collect();
     // Primary and legacy protocol handlers are passed as a single argument by the OS.
     if let Some(first) = args.get(1) {
-        let primary_prefix = format!("{URL_SCHEME}://");
-        let legacy_prefix = format!("{LEGACY_URL_SCHEME}://");
-        if let Some(rest) = first
-            .strip_prefix(&primary_prefix)
-            .or_else(|| first.strip_prefix(&legacy_prefix))
-        {
-            let name = rest
-                .trim_start_matches("open/")
-                .trim_start_matches("open")
-                .trim_matches('/')
-                .to_string();
+        if let Some((scheme, name)) = parse_deep_link(first) {
             // Boot the referenced app's stack, then open its window.
             let apps = storage::load_apps();
             if let Some(appdef) = apps.iter().find(|a| a.name == name) {
@@ -78,7 +91,7 @@ fn main() {
                     .expect("error while running Local Store");
                 return;
             } else {
-                eprintln!("{URL_SCHEME}://open/{name}: no such app");
+                eprintln!("{scheme}://open/{name}: no such app");
             }
         }
     }
@@ -128,4 +141,41 @@ fn main() {
         ])
         .run(tauri::generate_context!())
         .expect("error while running Local Store");
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn parses_primary_deep_link_with_one_percent_decoded_name_segment() {
+        assert_eq!(
+            parse_deep_link("localstore://open/My%20App"),
+            Some(("localstore".to_string(), "My App".to_string()))
+        );
+    }
+
+    #[test]
+    fn parses_legacy_deep_link() {
+        assert_eq!(
+            parse_deep_link(&format!("{LEGACY_URL_SCHEME}://open/penpot")),
+            Some((LEGACY_URL_SCHEME.to_string(), "penpot".to_string()))
+        );
+    }
+
+    #[test]
+    fn rejects_malformed_deep_links() {
+        for input in [
+            "https://open/penpot",
+            "localstore://wrong/penpot",
+            "localstore://open/",
+            "localstore://open/penpot/extra",
+            "localstore://open/penpot%2Fextra",
+            "localstore://open/open/penpot",
+            "localstore://open/penpot?x=1",
+            "localstore://open/penpot#fragment",
+        ] {
+            assert_eq!(parse_deep_link(input), None, "accepted {input}");
+        }
+    }
 }

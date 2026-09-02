@@ -38,10 +38,22 @@ fn legacy_config() -> String {
 }
 
 pub fn load_apps() -> Vec<AppDef> {
-    let data = std::fs::read_to_string(resolve_config())
-        .or_else(|_| std::fs::read_to_string(legacy_config()))
-        .unwrap_or_else(|_| "[]".to_string());
-    serde_json::from_str(&data).unwrap_or_default()
+    let primary = PathBuf::from(resolve_config());
+    let legacy = PathBuf::from(legacy_config());
+    load_apps_from_paths(&primary, &legacy)
+}
+
+fn load_apps_from_paths(primary: &std::path::Path, legacy: &std::path::Path) -> Vec<AppDef> {
+    match std::fs::read_to_string(primary) {
+        Ok(data) => serde_json::from_str(&data).unwrap_or_default(),
+        Err(error) if error.kind() == std::io::ErrorKind::NotFound => {
+            std::fs::read_to_string(legacy)
+                .ok()
+                .and_then(|data| serde_json::from_str(&data).ok())
+                .unwrap_or_default()
+        }
+        Err(_) => Vec::new(),
+    }
 }
 
 pub fn save_apps(apps: &[AppDef]) {
@@ -87,6 +99,33 @@ pub fn remove_app(name: &str) -> bool {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::{
+        fs,
+        time::{SystemTime, UNIX_EPOCH},
+    };
+
+    fn fixture_paths() -> (PathBuf, PathBuf, PathBuf) {
+        let root = std::env::temp_dir().join(format!(
+            "local-store-storage-test-{}-{}",
+            std::process::id(),
+            SystemTime::now()
+                .duration_since(UNIX_EPOCH)
+                .unwrap()
+                .as_nanos()
+        ));
+        fs::create_dir_all(&root).unwrap();
+        (
+            root.clone(),
+            root.join("primary.json"),
+            root.join("legacy.json"),
+        )
+    }
+
+    fn app_json(name: &str) -> String {
+        format!(
+            r#"[{{"name":"{name}","url":"http://{name}","icon":null,"compose":null,"health":null}}]"#
+        )
+    }
 
     #[test]
     fn config_path_uses_native_separator() {
@@ -126,5 +165,44 @@ mod tests {
         });
         assert_eq!(apps.len(), 1);
         assert_eq!(apps[0].url, "http://c");
+    }
+
+    #[test]
+    fn primary_registry_wins_over_legacy_registry() {
+        let (root, primary, legacy) = fixture_paths();
+        fs::write(&primary, app_json("primary")).unwrap();
+        fs::write(&legacy, app_json("legacy")).unwrap();
+
+        assert_eq!(load_apps_from_paths(&primary, &legacy)[0].name, "primary");
+        fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn missing_primary_registry_falls_back_to_legacy_registry() {
+        let (root, primary, legacy) = fixture_paths();
+        fs::write(&legacy, app_json("legacy")).unwrap();
+
+        assert_eq!(load_apps_from_paths(&primary, &legacy)[0].name, "legacy");
+        fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn corrupt_primary_registry_does_not_fall_back_to_legacy_registry() {
+        let (root, primary, legacy) = fixture_paths();
+        fs::write(&primary, "not json").unwrap();
+        fs::write(&legacy, app_json("legacy")).unwrap();
+
+        assert!(load_apps_from_paths(&primary, &legacy).is_empty());
+        fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn unreadable_primary_registry_does_not_fall_back_to_legacy_registry() {
+        let (root, primary, legacy) = fixture_paths();
+        fs::create_dir(&primary).unwrap();
+        fs::write(&legacy, app_json("legacy")).unwrap();
+
+        assert!(load_apps_from_paths(&primary, &legacy).is_empty());
+        fs::remove_dir_all(root).unwrap();
     }
 }

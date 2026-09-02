@@ -12,7 +12,13 @@ fn shipping_files(root: &Path) -> Vec<PathBuf> {
         root.join("Cargo.toml"),
         root.join("tauri.conf.json"),
         root.join(".github/workflows/build.yml"),
+        root.join("README.md"),
+        root.join("CONTRIBUTING.md"),
     ];
+    let publish = root.join("PUBLISH.md");
+    if publish.is_file() {
+        files.push(publish);
+    }
     collect_shipping_source_files(&root.join("src"), &mut files);
     files
 }
@@ -92,9 +98,11 @@ fn allowed_legacy_reference(relative: &str, line: &str) -> bool {
     // migration, and old URI scheme handling/registration.
     if line.contains("LEGACY_CONFIG_SLUG")
         || line.contains("LEGACY_URL_SCHEME")
-        || line.contains("legacy")
         || (relative == "Cargo.toml" && line.contains("repository ="))
         || (relative == "src/Info.plist" && line.contains("<string>dockwrap</string>"))
+        || (relative == "README.md"
+            && line.trim()
+                == "Compatibility (one release): legacy dockwrap registry and dockwrap:// deep links are imported/recognized.")
     {
         return true;
     }
@@ -102,4 +110,16 @@ fn allowed_legacy_reference(relative: &str, line: &str) -> bool {
     // This is an implementation-only JavaScript bridge marker; changing it would
     // be an unrelated behavior change.
     relative == "src/windowing.rs" && line.contains("window.__dockwrapBridge")
+}
+
+#[test]
+fn legacy_allowlist_is_limited_to_explicit_compatibility_references() {
+    assert!(!allowed_legacy_reference(
+        "README.md",
+        "this is a legacy note about dockwrap"
+    ));
+    assert!(allowed_legacy_reference(
+        "README.md",
+        "Compatibility (one release): legacy dockwrap registry and dockwrap:// deep links are imported/recognized."
+    ));
 }
