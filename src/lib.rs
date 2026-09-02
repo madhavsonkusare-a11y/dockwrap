@@ -1,3 +1,4 @@
+pub mod brand;
 pub mod catalog;
 pub mod commands;
 pub mod model;

@@ -1,12 +1,12 @@
 //! Curated self-hosted app catalog, baked into the binary at compile time.
 //! Ships as `src/catalog_full.json` (also lives in the webview bundle via
 //! `frontendDist: src`). Lets the GUI wizard offer a "pick a popular app"
-//! catalog instead of typing URLs, and backs `dockwrap add --preset`.
+//! catalog instead of typing URLs, and backs `local-store add --preset`.
 
 use crate::model::CatalogEntry;
 
 /// Curated, most-used self-hosted web apps (default localhost ports).
-/// Lets a user run `dockwrap add --preset n8n` instead of typing the URL.
+/// Lets a user run `local-store add --preset n8n` instead of typing the URL.
 pub const PRESETS: &[(&str, &str)] = &[
     ("n8n", "http://localhost:5678"),
     ("open-webui", "http://localhost:3000"),
@@ -23,7 +23,7 @@ pub const PRESETS: &[(&str, &str)] = &[
 /// The raw catalog, embedded at build time so the binary is self-contained
 /// (no runtime file read, no extra network at startup). The full awesome-selfhosted
 /// list (1257 apps) ships here; the 12 hand-curated apps (with compose/health snippets)
-/// are a separate quick-start subset used by `dockwrap add --preset`.
+/// are a separate quick-start subset used by `local-store add --preset`.
 const CATALOG_JSON: &str = include_str!("catalog_full.json");
 
 /// Parse the compile-time-embedded catalog JSON into structs.

@@ -1,7 +1,11 @@
 //! Platform integration: OS shortcuts and protocol-handler registration.
 
+#[cfg(not(windows))]
+use crate::brand::CLI_NAME;
+use crate::brand::{LEGACY_URL_SCHEME, PRODUCT_NAME, URL_SCHEME};
+
 /// Create an OS shortcut (Start Menu on Windows, ~/.local/share/applications on
-/// Linux) that launches `dockwrap open <name>` with the app's icon.
+/// Linux) that launches the current CLI with the app's icon.
 /// Returns the path written, or an error string.
 pub fn create_shortcut_for(name: &str, bin: &str, icon: Option<&str>) -> Result<String, String> {
     #[cfg(windows)]
@@ -19,7 +23,7 @@ fn create_shortcut_windows(name: &str, bin: &str, icon: Option<&str>) -> Result<
     let start_menu =
         std::env::var("APPDATA").unwrap_or_default() + "\\Microsoft\\Windows\\Start Menu\\Programs";
     let _ = std::fs::create_dir_all(&start_menu);
-    let lnk_path = format!("{}\\dockwrap - {}.lnk", start_menu, name);
+    let lnk_path = format!("{}\\{} - {}.lnk", start_menu, PRODUCT_NAME, name);
     // Use WScript.Shell COM (the standard, dependency-free way to write a .lnk)
     // via PowerShell. Arguments are passed with single-quoted heredoc-safe escaping.
     let esc = |s: &str| s.replace('\'', "''");
@@ -55,7 +59,7 @@ fn create_shortcut_unix(name: &str, bin: &str, icon: Option<&str>) -> Result<Str
         .unwrap_or_else(|_| format!("{}/.local/share", std::env::var("HOME").unwrap_or_default()))
         + "/applications";
     let _ = std::fs::create_dir_all(&dir);
-    let desktop = format!("{}/dockwrap-{}.desktop", dir, name);
+    let desktop = format!("{}/{}-{}.desktop", dir, CLI_NAME, name);
     let icon_line = icon.map(|i| format!("Icon={}\n", i)).unwrap_or_default();
     let content = format!(
         "[Desktop Entry]\nType=Application\nName={name}\nExec=\"{bin}\" open {name}\n{icon_line}Terminal=false\nCategories=Utility;\n"
@@ -68,44 +72,47 @@ fn create_shortcut_unix(name: &str, bin: &str, icon: Option<&str>) -> Result<Str
     Ok(desktop)
 }
 
-/// Register the `dockwrap://` URL scheme with the OS (best-effort; failures are
-/// logged but never fatal). Windows uses the registry; Linux uses xdg-settings
-/// against a .desktop file. On macOS the scheme is registered at install time
-/// via the `CFBundleURLTypes` entry in tauri.conf.json `bundle.macOS` (the
-/// bundle's Info.plist), so no runtime step is needed there.
+/// Register primary and one-release legacy URL schemes with the OS (best-effort;
+/// failures are logged but never fatal). On macOS schemes are registered in
+/// `src/Info.plist` at install time.
 pub fn register_protocol() {
     let bin = match std::env::current_exe() {
         Ok(p) => p.to_string_lossy().into_owned(),
         Err(_) => return,
     };
-    #[cfg(windows)]
-    {
-        let cmd = format!(
-            "reg add HKCU\\Software\\Classes\\dockwrap /f /ve /t REG_SZ /d \"URL:dockwrap Protocol\" && \
-             reg add HKCU\\Software\\Classes\\dockwrap /f /v \"URL Protocol\" /t REG_SZ /d \"\" && \
-             reg add HKCU\\Software\\Classes\\dockwrap\\DefaultIcon /f /ve /t REG_SZ /d \"{},0\" && \
-             reg add HKCU\\Software\\Classes\\dockwrap\\shell\\open\\command /f /ve /t REG_SZ /d \"\\\"{}\\\" \\\"%1\\\"\"",
-            bin, bin
-        );
-        let _ = std::process::Command::new("cmd")
-            .args(["/C", &cmd])
+    register_protocol_scheme(URL_SCHEME, &bin);
+    register_protocol_scheme(LEGACY_URL_SCHEME, &bin);
+}
+
+#[cfg(windows)]
+fn register_protocol_scheme(scheme: &str, bin: &str) {
+    let cmd = format!(
+        "reg add HKCU\\Software\\Classes\\{scheme} /f /ve /t REG_SZ /d \"URL:{PRODUCT_NAME} Protocol\" && \
+         reg add HKCU\\Software\\Classes\\{scheme} /f /v \"URL Protocol\" /t REG_SZ /d \"\" && \
+         reg add HKCU\\Software\\Classes\\{scheme}\\DefaultIcon /f /ve /t REG_SZ /d \"{bin},0\" && \
+         reg add HKCU\\Software\\Classes\\{scheme}\\shell\\open\\command /f /ve /t REG_SZ /d \"\\\"{bin}\\\" \\\"%1\\\"\""
+    );
+    let _ = std::process::Command::new("cmd")
+        .args(["/C", &cmd])
+        .status();
+}
+
+#[cfg(all(unix, not(target_os = "macos")))]
+fn register_protocol_scheme(scheme: &str, bin: &str) {
+    let dir = std::env::var("XDG_DATA_HOME")
+        .unwrap_or_else(|_| format!("{}/.local/share", std::env::var("HOME").unwrap_or_default()))
+        + "/applications";
+    let _ = std::fs::create_dir_all(&dir);
+    let desktop = format!("{}/{}-urlhandler.desktop", dir, scheme);
+    let content = format!(
+        "[Desktop Entry]\nType=Application\nName={PRODUCT_NAME} URL Handler\nExec=\"{bin}\" %u\nMimeType=x-scheme-handler/{scheme}\nTerminal=false\nNoDisplay=true\n"
+    );
+    if std::fs::write(&desktop, content).is_ok() {
+        let _ = std::process::Command::new("xdg-settings")
+            .args(["set", "default-url-scheme-handler", scheme, &desktop])
             .status();
     }
-    #[cfg(all(unix, not(target_os = "macos")))]
-    {
-        let dir = std::env::var("XDG_DATA_HOME").unwrap_or_else(|_| {
-            format!("{}/.local/share", std::env::var("HOME").unwrap_or_default())
-        }) + "/applications";
-        let _ = std::fs::create_dir_all(&dir);
-        let desktop = format!("{}/dockwrap-urlhandler.desktop", dir);
-        let content = format!(
-            "[Desktop Entry]\nType=Application\nName=dockwrap URL Handler\nExec=\"{}\" %u\nMimeType=x-scheme-handler/dockwrap\nTerminal=false\nNoDisplay=true\n",
-            bin
-        );
-        if std::fs::write(&desktop, content).is_ok() {
-            let _ = std::process::Command::new("xdg-settings")
-                .args(["set", "default-url-scheme-handler", "dockwrap", &desktop])
-                .status();
-        }
-    }
 }
+
+#[cfg(target_os = "macos")]
+fn register_protocol_scheme(_: &str, _: &str) {}

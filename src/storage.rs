@@ -2,12 +2,15 @@
 //! loaded and saved. The single source of truth for wrapped apps, used by BOTH
 //! the GUI (Tauri commands) and the CLI (standalone mode).
 
-use crate::model::AppDef;
+use crate::{
+    brand::{CONFIG_SLUG, LEGACY_CONFIG_SLUG},
+    model::AppDef,
+};
 use std::path::PathBuf;
 
 /// Where registered apps live. Same location on every platform via APPDATA
 /// (Windows) or XDG/HOME fallback on Linux/macOS.
-pub fn resolve_config() -> String {
+fn config_path(slug: &str) -> PathBuf {
     let base = std::env::var("APPDATA")
         .ok()
         .filter(|v| !v.is_empty())
@@ -19,13 +22,25 @@ pub fn resolve_config() -> String {
         .or_else(|| std::env::var("HOME").ok().map(|h| format!("{}/.config", h)))
         .unwrap_or_else(|| ".".to_string());
     let mut p = PathBuf::from(base);
-    p.push("dockwrap");
+    p.push(slug);
     p.push("apps.json");
-    p.to_string_lossy().into_owned()
+    p
+}
+
+pub fn resolve_config() -> String {
+    config_path(CONFIG_SLUG).to_string_lossy().into_owned()
+}
+
+fn legacy_config() -> String {
+    config_path(LEGACY_CONFIG_SLUG)
+        .to_string_lossy()
+        .into_owned()
 }
 
 pub fn load_apps() -> Vec<AppDef> {
-    let data = std::fs::read_to_string(resolve_config()).unwrap_or_else(|_| "[]".to_string());
+    let data = std::fs::read_to_string(resolve_config())
+        .or_else(|_| std::fs::read_to_string(legacy_config()))
+        .unwrap_or_else(|_| "[]".to_string());
     serde_json::from_str(&data).unwrap_or_default()
 }
 
@@ -77,10 +92,10 @@ mod tests {
     fn config_path_uses_native_separator() {
         let p = resolve_config();
         if cfg!(windows) {
-            assert!(p.ends_with("dockwrap\\apps.json"), "got: {}", p);
+            assert!(p.ends_with("local-store\\apps.json"), "got: {}", p);
         } else {
             assert!(!p.contains('\\'), "path must use native separator: {}", p);
-            assert!(p.ends_with("dockwrap/apps.json"), "got: {}", p);
+            assert!(p.ends_with("local-store/apps.json"), "got: {}", p);
         }
     }
 

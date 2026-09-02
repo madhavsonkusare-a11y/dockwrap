@@ -1,14 +1,14 @@
-//! Standalone CLI mode for dockwrap. Derived from the old cli.js, rewritten in
+//! Standalone CLI mode for local-store. Derived from the old cli.js, rewritten in
 //! Rust and unified into the same binary as the GUI.
 //!
 //! Usage:
-//!   dockwrap add <name> --url <url> [--icon <path>] [--preset <name>]
-//!   dockwrap add --preset <name>            (uses the preset's default URL)
-//!   dockwrap list
-//!   dockwrap remove <name>
-//!   dockwrap presets                        (show built-in presets)
+//!   local-store add <name> --url <url> [--icon <path>] [--preset <name>]
+//!   local-store add --preset <name>            (uses the preset's default URL)
+//!   local-store list
+//!   local-store remove <name>
+//!   local-store presets                        (show built-in presets)
 
-use dockwrap::{catalog, model::AppDef, platform, runtime, storage, windowing};
+use local_store::{brand::CLI_NAME, catalog, model::AppDef, platform, runtime, storage, windowing};
 
 const VERSION: &str = env!("CARGO_PKG_VERSION");
 
@@ -54,17 +54,18 @@ fn find_app(name: &str) -> Option<AppDef> {
 }
 
 fn usage() -> String {
-    "Usage:\n  \\
-     dockwrap add <name> --url <url> [--icon <path>] [--compose <path>] [--health <url>] [--preset <name>]\n  \
-     dockwrap add --preset <name>            (resolves from presets + the 1257-app catalog)\n  \
-     dockwrap list\n  \
-     dockwrap open <name>\n  \
-     dockwrap remove <name>\n  \
-     dockwrap shortcut <name>\n  \
-     dockwrap presets                        (show built-in presets)\n  \
-     dockwrap catalog                        (list catalog stats)\n  \
-     dockwrap catalog <search>               (search the 1257-app catalog)"
-        .to_string()
+    format!(
+        "Usage:\n  \\
+     {CLI_NAME} add <name> --url <url> [--icon <path>] [--compose <path>] [--health <url>] [--preset <name>]\n  \
+     {CLI_NAME} add --preset <name>            (resolves from presets + the 1257-app catalog)\n  \
+     {CLI_NAME} list\n  \
+     {CLI_NAME} open <name>\n  \
+     {CLI_NAME} remove <name>\n  \
+     {CLI_NAME} shortcut <name>\n  \
+     {CLI_NAME} presets                        (show built-in presets)\n  \
+     {CLI_NAME} catalog                        (list catalog stats)\n  \
+     {CLI_NAME} catalog <search>               (search the 1257-app catalog)"
+    )
 }
 
 fn get_flag(args: &[String], flag: &str) -> Option<String> {
@@ -84,7 +85,7 @@ fn resolve_preset(display_name: &str, preset: &str) -> (String, String) {
         return (e.name.clone(), e.url.clone());
     }
     eprintln!(
-        "Unknown preset \"{}\". Run `dockwrap presets` or `dockwrap catalog search {}`.",
+        "Unknown preset \"{}\". Run `{CLI_NAME} presets` or `{CLI_NAME} catalog search {}`.",
         preset, preset
     );
     std::process::exit(1);
@@ -112,7 +113,7 @@ pub fn run_cli() -> i32 {
                 (Some(n), Some(u), _) => (n, u),
                 // --preset N (with or without a name): resolve from PRESETS first,
                 // then fall back to the embedded 1257-app catalog so users can do
-                // `dockwrap add --preset immich` even if immich isn't in PRESETS.
+                // `local-store add --preset immich` even if immich isn't in PRESETS.
                 (Some(n), None, Some(p)) => resolve_preset(&n, &p),
                 (None, None, Some(p)) => resolve_preset(&p, &p),
                 _ => {
@@ -124,7 +125,7 @@ pub fn run_cli() -> i32 {
             // icon/compose/health defaults so the user doesn't have to type them.
             // Enrich whatever we resolved (from PRESETS or the catalog) with
             // the catalog's icon/compose/health defaults where available, so a
-            // user gets the right logo for `dockwrap add --preset immich` even
+            // user gets the right logo for `local-store add --preset immich` even
             // though PRESETS only stores the URL. Do NOT overwrite a URL the user
             // explicitly supplied via --url or --preset; the catalog may point at
             // the upstream site (e.g. immich.app) rather than localhost.
@@ -172,7 +173,10 @@ pub fn run_cli() -> i32 {
                 .filter(|a| a.as_str() != "--browser")
                 .cloned()
                 .collect();
-            let name = match name_arg(&args_no_flags, "Usage: dockwrap open <name> [--browser]") {
+            let name = match name_arg(
+                &args_no_flags,
+                &format!("Usage: {CLI_NAME} open <name> [--browser]"),
+            ) {
                 Ok(n) => n,
                 Err(ec) => return ec,
             };
@@ -196,7 +200,7 @@ pub fn run_cli() -> i32 {
             }
         }
         "shortcut" => {
-            let name = match name_arg(&args, "Usage: dockwrap shortcut <name>") {
+            let name = match name_arg(&args, &format!("Usage: {CLI_NAME} shortcut <name>")) {
                 Ok(n) => n,
                 Err(ec) => return ec,
             };
@@ -229,7 +233,7 @@ pub fn run_cli() -> i32 {
                 None => {
                     let cats = catalog::catalog_categories();
                     println!(
-                        "dockwrap app catalog: {} apps in {} categories",
+                        "{CLI_NAME} app catalog: {} apps in {} categories",
                         entries.len(),
                         cats.len()
                     );
@@ -242,7 +246,7 @@ pub fn run_cli() -> i32 {
                     }
                     if cats.len() > 12 {
                         println!(
-                            "  ... and {} more categories. Use `dockwrap catalog search <q>`",
+                            "  ... and {} more categories. Use `{CLI_NAME} catalog search <q>`",
                             cats.len() - 12
                         );
                     }
@@ -281,7 +285,7 @@ pub fn run_cli() -> i32 {
             }
         }
         "remove" => {
-            let name = match name_arg(&args, "Usage: dockwrap remove <name>") {
+            let name = match name_arg(&args, &format!("Usage: {CLI_NAME} remove <name>")) {
                 Ok(n) => n,
                 Err(ec) => return ec,
             };
@@ -294,7 +298,7 @@ pub fn run_cli() -> i32 {
             }
         }
         "version" | "--version" | "-V" => {
-            println!("dockwrap {}", VERSION);
+            println!("{CLI_NAME} {VERSION}");
             0
         }
         "presets" => {
@@ -318,14 +322,14 @@ mod tests {
     /// `name_arg` returns the bare positional name.
     #[test]
     fn name_arg_extracts_bare_name() {
-        let args: Vec<String> = vec!["dockwrap".into(), "immich".into()];
+        let args: Vec<String> = vec!["local-store".into(), "immich".into()];
         assert_eq!(name_arg(&args, "usage").unwrap(), "immich");
     }
 
     /// `name_arg` rejects flags (e.g. `--icon path`) as a name.
     #[test]
     fn name_arg_rejects_flag() {
-        let args: Vec<String> = vec!["dockwrap".into(), "--icon".into(), "x".into()];
+        let args: Vec<String> = vec!["local-store".into(), "--icon".into(), "x".into()];
         assert!(name_arg(&args, "usage").is_err());
     }
 
@@ -333,7 +337,7 @@ mod tests {
     #[test]
     fn get_flag_returns_value() {
         let args: Vec<String> = vec![
-            "dockwrap".into(),
+            "local-store".into(),
             "add".into(),
             "--url".into(),
             "http://x".into(),
@@ -344,11 +348,11 @@ mod tests {
     /// `get_flag` returns None when the flag is absent.
     #[test]
     fn get_flag_absent_is_none() {
-        let args: Vec<String> = vec!["dockwrap".into(), "add".into(), "my".into()];
+        let args: Vec<String> = vec!["local-store".into(), "add".into(), "my".into()];
         assert_eq!(get_flag(&args, "--icon"), None);
     }
 
-    /// `dockwrap add --preset immich` resolves from the embedded catalog
+    /// `local-store add --preset immich` resolves from the embedded catalog
     /// (immich is NOT in the 10-entry PRESETS array) and inherits the catalog
     /// icon + description.
     #[test]
@@ -364,7 +368,7 @@ mod tests {
         );
     }
 
-    /// `dockwrap catalog search media` finds results (search is substring across
+    /// `local-store catalog search media` finds results (search is substring across
     /// name/category/description/tags).
     #[test]
     fn catalog_search_finds_results() {
@@ -391,7 +395,7 @@ mod tests {
         );
     }
 
-    /// `dockwrap catalog` (no args) returns 0 and prints stats.
+    /// `local-store catalog` (no args) returns 0 and prints stats.
     #[test]
     fn catalog_subcommand_no_args_is_zero() {
         // run_cli reads std::env::args(), so we can't easily assert stdout.
@@ -406,7 +410,7 @@ mod tests {
         );
     }
 
-    /// `dockwrap open <name> --browser` parses the flag and strips it from args.
+    /// `local-store open <name> --browser` parses the flag and strips it from args.
     #[test]
     fn open_browser_flag_is_stripped() {
         let args: Vec<String> = vec!["open".into(), "immich".into(), "--browser".into()];
@@ -425,7 +429,7 @@ mod tests {
         );
     }
 
-    /// `dockwrap open --browser` (flag before name) still parses the name.
+    /// `local-store open --browser` (flag before name) still parses the name.
     #[test]
     fn open_browser_flag_before_name() {
         let args: Vec<String> = vec!["open".into(), "--browser".into(), "immich".into()];

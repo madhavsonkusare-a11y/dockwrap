@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "dockwrap",
-  "version": "0.4.0",
-  "identifier": "com.dockwrap.app",
+  "productName": "Local Store",
+  "version": "0.5.0-alpha.1",
+  "identifier": "io.github.madhavsonkusare.localstore",
   "build": {
     "frontendDist": "src",
     "devUrl": "http://localhost:1420",

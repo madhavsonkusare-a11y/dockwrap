@@ -1,6 +1,9 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use dockwrap::{catalog as catalog_module, commands, model, platform, runtime, storage, windowing};
+use local_store::{
+    brand::{CLI_NAME, LEGACY_URL_SCHEME, PRODUCT_NAME, URL_SCHEME},
+    catalog as catalog_module, commands, model, platform, runtime, storage, windowing,
+};
 
 mod cli;
 
@@ -44,9 +47,14 @@ fn open_app(app_handle: tauri::AppHandle, name: String) {
 
 fn main() {
     let args: Vec<String> = std::env::args().collect();
-    // Protocol handler: `dockwrap://open/<name>` (passed as a single arg by the OS).
+    // Primary and legacy protocol handlers are passed as a single argument by the OS.
     if let Some(first) = args.get(1) {
-        if let Some(rest) = first.strip_prefix("dockwrap://") {
+        let primary_prefix = format!("{URL_SCHEME}://");
+        let legacy_prefix = format!("{LEGACY_URL_SCHEME}://");
+        if let Some(rest) = first
+            .strip_prefix(&primary_prefix)
+            .or_else(|| first.strip_prefix(&legacy_prefix))
+        {
             let name = rest
                 .trim_start_matches("open/")
                 .trim_start_matches("open")
@@ -67,19 +75,19 @@ fn main() {
                         Ok(())
                     })
                     .run(tauri::generate_context!())
-                    .expect("error while running dockwrap");
+                    .expect("error while running Local Store");
                 return;
             } else {
-                eprintln!("dockwrap://open/{}: no such app", name);
+                eprintln!("{URL_SCHEME}://open/{name}: no such app");
             }
         }
     }
 
-    // If invoked with CLI subcommands (e.g. `dockwrap add ...`), run as CLI and exit.
+    // If invoked with CLI subcommands (e.g. `local-store add ...`), run as CLI and exit.
     if args.len() > 1 {
         let first = args[1].as_str();
         if first == "--version" || first == "-V" {
-            println!("dockwrap {}", env!("CARGO_PKG_VERSION"));
+            println!("{CLI_NAME} {}", env!("CARGO_PKG_VERSION"));
             return;
         }
         std::process::exit(cli::run_cli());
@@ -87,7 +95,7 @@ fn main() {
 
     tauri::Builder::default()
         .setup(|app| {
-            // Register the dockwrap:// protocol handler with the OS (best-effort).
+            // Register primary and one-release legacy protocol handlers (best-effort).
             platform::register_protocol();
             // Seed an example app on first run so the tool is useful immediately.
             if storage::load_apps().is_empty() {
@@ -102,7 +110,7 @@ fn main() {
                 "launcher",
                 tauri::WebviewUrl::App("index.html".into()),
             )
-            .title("dockwrap")
+            .title(PRODUCT_NAME)
             .inner_size(480.0, 420.0)
             .resizable(true)
             .initialization_script(&script)
@@ -119,5 +127,5 @@ fn main() {
             catalog
         ])
         .run(tauri::generate_context!())
-        .expect("error while running dockwrap");
+        .expect("error while running Local Store");
 }

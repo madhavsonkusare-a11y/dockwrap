@@ -50,7 +50,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v5
         with:
-          name: dockwrap-${{ matrix.platform }}
+          name: local-store-${{ matrix.platform }}
           path: |
             target/release/bundle/**/*.msi
             target/release/bundle/**/*setup.exe
@@ -58,10 +58,10 @@ jobs:
             target/release/bundle/**/*.deb
             target/release/bundle/**/*.rpm
             target/release/bundle/**/*.AppImage
-            target/release/dockwrap
-            target/release/dockwrap.exe
-            target/release/dockwrap.pdb
-            target/release/dockwrap.d
+            target/release/local-store
+            target/release/local-store.exe
+            target/release/local-store.pdb
+            target/release/local-store.d
           if-no-files-found: ignore
 
   # Single publish job: collects installers from every platform and creates the
@@ -76,19 +76,19 @@ jobs:
         uses: actions/download-artifact@v5
         with:
           path: artifacts
-          pattern: dockwrap-*
+          pattern: local-store-*
 
       - name: Publish to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            artifacts/dockwrap-windows-latest/**/*.msi
-            artifacts/dockwrap-windows-latest/**/*setup.exe
-            artifacts/dockwrap-macos-latest/**/*.dmg
-            artifacts/dockwrap-ubuntu-latest/**/*.deb
-            artifacts/dockwrap-ubuntu-latest/**/*.rpm
-            artifacts/dockwrap-ubuntu-latest/**/*.AppImage
-            artifacts/dockwrap-ubuntu-latest/dockwrap
-            artifacts/dockwrap-windows-latest/dockwrap.exe
-            artifacts/dockwrap-windows-latest/dockwrap.pdb
-            artifacts/dockwrap-windows-latest/dockwrap.d
+            artifacts/local-store-windows-latest/**/*.msi
+            artifacts/local-store-windows-latest/**/*setup.exe
+            artifacts/local-store-macos-latest/**/*.dmg
+            artifacts/local-store-ubuntu-latest/**/*.deb
+            artifacts/local-store-ubuntu-latest/**/*.rpm
+            artifacts/local-store-ubuntu-latest/**/*.AppImage
+            artifacts/local-store-ubuntu-latest/local-store
+            artifacts/local-store-windows-latest/local-store.exe
+            artifacts/local-store-windows-latest/local-store.pdb
+            artifacts/local-store-windows-latest/local-store.d
