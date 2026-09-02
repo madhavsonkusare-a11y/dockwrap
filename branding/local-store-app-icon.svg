@@ -5,5 +5,5 @@
   <path d="M128 80V376C128 411.3 156.7 440 192 440H432"
         fill="none" stroke="#F8F7F3" stroke-width="80"
         stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="272" y="240" width="144" height="144" rx="32" fill="#FF623E"/>
+  <rect x="272" y="208" width="144" height="144" rx="32" fill="#FF623E"/>
 </svg>
