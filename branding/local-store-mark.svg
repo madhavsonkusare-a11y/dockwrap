@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Local Store logo mark</title>
+  <desc id="desc">A bold letter L paired with one rounded app tile.</desc>
+  <path d="M16 10V47C16 51.4 19.6 55 24 55H54"
+        fill="none" stroke="#111827" stroke-width="10"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="34" y="30" width="18" height="18" rx="4" fill="#FF623E"/>
+</svg>
