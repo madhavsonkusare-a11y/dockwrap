@@ -53,19 +53,23 @@ pub fn is_valid_installed_app_id(id: &str) -> bool {
 
 /// Returns the first available stable ID using `base`, then `base-2`, `base-3`, and so on.
 ///
-/// The caller supplies availability so the helper remains pure and independent of storage.
+/// Returns `None` when `base` is not a valid installed-app ID. The caller supplies
+/// availability so the helper remains pure and independent of storage.
 pub fn next_available_installed_app_id(
     base: &str,
     mut is_available: impl FnMut(&str) -> bool,
-) -> String {
+) -> Option<String> {
+    if !is_valid_installed_app_id(base) {
+        return None;
+    }
     if is_available(base) {
-        return base.to_owned();
+        return Some(base.to_owned());
     }
 
     for suffix in 2_u64.. {
         let candidate = format!("{base}-{suffix}");
         if is_available(&candidate) {
-            return candidate;
+            return Some(candidate);
         }
     }
 
@@ -187,12 +191,23 @@ mod tests {
 
         assert_eq!(
             next_available_installed_app_id("actual", |candidate| !used.contains(candidate)),
-            "actual-4"
+            Some("actual-4".to_owned())
         );
         assert_eq!(
             next_available_installed_app_id("vikunja", |candidate| !used.contains(candidate)),
-            "vikunja"
+            Some("vikunja".to_owned())
         );
+    }
+
+    #[test]
+    fn next_available_installed_app_id_rejects_invalid_bases() {
+        for base in ["", "UPPER", "bad_name", "trailing-", "bad--id"] {
+            assert_eq!(
+                next_available_installed_app_id(base, |_| true),
+                None,
+                "{base:?} must not produce an invalid installed-app ID"
+            );
+        }
     }
 
     #[test]
