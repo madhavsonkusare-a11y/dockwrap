@@ -96,8 +96,7 @@ fn shipping_user_interfaces_do_not_leak_the_legacy_brand() {
 fn allowed_legacy_reference(relative: &str, line: &str) -> bool {
     // One-release migration compatibility only: named legacy constants, config
     // migration, and old URI scheme handling/registration.
-    if line.contains("LEGACY_CONFIG_SLUG")
-        || line.contains("LEGACY_URL_SCHEME")
+    if (relative == "src/brand.rs" && line.starts_with("pub const LEGACY_"))
         || (relative == "Cargo.toml" && line.contains("repository ="))
         || (relative == "src/Info.plist" && line.contains("<string>dockwrap</string>"))
         || (relative == "README.md"
@@ -121,5 +120,9 @@ fn legacy_allowlist_is_limited_to_explicit_compatibility_references() {
     assert!(allowed_legacy_reference(
         "README.md",
         "Compatibility (one release): legacy dockwrap registry and dockwrap:// deep links are imported/recognized."
+    ));
+    assert!(!allowed_legacy_reference(
+        "README.md",
+        "LEGACY_URL_SCHEME must not excuse this stale dockwrap product name"
     ));
 }

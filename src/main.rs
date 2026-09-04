@@ -64,7 +64,7 @@ fn parse_deep_link(input: &str) -> Option<(String, String)> {
     if name_segment.is_empty() || name_segment.contains('/') {
         return None;
     }
-    let name = windowing::percent_decode_str(name_segment);
+    let name = windowing::strict_percent_decode_path_segment(name_segment)?;
     (!name.is_empty() && !name.contains('/')).then(|| (scheme.to_string(), name))
 }
 
@@ -174,6 +174,10 @@ mod tests {
             "localstore://open/open/penpot",
             "localstore://open/penpot?x=1",
             "localstore://open/penpot#fragment",
+            "localstore://open/bad%ZZ",
+            "localstore://open/bad%",
+            "localstore://open/%E0%A4%A",
+            "localstore://open/%FF",
         ] {
             assert_eq!(parse_deep_link(input), None, "accepted {input}");
         }

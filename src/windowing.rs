@@ -54,6 +54,32 @@ pub fn percent_decode_str(s: &str) -> String {
     String::from_utf8_lossy(&out).into_owned()
 }
 
+/// Decode a URL path segment only when every percent escape is valid UTF-8.
+/// Unlike the query-string compatibility decoder above, this preserves literal
+/// `+` characters and rejects malformed escapes rather than passing them on.
+pub fn strict_percent_decode_path_segment(s: &str) -> Option<String> {
+    let bytes = s.as_bytes();
+    let mut out = Vec::with_capacity(bytes.len());
+    let mut i = 0;
+    while i < bytes.len() {
+        if bytes[i] == b'%' {
+            if i + 2 >= bytes.len()
+                || !bytes[i + 1].is_ascii_hexdigit()
+                || !bytes[i + 2].is_ascii_hexdigit()
+            {
+                return None;
+            }
+            let hex = std::str::from_utf8(&bytes[i + 1..i + 3]).ok()?;
+            out.push(u8::from_str_radix(hex, 16).ok()?);
+            i += 3;
+        } else {
+            out.push(bytes[i]);
+            i += 1;
+        }
+    }
+    String::from_utf8(out).ok()
+}
+
 /// Validate a URL handed to us for external navigation before it may reach the
 /// OS browser launcher. Accepts only absolute http(s) URLs of at most 2048
 /// bytes; anything else (file:, javascript:, data:, malformed or oversized
