@@ -3,6 +3,7 @@ pub mod catalog;
 pub mod commands;
 pub mod model;
 pub mod platform;
+pub mod recipes;
 pub mod runtime;
 pub mod storage;
 pub mod windowing;

@@ -12,9 +12,17 @@ test('discover search, category, detail and source actions are honest', async ({
  await expect(page.getByRole('heading',{name:'Immich'})).toBeVisible();
  await page.getByRole('button',{name:'View Immich details'}).click();
  await expect(page.getByText('Connect existing instance')).toBeVisible();
- await expect(page.getByText(/Automatic installation isn’t available/)).toBeVisible();
+ await expect(page.getByText(/Automatic installation is available only/)).toBeVisible();
  await page.getByRole('button',{name:/Visit project website/}).click();
  expect(await page.evaluate(() => window.__calls.at(-1))).toEqual({command:'open_project',args:{url:'https://immich.app'}});
+});
+
+test('reviewed Memos recipe shows prerequisites and installs into My Apps', async ({page}) => {
+ await page.getByRole('searchbox').fill('memo'); await page.getByRole('button',{name:'View Memos details'}).click();
+ await expect(page.getByText('Verified local install')).toBeVisible(); await page.getByRole('button',{name:'Review install'}).click();
+ await expect(page.getByText('neosmemo/memos:0.30.0')).toBeVisible(); await expect(page.getByText('Docker engine')).toBeVisible();
+ await page.getByRole('button',{name:'Install Memos'}).click(); await expect(page.getByRole('heading',{name:'Memos'})).toBeVisible();
+ expect(await page.evaluate(() => window.__calls.find(c=>c.command==='install_app'))).toEqual({command:'install_app',args:{recipeId:'memos'}});
 });
 
 test('connect validates, preserves input after error, and appears in My Apps', async ({page}) => {
@@ -33,6 +41,16 @@ test('My Apps handles open errors and confirms non-destructive removal', async (
  await page.getByRole('button',{name:'Remove Studio notes'}).click();
  await expect(page.getByText('The server and its data stay untouched.')).toBeVisible(); await page.getByRole('button',{name:'Remove connection'}).click();
  await expect(page.getByRole('heading',{name:'Your apps belong here.'})).toBeVisible();
+});
+
+test('managed apps expose lifecycle, logs, and data-preserving uninstall', async ({page}) => {
+ await installAdapter(page, {apps:[{id:'memos',display_name:'Memos',launch_url:'http://localhost:5230',icon_path:null,runtime:{kind:'compose'},status:'running',catalog_id:'Memos',created_at_unix:1,updated_at_unix:1}]});
+ await page.goto('/'); await page.getByRole('button',{name:/My Apps/}).click();
+ await page.getByRole('button',{name:'Logs'}).click(); await expect(page.getByText(/server started/)).toBeVisible(); await page.getByRole('button',{name:'Done'}).click();
+ await page.getByRole('button',{name:'Stop'}).click(); await expect(page.getByRole('button',{name:'Start'})).toBeVisible();
+ await page.getByRole('button',{name:'Uninstall Memos'}).click(); await expect(page.getByText('data is preserved by default')).toBeVisible();
+ await page.getByRole('button',{name:'Uninstall, keep data'}).click();
+ expect(await page.evaluate(() => window.__calls.find(c=>c.command==='uninstall_app'))).toEqual({command:'uninstall_app',args:{id:'memos',deleteData:false}});
 });
 
 test('keyboard shortcut and accessibility', async ({page}) => {

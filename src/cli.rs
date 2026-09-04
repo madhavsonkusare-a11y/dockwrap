@@ -1,20 +1,13 @@
-//! Standalone CLI mode for local-store. Derived from the old cli.js, rewritten in
-//! Rust and unified into the same binary as the GUI.
-//!
-//! Usage:
-//!   local-store add <name> --url <url> [--icon <path>] [--preset <name>]
-//!   local-store add --preset <name>            (uses the preset's default URL)
-//!   local-store list
-//!   local-store remove <name>
-//!   local-store presets                        (show built-in presets)
-
-use local_store::{brand::CLI_NAME, catalog, model::AppDef, platform, runtime, storage, windowing};
-
+//! Standalone command-line interface for Local Store.
+use local_store::{
+    brand::CLI_NAME,
+    catalog,
+    model::{next_available_installed_app_id, InstalledApp, RuntimeSpec},
+    platform, recipes, runtime, storage, windowing,
+};
+use std::time::{SystemTime, UNIX_EPOCH};
 const VERSION: &str = env!("CARGO_PKG_VERSION");
 
-/// On Windows the binary is a GUI subsystem (no console allocated). When invoked
-/// with arguments from a terminal, attach to the parent's console so stdio is
-/// wired up and prints are visible. Harmless on non-Windows.
 #[cfg(windows)]
 fn ensure_console() {
     use windows_sys::Win32::System::Console::{
@@ -26,293 +19,345 @@ fn ensure_console() {
         }
     }
 }
-
 #[cfg(not(windows))]
 fn ensure_console() {}
 
-/// Extract the single `<name>` positional arg common to several subcommands,
-/// or print `usage` and return an exit code. Replaces the repeated
-/// `match args.get(1) { Some(n) if !n.starts_with("--") => ... }` block.
-fn name_arg(args: &[String], usage: &str) -> Result<String, i32> {
-    match args.get(1) {
-        Some(n) if !n.starts_with("--") => Ok(n.clone()),
-        _ => {
-            eprintln!("{}", usage);
-            Err(1)
+fn usage() -> String {
+    format!("Usage:\n  {CLI_NAME} add <name> --url <url>\n  {CLI_NAME} list\n  {CLI_NAME} open <id-or-name> --browser\n  {CLI_NAME} shortcut <id-or-name>\n  {CLI_NAME} remove <id-or-name>\n  {CLI_NAME} doctor\n  {CLI_NAME} install memos\n  {CLI_NAME} start|stop|status|logs <id-or-name>\n  {CLI_NAME} uninstall <id-or-name> [--delete-data]\n  {CLI_NAME} catalog [search]\n  {CLI_NAME} version")
+}
+fn get_flag(args: &[String], flag: &str) -> Option<String> {
+    args.iter()
+        .position(|arg| arg == flag)
+        .and_then(|index| args.get(index + 1).cloned())
+}
+fn positional(args: &[String], index: usize, line: &str) -> Result<String, i32> {
+    args.get(index)
+        .filter(|value| !value.starts_with("--"))
+        .cloned()
+        .ok_or_else(|| {
+            eprintln!("{line}");
+            1
+        })
+}
+fn registry() -> Result<Vec<InstalledApp>, String> {
+    storage::load_or_migrate_registry()
+        .map(|registry| registry.apps)
+        .map_err(|error| error.to_string())
+}
+fn find_app(value: &str) -> Result<InstalledApp, String> {
+    registry()?
+        .into_iter()
+        .find(|app| app.id == value || app.display_name.eq_ignore_ascii_case(value))
+        .ok_or_else(|| format!("No app with ID or name \"{value}\" found."))
+}
+fn now() -> Result<u64, String> {
+    SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .map(|value| value.as_secs())
+        .map_err(|error| error.to_string())
+}
+fn report(result: Result<(), String>, success: &str) -> i32 {
+    match result {
+        Ok(()) => {
+            println!("{success}");
+            0
+        }
+        Err(error) => {
+            eprintln!("{error}");
+            1
         }
     }
 }
-
-/// Look up a registered app by name, returning an owned clone so callers don't
-/// borrow the `load_apps()` temporary. Replaces the repeated
-/// `storage::load_apps().iter().find(...)` + "No app named" block.
-fn find_app(name: &str) -> Option<AppDef> {
-    storage::load_apps()
-        .iter()
-        .find(|a| a.name == name)
-        .cloned()
-}
-
-fn usage() -> String {
-    format!(
-        "Usage:\n  \\
-     {CLI_NAME} add <name> --url <url> [--icon <path>] [--compose <path>] [--health <url>] [--preset <name>]\n  \
-     {CLI_NAME} add --preset <name>            (uses a built-in local-address preset)\n  \
-     {CLI_NAME} list\n  \
-     {CLI_NAME} open <name>\n  \
-     {CLI_NAME} remove <name>\n  \
-     {CLI_NAME} shortcut <name>\n  \
-     {CLI_NAME} presets                        (show built-in presets)\n  \
-     {CLI_NAME} catalog                        (list catalog stats)\n  \
-     {CLI_NAME} catalog <search>               (search the 1257-app catalog)"
-    )
-}
-
-fn get_flag(args: &[String], flag: &str) -> Option<String> {
-    args.iter()
-        .position(|a| a == flag)
-        .and_then(|i| args.get(i + 1).cloned())
-}
-
-/// Resolve a `--preset` name to (display_name, url), consulting the 10-entry
-/// Resolve a reviewed local-address preset. Discovery entries only carry source
-/// URLs, so they must never be used as launch addresses.
-fn resolve_preset(display_name: &str, preset: &str) -> (String, String) {
-    if let Some(u) = catalog::preset_url(preset) {
-        return (display_name.to_string(), u.to_string());
-    }
-    if let Some(entry) = catalog::catalog_entry(preset) {
-        eprintln!(
-            "\"{}\" is in Discover, but has no local-address preset. Add it with `{} add \"{}\" --url <your-instance-url>`.",
-            entry.name, CLI_NAME, entry.name
+fn catalog_command(query: Option<&String>) -> i32 {
+    let entries = catalog::catalog();
+    if let Some(query) = query {
+        let query = query.to_lowercase();
+        for entry in entries
+            .iter()
+            .filter(|entry| {
+                format!(
+                    "{} {} {} {}",
+                    entry.name,
+                    entry.category.as_deref().unwrap_or(""),
+                    entry.description.as_deref().unwrap_or(""),
+                    entry.tags
+                )
+                .to_lowercase()
+                .contains(&query)
+            })
+            .take(30)
+        {
+            println!(
+                "  {:<28} {:<22} {}",
+                entry.name,
+                entry.category.as_deref().unwrap_or("app"),
+                entry.url
+            );
+        }
+    } else {
+        println!(
+            "{CLI_NAME} catalog: {} projects; reviewed installs: Memos",
+            entries.len()
         );
-        std::process::exit(1);
     }
-    eprintln!(
-        "Unknown preset \"{}\". Run `{CLI_NAME} presets` or `{CLI_NAME} catalog search {}`.",
-        preset, preset
-    );
-    std::process::exit(1);
+    0
 }
 
 pub fn run_cli() -> i32 {
     ensure_console();
     let args: Vec<String> = std::env::args().skip(1).collect();
-    if args.is_empty() {
+    let Some(command) = args.first().map(String::as_str) else {
         eprintln!("{}", usage());
         return 1;
-    }
-    let cmd = args[0].as_str();
-
-    match cmd {
+    };
+    match command {
         "add" => {
-            let preset = get_flag(&args, "--preset");
-            let name_arg = args.get(1).cloned().filter(|s| !s.starts_with("--"));
-            let url = get_flag(&args, "--url");
-            let icon = get_flag(&args, "--icon");
-            let compose = get_flag(&args, "--compose");
-            let health = get_flag(&args, "--health");
-
-            let (name, url) = match (name_arg, url, preset) {
-                (Some(n), Some(u), _) => (n, u),
-                // Presets contain reviewed local addresses. The broad discovery
-                // catalog contains project sources and is never a URL fallback.
-                (Some(n), None, Some(p)) => resolve_preset(&n, &p),
-                (None, None, Some(p)) => resolve_preset(&p, &p),
-                _ => {
-                    eprintln!("{}", usage());
+            let name = match positional(
+                &args,
+                1,
+                &format!("Usage: {CLI_NAME} add <name> --url <url>"),
+            ) {
+                Ok(value) => value,
+                Err(code) => return code,
+            };
+            let Some(url) = get_flag(&args, "--url") else {
+                eprintln!("Usage: {CLI_NAME} add <name> --url <url>");
+                return 1;
+            };
+            let url = match windowing::validated_external_url(&url) {
+                Ok(value) => value,
+                Err(error) => {
+                    eprintln!("{error}");
                     return 1;
                 }
             };
-            // If we resolved the app from the catalog (not PRESETS), inherit its
-            // icon/compose/health defaults so the user doesn't have to type them.
-            // Enrich whatever we resolved (from PRESETS or the catalog) with
-            // the catalog's icon/compose/health defaults where available, so a
-            // user gets the right logo for `local-store add --preset immich` even
-            // though PRESETS only stores the URL. Do NOT overwrite a URL the user
-            // explicitly supplied via --url or --preset; the catalog may point at
-            // the upstream site (e.g. immich.app) rather than localhost.
-            let resolved_icon = catalog::catalog_entry(&name).and_then(|e| e.icon.or(icon.clone()));
-            storage::upsert_app(&name, &url, resolved_icon, compose.clone(), health.clone());
-            match (icon, compose) {
-                (Some(i), Some(c)) => println!(
-                    "Registered \"{}\" -> {} (icon: {}, compose: {}{})",
-                    name,
-                    url,
-                    i,
-                    c,
-                    health
-                        .map(|h| format!(", health: {}", h))
-                        .unwrap_or_default()
-                ),
-                (Some(i), None) => println!("Registered \"{}\" -> {} (icon: {})", name, url, i),
-                (None, Some(c)) => println!(
-                    "Registered \"{}\" -> {} (compose: {}{})",
-                    name,
-                    url,
-                    c,
-                    health
-                        .map(|h| format!(", health: {}", h))
-                        .unwrap_or_default()
-                ),
-                (None, None) => println!("Registered \"{}\" -> {}", name, url),
-            }
-            0
+            let apps = match registry() {
+                Ok(value) => value,
+                Err(error) => {
+                    eprintln!("{error}");
+                    return 1;
+                }
+            };
+            let base = storage::slug_for_display_name(&name);
+            let Some(id) = next_available_installed_app_id(&base, |candidate| {
+                !apps.iter().any(|app| app.id == candidate)
+            }) else {
+                eprintln!("Could not create a safe app ID.");
+                return 1;
+            };
+            let timestamp = match now() {
+                Ok(value) => value,
+                Err(error) => {
+                    eprintln!("{error}");
+                    return 1;
+                }
+            };
+            let app = InstalledApp {
+                id: id.clone(),
+                catalog_id: None,
+                display_name: name,
+                launch_url: url,
+                icon_path: None,
+                runtime: RuntimeSpec::External,
+                created_at_unix: timestamp,
+                updated_at_unix: timestamp,
+            };
+            report(
+                storage::insert_installed_app(app).map_err(|error| error.to_string()),
+                &format!("Connected app as \"{id}\"."),
+            )
         }
-        "list" => {
-            let apps: Vec<AppDef> = storage::load_apps();
-            if apps.is_empty() {
-                println!("No apps registered.");
-            } else {
+        "list" => match registry() {
+            Ok(apps) => {
                 println!("{}", serde_json::to_string_pretty(&apps).unwrap());
+                0
             }
-            0
+            Err(error) => {
+                eprintln!("{error}");
+                1
+            }
+        },
+        "doctor" => {
+            let result = runtime::doctor();
+            for check in result.checks {
+                println!(
+                    "{} {:<18} {}",
+                    if check.ok { "ok" } else { "fail" },
+                    check.label,
+                    check.detail
+                );
+            }
+            if result.ready {
+                0
+            } else {
+                1
+            }
+        }
+        "install" => {
+            let id = match positional(&args, 1, &format!("Usage: {CLI_NAME} install memos")) {
+                Ok(value) => value,
+                Err(code) => return code,
+            };
+            let Some(recipe) = recipes::recipe(&id) else {
+                eprintln!("No reviewed install recipe named \"{id}\".");
+                return 1;
+            };
+            match runtime::install_recipe(&recipe) {
+                Ok(app) => report(
+                    storage::insert_installed_app(app).map_err(|error| error.to_string()),
+                    "Installed and started.",
+                ),
+                Err(error) => {
+                    eprintln!("{error}");
+                    1
+                }
+            }
         }
         "open" => {
-            let browser = args.iter().any(|a| a == "--browser");
-            let args_no_flags: Vec<String> = args
-                .iter()
-                .skip(1)
-                .filter(|a| a.as_str() != "--browser")
-                .cloned()
-                .collect();
-            let name = match name_arg(
-                &args_no_flags,
-                &format!("Usage: {CLI_NAME} open <name> [--browser]"),
+            let value = match positional(
+                &args,
+                1,
+                &format!("Usage: {CLI_NAME} open <id-or-name> --browser"),
             ) {
-                Ok(n) => n,
-                Err(ec) => return ec,
+                Ok(value) => value,
+                Err(code) => return code,
             };
-            match find_app(&name) {
-                Some(appdef) => {
-                    if let Err(e) = runtime::boot_and_wait(&appdef) {
-                        eprintln!("warn: {}", e);
+            if !args.iter().any(|arg| arg == "--browser") {
+                eprintln!("The CLI opens app pages only with --browser. Use the Local Store launcher for a desktop app window.");
+                return 1;
+            }
+            match find_app(&value) {
+                Ok(app) => {
+                    if app.is_managed() {
+                        if let Err(error) = runtime::start(&app) {
+                            eprintln!("{error}");
+                            return 1;
+                        }
                     }
-                    if browser {
-                        windowing::launch_browser(&appdef.url);
-                        println!("Opened \"{}\" in your browser at {}", name, appdef.url);
-                    } else {
-                        println!("Opened \"{}\" at {} (compose booted)", name, appdef.url);
-                    }
+                    windowing::launch_browser(&app.launch_url);
+                    println!("Opened {}.", app.display_name);
                     0
                 }
-                None => {
-                    eprintln!("No app named \"{}\" found.", name);
+                Err(error) => {
+                    eprintln!("{error}");
                     1
                 }
             }
         }
         "shortcut" => {
-            let name = match name_arg(&args, &format!("Usage: {CLI_NAME} shortcut <name>")) {
-                Ok(n) => n,
-                Err(ec) => return ec,
+            let value = match positional(
+                &args,
+                1,
+                &format!("Usage: {CLI_NAME} shortcut <id-or-name>"),
+            ) {
+                Ok(value) => value,
+                Err(code) => return code,
             };
-            match find_app(&name) {
-                Some(appdef) => {
-                    let bin = std::env::current_exe()
-                        .map(|p| p.to_string_lossy().into_owned())
-                        .unwrap_or_default();
-                    match platform::create_shortcut_for(&name, &bin, appdef.icon.as_deref()) {
-                        Ok(path) => {
-                            println!("Shortcut created: {}", path);
-                            0
-                        }
-                        Err(e) => {
-                            eprintln!("Failed to create shortcut: {}", e);
-                            1
-                        }
+            match find_app(&value) {
+                Ok(app) => match std::env::current_exe()
+                    .map_err(|error| error.to_string())
+                    .and_then(|bin| {
+                        platform::create_shortcut_for(
+                            &app.id,
+                            &bin.to_string_lossy(),
+                            app.icon_path.as_ref().and_then(|path| path.to_str()),
+                        )
+                    }) {
+                    Ok(path) => {
+                        println!("Shortcut created: {path}");
+                        0
                     }
-                }
-                None => {
-                    eprintln!("No app named \"{}\" found.", name);
+                    Err(error) => {
+                        eprintln!("{error}");
+                        1
+                    }
+                },
+                Err(error) => {
+                    eprintln!("{error}");
                     1
                 }
             }
         }
-        "catalog" => {
-            let query = args.get(1).cloned().filter(|s| !s.starts_with("--"));
-            let entries = catalog::catalog();
-            match query {
-                None => {
-                    let cats = catalog::catalog_categories();
-                    println!(
-                        "{CLI_NAME} app catalog: {} apps in {} categories",
-                        entries.len(),
-                        cats.len()
-                    );
-                    for c in cats.iter().take(12) {
-                        let n = entries
-                            .iter()
-                            .filter(|e| e.category.as_deref() == Some(c.as_str()))
-                            .count();
-                        println!("  {} ({} apps)", c, n);
-                    }
-                    if cats.len() > 12 {
-                        println!(
-                            "  ... and {} more categories. Use `{CLI_NAME} catalog search <q>`",
-                            cats.len() - 12
-                        );
-                    }
-                    0
-                }
-                Some(q) => {
-                    let ql = q.to_lowercase();
-                    let matches: Vec<_> = entries
-                        .iter()
-                        .filter(|e| {
-                            e.name.to_lowercase().contains(&ql)
-                                || e.category
-                                    .as_deref()
-                                    .map(|c| c.to_lowercase().contains(&ql))
-                                    .unwrap_or(false)
-                                || e.description
-                                    .as_deref()
-                                    .map(|d| d.to_lowercase().contains(&ql))
-                                    .unwrap_or(false)
-                                || e.tags.to_lowercase().contains(&ql)
-                        })
-                        .collect();
-                    if matches.is_empty() {
-                        println!("No catalog apps matched \"{}\".", q);
-                    } else {
-                        for e in matches.iter().take(30) {
-                            let cat = e.category.as_deref().unwrap_or("app");
-                            println!("  {:<28} {:<22} {}", e.name, cat, e.url);
-                        }
-                        if matches.len() > 30 {
-                            println!("  ... {} more. Narrow your search.", matches.len() - 30);
-                        }
-                    }
-                    0
-                }
-            }
-        }
-        "remove" => {
-            let name = match name_arg(&args, &format!("Usage: {CLI_NAME} remove <name>")) {
-                Ok(n) => n,
-                Err(ec) => return ec,
+        "start" | "stop" | "status" | "logs" | "remove" | "uninstall" => {
+            let value = match positional(
+                &args,
+                1,
+                &format!("Usage: {CLI_NAME} {command} <id-or-name>"),
+            ) {
+                Ok(value) => value,
+                Err(code) => return code,
             };
-            if storage::remove_app(&name) {
-                println!("Removed \"{}\".", name);
-                0
-            } else {
-                eprintln!("No app named \"{}\" found.", name);
-                1
+            let app = match find_app(&value) {
+                Ok(value) => value,
+                Err(error) => {
+                    eprintln!("{error}");
+                    return 1;
+                }
+            };
+            match command {
+                "start" => report(runtime::start(&app), "Started."),
+                "stop" => report(runtime::stop(&app), "Stopped."),
+                "status" => match runtime::status(&app) {
+                    Ok(status) => {
+                        println!("{status:?}");
+                        0
+                    }
+                    Err(error) => {
+                        eprintln!("{error}");
+                        1
+                    }
+                },
+                "logs" => match runtime::logs(&app) {
+                    Ok(logs) => {
+                        print!("{logs}");
+                        0
+                    }
+                    Err(error) => {
+                        eprintln!("{error}");
+                        1
+                    }
+                },
+                "remove" if app.is_managed() => {
+                    eprintln!("Managed apps must be removed with uninstall.");
+                    1
+                }
+                "remove" => report(
+                    storage::remove_installed_app(&app.id)
+                        .map(|_| ())
+                        .map_err(|error| error.to_string()),
+                    "Connection removed.",
+                ),
+                "uninstall" if !app.is_managed() => {
+                    eprintln!("Connected apps must be removed with remove.");
+                    1
+                }
+                "uninstall" => {
+                    let delete_data = args.iter().any(|arg| arg == "--delete-data");
+                    if let Err(error) = runtime::uninstall(&app, delete_data) {
+                        eprintln!("{error}");
+                        return 1;
+                    }
+                    report(
+                        storage::remove_installed_app(&app.id)
+                            .map(|_| ())
+                            .map_err(|error| error.to_string()),
+                        if delete_data {
+                            "App and data removed."
+                        } else {
+                            "App removed; data preserved."
+                        },
+                    )
+                }
+                _ => unreachable!(),
             }
         }
+        "catalog" => catalog_command(args.get(1)),
         "version" | "--version" | "-V" => {
             println!("{CLI_NAME} {VERSION}");
             0
         }
-        "presets" => {
-            println!("Built-in presets (name -> default url):");
-            for (n, u) in catalog::PRESETS {
-                println!("  {} -> {}", n, u);
-            }
-            0
-        }
         _ => {
-            eprintln!("Unknown command \"{}\".\n{}", cmd, usage());
+            eprintln!("Unknown command \"{command}\".\n{}", usage());
             1
         }
     }
@@ -321,139 +366,46 @@ pub fn run_cli() -> i32 {
 #[cfg(test)]
 mod tests {
     use super::*;
-
-    /// `name_arg` returns the bare positional name.
-    #[test]
-    fn name_arg_extracts_bare_name() {
-        let args: Vec<String> = vec!["local-store".into(), "immich".into()];
-        assert_eq!(name_arg(&args, "usage").unwrap(), "immich");
-    }
-
-    /// `name_arg` rejects flags (e.g. `--icon path`) as a name.
-    #[test]
-    fn name_arg_rejects_flag() {
-        let args: Vec<String> = vec!["local-store".into(), "--icon".into(), "x".into()];
-        assert!(name_arg(&args, "usage").is_err());
-    }
-
-    /// `get_flag` returns the value following `--flag`.
     #[test]
     fn get_flag_returns_value() {
-        let args: Vec<String> = vec![
-            "local-store".into(),
-            "add".into(),
-            "--url".into(),
-            "http://x".into(),
-        ];
-        assert_eq!(get_flag(&args, "--url"), Some("http://x".to_string()));
+        assert_eq!(
+            get_flag(
+                &["add".into(), "x".into(), "--url".into(), "http://x".into()],
+                "--url"
+            ),
+            Some("http://x".into())
+        );
     }
-
-    /// `get_flag` returns None when the flag is absent.
     #[test]
     fn get_flag_absent_is_none() {
-        let args: Vec<String> = vec!["local-store".into(), "add".into(), "my".into()];
-        assert_eq!(get_flag(&args, "--icon"), None);
+        assert_eq!(get_flag(&["add".into()], "--url"), None);
     }
-
-    /// The discovery catalog and the launch-address presets have distinct roles.
     #[test]
-    fn discovery_catalog_does_not_define_arbitrary_launch_presets() {
-        let entry = catalog::catalog_entry("Immich");
-        assert!(entry.is_some(), "Immich must exist in the embedded catalog");
-        let e = entry.unwrap();
-        assert!(e.icon.is_some(), "catalog Immich should carry an icon");
-        assert!(
-            e.category.is_some(),
-            "catalog Immich should carry a category"
-        );
-        assert_eq!(catalog::preset_url("Immich"), None);
+    fn positional_rejects_flag() {
+        assert!(positional(&["open".into(), "--browser".into()], 1, "usage").is_err());
     }
-
-    /// `local-store catalog search media` finds results (search is substring across
-    /// name/category/description/tags).
     #[test]
-    fn catalog_search_finds_results() {
-        let entries = catalog::catalog();
-        let ql = "media";
-        let matches: Vec<_> = entries
-            .iter()
-            .filter(|e| {
-                e.name.to_lowercase().contains(ql)
-                    || e.category
-                        .as_deref()
-                        .map(|c| c.to_lowercase().contains(ql))
-                        .unwrap_or(false)
-                    || e.description
-                        .as_deref()
-                        .map(|d| d.to_lowercase().contains(ql))
-                        .unwrap_or(false)
-                    || e.tags.to_lowercase().contains(ql)
-            })
-            .collect();
-        assert!(
-            !matches.is_empty(),
-            "catalog search 'media' should match ≥1 app"
-        );
+    fn usage_mentions_managed_commands() {
+        let value = usage();
+        for command in [
+            "doctor",
+            "install",
+            "start",
+            "stop",
+            "logs",
+            "uninstall",
+            "catalog",
+        ] {
+            assert!(value.contains(command));
+        }
     }
-
-    /// `local-store catalog` (no args) returns 0 and prints stats.
     #[test]
-    fn catalog_subcommand_no_args_is_zero() {
-        // run_cli reads std::env::args(), so we can't easily assert stdout.
-        // Instead verify the underlying data the subcommand uses.
-        let entries = catalog::catalog();
-        let cats = catalog::catalog_categories();
-        assert!(!entries.is_empty());
-        assert!(!cats.is_empty());
+    fn catalog_has_reviewed_memos() {
         assert_eq!(
-            cats.len(),
-            cats.iter().collect::<std::collections::HashSet<_>>().len()
-        );
-    }
-
-    /// `local-store open <name> --browser` parses the flag and strips it from args.
-    #[test]
-    fn open_browser_flag_is_stripped() {
-        let args: Vec<String> = vec!["open".into(), "immich".into(), "--browser".into()];
-        let browser = args.iter().any(|a| a == "--browser");
-        let args_no_flags: Vec<String> = args
-            .iter()
-            .skip(1)
-            .filter(|a| a.as_str() != "--browser")
-            .cloned()
-            .collect();
-        assert!(browser, "--browser should be detected");
-        assert_eq!(
-            args_no_flags,
-            vec!["immich".to_string()],
-            "non-flag arg should remain"
-        );
-    }
-
-    /// `local-store open --browser` (flag before name) still parses the name.
-    #[test]
-    fn open_browser_flag_before_name() {
-        let args: Vec<String> = vec!["open".into(), "--browser".into(), "immich".into()];
-        let args_no_flags: Vec<String> = args
-            .iter()
-            .skip(1)
-            .filter(|a| a.as_str() != "--browser")
-            .cloned()
-            .collect();
-        assert_eq!(args_no_flags, vec!["immich".to_string()]);
-    }
-
-    /// `usage()` mentions the new catalog subcommand.
-    #[test]
-    fn usage_mentions_catalog() {
-        let u = usage();
-        assert!(
-            u.contains("catalog"),
-            "usage should document the catalog subcommand"
-        );
-        assert!(
-            u.contains("search"),
-            "usage should document `catalog search`"
+            catalog::search_catalog("Memos", "", 0, 10).entries[0]
+                .recipe_id
+                .as_deref(),
+            Some("memos")
         );
     }
 }

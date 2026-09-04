@@ -98,6 +98,10 @@ fn registry_config_root() -> PathBuf {
     PathBuf::from(config_base())
 }
 
+pub fn managed_apps_root() -> PathBuf {
+    registry_config_root().join(CONFIG_SLUG).join("apps")
+}
+
 fn config_base() -> String {
     std::env::var("APPDATA")
         .ok()
@@ -164,6 +168,68 @@ pub fn load_registry_v2_at(root: &Path) -> StorageResult<RegistryV2> {
 
 pub fn save_registry_v2(registry: &RegistryV2) -> StorageResult<()> {
     save_registry_v2_at(&registry_config_root(), registry)
+}
+
+/// Load the canonical registry, importing an older registry once when needed.
+pub fn load_or_migrate_registry() -> StorageResult<RegistryV2> {
+    load_or_migrate_registry_at(&registry_config_root())
+}
+
+pub fn load_or_migrate_registry_at(root: &Path) -> StorageResult<RegistryV2> {
+    if registry_v2_path_for_root(root).exists() || registry_v2_previous_path_for_root(root).exists()
+    {
+        return load_registry_v2_at(root);
+    }
+    if primary_v1_path_for_root(root).exists() || legacy_v1_path_for_root(root).exists() {
+        migrate_v1_registry_at(
+            root,
+            SystemTime::now()
+                .duration_since(UNIX_EPOCH)
+                .map_err(|error| StorageError::MigrationRefused(error.to_string()))?
+                .as_secs(),
+        )?;
+        return load_registry_v2_at(root);
+    }
+    Ok(RegistryV2::new(Vec::new()))
+}
+
+pub fn insert_installed_app(app: InstalledApp) -> StorageResult<()> {
+    let mut registry = load_or_migrate_registry()?;
+    if registry.apps.iter().any(|saved| saved.id == app.id) {
+        return Err(StorageError::MigrationRefused(format!(
+            "app id {:?} already exists",
+            app.id
+        )));
+    }
+    registry.apps.push(app);
+    save_registry_v2(&registry)
+}
+
+pub fn remove_installed_app(id: &str) -> StorageResult<InstalledApp> {
+    let mut registry = load_or_migrate_registry()?;
+    let position = registry
+        .apps
+        .iter()
+        .position(|app| app.id == id)
+        .ok_or_else(|| StorageError::MigrationRefused(format!("app id {id:?} not found")))?;
+    let removed = registry.apps.remove(position);
+    save_registry_v2(&registry)?;
+    Ok(removed)
+}
+
+pub fn update_installed_app(app: InstalledApp) -> StorageResult<()> {
+    let mut registry = load_or_migrate_registry()?;
+    let saved = registry
+        .apps
+        .iter_mut()
+        .find(|saved| saved.id == app.id)
+        .ok_or_else(|| StorageError::MigrationRefused(format!("app id {:?} not found", app.id)))?;
+    *saved = app;
+    save_registry_v2(&registry)
+}
+
+pub fn slug_for_display_name(name: &str) -> String {
+    ascii_slug(name)
 }
 
 pub fn save_registry_v2_at(root: &Path, registry: &RegistryV2) -> StorageResult<()> {
@@ -564,6 +630,28 @@ mod tests {
         assert!(try_load_apps_from_paths(&primary, &legacy)
             .unwrap()
             .is_empty());
+        fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn empty_root_loads_an_empty_v2_registry_without_writing() {
+        let (root, _, _) = fixture_paths();
+        let registry = load_or_migrate_registry_at(&root).unwrap();
+        assert_eq!(registry, RegistryV2::new(Vec::new()));
+        assert!(!registry_v2_path_for_root(&root).exists());
+        fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn load_or_migrate_imports_v1_once() {
+        let (root, _, _) = fixture_paths();
+        let old = primary_v1_path_for_root(&root);
+        fs::create_dir_all(old.parent().unwrap()).unwrap();
+        fs::write(&old, app_json("notes")).unwrap();
+        let imported = load_or_migrate_registry_at(&root).unwrap();
+        assert_eq!(imported.apps[0].id, "notes");
+        assert!(registry_v2_path_for_root(&root).exists());
+        assert_eq!(load_or_migrate_registry_at(&root).unwrap(), imported);
         fs::remove_dir_all(root).unwrap();
     }
 

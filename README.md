@@ -1,7 +1,7 @@
 # Local Store
 
-Discover self-hosted software, connect the instances you already run, and open
-them in dedicated desktop windows. One native launcher, no Electron.
+Discover self-hosted software, install reviewed local recipes, connect the
+instances you already run, and open them in dedicated desktop windows.
 
 Point Local Store at any local web app — Penpot, your homelab dashboard, a
 self-hosted tool — and it opens in a real native window with that app's name
@@ -23,13 +23,17 @@ MIT.
 
 - **Discover** searches the embedded project catalog in bounded pages. A project
   website is presented as a source link and is never treated as your instance.
+- **Verified install** currently supports Memos with a pinned container image,
+  a Docker/Compose preflight check, persistent local data, health verification,
+  and rollback when setup fails.
 - **Connect an app** saves its name and reachable HTTP(S) address. Local Store
   does not seed an example or imply that catalog projects are already installed.
-- **My Apps** opens connections, creates shortcuts, and removes saved
-  connections without deleting server data.
-- Apps are registered (name + URL, optional icon/compose/health) in a registry
-  file (`%APPDATA%/local-store/apps.json` on Windows, `~/.config/local-store/apps.json`
-  on Linux/macOS).
+- **My Apps** opens connections and starts, stops, inspects, or uninstalls apps
+  managed by Local Store. Uninstall preserves app data unless deletion is
+  explicitly selected and confirmed.
+- Apps use a versioned registry at `%APPDATA%/local-store/registry-v2.json` on
+  Windows (or the platform config directory elsewhere). Existing v1 and legacy
+  registries are imported once with a backup.
 - The launcher lists them; clicking **Open** spawns a native window to that URL.
 - A tiny injected script intercepts `window.open` and external `<a>` clicks,
   rewriting the navigation to a `localhost` marker URL. Rust catches that in
@@ -49,12 +53,18 @@ cargo run
 Add your own connection through the launcher or CLI:
 
 ```bash
-local-store add penpot --url http://localhost:9001 --icon /path/to/penpot.png
-local-store add n8n --preset n8n --compose /opt/n8n/docker-compose.yml
+local-store doctor
+local-store install memos
+local-store add penpot --url http://localhost:9001
 local-store list
-local-store open n8n
-local-store shortcut n8n
+local-store status memos
+local-store logs memos
+local-store stop memos
+local-store start memos
+local-store open memos --browser
+local-store shortcut memos
 local-store remove penpot
+local-store uninstall memos
 local-store --version
 ```
 
@@ -82,9 +92,12 @@ Compatibility (one release): legacy dockwrap registry and dockwrap:// deep links
 - [x] **Reference recipe data** — 12 curated entries document Compose and health-check metadata for future integration
 - [x] **Broad icon coverage** — verified icon sources plus favicon fallback for entries without one
 
-### Post-v0.4
-- [ ] Wire verified Compose and health-check recipes into the runtime catalog and setup wizard
-- [ ] Define the next roadmap after catalog feedback and maintenance work
+### v0.5 (in progress)
+- [x] Versioned v2 registry with one-time legacy migration and recovery
+- [x] Reviewed Memos recipe with pinned image and persistent data
+- [x] Docker doctor, transactional install, health verification, and rollback
+- [x] Managed app status, start, stop, logs, and data-preserving uninstall
+- [ ] Expand reviewed recipes after end-to-end recipe validation
 
 ## License
 

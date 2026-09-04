@@ -65,6 +65,7 @@ pub struct DiscoveryEntry {
     pub icon: Option<String>,
     pub warning: bool,
     pub capability: &'static str,
+    pub recipe_id: Option<String>,
 }
 
 #[derive(Serialize)]
@@ -113,7 +114,12 @@ pub fn search_catalog(query: &str, category: &str, offset: usize, limit: usize) 
                 .filter(|s| !s.is_empty())
                 .or_else(|| e.favicon_url.clone()),
             warning: e.warning,
-            capability: "connect",
+            capability: if crate::recipes::recipe(&e.name.to_lowercase()).is_some() {
+                "verified_install"
+            } else {
+                "connect"
+            },
+            recipe_id: crate::recipes::recipe(&e.name.to_lowercase()).map(|recipe| recipe.id),
         })
         .collect();
     CatalogPage {
@@ -145,6 +151,24 @@ mod tests {
         assert!(entry.get("source_url").is_some());
         assert_eq!(entry["capability"], "connect");
         assert!(search_catalog("", "", usize::MAX, 12).entries.is_empty());
+    }
+
+    #[test]
+    fn only_reviewed_catalog_entry_advertises_verified_install() {
+        let memos = search_catalog("Memos", "", 0, 48)
+            .entries
+            .into_iter()
+            .find(|entry| entry.name == "Memos")
+            .unwrap();
+        assert_eq!(memos.capability, "verified_install");
+        assert_eq!(memos.recipe_id.as_deref(), Some("memos"));
+        assert!(search_catalog("Immich", "", 0, 48)
+            .entries
+            .into_iter()
+            .find(|entry| entry.name == "Immich")
+            .unwrap()
+            .recipe_id
+            .is_none());
     }
 
     #[test]

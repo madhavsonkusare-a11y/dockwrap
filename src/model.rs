@@ -28,6 +28,12 @@ pub struct InstalledApp {
     pub updated_at_unix: u64,
 }
 
+impl InstalledApp {
+    pub fn is_managed(&self) -> bool {
+        matches!(self.runtime, RuntimeSpec::Compose { .. })
+    }
+}
+
 /// Returns whether `id` is a stable lowercase ASCII slug.
 ///
 /// Valid IDs are non-empty, begin and end with an ASCII alphanumeric character,

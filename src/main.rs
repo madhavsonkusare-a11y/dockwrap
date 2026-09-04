@@ -8,43 +8,49 @@ use local_store::{
 mod cli;
 
 #[tauri::command]
-fn create_shortcut(window: tauri::WebviewWindow, name: String) -> Result<String, String> {
+fn create_shortcut(window: tauri::WebviewWindow, id: String) -> Result<String, String> {
     commands::require_launcher(&window)?;
-    let apps = storage::try_load_apps().map_err(|e| e.to_string())?;
-    let appdef = apps
-        .iter()
-        .find(|a| a.name == name)
-        .ok_or_else(|| format!("No app named \"{}\" found.", name))?;
+    let app = storage::load_or_migrate_registry()
+        .map_err(|e| e.to_string())?
+        .apps
+        .into_iter()
+        .find(|app| app.id == id)
+        .ok_or("This app no longer exists.")?;
     let bin = std::env::current_exe()
         .map_err(|e| e.to_string())?
         .to_string_lossy()
         .into_owned();
-    platform::create_shortcut_for(&name, &bin, appdef.icon.as_deref())
+    platform::create_shortcut_for(
+        &app.id,
+        &bin,
+        app.icon_path.as_ref().and_then(|path| path.to_str()),
+    )
 }
 
 #[tauri::command]
 async fn open_app(
     window: tauri::WebviewWindow,
     app_handle: tauri::AppHandle,
-    name: String,
+    id: String,
 ) -> Result<(), String> {
     commands::require_launcher(&window)?;
-    let appdef = storage::try_load_apps()
+    let app = storage::load_or_migrate_registry()
         .map_err(|e| e.to_string())?
+        .apps
         .into_iter()
-        .find(|a| a.name == name)
-        .ok_or("This connection no longer exists.")?;
-    if appdef.compose.is_some() {
-        let pending = appdef.clone();
-        tauri::async_runtime::spawn_blocking(move || runtime::boot_and_wait(&pending))
+        .find(|app| app.id == id)
+        .ok_or("This app no longer exists.")?;
+    if app.is_managed() {
+        let pending = app.clone();
+        tauri::async_runtime::spawn_blocking(move || runtime::start(&pending))
             .await
             .map_err(|e| e.to_string())??;
     }
     windowing::build_window(
         &app_handle,
-        &appdef.name,
-        &appdef.url,
-        appdef.icon.as_deref(),
+        &app.display_name,
+        &app.launch_url,
+        app.icon_path.as_ref().and_then(|path| path.to_str()),
     )
 }
 
@@ -77,18 +83,25 @@ fn main() {
     if let Some(first) = args.get(1) {
         if let Some((scheme, name)) = parse_deep_link(first) {
             // Boot the referenced app's stack, then open its window.
-            let apps = storage::load_apps();
-            if let Some(appdef) = apps.iter().find(|a| a.name == name) {
-                if let Err(e) = runtime::boot_and_wait(appdef) {
-                    eprintln!("warn: {}", e);
+            let apps = storage::load_or_migrate_registry()
+                .map(|registry| registry.apps)
+                .unwrap_or_default();
+            if let Some(appdef) = apps.iter().find(|a| a.id == name) {
+                if appdef.is_managed() {
+                    let _ = runtime::start(appdef);
                 }
-                let open_name = appdef.name.clone();
-                let url = appdef.url.clone();
-                let icon = appdef.icon.clone();
+                let open_name = appdef.display_name.clone();
+                let url = appdef.launch_url.clone();
+                let icon = appdef.icon_path.clone();
                 tauri::Builder::default()
                     .setup(move |app| {
-                        windowing::build_window(app.handle(), &open_name, &url, icon.as_deref())
-                            .map_err(std::io::Error::other)?;
+                        windowing::build_window(
+                            app.handle(),
+                            &open_name,
+                            &url,
+                            icon.as_ref().and_then(|path| path.to_str()),
+                        )
+                        .map_err(std::io::Error::other)?;
                         Ok(())
                     })
                     .run(tauri::generate_context!())
@@ -114,6 +127,7 @@ fn main() {
         .setup(|app| {
             // Register primary and one-release legacy protocol handlers (best-effort).
             platform::register_protocol();
+            storage::load_or_migrate_registry().map_err(std::io::Error::other)?;
             let win = tauri::WebviewWindowBuilder::new(
                 app,
                 "launcher",
@@ -134,7 +148,14 @@ fn main() {
             create_shortcut,
             commands::remove_app_cmd,
             commands::search_catalog,
-            commands::open_project
+            commands::open_project,
+            commands::doctor,
+            commands::recipe_details,
+            commands::install_app,
+            commands::start_app,
+            commands::stop_app,
+            commands::app_logs,
+            commands::uninstall_app
         ])
         .run(tauri::generate_context!())
         .expect("error while running Local Store");

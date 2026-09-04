@@ -29,7 +29,14 @@
             "allow-create-shortcut",
             "allow-remove-app-cmd",
             "allow-search-catalog",
-            "allow-open-project"
+            "allow-open-project",
+            "allow-doctor",
+            "allow-recipe-details",
+            "allow-install-app",
+            "allow-start-app",
+            "allow-stop-app",
+            "allow-app-logs",
+            "allow-uninstall-app"
           ]
         }
       ]
