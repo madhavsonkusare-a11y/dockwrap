@@ -1,0 +1,16 @@
+[
+  {
+    "name": "External Dashboard",
+    "url": "https://dashboard.example.test",
+    "icon": "C:/icons/dashboard.png",
+    "compose": null,
+    "health": "https://dashboard.example.test/health"
+  },
+  {
+    "name": "Paperless NGX",
+    "url": "http://127.0.0.1:8000",
+    "icon": null,
+    "compose": "C:/Users/example/compose/paperless/compose.yaml",
+    "health": "127.0.0.1:8000"
+  }
+]
