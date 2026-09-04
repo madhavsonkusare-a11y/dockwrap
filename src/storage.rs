@@ -4,7 +4,10 @@
 
 use crate::{
     brand::{CONFIG_SLUG, LEGACY_CONFIG_SLUG},
-    model::{next_available_installed_app_id, AppDef, InstalledApp, RuntimeSpec},
+    model::{
+        is_valid_installed_app_id, next_available_installed_app_id, AppDef, InstalledApp,
+        RuntimeSpec,
+    },
 };
 use serde::{Deserialize, Serialize};
 use std::{
@@ -113,11 +116,19 @@ fn config_base() -> String {
 }
 
 pub fn registry_v2_path_for_root(root: &Path) -> PathBuf {
-    root.join("registry-v2.json")
+    root.join(CONFIG_SLUG).join("registry-v2.json")
 }
 
 pub fn migration_v1_backup_path_for_root(root: &Path) -> PathBuf {
-    root.join("migration-v1-backup.json")
+    root.join(CONFIG_SLUG).join("migration-v1-backup.json")
+}
+
+pub fn registry_v2_previous_path_for_root(root: &Path) -> PathBuf {
+    root.join(CONFIG_SLUG).join("registry-v2.previous.json")
+}
+
+pub fn primary_v1_path_for_root(root: &Path) -> PathBuf {
+    root.join(CONFIG_SLUG).join("apps.json")
 }
 
 pub fn legacy_v1_path_for_root(root: &Path) -> PathBuf {
@@ -135,11 +146,19 @@ pub fn load_registry_v2() -> StorageResult<RegistryV2> {
 }
 
 pub fn load_registry_v2_at(root: &Path) -> StorageResult<RegistryV2> {
-    let data = fs::read(registry_v2_path_for_root(root))?;
+    let data = match fs::read(registry_v2_path_for_root(root)) {
+        Ok(data) => data,
+        Err(error) if error.kind() == io::ErrorKind::NotFound => {
+            fs::read(registry_v2_previous_path_for_root(root)).map_err(|previous_error| {
+                StorageError::MigrationRefused(format!(
+                    "live registry is absent and no recovery file is valid: {previous_error}"
+                ))
+            })?
+        }
+        Err(error) => return Err(error.into()),
+    };
     let registry: RegistryV2 = serde_json::from_slice(&data)?;
-    if registry.version != RegistryV2::VERSION {
-        return Err(StorageError::InvalidRegistryVersion(registry.version));
-    }
+    validate_registry(&registry)?;
     Ok(registry)
 }
 
@@ -213,6 +232,52 @@ fn atomic_write(path: &Path, bytes: &[u8]) -> StorageResult<()> {
     result
 }
 
+fn validate_registry(registry: &RegistryV2) -> StorageResult<()> {
+    if registry.version != RegistryV2::VERSION {
+        return Err(StorageError::InvalidRegistryVersion(registry.version));
+    }
+    let mut ids = HashSet::new();
+    for app in &registry.apps {
+        if !is_valid_installed_app_id(&app.id) || !ids.insert(&app.id) {
+            return Err(StorageError::MigrationRefused(format!(
+                "invalid app id {:?}",
+                app.id
+            )));
+        }
+        if app.display_name.trim().is_empty() || app.launch_url.trim().is_empty() {
+            return Err(StorageError::MigrationRefused(
+                "empty essential app field".into(),
+            ));
+        }
+        if app.updated_at_unix < app.created_at_unix {
+            return Err(StorageError::MigrationRefused(
+                "updated timestamp predates creation".into(),
+            ));
+        }
+        if let RuntimeSpec::Compose {
+            project_name,
+            project_dir,
+            compose_file,
+        } = &app.runtime
+        {
+            if !is_valid_installed_app_id(project_name)
+                || project_dir
+                    .components()
+                    .any(|c| matches!(c, std::path::Component::ParentDir))
+                || compose_file
+                    .components()
+                    .any(|c| matches!(c, std::path::Component::ParentDir))
+                || !compose_file.starts_with(project_dir)
+            {
+                return Err(StorageError::MigrationRefused(
+                    "invalid compose runtime paths".into(),
+                ));
+            }
+        }
+    }
+    Ok(())
+}
+
 #[derive(Deserialize)]
 struct LegacyAppDef {
     name: String,
@@ -235,21 +300,32 @@ pub fn migrate_v1_registry() -> StorageResult<()> {
 
 pub fn migrate_v1_registry_at(root: &Path, timestamp: u64) -> StorageResult<()> {
     let v2_path = registry_v2_path_for_root(root);
-    if v2_path.exists() {
+    if fs::metadata(&v2_path).is_ok() {
         return Err(StorageError::MigrationRefused(format!(
             "{} already exists; migration never overwrites V2",
             v2_path.display()
         )));
     }
-    let source = fs::read(legacy_v1_path_for_root(root))?;
+    let backup_path = migration_v1_backup_path_for_root(root);
+    let source = match fs::read(&backup_path) {
+        Ok(bytes) => bytes,
+        Err(error) if error.kind() == io::ErrorKind::NotFound => {
+            match fs::read(primary_v1_path_for_root(root)) {
+                Ok(bytes) => bytes,
+                Err(error) if error.kind() == io::ErrorKind::NotFound => {
+                    fs::read(legacy_v1_path_for_root(root))?
+                }
+                Err(error) => return Err(error.into()),
+            }
+        }
+        Err(error) => return Err(error.into()),
+    };
     let legacy: Vec<LegacyAppDef> = serde_json::from_slice(&source)?;
     let apps = convert_legacy_apps(legacy, timestamp)?;
-    let registry = RegistryV2::new(apps);
-
-    // Back up original valid bytes first. Both writes use same-directory atomic
-    // replacement; no parse/validation failure can change either destination.
-    atomic_write(&migration_v1_backup_path_for_root(root), &source)?;
-    save_registry_v2_at(root, &registry)
+    if !backup_path.exists() {
+        atomic_write(&backup_path, &source)?;
+    }
+    save_registry_v2_at(root, &RegistryV2::new(apps))
 }
 
 fn convert_legacy_apps(
@@ -358,6 +434,31 @@ fn legacy_config() -> String {
         .into_owned()
 }
 
+/// Fallible V1 access for the launcher until runtime and CLI migrate together.
+pub fn try_load_apps() -> StorageResult<Vec<AppDef>> {
+    try_load_apps_from_paths(Path::new(&resolve_config()), Path::new(&legacy_config()))
+}
+
+fn try_load_apps_from_paths(primary: &Path, legacy: &Path) -> StorageResult<Vec<AppDef>> {
+    let bytes = match fs::read(primary) {
+        Ok(bytes) => bytes,
+        Err(error) if error.kind() == io::ErrorKind::NotFound => match fs::read(legacy) {
+            Ok(bytes) => bytes,
+            Err(error) if error.kind() == io::ErrorKind::NotFound => return Ok(Vec::new()),
+            Err(error) => return Err(error.into()),
+        },
+        Err(error) => return Err(error.into()),
+    };
+    Ok(serde_json::from_slice(&bytes)?)
+}
+
+pub fn try_save_apps(apps: &[AppDef]) -> StorageResult<()> {
+    atomic_replace_with_previous(
+        Path::new(&resolve_config()),
+        &serde_json::to_vec_pretty(apps)?,
+    )
+}
+
 pub fn load_apps() -> Vec<AppDef> {
     let primary = PathBuf::from(resolve_config());
     let legacy = PathBuf::from(legacy_config());
@@ -446,6 +547,24 @@ mod tests {
         format!(
             r#"[{{"name":"{name}","url":"http://{name}","icon":null,"compose":null,"health":null}}]"#
         )
+    }
+
+    #[test]
+    fn strict_launcher_load_reports_corruption_instead_of_empty_state() {
+        let (root, primary, legacy) = fixture_paths();
+        fs::write(&primary, "broken").unwrap();
+        fs::write(&legacy, app_json("legacy")).unwrap();
+        assert!(try_load_apps_from_paths(&primary, &legacy).is_err());
+        fs::remove_file(&primary).unwrap();
+        assert_eq!(
+            try_load_apps_from_paths(&primary, &legacy).unwrap()[0].name,
+            "legacy"
+        );
+        fs::remove_file(&legacy).unwrap();
+        assert!(try_load_apps_from_paths(&primary, &legacy)
+            .unwrap()
+            .is_empty());
+        fs::remove_dir_all(root).unwrap();
     }
 
     #[test]
@@ -707,5 +826,116 @@ mod tests {
                 .join(LEGACY_CONFIG_SLUG)
                 .join("apps.json")
         );
+    }
+
+    #[test]
+    fn all_v2_product_files_live_under_local_store_for_windows_and_linux_bases() {
+        for root in [
+            PathBuf::from("C:/Config"),
+            PathBuf::from("/home/user/.config"),
+        ] {
+            assert_eq!(
+                registry_v2_path_for_root(&root),
+                root.join(CONFIG_SLUG).join("registry-v2.json")
+            );
+            assert_eq!(
+                migration_v1_backup_path_for_root(&root),
+                root.join(CONFIG_SLUG).join("migration-v1-backup.json")
+            );
+            assert_eq!(
+                registry_v2_previous_path_for_root(&root),
+                root.join(CONFIG_SLUG).join("registry-v2.previous.json")
+            );
+            assert_eq!(
+                primary_v1_path_for_root(&root),
+                root.join(CONFIG_SLUG).join("apps.json")
+            );
+        }
+    }
+
+    #[test]
+    fn migration_prefers_current_local_store_v1_over_pre_rebrand_v1() {
+        let (root, _, _) = fixture_paths();
+        let current = primary_v1_path_for_root(&root);
+        let legacy = legacy_v1_path_for_root(&root);
+        fs::create_dir_all(current.parent().unwrap()).unwrap();
+        fs::create_dir_all(legacy.parent().unwrap()).unwrap();
+        fs::write(&current, app_json("current")).unwrap();
+        fs::write(&legacy, app_json("legacy")).unwrap();
+
+        migrate_v1_registry_at(&root, 9).unwrap();
+
+        assert_eq!(
+            load_registry_v2_at(&root).unwrap().apps[0].display_name,
+            "current"
+        );
+        assert_eq!(
+            fs::read(migration_v1_backup_path_for_root(&root)).unwrap(),
+            fs::read(current).unwrap()
+        );
+        fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn load_recovers_previous_registry_when_live_file_is_absent() {
+        let (root, _, _) = fixture_paths();
+        let prior = RegistryV2::new(vec![InstalledApp {
+            id: "prior".into(),
+            catalog_id: None,
+            display_name: "Prior".into(),
+            launch_url: "https://prior.test".into(),
+            icon_path: None,
+            runtime: RuntimeSpec::External,
+            created_at_unix: 1,
+            updated_at_unix: 1,
+        }]);
+        fs::create_dir_all(root.join(CONFIG_SLUG)).unwrap();
+        fs::write(
+            registry_v2_previous_path_for_root(&root),
+            serde_json::to_vec(&prior).unwrap(),
+        )
+        .unwrap();
+
+        assert_eq!(load_registry_v2_at(&root).unwrap(), prior);
+        fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn migration_retry_uses_immutable_backup_after_original_changes() {
+        let (root, _, _) = fixture_paths();
+        let current = primary_v1_path_for_root(&root);
+        fs::create_dir_all(current.parent().unwrap()).unwrap();
+        let original = app_json("original");
+        fs::write(&current, &original).unwrap();
+        fs::write(migration_v1_backup_path_for_root(&root), &original).unwrap();
+        fs::write(&current, app_json("changed")).unwrap();
+
+        migrate_v1_registry_at(&root, 9).unwrap();
+
+        assert_eq!(
+            fs::read(migration_v1_backup_path_for_root(&root)).unwrap(),
+            original.as_bytes()
+        );
+        assert_eq!(
+            load_registry_v2_at(&root).unwrap().apps[0].display_name,
+            "original"
+        );
+        fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn load_rejects_unknown_v2_fields_and_invalid_runtime_invariants() {
+        let (root, _, _) = fixture_paths();
+        let registry_path = registry_v2_path_for_root(&root);
+        fs::create_dir_all(registry_path.parent().unwrap()).unwrap();
+        fs::write(
+            &registry_path,
+            r#"{"version":2,"apps":[{"id":"Bad_ID","catalog_id":null,"display_name":"","launch_url":"","icon_path":null,"runtime":{"kind":"compose","project_name":"Bad_ID","project_dir":"projects/app","compose_file":"projects/app/../escape.yml","extra":true},"created_at_unix":2,"updated_at_unix":1,"extra":true}],"extra":true}"#,
+        )
+        .unwrap();
+
+        let error = load_registry_v2_at(&root).unwrap_err().to_string();
+        assert!(error.contains("unknown field") || error.contains("invalid"));
+        fs::remove_dir_all(root).unwrap();
     }
 }

@@ -1,6 +1,11 @@
-# ============================================================
-# dockwrap Design Notes
-# ============================================================
+# dockwrap Design Notes — **HISTORICAL**
+
+> These notes document the dockwrap project *before* its rebrand to **Local Store**.
+> They are preserved for historical context. For current architecture, commands, and
+> registry paths, see `README.md`, `CONTRIBUTING.md`, and the
+> [dockwrap agent profile (SOUL.md)](C:/Users/madha/AppData/Local/hermes/profiles/dockwrap_agent/SOUL.md).
+> The repo itself still lives at `github.com/madhavsonkusare-a11y/dockwrap`; only the
+> product name, CLI binary (`local-store`), and config slug (`local-store`) changed.
 # Problem:
 #   - Existing "wrap a website into a desktop app" tools (Nativefier,
 #     WebCatalog) assume the web app is already running externally.
