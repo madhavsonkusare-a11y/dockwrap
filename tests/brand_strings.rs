@@ -58,9 +58,9 @@ fn product_identity_is_centralized_and_consistent() {
     let cargo = fs::read_to_string(root.join("Cargo.toml")).expect("read Cargo.toml");
     let tauri = fs::read_to_string(root.join("tauri.conf.json")).expect("read tauri.conf.json");
     assert!(cargo.contains("name = \"local-store\""));
-    assert!(cargo.contains("version = \"0.5.0-alpha.1\""));
+    assert!(cargo.contains("version = \"0.5.0-1\""));
     assert!(tauri.contains("\"productName\": \"Local Store\""));
-    assert!(tauri.contains("\"version\": \"0.5.0-alpha.1\""));
+    assert!(tauri.contains("\"version\": \"0.5.0-1\""));
     assert!(tauri.contains("\"identifier\": \"io.github.madhavsonkusare.localstore\""));
 }
 
