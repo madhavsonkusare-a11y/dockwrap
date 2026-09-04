@@ -1,7 +1,7 @@
 //! Windowing: webview window construction, the external-link bridge JS, and
 //! external-URL validation/policy for routing links to the OS browser.
 
-use tauri::{WebviewUrl, WebviewWindowBuilder};
+use tauri::{Manager, WebviewUrl, WebviewWindowBuilder};
 
 /// Injected into every webview. Intercepts window.open + clicks on external
 /// links and rewrites the navigation to a localhost marker URL that Rust
@@ -14,7 +14,7 @@ pub const LINK_BRIDGE_JS: &str = r#"
   window.open = function(u, n, f) {
     if (!u) return origOpen(u, n, f);
     const abs = new URL(u, location.href).href;
-    if (/^https?:/.test(abs) && !abs.includes("localhost")) {
+    if (/^https?:/.test(abs) && new URL(abs).origin !== location.origin) {
       location.href = "http://127.0.0.1:65535/.external?" + encodeURIComponent(abs);
       return null;
     }
@@ -26,7 +26,7 @@ pub const LINK_BRIDGE_JS: &str = r#"
     const h = el.getAttribute("href");
     if (!h) return;
     const abs = new URL(h, location.href).href;
-    if (/^https?:/.test(abs) && !abs.includes("localhost")) {
+    if (/^https?:/.test(abs) && new URL(abs).origin !== location.origin) {
       e.preventDefault();
       location.href = "http://127.0.0.1:65535/.external?" + encodeURIComponent(abs);
     }
@@ -88,58 +88,76 @@ pub fn strict_percent_decode_path_segment(s: &str) -> Option<String> {
 // is only exercised by tests.
 #[allow(dead_code)]
 pub fn validated_external_url(url: &str) -> Result<String, String> {
-    if url.len() > 2048 {
-        return Err(format!(
-            "external URL too long ({} bytes, max 2048)",
-            url.len()
-        ));
+    if url.len() > 2048 || url.chars().any(|c| c.is_whitespace() || c.is_control()) {
+        return Err("Use a URL without spaces, up to 2048 bytes.".into());
     }
-    let (scheme, rest) = url
-        .split_once("://")
-        .ok_or_else(|| format!("not an absolute URL: {:?}", url))?;
-    if !scheme.eq_ignore_ascii_case("http") && !scheme.eq_ignore_ascii_case("https") {
-        return Err(format!("unsupported scheme {:?} (only http/https)", scheme));
+    if !(url.to_ascii_lowercase().starts_with("http://")
+        || url.to_ascii_lowercase().starts_with("https://"))
+    {
+        return Err("Enter a complete http:// or https:// address.".into());
     }
-    // The authority (host[:port]) must be non-empty: take everything up to the
-    // first path/query/fragment separator and require it to be present.
-    let authority = rest.split(['/', '?', '#']).next().unwrap_or("").trim();
-    if authority.is_empty() {
-        return Err(format!("missing host in URL: {:?}", url));
+    let parsed = tauri::Url::parse(url).map_err(|_| "Enter a valid app address.".to_string())?;
+    if parsed.host_str().is_none() || !parsed.username().is_empty() || parsed.password().is_some() {
+        return Err("Use an address with a host and no embedded username or password.".into());
     }
-    Ok(url.to_string())
+    Ok(url.to_owned())
 }
 
 /// Open a URL in the user's default browser via the runtime module.
 pub use crate::runtime::launch_browser;
 
-pub fn build_window(app: &tauri::AppHandle, label: &str, url: &str, icon: Option<&str>) {
-    if let Ok(parsed) = url.parse::<tauri::Url>() {
-        let builder = WebviewWindowBuilder::new(app, label, WebviewUrl::External(parsed))
-            .title(label)
-            .inner_size(1600.0, 900.0)
-            .resizable(true)
-            .initialization_script(LINK_BRIDGE_JS)
-            .on_navigation(move |url| {
-                let s = url.as_str();
-                if let Some(query) = s.strip_prefix("http://127.0.0.1:65535/.external?") {
-                    launch_browser(&percent_decode_str(query));
-                    return false;
-                }
-                true
-            });
-        // Per-app title-bar icon (best-effort; falls back to the app default).
-        let result = if let Some(ic) = icon {
-            match tauri::image::Image::from_path(ic) {
-                Ok(img) => builder.icon(img),
-                Err(_) => Ok(builder),
-            }
-        } else {
-            Ok(builder)
-        };
-        if let Ok(b) = result {
-            let _ = b.build().and_then(|w| w.set_focus());
-        }
+pub fn build_window(
+    app: &tauri::AppHandle,
+    name: &str,
+    url: &str,
+    icon: Option<&str>,
+) -> Result<(), String> {
+    let url = validated_external_url(url)?;
+    let parsed = url.parse::<tauri::Url>().map_err(|e| e.to_string())?;
+    // Stable, collision-free labels independent of display-name punctuation.
+    let label = format!(
+        "app-{}",
+        name.as_bytes()
+            .iter()
+            .map(|b| format!("{b:02x}"))
+            .collect::<String>()
+    );
+    if let Some(window) = app.get_webview_window(&label) {
+        window.show().map_err(|e| e.to_string())?;
+        return window.set_focus().map_err(|e| e.to_string());
     }
+    let origin = parsed.origin();
+    let builder = WebviewWindowBuilder::new(app, &label, WebviewUrl::External(parsed))
+        .title(name)
+        .inner_size(1200.0, 800.0)
+        .resizable(true)
+        .initialization_script(LINK_BRIDGE_JS)
+        .on_navigation(move |url| {
+            if let Some(query) = url
+                .as_str()
+                .strip_prefix("http://127.0.0.1:65535/.external?")
+            {
+                launch_browser(&percent_decode_str(query));
+                return false;
+            }
+            if !matches!(url.scheme(), "http" | "https") {
+                return false;
+            }
+            if url.origin() != origin {
+                launch_browser(url.as_str());
+                return false;
+            }
+            true
+        });
+    let builder = if let Some(image) = icon.and_then(|p| tauri::image::Image::from_path(p).ok()) {
+        builder.icon(image).map_err(|e| e.to_string())?
+    } else {
+        builder
+    };
+    builder
+        .build()
+        .and_then(|w| w.set_focus())
+        .map_err(|e| e.to_string())
 }
 
 #[cfg(test)]

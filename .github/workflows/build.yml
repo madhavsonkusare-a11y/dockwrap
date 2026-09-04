@@ -11,7 +11,30 @@ permissions:
   contents: write
 
 jobs:
+  quality:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v5
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: cargo fmt --all -- --check
+      - run: cargo clippy --all-targets --all-features --locked -- -D warnings
+      - run: cargo test --locked
+      # Interaction and axe checks are cross-platform. Pixel baselines are
+      # reviewed and updated on Windows, where the primary WebView ships.
+      - run: npm test -- --ignore-snapshots
+
   build:
+    needs: quality
     strategy:
       fail-fast: false
       matrix:

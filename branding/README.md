@@ -8,6 +8,7 @@ single signal-orange tile represents an app selected from the store.
 ## Canonical files
 
 - `local-store-mark.svg` — transparent product mark for light surfaces.
+- `local-store-mark-reversed.svg` — transparent mark for dark surfaces.
 - `local-store-app-icon.svg` — filled application icon source for platform exports.
 
 ## Palette

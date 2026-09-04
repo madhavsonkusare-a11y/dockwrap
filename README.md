@@ -1,6 +1,7 @@
 # Local Store
 
-Native desktop shells for self-hosted web apps. One binary, no Electron.
+Discover self-hosted software, connect the instances you already run, and open
+them in dedicated desktop windows. One native launcher, no Electron.
 
 Point Local Store at any local web app — Penpot, your homelab dashboard, a
 self-hosted tool — and it opens in a real native window with that app's name
@@ -20,6 +21,12 @@ MIT.
 
 ## How it works
 
+- **Discover** searches the embedded project catalog in bounded pages. A project
+  website is presented as a source link and is never treated as your instance.
+- **Connect an app** saves its name and reachable HTTP(S) address. Local Store
+  does not seed an example or imply that catalog projects are already installed.
+- **My Apps** opens connections, creates shortcuts, and removes saved
+  connections without deleting server data.
 - Apps are registered (name + URL, optional icon/compose/health) in a registry
   file (`%APPDATA%/local-store/apps.json` on Windows, `~/.config/local-store/apps.json`
   on Linux/macOS).
@@ -39,8 +46,7 @@ cargo tauri build          # produces release binary + installer
 cargo run
 ```
 
-On first launch an example app (Penpot on `localhost:9001`) is seeded so the
-launcher is useful immediately. Add your own via the UI or the CLI:
+Add your own connection through the launcher or CLI:
 
 ```bash
 local-store add penpot --url http://localhost:9001 --icon /path/to/penpot.png

@@ -4,6 +4,8 @@
 //! catalog instead of typing URLs, and backs `local-store add --preset`.
 
 use crate::model::CatalogEntry;
+use serde::Serialize;
+use std::sync::OnceLock;
 
 /// Curated, most-used self-hosted web apps (default localhost ports).
 /// Lets a user run `local-store add --preset n8n` instead of typing the URL.
@@ -26,37 +28,102 @@ pub const PRESETS: &[(&str, &str)] = &[
 /// are a separate quick-start subset used by `local-store add --preset`.
 const CATALOG_JSON: &str = include_str!("catalog_full.json");
 
-/// Parse the compile-time-embedded catalog JSON into structs.
-fn parse_catalog() -> Vec<CatalogEntry> {
-    serde_json::from_str(CATALOG_JSON).unwrap_or_default()
+/// The embedded catalog is parsed exactly once, with invalid data failing loudly.
+fn cached_catalog() -> &'static [CatalogEntry] {
+    static CATALOG: OnceLock<Vec<CatalogEntry>> = OnceLock::new();
+    CATALOG.get_or_init(|| serde_json::from_str(CATALOG_JSON).expect("valid embedded catalog"))
 }
 
-/// Public catalog access — cheap, returns the parsed list (re-parsed per call,
-/// but small and typically called once at launcher render time).
 pub fn catalog() -> Vec<CatalogEntry> {
-    parse_catalog()
+    cached_catalog().to_vec()
 }
 
-/// All distinct categories, in catalog order (owned so callers don't borrow locals).
 pub fn catalog_categories() -> Vec<String> {
-    let mut seen: Vec<String> = Vec::new();
-    for e in parse_catalog().iter() {
-        if let Some(cat) = &e.category {
-            if !seen.iter().any(|c: &String| c == cat) {
-                seen.push(cat.clone());
-            }
-        }
-    }
-    seen
+    let mut categories: Vec<_> = cached_catalog()
+        .iter()
+        .filter_map(|e| e.category.clone())
+        .collect();
+    categories.sort();
+    categories.dedup();
+    categories
 }
 
-/// Lookup a single catalog entry by name (case-insensitive — app names in the
-/// source list have inconsistent casing, e.g. "Immich" vs "n8n").
 pub fn catalog_entry(name: &str) -> Option<CatalogEntry> {
-    let lower = name.to_lowercase();
-    parse_catalog()
+    cached_catalog()
+        .iter()
+        .find(|e| e.name.eq_ignore_ascii_case(name))
+        .cloned()
+}
+
+#[derive(Serialize)]
+pub struct DiscoveryEntry {
+    pub name: String,
+    pub source_url: String,
+    pub description: String,
+    pub category: String,
+    pub license: String,
+    pub icon: Option<String>,
+    pub warning: bool,
+    pub capability: &'static str,
+}
+
+#[derive(Serialize)]
+pub struct CatalogPage {
+    pub entries: Vec<DiscoveryEntry>,
+    pub total: usize,
+    pub catalog_total: usize,
+    pub offset: usize,
+    pub limit: usize,
+    pub categories: Vec<String>,
+}
+
+pub fn search_catalog(query: &str, category: &str, offset: usize, limit: usize) -> CatalogPage {
+    let query = query.trim().to_lowercase();
+    let limit = limit.clamp(1, 48);
+    let mut matches: Vec<_> = cached_catalog()
+        .iter()
+        .filter(|entry| {
+            (category.is_empty() || entry.category.as_deref() == Some(category))
+                && (query.is_empty()
+                    || format!(
+                        "{} {} {}",
+                        entry.name,
+                        entry.description.as_deref().unwrap_or(""),
+                        entry.tags
+                    )
+                    .to_lowercase()
+                    .contains(&query))
+        })
+        .collect();
+    matches.sort_by_key(|e| e.name.to_lowercase());
+    let total = matches.len();
+    let entries = matches
         .into_iter()
-        .find(|e| e.name.to_lowercase() == lower)
+        .skip(offset)
+        .take(limit)
+        .map(|e| DiscoveryEntry {
+            name: e.name.clone(),
+            source_url: e.url.clone(),
+            description: e.description.clone().unwrap_or_default(),
+            category: e.category.clone().unwrap_or_else(|| "Other".into()),
+            license: e.tags.replace('`', ""),
+            icon: e
+                .icon
+                .clone()
+                .filter(|s| !s.is_empty())
+                .or_else(|| e.favicon_url.clone()),
+            warning: e.warning,
+            capability: "connect",
+        })
+        .collect();
+    CatalogPage {
+        entries,
+        total,
+        catalog_total: cached_catalog().len(),
+        offset,
+        limit,
+        categories: catalog_categories(),
+    }
 }
 
 /// Resolve a preset name to its default localhost URL, if known.
@@ -67,6 +134,32 @@ pub fn preset_url(name: &str) -> Option<&'static str> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn discovery_is_bounded_and_does_not_expose_source_as_launch_url() {
+        let page = search_catalog("", "", 0, 5000);
+        assert_eq!(page.entries.len(), 48);
+        assert_eq!(page.catalog_total, catalog().len());
+        let entry = serde_json::to_value(&page.entries[0]).unwrap();
+        assert!(entry.get("url").is_none());
+        assert!(entry.get("source_url").is_some());
+        assert_eq!(entry["capability"], "connect");
+        assert!(search_catalog("", "", usize::MAX, 12).entries.is_empty());
+    }
+
+    #[test]
+    fn discovery_combines_search_category_and_pagination() {
+        let all = search_catalog("", "Analytics", 0, 48);
+        assert!(all.total > 1);
+        assert!(all.entries.iter().all(|e| e.category == "Analytics"));
+        let second = search_catalog("", "Analytics", 1, 1);
+        assert_eq!(second.entries[0].name, all.entries[1].name);
+        assert_eq!(
+            search_catalog("  IMMICH  ", "", 0, 12).entries[0].name,
+            "Immich"
+        );
+        assert_eq!(search_catalog("no-such-app-xyzxyz", "", 0, 12).total, 0);
+    }
 
     #[test]
     fn preset_lookup_works() {

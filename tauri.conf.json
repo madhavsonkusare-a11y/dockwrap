@@ -11,7 +11,29 @@
   },
   "app": {
     "windows": [],
-    "withGlobalTauri": true
+    "withGlobalTauri": true,
+    "security": {
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https: data:; font-src 'self'; connect-src ipc: http://ipc.localhost; object-src 'none'; frame-src 'none'; base-uri 'self'",
+      "capabilities": [
+        {
+          "identifier": "launcher",
+          "description": "Only the bundled launcher can manage connections.",
+          "windows": [
+            "launcher"
+          ],
+          "permissions": [
+            "core:default",
+            "allow-list-apps",
+            "allow-add-app",
+            "allow-open-app",
+            "allow-create-shortcut",
+            "allow-remove-app-cmd",
+            "allow-search-catalog",
+            "allow-open-project"
+          ]
+        }
+      ]
+    }
   },
   "bundle": {
     "active": true,

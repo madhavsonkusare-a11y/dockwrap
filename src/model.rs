@@ -94,6 +94,8 @@ pub struct AppDef {
 /// One catalog entry — a fuller AppDef + a human description + category.
 #[derive(Deserialize, Clone, Serialize, Default)]
 pub struct CatalogEntry {
+    #[serde(default)]
+    pub warning: bool,
     pub name: String,
     pub url: String,
     pub icon: Option<String>,

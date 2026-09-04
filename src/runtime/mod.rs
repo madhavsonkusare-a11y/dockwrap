@@ -41,30 +41,22 @@ pub fn wait_for_health(target: &str, timeout: Duration) -> Result<(), String> {
 
 fn is_up(target: &str) -> bool {
     std::process::Command::new("curl")
-        .args(["-sf", "-o", "/dev/null", "--max-time", "2", target])
+        .args(["-sf", "--max-time", "2", "--", target])
+        .stdout(std::process::Stdio::null())
+        .stderr(std::process::Stdio::null())
         .status()
         .map(|s| s.success())
         .unwrap_or(false)
 }
 
-/// Open a URL in the user's default browser, hidden (no console flash).
-#[cfg(windows)]
+/// Validated OS URL opening through the maintained platform integration crate.
 pub fn launch_browser(url: &str) {
-    use std::os::windows::process::CommandExt;
-    let _ = std::process::Command::new("cmd")
-        .args(["/C", "start", "", url])
-        .creation_flags(0x08000000)
-        .spawn();
-}
-
-#[cfg(not(windows))]
-pub fn launch_browser(url: &str) {
-    // Best-effort: xdg-open (Linux) / open (macOS). Fails silently if absent.
-    let _ = std::process::Command::new(if cfg!(target_os = "macos") {
-        "open"
-    } else {
-        "xdg-open"
-    })
-    .arg(url)
-    .spawn();
+    match crate::windowing::validated_external_url(url) {
+        Ok(url) => {
+            if let Err(error) = open::that_detached(url) {
+                eprintln!("Could not open browser: {error}");
+            }
+        }
+        Err(error) => eprintln!("Could not open browser: {error}"),
+    }
 }

@@ -57,7 +57,7 @@ fn usage() -> String {
     format!(
         "Usage:\n  \\
      {CLI_NAME} add <name> --url <url> [--icon <path>] [--compose <path>] [--health <url>] [--preset <name>]\n  \
-     {CLI_NAME} add --preset <name>            (resolves from presets + the 1257-app catalog)\n  \
+     {CLI_NAME} add --preset <name>            (uses a built-in local-address preset)\n  \
      {CLI_NAME} list\n  \
      {CLI_NAME} open <name>\n  \
      {CLI_NAME} remove <name>\n  \
@@ -75,14 +75,18 @@ fn get_flag(args: &[String], flag: &str) -> Option<String> {
 }
 
 /// Resolve a `--preset` name to (display_name, url), consulting the 10-entry
-/// PRESETS table first, then the embedded 1257-app catalog as a fallback.
-/// If the preset is unknown everywhere, prints guidance and exits the CLI.
+/// Resolve a reviewed local-address preset. Discovery entries only carry source
+/// URLs, so they must never be used as launch addresses.
 fn resolve_preset(display_name: &str, preset: &str) -> (String, String) {
     if let Some(u) = catalog::preset_url(preset) {
         return (display_name.to_string(), u.to_string());
     }
-    if let Some(e) = catalog::catalog_entry(preset) {
-        return (e.name.clone(), e.url.clone());
+    if let Some(entry) = catalog::catalog_entry(preset) {
+        eprintln!(
+            "\"{}\" is in Discover, but has no local-address preset. Add it with `{} add \"{}\" --url <your-instance-url>`.",
+            entry.name, CLI_NAME, entry.name
+        );
+        std::process::exit(1);
     }
     eprintln!(
         "Unknown preset \"{}\". Run `{CLI_NAME} presets` or `{CLI_NAME} catalog search {}`.",
@@ -111,9 +115,8 @@ pub fn run_cli() -> i32 {
 
             let (name, url) = match (name_arg, url, preset) {
                 (Some(n), Some(u), _) => (n, u),
-                // --preset N (with or without a name): resolve from PRESETS first,
-                // then fall back to the embedded 1257-app catalog so users can do
-                // `local-store add --preset immich` even if immich isn't in PRESETS.
+                // Presets contain reviewed local addresses. The broad discovery
+                // catalog contains project sources and is never a URL fallback.
                 (Some(n), None, Some(p)) => resolve_preset(&n, &p),
                 (None, None, Some(p)) => resolve_preset(&p, &p),
                 _ => {
@@ -352,12 +355,9 @@ mod tests {
         assert_eq!(get_flag(&args, "--icon"), None);
     }
 
-    /// `local-store add --preset immich` resolves from the embedded catalog
-    /// (immich is NOT in the 10-entry PRESETS array) and inherits the catalog
-    /// icon + description.
+    /// The discovery catalog and the launch-address presets have distinct roles.
     #[test]
-    fn preset_falls_back_to_catalog() {
-        // immich is not in PRESETS — catalog_entry must resolve it.
+    fn discovery_catalog_does_not_define_arbitrary_launch_presets() {
         let entry = catalog::catalog_entry("Immich");
         assert!(entry.is_some(), "Immich must exist in the embedded catalog");
         let e = entry.unwrap();
@@ -366,6 +366,7 @@ mod tests {
             e.category.is_some(),
             "catalog Immich should carry a category"
         );
+        assert_eq!(catalog::preset_url("Immich"), None);
     }
 
     /// `local-store catalog search media` finds results (search is substring across
