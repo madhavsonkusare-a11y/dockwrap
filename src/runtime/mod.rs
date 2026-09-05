@@ -317,19 +317,34 @@ pub fn install_recipe_with(
     root: &Path,
     now: u64,
 ) -> Result<InstalledApp, String> {
+    recipe.validate()?;
     let report = doctor_with(runner);
     if !report.ready {
         return Err("Docker and Docker Compose must be running before installation.".into());
     }
     let project_dir = root.join(&recipe.id);
-    if project_dir.exists() {
-        return Err(
-            "A managed app directory already exists. Remove or reconnect it before retrying."
-                .into(),
-        );
+    let created_project = !project_dir.exists();
+    if !created_project {
+        let allowed = recipe
+            .data_directories
+            .iter()
+            .map(String::as_str)
+            .chain(std::iter::once("compose.yaml"))
+            .collect::<Vec<_>>();
+        for entry in fs::read_dir(&project_dir).map_err(|e| e.to_string())? {
+            let entry = entry.map_err(|e| e.to_string())?;
+            let name = entry.file_name();
+            if !allowed.iter().any(|allowed| name == *allowed) {
+                return Err(
+                    "The preserved app directory contains unexpected files; review it before reinstalling."
+                        .into(),
+                );
+            }
+        }
     }
     fs::create_dir_all(&project_dir).map_err(|e| e.to_string())?;
     let compose_file = project_dir.join("compose.yaml");
+    let previous_compose = fs::read(&compose_file).ok();
     let install = (|| {
         fs::write(&compose_file, recipe.compose.as_bytes()).map_err(|e| e.to_string())?;
         for directory in &recipe.data_directories {
@@ -368,13 +383,19 @@ pub fn install_recipe_with(
             runtime: RuntimeSpec::Compose {
                 project_name: format!("local-store-{}", recipe.id),
                 project_dir: project_dir.clone(),
-                compose_file,
+                compose_file: compose_file.clone(),
             },
             created_at_unix: now,
             updated_at_unix: now,
         };
         let _ = runner.run(&compose_command(&fallback, &["down"]).expect("compose runtime"));
-        let _ = fs::remove_dir_all(&project_dir);
+        if created_project {
+            let _ = fs::remove_dir_all(&project_dir);
+        } else if let Some(previous) = previous_compose {
+            let _ = fs::write(&compose_file, previous);
+        } else {
+            let _ = fs::remove_file(&compose_file);
+        }
     }
     install
 }
@@ -395,7 +416,12 @@ pub fn uninstall_with(
     app: &InstalledApp,
     delete_data: bool,
 ) -> Result<(), String> {
-    checked_run(runner, &compose_command(app, &["down"])?, "Uninstall")?;
+    let args = if delete_data {
+        &["down", "--volumes"][..]
+    } else {
+        &["down"][..]
+    };
+    checked_run(runner, &compose_command(app, args)?, "Uninstall")?;
     if delete_data {
         if let RuntimeSpec::Compose { project_dir, .. } = &app.runtime {
             fs::remove_dir_all(project_dir).map_err(|e| e.to_string())?;
@@ -408,7 +434,12 @@ pub fn uninstall(app: &InstalledApp, delete_data: bool) -> Result<(), String> {
         let RuntimeSpec::Compose { project_dir, .. } = &app.runtime else {
             return Err("Connected apps do not have Local Store managed data.".into());
         };
-        if !project_dir.starts_with(storage::managed_apps_root()) {
+        let root = storage::managed_apps_root();
+        let canonical_root = root.canonicalize().map_err(|e| e.to_string())?;
+        let canonical_project = project_dir.canonicalize().map_err(|e| e.to_string())?;
+        if project_dir != &root.join(&app.id)
+            || canonical_project.parent() != Some(canonical_root.as_path())
+        {
             return Err(
                 "Data deletion is available only for directories created by Local Store.".into(),
             );
@@ -576,22 +607,66 @@ mod tests {
         fs::remove_dir_all(root).unwrap();
     }
     #[test]
-    fn successful_install_uses_reviewed_recipe_and_persists_data_directory() {
+    fn successful_install_supports_every_reviewed_recipe() {
         let root =
             std::env::temp_dir().join(format!("local-store-install-ok-{}", std::process::id()));
         let _ = fs::remove_dir_all(&root);
         fs::create_dir_all(&root).unwrap();
-        let runner = FakeRunner::passing(4);
-        let app = install_recipe_with(
+        for recipe in crate::recipes::verified_recipes() {
+            let runner = FakeRunner::passing(4);
+            let app = install_recipe_with(&runner, &Ready(true), &recipe, &root, 5).unwrap();
+            for directory in &recipe.data_directories {
+                assert!(root.join(&recipe.id).join(directory).is_dir());
+            }
+            assert_eq!(app.created_at_unix, 5);
+        }
+        fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn reinstall_reuses_preserved_data_without_deleting_it_on_failure() {
+        let root =
+            std::env::temp_dir().join(format!("local-store-reinstall-{}", std::process::id()));
+        let _ = fs::remove_dir_all(&root);
+        let project = root.join("memos");
+        fs::create_dir_all(project.join("data")).unwrap();
+        fs::write(project.join("data/keep.db"), b"keep").unwrap();
+        fs::write(project.join("compose.yaml"), b"previous").unwrap();
+        let runner = FakeRunner {
+            outputs: Mutex::new(VecDeque::from([
+                Ok(ProcessOutput {
+                    success: true,
+                    stdout: "1".into(),
+                    stderr: String::new(),
+                }),
+                Ok(ProcessOutput {
+                    success: true,
+                    stdout: "1".into(),
+                    stderr: String::new(),
+                }),
+                Ok(ProcessOutput {
+                    success: false,
+                    stdout: String::new(),
+                    stderr: "invalid".into(),
+                }),
+                Ok(ProcessOutput {
+                    success: true,
+                    stdout: String::new(),
+                    stderr: String::new(),
+                }),
+            ])),
+            calls: Mutex::new(Vec::new()),
+        };
+        assert!(install_recipe_with(
             &runner,
             &Ready(true),
             &crate::recipes::recipe("memos").unwrap(),
             &root,
-            5,
+            5
         )
-        .unwrap();
-        assert!(root.join("memos/data").is_dir());
-        assert_eq!(app.created_at_unix, 5);
+        .is_err());
+        assert_eq!(fs::read(project.join("data/keep.db")).unwrap(), b"keep");
+        assert_eq!(fs::read(project.join("compose.yaml")).unwrap(), b"previous");
         fs::remove_dir_all(root).unwrap();
     }
 }

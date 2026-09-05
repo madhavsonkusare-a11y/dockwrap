@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "id": "uptime-kuma",
+  "display_name": "Uptime Kuma",
+  "catalog_name": "Uptime Kuma",
+  "description": "A friendly monitoring dashboard for websites, services, and status pages.",
+  "category": "Status / Uptime pages",
+  "license": "MIT",
+  "version": "2.5.3",
+  "image": "louislam/uptime-kuma:2.5.3",
+  "source_url": "https://github.com/louislam/uptime-kuma",
+  "documentation_url": "https://github.com/louislam/uptime-kuma/wiki/How-to-Install",
+  "verified_at": "2026-09-05",
+  "launch_url": "http://localhost:3001",
+  "health_url": "http://localhost:3001",
+  "port": 3001,
+  "data_directories": [
+    "data"
+  ],
+  "data_storage": "Local Store managed folder / uptime-kuma / data",
+  "risk_notes": [
+    "Creates a Docker container named local-store-uptime-kuma.",
+    "Publishes port 3001 on this computer's loopback interface only.",
+    "Stores the SQLite database and uploaded assets in the Local Store app directory.",
+    "Monitoring private network services may reveal their addresses inside Uptime Kuma's database."
+  ],
+  "compose": "services:\n  uptime-kuma:\n    image: louislam/uptime-kuma:2.5.3\n    container_name: local-store-uptime-kuma\n    restart: unless-stopped\n    ports:\n      - \"127.0.0.1:3001:3001\"\n    volumes:\n      - ./data:/app/data\n"
+}

@@ -21,8 +21,23 @@ test('reviewed Memos recipe shows prerequisites and installs into My Apps', asyn
  await page.getByRole('searchbox').fill('memo'); await page.getByRole('button',{name:'View Memos details'}).click();
  await expect(page.getByText('Verified local install')).toBeVisible(); await page.getByRole('button',{name:'Review install'}).click();
  await expect(page.getByText('neosmemo/memos:0.30.0')).toBeVisible(); await expect(page.getByText('Docker engine')).toBeVisible();
- await page.getByRole('button',{name:'Install Memos'}).click(); await expect(page.getByRole('heading',{name:'Memos'})).toBeVisible();
+ await page.getByRole('button',{name:'Install Memos'}).click();
+ await expect(page.locator('#install-dialog')).not.toBeVisible();
+ await expect(page.getByRole('heading',{name:'Memos',exact:true})).toBeVisible();
  expect(await page.evaluate(() => window.__calls.find(c=>c.command==='install_app'))).toEqual({command:'install_app',args:{recipeId:'memos'}});
+});
+
+test('all graduated recipes remain explicitly reviewed before install', async ({page}) => {
+ for (const [query, name, image] of [['n8n','n8n','docker.n8n.io/n8nio/n8n:2.37.10'],['uptime','Uptime Kuma','louislam/uptime-kuma:2.5.3']]) {
+   await page.getByRole('searchbox').fill(query);
+   await expect(page.getByRole('heading',{name})).toBeVisible();
+   await page.getByRole('button',{name:`View ${name} details`}).click();
+   await expect(page.getByText('Verified local install')).toBeVisible();
+   await page.getByRole('button',{name:'Review install'}).click();
+   await expect(page.getByText(image)).toBeVisible();
+   await page.getByRole('button',{name:'Cancel'}).click();
+   await expect(page.locator('#install-dialog')).not.toBeVisible();
+ }
 });
 
 test('connect validates, preserves input after error, and appears in My Apps', async ({page}) => {
@@ -62,4 +77,92 @@ test('keyboard shortcut and accessibility', async ({page}) => {
 test('responsive visual surfaces', async ({page}) => {
  await expect(page).toHaveScreenshot('discover-1280x800.png', {animations:'disabled'});
  await page.setViewportSize({width:800,height:600}); await expect(page).toHaveScreenshot('discover-800x600.png', {animations:'disabled'});
+ await page.setViewportSize({width:400,height:860});
+ await expect(page).toHaveScreenshot('discover-400x860.png', {animations:'disabled'});
+ expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
+test('dark-only surfaces keep contrast in light and dark system settings', async ({page}) => {
+ for (const colorScheme of ['light', 'dark']) {
+   await page.emulateMedia({colorScheme});
+   expect(await page.evaluate(() => getComputedStyle(document.documentElement).colorScheme)).toBe('dark');
+   expect(await page.evaluate(() => getComputedStyle(document.documentElement).backgroundColor)).toBe('rgb(17, 18, 20)');
+ }
+ await page.getByRole('button',{name:'Connect an app',exact:true}).first().click();
+ await expect(page.getByLabel('App name')).toBeFocused();
+ expect((await new AxeBuilder({page}).analyze()).violations).toEqual([]);
+ await expect(page).toHaveScreenshot('connect-dialog.png', {animations:'disabled'});
+ await page.keyboard.press('Escape');
+ await expect(page.locator('#connect-dialog')).not.toBeVisible();
+ await expect(page.locator('#connect-top')).toBeFocused();
+});
+
+test('keyboard and reduced-motion interactions stay immediate and restore focus', async ({page}) => {
+ await page.locator('#connect-top').focus();
+ await page.keyboard.press('Enter');
+ await expect(page.getByLabel('App name')).toBeFocused();
+ expect(await page.locator('#connect-dialog').evaluate(dialog => dialog.getAnimations().length)).toBe(0);
+ await page.keyboard.press('Escape');
+ await expect(page.locator('#connect-top')).toBeFocused();
+ await page.emulateMedia({reducedMotion:'reduce'});
+ await page.getByRole('button',{name:'Review n8n installation',exact:true}).click();
+ await expect(page.getByRole('button',{name:'Install n8n',exact:true})).toBeEnabled();
+ expect(await page.locator('#install-dialog').evaluate(dialog => dialog.getAnimations().length)).toBe(0);
+ expect((await new AxeBuilder({page}).analyze()).violations).toEqual([]);
+ await page.getByRole('button',{name:'Cancel',exact:true}).click();
+ await expect(page.getByRole('button',{name:'Review n8n installation',exact:true})).toBeFocused();
+});
+
+test('Escape interrupts dialog entry without leaving the workspace inert', async ({page}) => {
+ await page.locator('#connect-top').click();
+ await page.keyboard.press('Escape');
+ await expect(page.locator('#connect-dialog')).not.toBeVisible();
+ await page.keyboard.press('Control+k');
+ await expect(page.getByRole('searchbox')).toBeFocused();
+ expect(await page.locator('#connect-dialog').evaluate(dialog => dialog.getAnimations().length)).toBe(0);
+});
+
+test('featured recipes require ready prerequisites and preserve errors for retry', async ({page}) => {
+ await page.evaluate(() => {
+   const invoke = window.__TAURI__.core.invoke;
+   window.__TAURI__.core.invoke = (command,args) => command === 'doctor'
+     ? Promise.resolve({ready:false,checks:[{label:'Docker engine',ok:false,detail:'Docker is not running'}]})
+     : invoke(command,args);
+ });
+ await page.getByRole('button',{name:'Review Memos installation',exact:true}).click();
+ await expect(page.getByText('Docker is not running', {exact:true})).toBeVisible();
+ await expect(page.getByRole('button',{name:'Install Memos',exact:true})).toBeDisabled();
+ expect(await page.evaluate(() => window.__calls.some(call=>call.command==='install_app'))).toBe(false);
+ await page.keyboard.press('Escape');
+ await page.evaluate(() => {
+   const invoke = window.__TAURI__.core.invoke;
+   window.__TAURI__.core.invoke = (command,args) => {
+     if (command === 'doctor') return Promise.resolve({ready:true,checks:[{label:'Docker engine',ok:true,detail:'Ready'}]});
+     if (command === 'install_app') return Promise.reject(new Error('Port 5230 is already in use.'));
+     return invoke(command,args);
+   };
+ });
+ await page.getByRole('button',{name:'Review Memos installation',exact:true}).click();
+ await page.getByRole('button',{name:'Install Memos',exact:true}).click();
+ await expect(page.getByText('Port 5230 is already in use.')).toBeVisible();
+ await expect(page.getByRole('button',{name:'Install Memos',exact:true})).toBeEnabled();
+ await expect(page.getByRole('button',{name:'Cancel',exact:true})).toBeEnabled();
+});
+
+test('reviewed apps can also connect an existing instance', async ({page}) => {
+ await page.getByRole('button',{name:'View Memos details',exact:true}).click();
+ await page.getByRole('button',{name:'Already running it? Connect an instance',exact:true}).click();
+ await expect(page.getByLabel('App name')).toHaveValue('Memos');
+ await expect(page.getByLabel('Instance address')).toHaveValue('');
+ await expect(page.getByLabel('Instance address')).toBeFocused();
+});
+
+test('review and personal workspace visual surfaces', async ({page}) => {
+ await page.getByRole('button',{name:'Review n8n installation',exact:true}).click();
+ await expect(page.getByRole('button',{name:'Install n8n',exact:true})).toBeEnabled();
+ await expect(page).toHaveScreenshot('install-review.png', {animations:'disabled'});
+ await page.keyboard.press('Escape');
+ await page.getByRole('button',{name:'My Apps',exact:true}).click();
+ await expect(page.getByRole('heading',{name:'Studio notes',exact:true})).toBeVisible();
+ await expect(page).toHaveScreenshot('my-apps.png', {animations:'disabled'});
 });

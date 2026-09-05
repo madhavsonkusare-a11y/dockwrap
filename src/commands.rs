@@ -150,7 +150,7 @@ pub async fn install_app(window: tauri::WebviewWindow, recipe_id: String) -> Res
         .iter()
         .any(|app| app.id == recipe.id)
     {
-        return Err("Memos is already in My Apps.".into());
+        return Err(format!("{} is already in My Apps.", recipe.display_name));
     }
     let app = tauri::async_runtime::spawn_blocking(move || runtime::install_recipe(&recipe))
         .await

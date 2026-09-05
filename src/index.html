@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="light">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#111214">
   <title>Local Store</title>
   <link rel="stylesheet" href="styles/app.css">
   <script type="module" src="js/app.js"></script>
@@ -11,22 +12,30 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <aside class="sidebar">
-    <a class="brand" href="#discover" aria-label="Local Store home"><img src="assets/mark.svg" alt=""><span>Local Store<span class="brand-caption">A home for your apps</span></span></a>
+    <a class="brand" href="#discover" aria-label="Local Store home"><img src="assets/mark.svg" alt=""><span class="wordmark"><b>Local</b> Store<span class="brand-caption">A home for your apps</span></span></a>
     <p class="nav-label">WORKSPACE</p>
     <nav aria-label="Main navigation">
-      <button class="nav-item selected" id="nav-discover" aria-current="page"><img src="assets/icons/compass.svg" alt="">Discover</button>
-      <button class="nav-item" id="nav-apps"><img src="assets/icons/layout-grid.svg" alt="">My Apps<span id="app-count" class="nav-count">0</span></button>
+      <button class="nav-item selected" id="nav-discover" aria-current="page" aria-label="Discover" title="Discover"><img src="assets/icons/compass.svg" alt=""><span class="nav-text">Discover</span></button>
+      <button class="nav-item" id="nav-apps" aria-label="My Apps" title="My Apps"><img src="assets/icons/layout-grid.svg" alt=""><span class="nav-text">My Apps</span><span id="app-count" class="nav-count">0</span></button>
     </nav>
     <div class="sidebar-bottom">
       <div class="local-note"><img src="assets/icons/hard-drive.svg" alt=""><div>Your workspace.<br><span>Your infrastructure.</span></div></div>
-      <button class="nav-item" id="about"><img src="assets/icons/info.svg" alt="">About Local Store</button>
+      <button class="nav-item" id="about" aria-label="About Local Store" title="About Local Store"><img src="assets/icons/info.svg" alt=""><span class="nav-text">About Local Store</span></button>
       <div class="build-label">LOCAL STORE <span>PREVIEW</span></div>
     </div>
   </aside>
   <main id="main" tabindex="-1">
     <header class="topbar"><div class="breadcrumb">Workspace <span>/</span> <strong id="breadcrumb">Discover</strong></div><button class="primary compact" id="connect-top"><img src="assets/icons/plus.svg" alt="">Connect an app</button></header>
     <div class="workspace">
-      <section class="page-heading"><p class="eyebrow" id="eyebrow">THE SELF-HOSTED COLLECTION</p><h1 id="page-title">Good software. Your space.</h1><p class="intro" id="intro">Find your next self-hosted app. Give the ones you run a place on your desktop.</p></section>
+      <section class="page-heading"><p class="eyebrow" id="eyebrow">THE SELF-HOSTED COLLECTION</p><h1 id="page-title">Good software. Your space.</h1><p class="intro" id="intro">Discover independent apps. Bring your favorites closer to home.</p></section>
+      <section id="featured-shelf" class="featured-shelf" aria-labelledby="featured-title">
+        <div class="feature-copy"><p class="eyebrow">A GOOD PLACE TO START</p><h2 id="featured-title">Small tools.<br> Room for big ideas.</h2><p>A quiet place to write, a little less busywork, and a view of what’s running.</p><span class="feature-foot"><img src="assets/icons/hard-drive.svg" alt="">Reviewed recipes · Docker required</span></div>
+        <div class="shelf-apps" role="group" aria-label="Featured apps">
+          <button class="shelf-app" data-featured="memos" aria-label="Review Memos installation"><span class="shelf-art art-memos"><img src="assets/apps/memos.svg" alt=""></span><span class="shelf-name">Memos<img src="assets/icons/arrow-up-right.svg" alt=""></span><small>Catch a thought</small></button>
+          <button class="shelf-app" data-featured="n8n" aria-label="Review n8n installation"><span class="shelf-art art-n8n"><img src="assets/apps/n8n.svg" alt=""></span><span class="shelf-name">n8n<img src="assets/icons/arrow-up-right.svg" alt=""></span><small>Find your flow</small></button>
+          <button class="shelf-app" data-featured="uptime-kuma" aria-label="Review Uptime Kuma installation"><span class="shelf-art art-kuma"><img src="assets/apps/uptime-kuma.svg" alt=""></span><span class="shelf-name">Uptime Kuma<img src="assets/icons/arrow-up-right.svg" alt=""></span><small>Keep a quiet watch</small></button>
+        </div>
+      </section>
       <section id="discovery-note" class="discovery-note"><div class="note-icon"><img src="assets/icons/unplug.svg" alt=""></div><div><strong>Already running it? Make yourself at home.</strong><p>Connect a local or hosted instance and open it in its own desktop window.</p></div><button class="text-button" id="connect-note">Connect an app <span aria-hidden="true">↗</span></button></section>
       <div class="toolbar"><label class="search-box"><img src="assets/icons/search.svg" alt=""><input type="search" id="search" placeholder="Search apps, ideas, and tools…" aria-label="Search apps" autocomplete="off"><kbd aria-hidden="true">Ctrl K</kbd></label><label class="category-label" id="category-wrap"><span class="sr-only">Category</span><select id="category"><option value="">All categories</option></select></label></div>
       <div class="results-heading"><h2 id="results-title">Explore the collection</h2><span id="results-count" aria-live="polite"></span></div>
@@ -49,8 +58,8 @@
   <dialog id="remove-dialog" aria-labelledby="remove-title"><div class="modal-top"><p class="eyebrow">REMOVE CONNECTION</p><button class="icon-button" data-close="remove-dialog" aria-label="Close remove dialog"><img src="assets/icons/x.svg" alt=""></button></div><h2 id="remove-title">Remove this app?</h2><p class="modal-intro" id="remove-description"></p><p class="field-hint">This only removes the saved connection. The server and its data stay untouched.</p><p class="form-error" id="remove-error" role="alert"></p><div class="modal-actions"><button class="secondary" data-close="remove-dialog">Keep app</button><button class="danger" id="remove-confirm">Remove connection</button></div></dialog>
   <dialog id="install-dialog" class="wide-dialog" aria-labelledby="install-title"><div class="modal-top"><p class="eyebrow">VERIFIED INSTALL</p><button class="icon-button" data-close="install-dialog" aria-label="Close install dialog"><img src="assets/icons/x.svg" alt=""></button></div><h2 id="install-title">Review Memos installation</h2><p class="modal-intro">Review the exact container, address, storage, and prerequisites before anything changes.</p><div id="install-content" aria-live="polite"></div><p class="form-error" id="install-error" role="alert"></p><div class="modal-actions"><button class="secondary" data-close="install-dialog">Cancel</button><button class="primary" id="install-confirm">Install Memos</button></div></dialog>
   <dialog id="logs-dialog" class="wide-dialog" aria-labelledby="logs-title"><div class="modal-top"><p class="eyebrow">RECENT CONTAINER OUTPUT</p><button class="icon-button" data-close="logs-dialog" aria-label="Close logs dialog"><img src="assets/icons/x.svg" alt=""></button></div><h2 id="logs-title">App logs</h2><pre id="logs-content" class="log-view" tabindex="0"></pre><p class="form-error" id="logs-error" role="alert"></p><div class="modal-actions"><button class="primary" data-close="logs-dialog">Done</button></div></dialog>
-  <dialog id="uninstall-dialog" aria-labelledby="uninstall-title"><div class="modal-top"><p class="eyebrow">UNINSTALL MANAGED APP</p><button class="icon-button" data-close="uninstall-dialog" aria-label="Close uninstall dialog"><img src="assets/icons/x.svg" alt=""></button></div><h2 id="uninstall-title">Uninstall this app?</h2><p class="modal-intro" id="uninstall-description"></p><label class="delete-choice"><input type="checkbox" id="delete-data"> <span><strong>Delete app data too</strong><small>This permanently removes the managed data folder.</small></span></label><p class="form-error" id="uninstall-error" role="alert"></p><div class="modal-actions"><button class="secondary" data-close="uninstall-dialog">Keep app</button><button class="danger" id="uninstall-confirm">Uninstall, keep data</button></div></dialog>
-  <dialog id="about-dialog" aria-labelledby="about-title"><div class="modal-top"><p class="eyebrow">LOCAL STORE · PREVIEW</p><button class="icon-button" data-close="about-dialog" aria-label="Close about dialog"><img src="assets/icons/x.svg" alt=""></button></div><h2 id="about-title">A home for self-hosted apps.</h2><p class="modal-intro">Discover independent software, install reviewed recipes, and connect apps you already run.</p><div class="about-facts"><p><strong>Reviewed installs.</strong> Memos is the first pinned recipe. Local Store shows its container, port, storage, and risks before installation.</p><p><strong>No Local Store account.</strong> Connections and managed app records are saved on this computer. Apps retain their own sign-in requirements.</p><p><strong>Open source.</strong> Built with Tauri, Inter, and Lucide. Catalog information comes from awesome-selfhosted.</p></div><div class="modal-actions"><button class="primary" data-close="about-dialog">Got it</button></div></dialog>
+  <dialog id="uninstall-dialog" aria-labelledby="uninstall-title"><div class="modal-top"><p class="eyebrow">UNINSTALL MANAGED APP</p><button class="icon-button" data-close="uninstall-dialog" aria-label="Close uninstall dialog"><img src="assets/icons/x.svg" alt=""></button></div><h2 id="uninstall-title">Uninstall this app?</h2><p class="modal-intro" id="uninstall-description"></p><label class="delete-choice"><input type="checkbox" id="delete-data"> <span><strong>Delete app data too</strong><small>This permanently removes its managed folders and Docker volumes.</small></span></label><p class="form-error" id="uninstall-error" role="alert"></p><div class="modal-actions"><button class="secondary" data-close="uninstall-dialog">Keep app</button><button class="danger" id="uninstall-confirm">Uninstall, keep data</button></div></dialog>
+  <dialog id="about-dialog" aria-labelledby="about-title"><div class="modal-top"><p class="eyebrow">LOCAL STORE · PREVIEW</p><button class="icon-button" data-close="about-dialog" aria-label="Close about dialog"><img src="assets/icons/x.svg" alt=""></button></div><h2 id="about-title">A home for self-hosted apps.</h2><p class="modal-intro">Discover independent software, install reviewed recipes, and connect apps you already run.</p><div class="about-facts"><p><strong>Reviewed installs.</strong> Memos, n8n, and Uptime Kuma have pinned recipes. Local Store shows each container, port, storage, and risks before installation.</p><p><strong>No Local Store account.</strong> Connections and managed app records are saved on this computer. Apps retain their own sign-in requirements.</p><p><strong>Open source.</strong> Built with Tauri, Inter, and Lucide. Catalog information comes from awesome-selfhosted.</p></div><div class="modal-actions"><button class="primary" data-close="about-dialog">Got it</button></div></dialog>
   <div id="toast" class="toast" role="status" hidden></div>
 </body>
 </html>

@@ -31,7 +31,27 @@ const CATALOG_JSON: &str = include_str!("catalog_full.json");
 /// The embedded catalog is parsed exactly once, with invalid data failing loudly.
 fn cached_catalog() -> &'static [CatalogEntry] {
     static CATALOG: OnceLock<Vec<CatalogEntry>> = OnceLock::new();
-    CATALOG.get_or_init(|| serde_json::from_str(CATALOG_JSON).expect("valid embedded catalog"))
+    CATALOG.get_or_init(|| {
+        let mut entries: Vec<CatalogEntry> =
+            serde_json::from_str(CATALOG_JSON).expect("valid embedded catalog");
+        // Reviewed recipes may graduate before the upstream catalog snapshot.
+        for recipe in crate::recipes::verified_recipes() {
+            if !entries
+                .iter()
+                .any(|entry| entry.name.eq_ignore_ascii_case(&recipe.catalog_name))
+            {
+                entries.push(CatalogEntry {
+                    name: recipe.catalog_name,
+                    url: recipe.source_url,
+                    description: Some(recipe.description),
+                    category: Some(recipe.category),
+                    tags: recipe.license,
+                    ..Default::default()
+                });
+            }
+        }
+        entries
+    })
 }
 
 pub fn catalog() -> Vec<CatalogEntry> {
@@ -114,12 +134,12 @@ pub fn search_catalog(query: &str, category: &str, offset: usize, limit: usize) 
                 .filter(|s| !s.is_empty())
                 .or_else(|| e.favicon_url.clone()),
             warning: e.warning,
-            capability: if crate::recipes::recipe(&e.name.to_lowercase()).is_some() {
+            capability: if crate::recipes::recipe_for_catalog_name(&e.name).is_some() {
                 "verified_install"
             } else {
                 "connect"
             },
-            recipe_id: crate::recipes::recipe(&e.name.to_lowercase()).map(|recipe| recipe.id),
+            recipe_id: crate::recipes::recipe_for_catalog_name(&e.name).map(|recipe| recipe.id),
         })
         .collect();
     CatalogPage {
@@ -154,7 +174,7 @@ mod tests {
     }
 
     #[test]
-    fn only_reviewed_catalog_entry_advertises_verified_install() {
+    fn only_reviewed_catalog_entries_advertise_verified_install() {
         let memos = search_catalog("Memos", "", 0, 48)
             .entries
             .into_iter()
@@ -162,6 +182,15 @@ mod tests {
             .unwrap();
         assert_eq!(memos.capability, "verified_install");
         assert_eq!(memos.recipe_id.as_deref(), Some("memos"));
+        for (name, id) in [("n8n", "n8n"), ("Uptime Kuma", "uptime-kuma")] {
+            let entry = search_catalog(name, "", 0, 48)
+                .entries
+                .into_iter()
+                .find(|entry| entry.name.eq_ignore_ascii_case(name))
+                .unwrap();
+            assert_eq!(entry.capability, "verified_install");
+            assert_eq!(entry.recipe_id.as_deref(), Some(id));
+        }
         assert!(search_catalog("Immich", "", 0, 48)
             .entries
             .into_iter()

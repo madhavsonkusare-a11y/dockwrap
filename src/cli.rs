@@ -23,7 +23,7 @@ fn ensure_console() {
 fn ensure_console() {}
 
 fn usage() -> String {
-    format!("Usage:\n  {CLI_NAME} add <name> --url <url>\n  {CLI_NAME} list\n  {CLI_NAME} open <id-or-name> --browser\n  {CLI_NAME} shortcut <id-or-name>\n  {CLI_NAME} remove <id-or-name>\n  {CLI_NAME} doctor\n  {CLI_NAME} install memos\n  {CLI_NAME} start|stop|status|logs <id-or-name>\n  {CLI_NAME} uninstall <id-or-name> [--delete-data]\n  {CLI_NAME} catalog [search]\n  {CLI_NAME} version")
+    format!("Usage:\n  {CLI_NAME} add <name> --url <url>\n  {CLI_NAME} list\n  {CLI_NAME} open <id-or-name> --browser\n  {CLI_NAME} shortcut <id-or-name>\n  {CLI_NAME} remove <id-or-name>\n  {CLI_NAME} doctor\n  {CLI_NAME} install <recipe-id>\n  {CLI_NAME} recipes\n  {CLI_NAME} start|stop|status|logs <id-or-name>\n  {CLI_NAME} uninstall <id-or-name> [--delete-data]\n  {CLI_NAME} catalog [search]\n  {CLI_NAME} version")
 }
 fn get_flag(args: &[String], flag: &str) -> Option<String> {
     args.iter()
@@ -96,8 +96,9 @@ fn catalog_command(query: Option<&String>) -> i32 {
         }
     } else {
         println!(
-            "{CLI_NAME} catalog: {} projects; reviewed installs: Memos",
-            entries.len()
+            "{CLI_NAME} catalog: {} projects; {} reviewed installs",
+            entries.len(),
+            recipes::verified_recipes().len()
         );
     }
     0
@@ -194,7 +195,7 @@ pub fn run_cli() -> i32 {
             }
         }
         "install" => {
-            let id = match positional(&args, 1, &format!("Usage: {CLI_NAME} install memos")) {
+            let id = match positional(&args, 1, &format!("Usage: {CLI_NAME} install <recipe-id>")) {
                 Ok(value) => value,
                 Err(code) => return code,
             };
@@ -212,6 +213,12 @@ pub fn run_cli() -> i32 {
                     1
                 }
             }
+        }
+        "recipes" => {
+            for recipe in recipes::verified_recipes() {
+                println!("{:<14} {:<12} {}", recipe.id, recipe.version, recipe.image);
+            }
+            0
         }
         "open" => {
             let value = match positional(
@@ -390,6 +397,7 @@ mod tests {
         for command in [
             "doctor",
             "install",
+            "recipes",
             "start",
             "stop",
             "logs",

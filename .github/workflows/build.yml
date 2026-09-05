@@ -34,6 +34,8 @@ jobs:
       - run: cargo fmt --all -- --check
       - run: cargo clippy --all-targets --all-features --locked -- -D warnings
       - run: cargo test --locked
+      - name: Validate reviewed Compose recipes
+        run: python scripts/validate-recipes.py
       # Interaction and axe checks are cross-platform. Pixel baselines are
       # reviewed and updated on Windows, where the primary WebView ships.
       - run: npm test -- --ignore-snapshots

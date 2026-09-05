@@ -134,6 +134,7 @@ fn main() {
                 tauri::WebviewUrl::App("index.html".into()),
             )
             .title(PRODUCT_NAME)
+            .theme(Some(tauri::Theme::Dark))
             .inner_size(1180.0, 760.0)
             .min_inner_size(800.0, 600.0)
             .resizable(true)

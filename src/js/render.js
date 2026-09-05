@@ -5,7 +5,9 @@ export function plainDescription(value) {
 }
 export function avatar(name, url) {
   const initials = name.trim().split(/\s+/).slice(0, 2).map(word => [...word][0] || '').join('').toUpperCase();
-  const source = url && /^https:\/\//i.test(url) ? url : null;
+  const localIcons = { memos: 'memos', n8n: 'n8n', 'uptime kuma': 'uptime-kuma', immich: 'immich', 'actual budget': 'actual-budget' };
+  const localIcon = Object.hasOwn(localIcons, name.toLowerCase()) && localIcons[name.toLowerCase()];
+  const source = localIcon ? `assets/apps/${localIcon}.svg` : url && /^https:\/\//i.test(url) ? url : null;
   return `<span class="app-avatar" aria-hidden="true">${escapeHtml(initials)}${source ? `<img src="${escapeHtml(source)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : ''}</span>`;
 }
 export function discoveryCard(app, index) {
@@ -30,5 +32,5 @@ export function detail(app) {
 }
 export function recipeView(recipe, report) {
   const checks = report.checks.map(check => `<li class="doctor-check ${check.ok ? 'check-ok' : 'check-fail'}"><strong>${escapeHtml(check.label)}</strong><span>${escapeHtml(check.ok ? check.detail || 'Ready' : check.detail)}</span></li>`).join('');
-  return `<div class="recipe-summary"><div><span>Version</span><strong>${escapeHtml(recipe.version)}</strong></div><div><span>Container</span><strong>${escapeHtml(recipe.image)}</strong></div><div><span>Address</span><strong>${escapeHtml(recipe.launch_url)}</strong></div><div><span>Data folder</span><strong>Local Store / managed / ${escapeHtml(recipe.id)} / data</strong></div></div><h3 class="section-label">System check</h3><ul class="doctor-list">${checks}</ul><h3 class="section-label">What this changes</h3><ul class="risk-list">${recipe.risk_notes.map(note => `<li>${escapeHtml(note)}</li>`).join('')}</ul>`;
+  return `<div class="recipe-summary"><div><span>Version</span><strong>${escapeHtml(recipe.version)}</strong></div><div><span>Container</span><strong>${escapeHtml(recipe.image)}</strong></div><div><span>Address</span><strong>${escapeHtml(recipe.launch_url)}</strong></div><div><span>Data storage</span><strong>${escapeHtml(recipe.data_storage)}</strong></div></div><h3 class="section-label">System check</h3><ul class="doctor-list">${checks}</ul><h3 class="section-label">What this changes</h3><ul class="risk-list">${recipe.risk_notes.map(note => `<li>${escapeHtml(note)}</li>`).join('')}</ul>`;
 }

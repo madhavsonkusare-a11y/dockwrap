@@ -3,19 +3,26 @@
   "id": "memos",
   "display_name": "Memos",
   "catalog_name": "Memos",
+  "description": "A lightweight, self-hosted memo hub.",
+  "category": "Note-taking & Editors",
+  "license": "MIT",
   "version": "0.30.0",
   "image": "neosmemo/memos:0.30.0",
   "source_url": "https://github.com/usememos/memos",
   "documentation_url": "https://usememos.com/docs/deploy/docker-compose",
+  "verified_at": "2026-09-05",
   "launch_url": "http://localhost:5230",
   "health_url": "http://localhost:5230",
   "port": 5230,
-  "data_directories": ["data"],
+  "data_directories": [
+    "data"
+  ],
+  "data_storage": "Local Store managed folder / memos / data",
   "risk_notes": [
     "Creates a Docker container named local-store-memos.",
-    "Binds port 5230 on this computer.",
+    "Publishes port 5230 on this computer's loopback interface only.",
     "Stores the SQLite database and uploaded assets in the Local Store app directory.",
-    "Starts in private mode; the first user becomes the Memos administrator."
+    "Complete Memos setup and review its access settings before storing private notes."
   ],
-  "compose": "services:\n  memos:\n    image: neosmemo/memos:0.30.0\n    container_name: local-store-memos\n    restart: unless-stopped\n    ports:\n      - \"5230:5230\"\n    environment:\n      MEMOS_PORT: \"5230\"\n      MEMOS_DRIVER: sqlite\n    volumes:\n      - ./data:/var/opt/memos\n"
+  "compose": "services:\n  memos:\n    image: neosmemo/memos:0.30.0\n    container_name: local-store-memos\n    restart: unless-stopped\n    ports:\n      - \"127.0.0.1:5230:5230\"\n    environment:\n      MEMOS_PORT: \"5230\"\n      MEMOS_DRIVER: sqlite\n    volumes:\n      - ./data:/var/opt/memos\n"
 }

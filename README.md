@@ -10,20 +10,20 @@ and icon. External links (help docs, community, anything `http(s)://` not on
 
 ## Why
 
-- **Nativefier** bundles a full Chromium per app (~150 MB each) and is
-  Linux/macOS-first with spotty maintenance.
-- **WebCatalog** is closed-source and commercial.
-- **No maintained tool** ties a self-hosted Docker Compose stack to a one-click
-  native window.
+Local Store brings app discovery, reviewed Docker Compose recipes, and native
+desktop windows into one workspace. It builds on Tauri and the operating
+system's webview, with an open-source, MIT-licensed launcher.
 
-Local Store fills that gap: small Tauri binary, WebView2 on Windows, open source,
-MIT.
+The interface is dark-only: a warm, visual app shelf, clear capability labels,
+and native dialogs with keyboard and reduced-motion support.
+See the [refined brand deck](branding/brand-deck.html) and
+[identity guidelines](branding/README.md).
 
 ## How it works
 
 - **Discover** searches the embedded project catalog in bounded pages. A project
   website is presented as a source link and is never treated as your instance.
-- **Verified install** currently supports Memos with a pinned container image,
+- **Verified install** supports Memos, n8n, and Uptime Kuma with pinned images,
   a Docker/Compose preflight check, persistent local data, health verification,
   and rollback when setup fails.
 - **Connect an app** saves its name and reachable HTTP(S) address. Local Store
@@ -55,6 +55,8 @@ Add your own connection through the launcher or CLI:
 ```bash
 local-store doctor
 local-store install memos
+local-store install n8n
+local-store install uptime-kuma
 local-store add penpot --url http://localhost:9001
 local-store list
 local-store status memos
@@ -94,10 +96,12 @@ Compatibility (one release): legacy dockwrap registry and dockwrap:// deep links
 
 ### v0.5 (in progress)
 - [x] Versioned v2 registry with one-time legacy migration and recovery
-- [x] Reviewed Memos recipe with pinned image and persistent data
+- [x] Three reviewed recipes with pinned images and persistent data
 - [x] Docker doctor, transactional install, health verification, and rollback
 - [x] Managed app status, start, stop, logs, and data-preserving uninstall
-- [ ] Expand reviewed recipes after end-to-end recipe validation
+- [x] Validate every reviewed recipe with Docker Compose in CI
+- [x] Dark-only visual workspace, refined identity, and accessible motion
+- [ ] Run clean-machine installer and live-container smoke tests
 
 ## License
 
