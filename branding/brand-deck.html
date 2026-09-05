@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Local Store · Identity & interface</title>
+  <link rel="stylesheet" href="brand-deck.css">
+</head>
+<body>
+  <header class="deck-nav"><a href="#foundation"><img src="local-store-mark-reversed.svg" alt=""><span><b>Local</b> Store</span></a><span>IDENTITY & INTERFACE · 2026</span></header>
+  <main>
+    <section class="panel foundation" id="foundation">
+      <div class="panel-label"><span>01 / FOUNDATION</span><span>FAMILIAR. INDEPENDENT. YOURS.</span></div>
+      <div class="foundation-grid"><div><p class="eyebrow">A HOME FOR YOUR APPS</p><h1>A little closer<br>to home.</h1><p class="lead">Independent software, with a place on your desktop.<br>A quiet frame. One bright possibility.</p><div class="wordmark"><b>Local</b> Store<span>Self-hosted apps, made native.</span></div></div><div class="icon-stage"><img src="local-store-app-icon.svg" alt="Local Store: a warm white L and a centered coral tile on charcoal"></div></div>
+      <footer>Retaining the original L-and-tile concept. Refining its proportions, materials, and rhythm.<span>LOCAL STORE</span></footer>
+    </section>
+    <section class="panel" id="geometry">
+      <div class="panel-label"><span>02 / LOGO SYSTEM</span><span>ONE GEOMETRY, AT EVERY SIZE</span></div>
+      <h2>A little space makes<br>all the difference.</h2>
+      <div class="geometry-grid"><div class="construction"><img src="local-store-mark-reversed.svg" alt="Refined L and centered tile"><span class="centerline"></span><span class="center-label">CANVAS CENTER · 32, 32</span></div><div class="geometry-notes"><article><span>01</span><h3>The tile is centered.</h3><p>Its center sits at (32, 32) on a 64-unit canvas. On the 512-pixel app icon, the square is centered at (256, 256).</p></article><article><span>02</span><h3>The shelf has breathing room.</h3><p>A 4-unit gap separates the larger tile from the shelf. The L uses an 8-unit stroke with a soft, continuous corner.</p></article><article><span>03</span><h3>The family stays together.</h3><p>The flat mark and app icon share the same proportions. Gradients add warmth to the app icon without changing its silhouette.</p></article></div></div>
+      <footer>Flat marks stay flat. Depth belongs to the app icon and its surrounding materials.<span>64 × 64 MASTER GRID</span></footer>
+    </section>
+    <section class="panel" id="reduction">
+      <div class="panel-label"><span>03 / REDUCTION</span><span>DESIGNED FOR THE DESKTOP</span></div>
+      <h2>Still itself.<br>Even at sixteen pixels.</h2>
+      <div class="reduction-row">
+        <figure><img src="local-store-mark-reversed.svg" width="192" height="192" alt="192 pixel mark"><figcaption>192 px</figcaption></figure>
+        <figure><img src="local-store-mark-reversed.svg" width="128" height="128" alt="128 pixel mark"><figcaption>128 px</figcaption></figure>
+        <figure><img src="local-store-mark-reversed.svg" width="64" height="64" alt="64 pixel mark"><figcaption>64 px</figcaption></figure>
+        <figure><img src="local-store-mark-reversed.svg" width="32" height="32" alt="32 pixel mark"><figcaption>32 px</figcaption></figure>
+        <figure><img src="local-store-mark-reversed.svg" width="16" height="16" alt="16 pixel mark"><figcaption>16 px</figcaption></figure>
+      </div>
+      <div class="reduction-notes"><div class="mono-sample"><img src="local-store-mark-mono.svg" alt="Monochrome Local Store mark"><span>ONE INK<br><small>The shape carries the identity.</small></span></div><p>The tile and shelf remain separate at taskbar sizes. Keep the mark’s built-in clear space; use the filled app icon in launchers and OS surfaces.</p></div>
+      <footer>SVG is the source of truth. Platform exports are regenerated with the Tauri icon pipeline.<span>SVG · PNG · ICO · ICNS</span></footer>
+    </section>
+    <section class="panel" id="palette">
+      <div class="panel-label"><span>04 / COLOR & TYPE</span><span>DARK, WITH A LITTLE WARMTH</span></div>
+      <h2>Quiet materials.<br>Clear intentions.</h2>
+      <div class="swatches"><div><span class="swatch charcoal"></span><b>Charcoal</b><small>#111214 · Canvas</small></div><div><span class="swatch graphite"></span><b>Graphite</b><small>#232529 · Raised surfaces</small></div><div><span class="swatch paper"></span><b>Paper</b><small>#F8F7F3 · Primary text</small></div><div><span class="swatch signal"></span><b>Signal</b><small>#FF623E · Identity</small></div><div><span class="swatch warmth"></span><b>Warmth</b><small>#FFC1A9 → #FF9E7E · Action</small></div></div>
+      <div class="type-specimen"><div><span>INTER VARIABLE</span><p>Good software.<br>Your space.</p></div><div><h3>Less noise. More clarity.</h3><p>Optical sizing, balanced headlines, and a measured spacing scale. Weight carries hierarchy; color makes the next action apparent.</p><div class="spacing-scale"><span>4</span><span>8</span><span>12</span><span>16</span><span>24</span><span>32</span><span>48</span></div></div></div>
+      <footer>Dark mode only. Maintain legible contrast in every card, dialog, error, and disabled state.<span>INTER · LUCIDE</span></footer>
+    </section>
+    <section class="panel product" id="product">
+      <div class="panel-label"><span>05 / PRODUCT & MOTION</span><span>THE IDENTITY, IN USE</span></div>
+      <h2>Let the apps<br>take the spotlight.</h2>
+      <img class="product-preview" src="../tests/ui/app.spec.js-snapshots/discover-1280x800.png" alt="The dark Local Store Discover interface, with a featured app shelf and catalog cards">
+      <div class="motion-notes"><article><h3>Touch, then response.</h3><p>Buttons press at 0.97 scale. Pointer-driven dialogs ease between 0.96 and 1 over 250 ms, starting from their current position if interrupted.</p></article><article><h3>Speed is part of the design.</h3><p>Search and navigation stay immediate. Keyboard actions and reduced-motion preferences skip the animation. Native dialogs manage focus and Escape.</p></article></div>
+      <footer>Refined from the original five-panel Penpot brand deck. Motion informed by Emil Kowalski’s design engineering and Apple design skills.<span>SEPTEMBER 2026</span></footer>
+    </section>
+  </main>
+</body>
+</html>

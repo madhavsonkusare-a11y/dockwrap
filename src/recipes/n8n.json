@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "n8n",
+  "display_name": "n8n",
+  "catalog_name": "n8n",
+  "description": "A workflow automation platform with a visual editor and hundreds of integrations.",
+  "category": "Automation",
+  "license": "Sustainable Use License",
+  "version": "2.37.10",
+  "image": "docker.n8n.io/n8nio/n8n:2.37.10",
+  "source_url": "https://github.com/n8n-io/n8n",
+  "documentation_url": "https://github.com/n8n-io/n8n-docs/blob/main/docs/deploy/host-n8n/install-options/install-with-docker.md",
+  "verified_at": "2026-09-05",
+  "launch_url": "http://localhost:5678",
+  "health_url": "http://localhost:5678/healthz/readiness",
+  "port": 5678,
+  "data_directories": [],
+  "data_storage": "Docker volume local-store-n8n_n8n-data",
+  "risk_notes": [
+    "Creates a Docker container named local-store-n8n.",
+    "Publishes port 5678 on this computer's loopback interface only.",
+    "Stores workflows, credentials, and the encryption key in the Docker volume local-store-n8n_n8n-data.",
+    "n8n uses the Sustainable Use License and is not an OSI-approved open-source product.",
+    "External webhook delivery requires a separately configured HTTPS endpoint; this recipe stays local."
+  ],
+  "compose": "services:\n  n8n:\n    image: docker.n8n.io/n8nio/n8n:2.37.10\n    container_name: local-store-n8n\n    restart: unless-stopped\n    ports:\n      - \"127.0.0.1:5678:5678\"\n    environment:\n      N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: \"true\"\n    volumes:\n      - n8n-data:/home/node/.n8n\nvolumes:\n  n8n-data:\n"
+}

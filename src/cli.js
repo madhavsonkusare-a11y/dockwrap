@@ -3,7 +3,7 @@ const path = require('path');
 
 // Minimal CLI helper to register an app (writes apps.json)
 // Usage: node cli.js register <name> --url <url> [--icon <path>]
-const appdata = path.join(process.env.APPDATA, 'dockwrap', 'apps.json');
+const appdata = path.join(process.env.APPDATA, 'local-store', 'apps.json');
 
 function loadApps() {
   try {

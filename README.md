@@ -1,28 +1,39 @@
-# dockwrap
+# Local Store
 
-Native desktop shells for self-hosted web apps. One binary, no Electron.
+Discover self-hosted software, install reviewed local recipes, connect the
+instances you already run, and open them in dedicated desktop windows.
 
-Point dockwrap at any local web app — Penpot, your homelab dashboard, a
+Point Local Store at any local web app — Penpot, your homelab dashboard, a
 self-hosted tool — and it opens in a real native window with that app's name
 and icon. External links (help docs, community, anything `http(s)://` not on
 `localhost`) open in your **default browser**, not inside the app frame.
 
 ## Why
 
-- **Nativefier** bundles a full Chromium per app (~150 MB each) and is
-  Linux/macOS-first with spotty maintenance.
-- **WebCatalog** is closed-source and commercial.
-- **No maintained tool** ties a self-hosted Docker Compose stack to a one-click
-  native window.
+Local Store brings app discovery, reviewed Docker Compose recipes, and native
+desktop windows into one workspace. It builds on Tauri and the operating
+system's webview, with an open-source, MIT-licensed launcher.
 
-dockwrap fills that gap: small Tauri binary, WebView2 on Windows, open source,
-MIT.
+The interface is dark-only: a warm, visual app shelf, clear capability labels,
+and native dialogs with keyboard and reduced-motion support.
+See the [refined brand deck](branding/brand-deck.html) and
+[identity guidelines](branding/README.md).
 
 ## How it works
 
-- Apps are registered (name + URL, optional icon/compose/health) in a registry
-  file (`%APPDATA%/dockwrap/apps.json` on Windows, `~/.config/dockwrap/apps.json`
-  on Linux/macOS).
+- **Discover** searches the embedded project catalog in bounded pages. A project
+  website is presented as a source link and is never treated as your instance.
+- **Verified install** supports Memos, n8n, and Uptime Kuma with pinned images,
+  a Docker/Compose preflight check, persistent local data, health verification,
+  and rollback when setup fails.
+- **Connect an app** saves its name and reachable HTTP(S) address. Local Store
+  does not seed an example or imply that catalog projects are already installed.
+- **My Apps** opens connections and starts, stops, inspects, or uninstalls apps
+  managed by Local Store. Uninstall preserves app data unless deletion is
+  explicitly selected and confirmed.
+- Apps use a versioned registry at `%APPDATA%/local-store/registry-v2.json` on
+  Windows (or the platform config directory elsewhere). Existing v1 and legacy
+  registries are imported once with a backup.
 - The launcher lists them; clicking **Open** spawns a native window to that URL.
 - A tiny injected script intercepts `window.open` and external `<a>` clicks,
   rewriting the navigation to a `localhost` marker URL. Rust catches that in
@@ -39,35 +50,58 @@ cargo tauri build          # produces release binary + installer
 cargo run
 ```
 
-On first launch an example app (Penpot on `localhost:9001`) is seeded so the
-launcher is useful immediately. Add your own via the UI or the CLI:
+Add your own connection through the launcher or CLI:
 
 ```bash
-dockwrap add penpot --url http://localhost:9001 --icon /path/to/penpot.png
-dockwrap add n8n --preset n8n --compose /opt/n8n/docker-compose.yml
-dockwrap list
-dockwrap open n8n
-dockwrap shortcut n8n
-dockwrap remove penpot
-dockwrap --version
+local-store doctor
+local-store install memos
+local-store install n8n
+local-store install uptime-kuma
+local-store add penpot --url http://localhost:9001
+local-store list
+local-store status memos
+local-store logs memos
+local-store stop memos
+local-store start memos
+local-store open memos --browser
+local-store shortcut memos
+local-store remove penpot
+local-store uninstall memos
+local-store --version
 ```
+
+Compatibility (one release): legacy dockwrap registry and dockwrap:// deep links are imported/recognized.
 
 ## Roadmap
 
 ### v0.2 (shipped ✅)
-- [x] `dockwrap add <name> --url <u> --icon <i>` Rust CLI (replaces `cli.js`)
+- [x] `local-store add <name> --url <u> --icon <i>` Rust CLI (replaces `cli.js`)
 - [x] Docker Compose boot: `docker compose up -d` + health check before open
 - [x] Start Menu shortcut generation with the app's icon
-- [x] `dockwrap://open/<name>` protocol handler
+- [x] `localstore://open/<name>` protocol handler
 - [x] Per-app icon on the native window title bar
 
-### v0.3 (current)
+### v0.3 (shipped ✅)
 - [x] **Cross-platform registry path** — `apps.json` now uses `PathBuf` (was hardcoded `\`, broken on Linux/macOS)
 - [x] **Unit tests** for the registry (path, dedup, preset lookup)
-- [x] **`dockwrap --version`** / `dockwrap version` subcommand
+- [x] **`local-store --version`** / `local-store version` subcommand
 - [x] **GUI parity with CLI** — icon, compose, and health inputs; per-row Remove button; app icon + 🐳 compose badge in the launcher
-- [x] **macOS `dockwrap://`** registered via bundle `Info.plist` (`CFBundleURLTypes`)
-- [ ] (stretch, deferred) Tray minimize, export/import, auto-update, multi-window UI
+- [x] **macOS `localstore://`** registered via bundle `Info.plist` (`CFBundleURLTypes`)
+
+### v0.4 (shipped ✅ — current release)
+- [x] **Embedded app catalog** — 1,257 self-hosted app entries bundled into the binary
+- [x] **Catalog-backed setup wizard** — browse and configure catalog apps from the launcher
+- [x] **Reference recipe data** — 12 curated entries document Compose and health-check metadata for future integration
+- [x] **Broad icon coverage** — verified icon sources plus favicon fallback for entries without one
+
+### v0.5 (in progress)
+- [x] Versioned v2 registry with one-time legacy migration and recovery
+- [x] Three reviewed recipes with pinned images and persistent data
+- [x] Docker doctor, transactional install, health verification, and rollback
+- [x] Managed app status, start, stop, logs, and data-preserving uninstall
+- [x] Validate every reviewed recipe with Docker Compose in CI
+- [x] Dark-only visual workspace, refined identity, and accessible motion
+- [ ] Run clean-machine installer and live-container smoke tests
 
 ## License
 

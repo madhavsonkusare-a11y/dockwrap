@@ -1,6 +1,11 @@
-# ============================================================
-# dockwrap Design Notes
-# ============================================================
+# dockwrap Design Notes — **HISTORICAL**
+
+> These notes document the dockwrap project *before* its rebrand to **Local Store**.
+> They are preserved for historical context. For current architecture, commands, and
+> registry paths, see `README.md`, `CONTRIBUTING.md`, and the
+> [dockwrap agent profile (SOUL.md)](C:/Users/madha/AppData/Local/hermes/profiles/dockwrap_agent/SOUL.md).
+> The repo itself still lives at `github.com/madhavsonkusare-a11y/dockwrap`; only the
+> product name, CLI binary (`local-store`), and config slug (`local-store`) changed.
 # Problem:
 #   - Existing "wrap a website into a desktop app" tools (Nativefier,
 #     WebCatalog) assume the web app is already running externally.
@@ -13,7 +18,7 @@
 #   default browser (via the /__external marker bridge), keeping the design window
 #   intact.
 #
-# v0.1 scope (in-vault MVP — real, builds):
+# v0.1 scope (historical foundation):
 #   - Tauri shell: `cargo tauri build` -> dockwrap.exe
 #   - Launcher window listing registered apps (reads %APPDATA%\dockwrap\apps.json)
 #   - Click any app -> new native window to its URL
@@ -34,7 +39,7 @@
 #   - PE subsystem GUI prevents console windows on Windows launch
 #   - on_navigation handler is the proven bridge for external URLs
 #
-# v0.3 (current — released as v0.3.0):
+# v0.3 (shipped):
 #   - FIX: registry path used hardcoded '\' -> broken on Linux/macOS.
 #     Now uses std::path::PathBuf for a native, correct path on every OS.
 #   - Added unit tests for the registry (path separator, dedup, preset lookup).
@@ -44,4 +49,16 @@
 #   - macOS dockwrap:// registration via src/Info.plist (CFBundleURLTypes)
 #     referenced from tauri.conf.json bundle.macOS.infoPlist.
 #
-# Status: v0.3.0 — cross-platform correct, GUI feature-complete vs CLI, tested.
+# v0.4 (shipped as v0.4.0):
+#   - Embedded 1,257 self-hosted app catalog entries from src/catalog_full.json
+#     in the binary; runtime entries do not yet provide Compose/health values.
+#   - Added the catalog-backed launcher setup wizard.
+#   - Added 12 reference recipes in src/catalog.json with Compose/health
+#     metadata for future runtime integration; the wizard does not consume them.
+#   - Expanded icon coverage with verified sources and favicon fallback.
+#
+# Post-v0.4:
+#   - Wire verified Compose/health recipes into the runtime catalog and wizard.
+#
+# Status: v0.4.0 — current released version; catalog-enhanced, cross-platform,
+# tested, and distributed through tag-triggered CI releases.

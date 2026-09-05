@@ -1,0 +1,15 @@
+{
+  "name": "local-store-ui-tests",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test",
+    "preview": "node scripts/preview.mjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "@playwright/test": "1.62.1",
+    "lucide-static": "1.41.0"
+  }
+}

@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "dockwrap",
-  "version": "0.4.0",
-  "identifier": "com.dockwrap.app",
+  "productName": "Local Store",
+  "version": "0.5.0-1",
+  "identifier": "io.github.madhavsonkusare.localstore",
   "build": {
     "frontendDist": "src",
     "devUrl": "http://localhost:1420",
@@ -11,7 +11,36 @@
   },
   "app": {
     "windows": [],
-    "withGlobalTauri": true
+    "withGlobalTauri": true,
+    "security": {
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https: data:; font-src 'self'; connect-src ipc: http://ipc.localhost; object-src 'none'; frame-src 'none'; base-uri 'self'",
+      "capabilities": [
+        {
+          "identifier": "launcher",
+          "description": "Only the bundled launcher can manage connections.",
+          "windows": [
+            "launcher"
+          ],
+          "permissions": [
+            "core:default",
+            "allow-list-apps",
+            "allow-add-app",
+            "allow-open-app",
+            "allow-create-shortcut",
+            "allow-remove-app-cmd",
+            "allow-search-catalog",
+            "allow-open-project",
+            "allow-doctor",
+            "allow-recipe-details",
+            "allow-install-app",
+            "allow-start-app",
+            "allow-stop-app",
+            "allow-app-logs",
+            "allow-uninstall-app"
+          ]
+        }
+      ]
+    }
   },
   "bundle": {
     "active": true,

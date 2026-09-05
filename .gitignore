@@ -23,3 +23,7 @@ Thumbs.db
 # Windows null-device artifact (some tools write a literal 'nul' file)
 nul
 
+
+# UI test output
+/test-results/
+/playwright-report/
