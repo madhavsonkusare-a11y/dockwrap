@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Rename the GitHub repository to `local-store`, update repository/source links
+  and historical notes, and remove the old internal browser marker. Retain only
+  the compatibility identifiers required for existing registries and launch links.
+
 - Apply the approved Local Store logo: 224 px coral tile, top-aligned with the L,
   42 px equal gaps and concentric facing corners. Regenerate every desktop export.
 - Grow discovery from 1,259 to 1,672 projects using four pinned upstream imports,

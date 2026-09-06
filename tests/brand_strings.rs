@@ -14,12 +14,15 @@ fn shipping_files(root: &Path) -> Vec<PathBuf> {
         root.join(".github/workflows/build.yml"),
         root.join("README.md"),
         root.join("CONTRIBUTING.md"),
+        root.join("00_Design_Notes.md"),
+        root.join("scripts/catalog_pipeline.py"),
     ];
     let publish = root.join("PUBLISH.md");
     if publish.is_file() {
         files.push(publish);
     }
     collect_shipping_source_files(&root.join("src"), &mut files);
+    collect_shipping_source_files(&root.join("docs"), &mut files);
     files
 }
 
@@ -30,7 +33,7 @@ fn collect_shipping_source_files(directory: &Path, files: &mut Vec<PathBuf>) {
             collect_shipping_source_files(&path, files);
         } else if matches!(
             path.extension().and_then(|extension| extension.to_str()),
-            Some("rs" | "js" | "html" | "plist")
+            Some("rs" | "js" | "html" | "plist" | "json" | "md")
         ) {
             files.push(path);
         }
@@ -96,19 +99,8 @@ fn shipping_user_interfaces_do_not_leak_the_legacy_brand() {
 fn allowed_legacy_reference(relative: &str, line: &str) -> bool {
     // One-release migration compatibility only: named legacy constants, config
     // migration, and old URI scheme handling/registration.
-    if (relative == "src/brand.rs" && line.starts_with("pub const LEGACY_"))
-        || (relative == "Cargo.toml" && line.contains("repository ="))
+    (relative == "src/brand.rs" && line.starts_with("pub const LEGACY_"))
         || (relative == "src/Info.plist" && line.contains("<string>dockwrap</string>"))
-        || (relative == "README.md"
-            && line.trim()
-                == "Compatibility (one release): legacy dockwrap registry and dockwrap:// deep links are imported/recognized.")
-    {
-        return true;
-    }
-
-    // This is an implementation-only JavaScript bridge marker; changing it would
-    // be an unrelated behavior change.
-    relative == "src/windowing.rs" && line.contains("window.__dockwrapBridge")
 }
 
 #[test]
@@ -118,8 +110,16 @@ fn legacy_allowlist_is_limited_to_explicit_compatibility_references() {
         "this is a legacy note about dockwrap"
     ));
     assert!(allowed_legacy_reference(
-        "README.md",
-        "Compatibility (one release): legacy dockwrap registry and dockwrap:// deep links are imported/recognized."
+        "src/brand.rs",
+        "pub const LEGACY_CONFIG_SLUG: &str = \"dockwrap\";"
+    ));
+    assert!(!allowed_legacy_reference(
+        "Cargo.toml",
+        "repository = \"https://github.com/example/dockwrap\""
+    ));
+    assert!(!allowed_legacy_reference(
+        "src/windowing.rs",
+        "window.__dockwrapBridge = true;"
     ));
     assert!(!allowed_legacy_reference(
         "README.md",

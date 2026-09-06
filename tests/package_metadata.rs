@@ -19,7 +19,9 @@ fn package_metadata_is_present_in_cargo_manifest() {
     assert!(package.contains("edition = \"2021\""));
     assert!(package.contains("rust-version = \"1.77.2\""));
     assert!(package.contains("license = \"MIT\""));
-    assert!(package.contains("repository = \"https://github.com/madhavsonkusare-a11y/dockwrap\""));
+    assert!(
+        package.contains("repository = \"https://github.com/madhavsonkusare-a11y/local-store\"")
+    );
     assert!(package.contains("readme = \"README.md\""));
     assert!(package.contains("description ="));
 }

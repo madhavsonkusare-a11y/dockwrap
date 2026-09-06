@@ -41,5 +41,5 @@ Tauri adapter, with axe, Tab/Shift-Tab, failure paths and visual baselines.
 
 The recipe checks validate Compose configuration only. Native shortcut activation,
 clean installers and the full container lifecycle are still separate gates.
-GitHub's quality and OS build results are recorded on draft PR #2; no release
-tag or recipe verification promotion is part of this phase.
+GitHub's quality and OS build results are recorded in Actions on `main`; no
+release tag or recipe verification promotion is part of this phase.

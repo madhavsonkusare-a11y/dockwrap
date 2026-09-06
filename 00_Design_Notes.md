@@ -1,64 +1,44 @@
-# dockwrap Design Notes — **HISTORICAL**
+# Local Store design notes
 
-> These notes document the dockwrap project *before* its rebrand to **Local Store**.
-> They are preserved for historical context. For current architecture, commands, and
-> registry paths, see `README.md`, `CONTRIBUTING.md`, and the
-> [dockwrap agent profile (SOUL.md)](C:/Users/madha/AppData/Local/hermes/profiles/dockwrap_agent/SOUL.md).
-> The repo itself still lives at `github.com/madhavsonkusare-a11y/dockwrap`; only the
-> product name, CLI binary (`local-store`), and config slug (`local-store`) changed.
-# Problem:
-#   - Existing "wrap a website into a desktop app" tools (Nativefier,
-#     WebCatalog) assume the web app is already running externally.
-#   - They bundle Electron (150MB+ per app) and lack external-link routing.
-#   - No maintained tool ties Docker Compose boot to a native window.
-#
-# dockwrap vision:
-#   One binary, GUI subsystem (no console on Windows), loads any local web app
-#   as a native window with a custom name + icon. External links open in your
-#   default browser (via the /__external marker bridge), keeping the design window
-#   intact.
-#
-# v0.1 scope (historical foundation):
-#   - Tauri shell: `cargo tauri build` -> dockwrap.exe
-#   - Launcher window listing registered apps (reads %APPDATA%\dockwrap\apps.json)
-#   - Click any app -> new native window to its URL
-#   - External-link interceptor injected into each window (link-handler.js)
-#   - Node CLI `cli.js register <name> --url <u> --icon <i>` writes config
-#   - GUI subsystem PE = 2 (no terminal window), Penpot logo icon
-#
-# v0.2 (shipped):
-#   - Rust CLI replaces cli.js (add/list/remove/open/shortcut/presets)
-#   - Docker Compose boot + health check before open
-#   - Start Menu / .desktop shortcut generation with the app's icon
-#   - dockwrap://open/<name> protocol handler (Windows registry, Linux xdg,
-#     macOS bundle Info.plist CFBundleURLTypes)
-#   - Per-app title-bar icon
-#
-# Lessons from Penpot build applied here:
-#   - External links fail via window.open in WebView2 -> use /__external marker
-#   - PE subsystem GUI prevents console windows on Windows launch
-#   - on_navigation handler is the proven bridge for external URLs
-#
-# v0.3 (shipped):
-#   - FIX: registry path used hardcoded '\' -> broken on Linux/macOS.
-#     Now uses std::path::PathBuf for a native, correct path on every OS.
-#   - Added unit tests for the registry (path separator, dedup, preset lookup).
-#   - `dockwrap --version` / `dockwrap version` subcommand.
-#   - GUI parity with the CLI: icon + compose + health inputs, per-row Remove
-#     button, app icon thumbnail and a 🐳 compose badge in the launcher list.
-#   - macOS dockwrap:// registration via src/Info.plist (CFBundleURLTypes)
-#     referenced from tauri.conf.json bundle.macOS.infoPlist.
-#
-# v0.4 (shipped as v0.4.0):
-#   - Embedded 1,257 self-hosted app catalog entries from src/catalog_full.json
-#     in the binary; runtime entries do not yet provide Compose/health values.
-#   - Added the catalog-backed launcher setup wizard.
-#   - Added 12 reference recipes in src/catalog.json with Compose/health
-#     metadata for future runtime integration; the wizard does not consume them.
-#   - Expanded icon coverage with verified sources and favicon fallback.
-#
-# Post-v0.4:
-#   - Wire verified Compose/health recipes into the runtime catalog and wizard.
-#
-# Status: v0.4.0 — current released version; catalog-enhanced, cross-platform,
-# tested, and distributed through tag-triggered CI releases.
+This document records the project's original direction and development history.
+Current architecture, commands and registry paths are documented in
+[README.md](README.md) and [CONTRIBUTING.md](CONTRIBUTING.md).
+The repository is [Local Store](https://github.com/madhavsonkusare-a11y/local-store).
+Git history preserves the original implementation and release terminology.
+
+## Product direction
+
+Bring self-hosted apps closer to the desktop: discover projects, connect existing
+web interfaces, and open them in dedicated native windows. Adapt reviewed Docker
+Compose recipes where installation can be supported and tested. Reuse Tauri and
+the operating system's webview to keep the launcher small.
+
+An app's project website is distinct from its running instance. Links outside
+that origin open in the user's browser. Local Store keeps connection and managed
+app records on the user's computer.
+
+## Development checkpoints
+
+- **v0.1:** native windows, a local app registry, external-link interception,
+  a small Node CLI, and a Windows GUI-subsystem executable.
+- **v0.2:** Rust CLI, Compose boot and health checks, application shortcuts,
+  custom URL handling, and per-app title-bar icons.
+- **v0.3:** native path handling across operating systems, registry tests,
+  version commands, launcher configuration and macOS URL-scheme registration.
+- **v0.4:** an embedded 1,257-entry discovery snapshot, catalog setup wizard,
+  twelve reference recipe definitions and expanded remote icon coverage.
+- **v0.5 preview:** the versioned registry, migration/recovery, managed lifecycle,
+  a dark-only visual workspace, the approved L-and-tile identity, 1,672 discovery
+  projects, 508 bundled catalog icons, combined filters and Settings/Doctor.
+  Three recipes remain install previews pending real-container lifecycle tests.
+
+## Current design rules
+
+Use the Local Store product name, `local-store` executable/config slug and
+`localstore://` launch scheme. Keep the approved top alignment, equal facing
+gaps and concentric corner geometry; canonical assets live in `branding/`.
+Build on the existing Inter, Lucide, native dialogs and restrained motion system.
+
+The [33-task ledger](docs/upgrade-status.md) tracks outstanding runtime, native
+integration, installer, signing and update work. Successful builds and mocked
+tests do not replace those release gates.

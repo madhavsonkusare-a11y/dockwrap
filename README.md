@@ -75,7 +75,7 @@ local-store uninstall memos
 local-store --version
 ```
 
-Compatibility (one release): legacy dockwrap registry and dockwrap:// deep links are imported/recognized.
+Compatibility (one release): previous registry locations and launch links are imported/recognized.
 
 ## Roadmap
 

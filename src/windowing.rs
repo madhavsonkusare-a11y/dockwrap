@@ -8,8 +8,8 @@ use tauri::{Manager, WebviewUrl, WebviewWindowBuilder};
 /// catches in `on_navigation`, then launches the OS default browser.
 pub const LINK_BRIDGE_JS: &str = r#"
 (function(){
-  if (window.__dockwrapBridge) return;
-  window.__dockwrapBridge = true;
+  if (window.__localStoreBridge) return;
+  window.__localStoreBridge = true;
   const origOpen = window.open.bind(window);
   window.open = function(u, n, f) {
     if (!u) return origOpen(u, n, f);

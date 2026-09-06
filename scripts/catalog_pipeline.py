@@ -279,7 +279,7 @@ def generate(lock):
         add(row(item["name"], item["url"], None, item.get("description"), item.get("category"),
                 licenses=[item.get("tags", "").replace("`", "")], icon=item.get("icon"), legacy=True),
             {"source": "legacy", "upstream_id": item["name"], "revision": "52a36e45fbd403c1c1348f200105d9e31be2bc3c",
-             "url": "https://github.com/madhavsonkusare-a11y/dockwrap/blob/52a36e45fbd403c1c1348f200105d9e31be2bc3c/src/catalog_full.json"})
+             "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/52a36e45fbd403c1c1348f200105d9e31be2bc3c/src/catalog_full.json"})
     id_file = ROOT / 'catalog/ids.json'
     saved_ids = json.loads(id_file.read_text()) if id_file.exists() else {}
     next_ids = dict(saved_ids)
