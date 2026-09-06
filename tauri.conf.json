@@ -13,7 +13,7 @@
     "windows": [],
     "withGlobalTauri": true,
     "security": {
-      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https: data:; font-src 'self'; connect-src ipc: http://ipc.localhost; object-src 'none'; frame-src 'none'; base-uri 'self'",
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src ipc: http://ipc.localhost; object-src 'none'; frame-src 'none'; base-uri 'self'",
       "capabilities": [
         {
           "identifier": "launcher",
@@ -43,6 +43,15 @@
     }
   },
   "bundle": {
+    "resources": [
+      "THIRD_PARTY_NOTICES.md",
+      "catalog/notices/**/*",
+      "catalog/sources.lock.json",
+      "catalog/icons.json",
+      "src/assets/apps/LICENSE",
+      "src/assets/LUCIDE-LICENSE",
+      "src/fonts/OFL.txt"
+    ],
     "active": true,
     "targets": "all",
     "icon": [

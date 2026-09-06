@@ -1,10 +1,12 @@
 import { invoke } from './api.js';
-import { discoveryCard, installedRow, emptyState, detail, recipeView } from './render.js';
+import { catalogControls, defaultFilters } from './catalog-controls.js';
+import { discoveryCard, installedRow, emptyState, detail, recipeView, doctorView } from './render.js';
 import { showDialog, closeDialog, setDialogBusy, revealToast } from './motion.js';
 
 const $ = id => document.getElementById(id);
-const state = { view: 'discover', query: '', category: '', offset: 0, limit: 12, entries: [], apps: [], visibleApps: [], total: 0 };
-let request = 0, recipeRequest = 0, searchTimer, toastTimer, pendingApp, activeRecipe, refreshError;
+const state = { view: 'discover', filters: defaultFilters(), query: '', category: '', offset: 0, limit: 12, entries: [], apps: [], visibleApps: [], total: 0 };
+let request = 0, recipeRequest = 0, searchTimer, toastTimer, pendingApp, activeRecipe, refreshError, activeCatalogId;
+const controls = catalogControls(state, render);
 const message = error => error?.message || String(error);
 function toast(text) {
   clearTimeout(toastTimer);
@@ -39,15 +41,13 @@ async function render() {
   // Keep the previous results in place during search; avoid a loading flash on every key.
   if (!$('content').children.length) $('content').innerHTML = '<div class="loading" role="status">Finding your next app…</div>';
   try {
-    const page = await invoke('search_catalog', { query: state.query, category: state.category, offset: state.offset, limit: state.limit });
+    const page = await invoke('search_catalog', { query: state.query, category: state.category, offset: state.offset, limit: state.limit, filters: state.filters });
     if (token !== request) return;
-    state.entries = page.entries;
+    state.entries = page.entries.map(app => ({...app, snapshot_date:page.snapshot_date}));
     state.total = page.total;
-    const select = $('category');
-    if (select.options.length === 1) page.categories.forEach(category => select.add(new Option(category, category)));
-    select.value = state.category;
+    controls.update(page);
     $('results-count').textContent = `${page.total.toLocaleString()} ${page.total === 1 ? 'project' : 'projects'}`;
-    $('catalog-note').textContent = `${page.catalog_total.toLocaleString()} projects to discover · Reviewed installs are clearly marked`;
+    $('catalog-note').textContent = `${page.catalog_total.toLocaleString()} projects to discover · Works offline · Install previews are marked`;
     $('content').innerHTML = page.entries.length
       ? `<div class="app-grid">${page.entries.map(discoveryCard).join('')}</div>`
       : emptyState('Nothing here just yet.', 'Try a different search or category. You can also connect an app that isn’t in this collection.', 'clear', 'Clear filters', 'search');
@@ -62,7 +62,7 @@ function showError(error) { $('content').innerHTML = emptyState('We couldn’t l
 function navigate(view) {
   clearTimeout(searchTimer);
   state.view = view; state.query = ''; state.category = ''; state.offset = 0;
-  $('search').value = ''; $('category').value = '';
+  $('search').value = ''; controls.reset();
   const discover = view === 'discover';
   for (const [id, active] of [['nav-discover', discover], ['nav-apps', !discover]]) {
     $(id).classList.toggle('selected', active);
@@ -74,13 +74,15 @@ function navigate(view) {
   $('intro').textContent = discover ? 'Discover independent apps. Bring your favorites closer to home.' : 'Your apps, their own windows. All within reach.';
   $('results-title').textContent = discover ? 'Explore the collection' : 'Your apps';
   $('search').placeholder = discover ? 'Search apps, ideas, and tools…' : 'Search your apps…';
-  for (const id of ['discovery-note', 'category-wrap', 'featured-shelf']) $(id).hidden = !discover;
+  for (const id of ['discovery-note', 'filter-open', 'featured-shelf', 'collections', 'catalog-controls', 'active-filters']) $(id).hidden = !discover;
   $('catalog-note').textContent = discover ? 'Independent software. A little closer to home.' : 'Your app registry is saved on this computer.';
   $('content').replaceChildren();
   window.scrollTo({ top: 0, behavior: 'instant' });
   render();
 }
-function openConnect(name = '') {
+function openConnect(name = '', catalogId = null) {
+  activeCatalogId = catalogId;
+  $('connect-name').removeAttribute('aria-invalid'); $('connect-url').removeAttribute('aria-invalid');
   $('connect-form').reset();
   $('connect-name').value = name;
   $('connect-error').textContent = '';
@@ -114,7 +116,7 @@ async function reviewInstall(recipeId) {
 }
 function showDetail(app) {
   $('detail-content').innerHTML = detail(app);
-  if (app.capability === 'verified_install') {
+  if (app.capability === 'preview_install') {
     const connect = document.createElement('button');
     connect.id = 'detail-connect';
     connect.className = 'text-button detail-connect';
@@ -124,9 +126,11 @@ function showDetail(app) {
   showDialog($('detail-dialog'));
   $('detail-primary').onclick = async () => {
     await closeDialog($('detail-dialog'));
-    app.capability === 'verified_install' ? reviewInstall(app.recipe_id) : openConnect(app.name);
+    if (app.capability === 'preview_install') reviewInstall(app.recipe_id);
+    else if (app.capability === 'discover') { try { await invoke('open_project', { url: app.website_url || app.source_url }); } catch (error) { toast(message(error)); } }
+    else openConnect(app.name, app.id);
   };
-  $('detail-connect')?.addEventListener('click', async () => { await closeDialog($('detail-dialog')); openConnect(app.name); });
+  $('detail-connect')?.addEventListener('click', async () => { await closeDialog($('detail-dialog')); openConnect(app.name, app.id); });
   $('open-source').onclick = async () => {
     try { await invoke('open_project', { url: app.source_url }); }
     catch (error) { $('detail-error').textContent = message(error); }
@@ -146,11 +150,18 @@ $('nav-apps').onclick = async () => { await refreshApps(); navigate('apps'); };
 document.querySelector('.brand').onclick = event => { event.preventDefault(); navigate('discover'); };
 $('connect-top').onclick = $('connect-note').onclick = () => openConnect();
 $('about').onclick = () => showDialog($('about-dialog'));
+$('settings').onclick = () => showDialog($('settings-dialog'));
+$('run-doctor').onclick = async () => {
+  const button = $('run-doctor'); button.disabled = true; button.textContent = 'Checking…';
+  $('doctor-error').textContent = ''; $('doctor-output').innerHTML = '';
+  try { $('doctor-output').innerHTML = doctorView(await invoke('doctor')); }
+  catch (error) { $('doctor-error').textContent = message(error); }
+  finally { button.disabled = false; button.textContent = 'Run again'; }
+};
 $('search').addEventListener('input', () => {
   clearTimeout(searchTimer); ++request; state.query = $('search').value; state.offset = 0;
   searchTimer = setTimeout(render, 180);
 });
-$('category').onchange = () => { clearTimeout(searchTimer); state.category = $('category').value; state.offset = 0; render(); };
 $('previous').onclick = () => { state.offset = Math.max(0, state.offset - state.limit); render(); };
 $('next').onclick = () => { state.offset += state.limit; render(); };
 document.addEventListener('keydown', event => {
@@ -160,6 +171,7 @@ document.addEventListener('error', event => { if (event.target.matches?.('.app-a
 document.addEventListener('click', async event => {
   const button = event.target.closest('button');
   if (!button) return;
+  if (button.dataset.projectUrl) { try { await invoke('open_project', { url: button.dataset.projectUrl }); } catch (error) { $('detail-error').textContent = message(error); } return; }
   if (button.dataset.close) { await closeDialog($(button.dataset.close)); return; }
   if (button.dataset.featured) { reviewInstall(button.dataset.featured); return; }
   if (button.dataset.detail !== undefined) { showDetail(state.entries[Number(button.dataset.detail)]); return; }
@@ -167,7 +179,7 @@ document.addEventListener('click', async event => {
   if (button.dataset.action === 'discover') navigate('discover');
   if (button.dataset.action === 'clear') {
     clearTimeout(searchTimer);
-    $('search').value = ''; $('category').value = ''; state.query = ''; state.category = ''; state.offset = 0; render();
+    $('search').value = ''; controls.reset(); state.query = ''; state.category = ''; state.offset = 0; render();
   }
   if (button.dataset.action === 'retry') { await refreshApps(); render(); }
   const keyed = ['open', 'shortcut', 'start', 'stop', 'logs', 'remove', 'uninstall'].find(key => button.dataset[key] !== undefined);
@@ -196,6 +208,8 @@ document.addEventListener('click', async event => {
   catch (error) { $(`app-error-${state.visibleApps.indexOf(app)}`).textContent = message(error); }
   finally { button.disabled = false; button.innerHTML = old; }
 });
+$('connect-name').addEventListener('input', () => { $('connect-name').removeAttribute('aria-invalid'); $('connect-error').textContent = ''; });
+$('connect-url').addEventListener('input', () => { $('connect-url').removeAttribute('aria-invalid'); $('connect-error').textContent = ''; });
 $('connect-form').onsubmit = async event => {
   event.preventDefault();
   const name = $('connect-name').value.trim(), rawUrl = $('connect-url').value.trim();
@@ -205,11 +219,16 @@ $('connect-form').onsubmit = async event => {
     if (!name) throw new Error('Enter a name for this connection.');
     $('connect-submit').disabled = true; $('connect-submit').textContent = 'Saving…'; $('connect-error').textContent = '';
     setDialogBusy($('connect-dialog'), true);
-    await invoke('add_app', { name, url: rawUrl });
+    await invoke('add_app', { name, url: rawUrl, ...(activeCatalogId ? { catalogId: activeCatalogId } : {}) });
     setDialogBusy($('connect-dialog'), false);
     await closeDialog($('connect-dialog'));
     await refreshApps(); navigate('apps'); toast(`${name} added to My Apps.`);
-  } catch (error) { $('connect-error').textContent = message(error); }
+  } catch (error) {
+    const text = message(error);
+    $('connect-error').textContent = text;
+    if (/http|address|url/i.test(text)) $('connect-url').setAttribute('aria-invalid', 'true');
+    else if (/name/i.test(text)) $('connect-name').setAttribute('aria-invalid', 'true');
+  }
   finally { setDialogBusy($('connect-dialog'), false); $('connect-submit').disabled = false; $('connect-submit').textContent = 'Add to My Apps →'; }
 };
 $('install-confirm').onclick = async () => {

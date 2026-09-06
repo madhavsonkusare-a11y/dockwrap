@@ -27,3 +27,5 @@ nul
 # UI test output
 /test-results/
 /playwright-report/
+/.cache/
+__pycache__/

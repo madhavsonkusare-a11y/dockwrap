@@ -22,6 +22,7 @@ fn create_shortcut(window: tauri::WebviewWindow, id: String) -> Result<String, S
         .into_owned();
     platform::create_shortcut_for(
         &app.id,
+        &app.display_name,
         &bin,
         app.icon_path.as_ref().and_then(|path| path.to_str()),
     )
@@ -48,6 +49,7 @@ async fn open_app(
     }
     windowing::build_window(
         &app_handle,
+        &app.id,
         &app.display_name,
         &app.launch_url,
         app.icon_path.as_ref().and_then(|path| path.to_str()),
@@ -79,17 +81,34 @@ fn parse_deep_link(input: &str) -> Option<(String, String)> {
 
 fn main() {
     let args: Vec<String> = std::env::args().collect();
+    if args.get(1).is_some_and(|arg| arg == "open") {
+        cli::ensure_console();
+    }
     // Primary and legacy protocol handlers are passed as a single argument by the OS.
     if let Some(first) = args.get(1) {
-        if let Some((scheme, name)) = parse_deep_link(first) {
+        if let Some((scheme, name)) =
+            parse_deep_link(first).or_else(|| native_open_request(&args[1..]))
+        {
             // Boot the referenced app's stack, then open its window.
-            let apps = storage::load_or_migrate_registry()
-                .map(|registry| registry.apps)
-                .unwrap_or_default();
-            if let Some(appdef) = apps.iter().find(|a| a.id == name) {
-                if appdef.is_managed() {
-                    let _ = runtime::start(appdef);
+            let apps = match storage::load_or_migrate_registry() {
+                Ok(registry) => registry.apps,
+                Err(error) => {
+                    eprintln!("Could not load apps: {error}");
+                    std::process::exit(1);
                 }
+            };
+            if let Some(appdef) = apps.iter().find(|a| {
+                a.id == name
+                    || ((scheme == LEGACY_URL_SCHEME || scheme == "cli")
+                        && a.display_name.eq_ignore_ascii_case(&name))
+            }) {
+                if appdef.is_managed() {
+                    if let Err(error) = runtime::start(appdef) {
+                        eprintln!("Could not start app: {error}");
+                        std::process::exit(1);
+                    }
+                }
+                let open_id = appdef.id.clone();
                 let open_name = appdef.display_name.clone();
                 let url = appdef.launch_url.clone();
                 let icon = appdef.icon_path.clone();
@@ -97,6 +116,7 @@ fn main() {
                     .setup(move |app| {
                         windowing::build_window(
                             app.handle(),
+                            &open_id,
                             &open_name,
                             &url,
                             icon.as_ref().and_then(|path| path.to_str()),
@@ -109,6 +129,7 @@ fn main() {
                 return;
             } else {
                 eprintln!("{scheme}://open/{name}: no such app");
+                std::process::exit(1);
             }
         }
     }
@@ -162,9 +183,30 @@ fn main() {
         .expect("error while running Local Store");
 }
 
+fn native_open_request(args: &[String]) -> Option<(String, String)> {
+    match args {
+        [command, name] if command == "open" && !name.is_empty() && !name.starts_with('-') => {
+            Some(("cli".into(), name.clone()))
+        }
+        _ => None,
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn native_cli_open_is_dispatched_without_browser_flag() {
+        assert_eq!(
+            native_open_request(&["open".into(), "My notes".into()]),
+            Some(("cli".into(), "My notes".into()))
+        );
+        assert!(
+            native_open_request(&["open".into(), "memos".into(), "--browser".into()]).is_none()
+        );
+        assert!(native_open_request(&["open".into(), "--browser".into()]).is_none());
+    }
 
     #[test]
     fn parses_primary_deep_link_with_one_percent_decoded_name_segment() {

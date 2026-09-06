@@ -69,7 +69,12 @@ pub fn validate_connection(name: &str, url: &str) -> Result<(String, String), St
     Ok((name.into(), windowing::validated_external_url(url.trim())?))
 }
 #[tauri::command]
-pub fn add_app(window: tauri::WebviewWindow, name: String, url: String) -> Result<(), String> {
+pub fn add_app(
+    window: tauri::WebviewWindow,
+    name: String,
+    url: String,
+    catalog_id: Option<String>,
+) -> Result<(), String> {
     require_launcher(&window)?;
     let (name, url) = validate_connection(&name, &url)?;
     let _lock = REGISTRY_WRITE.lock().map_err(|e| e.to_string())?;
@@ -89,7 +94,7 @@ pub fn add_app(window: tauri::WebviewWindow, name: String, url: String) -> Resul
     let timestamp = now()?;
     storage::insert_installed_app(InstalledApp {
         id,
-        catalog_id: None,
+        catalog_id: catalog_id.as_deref().and_then(catalog::catalog_id),
         display_name: name,
         launch_url: url,
         icon_path: None,
@@ -118,9 +123,16 @@ pub fn search_catalog(
     category: String,
     offset: usize,
     limit: usize,
+    filters: Option<catalog::Filters>,
 ) -> Result<catalog::CatalogPage, String> {
     require_launcher(&window)?;
-    Ok(catalog::search_catalog(&query, &category, offset, limit))
+    Ok(catalog::search_filtered(
+        &query,
+        &category,
+        offset,
+        limit,
+        &filters.unwrap_or_default(),
+    ))
 }
 #[tauri::command]
 pub fn open_project(window: tauri::WebviewWindow, url: String) -> Result<(), String> {

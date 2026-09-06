@@ -1,75 +1,55 @@
 //! Platform integration: OS shortcuts and protocol-handler registration.
 
-#[cfg(not(windows))]
+#[cfg(all(unix, not(target_os = "macos")))]
 use crate::brand::CLI_NAME;
 use crate::brand::{LEGACY_URL_SCHEME, PRODUCT_NAME, URL_SCHEME};
 
-/// Create an OS shortcut (Start Menu on Windows, ~/.local/share/applications on
-/// Linux) that launches the current CLI with the app's icon.
-/// Returns the path written, or an error string.
-pub fn create_shortcut_for(name: &str, bin: &str, icon: Option<&str>) -> Result<String, String> {
+pub mod shortcut;
+
+/// Write a native protocol shortcut using a stable ID as the filename.
+pub fn create_shortcut_for(
+    id: &str,
+    name: &str,
+    bin: &str,
+    icon: Option<&str>,
+) -> Result<String, String> {
     #[cfg(windows)]
     {
-        create_shortcut_windows(name, bin, icon)
+        let _ = (name, bin);
+        let content = shortcut::windows_content(id, icon)?;
+        let dir =
+            std::path::PathBuf::from(std::env::var_os("APPDATA").ok_or("APPDATA is unavailable")?)
+                .join("Microsoft/Windows/Start Menu/Programs");
+        write_shortcut(&dir, &format!("{PRODUCT_NAME} - {id}.url"), &content)
     }
-    #[cfg(not(windows))]
+    #[cfg(all(unix, not(target_os = "macos")))]
     {
-        create_shortcut_unix(name, bin, icon)
+        let content = shortcut::linux_content(id, name, bin, icon)?;
+        let dir = std::env::var_os("XDG_DATA_HOME")
+            .map(std::path::PathBuf::from)
+            .or_else(|| {
+                std::env::var_os("HOME")
+                    .map(|home| std::path::PathBuf::from(home).join(".local/share"))
+            })
+            .ok_or("No application data directory is available")?
+            .join("applications");
+        write_shortcut(&dir, &format!("{CLI_NAME}-{id}.desktop"), &content)
+    }
+    #[cfg(target_os = "macos")]
+    {
+        let _ = (name, bin, icon);
+        let content = shortcut::macos_content(id)?;
+        let dir = std::path::PathBuf::from(std::env::var_os("HOME").ok_or("HOME is unavailable")?)
+            .join("Desktop");
+        write_shortcut(&dir, &format!("{PRODUCT_NAME} - {id}.webloc"), &content)
     }
 }
 
-#[cfg(windows)]
-fn create_shortcut_windows(name: &str, bin: &str, icon: Option<&str>) -> Result<String, String> {
-    let start_menu =
-        std::env::var("APPDATA").unwrap_or_default() + "\\Microsoft\\Windows\\Start Menu\\Programs";
-    let _ = std::fs::create_dir_all(&start_menu);
-    let lnk_path = format!("{}\\{} - {}.lnk", start_menu, PRODUCT_NAME, name);
-    // Use WScript.Shell COM (the standard, dependency-free way to write a .lnk)
-    // via PowerShell. Arguments are passed with single-quoted heredoc-safe escaping.
-    let esc = |s: &str| s.replace('\'', "''");
-    let icon_arg = match icon {
-        Some(ic) => format!("$sc.IconLocation='{},0';", esc(ic)),
-        None => String::new(),
-    };
-    let ps = format!(
-        "$ws=New-Object -ComObject WScript.Shell; \
-         $sc=$ws.CreateShortcut('{}'); \
-         $sc.TargetPath='{}'; \
-         $sc.Arguments='open {}'; \
-         {} \
-         $sc.Save();",
-        esc(&lnk_path),
-        esc(bin),
-        esc(name),
-        icon_arg
-    );
-    let status = std::process::Command::new("powershell")
-        .args(["-NoProfile", "-NonInteractive", "-Command", &ps])
-        .status();
-    match status {
-        Ok(s) if s.success() => Ok(lnk_path),
-        Ok(s) => Err(format!("powershell shortcut failed: {}", s)),
-        Err(e) => Err(format!("failed to spawn powershell: {}", e)),
-    }
-}
-
-#[cfg(not(windows))]
-fn create_shortcut_unix(name: &str, bin: &str, icon: Option<&str>) -> Result<String, String> {
-    let dir = std::env::var("XDG_DATA_HOME")
-        .unwrap_or_else(|_| format!("{}/.local/share", std::env::var("HOME").unwrap_or_default()))
-        + "/applications";
-    let _ = std::fs::create_dir_all(&dir);
-    let desktop = format!("{}/{}-{}.desktop", dir, CLI_NAME, name);
-    let icon_line = icon.map(|i| format!("Icon={}\n", i)).unwrap_or_default();
-    let content = format!(
-        "[Desktop Entry]\nType=Application\nName={name}\nExec=\"{bin}\" open {name}\n{icon_line}Terminal=false\nCategories=Utility;\n"
-    );
-    std::fs::write(&desktop, content).map_err(|e| e.to_string())?;
-    let _ = std::fs::set_permissions(
-        &desktop,
-        std::os::unix::fs::PermissionsExt::from_mode(0o755),
-    );
-    Ok(desktop)
+fn write_shortcut(dir: &std::path::Path, filename: &str, content: &str) -> Result<String, String> {
+    std::fs::create_dir_all(dir).map_err(|error| error.to_string())?;
+    let path = dir.join(filename);
+    std::fs::write(&path, content).map_err(|error| error.to_string())?;
+    Ok(path.to_string_lossy().into_owned())
 }
 
 /// Register primary and one-release legacy URL schemes with the OS (best-effort;

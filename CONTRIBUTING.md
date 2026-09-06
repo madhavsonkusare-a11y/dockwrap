@@ -15,22 +15,23 @@ cargo tauri build    # release binary + installer in target/release/bundle
 
 - Keep it dependency-light. The current footprint is Tauri, serde, serde_json,
   and narrowly scoped platform APIs; add dependencies only with a clear need.
-- External-link routing lives in `src/main.rs` (`LINK_BRIDGE_JS` + `on_navigation`).
-  Don't break that contract — it's the one feature that separates Local Store
-  from a bare webview.
-- App registry is `%APPDATA%/local-store/apps.json` (or `~/.config/local-store/`
-  on Linux/macOS). Treat it as the single source of truth.
+- External-link routing lives in `src/windowing.rs`. Preserve origin checks and
+  the launcher-only Tauri capability boundary.
+- App registry is `%APPDATA%/local-store/registry-v2.json` on Windows, under the
+  platform config directory elsewhere. Preserve migration/recovery semantics.
 - GUI-subsystem binary on Windows: keep `#![cfg_attr(not(debug_assertions),
   windows_subsystem = "windows")]` — no console window on launch.
 
 ## Before opening a PR
 
-- `cargo build` is clean
-- `cargo test` passes
-- README roadmap item checked off if you shipped a feature
+- `cargo fmt --all -- --check`, clippy with warnings denied, and `cargo test --locked`
+- `npm ci` and `npm test` (Windows visual baselines; Linux CI checks interactions/axe)
+- Offline catalog/icon/brand checks described in [the catalog guide](docs/catalog.md)
+- Update the current [task ledger](docs/upgrade-status.md) with actual evidence
 
 ## Current focus
 
-The v0.4.0 release added the embedded catalog and setup wizard. Keep follow-up
-work small and focused on catalog quality, reliability, or post-v0.4 roadmap
-items as they are defined in the README.
+The v0.5 preview combines discovery, connected instances and three install
+previews. Reuse upstream metadata and deployment instructions, then adapt and
+test recipes individually. Never promote an imported Compose file automatically.
+Runtime reliability, native integration and clean-machine verification are next.

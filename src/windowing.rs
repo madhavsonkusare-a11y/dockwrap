@@ -108,20 +108,17 @@ pub use crate::runtime::launch_browser;
 
 pub fn build_window(
     app: &tauri::AppHandle,
+    id: &str,
     name: &str,
     url: &str,
     icon: Option<&str>,
 ) -> Result<(), String> {
     let url = validated_external_url(url)?;
     let parsed = url.parse::<tauri::Url>().map_err(|e| e.to_string())?;
-    // Stable, collision-free labels independent of display-name punctuation.
-    let label = format!(
-        "app-{}",
-        name.as_bytes()
-            .iter()
-            .map(|b| format!("{b:02x}"))
-            .collect::<String>()
-    );
+    if !crate::model::is_valid_installed_app_id(id) {
+        return Err("Invalid app ID for window.".into());
+    }
+    let label = format!("app-{id}");
     if let Some(window) = app.get_webview_window(&label) {
         window.show().map_err(|e| e.to_string())?;
         return window.set_focus().map_err(|e| e.to_string());

@@ -1,0 +1,10 @@
+* text=auto
+# Generated checksums must survive Windows checkouts unchanged.
+*.json text eol=lf
+*.svg text eol=lf
+# Upstream icon checksums cover the exact downloaded bytes, including newlines.
+src/assets/catalog/*.svg -text
+*.png binary
+*.ico binary
+*.icns binary
+*.woff2 binary

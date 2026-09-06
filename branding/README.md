@@ -23,16 +23,23 @@ and integrations that supply a light background.
 
 ## Geometry
 
-The mark uses a 64 × 64 canvas. The L has an 8-unit stroke, round ends, and a
-7-unit inner corner. Its visible bounds are x = 11–53, y = 9–55.
+The approved 64 × 64 mark uses an 8-unit L stroke. Its visible bounds are
+x = 9–55, y = 9–55. The 32 × 32 tile starts at (23, 9), with radius 8.
+The top edges align at y = 9 and both facing gaps are exactly 6 units.
 
-The orange tile is 22 × 22, positioned at (21, 21), with a 5.5-unit corner radius.
-Its center is **(32, 32)**, the exact canvas center. Its enlarged area balances
-the L's visual weight. Keep the 2-unit side gap and 4-unit shelf gap intact.
+The tile's lower-left arc and the L's facing arc share center (31, 33).
+Their radii are 8 and 14: the difference is the 6-unit gap. The L centerline
+radius is 18 and its outside radius is 22.
 
-The 512 × 512 application icon uses the same mark at 7× scale with a 32-pixel
-offset. The orange square is 154 × 154 at (179, 179), centered at **(256, 256)**.
-Do not independently move the tile in platform exports.
+At 512 × 512, apply scale 7 and offset 32. The tile is 224 × 224 at (193, 95),
+radius 56. Both top edges align at y = 95; both facing gaps are 42 pixels.
+The shared corner center is (249, 263), with facing radii 56 and 98.
+Overall margins are 95 pixels on every side. The whole mark is centered;
+the tile is positioned by its alignment with the L.
+
+`node scripts/generate-brand.mjs --check` verifies the source assets and the
+constant separation across 10,001 quarter-circle samples. Change the generator
+to revise geometry; regenerate every variant together.
 
 ## Palette
 
@@ -45,7 +52,7 @@ Do not independently move the tile in platform exports.
 | Signal | `#FF623E` | Flat identity tile |
 | Warmth | `#FFC1A9` → `#FF9E7E` | Primary action material |
 | Muted | `#A3A5AC` | Supporting text |
-| Mint | `#9AD8B6` | Verified capability and running states |
+| Mint | `#9AD8B6` | Recipe capability and running states |
 
 Keep gradients static and local to surfaces. Use weight, spacing, and contrast
 for hierarchy. Preserve app logos' original colors and shapes inside their tiles.
@@ -65,7 +72,7 @@ Support reduced transparency and increased contrast.
 
 ## Exports and verification
 
-Edit the SVG sources, then regenerate; don't retouch raster exports:
+Run `node scripts/generate-brand.mjs`, then regenerate; don't retouch raster exports:
 
 ```sh
 cargo tauri icon branding/local-store-app-icon.svg

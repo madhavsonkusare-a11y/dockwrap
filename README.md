@@ -5,8 +5,8 @@ instances you already run, and open them in dedicated desktop windows.
 
 Point Local Store at any local web app — Penpot, your homelab dashboard, a
 self-hosted tool — and it opens in a real native window with that app's name
-and icon. External links (help docs, community, anything `http(s)://` not on
-`localhost`) open in your **default browser**, not inside the app frame.
+and icon. Links outside the connected app's origin open in your **default
+browser**. Local, LAN and hosted HTTPS instances are supported.
 
 ## Why
 
@@ -23,9 +23,13 @@ See the [refined brand deck](branding/brand-deck.html) and
 
 - **Discover** searches the embedded project catalog in bounded pages. A project
   website is presented as a source link and is never treated as your instance.
-- **Verified install** supports Memos, n8n, and Uptime Kuma with pinned images,
+  Browse **1,672 projects**, four interest collections, combined filters and
+  source provenance. **508 catalog icons** are bundled for offline use.
+- **Preview install** supports Memos, n8n, and Uptime Kuma with pinned images,
   a Docker/Compose preflight check, persistent local data, health verification,
   and rollback when setup fails.
+  These three recipes have configuration checks; full real-container lifecycle
+  verification is still pending.
 - **Connect an app** saves its name and reachable HTTP(S) address. Local Store
   does not seed an example or imply that catalog projects are already installed.
 - **My Apps** opens connections and starts, stops, inspects, or uninstalls apps
@@ -64,6 +68,7 @@ local-store logs memos
 local-store stop memos
 local-store start memos
 local-store open memos --browser
+local-store open memos             # dedicated native window
 local-store shortcut memos
 local-store remove penpot
 local-store uninstall memos
@@ -101,8 +106,16 @@ Compatibility (one release): legacy dockwrap registry and dockwrap:// deep links
 - [x] Managed app status, start, stop, logs, and data-preserving uninstall
 - [x] Validate every reviewed recipe with Docker Compose in CI
 - [x] Dark-only visual workspace, refined identity, and accessible motion
+- [x] Approved top-aligned logo and mathematically verified corner spacing
+- [x] Four reproducible source imports, stable catalog IDs and offline artwork
+- [x] Combined discovery filters, collections, source details and Settings/Doctor
+- [x] Protocol shortcuts and native CLI opening with stable window IDs
 - [ ] Run clean-machine installer and live-container smoke tests
+
+See the [current 33-task ledger](docs/upgrade-status.md),
+[catalog contribution guide](docs/catalog.md) and [phase record](docs/catalog-phase.md).
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+Original launcher code: MIT — see [LICENSE](LICENSE). Imported catalog material,
+fonts and icons retain their licenses; see [third-party notices](THIRD_PARTY_NOTICES.md).

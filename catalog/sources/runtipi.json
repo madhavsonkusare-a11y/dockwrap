@@ -1,0 +1,4388 @@
+{
+  "excluded": [],
+  "records": [
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "security"
+      ],
+      "description": "Manage your Two-Factor Authentication codes.",
+      "name": "2FAuth",
+      "source_url": "https://github.com/Bubka/2FAuth",
+      "upstream_id": "apps/2fauth/config.json",
+      "web_ui": true,
+      "website_url": "https://docs.2fauth.app/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "automation"
+      ],
+      "description": "True zapier alternative.",
+      "name": "Activepieces",
+      "source_url": "https://github.com/activepieces/activepieces",
+      "upstream_id": "apps/activepieces/config.json",
+      "web_ui": true,
+      "website_url": "https://www.activepieces.com/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "finance"
+      ],
+      "description": "Local-first OpenSource Budget tool",
+      "name": "Actual Budget",
+      "source_url": "https://github.com/actualbudget/actual",
+      "upstream_id": "apps/actual-budget/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "network",
+        "security"
+      ],
+      "description": "World's most advanced adblocker!",
+      "name": "Adguard",
+      "source_url": "https://github.com/AdguardTeam",
+      "upstream_id": "apps/adguard/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "network",
+        "utilities"
+      ],
+      "description": "Synchronize AdGuard Home config to replicas",
+      "name": "Adguard Home Sync",
+      "source_url": "https://github.com/bakito/adguardhome-sync",
+      "upstream_id": "apps/adguardhome-sync/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "AFFiNE is a workspace with fully merged docs, whiteboards and databases.",
+      "name": "AFFiNE",
+      "source_url": "https://github.com/toeverything/affine",
+      "upstream_id": "apps/affine/config.json",
+      "web_ui": true,
+      "website_url": "https://affine.pro"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "ai"
+      ],
+      "description": "Fully optimized UI for AI Chats.",
+      "name": "Anse",
+      "source_url": "https://github.com/anse-app/anse",
+      "upstream_id": "apps/anse/config.json",
+      "web_ui": true,
+      "website_url": "https://anse.app"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media"
+      ],
+      "description": "Open source self-hosted web archiving.",
+      "name": "ArchiveBox",
+      "source_url": "https://github.com/ArchiveBox/ArchiveBox",
+      "upstream_id": "apps/archivebox/config.json",
+      "web_ui": true,
+      "website_url": "https://archivebox.io"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities",
+        "development"
+      ],
+      "description": "Magical Shell History",
+      "name": "Atuin Server",
+      "source_url": "https://github.com/atuinsh/atuin",
+      "upstream_id": "apps/atuin/config.json",
+      "web_ui": true,
+      "website_url": "https://atuin.sh"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "books",
+        "media"
+      ],
+      "description": "Audiobookshelf is a self-hosted audiobook and podcast server.",
+      "name": "Audiobookshelf",
+      "source_url": "https://github.com/advplyr/audiobookshelf",
+      "upstream_id": "apps/audiobookshelf/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "development"
+      ],
+      "description": "The authentication glue you need.",
+      "name": "Authentik",
+      "source_url": "https://github.com/goauthentik/authentik",
+      "upstream_id": "apps/authentik-1/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media"
+      ],
+      "description": "Automation for downloads.",
+      "name": "autobrr",
+      "source_url": "https://github.com/autobrr/autobrr",
+      "upstream_id": "apps/autobrr/config.json",
+      "web_ui": true,
+      "website_url": "https://autobrr.com/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "data",
+        "utilities"
+      ],
+      "description": "Calendar + Contacts server",
+      "name": "Baïkal",
+      "source_url": "https://github.com/aalmenar/baikal-docker",
+      "upstream_id": "apps/baikal/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Minimal Deluge WebUI with full mobile support",
+      "name": "Barrage",
+      "source_url": "https://github.com/maulik9898/barrage",
+      "upstream_id": "apps/barrage/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media",
+        "utilities"
+      ],
+      "description": "A companion application to Sonarr and Radarr that manages and downloads subtitles",
+      "name": "Bazarr",
+      "source_url": "https://github.com/morpheus65535/bazarr",
+      "upstream_id": "apps/bazarr/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Agent software for Beszel.",
+      "name": "Beszel Agent",
+      "source_url": "https://github.com/henrygd/beszel",
+      "upstream_id": "apps/beszel-agent/config.json",
+      "web_ui": false,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Lightweight server monitoring.",
+      "name": "Beszel",
+      "source_url": "https://github.com/henrygd/beszel",
+      "upstream_id": "apps/beszel/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "data"
+      ],
+      "description": "The Simple Web Cloud Solution.",
+      "name": "bewCloud",
+      "source_url": "https://github.com/bewcloud/bewcloud",
+      "upstream_id": "apps/bewcloud/config.json",
+      "web_ui": true,
+      "website_url": "https://bewcloud.com"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "available": true,
+      "categories": [
+        "finance"
+      ],
+      "description": "Bitcoin core node",
+      "name": "Bitcoin",
+      "source_url": "https://github.com/lncm/docker-bitcoind",
+      "upstream_id": "apps/bitcoind/config.json",
+      "web_ui": false,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media"
+      ],
+      "description": "A self-hosted BitTorrent indexer.",
+      "name": "Bitmagnet",
+      "source_url": "https://github.com/bitmagnet-io/bitmagnet",
+      "upstream_id": "apps/bitmagnet/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "books",
+        "media"
+      ],
+      "description": "The selfhosted audiobook server",
+      "name": "Booksonic",
+      "source_url": "https://github.com/popeen/Booksonic-Air",
+      "upstream_id": "apps/booksonic/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "data"
+      ],
+      "description": "BookStack is a self-hosted platform for organising and storing information.",
+      "name": "Bookstack",
+      "source_url": "https://github.com/BookStackApp/BookStack",
+      "upstream_id": "apps/bookstack/config.json",
+      "web_ui": true,
+      "website_url": "https://www.bookstackapp.com/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "development"
+      ],
+      "description": "Internal tools made easy.",
+      "name": "Budibase",
+      "source_url": "https://github.com/Budibase/budibase",
+      "upstream_id": "apps/budibase/config.json",
+      "web_ui": true,
+      "website_url": "https://budibase.com/"
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "social"
+      ],
+      "description": "Scheduling infrastructure for absolutely everyone.",
+      "name": "Cal.com",
+      "source_url": "https://github.com/calcom/cal.com",
+      "upstream_id": "apps/calcom/config.json",
+      "web_ui": true,
+      "website_url": "https://cal.com/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "books"
+      ],
+      "description": "Calibre-web is a web app providing a clean interface for browsing, reading and downloading eBooks using an existing Calibre database.",
+      "name": "Calibre-Web - EBook Reader",
+      "source_url": "https://github.com/janeczku/calibre-web",
+      "upstream_id": "apps/calibre-web/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Website change detection.",
+      "name": "ChangeDetection",
+      "source_url": "https://github.com/dgtlmoon/changedetection.io",
+      "upstream_id": "apps/changedetection/config.json",
+      "web_ui": true,
+      "website_url": "https://changedetection.io/"
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "ai"
+      ],
+      "description": "A ChatGPT web client that supports multiple users, multiple languages, and multiple database connections for persistent data storage",
+      "name": "ChatGPT UI",
+      "source_url": "https://github.com/WongSaang/chatgpt-ui",
+      "upstream_id": "apps/chatgpt-ui/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "ai"
+      ],
+      "description": "Not just another ChatGPT user-interface!",
+      "name": "Chatpad AI",
+      "source_url": "https://github.com/deiucanta/chatpad",
+      "upstream_id": "apps/chatpad/config.json",
+      "web_ui": true,
+      "website_url": "https://chatpad.ai/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "available": true,
+      "categories": [
+        "ai"
+      ],
+      "description": "A production-ready AI framework to develop AI agents.",
+      "name": "Cheshire Cat AI",
+      "source_url": "https://github.com/cheshire-cat-ai/core",
+      "upstream_id": "apps/cheshire-cat-ai/config.json",
+      "web_ui": true,
+      "website_url": "https://cheshirecat.ai"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "network"
+      ],
+      "description": "Update DNS records on Cloudflare.",
+      "name": "Cloudflare DDNS",
+      "source_url": "https://github.com/joshuaavalon/docker-cloudflare",
+      "upstream_id": "apps/cloudflare-ddns/config.json",
+      "web_ui": false,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Cloudflare Tunnels in a Web UI",
+      "name": "Cloudflared",
+      "source_url": "https://github.com/WisdomSky/Cloudflared-web",
+      "upstream_id": "apps/cloudflared/config.json",
+      "web_ui": false,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "development"
+      ],
+      "description": "VS Code in the browser",
+      "name": "Code Server",
+      "source_url": "https://github.com/coder/code-server",
+      "upstream_id": "apps/code-server/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media"
+      ],
+      "description": "Free Docs app powered by Editor.js ecosystem.",
+      "name": "CodeX.docs",
+      "source_url": "https://github.com/codex-team/codex.docs",
+      "upstream_id": "apps/codex-docs/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "gaming"
+      ],
+      "description": "Python based Control Panel for your Minecraft Server",
+      "name": "Crafty",
+      "source_url": "https://gitlab.com/crafty-controller/crafty-4",
+      "upstream_id": "apps/crafty/config.json",
+      "web_ui": true,
+      "website_url": "https://craftycontrol.com/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media",
+        "utilities"
+      ],
+      "description": "Fully-automatic cross-seeding with Torznab.",
+      "name": "Cross-Seed",
+      "source_url": "https://github.com/cross-seed/cross-seed",
+      "upstream_id": "apps/cross-seed/config.json",
+      "web_ui": false,
+      "website_url": "https://www.cross-seed.org"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "security",
+        "utilities"
+      ],
+      "description": "Participative security solution offering crowdsourced protection against malicious IPs and access to the most advanced real-world CTI.",
+      "name": "Crowdsec",
+      "source_url": "https://github.com/crowdsecurity/crowdsec",
+      "upstream_id": "apps/crowdsec/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Cyber Security Training made simple.",
+      "name": "CTFd",
+      "source_url": "https://github.com/CTFd/CTFd",
+      "upstream_id": "apps/ctfd/config.json",
+      "web_ui": true,
+      "website_url": "https://ctfd.io/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "The easiest way to check for your container updates.",
+      "name": "Cup",
+      "source_url": "https://github.com/sergi0g/cup",
+      "upstream_id": "apps/cup/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities",
+        "security"
+      ],
+      "description": "The Cyber Swiss Army Knife",
+      "name": "CyberChef",
+      "source_url": "https://github.com/gchq/CyberChef",
+      "upstream_id": "apps/cyberchef/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Encrypted Diary Web-App",
+      "name": "DailyTxT",
+      "source_url": "https://github.com/PhiTux/DailyTxT",
+      "upstream_id": "apps/dailytxt/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "A simple, modern server dashboard, primarily used by smaller private server",
+      "name": "Dash.",
+      "source_url": "https://github.com/MauriceNino/dashdot",
+      "upstream_id": "apps/dashdot/config.json",
+      "web_ui": true,
+      "website_url": "https://getdashdot.com/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "A self-hostable personal dashboard built for you.",
+      "name": "Dashy",
+      "source_url": "https://github.com/lissy93/dashy",
+      "upstream_id": "apps/dashy/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Messenger for the Decentralized Web",
+      "name": "Databag",
+      "source_url": "https://github.com/balzack/databag",
+      "upstream_id": "apps/databag/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Program to keep DNS A and/or AAAA records updated for multiple DNS providers.",
+      "name": "DDNS Updater",
+      "source_url": "https://github.com/qdm12/ddns-updater",
+      "upstream_id": "apps/ddns-updater/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media",
+        "music"
+      ],
+      "description": "deemix is a barebone deezer downloader library built from the ashes of Deezloader Remix.",
+      "name": "Deemix",
+      "source_url": "https://gitlab.com/Bockiii/deemix-docker",
+      "upstream_id": "apps/deemix/config.json",
+      "web_ui": true,
+      "website_url": "https://deemix.app/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Deluge is a lightweight, Free Software, cross-platform BitTorrent client.",
+      "name": "Deluge",
+      "source_url": "https://github.com/linuxserver/docker-deluge",
+      "upstream_id": "apps/deluge/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Docker compose.yaml stack-oriented manager.",
+      "name": "Dockge",
+      "source_url": "https://github.com/louislam/dockge",
+      "upstream_id": "apps/dockge/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "data",
+        "utilities"
+      ],
+      "description": "An open-source collaborative wiki and documentation software",
+      "name": "Docmost",
+      "source_url": "https://github.com/docmost/docmost",
+      "upstream_id": "apps/docmost/config.json",
+      "web_ui": true,
+      "website_url": "https://docmost.com/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media"
+      ],
+      "description": "DokuWiki is a simple to use and highly versatile Open Source wiki software",
+      "name": "DokuWiki",
+      "source_url": "https://github.com/dokuwiki/dokuwiki",
+      "upstream_id": "apps/dokuwiki/config.json",
+      "web_ui": true,
+      "website_url": "https://www.dokuwiki.org/dokuwiki"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "development"
+      ],
+      "description": "Dozzle is a small web based app to monitor Docker logs",
+      "name": "Dozzle",
+      "source_url": "https://github.com/amir20/dozzle",
+      "upstream_id": "apps/dozzle/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Diagramming and whiteboarding app.",
+      "name": "Draw.io",
+      "source_url": "https://github.com/jgraph/drawio",
+      "upstream_id": "apps/drawio/config.json",
+      "web_ui": true,
+      "website_url": "https://www.drawio.com/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "network"
+      ],
+      "description": "Duck DNS is a free Dynamic DNS service",
+      "name": "Duck DNS",
+      "source_url": "https://github.com/linuxserver/docker-duckdns",
+      "upstream_id": "apps/duckdns/config.json",
+      "web_ui": false,
+      "website_url": "https://docs.linuxserver.io/images/docker-duckdns/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "data"
+      ],
+      "description": "Store securely encrypted backups in the cloud!",
+      "name": "Duplicati",
+      "source_url": "https://github.com/linuxserver/docker-duplicati",
+      "upstream_id": "apps/duplicati/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities",
+        "automation"
+      ],
+      "description": "The MQTT protocol provides a lightweight method of carrying out messaging using a publish/subscribe model.",
+      "name": "Eclipse Mosquitto",
+      "source_url": "https://github.com/eclipse/mosquitto/",
+      "upstream_id": "apps/eclipse-mosquitto/config.json",
+      "web_ui": true,
+      "website_url": "https://mosquitto.org/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "available": true,
+      "categories": [
+        "finance"
+      ],
+      "description": "Electrum server",
+      "name": "Electrs",
+      "source_url": "https://github.com/romanz/electrs",
+      "upstream_id": "apps/electrs/config.json",
+      "web_ui": false,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities",
+        "security"
+      ],
+      "description": "OAuth Proxy for IMAP/POP/SMTP.",
+      "name": "Email OAuth2 Proxy",
+      "source_url": "https://github.com/simonrob/email-oauth2-proxy",
+      "upstream_id": "apps/email-oauth2-proxy/config.json",
+      "web_ui": false,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media"
+      ],
+      "description": "A media server for your home collection",
+      "name": "Emby",
+      "source_url": "https://emby.media",
+      "upstream_id": "apps/emby/config.json",
+      "web_ui": true,
+      "website_url": "https://emby.media"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities",
+        "automation"
+      ],
+      "description": "Scalable open-source MQTT broker.",
+      "name": "EMQX Open Source",
+      "source_url": "https://github.com/emqx/emqx",
+      "upstream_id": "apps/emqx/config.json",
+      "web_ui": true,
+      "website_url": "https://www.emqx.com/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "gaming"
+      ],
+      "description": "Self-hosted Javascript emulation for various system.",
+      "name": "Emulatorjs",
+      "source_url": "https://github.com/EmulatorJS/EmulatorJS",
+      "upstream_id": "apps/emulatorjs/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "automation"
+      ],
+      "description": "Control your ESP8266/ESP32.",
+      "name": "ESP Home",
+      "source_url": "https://github.com/esphome/esphome",
+      "upstream_id": "apps/esphome/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Online whiteboard collaboration made easy",
+      "name": "Excalidraw",
+      "source_url": "https://github.com/excalidraw/excalidraw",
+      "upstream_id": "apps/excalidraw/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Access your homeserver files from your browser",
+      "name": "File Browser Quantum",
+      "source_url": "https://github.com/gtsteffaniak/filebrowser",
+      "upstream_id": "apps/filebrowser-quantum/config.json",
+      "web_ui": true,
+      "website_url": "https://filebrowserquantum.com"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Access your homeserver files from your browser",
+      "name": "File Browser",
+      "source_url": "https://github.com/filebrowser/filebrowser",
+      "upstream_id": "apps/filebrowser/config.json",
+      "web_ui": true,
+      "website_url": "https://filebrowser.org/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "A modern web client for SFTP, S3, FTP, WebDAV, Git, Minio, LDAP, CalDAV, CardDAV, Mysql, Backblaze",
+      "name": "Filestash",
+      "source_url": "https://github.com/mickael-kerjean/filestash",
+      "upstream_id": "apps/filestash/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "finance"
+      ],
+      "description": "The Firefly III Data Importer can import data into Firefly III",
+      "name": "Firefly III Data Importer",
+      "source_url": "https://github.com/firefly-iii/data-importer",
+      "upstream_id": "apps/firefly-iii-data-importer/config.json",
+      "web_ui": true,
+      "website_url": "https://www.firefly-iii.org/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "finance"
+      ],
+      "description": "Firefly III: a personal finances manager",
+      "name": "Firefly III",
+      "source_url": "https://github.com/firefly-iii/firefly-iii",
+      "upstream_id": "apps/firefly-iii/config.json",
+      "web_ui": true,
+      "website_url": "https://www.firefly-iii.org/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "gaming",
+        "media"
+      ],
+      "description": "Self host your media and share with unique links",
+      "name": "Fireshare",
+      "source_url": "https://github.com/ShaneIsrael/fireshare",
+      "upstream_id": "apps/fireshare/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media",
+        "security",
+        "utilities"
+      ],
+      "description": "Bypass Cloudflare and DDoS-GuARD.",
+      "name": "Flaresolverr",
+      "source_url": "https://github.com/FlareSolverr/FlareSolverr",
+      "upstream_id": "apps/flaresolverr/config.json",
+      "web_ui": false,
+      "website_url": "https://github.com/FlareSolverr/FlareSolverr"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "A self-hosted, database-less note taking web app",
+      "name": "flatnotes",
+      "source_url": "https://github.com/Dullage/flatnotes",
+      "upstream_id": "apps/flatnotes/config.json",
+      "web_ui": true,
+      "website_url": "https://demo.flatnotes.io/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities",
+        "data"
+      ],
+      "description": "Flightlog, a web application that keeps track of your personal flight history",
+      "name": "Flightlog",
+      "source_url": "https://github.com/perdian/flightlog/",
+      "upstream_id": "apps/flightlog/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "ai",
+        "automation"
+      ],
+      "description": "Build LLM Apps Easily",
+      "name": "Flowise AI",
+      "source_url": "https://github.com/FlowiseAI/Flowise",
+      "upstream_id": "apps/flowise/config.json",
+      "web_ui": true,
+      "website_url": "https://flowiseai.com/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "development"
+      ],
+      "description": "Beyond coding. We forge. · Lightweight and performant · Guaranteed 100% Free Software",
+      "name": "Forgejo",
+      "source_url": "https://codeberg.org/forgejo/forgejo/",
+      "upstream_id": "apps/forgejo/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "A free, self-hostable aggregator…",
+      "name": "FreshRSS",
+      "source_url": "https://github.com/FreshRSS/FreshRSS",
+      "upstream_id": "apps/freshrss/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "network"
+      ],
+      "description": "Update your Gandi DNS zone records with your WAN IP",
+      "name": "gandi-livedns",
+      "source_url": "https://github.com/jbbodart/gandi-livedns",
+      "upstream_id": "apps/gandi-livedns/config.json",
+      "web_ui": false,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "social",
+        "media"
+      ],
+      "description": "Ghost - Turn your audience into a business.",
+      "name": "Ghost Development",
+      "source_url": "https://github.com/TryGhost/Ghost",
+      "upstream_id": "apps/ghost-dev/config.json",
+      "web_ui": true,
+      "website_url": "https://ghost.org"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "social",
+        "media"
+      ],
+      "description": "Ghost - Turn your audience into a business.",
+      "name": "Ghost Production",
+      "source_url": "https://github.com/TryGhost/Ghost",
+      "upstream_id": "apps/ghost/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "finance"
+      ],
+      "description": "Open Source Wealth Management Software.",
+      "name": "Ghostfolio",
+      "source_url": "https://github.com/ghostfolio/ghostfolio",
+      "upstream_id": "apps/ghostfolio/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "development"
+      ],
+      "description": "Gitea - Git with a cup of tea · A painless self-hosted Git service. · Cross-platform · Easy to install · Lightweight · Open Source.",
+      "name": "Gitea",
+      "source_url": "https://github.com/go-gitea/gitea",
+      "upstream_id": "apps/gitea/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "automation"
+      ],
+      "description": "A privacy-first, open-source home assistant",
+      "name": "Gladys Assistant",
+      "source_url": "https://github.com/gladysassistant/gladys",
+      "upstream_id": "apps/gladys/config.json",
+      "web_ui": false,
+      "website_url": "https://gladysassistant.com/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Super configurable dashboard",
+      "name": "Glance",
+      "source_url": "https://github.com/glanceapp/glance",
+      "upstream_id": "apps/glance/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "An eye on your system",
+      "name": "Glances",
+      "source_url": "https://github.com/nicolargo/glances",
+      "upstream_id": "apps/glances/config.json",
+      "web_ui": false,
+      "website_url": "https://nicolargo.github.io/glances/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Gotify, a simple server for sending and receiving notification messages.",
+      "name": "Gotify",
+      "source_url": "https://github.com/gotify/server",
+      "upstream_id": "apps/gotify/config.json",
+      "web_ui": true,
+      "website_url": "https://gotify.net"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "social"
+      ],
+      "description": "Fast, fun, ActivityPub server, powered by Go.",
+      "name": "GoToSocial",
+      "source_url": "https://github.com/superseriousbusiness/gotosocial",
+      "upstream_id": "apps/gotosocial/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "data"
+      ],
+      "description": "The open and composable observability and data visualization platform.",
+      "name": "Grafana",
+      "source_url": "https://github.com/grafana/grafana",
+      "upstream_id": "apps/grafana/config.json",
+      "web_ui": true,
+      "website_url": "https://grafana.com/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "data",
+        "social"
+      ],
+      "description": "Web app for collaborative genealogy.",
+      "name": "Gramps Web",
+      "source_url": "https://github.com/gramps-project/gramps-web",
+      "upstream_id": "apps/grampsweb/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "social",
+        "media"
+      ],
+      "description": "Fast, Simple, and Flexible, file-based Web-platform.",
+      "name": "Grav V2",
+      "source_url": "https://github.com/getgrav/grav",
+      "upstream_id": "apps/grav-2/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "social",
+        "media"
+      ],
+      "description": "Grav is a Fast, Simple, and Flexible, file-based Web-platform.",
+      "name": "Grav",
+      "source_url": "https://github.com/getgrav/grav",
+      "upstream_id": "apps/grav/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Grist is the evolution of spreadsheets.",
+      "name": "Grist",
+      "source_url": "https://github.com/gristlabs/grist-core",
+      "upstream_id": "apps/grist/config.json",
+      "web_ui": true,
+      "website_url": "https://www.getgrist.com/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "automation",
+        "finance"
+      ],
+      "description": "ERP beyond your fridge",
+      "name": "Grocy",
+      "source_url": "https://github.com/grocy/grocy",
+      "upstream_id": "apps/grocy/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Clientless remote desktop gateway",
+      "name": "Guacamole",
+      "source_url": "https://github.com/apache/guacamole-server",
+      "upstream_id": "apps/guacamole/config.json",
+      "web_ui": true,
+      "website_url": "https://guacamole.apache.org"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "social",
+        "media"
+      ],
+      "description": "Halo - Open source website building tool.",
+      "name": "Halo",
+      "source_url": "https://github.com/halo-dev/halo",
+      "upstream_id": "apps/halo/config.json",
+      "web_ui": true,
+      "website_url": "https://halo.run"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Self hosted vehicle and expense management system. Like Clarkson, but better",
+      "name": "Hammond",
+      "source_url": "https://github.com/alfhou/hammond",
+      "upstream_id": "apps/hammond/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "available": true,
+      "categories": [
+        "social"
+      ],
+      "description": "Self-hostable private blogging.",
+      "name": "Haven",
+      "source_url": "https://github.com/havenweb/haven",
+      "upstream_id": "apps/haven/config.json",
+      "web_ui": true,
+      "website_url": "https://havenweb.org"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media"
+      ],
+      "description": "A Collaborative Markdown and Note Taking App",
+      "name": "HedgeDoc",
+      "source_url": "https://github.com/hedgedoc/hedgedoc",
+      "upstream_id": "apps/hedgedoc/config.json",
+      "web_ui": true,
+      "website_url": "https://hedgedoc.org/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Application Dashboard",
+      "name": "Heimdall",
+      "source_url": "https://github.com/linuxserver/Heimdall",
+      "upstream_id": "apps/heimdall/config.json",
+      "web_ui": true,
+      "website_url": "https://heimdall.site/"
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Hello World web server in under 2 MB",
+      "name": "Hello World",
+      "source_url": "https://github.com/crccheck/docker-hello-world",
+      "upstream_id": "apps/hello-world/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities",
+        "ai"
+      ],
+      "description": "Self-hostable bookmark-everything app",
+      "name": "Hoarder",
+      "source_url": "https://github.com/hoarder-app/hoarder",
+      "upstream_id": "apps/hoarder/config.json",
+      "web_ui": true,
+      "website_url": "https://hoarder.app"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Homarr is a simple and lightweight homepage for your server, that helps you easily access all of your services in one place.",
+      "name": "Homarr",
+      "source_url": "https://github.com/homarr-labs/homarr",
+      "upstream_id": "apps/homarr-1/config.json",
+      "web_ui": true,
+      "website_url": "https://homarr.dev"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "automation"
+      ],
+      "description": "Open source home automation that puts local control and privacy first",
+      "name": "Home Assistant",
+      "source_url": "https://github.com/home-assistant/core",
+      "upstream_id": "apps/homeassistant-1/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Inventory and organization system.",
+      "name": "HomeBox",
+      "source_url": "https://github.com/sysadminsmedia/homebox",
+      "upstream_id": "apps/homebox/config.json",
+      "web_ui": true,
+      "website_url": "https://homebox.sysadminsmedia.com/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "automation"
+      ],
+      "description": "HomeKit support for the impatient.",
+      "name": "Home Bridge",
+      "source_url": "https://github.com/homebridge/homebridge",
+      "upstream_id": "apps/homebridge/config.json",
+      "web_ui": false,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "A highly customizable homepage",
+      "name": "Homepage",
+      "source_url": "https://github.com/gethomepage/homepage",
+      "upstream_id": "apps/homepage/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "A very simple static homepage for your server",
+      "name": "Homer",
+      "source_url": "https://github.com/bastienwirtz/homer",
+      "upstream_id": "apps/homer/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "data",
+        "photography"
+      ],
+      "description": "Photo and video backup solution directly from your mobile phone.",
+      "name": "Immich",
+      "source_url": "https://github.com/immich-app/immich",
+      "upstream_id": "apps/immich/config.json",
+      "web_ui": true,
+      "website_url": "https://www.immich.app/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "social"
+      ],
+      "description": "A modular C++ IRC server.",
+      "name": "Inspircd",
+      "source_url": "https://github.com/inspircd/inspircd",
+      "upstream_id": "apps/inspircd/config.json",
+      "web_ui": true,
+      "website_url": "https://www.inspircd.org"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media",
+        "social"
+      ],
+      "description": "An alternative front-end to YouTube",
+      "name": "Invidious",
+      "source_url": "https://github.com/iv-org/invidious",
+      "upstream_id": "apps/invidious/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "finance"
+      ],
+      "description": "Invoices, Expenses and Tasks built with Laravel, Flutter and React.",
+      "name": "Invoice Ninja",
+      "source_url": "https://github.com/invoiceninja/invoiceninja",
+      "upstream_id": "apps/invoice-ninja/config.json",
+      "web_ui": true,
+      "website_url": "https://invoiceninja.com/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "development"
+      ],
+      "description": "Collection of handy online tools for developers, with great UX.",
+      "name": "IT-Tools",
+      "source_url": "https://github.com/CorentinTh/it-tools",
+      "upstream_id": "apps/it-tools/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media",
+        "utilities"
+      ],
+      "description": "API Support for your favorite torrent trackers",
+      "name": "Jackett",
+      "source_url": "https://github.com/Jackett/Jackett",
+      "upstream_id": "apps/jackett/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media"
+      ],
+      "description": "A modern web client for Jellyfin based on Vue",
+      "name": "Jellyfin Vue (Beta)",
+      "source_url": "https://github.com/jellyfin/jellyfin-vue",
+      "upstream_id": "apps/jellyfin-vue/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media"
+      ],
+      "description": "A media server for your home collection",
+      "name": "Jellyfin",
+      "source_url": "https://github.com/jellyfin/jellyfin",
+      "upstream_id": "apps/jellyfin/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media",
+        "utilities"
+      ],
+      "description": "Fork of overseerr for Jellyfin support",
+      "name": "Jellyseerr",
+      "source_url": "https://github.com/Fallenbagel/jellyseerr",
+      "upstream_id": "apps/jellyseerr/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Note taking and to-do application with synchronisation",
+      "name": "Joplin Server",
+      "source_url": "https://github.com/laurent22/joplin",
+      "upstream_id": "apps/joplin/config.json",
+      "web_ui": true,
+      "website_url": "https://joplinapp.org"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "development"
+      ],
+      "description": "Open Source Kanban Board",
+      "name": "Kanboard",
+      "source_url": "https://github.com/kanboard/kanboard",
+      "upstream_id": "apps/kanboard/config.json",
+      "web_ui": true,
+      "website_url": "https://kanboard.org/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media",
+        "utilities"
+      ],
+      "description": "Kapowarr is a software to build and manage a comic book library, fitting in the *arr suite of software.",
+      "name": "Kapowarr",
+      "source_url": "https://github.com/Casvt/Kapowarr",
+      "upstream_id": "apps/kapowarr/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Container streaming platform.",
+      "name": "Kasm Workspaces",
+      "source_url": "https://github.com/kasmtech",
+      "upstream_id": "apps/kasm-workspaces/config.json",
+      "web_ui": false,
+      "website_url": "https://www.kasmweb.com/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media"
+      ],
+      "description": "Kavita is a fast, feature rich, cross platform reading server",
+      "name": "Kavita",
+      "source_url": "https://github.com/Kareadita/Kavita",
+      "upstream_id": "apps/kavita/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Open source time-tracker",
+      "name": "Kimai",
+      "source_url": "https://github.com/kimai/kimai",
+      "upstream_id": "apps/kimai/config.json",
+      "web_ui": true,
+      "website_url": "https://www.kimai.org"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media"
+      ],
+      "description": "Kiwix Server is a web server for hosting .zim files",
+      "name": "Kiwix Server",
+      "source_url": "https://github.com/kiwix/kiwix-tools/",
+      "upstream_id": "apps/kiwix-serve/config.json",
+      "web_ui": true,
+      "website_url": "https://kiwix.org/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Koillection allow you to manage any kind of collections.",
+      "name": "Koillection",
+      "source_url": "https://github.com/benjaminjonard/koillection",
+      "upstream_id": "apps/koillection/config.json",
+      "web_ui": true,
+      "website_url": "https://koillection.github.io/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities",
+        "media"
+      ],
+      "description": "Overlays, Collections & Playlists for Plex.",
+      "name": "Kometa",
+      "source_url": "https://github.com/Kometa-Team/Kometa",
+      "upstream_id": "apps/kometa/config.json",
+      "web_ui": false,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media"
+      ],
+      "description": "A media server for your comics, mangas, BDs, magazines and eBooks.",
+      "name": "Komga",
+      "source_url": "https://github.com/gotson/komga",
+      "upstream_id": "apps/komga/config.json",
+      "web_ui": true,
+      "website_url": "https://komga.org/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "photography"
+      ],
+      "description": "Complete photo management service",
+      "name": "LibrePhotos",
+      "source_url": "https://github.com/LibrePhotos/librephotos",
+      "upstream_id": "apps/librephotos/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "network",
+        "utilities"
+      ],
+      "description": "No Flash, No Java, No Websocket, No Garbage",
+      "name": "LibreSpeed",
+      "source_url": "https://github.com/librespeed/speedtest",
+      "upstream_id": "apps/librespeed/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Free and Open Source Machine Translation API. 100% self-hosted, offline capable and easy to setup.",
+      "name": "LibreTranslate",
+      "source_url": "https://github.com/LibreTranslate/LibreTranslate",
+      "upstream_id": "apps/libretranslate/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media"
+      ],
+      "description": "Lidarr with some muscles thanks to deemix",
+      "name": "Lidarr on Steroids",
+      "source_url": "https://github.com/youegraillot/lidarr-on-steroids",
+      "upstream_id": "apps/lidarr-deemix/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media",
+        "music"
+      ],
+      "description": "Looks and smells like Sonarr but made for music.",
+      "name": "Lidarr",
+      "source_url": "https://github.com/Lidarr/Lidarr",
+      "upstream_id": "apps/lidarr/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media"
+      ],
+      "description": "LinkStack is a highly customizable link sharing platform with an intuitive, easy to use user interface",
+      "name": "LinkStack",
+      "source_url": "https://github.com/LinkStackOrg/linkstack-docker",
+      "upstream_id": "apps/linkstack/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "data"
+      ],
+      "description": "A self-hosted, open-source collaborative bookmark manager",
+      "name": "Linkwarden",
+      "source_url": "https://github.com/linkwarden/linkwarden",
+      "upstream_id": "apps/linkwarden/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "ai"
+      ],
+      "description": "LLM chatbot framework",
+      "name": "Lobe Chat",
+      "source_url": "https://github.com/lobehub/lobe-chat",
+      "upstream_id": "apps/lobe-chat/config.json",
+      "web_ui": true,
+      "website_url": "https://github.com/lobehub/lobe-chat"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "gaming"
+      ],
+      "description": "Server hosting tool for Minecraft and other multiplayers.",
+      "name": "Lodestone Core",
+      "source_url": "https://github.com/Lodestone-Team/lodestone_core",
+      "upstream_id": "apps/lodestone-core/config.json",
+      "web_ui": true,
+      "website_url": "https://lodestone.cc"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "security"
+      ],
+      "description": "Logto is a cost-effective open-source alternative to Auth0.",
+      "name": "Logto",
+      "source_url": "https://github.com/logto-io/logto",
+      "upstream_id": "apps/logto/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Vehicle Maintenance and Fuel Mileage Tracker.",
+      "name": "LubeLogger",
+      "source_url": "https://github.com/hargata/lubelog",
+      "upstream_id": "apps/lubelogger/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media",
+        "utilities"
+      ],
+      "description": "Maintainerr will manage the storage space on your plex server, launching automated actions to delete your files.",
+      "name": "Maintainerr",
+      "source_url": "https://github.com/Maintainerr/Maintainerr",
+      "upstream_id": "apps/maintainerr/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "social"
+      ],
+      "description": "Your self-hosted, globally interconnected microblogging community",
+      "name": "Mastodon",
+      "source_url": "https://github.com/mastodon/mastodon",
+      "upstream_id": "apps/mastodon/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "social"
+      ],
+      "description": "Conduit is a simple, fast and reliable chat server written in Rust",
+      "name": "Conduit",
+      "source_url": "https://gitlab.com/famedly/conduit",
+      "upstream_id": "apps/matrix-conduit/config.json",
+      "web_ui": true,
+      "website_url": "https://matrix.org/docs/projects/server/conduit"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities",
+        "automation"
+      ],
+      "description": "Interact with Matter. Works with HA !",
+      "name": "Matter Server",
+      "source_url": "https://github.com/home-assistant-libs/python-matter-server",
+      "upstream_id": "apps/matter-server/config.json",
+      "web_ui": false,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities",
+        "automation"
+      ],
+      "description": "Re-broadcast mDNS packets.",
+      "name": "MDNS Repeater",
+      "source_url": "https://github.com/angelnu/docker-mdns_repeater",
+      "upstream_id": "apps/mdns-repeater/config.json",
+      "web_ui": false,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [],
+      "description": "Mealie is a self-hosted recipe manager and meal planner.",
+      "name": "Mealie",
+      "source_url": "https://github.com/hay-kot/mealie",
+      "upstream_id": "apps/mealie-1/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Memo hub for knowledge management and collaboration.",
+      "name": "Memos",
+      "source_url": "https://github.com/usememos/memos",
+      "upstream_id": "apps/memos/config.json",
+      "web_ui": true,
+      "website_url": "https://usememos.com/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "available": true,
+      "categories": [
+        "finance"
+      ],
+      "description": "Bitcoin mempool visualizer and blockchain explorer",
+      "name": "Mempool",
+      "source_url": "https://github.com/mempool/mempool",
+      "upstream_id": "apps/mempool/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "data",
+        "utilities"
+      ],
+      "description": "The simplest, fastest way to get business intelligence and analytics to everyone in your company",
+      "name": "Metabase",
+      "source_url": "https://github.com/metabase/metabase",
+      "upstream_id": "apps/metabase/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media"
+      ],
+      "description": "Self-hosted YouTube downloader.",
+      "name": "MeTube",
+      "source_url": "https://github.com/alexta69/metube",
+      "upstream_id": "apps/metube/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "A simple self hosted reminder platform that uses push to send notifications to your device.",
+      "name": "Mind",
+      "source_url": "https://github.com/Casvt/MIND",
+      "upstream_id": "apps/mind/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "gaming"
+      ],
+      "description": "Run a minecraft server",
+      "name": "Minecraft Server",
+      "source_url": "https://github.com/itzg/docker-minecraft-server",
+      "upstream_id": "apps/minecraft-server/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "development"
+      ],
+      "description": "High Performance Object Storage.",
+      "name": "Minio",
+      "source_url": "https://github.com/minio/minio",
+      "upstream_id": "apps/minio/config.json",
+      "web_ui": true,
+      "website_url": "https://min.io"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "social",
+        "utilities"
+      ],
+      "description": "Self-hosted social media management. Schedule and organize your social content.",
+      "name": "Mixpost Pro",
+      "source_url": "https://github.com/inovector/mixpost",
+      "upstream_id": "apps/mixpost-pro/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "social"
+      ],
+      "description": "Self-hosted social media management. Schedule and organize your social content.",
+      "name": "Mixpost",
+      "source_url": "https://github.com/inovector/mixpost",
+      "upstream_id": "apps/mixpost/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Decentralized and trustless Monero block explorer",
+      "name": "Moneroblock",
+      "source_url": "https://github.com/duggavo/MoneroBlock",
+      "upstream_id": "apps/moneroblock/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "finance"
+      ],
+      "description": "Monero is a private, decentralized cryptocurrency that keeps your finances confidential and secure.",
+      "name": "Monero Daemon",
+      "source_url": "https://github.com/sethforprivacy/simple-monerod-docker",
+      "upstream_id": "apps/monerod/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "development",
+        "data"
+      ],
+      "description": "Web-based MongoDB admin interface, written with Node.js and Express",
+      "name": "Mongo Express",
+      "source_url": "https://github.com/mongo-express/mongo-express",
+      "upstream_id": "apps/mongo-express/config.json",
+      "web_ui": false,
+      "website_url": "https://www.mongodb.com/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "development",
+        "data"
+      ],
+      "description": "MongoDB is an open-source NoSQL database",
+      "name": "MongoDB",
+      "source_url": "https://github.com/mongodb/mongo",
+      "upstream_id": "apps/mongo/config.json",
+      "web_ui": true,
+      "website_url": "https://www.mongodb.com/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "data",
+        "social"
+      ],
+      "description": "A Personal Relationship Management tool to help you document your social life.",
+      "name": "Monica",
+      "source_url": "https://github.com/monicahq/monica",
+      "upstream_id": "apps/monica/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media"
+      ],
+      "description": "Ambient sounds for focus and calm.",
+      "name": "Moodist",
+      "source_url": "https://github.com/remvze/moodist",
+      "upstream_id": "apps/moodist/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media"
+      ],
+      "description": "Movary is a self-hosted web application to track and rate your watched movies.",
+      "name": "Movary",
+      "source_url": "https://github.com/leepeuker/movary",
+      "upstream_id": "apps/movary/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "MQTT websocket browser client tool",
+      "name": "MQTTX",
+      "source_url": "https://github.com/emqx/MQTTX/",
+      "upstream_id": "apps/mqttx/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "music",
+        "media"
+      ],
+      "description": "The easiest music streaming server available",
+      "name": "mStream Music",
+      "source_url": "https://github.com/IrosTheBeggar/mStream",
+      "upstream_id": "apps/mstream/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media"
+      ],
+      "description": "Mylar3 is an automated Comic Book downloader (cbr/cbz) for use with NZB and torrents written in python.",
+      "name": "Mylar3",
+      "source_url": "https://github.com/mylar3/mylar3",
+      "upstream_id": "apps/mylar3/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "automation"
+      ],
+      "description": "Workflow Automation Tool. Alternative to Zapier",
+      "name": "n8n",
+      "source_url": "https://github.com/n8n-io/n8n",
+      "upstream_id": "apps/n8n-2/config.json",
+      "web_ui": true,
+      "website_url": "https://n8n.io/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media",
+        "music"
+      ],
+      "description": "A selfhosted music server",
+      "name": "Navidrome",
+      "source_url": "https://github.com/navidrome/navidrome/",
+      "upstream_id": "apps/navidrome/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Your favorite operating systems in one place.",
+      "name": "Netboot.xyz",
+      "source_url": "https://github.com/netbootxyz/netboot.xyz",
+      "upstream_id": "apps/netbootxyz/config.json",
+      "web_ui": true,
+      "website_url": "https://netboot.xyz/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Open-source, real-time, performance and health monitoring.",
+      "name": "Netdata",
+      "source_url": "https://github.com/netdata/netdata",
+      "upstream_id": "apps/netdata/config.json",
+      "web_ui": true,
+      "website_url": "https://www.netdata.cloud/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "data"
+      ],
+      "description": "A safe home for all your data.",
+      "name": "Nextcloud Mini",
+      "source_url": "https://github.com/nextcloud/server",
+      "upstream_id": "apps/nextcloud-mini/config.json",
+      "web_ui": true,
+      "website_url": "https://nextcloud.com"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "data"
+      ],
+      "description": "Productivity platform that keeps you in control",
+      "name": "Nextcloud",
+      "source_url": "https://github.com/nextcloud/server",
+      "upstream_id": "apps/nextcloud/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "gaming"
+      ],
+      "description": "Gameboy in your browser",
+      "name": "NextGBA",
+      "source_url": "https://github.com/nicotsx/nextgba",
+      "upstream_id": "apps/nextgba/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Open-source simple and fast web server.",
+      "name": "Nginx",
+      "source_url": "https://github.com/nginx/nginx",
+      "upstream_id": "apps/nginx/config.json",
+      "web_ui": true,
+      "website_url": "https://www.nginx.com/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "social"
+      ],
+      "description": "Twitter without annoyances!",
+      "name": "Nitter",
+      "source_url": "https://github.com/zedeus/nitter",
+      "upstream_id": "apps/nitter/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Open Source Airtable Alternative",
+      "name": "NocoDB",
+      "source_url": "https://github.com/nocodb/nocodb",
+      "upstream_id": "apps/nocodb/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "automation"
+      ],
+      "description": "Low-code programming for event-driven applications",
+      "name": "Node-RED",
+      "source_url": "https://github.com/node-red/node-red",
+      "upstream_id": "apps/nodered/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Lighting fast web-based Markdown notes app.",
+      "name": "Notemark",
+      "source_url": "https://github.com/enchant97/note-mark/",
+      "upstream_id": "apps/notemark/config.json",
+      "web_ui": true,
+      "website_url": "https://notemark.docs.enchantedcode.co.uk/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Ntfy, a simple server for sending and receiving notification messages.",
+      "name": "Ntfy",
+      "source_url": "https://github.com/binwiederhier/ntfy",
+      "upstream_id": "apps/ntfy/config.json",
+      "web_ui": true,
+      "website_url": "https://ntfy.sh/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "LiveSync couchdb backend for Obsidian",
+      "name": "Obsidian LiveSync",
+      "source_url": "https://github.com/vrtmrz/self-hosted-livesync-server",
+      "upstream_id": "apps/obsidian-livesync/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "automation",
+        "finance"
+      ],
+      "description": "Octobot is a powerful open-source cryptocurrency trading robot.",
+      "name": "Octobot",
+      "source_url": "https://github.com/Drakkar-Software/OctoBot",
+      "upstream_id": "apps/octobot/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities",
+        "finance"
+      ],
+      "description": "Open-source business management software with modular applications for streamlined operations.",
+      "name": "Odoo",
+      "source_url": "https://github.com/odoo/odoo",
+      "upstream_id": "apps/odoo/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Give safe and simple access to predefined shell commands from a web interface.",
+      "name": "Olivetin",
+      "source_url": "https://github.com/OliveTin/OliveTin",
+      "upstream_id": "apps/olivetin/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "ai"
+      ],
+      "description": "LLMs inference server with OpenAI compatible API",
+      "name": "Ollama - AMD",
+      "source_url": "https://github.com/ollama/ollama",
+      "upstream_id": "apps/ollama-amd/config.json",
+      "web_ui": true,
+      "website_url": "https://ollama.com"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "ai"
+      ],
+      "description": "LLMs inference server with OpenAI compatible API",
+      "name": "Ollama - CPU",
+      "source_url": "https://github.com/ollama/ollama",
+      "upstream_id": "apps/ollama-cpu/config.json",
+      "web_ui": true,
+      "website_url": "https://ollama.com"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "ai"
+      ],
+      "description": "LLMs inference server with OpenAI compatible API",
+      "name": "Ollama - Nvidia",
+      "source_url": "https://github.com/ollama/ollama",
+      "upstream_id": "apps/ollama-nvidia/config.json",
+      "web_ui": true,
+      "website_url": "https://ollama.com"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "development"
+      ],
+      "description": "Self-hosted Git Server with Kanban and CI/CD",
+      "name": "OneDev",
+      "source_url": "https://code.onedev.io/onedev/server",
+      "upstream_id": "apps/onedev/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "ai"
+      ],
+      "description": "User-friendly WebUI for LLMs",
+      "name": "Open WebUI",
+      "source_url": "https://github.com/open-webui/open-webui",
+      "upstream_id": "apps/open-webui/config.json",
+      "web_ui": true,
+      "website_url": "https://openwebui.com/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media",
+        "books"
+      ],
+      "description": "Search and Download eBooks",
+      "name": "openbooks",
+      "source_url": "https://github.com/evan-buss/openbooks",
+      "upstream_id": "apps/openbooks/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "ai"
+      ],
+      "description": "OpenClaw is a personal AI assistant you run on your own devices. It answers you on the channels you already use.",
+      "name": "OpenClaw",
+      "source_url": "https://github.com/openclaw/openclaw",
+      "upstream_id": "apps/openclaw/config.json",
+      "web_ui": true,
+      "website_url": "https://openclaw.ai"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "A home for all your docs",
+      "name": "Outline",
+      "source_url": "https://github.com/outline/outline",
+      "upstream_id": "apps/outline/config.json",
+      "web_ui": true,
+      "website_url": "https://getoutline.com"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media",
+        "utilities"
+      ],
+      "description": "Request management and media discovery tool for the Plex ecosystem",
+      "name": "Overseerr",
+      "source_url": "https://github.com/sct/overseerr",
+      "upstream_id": "apps/overseerr/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media"
+      ],
+      "description": "Take control over your live stream video by running it yourself. Streaming + chat out of the box.",
+      "name": "Owncast",
+      "source_url": "https://github.com/owncast/owncast",
+      "upstream_id": "apps/owncast/config.json",
+      "web_ui": true,
+      "website_url": "https://owncast.online/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "data"
+      ],
+      "description": "A personal cloud which runs on your own server.",
+      "name": "Owncloud",
+      "source_url": "https://github.com/owncloud/core",
+      "upstream_id": "apps/owncloud/config.json",
+      "web_ui": true,
+      "website_url": "https://owncloud.com/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media",
+        "data",
+        "utilities"
+      ],
+      "description": "Local file sharing in your browser. Inspired by Apple's AirDrop",
+      "name": "PairDrop",
+      "source_url": "https://github.com/schlagmichdoch/PairDrop",
+      "upstream_id": "apps/pairdrop/config.json",
+      "web_ui": true,
+      "website_url": "https://pairdrop.net/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Document Management System (DMS)",
+      "name": "Paperless-ngx",
+      "source_url": "https://github.com/paperless-ngx/paperless-ngx",
+      "upstream_id": "apps/paperless-ngx/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Open-Source design & prototyping platform.",
+      "name": "Penpot",
+      "source_url": "https://github.com/penpot/penpot",
+      "upstream_id": "apps/penpot/config.json",
+      "web_ui": true,
+      "website_url": "https://penpot.app"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "An open source ticket management & help desk solution.",
+      "name": "Peppermint",
+      "source_url": "https://github.com/Peppermint-Lab/peppermint",
+      "upstream_id": "apps/peppermint/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "photography"
+      ],
+      "description": "AI-Powered Photos App for the Decentralized Web. We are on a mission to protect your freedom and privacy.",
+      "name": "PhotoPrism",
+      "source_url": "https://github.com/photoprism/photoprism",
+      "upstream_id": "apps/photoprism/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "network",
+        "security"
+      ],
+      "description": "A black hole for Internet advertisements",
+      "name": "Pi-hole",
+      "source_url": "https://github.com/pi-hole/pi-hole",
+      "upstream_id": "apps/pihole/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media"
+      ],
+      "description": "Your next YouTube media manager",
+      "name": "Pinchflat",
+      "source_url": "https://github.com/kieraneglin/pinchflat",
+      "upstream_id": "apps/pinchflat/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "data",
+        "utilities"
+      ],
+      "description": "Self-hosted file sharing platform",
+      "name": "Pingvin Share",
+      "source_url": "https://github.com/stonith404/pingvin-share",
+      "upstream_id": "apps/pingvin-share/config.json",
+      "web_ui": true,
+      "website_url": "https://pingvin-share.dev.eliasschneider.com"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "development"
+      ],
+      "description": "Free open source kanban board for workgroups.",
+      "name": "Planka",
+      "source_url": "https://github.com/plankanban/planka",
+      "upstream_id": "apps/planka/config.json",
+      "web_ui": true,
+      "website_url": "https://docs.planka.cloud/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "available": true,
+      "categories": [
+        "development"
+      ],
+      "description": "Online planning poker for scrum master.",
+      "name": "Planning Poker",
+      "source_url": "https://github.com/axeleroy/self-host-planning-poker",
+      "upstream_id": "apps/planning-poker/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Simple, open-source, lightweight (< 1 KB) and privacy-friendly web analytics alternative to Google Analytics.",
+      "name": "Plausible CE",
+      "source_url": "https://github.com/plausible/community-edition",
+      "upstream_id": "apps/plausible-ce/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media"
+      ],
+      "description": "Stream Movies & TV Shows",
+      "name": "Plex",
+      "source_url": "https://github.com/plexinc/pms-docker",
+      "upstream_id": "apps/plex/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media"
+      ],
+      "description": "A sleek and efficient podcast downloader.",
+      "name": "PodFetch",
+      "source_url": "https://github.com/SamTV12345/PodFetch",
+      "upstream_id": "apps/podfetch/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Making Docker and Kubernetes management easy.",
+      "name": "Portainer",
+      "source_url": "https://github.com/portainer/portainer",
+      "upstream_id": "apps/portainer/config.json",
+      "web_ui": true,
+      "website_url": "https://www.portainer.io"
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Simple SMTP relay for environments where you may have private servers with no Internet connection.",
+      "name": "Postfix Mail Relay",
+      "source_url": "https://github.com/shamil/docker-postfix-relay",
+      "upstream_id": "apps/postfix-relay/config.json",
+      "web_ui": false,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "A minimalist, open source online pastebin where the server has zero knowledge of pasted data. Data is encrypted/decrypted in the browser using 256 bits AES.",
+      "name": "PrivateBin",
+      "source_url": "https://github.com/PrivateBin/PrivateBin",
+      "upstream_id": "apps/privatebin/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media",
+        "utilities"
+      ],
+      "description": "A torrent/usenet indexer manager/proxy",
+      "name": "Prowlarr",
+      "source_url": "https://github.com/Prowlarr/Prowlarr/",
+      "upstream_id": "apps/prowlarr/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Fast, easy, and free BitTorrent client",
+      "name": "qBittorrent",
+      "source_url": "https://github.com/qbittorrent/qBittorrent",
+      "upstream_id": "apps/qbittorrent/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "A graphical disk usage analyzer",
+      "name": "qDirStat",
+      "source_url": "https://github.com/linuxserver/docker-qdirstat",
+      "upstream_id": "apps/qdirstat/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media",
+        "utilities"
+      ],
+      "description": "Movie collection manager for Usenet and BitTorrent users.",
+      "name": "Radarr",
+      "source_url": "https://github.com/Radarr/Radarr",
+      "upstream_id": "apps/radarr/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Scheduling and collaboration tool",
+      "name": "Rallly",
+      "source_url": "https://github.com/lukevella/rallly",
+      "upstream_id": "apps/rallly/config.json",
+      "web_ui": true,
+      "website_url": "https://rallly.co"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "books",
+        "media"
+      ],
+      "description": "Book Manager and Automation (Sonarr for Ebooks)",
+      "name": "Readarr",
+      "source_url": "https://github.com/Readarr/Readarr",
+      "upstream_id": "apps/readarr/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media",
+        "utilities"
+      ],
+      "description": "Sync TRaSH Guides.",
+      "name": "Recyclarr",
+      "source_url": "https://github.com/recyclarr/recyclarr",
+      "upstream_id": "apps/recyclarr/config.json",
+      "web_ui": false,
+      "website_url": "https://recyclarr.dev"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "data",
+        "utilities"
+      ],
+      "description": "Fast, reliable, and simple file sync and share solution.",
+      "name": "Resilio",
+      "source_url": "https://github.com/bt-sync",
+      "upstream_id": "apps/resilio-sync/config.json",
+      "web_ui": false,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "gaming"
+      ],
+      "description": "Your beautiful, powerful, self-hosted rom manager.",
+      "name": "RomM",
+      "source_url": "https://github.com/rommapp/romm",
+      "upstream_id": "apps/romm/config.json",
+      "web_ui": true,
+      "website_url": "https://romm.app"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities",
+        "media"
+      ],
+      "description": "A simple, opinionated, RSS feed aggregator.",
+      "name": "RSS",
+      "source_url": "https://github.com/ssddanbrown/rss",
+      "upstream_id": "apps/rss/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities",
+        "media"
+      ],
+      "description": "Everything is RSSible with RSSHub",
+      "name": "RSSHub",
+      "source_url": "https://github.com/DIYgod/RSSHub",
+      "upstream_id": "apps/rsshub/config.json",
+      "web_ui": true,
+      "website_url": "https://docs.rsshub.app/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media",
+        "utilities"
+      ],
+      "description": "Sabnzbd makes Usenet as simple and streamlined as possible by automating everything we can",
+      "name": "SABnzbd",
+      "source_url": "https://github.com/sabnzbd/sabnzbd",
+      "upstream_id": "apps/sabnzbd/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "security"
+      ],
+      "description": "High performance home video integration and automation platform",
+      "name": "Scrypted",
+      "source_url": "https://github.com/koush/scrypted",
+      "upstream_id": "apps/scrypted/config.json",
+      "web_ui": false,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "social"
+      ],
+      "description": "Privacy-respecting, hackable metasearch engine",
+      "name": "SearXNG",
+      "source_url": "https://github.com/searxng/searxng",
+      "upstream_id": "apps/searxng/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "SeedSync is a tool to sync the files on a remote Linux server.",
+      "name": "SeedSync",
+      "source_url": "https://github.com/ipsingh06/seedsync",
+      "upstream_id": "apps/seedsync/config.json",
+      "web_ui": true,
+      "website_url": "https://ipsingh06.github.io/seedsync/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media",
+        "utilities"
+      ],
+      "description": "Managing requests for your media library",
+      "name": "Seerr",
+      "source_url": "https://github.com/seerr-team/seerr",
+      "upstream_id": "apps/seerr/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "development"
+      ],
+      "description": "Modern UI for Ansible, Terraform, OpenTofu, Bash, Pulumi.",
+      "name": "Semaphore",
+      "source_url": "https://github.com/semaphoreui/semaphore",
+      "upstream_id": "apps/semaphore/config.json",
+      "web_ui": true,
+      "website_url": "https://semaphoreui.com"
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Simple, private file sharing. https://send.vis.ee/",
+      "name": "Send",
+      "source_url": "https://gitlab.com/timvisee/send",
+      "upstream_id": "apps/send/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "ai"
+      ],
+      "description": "LLaMA made easy",
+      "name": "Serge",
+      "source_url": "https://github.com/serge-chat/serge",
+      "upstream_id": "apps/serge/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Fully featured and highly configurable SFTP server",
+      "name": "SFTPGo",
+      "source_url": "https://github.com/drakkan/sftpgo",
+      "upstream_id": "apps/sftpgo/config.json",
+      "web_ui": true,
+      "website_url": "https://sftpgo.com"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Shlink is a self-hosted URL shortener",
+      "name": "Shlink",
+      "source_url": "https://github.com/shlinkio/shlink",
+      "upstream_id": "apps/shlink/config.json",
+      "web_ui": true,
+      "website_url": "https://shlink.io/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "SilverBullet is a creative space where you collect, create and expand your personal knowledge, while also letting you constantly evolve the tools you use to do so.",
+      "name": "Silverbullet",
+      "source_url": "https://github.com/silverbulletmd/silverbullet",
+      "upstream_id": "apps/silverbullet/config.json",
+      "web_ui": true,
+      "website_url": "https://silverbullet.md"
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "social"
+      ],
+      "description": "A reference implementation of the SimpleX Messaging Protocol for simplex queues over public networks.",
+      "name": "SimpleX SMP",
+      "source_url": "https://github.com/simplex-chat/simplexmq",
+      "upstream_id": "apps/simplex-smp/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "SiYuan is a privacy-first personal knowledge management system.",
+      "name": "SiYuan",
+      "source_url": "https://github.com/siyuan-note/siyuan",
+      "upstream_id": "apps/siyuan/config.json",
+      "web_ui": true,
+      "website_url": "https://b3log.org/siyuan/en/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "P2P downloads",
+      "name": "SLSKD",
+      "source_url": "https://github.com/slskd/slskd",
+      "upstream_id": "apps/slskd/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "development"
+      ],
+      "description": "Your internet folder",
+      "name": "Smallweb",
+      "source_url": "https://github.com/pomdtr/smallweb",
+      "upstream_id": "apps/smallweb/config.json",
+      "web_ui": true,
+      "website_url": "https://smallweb.run"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media",
+        "utilities"
+      ],
+      "description": "TV show manager for Usenet and BitTorrent",
+      "name": "Sonarr",
+      "source_url": "https://github.com/Sonarr/Sonarr",
+      "upstream_id": "apps/sonarr/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Cross-platform file explorer",
+      "name": "Spacedrive",
+      "source_url": "https://github.com/spacedriveapp/spacedrive",
+      "upstream_id": "apps/spacedrive/config.json",
+      "web_ui": true,
+      "website_url": "https://spacedrive.com/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Internet performance tracking application.",
+      "name": "Speedtest Tracker",
+      "source_url": "https://github.com/alexjustesen/speedtest-tracker",
+      "upstream_id": "apps/speedtest-tracker/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities",
+        "automation"
+      ],
+      "description": "Keep track of your inventory of 3D-printer filament spools",
+      "name": "Spoolman",
+      "source_url": "https://github.com/Donkie/Spoolman",
+      "upstream_id": "apps/spoolman/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "development"
+      ],
+      "description": "Web SSH & Telnet (WebSSH & WebTelnet client)",
+      "name": "Sshwifty",
+      "source_url": "https://github.com/nirui/sshwifty",
+      "upstream_id": "apps/sshwifty/config.json",
+      "web_ui": true,
+      "website_url": "https://sshwifty-demo.nirui.org/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media",
+        "network",
+        "utilities"
+      ],
+      "description": "Open-source mail server solution with JMAP, IMAP4, and SMTP support",
+      "name": "Stalwart Mail",
+      "source_url": "https://github.com/stalwartlabs",
+      "upstream_id": "apps/stalwart-mail/config.json",
+      "web_ui": true,
+      "website_url": "https://stalw.art"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "data",
+        "utilities"
+      ],
+      "description": "Powerful locally hosted web based PDF manipulation tool.",
+      "name": "Stirling-PDF",
+      "source_url": "https://github.com/Frooodle/Stirling-PDF/",
+      "upstream_id": "apps/stirling-pdf/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "books",
+        "media"
+      ],
+      "description": "An open-source manga reader server with bundled Web UI",
+      "name": "Suwayomi",
+      "source_url": "https://github.com/Suwayomi/docker-tachidesk",
+      "upstream_id": "apps/suwayomi/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "data",
+        "utilities"
+      ],
+      "description": "Peer-to-peer file synchronization between your devices",
+      "name": "Syncthing",
+      "source_url": "https://github.com/syncthing",
+      "upstream_id": "apps/syncthing/config.json",
+      "web_ui": true,
+      "website_url": "https://syncthing.net"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "network",
+        "security"
+      ],
+      "description": "The easiest, most secure way to use WireGuard and 2FA.",
+      "name": "Tailscale",
+      "source_url": "https://github.com/tailscale/tailscale",
+      "upstream_id": "apps/tailscale/config.json",
+      "web_ui": false,
+      "website_url": "https://tailscale.com/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "data"
+      ],
+      "description": "Recipe collection manager.",
+      "name": "Tandoor",
+      "source_url": "https://github.com/TandoorRecipes/recipes",
+      "upstream_id": "apps/tandoor/config.json",
+      "web_ui": true,
+      "website_url": "https://tandoor.dev/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "development"
+      ],
+      "description": "A self-hosted, file based task management board.",
+      "name": "Tasks.md",
+      "source_url": "https://github.com/BaldissaraMatheus/Tasks.md",
+      "upstream_id": "apps/tasks-md/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media",
+        "utilities"
+      ],
+      "description": "Monitoring and tracking tool for Plex Media Server.",
+      "name": "Tautulli",
+      "source_url": "https://github.com/Tautulli/Tautulli",
+      "upstream_id": "apps/tautulli/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "security"
+      ],
+      "description": "The tiniest authentication and authorization server you have ever seen.",
+      "name": "Tinyauth",
+      "source_url": "https://github.com/tinyauthapp/tinyauth",
+      "upstream_id": "apps/tinyauth/config.json",
+      "web_ui": true,
+      "website_url": "https://tinyauth.app"
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "automation"
+      ],
+      "description": "Alternative to retool to construct CRM dashboard",
+      "name": "Tooljet",
+      "source_url": "https://github.com/ToolJet/ToolJet",
+      "upstream_id": "apps/tooljet/config.json",
+      "web_ui": true,
+      "website_url": "https://www.tooljet.com"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities",
+        "security"
+      ],
+      "description": "Dumps Let's Encrypt certificates of a specified domain which Traefik stores in acme.json.",
+      "name": "Traefik Certs Dumper",
+      "source_url": "https://github.com/kereis/traefik-certs-dumper",
+      "upstream_id": "apps/traefik-certs-dumper/config.json",
+      "web_ui": false,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities",
+        "security"
+      ],
+      "description": "BitTorrent client with VPN support.",
+      "name": "Transmission (VPN)",
+      "source_url": "https://github.com/haugene/docker-transmission-openvpn",
+      "upstream_id": "apps/transmission-vpn/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Fast, easy, and free BitTorrent client",
+      "name": "Transmission",
+      "source_url": "https://github.com/transmission/transmission",
+      "upstream_id": "apps/transmission/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "An open-source, self-hosted Notion alterative",
+      "name": "Trilium",
+      "source_url": "https://github.com/TriliumNext/Trilium",
+      "upstream_id": "apps/trilium/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media"
+      ],
+      "description": "Your self-hosted YouTube media server",
+      "name": "Tube Archivist",
+      "source_url": "https://github.com/tubearchivist/tubearchivist",
+      "upstream_id": "apps/tubearchivist/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Umami is a simple, fast, privacy-focused alternative to Google Analytics.",
+      "name": "Umami Analytics",
+      "source_url": "https://github.com/umami-software/umami",
+      "upstream_id": "apps/umami-analytics/config.json",
+      "web_ui": true,
+      "website_url": "https://umami.is"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities",
+        "data",
+        "media"
+      ],
+      "description": "Unmanic - Library Optimiser.",
+      "name": "Unmanic",
+      "source_url": "https://github.com/Unmanic/unmanic",
+      "upstream_id": "apps/unmanic/config.json",
+      "web_ui": true,
+      "website_url": "https://docs.unmanic.app/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "A fancy self-hosted monitoring tool.",
+      "name": "Uptime Kuma",
+      "source_url": "https://github.com/louislam/uptime-kuma",
+      "upstream_id": "apps/uptime-kuma/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "All your passwords in your control!",
+      "name": "VaultWarden",
+      "source_url": "https://github.com/dani-garcia/vaultwarden",
+      "upstream_id": "apps/vaultwarden/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media"
+      ],
+      "description": "The open source, privacy-conscious way to enjoy your favorite YouTube content.",
+      "name": "ViewTube",
+      "source_url": "https://github.com/ViewTube/viewtube",
+      "upstream_id": "apps/viewtube/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "The Todo-app to organize your life.",
+      "name": "Vikunja",
+      "source_url": "https://kolaente.dev/vikunja",
+      "upstream_id": "apps/vikunja/config.json",
+      "web_ui": true,
+      "website_url": "https://vikunja.io"
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "finance"
+      ],
+      "description": "Open-Source Personal Subscription Tracker",
+      "name": "Wallos",
+      "source_url": "https://github.com/ellite/Wallos",
+      "upstream_id": "apps/wallos/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "network",
+        "utilities"
+      ],
+      "description": "Lightweight network IP scanner",
+      "name": "WatchYourLAN",
+      "source_url": "https://github.com/aceberg/WatchYourLAN",
+      "upstream_id": "apps/watchyourlan/config.json",
+      "web_ui": false,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "development"
+      ],
+      "description": "Open-Source, customizable, and privacy-focused kanban",
+      "name": "Wekan",
+      "source_url": "https://github.com/wekan/wekan",
+      "upstream_id": "apps/wekan/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "network"
+      ],
+      "description": "VPN server for your homeserver.",
+      "name": "Wireguard",
+      "source_url": "https://github.com/wg-easy/wg-easy",
+      "upstream_id": "apps/wg-easy-1/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media",
+        "utilities"
+      ],
+      "description": "Adult movie collection manager.",
+      "name": "Whisparr",
+      "source_url": "https://github.com/Whisparr/Whisparr",
+      "upstream_id": "apps/whisparr/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Tiny Go server that prints os information and HTTP request to output.",
+      "name": "Whoami",
+      "source_url": "https://github.com/traefik/whoami",
+      "upstream_id": "apps/whoami/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "social"
+      ],
+      "description": "A self-hosted, ad-free, privacy-respecting metasearch engine.",
+      "name": "Whoogle Search",
+      "source_url": "https://github.com/benbusby/whoogle-search",
+      "upstream_id": "apps/whoogle/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media"
+      ],
+      "description": "A modern and powerful wiki app built on Node.js",
+      "name": "WikiJS",
+      "source_url": "https://github.com/requarks/wiki",
+      "upstream_id": "apps/wikijs/config.json",
+      "web_ui": true,
+      "website_url": "https://js.wiki/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Full windows vm in your browser",
+      "name": "Windows",
+      "source_url": "https://github.com/dockur/windows/",
+      "upstream_id": "apps/windows/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities"
+      ],
+      "description": "Wizarr is an automatic user invitation system for Plex and Jellyfin.",
+      "name": "Wizarr",
+      "source_url": "https://github.com/Wizarrrr/wizarr",
+      "upstream_id": "apps/wizarr/config.json",
+      "web_ui": true,
+      "website_url": "https://docs.wizarr.dev/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "available": true,
+      "categories": [
+        "social"
+      ],
+      "description": "Popular CMS for websites and blogs",
+      "name": "WordPress",
+      "source_url": "https://github.com/WordPress/WordPress",
+      "upstream_id": "apps/wordpress/config.json",
+      "web_ui": true,
+      "website_url": "https://wordpress.org"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "available": true,
+      "categories": [
+        "social"
+      ],
+      "description": "Markdown-based publishing platform.",
+      "name": "Write-Freely",
+      "source_url": "https://hub.docker.com/r/nephatrine/write-freely",
+      "upstream_id": "apps/write-freely/config.json",
+      "web_ui": true,
+      "website_url": "https://writefreely.org/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "music",
+        "utilities"
+      ],
+      "description": "Self hosted Spotify tracking dashboard.",
+      "name": "Your Spotify",
+      "source_url": "https://github.com/Yooooomi/your_spotify",
+      "upstream_id": "apps/your-spotify/config.json",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "network",
+        "security"
+      ],
+      "description": "Easy to use zero configuration VPN.",
+      "name": "ZeroTier",
+      "source_url": "https://github.com/zerotier/ZeroTierOne",
+      "upstream_id": "apps/zerotier/config.json",
+      "web_ui": false,
+      "website_url": "https://www.zerotier.com"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "utilities",
+        "automation"
+      ],
+      "description": "Zigbee to MQTT bridge",
+      "name": "Zigbee2MQTT",
+      "source_url": "https://github.com/Koenkk/zigbee2mqtt",
+      "upstream_id": "apps/zigbee2mqtt/config.json",
+      "web_ui": true,
+      "website_url": "https://www.zigbee2mqtt.io/"
+    },
+    {
+      "architectures": [
+        "arm64",
+        "amd64"
+      ],
+      "available": true,
+      "categories": [
+        "media"
+      ],
+      "description": "A ShareX/file upload server that is easy to use, packed with features, and with an easy setup!",
+      "name": "Zipline",
+      "source_url": "https://github.com/diced/zipline",
+      "upstream_id": "apps/zipline-1/config.json",
+      "web_ui": true,
+      "website_url": "https://zipline.diced.sh"
+    }
+  ],
+  "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+  "source": "runtipi"
+}

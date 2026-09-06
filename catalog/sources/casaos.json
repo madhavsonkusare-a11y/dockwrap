@@ -1,0 +1,2819 @@
+{
+  "excluded": [
+    {
+      "path": "Apps/Filedrop/docker-compose.yml",
+      "reason": "Missing name, description or valid project URL"
+    },
+    {
+      "path": "Apps/FlareSolverr/docker-compose.yml",
+      "reason": "Missing name, description or valid project URL"
+    },
+    {
+      "path": "Apps/JDownloader2/docker-compose.yml",
+      "reason": "Missing name, description or valid project URL"
+    },
+    {
+      "path": "Apps/RDTClient/docker-compose.yml",
+      "reason": "Missing name, description or valid project URL"
+    }
+  ],
+  "records": [
+    {
+      "architectures": [
+        "amd64",
+        "386",
+        "arm64",
+        "arm"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "A web app to manage your Two-Factor Authentication (2FA) accounts and generate their security codes",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/2FAuth/icon.svg",
+      "name": "2FAuth",
+      "source_url": "https://github.com/Bubka/2FAuth",
+      "upstream_id": "Apps/2FAuth/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://2fauth.app"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Finance"
+      ],
+      "description": "Privacy-first finance app with envelope budgeting and multi-device sync.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/ActualBudget/icon.svg",
+      "name": "Actual Budget",
+      "source_url": "https://github.com/actualbudget/actual",
+      "upstream_id": "Apps/ActualBudget/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://actualbudget.org"
+    },
+    {
+      "architectures": [
+        "386",
+        "amd64",
+        "arm",
+        "arm64",
+        "ppc64le"
+      ],
+      "categories": [
+        "Networking"
+      ],
+      "description": "Network-wide ad and tracker blocking",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/AdGuardHome/icon.svg",
+      "name": "AdGuard Home",
+      "source_url": "https://github.com/AdguardTeam/AdGuardHome",
+      "upstream_id": "Apps/AdGuardHome/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://adguard.com/en/adguard-home/overview.html"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm",
+        "arm64"
+      ],
+      "categories": [
+        "Developer"
+      ],
+      "description": "Database management in a single PHP file",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Adminer/icon.svg",
+      "name": "Adminer",
+      "source_url": "https://github.com/vrana/adminer",
+      "upstream_id": "Apps/Adminer/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://www.adminer.org"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Finance"
+      ],
+      "description": "Self-custodial Bitcoin Lightning wallet with integrated node and app connections.",
+      "icon": "https://cdn.jsdelivr.net/gh/getAlby/hub@master/frontend/public/icon-512.png",
+      "name": "Alby Hub ✨",
+      "source_url": "https://github.com/getAlby/hub",
+      "upstream_id": "Apps/AlbyHub/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://albyhub.com/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm",
+        "arm64"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "An Alist storage synchronization tool based on the Web interface.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Alist-Sync/icon.svg",
+      "name": "Alist-Sync",
+      "source_url": "https://github.com/xjxjin/alist-sync",
+      "upstream_id": "Apps/Alist-Sync/docker-compose.yml",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm",
+        "arm64"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "Mount your cloud drive on your home NAS",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Alist/icon.svg",
+      "name": "Alist",
+      "source_url": "https://github.com/AlistGo/alist",
+      "upstream_id": "Apps/Alist/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://alistgo.com/"
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "categories": [
+        "AI"
+      ],
+      "description": "Your machine learning Env work with Jupyter Lab",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Anaconda3/icon.svg",
+      "name": "Anaconda3",
+      "source_url": "https://github.com/anaconda/docker-images",
+      "upstream_id": "Apps/Anaconda3/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://www.anaconda.com"
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "categories": [
+        "AI"
+      ],
+      "description": "The all-in-one AI application.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/AnythingLLM/icon.svg",
+      "name": "AnythingLLM",
+      "source_url": "https://github.com/Mintplex-Labs/anything-llm",
+      "upstream_id": "Apps/AnythingLLM/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://anythingllm.com"
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "Self-hosted internet archiving solution",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/ArchiveBox/icon.svg",
+      "name": "ArchiveBox",
+      "source_url": "https://github.com/ArchiveBox/ArchiveBox",
+      "upstream_id": "Apps/ArchiveBox/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://archivebox.io"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Audiobookshelf is a self-hosted audiobook and podcast server.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Audiobookshelf/icon.svg",
+      "name": "Audiobookshelf",
+      "source_url": "https://github.com/advplyr/audiobookshelf",
+      "upstream_id": "Apps/Audiobookshelf/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://audiobookshelf.org"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Modern, easy to use download automation for torrents and usenet.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Autobrr/icon.svg",
+      "name": "Autobrr",
+      "source_url": "https://github.com/autobrr/autobrr",
+      "upstream_id": "Apps/Autobrr/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://autobrr.com"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Letter generators for Sonarr and Radarr",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Bazarr/icon.svg",
+      "name": "Bazarr",
+      "source_url": "https://github.com/morpheus65535/bazarr",
+      "upstream_id": "Apps/Bazarr/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://www.bazarr.media"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "A self-hosted, goal-free habit tracking tool.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/BeaverHabitTracker/icon.svg",
+      "name": "BeaverHabitTracker",
+      "source_url": "https://github.com/daya0576/beaverhabits",
+      "upstream_id": "Apps/BeaverHabitTracker/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://beaverhabits.com/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "Privacy-first, self-hosted PDF toolkit",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/BentoPDF/icon.svg",
+      "name": "BentoPDF",
+      "source_url": "https://github.com/alam00000/bentopdf",
+      "upstream_id": "Apps/BentoPDF/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://bentopdf.com"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "Blinko is an AI-powered card note-taking project. Designed for individuals who want to quickly capture and organize their fleeting thoughts. Blinko allows users to seamlessly jot down ideas the moment they strike, ensuring that no spark of creativity is lost.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Blinko/icon.svg",
+      "name": "Blinko",
+      "source_url": "https://github.com/blinkospace/blinko",
+      "upstream_id": "Apps/Blinko/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://blinko.space/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Web app for browsing, reading and downloading eBooks stored in a Calibre database",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Calibre-web/icon.svg",
+      "name": "Calibre-web",
+      "source_url": "https://github.com/janeczku/calibre-web",
+      "upstream_id": "Apps/Calibre-web/docker-compose.yml",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "AI"
+      ],
+      "description": "A well-designed cross-platform ChatGPT UI.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/ChatGPT-Next-Web/icon.svg",
+      "name": "ChatGPT Next Web",
+      "source_url": "https://github.com/ChatGPTNextWeb/NextChat",
+      "upstream_id": "Apps/ChatGPT-Next-Web/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://nextchat.club"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "AI"
+      ],
+      "description": "Open source chat UI for AI models",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/ChatbotUI/icon.jpg",
+      "name": "Chatbot UI",
+      "source_url": "https://github.com/mckaywrigley/chatbot-ui",
+      "upstream_id": "Apps/ChatbotUI/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://www.chatbotui.com"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Developer"
+      ],
+      "description": "Cloud Database Manager.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/CloudBeaver/icon.svg",
+      "name": "CloudBeaver",
+      "source_url": "https://github.com/dbeaver/cloudbeaver",
+      "upstream_id": "Apps/CloudBeaver/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://dbeaver.com/download/cloudbeaver/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm",
+        "arm64"
+      ],
+      "categories": [
+        "Networking"
+      ],
+      "description": "A tunneling daemon by Cloudflare that safely exposes your web servers into the internet.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Cloudflared/icon.svg",
+      "name": "Cloudflared",
+      "source_url": "https://github.com/WisdomSky/Cloudflared-web",
+      "upstream_id": "Apps/Cloudflared/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/get-started/create-remote-tunnel/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "Self-hosted cloud data migration & sync manager",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Clumoove/icon.svg",
+      "name": "Clumoove",
+      "source_url": "https://github.com/xXRoxXeRXx/clumoove",
+      "upstream_id": "Apps/Clumoove/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://clumoove.com"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "A versatile file conversion tool that supports multiple formats.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/ConvertX/icon.svg",
+      "name": "ConvertX",
+      "source_url": "https://github.com/c4illin/convertx",
+      "upstream_id": "Apps/ConvertX/docker-compose.yml",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "A simple, private file server.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/CopyParty/icon.svg",
+      "name": "CopyParty",
+      "source_url": "https://github.com/9001/copyparty",
+      "upstream_id": "Apps/CopyParty/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://copyparty.eu/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Take control of your Minecraft servers.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Crafty/icon.svg",
+      "name": "Crafty",
+      "source_url": "https://gitlab.com/crafty-controller/crafty-4",
+      "upstream_id": "Apps/Crafty/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://craftycontrol.com"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm",
+        "arm64"
+      ],
+      "categories": [
+        "Networking"
+      ],
+      "description": "Simple and easy to use DDNS",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/DDNS-Updater/icon.svg",
+      "name": "ddns-updater",
+      "source_url": "https://github.com/qdm12/ddns-updater",
+      "upstream_id": "Apps/DDNS-Updater/docker-compose.yml",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Social"
+      ],
+      "description": "Messenger for the Decentralized Web",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Databag/icon.svg",
+      "name": "Databag",
+      "source_url": "https://github.com/balzack/databag",
+      "upstream_id": "Apps/Databag/docker-compose.yml",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm",
+        "arm64"
+      ],
+      "categories": [
+        "Networking"
+      ],
+      "description": "Simple and easy to use DDNS",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Ddns-go/icon.svg",
+      "name": "ddns-go",
+      "source_url": "https://github.com/jeessy2/ddns-go",
+      "upstream_id": "Apps/Ddns-go/docker-compose.yml",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "categories": [
+        "AI"
+      ],
+      "description": "Powerful OCR powered by DeepSeek AI",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/DeepSeek-OCR_Nvidia/icon.svg",
+      "name": "DeepSeek OCR(Nvidia GPU)",
+      "source_url": "https://github.com/rdumasia303/deepseek_ocr_app",
+      "upstream_id": "Apps/DeepSeek-OCR_Nvidia/docker-compose.yml",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "AI"
+      ],
+      "description": "DeepSeek Harness “Everything is a Plugin“.",
+      "icon": "https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/deepseek.png",
+      "name": "DeepSeekHarness",
+      "source_url": "https://github.com/deepseek-ai/deepseek-harness",
+      "upstream_id": "Apps/DeepSeekHarness/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://www.deepseek.com"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "A lightweight and free BitTorrent client.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Deluge/icon.svg",
+      "name": "Deluge",
+      "source_url": "https://github.com/deluge-torrent/deluge",
+      "upstream_id": "Apps/Deluge/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://deluge-torrent.org"
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "categories": [
+        "AI"
+      ],
+      "description": "LLM App Development Platform",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Dify/icon.svg",
+      "name": "Dify",
+      "source_url": "https://github.com/langgenius/dify",
+      "upstream_id": "Apps/Dify/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://dify.ai"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "A modern wiki and knowledge base for teams",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Docmost/icon.svg",
+      "name": "Docmost",
+      "source_url": "https://github.com/docmost/docmost",
+      "upstream_id": "Apps/Docmost/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://docmost.com/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Download Spotify music with album art and metadata",
+      "icon": "https://raw.githubusercontent.com/henriquesebastiao/downtify/refs/heads/main/assets/casaos-icon.png",
+      "name": "Downtify",
+      "source_url": "https://github.com/henriquesebastiao/downtify",
+      "upstream_id": "Apps/Downtify/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://downtify.henriquesebastiao.com"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Networking"
+      ],
+      "description": "Dynamic DNS for your domain, supporting both IPv4 and IPv6",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/DuckDNS/icon.svg",
+      "name": "duckdns",
+      "source_url": "https://github.com/linuxserver/docker-duckdns",
+      "upstream_id": "Apps/DuckDNS/docker-compose.yml",
+      "web_ui": false,
+      "website_url": "https://www.duckdns.org"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "Store securely encrypted backups in the cloud!",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Duplicati/icon.svg",
+      "name": "Duplicati",
+      "source_url": "https://github.com/duplicati/duplicati",
+      "upstream_id": "Apps/Duplicati/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://duplicati.com/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Home"
+      ],
+      "description": "Home Automation systems",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/ESPHome/icon.svg",
+      "name": "ESPHome",
+      "source_url": "https://github.com/esphome/esphome",
+      "upstream_id": "Apps/ESPHome/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://esphome.io"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Emby brings together your personal videos, music, photos, and live television.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Emby/icon.svg",
+      "name": "Emby",
+      "source_url": "https://github.com/linuxserver/docker-emby",
+      "upstream_id": "Apps/Emby/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://emby.media/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "TAKE YOUR MEDIA ANYWHERE WITH EMBY",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Emby/icon.svg",
+      "name": "Emby(Nvidia GPU)",
+      "source_url": "https://github.com/linuxserver/docker-emby",
+      "upstream_id": "Apps/Emby_Nvidia/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://emby.media/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Calculate all kinds of statistics from your (local) Emby or Jellyfin server",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Embystat/icon.svg",
+      "name": "Embystat",
+      "source_url": "https://github.com/mregni/EmbyStat",
+      "upstream_id": "Apps/Embystat/docker-compose.yml",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "EmulatorJS is a Docker-based emulator application that can simulate various operating systems and device environments within containers for development, testing, and learning purposes.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/EmulatorJS/icon.svg",
+      "name": "emulatorjs",
+      "source_url": "https://github.com/linuxserver/emulatorjs",
+      "upstream_id": "Apps/EmulatorJS/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://emulatorjs.org/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "Real-time collaborative document editor",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Etherpad/icon.svg",
+      "name": "Etherpad",
+      "source_url": "https://github.com/ether/etherpad",
+      "upstream_id": "Apps/Etherpad/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://etherpad.org/"
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "Virtual whiteboard for sketching hand-drawn like diagrams",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Excalidraw/icon.svg",
+      "name": "Excalidraw",
+      "source_url": "https://github.com/excalidraw/excalidraw",
+      "upstream_id": "Apps/Excalidraw/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://excalidraw.com/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "File processing made easy!",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/FileFlows/icon.svg",
+      "name": "FileFlows",
+      "source_url": "https://fileflows.com/",
+      "upstream_id": "Apps/FileFlows/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://fileflows.com/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64",
+        "arm"
+      ],
+      "categories": [
+        "Networking"
+      ],
+      "description": "Firefly, the easiest using of WireGuard VPN server, plus version of wg-easy.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Firefly/icon.svg",
+      "name": "Firefly",
+      "source_url": "https://github.com/Safe3/firefly",
+      "upstream_id": "Apps/Firefly/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://qq.uusec.com/"
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "categories": [
+        "AI"
+      ],
+      "description": "An open source generative AI development platform for building AI Agents and LLM workflows",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/FlowiseAi/icon.svg",
+      "name": "Flowise",
+      "source_url": "https://github.com/flowiseai/flowise",
+      "upstream_id": "Apps/FlowiseAi/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://flowiseai.com/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64",
+        "arm"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "A free, self-hostable news aggregator…",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/FreshRSS/icon.svg",
+      "name": "FreshRSS",
+      "source_url": "https://github.com/FreshRSS/FreshRSS",
+      "upstream_id": "Apps/FreshRSS/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://freshrss.org/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Home"
+      ],
+      "description": "Monitor your security cameras with locally processed AI",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Frigate/icon.png",
+      "name": "Frigate",
+      "source_url": "https://github.com/blakeblackshear/frigate",
+      "upstream_id": "Apps/Frigate/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://frigate.video/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm",
+        "arm64"
+      ],
+      "categories": [
+        "Networking"
+      ],
+      "description": "A third-party client for casaos and zimaOS, remote access management interface, remote access to installed applications.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Gateway-go/icon.svg",
+      "name": "gateway-go",
+      "source_url": "https://github.com/OpenIoTHub/gateway-go",
+      "upstream_id": "Apps/Gateway-go/docker-compose.yml",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Developer"
+      ],
+      "description": "Self-hosted software development service",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Gitea/icon.svg",
+      "name": "Gitea",
+      "source_url": "https://github.com/go-gitea/gitea",
+      "upstream_id": "Apps/Gitea/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://about.gitea.com/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "Cross-platform monitoring tool.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Glances/icon.svg",
+      "name": "Glances",
+      "source_url": "https://github.com/nicolargo/glances",
+      "upstream_id": "Apps/Glances/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://nicolargo.github.io/glances/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64",
+        "arm"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Open source, lightweight, native, supports (HTTP, BitTorrent, Magnet, etc.) for downloading.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Gopeed/icon.svg",
+      "name": "Gopeed",
+      "source_url": "https://github.com/gopeedlab/gopeed",
+      "upstream_id": "Apps/Gopeed/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://gopeed.com"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Developer"
+      ],
+      "description": "Grafana is a complete observability stack that allows you to monitor and analyze metrics, logs and traces. It allows you to query, visualize, alert on and understand your data no matter where it is stored.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Grafana/icon.svg",
+      "name": "Grafana",
+      "source_url": "https://github.com/grafana/grafana",
+      "upstream_id": "Apps/Grafana/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://grafana.com/"
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Liberate your videos and unleash infinite possibilities.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Handbrake/icon.svg",
+      "name": "handbrake",
+      "source_url": "https://github.com/jlesage/docker-handbrake",
+      "upstream_id": "Apps/Handbrake/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://handbrake.fr"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "AI"
+      ],
+      "description": "A self-improving AI agent with memory, skills, messaging, and a web dashboard.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Hermes/icon.svg",
+      "name": "Hermes",
+      "source_url": "https://github.com/NousResearch/hermes-agent",
+      "upstream_id": "Apps/Hermes/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://hermes-agent.nousresearch.com/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64",
+        "arm"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "A web app to listen Youtube audio source.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/HoloPlay/icon.svg",
+      "name": "HoloPlay",
+      "source_url": "https://github.com/stephane-r/HoloPlay",
+      "upstream_id": "Apps/HoloPlay/docker-compose.yml",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Home"
+      ],
+      "description": "Open source home automation that puts local control and privacy first.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/HomeAssistant/icon.svg",
+      "name": "Home Assistant",
+      "source_url": "https://github.com/home-assistant/core",
+      "upstream_id": "Apps/HomeAssistant/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://www.home-assistant.io"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm",
+        "arm64"
+      ],
+      "categories": [
+        "Home"
+      ],
+      "description": "HomeKit support for the impatient.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Homebridge/icon.svg",
+      "name": "Homebridge",
+      "source_url": "https://github.com/homebridge/homebridge",
+      "upstream_id": "Apps/Homebridge/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://homebridge.io/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Developer"
+      ],
+      "description": "The world's fastest framework for building websites",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Hugo/icon.svg",
+      "name": "Hugo",
+      "source_url": "https://github.com/gohugoio/hugo",
+      "upstream_id": "Apps/Hugo/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://gohugo.io/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Self-hosted media management solution",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Immich/icon.svg",
+      "name": "Immich",
+      "source_url": "https://github.com/immich-app/immich",
+      "upstream_id": "Apps/Immich/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://immich.app/"
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "categories": [
+        "AI"
+      ],
+      "description": "An Industrial-Level Controllable and Efficient Zero-Shot Text-To-Speech System",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Index-TTS/icon.svg",
+      "name": "Index-TTS",
+      "source_url": "https://github.com/index-tts/index-tts",
+      "upstream_id": "Apps/Index-TTS/docker-compose.yml",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "categories": [
+        "AI"
+      ],
+      "description": "An Industrial-Level Controllable and Efficient Zero-Shot Text-To-Speech System",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Index-TTS_Nvidia/icon.svg",
+      "name": "Index-TTS(Nvidia GPU)",
+      "source_url": "https://github.com/index-tts/index-tts",
+      "upstream_id": "Apps/Index-TTS_Nvidia/docker-compose.yml",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Jackett works as a proxy server",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Jackett/icon.svg",
+      "name": "Jackett",
+      "source_url": "https://github.com/Jackett/Jackett",
+      "upstream_id": "Apps/Jackett/docker-compose.yml",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "The personal Media System",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Jellyfin/icon.svg",
+      "name": "Jellyfin",
+      "source_url": "https://github.com/jellyfin/jellyfin",
+      "upstream_id": "Apps/Jellyfin/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://jellyfin.org/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "The personal Media System",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Jellyfin/icon.svg",
+      "name": "Jellyfin(Nvidia GPU)",
+      "source_url": "https://github.com/jellyfin/jellyfin",
+      "upstream_id": "Apps/Jellyfin_Nvidia/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://jellyfin.org/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Jellyseerr is a free and open source software application for managing requests for your media library.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Jellyseerr/icon.svg",
+      "name": "Jellyseerr",
+      "source_url": "https://github.com/Fallenbagel/jellyseerr",
+      "upstream_id": "Apps/Jellyseerr/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://seerr.dev/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Developer"
+      ],
+      "description": "Jenkins Continuous Integration and Delivery server.",
+      "icon": "https://icon.casaos.io/main/all/jenkins.png",
+      "name": "Jenkins CI/CD",
+      "source_url": "https://github.com/jenkinsci/jenkins",
+      "upstream_id": "Apps/Jenkin/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://www.jenkins.io/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "The Bookmark Everything App",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Karakeep/icon.svg",
+      "name": "Karakeep",
+      "source_url": "https://github.com/karakeep-app/karakeep",
+      "upstream_id": "Apps/Karakeep/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://karakeep.app/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Kavita is a free and open source web based Comic and Book Server.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Kavita/icon.svg",
+      "name": "Kavita",
+      "source_url": "https://github.com/Kareadita/Kavita",
+      "upstream_id": "Apps/Kavita/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://www.kavitareader.com"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Komga is a media server for your comics, mangas, BDs, magazines and eBooks.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Komga/icon.svg",
+      "name": "Komga",
+      "source_url": "https://github.com/gotson/komga",
+      "upstream_id": "Apps/Komga/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://komga.org"
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "categories": [
+        "AI"
+      ],
+      "description": "Unified LLM Fine-Tuning with 100+ Models",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/LLaMA-Factory_Nvidia/icon.svg",
+      "name": "LLaMA Factory(Nvidia GPU)",
+      "source_url": "https://github.com/hiyouga/LLaMA-Factory",
+      "upstream_id": "Apps/LLaMA-Factory_Nvidia/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://llamafactory.readthedocs.io/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "AI"
+      ],
+      "description": "Label Studio is an open source data labeling tool. It lets you label data types like audio, text, images, videos, and time series with a simple and straightforward UI and export to various model formats. It can be used to prepare raw data or improve existing training data to get more accurate ML models.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/LabelStudio/icon.svg",
+      "name": "Label Studio",
+      "source_url": "https://github.com/HumanSignal/label-studio",
+      "upstream_id": "Apps/LabelStudio/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://labelstud.io/"
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "categories": [
+        "AI"
+      ],
+      "description": "Open-source UI for building and debugging multi-agent and RAG applications",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/LangFlow/icon.svg",
+      "name": "Langflow",
+      "source_url": "https://github.com/langflow-ai/langflow",
+      "upstream_id": "Apps/LangFlow/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://www.langflow.org"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "eBook Auto Downloader",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Lazylibrarian/icon.svg",
+      "name": "Lazylibrarian",
+      "source_url": "https://github.com/lazylibrarian/LazyLibrarian",
+      "upstream_id": "Apps/Lazylibrarian/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://lazylibrarian.gitlab.io/"
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "categories": [
+        "AI"
+      ],
+      "description": "A full-featured, open-source AI chat interface",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/LibreChat/icon.svg",
+      "name": "LibreChat",
+      "source_url": "https://github.com/danny-avila/LibreChat",
+      "upstream_id": "Apps/LibreChat/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://www.librechat.ai"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Music collection manager for Usenet and BitTorrent users",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Lidarr/icon.svg",
+      "name": "Lidarr",
+      "source_url": "https://github.com/Lidarr/Lidarr",
+      "upstream_id": "Apps/Lidarr/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://lidarr.audio/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "Self-hosted collaborative bookmark manager to collect, read, annotate, and fully preserve what matters, all in one place.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Linkwarden/icon.svg",
+      "name": "Linkwarden",
+      "source_url": "https://github.com/linkwarden/linkwarden",
+      "upstream_id": "Apps/Linkwarden/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://linkwarden.app/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "A privacy-first, open-source platform for knowledge management and collaboration.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Logseq/icon.svg",
+      "name": "Logseq",
+      "source_url": "https://github.com/logseq/logseq",
+      "upstream_id": "Apps/Logseq/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://logseq.com/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm",
+        "arm64"
+      ],
+      "categories": [
+        "Networking"
+      ],
+      "description": "Powerful networking tool",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Lucky/icon.svg",
+      "name": "Lucky",
+      "source_url": "https://github.com/gdy666/lucky",
+      "upstream_id": "Apps/Lucky/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://lucky666.cn/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Lyrion Music Server is a streaming audio server for Squeezebox audio players.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/LyrionMusicServer/icon.svg",
+      "name": "LyrionMusicServer",
+      "source_url": "https://github.com/lms-community/slimserver",
+      "upstream_id": "Apps/LyrionMusicServer/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://www.lyrion.org"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Developer"
+      ],
+      "description": "MariaDB Server is one of the most popular database servers in the world. It's made by the original developers of MySQL and guaranteed to stay open source.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/MariaDB/icon.svg",
+      "name": "MariaDB",
+      "source_url": "https://github.com/MariaDB/server",
+      "upstream_id": "Apps/MariaDB/docker-compose.yml",
+      "web_ui": false,
+      "website_url": "https://mariadb.org/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Finance"
+      ],
+      "description": "Personal finance management application",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Maybe/icon.svg",
+      "name": "Maybe",
+      "source_url": "https://github.com/maybe-finance/maybe",
+      "upstream_id": "Apps/Maybe/docker-compose.yml",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64",
+        "arm"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Automatic Video Library Manager for TV Shows. It watches for new episodes of your favorite shows, and when they are posted it does its magic.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Medusa/icon.svg",
+      "name": "Medusa",
+      "source_url": "https://github.com/pymedusa/Medusa",
+      "upstream_id": "Apps/Medusa/docker-compose.yml",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64",
+        "arm"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "Memos is a lightweight, self-hosted memo hub. Open Source and Free forever.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Memos/icon.svg",
+      "name": "Memos",
+      "source_url": "https://github.com/usememos/memos",
+      "upstream_id": "Apps/Memos/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://usememos.com/"
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Free and easy to use Minecraft server management tool.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/MineOS/icon.svg",
+      "name": "MineOS",
+      "source_url": "https://github.com/hexparrot/mineos-node",
+      "upstream_id": "Apps/MineOS/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://www.mineos.net/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Developer"
+      ],
+      "description": "A free and open-source cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with schemata.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Mongo/icon.svg",
+      "name": "MongoDB",
+      "source_url": "https://github.com/mongodb/mongo",
+      "upstream_id": "Apps/Mongo/docker-compose.yml",
+      "web_ui": false,
+      "website_url": "https://www.mongodb.com/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Developer"
+      ],
+      "description": "A free and open-source cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with schemata.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/MongoDB4/icon.svg",
+      "name": "MongoDB 4",
+      "source_url": "https://github.com/mongodb/mongo",
+      "upstream_id": "Apps/MongoDB4/docker-compose.yml",
+      "web_ui": false,
+      "website_url": "https://www.mongodb.com/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Social"
+      ],
+      "description": "A Personal Relationship Management tool to help you document your social life.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Monica/icon.svg",
+      "name": "Monica",
+      "source_url": "https://github.com/monicahq/monica",
+      "upstream_id": "Apps/Monica/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://www.monicahq.com"
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "categories": [
+        "Home"
+      ],
+      "description": "A web frontend for the motion daemon.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Motioneye/icon.svg",
+      "name": "Motioneye",
+      "source_url": "https://github.com/motioneye-project/motioneye",
+      "upstream_id": "Apps/Motioneye/docker-compose.yml",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64",
+        "arm"
+      ],
+      "categories": [
+        "Networking"
+      ],
+      "description": "Analysis software that shows your internet speed for up to 30 days.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/MySpeed/icon.svg",
+      "name": "MySpeed",
+      "source_url": "https://github.com/gnmyt/myspeed",
+      "upstream_id": "Apps/MySpeed/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://myspeed.dev"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Automatic comic book (cbr/cbz) downloader",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Mylar3/icon.svg",
+      "name": "Mylar3",
+      "source_url": "https://github.com/mylar3/mylar3",
+      "upstream_id": "Apps/Mylar3/docker-compose.yml",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "Workflow automation tool",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/N8n/icon.svg",
+      "name": "n8n",
+      "source_url": "https://github.com/n8n-io/n8n",
+      "upstream_id": "Apps/N8n/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://n8n.io"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64",
+        "arm"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Music Collection and Streaming Server",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Navidrome/icon.svg",
+      "name": "Navidrome",
+      "source_url": "https://github.com/navidrome/navidrome",
+      "upstream_id": "Apps/Navidrome/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://www.navidrome.org"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Networking"
+      ],
+      "description": "Connect your devices into a secure WireGuard®-based overlay network with SSO, MFA and granular access controls.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/NetBird/icon.svg",
+      "name": "NetBird",
+      "source_url": "https://github.com/netbirdio/netbird",
+      "upstream_id": "Apps/NetBird/docker-compose.yml",
+      "web_ui": false,
+      "website_url": "https://netbird.io"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64",
+        "arm"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "Real-time Performance Monitoring",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Netdata/icon.svg",
+      "name": "Netdata",
+      "source_url": "https://github.com/netdata/netdata",
+      "upstream_id": "Apps/Netdata/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://www.netdata.cloud"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Networking"
+      ],
+      "description": "Monitor, analyze, and alert on network performance.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Netronome/icon.png",
+      "name": "Netronome",
+      "source_url": "https://github.com/autobrr/netronome",
+      "upstream_id": "Apps/Netronome/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://netrono.me"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm",
+        "arm64",
+        "386",
+        "ppc64le",
+        "s390x"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "Content collaboration platform",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Nextcloud/icon.svg",
+      "name": "Nextcloud",
+      "source_url": "https://github.com/nextcloud/server",
+      "upstream_id": "Apps/Nextcloud/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://nextcloud.com"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64",
+        "arm"
+      ],
+      "categories": [
+        "Networking"
+      ],
+      "description": "Managing Nginx proxy hosts with a simple, powerful interface.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/NginxProxyManager/icon.svg",
+      "name": "Nginx Proxy Manager",
+      "source_url": "https://github.com/NginxProxyManager/nginx-proxy-manager",
+      "upstream_id": "Apps/NginxProxyManager/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://nginxproxymanager.com"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64",
+        "arm"
+      ],
+      "categories": [
+        "Developer"
+      ],
+      "description": "Low-code programming for event-driven applications",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Node-RED/icon.svg",
+      "name": "Node-RED",
+      "source_url": "https://github.com/node-red/node-red",
+      "upstream_id": "Apps/Node-RED/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://nodered.org/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Efficient Usenet downloader",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Nzbget/icon.svg",
+      "name": "Nzbget",
+      "source_url": "https://github.com/nzbgetcom/nzbget",
+      "upstream_id": "Apps/Nzbget/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://nzbget.com"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "Obsidian is a knowledge management app for creating, linking, and visually organizing Markdown notes.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Obsidian/icon.svg",
+      "name": "Obsidian",
+      "source_url": "https://github.com/obsidianmd/obsidian-releases",
+      "upstream_id": "Apps/Obsidian/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://obsidian.md"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "AI"
+      ],
+      "description": "Get up and running with large language models locally",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Ollama/icon.svg",
+      "name": "Ollama",
+      "source_url": "https://github.com/ollama/ollama",
+      "upstream_id": "Apps/Ollama/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://ollama.com/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "AI"
+      ],
+      "description": "Get up and running with large language models locally",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Ollama/icon.svg",
+      "name": "Ollama(Nvidia GPU)",
+      "source_url": "https://github.com/ollama/ollama",
+      "upstream_id": "Apps/Ollama_Nvidia/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://ollama.com/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Friendly media request tool, automatically syncs with your media servers!",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Ombi/icon.svg",
+      "name": "Ombi",
+      "source_url": "https://github.com/Ombi-app/Ombi",
+      "upstream_id": "Apps/Ombi/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://ombi.io"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "AI"
+      ],
+      "description": "OpenClaw is a personal AI assistant you run on your own devices",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/OpenClaw/icon.svg",
+      "name": "OpenClaw",
+      "source_url": "https://github.com/openclaw/openclaw",
+      "upstream_id": "Apps/OpenClaw/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://openclaw.ai"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Home"
+      ],
+      "description": "Empowering the smart home",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/OpenHAB/icon.svg",
+      "name": "OpenHAB",
+      "source_url": "https://github.com/openhab/openhab-distro",
+      "upstream_id": "Apps/OpenHAB/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://www.openhab.org"
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "categories": [
+        "AI"
+      ],
+      "description": "Open-source AI-powered coding assistant",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/OpenHands/icon.svg",
+      "name": "OpenHands",
+      "source_url": "https://github.com/All-Hands-AI/OpenHands",
+      "upstream_id": "Apps/OpenHands/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://www.openhands.dev/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm",
+        "arm64"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "Mount your cloud drive on your home NAS",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/OpenList/icon.svg",
+      "name": "OpenList",
+      "source_url": "https://github.com/OpenListTeam/OpenList",
+      "upstream_id": "Apps/OpenList/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://oplist.org/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64",
+        "ppc64le",
+        "s390x",
+        "386",
+        "arm"
+      ],
+      "categories": [
+        "Networking"
+      ],
+      "description": "HTML5 Network Speed Test Server.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/OpenSpeedTest/icon.svg",
+      "name": "OpenSpeedTest",
+      "source_url": "https://github.com/openspeedtest/Speed-Test",
+      "upstream_id": "Apps/OpenSpeedTest/docker-compose.yml",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "categories": [
+        "AI"
+      ],
+      "description": "User-friendly WebUI for LLMs (Formerly Ollama WebUI)",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/OpenWebUI/icon.svg",
+      "name": "Open WebUI",
+      "source_url": "https://github.com/open-webui/open-webui",
+      "upstream_id": "Apps/OpenWebUI/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://openwebui.com"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Overseerr is a request management and media discovery tool built to work with your existing Plex ecosystem.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Overseerr/icon.svg",
+      "name": "Overseerr",
+      "source_url": "https://github.com/sct/overseerr",
+      "upstream_id": "Apps/Overseerr/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://overseerr.dev"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "Selfhosted PDF manager, viewer and editor",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/PdfDing/icon.svg",
+      "name": "PdfDing",
+      "source_url": "https://github.com/mrmn2/PdfDing",
+      "upstream_id": "Apps/PdfDing/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://www.pdfding.com"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Home"
+      ],
+      "description": "UPS monitoring and power outage notification system",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Peanut/icon.svg",
+      "name": "PeaNUT",
+      "source_url": "https://github.com/brandawg93/peanut",
+      "upstream_id": "Apps/Peanut/docker-compose.yml",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "A third party companion app available to Plex server owners to allow their users to request, review and discover content.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Petio/icon.svg",
+      "name": "Petio",
+      "source_url": "https://github.com/petio-team/petio",
+      "upstream_id": "Apps/Petio/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://petio.tv"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Browse Your Life in Images",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/PhotoPrism/icon.svg",
+      "name": "PhotoPrism",
+      "source_url": "https://github.com/photoprism/photoprism",
+      "upstream_id": "Apps/PhotoPrism/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://www.photoprism.app"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64",
+        "386",
+        "arm"
+      ],
+      "categories": [
+        "Networking"
+      ],
+      "description": "Network-wide Ad Blocking",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Pihole/icon.svg",
+      "name": "Pi-hole",
+      "source_url": "https://github.com/pi-hole/pi-hole",
+      "upstream_id": "Apps/Pihole/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://pi-hole.net/"
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Your next YouTube media manager",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Pinchflat/icon.svg",
+      "name": "Pinchflat",
+      "source_url": "https://github.com/kieraneglin/pinchflat",
+      "upstream_id": "Apps/Pinchflat/docker-compose.yml",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "Self-hosted file sharing with a modern web interface",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Pingvin-Share/icon.svg",
+      "name": "Pingvin-Share",
+      "source_url": "https://github.com/stonith404/pingvin-share",
+      "upstream_id": "Apps/Pingvin-Share/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://stonith404.github.io/pingvin-share/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Stream Movies & TV Shows",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Plex/icon.svg",
+      "name": "Plex",
+      "source_url": "https://github.com/linuxserver/docker-plex",
+      "upstream_id": "Apps/Plex/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://www.plex.tv"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Stream Movies & TV Shows",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Plex/icon.svg",
+      "name": "Plex(Nvidia GPU)",
+      "source_url": "https://github.com/linuxserver/docker-plex",
+      "upstream_id": "Apps/Plex_Nvidia/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://www.plex.tv"
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "categories": [
+        "Developer"
+      ],
+      "description": "Open Source realtime backend in 1 file",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/PocketBase/icon.svg",
+      "name": "PocketBase",
+      "source_url": "https://github.com/pocketbase/pocketbase",
+      "upstream_id": "Apps/PocketBase/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://pocketbase.io"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Sleek podcast downloader with GPodder sync",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/PodFetch/icon.png",
+      "name": "PodFetch",
+      "source_url": "https://github.com/SamTV12345/PodFetch",
+      "upstream_id": "Apps/PodFetch/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://samtv12345.github.io/PodFetch/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm",
+        "arm64"
+      ],
+      "categories": [
+        "Developer"
+      ],
+      "description": "Lightweight Docker management UI",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Portainer/icon.svg",
+      "name": "Portainer",
+      "source_url": "https://github.com/portainer/portainer",
+      "upstream_id": "Apps/Portainer/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://www.portainer.io/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm",
+        "arm64"
+      ],
+      "categories": [
+        "Developer"
+      ],
+      "description": "PostgreSQL is an advanced, enterprise-class, and open-source relational database system. PostgreSQL supports both SQL (relational) and JSON (non-relational) querying.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/PostgreSQL/icon.svg",
+      "name": "PostgreSQL",
+      "source_url": "https://github.com/postgres/postgres",
+      "upstream_id": "Apps/PostgreSQL/docker-compose.yml",
+      "web_ui": false,
+      "website_url": "https://www.postgresql.org"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Integration of various PVR applications",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Prowlarr/icon.svg",
+      "name": "Prowlarr",
+      "source_url": "https://github.com/Prowlarr/Prowlarr",
+      "upstream_id": "Apps/Prowlarr/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://prowlarr.com"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "A simple, open-source file sharing host.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/PsiTransfer/icon.png",
+      "name": "PsiTransfer",
+      "source_url": "https://github.com/psi-4ward/psitransfer",
+      "upstream_id": "Apps/PsiTransfer/docker-compose.yml",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Free Downloader Manager.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/PyLoad/icon.svg",
+      "name": "PyLoad",
+      "source_url": "https://github.com/pyload/pyload",
+      "upstream_id": "Apps/PyLoad/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://pyload.net"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Fast, modern web interface for qBittorrent",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Qui/icon.svg",
+      "name": "Qui",
+      "source_url": "https://github.com/autobrr/qui",
+      "upstream_id": "Apps/Qui/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://getqui.com"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "The movie collection manager for Usenet and BitTorrent users",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Radarr/icon.svg",
+      "name": "Radarr",
+      "source_url": "https://github.com/Radarr/Radarr",
+      "upstream_id": "Apps/Radarr/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://radarr.video"
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "categories": [
+        "AI"
+      ],
+      "description": "RagFlow is an open-source RAG engine based on deep document understanding.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/RagFlow/icon.svg",
+      "name": "RagFlow",
+      "source_url": "https://github.com/infiniflow/ragflow",
+      "upstream_id": "Apps/RagFlow/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://ragflow.io"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Ebook and audiobook collection manager for Usenet and BitTorrent users.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Readarr/icon.svg",
+      "name": "Readarr",
+      "source_url": "https://github.com/Readarr/Readarr",
+      "upstream_id": "Apps/Readarr/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://readarr.com"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "Unleash the power of seamless file synchronization.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Resilio-sync/icon.svg",
+      "name": "resilio-sync",
+      "source_url": "https://github.com/linuxserver/docker-resilio-sync",
+      "upstream_id": "Apps/Resilio-sync/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://www.resilio.com/sync/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Online retro games emulator",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/RetroArch/icon.svg",
+      "name": "RetroArch",
+      "source_url": "https://github.com/libretro/RetroArch",
+      "upstream_id": "Apps/RetroArch/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://www.retroarch.com"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "RomM is a self-hosted ROM manager for managing and playing game collections.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/RomM/icon.svg",
+      "name": "RomM",
+      "source_url": "https://github.com/rommapp/romm",
+      "upstream_id": "Apps/RomM/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://romm.app"
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Music software that transforms your listening experience",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/RoonServer/icon.svg",
+      "name": "Roon Server",
+      "source_url": "https://roon.app",
+      "upstream_id": "Apps/RoonServer/docker-compose.yml",
+      "web_ui": false,
+      "website_url": "https://roon.app"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Free and easy binary newsreader",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sabnzbd/icon.svg",
+      "name": "Sabnzbd",
+      "source_url": "https://github.com/sabnzbd/sabnzbd",
+      "upstream_id": "Apps/Sabnzbd/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://sabnzbd.org"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Automatic video library manager for TV Shows",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sickchill/icon.svg",
+      "name": "Sickchill",
+      "source_url": "https://github.com/SickChill/SickChill",
+      "upstream_id": "Apps/Sickchill/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://sickchill.github.io"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64",
+        "arm"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "Private personal knowledge management",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Siyuan-Note/icon.svg",
+      "name": "SiYuan Note",
+      "source_url": "https://github.com/siyuan-note/siyuan",
+      "upstream_id": "Apps/Siyuan-Note/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://b3log.org/siyuan/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Networking"
+      ],
+      "description": "Free open source network performance monitoring tool",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Smokeping/icon.svg",
+      "name": "Smokeping",
+      "source_url": "https://github.com/oetiker/SmokePing",
+      "upstream_id": "Apps/Smokeping/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://oss.oetiker.ch/smokeping/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "Self-hosted file toolkit for images, video, audio, PDFs, and files",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/SnapOtter/icon.png",
+      "name": "SnapOtter",
+      "source_url": "https://github.com/snapotter-hq/SnapOtter",
+      "upstream_id": "Apps/SnapOtter/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://snapotter.com"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "Cross-platform file sharing made easy.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Snapdrop/icon.svg",
+      "name": "snapdrop",
+      "source_url": "https://github.com/RobinLinus/snapdrop",
+      "upstream_id": "Apps/Snapdrop/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://snapdrop.net"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "The PVR for Usenet and BitTorrent users",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sonarr/icon.svg",
+      "name": "Sonarr",
+      "source_url": "https://github.com/Sonarr/Sonarr",
+      "upstream_id": "Apps/Sonarr/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://sonarr.tv"
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "categories": [
+        "AI"
+      ],
+      "description": "An AI model used to generate images conditioned on text descriptions.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/StableDiffusionWebUI/icon.svg",
+      "name": "Stable Diffusion",
+      "source_url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui",
+      "upstream_id": "Apps/StableDiffusionWebUI/docker-compose.yml",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Stremio is a modern media center that gives you the freedom to watch everything you want.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Stremio/icon.svg",
+      "name": "Stremio",
+      "source_url": "https://github.com/tsaridas/stremio-docker",
+      "upstream_id": "Apps/Stremio/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://www.stremio.com"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Finance"
+      ],
+      "description": "Personal finance management application",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sure/icon.svg",
+      "name": "Sure",
+      "source_url": "https://github.com/we-promise/sure",
+      "upstream_id": "Apps/Sure/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://sure.am"
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Swing Music is a beautifully designed, self-hosted music streaming server. Like a cooler Spotify ... but bring your own music.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/SwingMusic/icon.svg",
+      "name": "Swing Music",
+      "source_url": "https://github.com/swing-opensource/swingmusic",
+      "upstream_id": "Apps/SwingMusic/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://swingmx.com"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "Open decentralized file synchronization",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Syncthing/icon.svg",
+      "name": "Syncthing",
+      "source_url": "https://github.com/syncthing/syncthing",
+      "upstream_id": "Apps/Syncthing/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://syncthing.net"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm",
+        "arm64",
+        "386"
+      ],
+      "categories": [
+        "Networking"
+      ],
+      "description": "Connect your devices and users together in your own secure virtual private network.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Tailscale/icon.svg",
+      "name": "Tailscale",
+      "source_url": "https://github.com/tailscale/tailscale",
+      "upstream_id": "Apps/Tailscale/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://tailscale.com"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "AI"
+      ],
+      "description": "The developer-friendly cloud platform for building and running LLM agents for AI-native applications.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/TaskingAI/icon.svg",
+      "name": "TaskingAI",
+      "source_url": "https://github.com/TaskingAI/TaskingAI",
+      "upstream_id": "Apps/TaskingAI/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://docs.tasking.ai/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Monitor your Plex Media Server and much more.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Tautulli/icon.svg",
+      "name": "Tautulli",
+      "source_url": "https://github.com/Tautulli/Tautulli",
+      "upstream_id": "Apps/Tautulli/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://tautulli.com"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "Teable adopts a concise spreadsheet interface, yet creates powerful database applications",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Teable/icon.svg",
+      "name": "Teable",
+      "source_url": "https://github.com/teableio/teable",
+      "upstream_id": "Apps/Teable/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://teable.ai"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64",
+        "arm"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "M3U proxy server",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Threadfin/icon.svg",
+      "name": "Threadfin",
+      "source_url": "https://github.com/Threadfin/Threadfin",
+      "upstream_id": "Apps/Threadfin/docker-compose.yml",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Transmission is a cross-platform BitTorrent client",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Transmission/icon.svg",
+      "name": "Transmission",
+      "source_url": "https://github.com/transmission/transmission",
+      "upstream_id": "Apps/Transmission/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://transmissionbt.com/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64",
+        "arm"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "Build your personal knowledge base with TriliumNext Notes",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Trilium/icon.svg",
+      "name": "Trilium",
+      "source_url": "https://github.com/TriliumNext/Trilium",
+      "upstream_id": "Apps/Trilium/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://triliumnext.github.io/Docs/"
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "categories": [
+        "AI"
+      ],
+      "description": "An accelerated video generation framework that speeds up end-to-end diffusion while preserving video quality",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/TurboDiffusion_Nvidia/icon.png",
+      "name": "TurboDiffusion(Nvidia GPU)",
+      "source_url": "https://github.com/thu-ml/TurboDiffusion",
+      "upstream_id": "Apps/TurboDiffusion_Nvidia/docker-compose.yml",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64",
+        "arm"
+      ],
+      "categories": [
+        "Networking"
+      ],
+      "description": "Twingate Connector for CasaOS",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Twingate/icon.svg",
+      "name": "Twingate",
+      "source_url": "https://www.twingate.com",
+      "upstream_id": "Apps/Twingate/docker-compose.yml",
+      "web_ui": false,
+      "website_url": "https://www.twingate.com"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Networking"
+      ],
+      "description": "The Unifi network application software is a powerful, enterprise wireless software engine ideal for high-density client deployments requiring low latency and high uptime performance.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Unifi-Network-Application/icon.svg",
+      "name": "Unifi Network Application",
+      "source_url": "https://github.com/linuxserver/docker-unifi-network-application",
+      "upstream_id": "Apps/Unifi-Network-Application/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://ui.com"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Networking"
+      ],
+      "description": "The Unifi-controller software is a powerful, enterprise wireless software engine ideal for high-density client deployments requiring low latency and high uptime performance.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Unifi-controller/icon.svg",
+      "name": "Unifi-controller [legacy]",
+      "source_url": "https://github.com/linuxserver/docker-unifi-controller",
+      "upstream_id": "Apps/Unifi-controller/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://ui.com"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64",
+        "arm"
+      ],
+      "categories": [
+        "Networking"
+      ],
+      "description": "A fancy monitoring tool",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/UptimeKuma/icon.svg",
+      "name": "Uptime Kuma",
+      "source_url": "https://github.com/louislam/uptime-kuma",
+      "upstream_id": "Apps/UptimeKuma/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://uptimekuma.org"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Networking"
+      ],
+      "description": "A web GUI client of Project V which supports VMess, VLESS, SS, SSR, Trojan, Tuic and Juicity protocols",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/V2rayA/icon.svg",
+      "name": "V2rayA",
+      "source_url": "https://github.com/v2rayA/v2rayA",
+      "upstream_id": "Apps/V2rayA/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://v2raya.org/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm",
+        "arm64"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "A self-hosted Bitwarden server",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Vaultwarden/icon.svg",
+      "name": "Vaultwarden",
+      "source_url": "https://github.com/dani-garcia/vaultwarden",
+      "upstream_id": "Apps/Vaultwarden/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://vaultwarden.net"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Developer"
+      ],
+      "description": "A GTK Broadway web UI for libvirt and virt-manager.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/VirtualMachineManager/icon.svg",
+      "name": "Virtual Machine Manager",
+      "source_url": "https://github.com/m-bers/docker-virt-manager",
+      "upstream_id": "Apps/VirtualMachineManager/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://virt-manager.org"
+    },
+    {
+      "architectures": [
+        "amd64"
+      ],
+      "categories": [
+        "Social"
+      ],
+      "description": "Have a Private Social Space Hosted on Your Site",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/VoceChat/icon.svg",
+      "name": "VoceChat",
+      "source_url": "https://github.com/Privoce/vocechat-server-rust",
+      "upstream_id": "Apps/VoceChat/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://voce.chat"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "Save and classify articles. Read them later. Freely.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Wallabag/icon.svg",
+      "name": "Wallabag",
+      "source_url": "https://github.com/wallabag/wallabag",
+      "upstream_id": "Apps/Wallabag/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://wallabag.org"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "AI"
+      ],
+      "description": "WeKnora is an LLM-powered framework designed for deep document understanding and semantic retrieval, especially for handling complex, heterogeneous documents.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/WeKnora/icon.svg",
+      "name": "WeKnora",
+      "source_url": "https://github.com/Tencent/WeKnora",
+      "upstream_id": "Apps/WeKnora/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://weknora.weixin.qq.com"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "386",
+        "arm64",
+        "arm"
+      ],
+      "categories": [
+        "Productivity"
+      ],
+      "description": "A web-based file sharing and management protocol",
+      "icon": "https://icon.casaos.io/main/all/webdav.png",
+      "name": "WebDAV",
+      "source_url": "https://github.com/ugeek/docker-webdav",
+      "upstream_id": "Apps/WebDav/docker-compose.yml",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm",
+        "arm64"
+      ],
+      "categories": [
+        "Networking"
+      ],
+      "description": "WEB UI to manage WireGuard VPN.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/WireGuardEasy/icon.svg",
+      "name": "WireGuard Easy",
+      "source_url": "https://github.com/wg-easy/wg-easy",
+      "upstream_id": "Apps/WireGuardEasy/docker-compose.yml",
+      "web_ui": true,
+      "website_url": null
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Networking"
+      ],
+      "description": "Self-hosted ZeroTier network controller with web UI for centralized management.",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Ztnet/icon.svg",
+      "name": "ZTnet",
+      "source_url": "https://github.com/sinamics/ztnet",
+      "upstream_id": "Apps/Ztnet/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://ztnet.network/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "AI"
+      ],
+      "description": "Run GGUF LLMs locally with GPU acceleration",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/llama.cpp/icon.svg",
+      "name": "llama.cpp",
+      "source_url": "https://github.com/ggml-org/llama.cpp",
+      "upstream_id": "Apps/llama.cpp/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://github.com/ggml-org/llama.cpp"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Fast Usenet downloader with a SABnzbd-compatible API",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/nzbfast/icon.svg",
+      "name": "nzbfast",
+      "source_url": "https://github.com/nzbfast/nzbfast",
+      "upstream_id": "Apps/nzbfast/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://nzbfast.github.io/nzbfast/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "Podcast synchronization service",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/oPodSync/icon.svg",
+      "name": "oPodSync",
+      "source_url": "https://github.com/kd2org/oPodSync",
+      "upstream_id": "Apps/oPodSync/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://fossil.kd2.org/opodsync/"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Networking"
+      ],
+      "description": "A free reverse proxy for tunneling services (not self-hosted).",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/playit-agent/icon.svg",
+      "name": "Playit Agent",
+      "source_url": "https://github.com/playit-cloud/playit-agent",
+      "upstream_id": "Apps/playit-agent/docker-compose.yml",
+      "web_ui": false,
+      "website_url": "https://playit.gg"
+    },
+    {
+      "architectures": [
+        "amd64",
+        "arm64"
+      ],
+      "categories": [
+        "Media"
+      ],
+      "description": "P2P bittorrent download",
+      "icon": "https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/qBittorrent/icon.svg",
+      "name": "qBittorrent",
+      "source_url": "https://github.com/qbittorrent/qBittorrent",
+      "upstream_id": "Apps/qBittorrent/docker-compose.yml",
+      "web_ui": true,
+      "website_url": "https://www.qbittorrent.org"
+    }
+  ],
+  "revision": "2e8aec47d7d139363488372cb1fc6826010138fe",
+  "source": "casaos"
+}

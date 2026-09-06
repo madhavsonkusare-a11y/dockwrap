@@ -9,7 +9,7 @@ use std::time::{SystemTime, UNIX_EPOCH};
 const VERSION: &str = env!("CARGO_PKG_VERSION");
 
 #[cfg(windows)]
-fn ensure_console() {
+pub(crate) fn ensure_console() {
     use windows_sys::Win32::System::Console::{
         AttachConsole, GetConsoleWindow, ATTACH_PARENT_PROCESS,
     };
@@ -20,10 +20,10 @@ fn ensure_console() {
     }
 }
 #[cfg(not(windows))]
-fn ensure_console() {}
+pub(crate) fn ensure_console() {}
 
 fn usage() -> String {
-    format!("Usage:\n  {CLI_NAME} add <name> --url <url>\n  {CLI_NAME} list\n  {CLI_NAME} open <id-or-name> --browser\n  {CLI_NAME} shortcut <id-or-name>\n  {CLI_NAME} remove <id-or-name>\n  {CLI_NAME} doctor\n  {CLI_NAME} install <recipe-id>\n  {CLI_NAME} recipes\n  {CLI_NAME} start|stop|status|logs <id-or-name>\n  {CLI_NAME} uninstall <id-or-name> [--delete-data]\n  {CLI_NAME} catalog [search]\n  {CLI_NAME} version")
+    format!("Usage:\n  {CLI_NAME} add <name> --url <url>\n  {CLI_NAME} list\n  {CLI_NAME} open <id-or-name> [--browser]\n  {CLI_NAME} shortcut <id-or-name>\n  {CLI_NAME} remove <id-or-name>\n  {CLI_NAME} doctor\n  {CLI_NAME} install <recipe-id>\n  {CLI_NAME} recipes\n  {CLI_NAME} start|stop|status|logs <id-or-name>\n  {CLI_NAME} uninstall <id-or-name> [--delete-data]\n  {CLI_NAME} catalog [search]\n  {CLI_NAME} version")
 }
 fn get_flag(args: &[String], flag: &str) -> Option<String> {
     args.iter()
@@ -98,7 +98,7 @@ fn catalog_command(query: Option<&String>) -> i32 {
         println!(
             "{CLI_NAME} catalog: {} projects; {} reviewed installs",
             entries.len(),
-            recipes::verified_recipes().len()
+            recipes::reviewed_recipes().len()
         );
     }
     0
@@ -215,7 +215,7 @@ pub fn run_cli() -> i32 {
             }
         }
         "recipes" => {
-            for recipe in recipes::verified_recipes() {
+            for recipe in recipes::reviewed_recipes() {
                 println!("{:<14} {:<12} {}", recipe.id, recipe.version, recipe.image);
             }
             0
@@ -224,13 +224,13 @@ pub fn run_cli() -> i32 {
             let value = match positional(
                 &args,
                 1,
-                &format!("Usage: {CLI_NAME} open <id-or-name> --browser"),
+                &format!("Usage: {CLI_NAME} open <id-or-name> [--browser]"),
             ) {
                 Ok(value) => value,
                 Err(code) => return code,
             };
             if !args.iter().any(|arg| arg == "--browser") {
-                eprintln!("The CLI opens app pages only with --browser. Use the Local Store launcher for a desktop app window.");
+                eprintln!("Use open <id-or-name> for a desktop window, or add --browser for the default browser.");
                 return 1;
             }
             match find_app(&value) {
@@ -266,6 +266,7 @@ pub fn run_cli() -> i32 {
                     .and_then(|bin| {
                         platform::create_shortcut_for(
                             &app.id,
+                            &app.display_name,
                             &bin.to_string_lossy(),
                             app.icon_path.as_ref().and_then(|path| path.to_str()),
                         )

@@ -1,4 +1,16 @@
+#[path = "src/catalog_schema.rs"]
+mod catalog_schema;
+
 fn main() {
+    println!("cargo:rerun-if-changed=src/generated/catalog.json");
+    println!("cargo:rerun-if-changed=src/assets/catalog");
+    let catalog: catalog_schema::Catalog = serde_json::from_str(
+        &std::fs::read_to_string("src/generated/catalog.json").expect("read generated catalog"),
+    )
+    .expect("parse catalog schema");
+    catalog
+        .validate(std::path::Path::new("src"))
+        .expect("validate generated catalog");
     tauri_build::try_build(tauri_build::Attributes::new().app_manifest(
         tauri_build::AppManifest::new().commands(&[
             "list_apps",

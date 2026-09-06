@@ -29,7 +29,7 @@ const MEMOS: &str = include_str!("memos.json");
 const N8N: &str = include_str!("n8n.json");
 const UPTIME_KUMA: &str = include_str!("uptime-kuma.json");
 
-pub fn verified_recipes() -> Vec<Recipe> {
+pub fn reviewed_recipes() -> Vec<Recipe> {
     [MEMOS, N8N, UPTIME_KUMA]
         .into_iter()
         .map(|source| {
@@ -42,13 +42,13 @@ pub fn verified_recipes() -> Vec<Recipe> {
 }
 
 pub fn recipe(id: &str) -> Option<Recipe> {
-    verified_recipes()
+    reviewed_recipes()
         .into_iter()
         .find(|recipe| recipe.id == id)
 }
 
 pub fn recipe_for_catalog_name(name: &str) -> Option<Recipe> {
-    verified_recipes()
+    reviewed_recipes()
         .into_iter()
         .find(|recipe| recipe.catalog_name.eq_ignore_ascii_case(name))
 }
@@ -158,7 +158,7 @@ mod tests {
 
     #[test]
     fn reviewed_recipes_are_pinned_persistent_and_unprivileged() {
-        for recipe in verified_recipes() {
+        for recipe in reviewed_recipes() {
             recipe.validate().unwrap();
             assert!(recipe.compose.contains("./data:") || recipe.compose.contains("n8n-data:"));
         }
@@ -166,7 +166,7 @@ mod tests {
 
     #[test]
     fn only_explicitly_reviewed_recipes_are_installable() {
-        assert_eq!(verified_recipes().len(), 3);
+        assert_eq!(reviewed_recipes().len(), 3);
         assert!(recipe("memos").is_some());
         assert!(recipe("n8n").is_some());
         assert!(recipe("uptime-kuma").is_some());

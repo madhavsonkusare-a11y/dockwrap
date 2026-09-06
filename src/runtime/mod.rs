@@ -352,7 +352,7 @@ pub fn install_recipe_with(
         }
         let app = InstalledApp {
             id: recipe.id.clone(),
-            catalog_id: Some(recipe.catalog_name.clone()),
+            catalog_id: crate::catalog::catalog_id(&recipe.catalog_name),
             display_name: recipe.display_name.clone(),
             launch_url: recipe.launch_url.clone(),
             icon_path: None,
@@ -612,7 +612,7 @@ mod tests {
             std::env::temp_dir().join(format!("local-store-install-ok-{}", std::process::id()));
         let _ = fs::remove_dir_all(&root);
         fs::create_dir_all(&root).unwrap();
-        for recipe in crate::recipes::verified_recipes() {
+        for recipe in crate::recipes::reviewed_recipes() {
             let runner = FakeRunner::passing(4);
             let app = install_recipe_with(&runner, &Ready(true), &recipe, &root, 5).unwrap();
             for directory in &recipe.data_directories {

@@ -5,10 +5,14 @@ import { installAdapter } from './fixtures.js';
 test.beforeEach(async ({page}) => { await installAdapter(page); await page.goto('/'); });
 test('discover search, category, detail and source actions are honest', async ({page}) => {
  await expect(page.getByRole('heading',{name:'Good software. Your space.'})).toBeVisible();
- await expect(page.getByText('1,257 projects to discover')).toBeVisible();
+ await expect(page.getByText(/5 projects to discover/)).toBeVisible();
  await page.getByRole('searchbox').fill('memo'); await expect(page.getByRole('heading',{name:'Memos'})).toBeVisible();
  await expect(page.getByRole('heading',{name:'Immich'})).toHaveCount(0);
- await page.getByRole('searchbox').fill(''); await page.getByLabel('Category').selectOption('Photo Galleries');
+ await page.getByRole('searchbox').fill('');
+ await page.getByRole('button',{name:'Filters',exact:true}).click();
+ await page.getByLabel('Find a category').fill('Photo');
+ await page.getByRole('button',{name:/Photo Galleries/}).click();
+ await page.getByRole('button',{name:'Show results'}).click();
  await expect(page.getByRole('heading',{name:'Immich'})).toBeVisible();
  await page.getByRole('button',{name:'View Immich details'}).click();
  await expect(page.getByText('Connect existing instance')).toBeVisible();
@@ -19,7 +23,7 @@ test('discover search, category, detail and source actions are honest', async ({
 
 test('reviewed Memos recipe shows prerequisites and installs into My Apps', async ({page}) => {
  await page.getByRole('searchbox').fill('memo'); await page.getByRole('button',{name:'View Memos details'}).click();
- await expect(page.getByText('Verified local install')).toBeVisible(); await page.getByRole('button',{name:'Review install'}).click();
+ await expect(page.getByText('Preview local install')).toBeVisible(); await page.getByRole('button',{name:'Review install'}).click();
  await expect(page.getByText('neosmemo/memos:0.30.0')).toBeVisible(); await expect(page.getByText('Docker engine')).toBeVisible();
  await page.getByRole('button',{name:'Install Memos'}).click();
  await expect(page.locator('#install-dialog')).not.toBeVisible();
@@ -32,7 +36,7 @@ test('all graduated recipes remain explicitly reviewed before install', async ({
    await page.getByRole('searchbox').fill(query);
    await expect(page.getByRole('heading',{name})).toBeVisible();
    await page.getByRole('button',{name:`View ${name} details`}).click();
-   await expect(page.getByText('Verified local install')).toBeVisible();
+   await expect(page.getByText('Preview local install')).toBeVisible();
    await page.getByRole('button',{name:'Review install'}).click();
    await expect(page.getByText(image)).toBeVisible();
    await page.getByRole('button',{name:'Cancel'}).click();

@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "snapshot_date": "2026-09-05",
+  "sources": [
+    {
+      "id": "awesome-selfhosted",
+      "license": "CC-BY-SA-3.0",
+      "repository": "awesome-selfhosted/awesome-selfhosted-data",
+      "revision": "31f409963ffccc17159ccc07646f38e41b8b0361",
+      "sha256": "f417bf7bed9ea0fdc3a014e57550e615987b7a46dca7efb590babb927404bac5"
+    },
+    {
+      "id": "runtipi",
+      "license": "GPL-3.0",
+      "repository": "runtipi/runtipi-appstore",
+      "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+      "sha256": "5e56217b221b5e9d71f5d83c817fce1c608b379f5c8262091f475c859c4f7bb3"
+    },
+    {
+      "id": "casaos",
+      "license": "Apache-2.0",
+      "repository": "IceWhaleTech/CasaOS-AppStore",
+      "revision": "2e8aec47d7d139363488372cb1fc6826010138fe",
+      "sha256": "d37184d7915c0739da98b66b5bd1f71abdddc42b1cf53f03121aa6888da398e9"
+    },
+    {
+      "id": "coolify",
+      "license": "Apache-2.0",
+      "repository": "coollabsio/coolify",
+      "revision": "08f68016dd342fe944564f79969f4ceceddc88d6",
+      "sha256": "e40550411948696d56b2b59cdf7aebd00bdc283a1fbb974b5e375197ccf9f872"
+    }
+  ]
+}

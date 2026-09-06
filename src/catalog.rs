@@ -1,11 +1,10 @@
-//! Curated self-hosted app catalog, baked into the binary at compile time.
-//! Ships as `src/catalog_full.json` (also lives in the webview bundle via
-//! `frontendDist: src`). Lets the GUI wizard offer a "pick a popular app"
-//! catalog instead of typing URLs, and backs `local-store add --preset`.
+//! Offline catalog generated from pinned upstream snapshots.
+//! Project source addresses are never treated as running app instances.
 
 use crate::model::CatalogEntry;
-use serde::Serialize;
-use std::sync::OnceLock;
+#[path = "catalog_index.rs"]
+mod index;
+pub use index::{CatalogPage, Filters};
 
 /// Curated, most-used self-hosted web apps (default localhost ports).
 /// Lets a user run `local-store add --preset n8n` instead of typing the URL.
@@ -22,134 +21,76 @@ pub const PRESETS: &[(&str, &str)] = &[
     ("changedetection", "http://localhost:5000"),
 ];
 
-/// The raw catalog, embedded at build time so the binary is self-contained
-/// (no runtime file read, no extra network at startup). The full awesome-selfhosted
-/// list (1257 apps) ships here; the 12 hand-curated apps (with compose/health snippets)
-/// are a separate quick-start subset used by `local-store add --preset`.
-const CATALOG_JSON: &str = include_str!("catalog_full.json");
-
-/// The embedded catalog is parsed exactly once, with invalid data failing loudly.
-fn cached_catalog() -> &'static [CatalogEntry] {
-    static CATALOG: OnceLock<Vec<CatalogEntry>> = OnceLock::new();
-    CATALOG.get_or_init(|| {
-        let mut entries: Vec<CatalogEntry> =
-            serde_json::from_str(CATALOG_JSON).expect("valid embedded catalog");
-        // Reviewed recipes may graduate before the upstream catalog snapshot.
-        for recipe in crate::recipes::verified_recipes() {
-            if !entries
-                .iter()
-                .any(|entry| entry.name.eq_ignore_ascii_case(&recipe.catalog_name))
-            {
-                entries.push(CatalogEntry {
-                    name: recipe.catalog_name,
-                    url: recipe.source_url,
-                    description: Some(recipe.description),
-                    category: Some(recipe.category),
-                    tags: recipe.license,
-                    ..Default::default()
-                });
-            }
-        }
-        entries
-    })
-}
-
+/// Compatibility projection for CLI consumers; discovery uses the versioned index.
 pub fn catalog() -> Vec<CatalogEntry> {
-    cached_catalog().to_vec()
+    index::index()
+        .entries
+        .iter()
+        .map(|entry| CatalogEntry {
+            name: entry.name.clone(),
+            url: entry.source_url.clone(),
+            icon: entry.icon.clone(),
+            category: Some(entry.category.clone()),
+            description: Some(entry.description.clone()),
+            tags: entry.licenses.join(", "),
+            warning: entry.warning,
+            ..Default::default()
+        })
+        .collect()
 }
 
 pub fn catalog_categories() -> Vec<String> {
-    let mut categories: Vec<_> = cached_catalog()
+    search_catalog("", "", 0, 1).categories
+}
+
+pub fn catalog_entry(value: &str) -> Option<CatalogEntry> {
+    let project = index::index().entries.iter().find(|entry| {
+        entry.id == value
+            || entry.name.eq_ignore_ascii_case(value)
+            || entry
+                .aliases
+                .iter()
+                .any(|alias| alias.eq_ignore_ascii_case(value))
+    })?;
+    Some(CatalogEntry {
+        name: project.name.clone(),
+        url: project.source_url.clone(),
+        icon: project.icon.clone(),
+        category: Some(project.category.clone()),
+        description: Some(project.description.clone()),
+        tags: project.licenses.join(", "),
+        warning: project.warning,
+        ..Default::default()
+    })
+}
+
+pub fn catalog_id(value: &str) -> Option<String> {
+    index::index()
+        .entries
         .iter()
-        .filter_map(|e| e.category.clone())
-        .collect();
-    categories.sort();
-    categories.dedup();
-    categories
-}
-
-pub fn catalog_entry(name: &str) -> Option<CatalogEntry> {
-    cached_catalog()
-        .iter()
-        .find(|e| e.name.eq_ignore_ascii_case(name))
-        .cloned()
-}
-
-#[derive(Serialize)]
-pub struct DiscoveryEntry {
-    pub name: String,
-    pub source_url: String,
-    pub description: String,
-    pub category: String,
-    pub license: String,
-    pub icon: Option<String>,
-    pub warning: bool,
-    pub capability: &'static str,
-    pub recipe_id: Option<String>,
-}
-
-#[derive(Serialize)]
-pub struct CatalogPage {
-    pub entries: Vec<DiscoveryEntry>,
-    pub total: usize,
-    pub catalog_total: usize,
-    pub offset: usize,
-    pub limit: usize,
-    pub categories: Vec<String>,
+        .find(|entry| {
+            entry.id == value
+                || entry.name.eq_ignore_ascii_case(value)
+                || entry
+                    .aliases
+                    .iter()
+                    .any(|alias| alias.eq_ignore_ascii_case(value))
+        })
+        .map(|entry| entry.id.clone())
 }
 
 pub fn search_catalog(query: &str, category: &str, offset: usize, limit: usize) -> CatalogPage {
-    let query = query.trim().to_lowercase();
-    let limit = limit.clamp(1, 48);
-    let mut matches: Vec<_> = cached_catalog()
-        .iter()
-        .filter(|entry| {
-            (category.is_empty() || entry.category.as_deref() == Some(category))
-                && (query.is_empty()
-                    || format!(
-                        "{} {} {}",
-                        entry.name,
-                        entry.description.as_deref().unwrap_or(""),
-                        entry.tags
-                    )
-                    .to_lowercase()
-                    .contains(&query))
-        })
-        .collect();
-    matches.sort_by_key(|e| e.name.to_lowercase());
-    let total = matches.len();
-    let entries = matches
-        .into_iter()
-        .skip(offset)
-        .take(limit)
-        .map(|e| DiscoveryEntry {
-            name: e.name.clone(),
-            source_url: e.url.clone(),
-            description: e.description.clone().unwrap_or_default(),
-            category: e.category.clone().unwrap_or_else(|| "Other".into()),
-            license: e.tags.replace('`', ""),
-            icon: e
-                .icon
-                .clone()
-                .filter(|s| !s.is_empty())
-                .or_else(|| e.favicon_url.clone()),
-            warning: e.warning,
-            capability: if crate::recipes::recipe_for_catalog_name(&e.name).is_some() {
-                "verified_install"
-            } else {
-                "connect"
-            },
-            recipe_id: crate::recipes::recipe_for_catalog_name(&e.name).map(|recipe| recipe.id),
-        })
-        .collect();
-    CatalogPage {
-        entries,
-        total,
-        catalog_total: cached_catalog().len(),
-        offset,
-        limit,
-        categories: catalog_categories(),
-    }
+    index::search(query, category, offset, limit, &Filters::default())
+}
+
+pub fn search_filtered(
+    query: &str,
+    category: &str,
+    offset: usize,
+    limit: usize,
+    filters: &Filters,
+) -> CatalogPage {
+    index::search(query, category, offset, limit, filters)
 }
 
 /// Resolve a preset name to its default localhost URL, if known.
@@ -169,18 +110,18 @@ mod tests {
         let entry = serde_json::to_value(&page.entries[0]).unwrap();
         assert!(entry.get("url").is_none());
         assert!(entry.get("source_url").is_some());
-        assert_eq!(entry["capability"], "connect");
+        assert!(entry.get("id").is_some());
         assert!(search_catalog("", "", usize::MAX, 12).entries.is_empty());
     }
 
     #[test]
-    fn only_reviewed_catalog_entries_advertise_verified_install() {
+    fn only_reviewed_catalog_entries_advertise_preview_install() {
         let memos = search_catalog("Memos", "", 0, 48)
             .entries
             .into_iter()
             .find(|entry| entry.name == "Memos")
             .unwrap();
-        assert_eq!(memos.capability, "verified_install");
+        assert_eq!(memos.capability, "preview_install");
         assert_eq!(memos.recipe_id.as_deref(), Some("memos"));
         for (name, id) in [("n8n", "n8n"), ("Uptime Kuma", "uptime-kuma")] {
             let entry = search_catalog(name, "", 0, 48)
@@ -188,7 +129,7 @@ mod tests {
                 .into_iter()
                 .find(|entry| entry.name.eq_ignore_ascii_case(name))
                 .unwrap();
-            assert_eq!(entry.capability, "verified_install");
+            assert_eq!(entry.capability, "preview_install");
             assert_eq!(entry.recipe_id.as_deref(), Some(id));
         }
         assert!(search_catalog("Immich", "", 0, 48)
