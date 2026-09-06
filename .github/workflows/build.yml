@@ -49,6 +49,14 @@ jobs:
       # Interaction and axe checks are cross-platform. Pixel baselines are
       # reviewed and updated on Windows, where the primary WebView ships.
       - run: npm test -- --ignore-snapshots
+      - name: Upload UI failure diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v5
+        with:
+          name: ui-failure-diagnostics
+          path: test-results/
+          retention-days: 7
+          if-no-files-found: ignore
 
   build:
     needs: quality

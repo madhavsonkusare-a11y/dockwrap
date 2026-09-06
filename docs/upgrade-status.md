@@ -46,6 +46,10 @@ not percentage effort. The requested dark-only direction supersedes light mode.
 
 ## Next development phase
 
+Use the [agent handoff](agent-handoff.md) for bounded next batches, acceptance
+criteria, validation commands and the latest CI repair context. No private
+agent workspace or prior chat history is required.
+
 Complete runtime reliability and native integration before expanding automatic
 installation: bound/cancel Docker processes, add operation progress and typed
 errors, close transaction/concurrency gaps, finish official deep links and prove

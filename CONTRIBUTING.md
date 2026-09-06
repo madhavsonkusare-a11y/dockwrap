@@ -22,12 +22,16 @@ cargo tauri build    # release binary + installer in target/release/bundle
 - GUI-subsystem binary on Windows: keep `#![cfg_attr(not(debug_assertions),
   windows_subsystem = "windows")]` — no console window on launch.
 
-## Before opening a PR
+## Before publishing changes
 
 - `cargo fmt --all -- --check`, clippy with warnings denied, and `cargo test --locked`
 - `npm ci` and `npm test` (Windows visual baselines; Linux CI checks interactions/axe)
 - Offline catalog/icon/brand checks described in [the catalog guide](docs/catalog.md)
 - Update the current [task ledger](docs/upgrade-status.md) with actual evidence
+
+For the next bounded development batch, start with the
+[agent handoff](docs/agent-handoff.md). It contains scope, acceptance criteria,
+validation commands and current limitations without requiring chat history.
 
 ## Current focus
 

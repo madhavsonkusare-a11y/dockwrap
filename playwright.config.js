@@ -1,9 +1,14 @@
 import { defineConfig } from '@playwright/test';
 import { mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-const temporaryDirectory = fileURLToPath(new URL('./.cache/playwright-tmp/', import.meta.url));
-mkdirSync(temporaryDirectory, {recursive:true});
-process.env.TMPDIR = process.env.TMP = process.env.TEMP = temporaryDirectory;
+// Windows keeps browser scratch files on the workspace drive. On POSIX, use
+// the OS temp directory: Chromium's Unix socket path has a short length limit
+// and a nested checkout (including GitHub's owner/repo paths) can exceed it.
+if (process.platform === 'win32') {
+  const temporaryDirectory = fileURLToPath(new URL('./.cache/playwright-tmp/', import.meta.url));
+  mkdirSync(temporaryDirectory, {recursive:true});
+  process.env.TMPDIR = process.env.TMP = process.env.TEMP = temporaryDirectory;
+}
 export default defineConfig({
   testDir: './tests/ui', snapshotPathTemplate: '{testDir}/{testFilePath}-snapshots/{arg}{ext}', timeout: 20_000, fullyParallel: true,
   use: { baseURL: 'http://127.0.0.1:4173', viewport: { width: 1280, height: 800 }, trace: 'retain-on-failure', channel: 'chromium' },
