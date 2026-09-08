@@ -28,15 +28,40 @@ upstream app, independently of these data licenses.
 ## Visual assets
 
 - App artwork: [Homarr dashboard-icons contributors](https://github.com/homarr-labs/dashboard-icons),
-  [Apache-2.0](src/assets/apps/LICENSE). Original artwork is redistributed without
+  [Apache-2.0](src/assets/apps/LICENSE), and [Coolify contributors](https://github.com/coollabsio/coolify),
+  [Apache-2.0](catalog/notices/coolify/LICENSE). Original artwork is redistributed without
   visual modification; the UI supplies an outer frame. The catalog icon manifest
   records source URLs, immutable revision and checksums. Existing featured app
-  identities use the same upstream icon collection. Project names and logos
+  identities use Homarr's icon collection. Project names and logos
   remain the property of their respective owners; inclusion implies no endorsement.
 - Interface icons: Lucide Icons and Contributors, [ISC license](src/assets/LUCIDE-LICENSE).
 - Inter font: The Inter Project Authors, [SIL Open Font License 1.1](src/fonts/OFL.txt),
   [upstream source](https://github.com/rsms/inter).
 
+## Rust dependencies
+
+Local Store links 495 Rust crates. Every one declares an SPDX license, and
+`scripts/check-licenses.py` fails the build if any of them cannot be
+redistributed under a permissive choice — an upstream bump introducing a GPL or
+AGPL dependency stops the build rather than changing what may be shipped
+unnoticed. The overwhelming majority are MIT and/or Apache-2.0.
+
+Five are under the Mozilla Public License 2.0, which is file-level copyleft:
+`cssparser`, `cssparser-macros`, `dtoa-short`, `option-ext` and `selectors`.
+They are used unmodified. Their source is available from crates.io at the exact
+versions recorded in `Cargo.lock`; if a future change modifies any MPL-licensed
+file, that file's source must be published under the MPL.
+
+Nineteen crates carrying Unicode data are under Unicode-3.0. No dependency is
+under the GPL or AGPL.
+
 Installer resources include this document and the referenced license texts.
-Rust/Node dependency manifests and lockfiles provide the dependency inventory.
-Automated dependency-license reporting and release SBOMs remain planned work.
+`Cargo.lock` and `package-lock.json` record exact versions; Node packages are
+development-only and are not shipped. A generated SBOM for releases remains
+planned work.
+
+Native activation uses the official Tauri plugins `tauri-plugin-single-instance`
+2.4.4 and `tauri-plugin-deep-link` 2.4.10, each licensed under Apache-2.0 OR MIT
+by the Tauri Programme within The Commons Conservancy. Their exact transitive
+dependencies are recorded in `Cargo.lock`; this notice does not replace the
+planned full dependency-license inventory.

@@ -1,0 +1,26 @@
+{
+  "checks": [
+    "install of a web app beside a database from one plan",
+    "typed setup answer reaches the database container",
+    "database is not published to the host",
+    "the two services share the project network",
+    "generated password authenticates over TCP",
+    "pending lock held through commit",
+    "stop/status/start/health",
+    "row survives a restart",
+    "keep-data uninstall preserves the volume and the credential",
+    "reinstall reuses the password and reads the preserved row",
+    "explicit deletion removes every owned container, network and volume",
+    "containers owned by anything else survived"
+  ],
+  "image_ids": [
+    "sha256:34d37131366c5aa84e1693dbed48593ed6f95fb450b576c1a7a59d3a9c9e8802",
+    "sha256:029660641a0cfc575b14f336ba448fb8a75fd595d42e1fa316b9fb4378742297"
+  ],
+  "images": [
+    "adminer:4.8.1-standalone",
+    "postgres:16.10-alpine"
+  ],
+  "passed": true,
+  "scope": "two-service plan transaction, Compose network and registry; no GUI"
+}

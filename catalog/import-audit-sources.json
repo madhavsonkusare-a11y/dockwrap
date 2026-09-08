@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "caprover": {
+    "repository": "caprover/one-click-apps",
+    "revision": "7f1f329125dde0cb915f47c8b33293eca45f7d0e",
+    "sha256": "7535b8ce39660ad6bf074461612f81b8bf7d3d8fd9e8c8c50c15477041ff3084",
+    "license": "Apache-2.0"
+  },
+  "umbrel": {
+    "repository": "getumbrel/umbrel-apps",
+    "revision": "ec3a323be0f651d4191bc0e422d67a2137768fb6",
+    "license": null,
+    "status": "research only; repository reuse permission not established"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 3,
   "id": "memos",
   "display_name": "Memos",
   "catalog_name": "Memos",
@@ -13,7 +13,8 @@
   "verified_at": "2026-09-05",
   "launch_url": "http://localhost:5230",
   "health_url": "http://localhost:5230",
-  "port": 5230,
+  "host_port": 5230,
+  "container_port": 5230,
   "data_directories": [
     "data"
   ],
@@ -24,5 +25,20 @@
     "Stores the SQLite database and uploaded assets in the Local Store app directory.",
     "Complete Memos setup and review its access settings before storing private notes."
   ],
-  "compose": "services:\n  memos:\n    image: neosmemo/memos:0.30.0\n    container_name: local-store-memos\n    restart: unless-stopped\n    ports:\n      - \"127.0.0.1:5230:5230\"\n    environment:\n      MEMOS_PORT: \"5230\"\n      MEMOS_DRIVER: sqlite\n    volumes:\n      - ./data:/var/opt/memos\n"
+  "compose": "services:\n  memos:\n    image: neosmemo/memos:0.30.0\n    container_name: local-store-memos\n    restart: unless-stopped\n    ports:\n      - \"127.0.0.1:5230:5230\"\n    environment:\n      MEMOS_PORT: \"5230\"\n      MEMOS_DRIVER: sqlite\n    volumes:\n      - ./data:/var/opt/memos\n",
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm/v7",
+      "linux/arm64"
+    ],
+    "image_audit": {
+      "source_url": "https://hub.docker.com/v2/repositories/neosmemo/memos/tags/0.30.0",
+      "checked_at": "2026-09-07",
+      "index_digest": "sha256:71a5b4738d1bed96e92112004054f0888e92791b64eb78afd79077c96e6f9327"
+    }
+  }
 }

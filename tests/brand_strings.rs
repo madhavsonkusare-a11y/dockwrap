@@ -27,6 +27,12 @@ fn shipping_files(root: &Path) -> Vec<PathBuf> {
 }
 
 fn collect_shipping_source_files(directory: &Path, files: &mut Vec<PathBuf>) {
+    // Recorded evidence is not a user interface. A run that deliberately
+    // exercised the legacy URI scheme has to be able to say so, and rewriting
+    // the record to satisfy a brand check would make it a worse record.
+    if directory.file_name().is_some_and(|name| name == "evidence") {
+        return;
+    }
     for entry in fs::read_dir(directory).expect("read shipping source directory") {
         let path = entry.expect("read shipping source entry").path();
         if path.is_dir() {
@@ -100,6 +106,7 @@ fn allowed_legacy_reference(relative: &str, line: &str) -> bool {
     // One-release migration compatibility only: named legacy constants, config
     // migration, and old URI scheme handling/registration.
     (relative == "src/brand.rs" && line.starts_with("pub const LEGACY_"))
+        || (relative == "tauri.conf.json" && line.trim() == "\"dockwrap\"")
         || (relative == "src/Info.plist" && line.contains("<string>dockwrap</string>"))
 }
 

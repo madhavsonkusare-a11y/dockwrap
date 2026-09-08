@@ -2,7 +2,8 @@
 
 #[cfg(all(unix, not(target_os = "macos")))]
 use crate::brand::CLI_NAME;
-use crate::brand::{LEGACY_URL_SCHEME, PRODUCT_NAME, URL_SCHEME};
+#[cfg(any(windows, target_os = "macos"))]
+use crate::brand::PRODUCT_NAME;
 
 pub mod shortcut;
 
@@ -52,85 +53,17 @@ fn write_shortcut(dir: &std::path::Path, filename: &str, content: &str) -> Resul
     Ok(path.to_string_lossy().into_owned())
 }
 
-/// Register primary and one-release legacy URL schemes with the OS (best-effort;
-/// failures are logged but never fatal). On macOS schemes are registered in
-/// `src/Info.plist` at install time.
-pub fn register_protocol() {
-    let bin = match std::env::current_exe() {
-        Ok(p) => p.to_string_lossy().into_owned(),
-        Err(_) => return,
-    };
-    register_protocol_scheme(URL_SCHEME, &bin);
-    register_protocol_scheme(LEGACY_URL_SCHEME, &bin);
-}
-
-#[cfg(any(test, all(unix, not(target_os = "macos"))))]
-fn protocol_handler_desktop_id(scheme: &str) -> String {
-    format!("{scheme}-urlhandler.desktop")
-}
-
-#[cfg(any(test, all(unix, not(target_os = "macos"))))]
-fn protocol_handler_command_args(scheme: &str) -> [String; 4] {
-    [
-        "set".to_string(),
-        "default-url-scheme-handler".to_string(),
-        scheme.to_string(),
-        protocol_handler_desktop_id(scheme),
-    ]
-}
-
-#[cfg(windows)]
-fn register_protocol_scheme(scheme: &str, bin: &str) {
-    let cmd = format!(
-        "reg add HKCU\\Software\\Classes\\{scheme} /f /ve /t REG_SZ /d \"URL:{PRODUCT_NAME} Protocol\" && \
-         reg add HKCU\\Software\\Classes\\{scheme} /f /v \"URL Protocol\" /t REG_SZ /d \"\" && \
-         reg add HKCU\\Software\\Classes\\{scheme}\\DefaultIcon /f /ve /t REG_SZ /d \"{bin},0\" && \
-         reg add HKCU\\Software\\Classes\\{scheme}\\shell\\open\\command /f /ve /t REG_SZ /d \"\\\"{bin}\\\" \\\"%1\\\"\""
-    );
-    let _ = std::process::Command::new("cmd")
-        .args(["/C", &cmd])
-        .status();
-}
-
-#[cfg(all(unix, not(target_os = "macos")))]
-fn register_protocol_scheme(scheme: &str, bin: &str) {
-    let dir = std::env::var("XDG_DATA_HOME")
-        .unwrap_or_else(|_| format!("{}/.local/share", std::env::var("HOME").unwrap_or_default()))
-        + "/applications";
-    let _ = std::fs::create_dir_all(&dir);
-    let desktop_id = protocol_handler_desktop_id(scheme);
-    let desktop = format!("{dir}/{desktop_id}");
-    let content = format!(
-        "[Desktop Entry]\nType=Application\nName={PRODUCT_NAME} URL Handler\nExec=\"{bin}\" %u\nMimeType=x-scheme-handler/{scheme}\nTerminal=false\nNoDisplay=true\n"
-    );
-    if std::fs::write(&desktop, content).is_ok() {
-        let _ = std::process::Command::new("xdg-settings")
-            .args(protocol_handler_command_args(scheme))
-            .status();
+/// Register the configured schemes through the official plugin. macOS uses
+/// installer metadata; runtime registration is supported on Windows/Linux.
+pub fn register_protocol(app: &tauri::AppHandle) -> crate::error::AppResult<()> {
+    #[cfg(any(windows, target_os = "linux"))]
+    {
+        use tauri_plugin_deep_link::DeepLinkExt;
+        app.deep_link()
+            .register_all()
+            .map_err(crate::error::AppError::internal)?;
     }
-}
-
-#[cfg(target_os = "macos")]
-fn register_protocol_scheme(_: &str, _: &str) {}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn protocol_handler_uses_desktop_file_id_not_path() {
-        assert_eq!(
-            protocol_handler_desktop_id("localstore"),
-            "localstore-urlhandler.desktop"
-        );
-        assert_eq!(
-            protocol_handler_command_args("localstore"),
-            [
-                "set",
-                "default-url-scheme-handler",
-                "localstore",
-                "localstore-urlhandler.desktop"
-            ]
-        );
-    }
+    #[cfg(not(any(windows, target_os = "linux")))]
+    let _ = app;
+    Ok(())
 }

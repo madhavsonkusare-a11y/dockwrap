@@ -1,0 +1,63 @@
+{
+  "comment": [
+    "Advisories that scripts/check-advisories.py may pass over, each with the",
+    "reason and the date somebody looked. Nothing is ignored without an entry,",
+    "and an entry that no longer matches a real finding fails the gate, so a",
+    "decision cannot outlive the thing it was about.",
+    "",
+    "Every entry below is a transitive dependency of Tauri with no version this",
+    "project can choose. None is a vulnerability class: they are unmaintained or",
+    "unsound advisories. Re-check them whenever Tauri is upgraded."
+  ],
+  "accepted": [
+    {
+      "id": "RUSTSEC-2024-0370",
+      "package": "proc-macro-error",
+      "class": "unmaintained",
+      "reason": "Build-time proc macro reached through glib-macros -> glib -> gtk -> muda -> tauri. It runs during compilation and no part of it is linked into the shipped binary. No release of the chain drops it; the fix has to come from Tauri's GTK stack.",
+      "reviewed_on": "2026-09-08"
+    },
+    {
+      "id": "RUSTSEC-2024-0429",
+      "package": "glib",
+      "class": "unsound",
+      "reason": "Reached through atk -> gtk -> muda -> tauri, and only on Linux. The unsoundness is in glib's VariantStrIter, which this project never constructs. Tauri pins glib 0.18; upgrading is Tauri's to make.",
+      "reviewed_on": "2026-09-08"
+    },
+    {
+      "id": "RUSTSEC-2025-0075",
+      "package": "unic-char-range",
+      "class": "unmaintained",
+      "reason": "Reached through urlpattern -> tauri-utils. Unmaintained, not vulnerable. Replacing it means Tauri moving off urlpattern.",
+      "reviewed_on": "2026-09-08"
+    },
+    {
+      "id": "RUSTSEC-2025-0080",
+      "package": "unic-common",
+      "class": "unmaintained",
+      "reason": "Same urlpattern -> tauri-utils chain as RUSTSEC-2025-0075.",
+      "reviewed_on": "2026-09-08"
+    },
+    {
+      "id": "RUSTSEC-2025-0081",
+      "package": "unic-char-property",
+      "class": "unmaintained",
+      "reason": "Same urlpattern -> tauri-utils chain as RUSTSEC-2025-0075.",
+      "reviewed_on": "2026-09-08"
+    },
+    {
+      "id": "RUSTSEC-2025-0098",
+      "package": "unic-ucd-version",
+      "class": "unmaintained",
+      "reason": "Same urlpattern -> tauri-utils chain as RUSTSEC-2025-0075.",
+      "reviewed_on": "2026-09-08"
+    },
+    {
+      "id": "RUSTSEC-2025-0100",
+      "package": "unic-ucd-ident",
+      "class": "unmaintained",
+      "reason": "Same urlpattern -> tauri-utils chain as RUSTSEC-2025-0075.",
+      "reviewed_on": "2026-09-08"
+    }
+  ]
+}

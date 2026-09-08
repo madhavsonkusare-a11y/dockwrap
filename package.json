@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "playwright test",
+    "test": "node --test tests/api.test.mjs tests/operations.test.mjs tests/readiness.test.mjs && playwright test",
     "test:ui": "playwright test",
     "preview": "node scripts/preview.mjs"
   },

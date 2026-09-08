@@ -17,7 +17,12 @@ fn package_metadata_is_present_in_cargo_manifest() {
     let version_line = format!("version = \"{version}\"");
     assert!(package.contains(&version_line));
     assert!(package.contains("edition = \"2021\""));
-    assert!(package.contains("rust-version = \"1.77.2\""));
+    // Asserted against what Cargo parsed rather than a literal, so a bump stays
+    // honest here. Whether the value is *high enough* for the dependency graph
+    // is scripts/check-msrv.py, and whether our own code builds there is CI.
+    let rust_version = env!("CARGO_PKG_RUST_VERSION");
+    assert!(!rust_version.is_empty(), "rust-version must be declared");
+    assert!(package.contains(&format!("rust-version = \"{rust_version}\"")));
     assert!(package.contains("license = \"MIT\""));
     assert!(
         package.contains("repository = \"https://github.com/madhavsonkusare-a11y/local-store\"")

@@ -31,12 +31,17 @@
             "allow-search-catalog",
             "allow-open-project",
             "allow-doctor",
+            "allow-inspect-recovery",
             "allow-recipe-details",
             "allow-install-app",
             "allow-start-app",
             "allow-stop-app",
             "allow-app-logs",
-            "allow-uninstall-app"
+            "allow-uninstall-app",
+            "allow-cancel-app-setup",
+            "allow-app-readiness",
+            "allow-check-address",
+            "allow-take-activation-errors"
           ]
         }
       ]
@@ -69,6 +74,16 @@
     "windows": {
       "wix": {
         "language": "en-US"
+      }
+    }
+  },
+  "plugins": {
+    "deep-link": {
+      "desktop": {
+        "schemes": [
+          "localstore",
+          "dockwrap"
+        ]
       }
     }
   }

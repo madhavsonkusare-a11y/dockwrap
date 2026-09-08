@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-check-address"
+description = "Enables the check_address command without any pre-configured scope."
+commands.allow = ["check_address"]
+
+[[permission]]
+identifier = "deny-check-address"
+description = "Denies the check_address command without any pre-configured scope."
+commands.deny = ["check_address"]

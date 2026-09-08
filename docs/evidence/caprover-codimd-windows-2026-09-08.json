@@ -1,0 +1,29 @@
+{
+  "checks": [
+    "the reviewed template resolves to a valid plan",
+    "srv-captain-- reference resolves to a Compose service name",
+    "quoted notExposeAsWebApp keeps the database off the host",
+    "typed setup answer reaches the container",
+    "one generated credential is presented by both services",
+    "credential authenticates against MariaDB over TCP",
+    "stop/status/start/health",
+    "row survives a restart",
+    "keep-data uninstall preserves the volume and the credential",
+    "reinstall reuses the credential and reads the preserved row",
+    "explicit deletion removes every owned container, network and volume",
+    "containers owned by anything else survived"
+  ],
+  "definition": "public/v4/apps/codimd.yml",
+  "duration_seconds": 70.58,
+  "host": "Windows 11, Docker Desktop 4.68.0, engine 29.3.1",
+  "images": [
+    "linuxserver/codimd:1.6.0-ls44",
+    "linuxserver/mariadb:110.4.14mariabionic-ls77"
+  ],
+  "passed": true,
+  "ran_at": "2026-09-08",
+  "reviewed_template": "src/templates/codimd.json",
+  "revision": "7f1f329125dde0cb915f47c8b33293eca45f7d0e",
+  "scope": "one reviewed template through the shared plan transaction; the app is not approved for the catalog",
+  "source": "caprover/one-click-apps"
+}

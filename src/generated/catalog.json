@@ -13,7 +13,7 @@
       "archived": false,
       "category": "Money, Budgeting & Management",
       "description": "Local-first personal finance tool based on zero-sum budgeting, supporting synchronization across devices, custom rules, manual transaction importing (from QIF, OFX, and QFX files), and optional automatic synchronization with many banks.",
-      "icon": null,
+      "icon": "assets/catalog/actual.svg",
       "id": "actual",
       "licenses": [
         "MIT"
@@ -1391,7 +1391,7 @@
       "archived": false,
       "category": "Network Utilities",
       "description": "World's most advanced adblocker!",
-      "icon": null,
+      "icon": "assets/catalog/adguard.svg",
       "id": "adguard",
       "licenses": [],
       "maintenance": "tracked",
@@ -1480,7 +1480,7 @@
       "archived": false,
       "category": "Network Utilities",
       "description": "Synchronize AdGuard Home config to replicas",
-      "icon": null,
+      "icon": "assets/catalog/adguard-home-sync.png",
       "id": "adguard-home-sync",
       "licenses": [],
       "maintenance": "tracked",
@@ -1608,7 +1608,7 @@
       "archived": false,
       "category": "Maps and Global Positioning System (GPS)",
       "description": "Travel tracker and trip planner.",
-      "icon": null,
+      "icon": "assets/catalog/adventurelog.svg",
       "id": "adventurelog",
       "licenses": [
         "GPL-3.0"
@@ -1655,7 +1655,7 @@
       "archived": false,
       "category": "Knowledge Management Tools",
       "description": "Next-gen knowledge base that brings planning, sorting and creating all together. Privacy first, customizable and ready to use (alternative to Notion and Miro).",
-      "icon": null,
+      "icon": "assets/catalog/affine-community-edition.svg",
       "id": "affine-community-edition",
       "licenses": [
         "AGPL-3.0",
@@ -1800,7 +1800,7 @@
       "archived": false,
       "category": "Maps and Global Positioning System (GPS)",
       "description": "Personal flight tracking system.",
-      "icon": null,
+      "icon": "assets/catalog/airtrail.svg",
       "id": "airtrail",
       "licenses": [
         "GPL-3.0"
@@ -2309,7 +2309,7 @@
       "archived": false,
       "category": "Media Streaming - Audio Streaming",
       "description": "Web based audio/video streaming application.",
-      "icon": null,
+      "icon": "assets/catalog/ampache.png",
       "id": "ampache",
       "licenses": [
         "AGPL-3.0"
@@ -2394,7 +2394,7 @@
       "archived": false,
       "category": "Artificial Intelligence",
       "description": "Your machine learning Env work with Jupyter Lab",
-      "icon": null,
+      "icon": "assets/catalog/anaconda3.svg",
       "id": "anaconda3",
       "licenses": [],
       "maintenance": "tracked",
@@ -2584,7 +2584,7 @@
       "archived": false,
       "category": "Communication - Social Networks and Forums",
       "description": "Knowledge-based community software. You can use it to quickly build your Q&A community for product technical support, customer support, user communication, and more.",
-      "icon": null,
+      "icon": "assets/catalog/answer.svg",
       "id": "answer",
       "licenses": [
         "Apache-2.0"
@@ -2667,7 +2667,7 @@
       "archived": false,
       "category": "Miscellaneous",
       "description": "Web AI firewall utility which protects upstream resources from scraper bots.",
-      "icon": null,
+      "icon": "assets/catalog/anubis.png",
       "id": "anubis",
       "licenses": [
         "MIT"
@@ -2755,7 +2755,7 @@
       "archived": false,
       "category": "Generative Artificial Intelligence (GenAI)",
       "description": "All-in-one desktop & Docker AI application with built-in RAG, AI agents, No-code agent builder, MCP compatibility, and more.",
-      "icon": null,
+      "icon": "assets/catalog/anythingllm.svg",
       "id": "anythingllm",
       "licenses": [
         "MIT"
@@ -2865,7 +2865,7 @@
       "archived": false,
       "category": "Web Servers",
       "description": "Secure, efficient and extensible server that provides HTTP services in sync with the current HTTP standards.",
-      "icon": null,
+      "icon": "assets/catalog/apache-http-server.svg",
       "id": "apache-http-server",
       "licenses": [
         "Apache-2.0"
@@ -3090,7 +3090,7 @@
       "archived": false,
       "category": "Communication - Custom Communication Systems",
       "description": "Apprise allows you to send a notification to almost all of the most popular notification services available to us today such as: Telegram, Discord, Slack, Amazon SNS, Gotify, etc.",
-      "icon": null,
+      "icon": "assets/catalog/apprise.png",
       "id": "apprise",
       "licenses": [
         "MIT"
@@ -3133,7 +3133,7 @@
       "archived": false,
       "category": "Automation",
       "description": "Push Notifications API",
-      "icon": null,
+      "icon": "assets/catalog/apprise-api.png",
       "id": "apprise-api",
       "licenses": [],
       "maintenance": "tracked",
@@ -3166,7 +3166,7 @@
       "archived": false,
       "category": "Software Development - Low Code",
       "description": "Build admin panels, CRUD apps and workflows. Build everything you need, 10x faster.",
-      "icon": null,
+      "icon": "assets/catalog/appsmith.svg",
       "id": "appsmith",
       "licenses": [
         "Apache-2.0"
@@ -3315,7 +3315,7 @@
       "archived": false,
       "category": "Archiving and Digital Preservation (DP)",
       "description": "Create HTML & screenshot archives of sites from your bookmarks, browsing history, RSS feeds, or other sources (alternative to Wayback Machine).",
-      "icon": null,
+      "icon": "assets/catalog/archivebox.png",
       "id": "archivebox",
       "licenses": [
         "MIT"
@@ -3412,7 +3412,7 @@
       "archived": false,
       "category": "Artificial Intelligence",
       "description": "Argilla is a collaboration tool for AI engineers and domain experts who need to build high-quality datasets for their projects.",
-      "icon": null,
+      "icon": "assets/catalog/argilla.png",
       "id": "argilla",
       "licenses": [],
       "maintenance": "tracked",
@@ -3615,7 +3615,7 @@
       "archived": false,
       "category": "Communication - SIP",
       "description": "Easy to use but advanced IP PBX system, VoIP gateway and conference server.",
-      "icon": null,
+      "icon": "assets/catalog/asterisk.png",
       "id": "asterisk",
       "licenses": [
         "GPL-2.0"
@@ -3786,7 +3786,7 @@
       "archived": false,
       "category": "Utilities",
       "description": "Magical Shell History",
-      "icon": null,
+      "icon": "assets/catalog/atuin-server.svg",
       "id": "atuin-server",
       "licenses": [],
       "maintenance": "tracked",
@@ -3983,7 +3983,7 @@
       "archived": false,
       "category": "Games - Administrative Utilities & Control Panels",
       "description": "Cross-platform Minecraft server manager.",
-      "icon": null,
+      "icon": "assets/catalog/auto-mcs.png",
       "id": "auto-mcs",
       "licenses": [
         "AGPL-3.0"
@@ -4024,7 +4024,7 @@
       "archived": false,
       "category": "Database Management",
       "description": "Autobase for PostgreSQL® is an open-source alternative to cloud-managed databases (self-hosted DBaaS).",
-      "icon": null,
+      "icon": "assets/catalog/autobase.svg",
       "id": "autobase",
       "licenses": [],
       "maintenance": "tracked",
@@ -4292,7 +4292,7 @@
       "archived": false,
       "category": "Database Management",
       "description": "Visual database exploration made for real world databases (big and messy). Explore your database schema as well as data, document them, extend them and even get analysis and guidelines.",
-      "icon": null,
+      "icon": "assets/catalog/azimutt.png",
       "id": "azimutt",
       "licenses": [
         "MIT"
@@ -4431,7 +4431,7 @@
       "archived": false,
       "category": "Miscellaneous",
       "description": "Helps caregivers track baby sleep, feedings, diaper changes, and tummy time.",
-      "icon": null,
+      "icon": "assets/catalog/baby-buddy.png",
       "id": "baby-buddy",
       "licenses": [
         "BSD-2-Clause"
@@ -4907,7 +4907,7 @@
       "archived": false,
       "category": "Media Streaming - Audio Streaming",
       "description": "Music library manager and MusicBrainz tagger (command-line and Web interface).",
-      "icon": null,
+      "icon": "assets/catalog/beets.png",
       "id": "beets",
       "licenses": [
         "MIT"
@@ -6044,7 +6044,7 @@
       "archived": false,
       "category": "Backend",
       "description": "Bluesky PDS (Personal Data Server)",
-      "icon": null,
+      "icon": "assets/catalog/bluesky-pds.svg",
       "id": "bluesky-pds",
       "licenses": [],
       "maintenance": "tracked",
@@ -6240,7 +6240,7 @@
       "archived": false,
       "category": "Document Management - E-books",
       "description": "The selfhosted audiobook server",
-      "icon": null,
+      "icon": "assets/catalog/booksonic.png",
       "id": "booksonic",
       "licenses": [],
       "maintenance": "tracked",
@@ -6528,7 +6528,7 @@
       "archived": false,
       "category": "Money, Budgeting & Management",
       "description": "Bitcoin and other cryptocurrencies payment processor.",
-      "icon": null,
+      "icon": "assets/catalog/btcpay-server.png",
       "id": "btcpay-server",
       "licenses": [
         "MIT"
@@ -6687,7 +6687,7 @@
       "archived": false,
       "category": "Money, Budgeting & Management",
       "description": "A budgeting personal finance app.",
-      "icon": null,
+      "icon": "assets/catalog/budge.png",
       "id": "budge",
       "licenses": [],
       "maintenance": "tracked",
@@ -6869,7 +6869,7 @@
       "archived": false,
       "category": "Ticketing",
       "description": "Real-time error tracking for your applications with all the details in one place. Easy setup with clear instructions included.",
-      "icon": null,
+      "icon": "assets/catalog/bugsink.svg",
       "id": "bugsink",
       "licenses": [
         "⊘ Proprietary"
@@ -7498,7 +7498,7 @@
       "archived": false,
       "category": "Media",
       "description": "An intuitive web interface for searching and requesting book downloads, designed to work seamlessly with Calibre-Web-Automated.",
-      "icon": null,
+      "icon": "assets/catalog/calibre-web-automated-book-downloader.png",
       "id": "calibre-web-automated-book-downloader",
       "licenses": [],
       "maintenance": "tracked",
@@ -7664,7 +7664,7 @@
       "archived": false,
       "category": "Media",
       "description": "Cap is the open source alternative to Loom. Lightweight, powerful, and cross-platform. Record and share in seconds.",
-      "icon": null,
+      "icon": "assets/catalog/cap.svg",
       "id": "cap",
       "licenses": [],
       "maintenance": "tracked",
@@ -7701,7 +7701,7 @@
       "archived": false,
       "category": "Security",
       "description": "The self-hosted CAPTCHA for the modern web.",
-      "icon": null,
+      "icon": "assets/catalog/cap-captcha.png",
       "id": "cap-captcha",
       "licenses": [],
       "maintenance": "tracked",
@@ -7834,7 +7834,7 @@
       "archived": false,
       "category": "Backend",
       "description": "Self-hosted, distributed Durable Objects powered by Deno.",
-      "icon": null,
+      "icon": "assets/catalog/celld.svg",
       "id": "celld",
       "licenses": [],
       "maintenance": "tracked",
@@ -8179,7 +8179,7 @@
       "archived": false,
       "category": "Database Management",
       "description": "Database diagrams editor that allows you to visualize and design your DB with a single query.",
-      "icon": null,
+      "icon": "assets/catalog/chartdb.png",
       "id": "chartdb",
       "licenses": [
         "AGPL-3.0"
@@ -8221,7 +8221,7 @@
       "archived": false,
       "category": "Ticketing",
       "description": "Chaskiq is an messaging platform for marketing, support & sales",
-      "icon": null,
+      "icon": "assets/catalog/chaskiq.png",
       "id": "chaskiq",
       "licenses": [],
       "maintenance": "tracked",
@@ -8697,7 +8697,7 @@
       "archived": false,
       "category": "Automation",
       "description": "Employee onboarding platform that allows you to provision user accounts and create sequences with todo items, resources, text/email/Slack messages, and more! Available as a web portal and Slack bot.",
-      "icon": null,
+      "icon": "assets/catalog/chiefonboarding.png",
       "id": "chiefonboarding",
       "licenses": [
         "AGPL-3.0"
@@ -9424,7 +9424,7 @@
       "archived": false,
       "category": "Automation",
       "description": "A small, feature-rich, and robust Cloudflare DDNS updater.",
-      "icon": null,
+      "icon": "assets/catalog/cloudflare-ddns-358adb88.svg",
       "id": "cloudflare-ddns-358adb88",
       "licenses": [],
       "maintenance": "tracked",
@@ -9548,7 +9548,7 @@
       "archived": false,
       "category": "File Transfer & Synchronization",
       "description": "File management and sharing system, supports multiple storage providers.",
-      "icon": null,
+      "icon": "assets/catalog/cloudreve.png",
       "id": "cloudreve",
       "licenses": [
         "GPL-3.0"
@@ -9932,7 +9932,7 @@
       "archived": false,
       "category": "Software Development - IDE & Tools",
       "description": "VS Code in the browser, hosted on a remote server.",
-      "icon": null,
+      "icon": "assets/catalog/code-server.png",
       "id": "code-server",
       "licenses": [
         "MIT"
@@ -10081,7 +10081,7 @@
       "archived": false,
       "category": "Productivity",
       "description": "Realtime collaborative markdown notes on all platforms",
-      "icon": null,
+      "icon": "assets/catalog/codimd.png",
       "id": "codimd",
       "licenses": [],
       "maintenance": "tracked",
@@ -10542,7 +10542,7 @@
       "archived": false,
       "category": "Miscellaneous",
       "description": "Online file converter which supports over a thousand different formats.",
-      "icon": null,
+      "icon": "assets/catalog/convertx.png",
       "id": "convertx",
       "licenses": [
         "AGPL-3.0"
@@ -11242,7 +11242,7 @@
       "archived": false,
       "category": "Media",
       "description": "Fully-automatic cross-seeding with Torznab.",
-      "icon": null,
+      "icon": "assets/catalog/cross-seed.png",
       "id": "cross-seed",
       "licenses": [],
       "maintenance": "tracked",
@@ -11344,7 +11344,7 @@
       "archived": false,
       "category": "Security",
       "description": "Secure note / file sharing service inspired by PrivNote.",
-      "icon": null,
+      "icon": "assets/catalog/cryptgeon.png",
       "id": "cryptgeon",
       "licenses": [],
       "maintenance": "tracked",
@@ -12125,7 +12125,7 @@
       "archived": false,
       "category": "Personal Dashboards",
       "description": "Feature-rich homepage for your homelab, with easy YAML configuration.",
-      "icon": null,
+      "icon": "assets/catalog/dashy.png",
       "id": "dashy",
       "licenses": [
         "MIT"
@@ -12402,7 +12402,7 @@
       "archived": false,
       "category": "Calendar & Contacts",
       "description": "A simple, dockerizable and fully translatable admin interface for sabre/dav based on Symfony 5 and Bootstrap 4, largely inspired by Baïkal.",
-      "icon": null,
+      "icon": "assets/catalog/davis.png",
       "id": "davis",
       "licenses": [
         "MIT"
@@ -12733,7 +12733,7 @@
       "archived": false,
       "category": "Media",
       "description": "deemix is a barebone deezer downloader library built from the ashes of Deezloader Remix.",
-      "icon": null,
+      "icon": "assets/catalog/deemix.png",
       "id": "deemix",
       "licenses": [],
       "maintenance": "tracked",
@@ -13084,7 +13084,7 @@
       "archived": false,
       "category": "Self-hosting Solutions",
       "description": "Minimal Debian OS optimized for single-board computers, which allows you to easily install and manage several services for selfhosting at home.",
-      "icon": null,
+      "icon": "assets/catalog/dietpi.png",
       "id": "dietpi",
       "licenses": [
         "GPL-2.0"
@@ -13128,7 +13128,7 @@
       "archived": false,
       "category": "Software Development - Low Code",
       "description": "Build, test and deploy LLM applications.",
-      "icon": null,
+      "icon": "assets/catalog/dify-ai.png",
       "id": "dify-ai",
       "licenses": [
         "Apache-2.0",
@@ -14328,7 +14328,7 @@
       "archived": false,
       "category": "Automation",
       "description": "Docker Image Update Notifier is a CLI application to receive notifications when a Docker image is updated on a Docker registry.",
-      "icon": null,
+      "icon": "assets/catalog/diun.png",
       "id": "diun",
       "licenses": [],
       "maintenance": "tracked",
@@ -14528,7 +14528,7 @@
       "archived": false,
       "category": "Software Development - IDE & Tools",
       "description": "The Docker Registry lets you distribute Docker images.",
-      "icon": null,
+      "icon": "assets/catalog/docker-registry.png",
       "id": "docker-registry",
       "licenses": [],
       "maintenance": "tracked",
@@ -14637,7 +14637,7 @@
       "archived": false,
       "category": "Self-hosting Solutions",
       "description": "DockSTARTer helps you get started with home server apps running in Docker.",
-      "icon": null,
+      "icon": "assets/catalog/dockstarter.png",
       "id": "dockstarter",
       "licenses": [
         "MIT"
@@ -14682,7 +14682,7 @@
       "archived": false,
       "category": "Wikis",
       "description": "Collaborative wiki and documentation software (alternative to Confluence, Notion).",
-      "icon": null,
+      "icon": "assets/catalog/docmost-community-edition.png",
       "id": "docmost-community-edition",
       "licenses": [
         "AGPL-3.0"
@@ -15057,7 +15057,7 @@
       "archived": false,
       "category": "Resource Planning",
       "description": "Modern CRM software package to manage your company or foundation activity (contacts, suppliers, invoices, orders, stocks, agenda, accounting, ...).",
-      "icon": null,
+      "icon": "assets/catalog/dolibarr.png",
       "id": "dolibarr",
       "licenses": [
         "GPL-3.0"
@@ -15195,7 +15195,7 @@
       "archived": false,
       "category": "Internet of Things (IoT)",
       "description": "Home Automation System that lets you monitor and configure various devices like: Lights, Switches, various sensors/meters like Temperature, Rain, Wind, UV, Electra, Gas, Water and much more.",
-      "icon": null,
+      "icon": "assets/catalog/domoticz.png",
       "id": "domoticz",
       "licenses": [
         "GPL-3.0"
@@ -15369,7 +15369,7 @@
       "archived": false,
       "category": "Media Management",
       "description": "Download Spotify music with album art and metadata.",
-      "icon": null,
+      "icon": "assets/catalog/downtify.png",
       "id": "downtify",
       "licenses": [
         "GPL-3.0"
@@ -15919,7 +15919,7 @@
       "archived": false,
       "category": "Content Management Systems (CMS)",
       "description": "Drupal is a free and open-source web content management system written in PHP and distributed under the GNU General Public License.",
-      "icon": null,
+      "icon": "assets/catalog/drupal-with-postgresql.svg",
       "id": "drupal-with-postgresql",
       "licenses": [],
       "maintenance": "tracked",
@@ -16130,7 +16130,7 @@
       "archived": false,
       "category": "Booking and Scheduling",
       "description": "Allows your customers to book appointments with you via the web.",
-      "icon": null,
+      "icon": "assets/catalog/easy-appointments.png",
       "id": "easy-appointments",
       "licenses": [
         "GPL-3.0"
@@ -16461,7 +16461,7 @@
       "archived": false,
       "category": "Database Management",
       "description": "An open-source database designed as a spiritual successor to SQL and the relational paradigm. Powered by the Postgres query engine under the hood.",
-      "icon": null,
+      "icon": "assets/catalog/edgedb.svg",
       "id": "edgedb",
       "licenses": [],
       "maintenance": "tracked",
@@ -16689,7 +16689,7 @@
       "archived": false,
       "category": "Content Management Systems (CMS)",
       "description": "Online lab notebook for research labs. Store experiments, use a database to find reagents or protocols, use trusted timestamping to legally timestamp an experiment, export as pdf or zip archive, share with collaborators….",
-      "icon": null,
+      "icon": "assets/catalog/elabftw.png",
       "id": "elabftw",
       "licenses": [
         "AGPL-3.0"
@@ -16778,7 +16778,7 @@
       "archived": false,
       "category": "Monitoring",
       "description": "Elastic + Kibana is a Free and Open Source Search, Monitoring, and Visualization Stack",
-      "icon": null,
+      "icon": "assets/catalog/elasticsearch-with-kibana.svg",
       "id": "elasticsearch-with-kibana",
       "licenses": [],
       "maintenance": "tracked",
@@ -16819,7 +16819,7 @@
       "archived": false,
       "category": "Backend",
       "description": "Sync shape-based subsets of your Postgres data over HTTP.",
-      "icon": null,
+      "icon": "assets/catalog/electricsql.svg",
       "id": "electricsql",
       "licenses": [],
       "maintenance": "tracked",
@@ -17196,7 +17196,7 @@
       "archived": false,
       "category": "Media",
       "description": "Calculate all kinds of statistics from your (local) Emby or Jellyfin server",
-      "icon": null,
+      "icon": "assets/catalog/embystat.png",
       "id": "embystat",
       "licenses": [],
       "maintenance": "tracked",
@@ -17292,7 +17292,7 @@
       "archived": false,
       "category": "Network Utilities",
       "description": "Open-source MQTT broker for IoT, IIoT, and connected vehicles.",
-      "icon": null,
+      "icon": "assets/catalog/emqx-enterprise.svg",
       "id": "emqx-enterprise",
       "licenses": [],
       "maintenance": "tracked",
@@ -17541,7 +17541,7 @@
       "archived": false,
       "category": "Media",
       "description": "Ente Photos is a fully open source, End to End Encrypted alternative to Google Photos and Apple Photos.",
-      "icon": null,
+      "icon": "assets/catalog/ente-photos-with-s3.png",
       "id": "ente-photos-with-s3",
       "licenses": [],
       "maintenance": "tracked",
@@ -17926,7 +17926,7 @@
       "archived": false,
       "category": "Customer Relationship Management (CRM)",
       "description": "CRM with a frontend designed as a single page application, and a REST API.",
-      "icon": null,
+      "icon": "assets/catalog/espocrm.png",
       "id": "espocrm",
       "licenses": [
         "AGPL-3.0"
@@ -18417,7 +18417,7 @@
       "archived": false,
       "category": "Software Development - IDE & Tools",
       "description": "Self-hosted AI agent integrations and code execution server.",
-      "icon": null,
+      "icon": "assets/catalog/executor.png",
       "id": "executor",
       "licenses": [],
       "maintenance": "tracked",
@@ -18495,7 +18495,7 @@
       "archived": false,
       "category": "Money, Budgeting & Management",
       "description": "Extremely simple expense tracker with a beautiful UI.",
-      "icon": null,
+      "icon": "assets/catalog/expenseowl.png",
       "id": "expenseowl",
       "licenses": [
         "MIT"
@@ -18579,7 +18579,7 @@
       "archived": false,
       "category": "Money, Budgeting & Management",
       "description": "A lightweight personal bookkeeping app hosted by yourself.",
-      "icon": null,
+      "icon": "assets/catalog/ezbookkeeping.png",
       "id": "ezbookkeeping",
       "licenses": [
         "MIT"
@@ -18705,7 +18705,7 @@
       "archived": false,
       "category": "Security",
       "description": "Faraday is a powerful, open-source, web-based vulnerability management tool.",
-      "icon": null,
+      "icon": "assets/catalog/faraday.png",
       "id": "faraday",
       "licenses": [],
       "maintenance": "tracked",
@@ -19297,7 +19297,7 @@
       "archived": false,
       "category": "Utilities",
       "description": "Access your homeserver files from your browser",
-      "icon": null,
+      "icon": "assets/catalog/file-browser-quantum.svg",
       "id": "file-browser-quantum",
       "licenses": [],
       "maintenance": "tracked",
@@ -19415,7 +19415,7 @@
       "archived": false,
       "category": "File Transfer - Web-based File Managers",
       "description": "Web file manager with uploads, tagging, share links, gallery/table views, and an in-browser editor.",
-      "icon": null,
+      "icon": "assets/catalog/filerise.png",
       "id": "filerise",
       "licenses": [
         "MIT"
@@ -19768,7 +19768,7 @@
       "archived": false,
       "category": "Games",
       "description": "Self host your media and share with unique links",
-      "icon": null,
+      "icon": "assets/catalog/fireshare.png",
       "id": "fireshare",
       "licenses": [],
       "maintenance": "tracked",
@@ -19884,7 +19884,7 @@
       "archived": false,
       "category": "Productivity",
       "description": "Kanban tracking tool for issues and ideas by 37signals",
-      "icon": null,
+      "icon": "assets/catalog/fizzy.png",
       "id": "fizzy",
       "licenses": [],
       "maintenance": "tracked",
@@ -20296,7 +20296,7 @@
       "archived": false,
       "category": "Software Development - Feature Toggle",
       "description": "Feature flag solution with support for multiple data backends (alternative to LaunchDarkly).",
-      "icon": null,
+      "icon": "assets/catalog/flipt.svg",
       "id": "flipt",
       "licenses": [
         "GPL-3.0"
@@ -20439,7 +20439,7 @@
       "archived": false,
       "category": "Artificial Intelligence",
       "description": "Build LLM Apps Easily",
-      "icon": null,
+      "icon": "assets/catalog/flowise-ai.svg",
       "id": "flowise-ai",
       "licenses": [],
       "maintenance": "tracked",
@@ -20479,7 +20479,7 @@
       "archived": false,
       "category": "Artificial Intelligence",
       "description": "Flowise is an open source low-code tool for developers to build customized LLM orchestration flows & AI agents. Also deploys Redis, Postgres and other services.",
-      "icon": null,
+      "icon": "assets/catalog/flowise-with-databases.svg",
       "id": "flowise-with-databases",
       "licenses": [],
       "maintenance": "tracked",
@@ -20843,7 +20843,7 @@
       "archived": false,
       "category": "Software Development - Source Control",
       "description": "Forgejo is a self-hosted lightweight software forge. Easy to install and low maintenance, it just does the job.",
-      "icon": null,
+      "icon": "assets/catalog/forgejo-with-mariadb.svg",
       "id": "forgejo-with-mariadb",
       "licenses": [],
       "maintenance": "tracked",
@@ -21185,7 +21185,7 @@
       "archived": false,
       "category": "Games",
       "description": "Foundry Virtual Tabletop is a self-hosted & modern roleplaying platform",
-      "icon": null,
+      "icon": "assets/catalog/foundryvtt.png",
       "id": "foundryvtt",
       "licenses": [],
       "maintenance": "tracked",
@@ -21472,7 +21472,7 @@
       "archived": false,
       "category": "Ticketing",
       "description": "Email-based customer support application, help desk and shared mailbox (alternative to Zendesk and Help Scout).",
-      "icon": null,
+      "icon": "assets/catalog/freescout.png",
       "id": "freescout",
       "licenses": [
         "AGPL-3.0"
@@ -21568,7 +21568,7 @@
       "archived": false,
       "category": "Feed Readers",
       "description": "A free, self-hostable feed aggregator.",
-      "icon": null,
+      "icon": "assets/catalog/freshrss-with-mariadb.svg",
       "id": "freshrss-with-mariadb",
       "licenses": [],
       "maintenance": "tracked",
@@ -21873,7 +21873,7 @@
       "archived": false,
       "category": "Communication - SIP",
       "description": "Web interface for multi-platform voice switch called FreeSWITCH.",
-      "icon": null,
+      "icon": "assets/catalog/fusionpbx.png",
       "id": "fusionpbx",
       "licenses": [
         "MPL-1.1"
@@ -22121,7 +22121,7 @@
       "archived": false,
       "category": "Games - Administrative Utilities & Control Panels",
       "description": "Organize, download, and play DRM-free games from your own server, complete with metadata enrichment and user-friendly interface.",
-      "icon": null,
+      "icon": "assets/catalog/gamevault.png",
       "id": "gamevault",
       "licenses": [
         "CC-BY-NC-SA-4.0"
@@ -22157,7 +22157,7 @@
       "archived": false,
       "category": "Games - Administrative Utilities & Control Panels",
       "description": "Video game library manager with automatic scanning, web access, downloads, and plugin support.",
-      "icon": null,
+      "icon": "assets/catalog/gameyfin.png",
       "id": "gameyfin",
       "licenses": [
         "AGPL-3.0"
@@ -22881,7 +22881,7 @@
       "archived": false,
       "category": "Blogging Platforms",
       "description": "Just a blogging platform.",
-      "icon": null,
+      "icon": "assets/catalog/ghost.png",
       "id": "ghost",
       "licenses": [
         "MIT"
@@ -23081,7 +23081,7 @@
       "archived": false,
       "category": "Software Development - Project Management",
       "description": "Git platform powered with easy installation, high extensibility & GitHub API compatibility (alternative to GitHub).",
-      "icon": null,
+      "icon": "assets/catalog/gitbucket.png",
       "id": "gitbucket",
       "licenses": [
         "Apache-2.0"
@@ -23198,7 +23198,7 @@
       "archived": false,
       "category": "Software Development - Source Control",
       "description": "Gitea is a self-hosted, lightweight Git service, offering version control, collaboration, and code hosting.",
-      "icon": null,
+      "icon": "assets/catalog/gitea-with-mariadb.svg",
       "id": "gitea-with-mariadb",
       "licenses": [],
       "maintenance": "tracked",
@@ -23255,7 +23255,7 @@
       "archived": false,
       "category": "Software Development - IDE & Tools",
       "description": "A GitHub Actions runner for Docker",
-      "icon": null,
+      "icon": "assets/catalog/github-runner.png",
       "id": "github-runner",
       "licenses": [],
       "maintenance": "tracked",
@@ -23450,7 +23450,7 @@
       "archived": false,
       "category": "Internet of Things (IoT)",
       "description": "Privacy-first home assistant.",
-      "icon": null,
+      "icon": "assets/catalog/gladys.png",
       "id": "gladys",
       "licenses": [
         "Apache-2.0"
@@ -23802,7 +23802,7 @@
       "archived": false,
       "category": "Web Servers",
       "description": "Lightweight, simple, and  performant reverse proxy with WebUI, Docker integration, automatic shutdown/startup for container based on traffic.",
-      "icon": null,
+      "icon": "assets/catalog/go-doxy.png",
       "id": "go-doxy",
       "licenses": [
         "MIT"
@@ -24061,7 +24061,7 @@
       "archived": false,
       "category": "Software Development - Project Management",
       "description": "Painless self-hosted Git Service written in Go.",
-      "icon": null,
+      "icon": "assets/catalog/gogs.png",
       "id": "gogs",
       "licenses": [
         "MIT"
@@ -24144,7 +24144,7 @@
       "archived": false,
       "category": "Wikis",
       "description": "Simple, Git-powered wiki with a sweet API and local frontend.",
-      "icon": null,
+      "icon": "assets/catalog/gollum.png",
       "id": "gollum",
       "licenses": [
         "MIT"
@@ -24308,7 +24308,7 @@
       "archived": false,
       "category": "Media",
       "description": "Open source, lightweight, native, supports (HTTP, BitTorrent, Magnet, etc.) for downloading.",
-      "icon": null,
+      "icon": "assets/catalog/gopeed.png",
       "id": "gopeed",
       "licenses": [],
       "maintenance": "tracked",
@@ -24422,7 +24422,7 @@
       "archived": false,
       "category": "Document Management",
       "description": "Developer-friendly API to interact with powerful tools like Chromium and LibreOffice for converting numerous document formats (HTML, Markdown, Word, Excel, etc.) into PDF files, and more.",
-      "icon": null,
+      "icon": "assets/catalog/gotenberg.png",
       "id": "gotenberg",
       "licenses": [
         "MIT"
@@ -24478,7 +24478,7 @@
       "archived": false,
       "category": "Communication - Custom Communication Systems",
       "description": "Notification server with Android and CLI clients (alternative to PushBullet).",
-      "icon": null,
+      "icon": "assets/catalog/gotify.png",
       "id": "gotify",
       "licenses": [
         "MIT"
@@ -24821,7 +24821,7 @@
       "archived": false,
       "category": "Communication - Social Networks and Forums",
       "description": "Fast, Simple, and Flexible, file-based Web-platform.",
-      "icon": null,
+      "icon": "assets/catalog/grav-v2.svg",
       "id": "grav-v2",
       "licenses": [],
       "maintenance": "tracked",
@@ -24859,7 +24859,7 @@
       "archived": false,
       "category": "Other",
       "description": "Grimmory is a self-hosted application for managing your entire book collection in one place. Organize, read, annotate, sync across devices, and share without relying on third-party services.",
-      "icon": null,
+      "icon": "assets/catalog/grimmory.svg",
       "id": "grimmory",
       "licenses": [],
       "maintenance": "tracked",
@@ -25650,7 +25650,7 @@
       "archived": false,
       "category": "Automation",
       "description": "Hatchet allows you to run background tasks at scale with a high-throughput, low-latency computing service built on an open-source, fault-tolerant queue.",
-      "icon": null,
+      "icon": "assets/catalog/hatchet.svg",
       "id": "hatchet",
       "licenses": [],
       "maintenance": "tracked",
@@ -26098,7 +26098,7 @@
       "archived": false,
       "category": "Artificial Intelligence",
       "description": "Hermes Agent — autonomous AI agent with persistent memory, scheduling, and a self-hosted web chat UI.",
-      "icon": null,
+      "icon": "assets/catalog/hermes-agent-with-webui.png",
       "id": "hermes-agent-with-webui",
       "licenses": [],
       "maintenance": "tracked",
@@ -26235,7 +26235,7 @@
       "archived": false,
       "category": "Search Engines",
       "description": "Personal web search engine with automatic indexing of visited websites. Supports offline local result previews, local files, multi-user handling and optional semantic search.",
-      "icon": null,
+      "icon": "assets/catalog/hister.png",
       "id": "hister",
       "licenses": [
         "AGPL-3.0"
@@ -26582,7 +26582,7 @@
       "archived": false,
       "category": "Inventory Management",
       "description": "Inventory and organization system built for the home user.",
-      "icon": null,
+      "icon": "assets/catalog/homebox-sysadminsmedia.svg",
       "id": "homebox-sysadminsmedia",
       "licenses": [
         "AGPL-3.0"
@@ -26768,7 +26768,7 @@
       "archived": false,
       "category": "Productivity",
       "description": "A modern, fully static, fast, secure fully proxied, highly customizable application dashboard",
-      "icon": null,
+      "icon": "assets/catalog/homepage.png",
       "id": "homepage",
       "licenses": [],
       "maintenance": "tracked",
@@ -27178,7 +27178,7 @@
       "archived": false,
       "category": "Miscellaneous",
       "description": "Collaborative plant management and tracking system for plant enthusiasts.",
-      "icon": null,
+      "icon": "assets/catalog/hortusfox.png",
       "id": "hortusfox",
       "licenses": [
         "MIT"
@@ -27926,7 +27926,7 @@
       "archived": false,
       "category": "Money, Budgeting & Management",
       "description": "Manage your shared expenses, easily.",
-      "icon": null,
+      "icon": "assets/catalog/ihatemoney.png",
       "id": "ihatemoney",
       "licenses": [
         "BSD-3-Clause"
@@ -28010,7 +28010,7 @@
       "archived": false,
       "category": "Miscellaneous",
       "description": "Image processing tool that runs entirely in Docker. Compress, convert, resize, batch-process images, and remove backgrounds using local AI without cloud dependencies.",
-      "icon": null,
+      "icon": "assets/catalog/imgcompress.png",
       "id": "imgcompress",
       "licenses": [
         "GPL-3.0"
@@ -28473,7 +28473,7 @@
       "archived": false,
       "category": "Automation",
       "description": "Durable workflow engine for background jobs, queues and scheduled tasks.",
-      "icon": null,
+      "icon": "assets/catalog/inngest.png",
       "id": "inngest",
       "licenses": [],
       "maintenance": "tracked",
@@ -28954,7 +28954,7 @@
       "archived": false,
       "category": "Communication - Email - Complete Solutions",
       "description": "Full-featured mail server solution based on Postfix and Dovecot.",
-      "icon": null,
+      "icon": "assets/catalog/iredmail.png",
       "id": "iredmail",
       "licenses": [
         "GPL-3.0"
@@ -29368,7 +29368,7 @@
       "archived": false,
       "category": "Software Development - IDE & Tools",
       "description": "Open-source desktop and server client for orchestrating AI coding agents.",
-      "icon": null,
+      "icon": "assets/catalog/jean.png",
       "id": "jean",
       "licenses": [],
       "maintenance": "tracked",
@@ -30103,7 +30103,7 @@
       "archived": false,
       "category": "Software Development - IDE & Tools",
       "description": "Jupyter Notebook is an open-source web application that allows you to create and share documents that contain live code, equations, visualizations, and narrative text.",
-      "icon": null,
+      "icon": "assets/catalog/jupyter-notebook-python.svg",
       "id": "jupyter-notebook-python",
       "licenses": [],
       "maintenance": "tracked",
@@ -30543,7 +30543,7 @@
       "archived": false,
       "category": "Media Streaming - Multimedia Streaming",
       "description": "Host awesome karaoke parties where everyone can easily find and queue songs from their phone's browser. The player is also fully browser-based with support for MP3+G, MP4 and WebGL visualizations.",
-      "icon": null,
+      "icon": "assets/catalog/karaoke-eternal.png",
       "id": "karaoke-eternal",
       "licenses": [
         "ISC"
@@ -30820,7 +30820,7 @@
       "archived": false,
       "category": "Identity and Access Management",
       "description": "Keycloak is an open-source Identity and Access Management tool.",
-      "icon": null,
+      "icon": "assets/catalog/keycloak-with-postgres.svg",
       "id": "keycloak-with-postgres",
       "licenses": [],
       "maintenance": "tracked",
@@ -31523,7 +31523,7 @@
       "archived": false,
       "category": "Utilities",
       "description": "Overlays, Collections & Playlists for Plex.",
-      "icon": null,
+      "icon": "assets/catalog/kometa.png",
       "id": "kometa",
       "licenses": [],
       "maintenance": "tracked",
@@ -31783,7 +31783,7 @@
       "archived": false,
       "category": "URL Shorteners",
       "description": "Modern URL shortener with support for custom domains and custom URLs.",
-      "icon": null,
+      "icon": "assets/catalog/kutt.png",
       "id": "kutt",
       "licenses": [
         "MIT"
@@ -31825,7 +31825,7 @@
       "archived": false,
       "category": "Backend",
       "description": "Kuzzle is a generic backend offering the basic building blocks common to every application.",
-      "icon": null,
+      "icon": "assets/catalog/kuzzle.png",
       "id": "kuzzle",
       "licenses": [],
       "maintenance": "tracked",
@@ -31910,7 +31910,7 @@
       "archived": false,
       "category": "Artificial Intelligence",
       "description": "Label Studio is an open source data labeling tool. It lets you label data types like audio, text, images, videos, and time series with a simple and straightforward UI and export to various model formats. It can be used to prepare raw data or improve existing training data to get more accurate ML models.",
-      "icon": null,
+      "icon": "assets/catalog/label-studio.png",
       "id": "label-studio",
       "licenses": [],
       "maintenance": "tracked",
@@ -32047,7 +32047,7 @@
       "archived": false,
       "category": "Artificial Intelligence",
       "description": "Open-source UI for building and debugging multi-agent and RAG applications",
-      "icon": null,
+      "icon": "assets/catalog/langflow.png",
       "id": "langflow",
       "licenses": [],
       "maintenance": "tracked",
@@ -32181,7 +32181,7 @@
       "archived": false,
       "category": "Automation",
       "description": "Follow authors and grab metadata for all your digital reading needs. It uses a combination of Goodreads, Librarything and optionally GoogleBooks as sources for author info and book info.",
-      "icon": null,
+      "icon": "assets/catalog/lazylibrarian.png",
       "id": "lazylibrarian",
       "licenses": [
         "GPL-3.0"
@@ -32954,7 +32954,7 @@
       "archived": false,
       "category": "Photo Galleries",
       "description": "Photo management service with a slight focus on cool graphs (alternative to Google Photos).",
-      "icon": null,
+      "icon": "assets/catalog/librephotos.png",
       "id": "librephotos",
       "licenses": [
         "MIT"
@@ -33624,7 +33624,7 @@
       "archived": false,
       "category": "Bookmarks and Link Sharing",
       "description": "Bookmark and archive manager to store your useful links.",
-      "icon": null,
+      "icon": "assets/catalog/linkwarden.png",
       "id": "linkwarden",
       "licenses": [
         "MIT"
@@ -33859,7 +33859,7 @@
       "archived": false,
       "category": "Artificial Intelligence",
       "description": "Call all LLM APIs using the OpenAI format. Use Bedrock, Azure, OpenAI, Cohere, Anthropic, Ollama, Sagemaker, HuggingFace, Replicate, Groq (100+ LLMs)",
-      "icon": null,
+      "icon": "assets/catalog/litellm.svg",
       "id": "litellm",
       "licenses": [],
       "maintenance": "tracked",
@@ -33904,7 +33904,7 @@
       "archived": false,
       "category": "Database Management",
       "description": "Lite Queen is an open-source SQLite database management software that runs on your server.",
-      "icon": null,
+      "icon": "assets/catalog/litequeen.svg",
       "id": "litequeen",
       "licenses": [],
       "maintenance": "tracked",
@@ -34789,7 +34789,7 @@
       "archived": false,
       "category": "Productivity",
       "description": "Lowcoder (forked from OpenBlocks) is a self-hosted, open-source, low-code platform for building internal tools.",
-      "icon": null,
+      "icon": "assets/catalog/lowcoder.svg",
       "id": "lowcoder",
       "licenses": [],
       "maintenance": "tracked",
@@ -34918,7 +34918,7 @@
       "archived": false,
       "category": "Miscellaneous",
       "description": "Web-based vehicle maintenance and fuel mileage tracker.",
-      "icon": null,
+      "icon": "assets/catalog/lubelogger.png",
       "id": "lubelogger",
       "licenses": [
         "MIT"
@@ -35044,7 +35044,7 @@
       "archived": false,
       "category": "Photo Galleries",
       "description": "Grid and album based photo-management-system.",
-      "icon": null,
+      "icon": "assets/catalog/lychee.png",
       "id": "lychee",
       "licenses": [
         "MIT"
@@ -35141,7 +35141,7 @@
       "archived": false,
       "category": "Productivity",
       "description": "Run macOS in a containerized environment.",
-      "icon": null,
+      "icon": "assets/catalog/macos.svg",
       "id": "macos",
       "licenses": [],
       "maintenance": "tracked",
@@ -35259,7 +35259,7 @@
       "archived": false,
       "category": "Automation",
       "description": "Build, run, and manage data pipelines for integrating and transforming data.",
-      "icon": null,
+      "icon": "assets/catalog/mage-ai.svg",
       "id": "mage-ai",
       "licenses": [],
       "maintenance": "tracked",
@@ -35534,7 +35534,7 @@
       "archived": false,
       "category": "Communication - Email - Complete Solutions",
       "description": "Simple yet full-featured mail server as a set of Docker images.",
-      "icon": null,
+      "icon": "assets/catalog/mailu.png",
       "id": "mailu",
       "licenses": [
         "MIT"
@@ -35621,7 +35621,7 @@
       "archived": false,
       "category": "Media",
       "description": "Maintainerr will manage the storage space on your plex server, launching automated actions to delete your files.",
-      "icon": null,
+      "icon": "assets/catalog/maintainerr.png",
       "id": "maintainerr",
       "licenses": [],
       "maintenance": "tracked",
@@ -35821,7 +35821,7 @@
       "archived": false,
       "category": "Ticketing",
       "description": "Bug tracker, fits best for software development.",
-      "icon": null,
+      "icon": "assets/catalog/mantisbt.png",
       "id": "mantisbt",
       "licenses": [
         "GPL-2.0"
@@ -36048,7 +36048,7 @@
       "archived": false,
       "category": "Backend",
       "description": "Martin is a tile server able to generate and serve vector tiles on the fly from large PostGIS databases, PMTiles (local or remote), and MBTiles files, allowing multiple tile sources to be dynamically combined into one.",
-      "icon": null,
+      "icon": "assets/catalog/martin.png",
       "id": "martin",
       "licenses": [],
       "maintenance": "tracked",
@@ -36257,7 +36257,7 @@
       "archived": false,
       "category": "Analytics",
       "description": "Web analytics that protects your data and your customers' privacy (alternative to Google Analytics).",
-      "icon": null,
+      "icon": "assets/catalog/matomo.png",
       "id": "matomo",
       "licenses": [
         "GPL-3.0"
@@ -36299,7 +36299,7 @@
       "archived": false,
       "category": "Communication - Custom Communication Systems",
       "description": "Chat securely with your family, friends, community, or build great apps with Matrix!",
-      "icon": null,
+      "icon": "assets/catalog/matrix-synapse-with-postgresql.svg",
       "id": "matrix-synapse-with-postgresql",
       "licenses": [],
       "maintenance": "tracked",
@@ -37286,7 +37286,7 @@
       "archived": false,
       "category": "Note-taking & Editors",
       "description": "Knowledge base that works with a SQLite db file.",
-      "icon": null,
+      "icon": "assets/catalog/memos.png",
       "id": "memos",
       "licenses": [
         "MIT"
@@ -37356,7 +37356,7 @@
       "archived": false,
       "category": "Money, Budgeting & Management",
       "description": "Bitcoin mempool visualizer and blockchain explorer",
-      "icon": null,
+      "icon": "assets/catalog/mempool.png",
       "id": "mempool",
       "licenses": [],
       "maintenance": "tracked",
@@ -37471,7 +37471,7 @@
       "archived": false,
       "category": "Remote Access",
       "description": "Run your own web server to remotely manage and control computers on a local network or anywhere on the internet.",
-      "icon": null,
+      "icon": "assets/catalog/meshcentral.png",
       "id": "meshcentral",
       "licenses": [
         "Apache-2.0"
@@ -37575,7 +37575,7 @@
       "archived": false,
       "category": "Artificial Intelligence",
       "description": "MCP Aggregator, Orchestrator, Middleware, Gateway in one app",
-      "icon": null,
+      "icon": "assets/catalog/metamcp.png",
       "id": "metamcp",
       "licenses": [],
       "maintenance": "tracked",
@@ -37797,7 +37797,7 @@
       "archived": false,
       "category": "Database Management",
       "description": "AI layer for existing databases that allows you to effortlessly develop, train and deploy state-of-the-art machine learning models using standard queries.",
-      "icon": null,
+      "icon": "assets/catalog/mindsdb.svg",
       "id": "mindsdb",
       "licenses": [
         "Elastic-2.0"
@@ -37931,7 +37931,7 @@
       "archived": false,
       "category": "Games",
       "description": "Run a minecraft server",
-      "icon": null,
+      "icon": "assets/catalog/minecraft-server.svg",
       "id": "minecraft-server",
       "licenses": [],
       "maintenance": "tracked",
@@ -37972,7 +37972,7 @@
       "archived": false,
       "category": "Media",
       "description": "Free and easy to use Minecraft server management tool.",
-      "icon": null,
+      "icon": "assets/catalog/mineos.png",
       "id": "mineos",
       "licenses": [],
       "maintenance": "tracked",
@@ -38145,7 +38145,7 @@
       "archived": false,
       "category": "File Transfer & Synchronization",
       "description": "MinIO is a high performance object storage server compatible with Amazon S3 APIs.",
-      "icon": null,
+      "icon": "assets/catalog/minio-community-edition.svg",
       "id": "minio-community-edition",
       "licenses": [],
       "maintenance": "tracked",
@@ -38637,7 +38637,7 @@
       "archived": false,
       "category": "Communication - Social Networks and Forums",
       "description": "Self-hosted social media management. Schedule and organize your social content.",
-      "icon": null,
+      "icon": "assets/catalog/mixpost-pro.svg",
       "id": "mixpost-pro",
       "licenses": [],
       "maintenance": "tracked",
@@ -38950,7 +38950,7 @@
       "archived": false,
       "category": "Money, Budgeting & Management",
       "description": "Budgeting application focused on planning for recurring expenses.",
-      "icon": null,
+      "icon": "assets/catalog/monetr.png",
       "id": "monetr",
       "licenses": [
         "FSL-1.1-MIT"
@@ -39136,7 +39136,7 @@
       "archived": false,
       "category": "Media Streaming - Audio Streaming",
       "description": "Audiophile-quality music playback for the wonderful Raspberry Pi family of single board computers.",
-      "icon": null,
+      "icon": "assets/catalog/moode-audio.png",
       "id": "moode-audio",
       "licenses": [
         "GPL-3.0"
@@ -40507,7 +40507,7 @@
       "archived": false,
       "category": "Media Streaming - Audio Streaming",
       "description": "Modern Music Server and Streamer, compatible with Subsonic/Airsonic.",
-      "icon": null,
+      "icon": "assets/catalog/navidrome-music-server.svg",
       "id": "navidrome-music-server",
       "licenses": [
         "GPL-3.0"
@@ -40656,7 +40656,7 @@
       "archived": false,
       "category": "Proxy",
       "description": "The database you love, on a serverless platform designed to help you build reliable and scalable applications faster.",
-      "icon": null,
+      "icon": "assets/catalog/neon-ws-proxy.svg",
       "id": "neon-ws-proxy",
       "licenses": [],
       "maintenance": "tracked",
@@ -40846,7 +40846,7 @@
       "archived": false,
       "category": "Vpn",
       "description": "Connect your devices into a secure WireGuard®-based overlay network with SSO, MFA and granular access controls.",
-      "icon": null,
+      "icon": "assets/catalog/netbird-client.png",
       "id": "netbird-client",
       "licenses": [],
       "maintenance": "tracked",
@@ -41003,7 +41003,7 @@
       "archived": false,
       "category": "Network Utilities",
       "description": "Monitor, analyze, and alert on network performance.",
-      "icon": null,
+      "icon": "assets/catalog/netronome.png",
       "id": "netronome",
       "licenses": [],
       "maintenance": "tracked",
@@ -41034,7 +41034,7 @@
       "archived": false,
       "category": "Software Development - API Management",
       "description": "The next-generation LLM gateway and AI asset management system supports multiple languages.",
-      "icon": null,
+      "icon": "assets/catalog/newapi.png",
       "id": "newapi",
       "licenses": [],
       "maintenance": "tracked",
@@ -41151,7 +41151,7 @@
       "archived": false,
       "category": "Proxy",
       "description": "Pangolin tunnels your services to the internet so you can access anything from anywhere.",
-      "icon": null,
+      "icon": "assets/catalog/newt-pangolin.png",
       "id": "newt-pangolin",
       "licenses": [],
       "maintenance": "tracked",
@@ -41336,7 +41336,7 @@
       "archived": false,
       "category": "File Transfer & Synchronization",
       "description": "NextCloud is a self-hosted, open-source platform that provides file storage, collaboration, and communication tools for seamless data management.",
-      "icon": null,
+      "icon": "assets/catalog/nextcloud-with-mariadb.svg",
       "id": "nextcloud-with-mariadb",
       "licenses": [],
       "maintenance": "tracked",
@@ -41508,7 +41508,7 @@
       "archived": false,
       "category": "Software Development - IDE & Tools",
       "description": "Open source Universal Repository Manager (ARM version, community edition), default credentials: admin/admin123",
-      "icon": null,
+      "icon": "assets/catalog/nexus-arm.svg",
       "id": "nexus-arm",
       "licenses": [],
       "maintenance": "tracked",
@@ -41783,7 +41783,7 @@
       "archived": false,
       "category": "Content Management Systems (CMS)",
       "description": "Nitropage is an extensible, visual website builder, offering a growing library of versatile building blocks, focal-point image cropping and sovereign font management.",
-      "icon": null,
+      "icon": "assets/catalog/nitropage-with-postgresql.svg",
       "id": "nitropage-with-postgresql",
       "licenses": [],
       "maintenance": "tracked",
@@ -41861,7 +41861,7 @@
       "archived": false,
       "category": "Software Development - IDE & Tools",
       "description": "NocoBase is the most extensible AI-powered no-code/low-code platform.",
-      "icon": null,
+      "icon": "assets/catalog/nocobase.png",
       "id": "nocobase",
       "licenses": [],
       "maintenance": "tracked",
@@ -42591,7 +42591,7 @@
       "archived": false,
       "category": "Monitoring",
       "description": "Observium is a comprehensive network monitoring platform designed to deliver powerful monitoring capabilities, combined with an elegant and intuitive user interface.",
-      "icon": null,
+      "icon": "assets/catalog/observium.png",
       "id": "observium",
       "licenses": [],
       "maintenance": "tracked",
@@ -42662,7 +42662,7 @@
       "archived": false,
       "category": "Utilities",
       "description": "LiveSync couchdb backend for Obsidian",
-      "icon": null,
+      "icon": "assets/catalog/obsidian-livesync.svg",
       "id": "obsidian-livesync",
       "licenses": [],
       "maintenance": "tracked",
@@ -43206,7 +43206,7 @@
       "archived": false,
       "category": "Artificial Intelligence",
       "description": "Ollama with Open Web UI integrates AI model deployment with a user-friendly interface.",
-      "icon": null,
+      "icon": "assets/catalog/ollama-with-open-webui.svg",
       "id": "ollama-with-open-webui",
       "licenses": [],
       "maintenance": "tracked",
@@ -43382,7 +43382,7 @@
       "archived": false,
       "category": "Miscellaneous",
       "description": "Collection of powerful web-based tools for everyday tasks (coding, manipulating images/videos, PDFs or crunching numbers...).",
-      "icon": null,
+      "icon": "assets/catalog/omnitools.png",
       "id": "omnitools",
       "licenses": [
         "MIT"
@@ -43423,7 +43423,7 @@
       "archived": false,
       "category": "Communication - Custom Communication Systems",
       "description": "Super simple group chat, without a subscription.",
-      "icon": null,
+      "icon": "assets/catalog/once-campfire.png",
       "id": "once-campfire",
       "licenses": [],
       "maintenance": "tracked",
@@ -43462,7 +43462,7 @@
       "archived": false,
       "category": "Communication - Custom Communication Systems",
       "description": "Share sensitive information securely with self-destructing links that are only viewable once.",
-      "icon": null,
+      "icon": "assets/catalog/one-time-secret.svg",
       "id": "one-time-secret",
       "licenses": [
         "MIT"
@@ -44286,7 +44286,7 @@
       "archived": false,
       "category": "File Transfer & Synchronization",
       "description": "File Sharing and Collaboration Platform.",
-      "icon": null,
+      "icon": "assets/catalog/opencloud.svg",
       "id": "opencloud",
       "licenses": [
         "Apache-2.0"
@@ -44741,7 +44741,7 @@
       "archived": false,
       "category": "Monitoring",
       "description": "Cloud-native observability platform for logs, metrics, traces, RUM, errors and session replays — a 140x cheaper alternative to Elasticsearch, Splunk and Datadog.",
-      "icon": null,
+      "icon": "assets/catalog/openobserve.svg",
       "id": "openobserve",
       "licenses": [],
       "maintenance": "tracked",
@@ -45665,7 +45665,7 @@
       "archived": false,
       "category": "Productivity",
       "description": "OrangeHRM open source HR management software.",
-      "icon": null,
+      "icon": "assets/catalog/orangehrm.svg",
       "id": "orangehrm",
       "licenses": [],
       "maintenance": "tracked",
@@ -45745,7 +45745,7 @@
       "archived": false,
       "category": "Productivity",
       "description": "Homelab Services Organizer",
-      "icon": null,
+      "icon": "assets/catalog/organizr.png",
       "id": "organizr",
       "licenses": [],
       "maintenance": "tracked",
@@ -46650,7 +46650,7 @@
       "archived": false,
       "category": "Media",
       "description": "Local file sharing in your browser. Inspired by Apple's AirDrop",
-      "icon": null,
+      "icon": "assets/catalog/pairdrop.png",
       "id": "pairdrop",
       "licenses": [],
       "maintenance": "tracked",
@@ -47068,7 +47068,7 @@
       "archived": false,
       "category": "Pastebins",
       "description": "Dead-simple application to securely communicate passwords (or text) over the web. Passwords automatically expire after a certain number of views and/or time has passed.",
-      "icon": null,
+      "icon": "assets/catalog/password-pusher.png",
       "id": "password-pusher",
       "licenses": [
         "Apache-2.0"
@@ -47440,7 +47440,7 @@
       "archived": false,
       "category": "Productivity",
       "description": "Penpot is the first Open Source design and prototyping platform for product teams.",
-      "icon": null,
+      "icon": "assets/catalog/penpot-with-s3.svg",
       "id": "penpot-with-s3",
       "licenses": [],
       "maintenance": "tracked",
@@ -47572,7 +47572,7 @@
       "archived": false,
       "category": "Media",
       "description": "A third party companion app available to Plex server owners to allow their users to request, review and discover content.",
-      "icon": null,
+      "icon": "assets/catalog/petio.png",
       "id": "petio",
       "licenses": [],
       "maintenance": "tracked",
@@ -47635,7 +47635,7 @@
       "archived": false,
       "category": "Software Development - IDE & Tools",
       "description": "Effortless PostgreSQL backups with a user-friendly web interface!",
-      "icon": null,
+      "icon": "assets/catalog/pgbackweb.svg",
       "id": "pgbackweb",
       "licenses": [],
       "maintenance": "tracked",
@@ -47846,7 +47846,7 @@
       "archived": false,
       "category": "Photo Galleries",
       "description": "Simple and user-friendly photo gallery for personal servers. It is made for photographers and aims to provide an easy and fast way to navigate directories, with thousands of high resolution photos.",
-      "icon": null,
+      "icon": "assets/catalog/photoview.png",
       "id": "photoview",
       "licenses": [
         "GPL-3.0"
@@ -48376,7 +48376,7 @@
       "archived": false,
       "category": "Media Management",
       "description": "Download YouTube content built using yt-dlp.",
-      "icon": null,
+      "icon": "assets/catalog/pinchflat.png",
       "id": "pinchflat",
       "licenses": [
         "AGPL-3.0"
@@ -48431,7 +48431,7 @@
       "archived": false,
       "category": "Media Streaming - Audio Streaming",
       "description": "Podcast management system with multi-user support. Pinepods utilizes a central database so aspects like listen time and themes follow from device to device.",
-      "icon": null,
+      "icon": "assets/catalog/pinepods.png",
       "id": "pinepods",
       "licenses": [
         "GPL-3.0"
@@ -49344,7 +49344,7 @@
       "archived": false,
       "category": "Communication - Email",
       "description": "Plunk, The Open-Source Email Platform for AWS",
-      "icon": null,
+      "icon": "assets/catalog/plunk.svg",
       "id": "plunk",
       "licenses": [],
       "maintenance": "tracked",
@@ -49461,7 +49461,7 @@
       "archived": false,
       "category": "Identity and Access Management",
       "description": "A simple and secure OIDC provider with passkey authentication",
-      "icon": null,
+      "icon": "assets/catalog/pocket-id-with-postgresql.svg",
       "id": "pocket-id-with-postgresql",
       "licenses": [],
       "maintenance": "tracked",
@@ -50264,7 +50264,7 @@
       "archived": false,
       "category": "Automation",
       "description": "Prefect is an orchestration and observability platform that empowers developers to build and scale workflows quickly.",
-      "icon": null,
+      "icon": "assets/catalog/prefect.png",
       "id": "prefect",
       "licenses": [],
       "maintenance": "tracked",
@@ -50828,7 +50828,7 @@
       "archived": false,
       "category": "Proxy",
       "description": "A simple proxy server created for https://hoppscotch.io - CORS proxy",
-      "icon": null,
+      "icon": "assets/catalog/proxyscotch.png",
       "id": "proxyscotch",
       "licenses": [],
       "maintenance": "tracked",
@@ -50864,7 +50864,7 @@
       "archived": false,
       "category": "File Transfer - Single-click & Drag-n-drop Upload",
       "description": "Simple file sharing solution with robust up-/download-resume and password protection.",
-      "icon": null,
+      "icon": "assets/catalog/psitransfer.png",
       "id": "psitransfer",
       "licenses": [
         "BSD-2-Clause"
@@ -51993,7 +51993,7 @@
       "archived": false,
       "category": "Wikis",
       "description": "Knowledgebase platform that uses static Markdown files.",
-      "icon": null,
+      "icon": "assets/catalog/raneto.png",
       "id": "raneto",
       "licenses": [
         "MIT"
@@ -52599,7 +52599,7 @@
       "archived": false,
       "category": "Recipe Management",
       "description": "Clean, simple and powerful recipe manager your whole family will enjoy.",
-      "icon": null,
+      "icon": "assets/catalog/recipya.png",
       "id": "recipya",
       "licenses": [
         "GPL-3.0"
@@ -52805,7 +52805,7 @@
       "archived": false,
       "category": "Database Management",
       "description": "Redis Insight lets you do both GUI- and CLI-based interactions in a fully-featured desktop GUI client.",
-      "icon": null,
+      "icon": "assets/catalog/redis-insight.png",
       "id": "redis-insight",
       "licenses": [],
       "maintenance": "tracked",
@@ -53783,7 +53783,7 @@
       "archived": false,
       "category": "Software Development - IDE & Tools",
       "description": "Build and scale stateful workloads with long-lived processes",
-      "icon": null,
+      "icon": "assets/catalog/rivet-engine.svg",
       "id": "rivet-engine",
       "licenses": [],
       "maintenance": "tracked",
@@ -54383,7 +54383,7 @@
       "archived": false,
       "category": "Feed Readers",
       "description": "Easy to use, and extensible RSS feed aggregator capable of generating RSS feeds from pretty much everything ranging from social media to university departments.",
-      "icon": null,
+      "icon": "assets/catalog/rsshub.png",
       "id": "rsshub",
       "licenses": [
         "MIT"
@@ -55157,7 +55157,7 @@
       "archived": false,
       "category": "File Transfer & Synchronization",
       "description": "Samba is the standard Windows interoperability suite of programs for Linux and Unix. It provides secure, stable and fast file and print services for all clients using the SMB/CIFS protocol.",
-      "icon": null,
+      "icon": "assets/catalog/samba.svg",
       "id": "samba",
       "licenses": [
         "GPL-3.0"
@@ -55322,7 +55322,7 @@
       "archived": false,
       "category": "Games",
       "description": "Satisfactory Dedicated Server for hosting your own Satisfactory game sessions.",
-      "icon": null,
+      "icon": "assets/catalog/satisfactory.png",
       "id": "satisfactory",
       "licenses": [],
       "maintenance": "tracked",
@@ -55609,7 +55609,7 @@
       "archived": false,
       "category": "Security",
       "description": "High performance home video integration and automation platform",
-      "icon": null,
+      "icon": "assets/catalog/scrypted.png",
       "id": "scrypted",
       "licenses": [],
       "maintenance": "tracked",
@@ -55847,7 +55847,7 @@
       "archived": false,
       "category": "File Transfer - Object Storage & File Servers",
       "description": "SeaweedFS is an open source distributed file system supporting WebDAV, S3 API, FUSE mount, HDFS, etc, optimized for lots of small files, and easy to add capacity.",
-      "icon": null,
+      "icon": "assets/catalog/seaweedfs.svg",
       "id": "seaweedfs",
       "licenses": [
         "Apache-2.0"
@@ -56372,7 +56372,7 @@
       "archived": false,
       "category": "Analytics",
       "description": "The fastest Postgres change data capture",
-      "icon": null,
+      "icon": "assets/catalog/sequin.svg",
       "id": "sequin",
       "licenses": [],
       "maintenance": "tracked",
@@ -56564,7 +56564,7 @@
       "archived": false,
       "category": "File Transfer - Object Storage & File Servers",
       "description": "Flexible, fully featured and highly configurable SFTP server with optional FTP/S and WebDAV support.",
-      "icon": null,
+      "icon": "assets/catalog/sftpgo-community-edition.png",
       "id": "sftpgo-community-edition",
       "licenses": [
         "AGPL-3.0",
@@ -56786,7 +56786,7 @@
       "archived": false,
       "category": "Inventory Management",
       "description": "Asset and equipment tracking software used by teams who value clarity. Shelf is an asset database and QR asset label generator that lets you create, manage and overview your assets across locations. Unlimited assets, free forever.",
-      "icon": null,
+      "icon": "assets/catalog/shelf.png",
       "id": "shelf",
       "licenses": [
         "AGPL-3.0"
@@ -57184,7 +57184,7 @@
       "archived": false,
       "category": "Media",
       "description": "Automatic video library manager for TV Shows",
-      "icon": null,
+      "icon": "assets/catalog/sickchill.png",
       "id": "sickchill",
       "licenses": [],
       "maintenance": "tracked",
@@ -57301,7 +57301,7 @@
       "archived": false,
       "category": "Note-taking & Editors",
       "description": "Note-taking application optimized for people with a hacker mindset.",
-      "icon": null,
+      "icon": "assets/catalog/silverbullet.png",
       "id": "silverbullet",
       "licenses": [
         "MIT"
@@ -58051,7 +58051,7 @@
       "archived": false,
       "category": "File Transfer - Single-click & Drag-n-drop Upload",
       "description": "Image sharing platform designed to give users complete control over their media sharing experience.",
-      "icon": null,
+      "icon": "assets/catalog/slink.png",
       "id": "slink",
       "licenses": [
         "AGPL-3.0"
@@ -58223,7 +58223,7 @@
       "archived": false,
       "category": "Network Utilities",
       "description": "Free open source network performance monitoring tool",
-      "icon": null,
+      "icon": "assets/catalog/smokeping.png",
       "id": "smokeping",
       "licenses": [],
       "maintenance": "tracked",
@@ -58752,7 +58752,7 @@
       "archived": false,
       "category": "Communication - Custom Communication Systems",
       "description": "A user-friendly IRC bouncer with a modern web interface",
-      "icon": null,
+      "icon": "assets/catalog/soju.svg",
       "id": "soju",
       "licenses": [],
       "maintenance": "tracked",
@@ -58822,7 +58822,7 @@
       "archived": false,
       "category": "Software Development - IDE & Tools",
       "description": "Manage soketi websocket server and apps with ease.",
-      "icon": null,
+      "icon": "assets/catalog/soketi-app-manager.svg",
       "id": "soketi-app-manager",
       "licenses": [],
       "maintenance": "tracked",
@@ -58898,7 +58898,7 @@
       "archived": false,
       "category": "Money, Budgeting & Management",
       "description": "Open source invoicing and quote application.",
-      "icon": null,
+      "icon": "assets/catalog/solidinvoice.png",
       "id": "solidinvoice",
       "licenses": [
         "MIT"
@@ -59290,7 +59290,7 @@
       "archived": false,
       "category": "Artificial Intelligence",
       "description": "An agentic AI system with specialized processes for thinking, working, and remembering.",
-      "icon": null,
+      "icon": "assets/catalog/spacebot.png",
       "id": "spacebot",
       "licenses": [],
       "maintenance": "tracked",
@@ -59396,7 +59396,7 @@
       "archived": false,
       "category": "Health and Fitness",
       "description": "SparkyFitness is a comprehensive fitness tracking and management application designed to help users monitor their nutrition, exercise, and body measurements. It provides tools for daily progress tracking, goal setting, and insightful reports to support a healthy lifestyle.",
-      "icon": null,
+      "icon": "assets/catalog/sparkyfitness.png",
       "id": "sparkyfitness",
       "licenses": [],
       "maintenance": "tracked",
@@ -59482,7 +59482,7 @@
       "archived": false,
       "category": "Network Utilities",
       "description": "Free & Open-Source HTML5 Network Performance Estimation Tool.",
-      "icon": null,
+      "icon": "assets/catalog/speed-test-by-openspeedtesttm.svg",
       "id": "speed-test-by-openspeedtesttm",
       "licenses": [
         "MIT"
@@ -59533,7 +59533,7 @@
       "archived": false,
       "category": "Network Utilities",
       "description": "Monitor the performance and uptime of your internet connection.",
-      "icon": null,
+      "icon": "assets/catalog/speedtest-tracker.png",
       "id": "speedtest-tracker",
       "licenses": [
         "MIT"
@@ -60136,7 +60136,7 @@
       "archived": false,
       "category": "Communication - Email",
       "description": "Modern mail server platform",
-      "icon": null,
+      "icon": "assets/catalog/stalwart.png",
       "id": "stalwart",
       "licenses": [],
       "maintenance": "tracked",
@@ -60481,7 +60481,7 @@
       "archived": false,
       "category": "Monitoring",
       "description": "Effortlessly deploy a status page and start monitoring endpoints in minutes",
-      "icon": null,
+      "icon": "assets/catalog/statusnook.svg",
       "id": "statusnook",
       "licenses": [],
       "maintenance": "tracked",
@@ -60587,7 +60587,7 @@
       "archived": false,
       "category": "Communication - Custom Communication Systems",
       "description": "Stoat is a user-first chat platform built with modern web technologies.",
-      "icon": null,
+      "icon": "assets/catalog/stoat.png",
       "id": "stoat",
       "licenses": [
         "AGPL-3.0",
@@ -61116,7 +61116,7 @@
       "archived": false,
       "category": "Task Management & To-do Lists",
       "description": "Advanced todo list app with integrated timeboxing and time tracking capabilities. Integrates with Jira, GitHub, GitLab, Redmine and OpenProject.",
-      "icon": null,
+      "icon": "assets/catalog/super-productivity.png",
       "id": "super-productivity",
       "licenses": [
         "MIT"
@@ -61200,7 +61200,7 @@
       "archived": false,
       "category": "Analytics",
       "description": "Modern data exploration and visualization platform.",
-      "icon": null,
+      "icon": "assets/catalog/superset.svg",
       "id": "superset",
       "licenses": [
         "Apache-2.0"
@@ -61241,7 +61241,7 @@
       "archived": false,
       "category": "Analytics",
       "description": "Modern data exploration and visualization platform (unofficial community docker image)",
-      "icon": null,
+      "icon": "assets/catalog/superset-with-postgresql.svg",
       "id": "superset-with-postgresql",
       "licenses": [],
       "maintenance": "tracked",
@@ -61278,7 +61278,7 @@
       "archived": false,
       "category": "Identity and Access Management",
       "description": "An open-source authentication solution that simplifies the implementation of secure user authentication and session management for web and mobile applications.",
-      "icon": null,
+      "icon": "assets/catalog/supertokens-with-mysql.svg",
       "id": "supertokens-with-mysql",
       "licenses": [],
       "maintenance": "tracked",
@@ -61853,7 +61853,7 @@
       "archived": false,
       "category": "Communication - Email - Mailing Lists and Newsletters",
       "description": "Mailing list manager.",
-      "icon": null,
+      "icon": "assets/catalog/sympa.png",
       "id": "sympa",
       "licenses": [
         "GPL-2.0"
@@ -62233,7 +62233,7 @@
       "archived": false,
       "category": "Network Utilities",
       "description": "Tailscale securely connects your devices over the internet using WireGuard.",
-      "icon": null,
+      "icon": "assets/catalog/tailscale-client.svg",
       "id": "tailscale-client",
       "licenses": [],
       "maintenance": "tracked",
@@ -62654,7 +62654,7 @@
       "archived": false,
       "category": "Productivity",
       "description": "Teable adopts a concise spreadsheet interface, yet creates powerful database applications",
-      "icon": null,
+      "icon": "assets/catalog/teable.png",
       "id": "teable",
       "licenses": [],
       "maintenance": "tracked",
@@ -63279,7 +63279,7 @@
       "archived": false,
       "category": "Wikis",
       "description": "A collection of themes/skins for 50 selfhosted apps! ([Source Code](https://github.com/GilbN/theme.park/))",
-      "icon": null,
+      "icon": "assets/catalog/theme-park.png",
       "id": "theme-park",
       "licenses": [
         "MIT"
@@ -63886,7 +63886,7 @@
       "archived": false,
       "category": "Feed Readers",
       "description": "Web-based news feed (RSS/Atom) reader and aggregator.",
-      "icon": null,
+      "icon": "assets/catalog/tiny-tiny-rss.png",
       "id": "tiny-tiny-rss",
       "licenses": [
         "GPL-3.0"
@@ -64046,7 +64046,7 @@
       "archived": false,
       "category": "Self-hosting Solutions",
       "description": "Homeserver manager. One command setup, one click installs for your favorites self-hosted apps.",
-      "icon": null,
+      "icon": "assets/catalog/tipi.png",
       "id": "tipi",
       "licenses": [
         "GPL-3.0"
@@ -64702,7 +64702,7 @@
       "archived": false,
       "category": "Software Development - Low Code",
       "description": "Open, sub-millisecond, single-executable FireBase alternative with type-safe REST & realtime APIs, built-in JS/TS runtime, auth & admin UI.",
-      "icon": null,
+      "icon": "assets/catalog/trailbase.svg",
       "id": "trailbase",
       "licenses": [
         "OSL-3.0"
@@ -64983,7 +64983,7 @@
       "archived": false,
       "category": "Automation",
       "description": "The open source background jobs platform for developers",
-      "icon": null,
+      "icon": "assets/catalog/trigger.png",
       "id": "trigger",
       "licenses": [],
       "maintenance": "tracked",
@@ -65028,7 +65028,7 @@
       "archived": false,
       "category": "Note-taking & Editors",
       "description": "Cross-platform hierarchical note taking application with focus on building large personal knowledge bases (fork of Trilium Notes).",
-      "icon": null,
+      "icon": "assets/catalog/triliumnext-notes.svg",
       "id": "triliumnext-notes",
       "licenses": [
         "AGPL-3.0"
@@ -65262,7 +65262,7 @@
       "archived": false,
       "category": "Media Streaming - Video Streaming",
       "description": "Organize, search, and enjoy your YouTube collection. Subscribe, download, and track viewed content with metadata indexing and a user-friendly interface.",
-      "icon": null,
+      "icon": "assets/catalog/tube-archivist.png",
       "id": "tube-archivist",
       "licenses": [
         "GPL-3.0"
@@ -65353,7 +65353,7 @@
       "archived": false,
       "category": "Task Management & To-do Lists",
       "description": "Task management tool with hierarchical structure, smart recurring tasks, and seamless Telegram integration.",
-      "icon": null,
+      "icon": "assets/catalog/tududi.png",
       "id": "tududi",
       "licenses": [
         "MIT"
@@ -65553,7 +65553,7 @@
       "archived": false,
       "category": "Customer Relationship Management (CRM)",
       "description": "A modern CRM offering the flexibility of open source, advanced features, and a sleek design.",
-      "icon": null,
+      "icon": "assets/catalog/twenty.svg",
       "id": "twenty",
       "licenses": [
         "AGPL-3.0"
@@ -65859,7 +65859,7 @@
       "archived": false,
       "category": "Document Management - E-books",
       "description": "Free to use, versatile, lightweight, multi-platform, and secure home server for your comic and e-book library.",
-      "icon": null,
+      "icon": "assets/catalog/ubooquity.png",
       "id": "ubooquity",
       "licenses": [
         "⊘ Proprietary"
@@ -66235,7 +66235,7 @@
       "archived": false,
       "category": "Software Development - IDE & Tools",
       "description": "Open source feature flag management for enterprises.",
-      "icon": null,
+      "icon": "assets/catalog/unleash-with-postgresql.svg",
       "id": "unleash-with-postgresql",
       "licenses": [],
       "maintenance": "tracked",
@@ -66280,7 +66280,7 @@
       "archived": false,
       "category": "Utilities",
       "description": "Unmanic - Library Optimiser.",
-      "icon": null,
+      "icon": "assets/catalog/unmanic.png",
       "id": "unmanic",
       "licenses": [],
       "maintenance": "tracked",
@@ -66389,7 +66389,7 @@
       "archived": false,
       "category": "Artificial Intelligence",
       "description": "Unstructured provides a platform and tools to ingest and process unstructured documents for Retrieval Augmented Generation (RAG) and model fine-tuning.",
-      "icon": null,
+      "icon": "assets/catalog/unstructured.png",
       "id": "unstructured",
       "licenses": [],
       "maintenance": "tracked",
@@ -66431,7 +66431,7 @@
       "archived": false,
       "category": "Network Utilities",
       "description": "A simple Wake on LAN (WOL) dashboard app. Wake up devices on your network and see current status.",
-      "icon": null,
+      "icon": "assets/catalog/upsnap.png",
       "id": "upsnap",
       "licenses": [
         "MIT"
@@ -66667,7 +66667,7 @@
       "archived": false,
       "category": "Communication - Email",
       "description": "Usesend is an open-source alternative to Resend, Sendgrid, Mailgun and Postmark etc.",
-      "icon": null,
+      "icon": "assets/catalog/usesend.svg",
       "id": "usesend",
       "licenses": [],
       "maintenance": "tracked",
@@ -67022,7 +67022,7 @@
       "archived": false,
       "category": "Software Development - IDE & Tools",
       "description": "The next-generation file converter. Open source, fully local and free forever.",
-      "icon": null,
+      "icon": "assets/catalog/vert.png",
       "id": "vert",
       "licenses": [],
       "maintenance": "tracked",
@@ -67583,7 +67583,7 @@
       "archived": false,
       "category": "Content Management Systems (CMS)",
       "description": "Powerful and easy to use cms to build websites, blogs or ecommerce stores.",
-      "icon": null,
+      "icon": "assets/catalog/vvveb-with-mariadb.svg",
       "id": "vvveb-with-mariadb",
       "licenses": [],
       "maintenance": "tracked",
@@ -67946,7 +67946,7 @@
       "archived": false,
       "category": "Money, Budgeting & Management",
       "description": "Lightweight personal subscription tracker with statistics and optional notifications.",
-      "icon": null,
+      "icon": "assets/catalog/wallos.png",
       "id": "wallos",
       "licenses": [
         "GPL-3.0"
@@ -68080,7 +68080,7 @@
       "archived": false,
       "category": "Miscellaneous",
       "description": "Warranty tracker that lets you monitor expiry dates, upload receipts/files, and get alerts before warranties expire.",
-      "icon": null,
+      "icon": "assets/catalog/warracker.png",
       "id": "warracker",
       "licenses": [
         "AGPL-3.0"
@@ -68163,7 +68163,7 @@
       "archived": false,
       "category": "Media Management",
       "description": "Add and track all the shows and movies you are watching. Comes with user authentication, modern and clean UI and a very simple setup.",
-      "icon": null,
+      "icon": "assets/catalog/watcharr.svg",
       "id": "watcharr",
       "licenses": [
         "MIT"
@@ -68207,7 +68207,7 @@
       "archived": false,
       "category": "Network Utilities",
       "description": "Lightweight network IP scanner with notifications, history, export to Grafana.",
-      "icon": null,
+      "icon": "assets/catalog/watchyourlan.png",
       "id": "watchyourlan",
       "licenses": [
         "MIT"
@@ -68258,7 +68258,7 @@
       "archived": false,
       "category": "Miscellaneous",
       "description": "Webbased Logging Software for Radio Amateurs. Enhanced QSO logging, statistics and maps for your browser.",
-      "icon": null,
+      "icon": "assets/catalog/wavelog.png",
       "id": "wavelog",
       "licenses": [
         "MIT"
@@ -68382,7 +68382,7 @@
       "archived": false,
       "category": "Communication - Custom Communication Systems",
       "description": "Web Whiteboard to collaborate in real-time on schemas, drawings, and notes.",
-      "icon": null,
+      "icon": "assets/catalog/wbo.png",
       "id": "wbo",
       "licenses": [
         "AGPL-3.0"
@@ -68424,7 +68424,7 @@
       "archived": false,
       "category": "Artificial Intelligence",
       "description": "Weaviate is an open-source vector database that stores both objects and vectors, allowing for combining vector search with structured filtering.",
-      "icon": null,
+      "icon": "assets/catalog/weaviate.png",
       "id": "weaviate",
       "licenses": [],
       "maintenance": "tracked",
@@ -68500,7 +68500,7 @@
       "archived": false,
       "category": "Productivity",
       "description": "A web-based file sharing and management protocol",
-      "icon": null,
+      "icon": "assets/catalog/webdav.png",
       "id": "webdav",
       "licenses": [],
       "maintenance": "tracked",
@@ -69008,7 +69008,7 @@
       "archived": false,
       "category": "Miscellaneous",
       "description": "Terminal in browser over http/https.",
-      "icon": null,
+      "icon": "assets/catalog/wetty.png",
       "id": "wetty",
       "licenses": [
         "MIT"
@@ -69248,7 +69248,7 @@
       "archived": false,
       "category": "Communication - Social Networks and Forums",
       "description": "A self-hosted, ad-free, privacy-respecting metasearch engine.",
-      "icon": null,
+      "icon": "assets/catalog/whoogle-search.png",
       "id": "whoogle-search",
       "licenses": [],
       "maintenance": "tracked",
@@ -69612,7 +69612,7 @@
       "archived": false,
       "category": "Automation",
       "description": "Windmill is a developer platform to build production-grade multi-steps automations and internal apps.",
-      "icon": null,
+      "icon": "assets/catalog/windmill.png",
       "id": "windmill",
       "licenses": [],
       "maintenance": "tracked",
@@ -69650,7 +69650,7 @@
       "archived": false,
       "category": "Utilities",
       "description": "Full windows vm in your browser",
-      "icon": null,
+      "icon": "assets/catalog/windows.svg",
       "id": "windows",
       "licenses": [],
       "maintenance": "tracked",
@@ -69787,7 +69787,7 @@
       "archived": false,
       "category": "Miscellaneous",
       "description": "Wishlist application that you can share with your friends and family.",
-      "icon": null,
+      "icon": "assets/catalog/wishlist.png",
       "id": "wishlist",
       "licenses": [
         "MIT"
@@ -70058,7 +70058,7 @@
       "archived": false,
       "category": "Communication - Custom Communication Systems",
       "description": "Virtual office / virtual conference application presented as a 16-bit RPG video game.",
-      "icon": null,
+      "icon": "assets/catalog/workadventure.png",
       "id": "workadventure",
       "licenses": [
         "AGPL-3.0",
@@ -70549,7 +70549,7 @@
       "archived": false,
       "category": "Communication - Social Networks and Forums",
       "description": "Self-Hosted, Twitter™-like Decentralised micro-logging platform. No ads, no tracking, your content, your data.",
-      "icon": null,
+      "icon": "assets/catalog/yarn-social.png",
       "id": "yarn-social",
       "licenses": [
         "MIT"
@@ -70886,7 +70886,7 @@
       "archived": false,
       "category": "Media Management",
       "description": "Download videos from YouTube channels on a schedule via yt-dlp, with a web UI to browse and selectively download videos. Integrates with Plex Media Server and generates NFO metadata for Jellyfin, Kodi, and Emby.",
-      "icon": null,
+      "icon": "assets/catalog/youtarr.png",
       "id": "youtarr",
       "licenses": [
         "ISC"
@@ -71262,7 +71262,7 @@
       "archived": false,
       "category": "Artificial Intelligence",
       "description": "Zep enhances your AI agent's knowledge through continuous learning from user interactions, enabling personalized experiences and improved accuracy.",
-      "icon": null,
+      "icon": "assets/catalog/zep.png",
       "id": "zep",
       "licenses": [],
       "maintenance": "tracked",
@@ -71648,7 +71648,7 @@
       "archived": false,
       "category": "Communication - IRC",
       "description": "Advanced IRC bouncer.",
-      "icon": null,
+      "icon": "assets/catalog/znc.png",
       "id": "znc",
       "licenses": [
         "Apache-2.0"
@@ -71690,7 +71690,7 @@
       "archived": false,
       "category": "Video Surveillance",
       "description": "Closed-circuit television (CCTV) software application which supports IP, USB and Analog cameras.",
-      "icon": null,
+      "icon": "assets/catalog/zoneminder.png",
       "id": "zoneminder",
       "licenses": [
         "GPL-2.0"

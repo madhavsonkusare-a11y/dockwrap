@@ -1,0 +1,338 @@
+//! What an interrupted install leaves behind, and how to clear it.
+//!
+//! The inventory is read-only: retained files are candidates, never proof of a
+//! crash or permission to stop a container. Optional Docker label verification
+//! is a snapshot, so `discard` — the one mutation here — rechecks all of it
+//! under the app's operation lock rather than trusting what a person was
+//! shown.
+use crate::{
+    error::{AppError, AppResult, ErrorCode},
+    recipes,
+    runtime::{CommandSpec, ProcessRunner, DIAGNOSTIC_TIMEOUT},
+    storage,
+};
+use serde::Serialize;
+use std::path::{Path, PathBuf};
+
+#[derive(Debug, Serialize)]
+pub struct RecoveryCandidate {
+    pub recipe_id: String,
+    pub display_name: String,
+    pub compose_file: PathBuf,
+    pub project_name: String,
+    pub docker_ownership_verified: bool,
+    pub ownership_status: OwnershipStatus,
+}
+
+#[derive(Debug, Serialize, PartialEq, Eq)]
+#[serde(rename_all = "snake_case")]
+pub enum OwnershipStatus {
+    NotChecked,
+    NoContainers,
+    Verified,
+    Mismatch,
+}
+
+/// Inspect only IDs and Compose labels; never read container environment or run
+/// a retained Compose file. This snapshot must be rechecked under lock before
+/// any future recovery action, since Docker can change immediately afterward.
+pub fn verify_with(candidate: &mut RecoveryCandidate, runner: &dyn ProcessRunner) -> AppResult<()> {
+    candidate.docker_ownership_verified = false;
+    candidate.ownership_status = OwnershipStatus::NotChecked;
+    let query = |args: Vec<String>| -> AppResult<String> {
+        let output = runner
+            .run(&CommandSpec::new("docker", args, None, DIAGNOSTIC_TIMEOUT))
+            .map_err(AppError::from)?;
+        if !output.success || output.truncated {
+            return Err(AppError::invalid(
+                "Docker ownership inspection failed or returned incomplete output.",
+            ));
+        }
+        Ok(output.stdout)
+    };
+    let output = query(vec![
+        "container".into(),
+        "ls".into(),
+        "--all".into(),
+        "--quiet".into(),
+        "--no-trunc".into(),
+        "--filter".into(),
+        format!(
+            "label=com.docker.compose.project={}",
+            candidate.project_name
+        ),
+    ])?;
+    let ids: Vec<&str> = output.split_whitespace().collect();
+    if ids.is_empty() {
+        candidate.ownership_status = OwnershipStatus::NoContainers;
+        return Ok(());
+    }
+    if ids.len() > 32
+        || ids
+            .iter()
+            .any(|id| id.len() != 64 || !id.bytes().all(|byte| byte.is_ascii_hexdigit()))
+    {
+        return Err(AppError::invalid(
+            "Docker returned an invalid ownership inventory.",
+        ));
+    }
+    let mut args = vec![
+        "container".into(),
+        "inspect".into(),
+        "--format".into(),
+        "{{json .Config.Labels}}".into(),
+    ];
+    args.extend(ids.iter().map(|id| (*id).to_owned()));
+    let labels = query(args)?;
+    let lines: Vec<&str> = labels
+        .lines()
+        .filter(|line| !line.trim().is_empty())
+        .collect();
+    let expected = candidate.compose_file.canonicalize()?;
+    let matches = lines.len() == ids.len()
+        && lines.iter().all(|line| {
+            let Ok(labels) =
+                serde_json::from_str::<std::collections::BTreeMap<String, String>>(line)
+            else {
+                return false;
+            };
+            let get = |key: &str| labels.get(key).map(String::as_str).unwrap_or_default();
+            let config = get("com.docker.compose.project.config_files");
+            let working = get("com.docker.compose.project.working_dir");
+            get("com.docker.compose.project") == candidate.project_name
+                && get("com.docker.compose.service") == candidate.recipe_id
+                && get("com.docker.compose.oneoff").eq_ignore_ascii_case("false")
+                && Path::new(config).is_absolute()
+                && Path::new(working).is_absolute()
+                && Path::new(config).canonicalize().ok().as_ref() == Some(&expected)
+                && Path::new(working).canonicalize().ok().as_deref() == expected.parent()
+        });
+    candidate.docker_ownership_verified = matches;
+    candidate.ownership_status = if matches {
+        OwnershipStatus::Verified
+    } else {
+        OwnershipStatus::Mismatch
+    };
+    Ok(())
+}
+
+pub fn inspect_at(config: &Path) -> AppResult<Vec<RecoveryCandidate>> {
+    let live = storage::registry_v2_path_for_root(config);
+    let previous = storage::registry_v2_previous_path_for_root(config);
+    let installed = if live.exists() || previous.exists() {
+        storage::load_registry_v2_at(config)?.apps
+    } else {
+        if storage::primary_v1_path_for_root(config).exists()
+            || storage::legacy_v1_path_for_root(config).exists()
+        {
+            return Err(AppError::invalid("A legacy registry needs migration before recovery inspection. Open Local Store first."));
+        }
+        Vec::new()
+    };
+    let root = config.join(crate::brand::CONFIG_SLUG).join("apps");
+    if !root.exists() {
+        return Ok(Vec::new());
+    }
+    let resolved_root = root.canonicalize()?;
+    let mut candidates = Vec::new();
+    for recipe in recipes::reviewed_recipes() {
+        if installed.iter().any(|app| app.id == recipe.id) {
+            continue;
+        }
+        let project = root.join(&recipe.id);
+        let compose = project.join("compose.yaml");
+        if !compose.exists() {
+            continue;
+        }
+        let resolved_project = project.canonicalize()?;
+        let resolved_compose = compose.canonicalize()?;
+        if resolved_project.parent() != Some(resolved_root.as_path())
+            || resolved_project.file_name() != Some(std::ffi::OsStr::new(&recipe.id))
+            || resolved_compose.parent() != Some(resolved_project.as_path())
+            || !resolved_compose.is_file()
+        {
+            return Err(AppError::invalid(
+                "Retained setup files resolve outside their managed app directory.",
+            ));
+        }
+        candidates.push(RecoveryCandidate {
+            project_name: format!("local-store-{}", recipe.id),
+            recipe_id: recipe.id,
+            display_name: recipe.display_name,
+            compose_file: resolved_compose,
+            docker_ownership_verified: false,
+            ownership_status: OwnershipStatus::NotChecked,
+        });
+    }
+    Ok(candidates)
+}
+
+pub fn inspect() -> AppResult<Vec<RecoveryCandidate>> {
+    let apps = storage::managed_apps_root();
+    let config = apps
+        .parent()
+        .and_then(Path::parent)
+        .ok_or_else(|| AppError::invalid("Invalid managed configuration root."))?;
+    inspect_at(config)
+}
+
+/// What a discard actually did, so a caller can say so rather than guess.
+#[derive(Debug, Serialize, PartialEq, Eq)]
+pub struct Discarded {
+    pub recipe_id: String,
+    /// Containers the retained project owned when the lock was taken.
+    pub containers_removed: usize,
+    /// Whether the retained directory was deleted. False means the setup files
+    /// and any data are still there.
+    pub data_deleted: bool,
+}
+
+/// Clear the leftovers of an install that never finished.
+///
+/// This is the only mutation in this module, and everything the inspection
+/// side is careful about applies here twice over. The candidate list a person
+/// was shown is a snapshot: by the time they click, the app may have been
+/// installed by another window, the containers may have gone, or something
+/// else may have taken the project name. So none of that snapshot is trusted —
+/// the whole check runs again under the app's operation lock, and the lock is
+/// held until the removal is done.
+///
+/// Discard, not adopt. These files are from a transaction that never
+/// committed: no health was confirmed and no registry entry was written. The
+/// honest exit is to clear them so an ordinary install can proceed, rather than
+/// to register an app whose install nobody finished.
+pub fn discard(recipe_id: &str, delete_data: bool) -> AppResult<Discarded> {
+    discard_with(&crate::runtime::SystemProcessRunner, recipe_id, delete_data)
+}
+
+pub fn discard_with(
+    runner: &dyn ProcessRunner,
+    recipe_id: &str,
+    delete_data: bool,
+) -> AppResult<Discarded> {
+    // Taken before anything is read, and held until everything is done. An
+    // install of this app running right now would otherwise have its files
+    // removed from under it.
+    let _lock = crate::runtime::lock_operation(recipe_id)?;
+
+    let apps = storage::managed_apps_root();
+    let config = apps
+        .parent()
+        .and_then(Path::parent)
+        .ok_or_else(|| AppError::invalid("Invalid managed configuration root."))?
+        .to_path_buf();
+
+    // Re-derived under the lock rather than taken from the caller. This is
+    // also what refuses an app that has since been installed: `inspect_at`
+    // skips anything the registry lists, so a real app is simply not a
+    // candidate and cannot be discarded by this path.
+    let mut candidate = inspect_at(&config)?
+        .into_iter()
+        .find(|candidate| candidate.recipe_id == recipe_id)
+        .ok_or_else(|| {
+            AppError::new(
+                ErrorCode::NotFound,
+                "There are no retained setup files for this app. If it is installed, uninstall it instead.",
+            )
+        })?;
+
+    // A snapshot taken before the lock proves nothing about now.
+    verify_with(&mut candidate, runner)?;
+    let containers = match candidate.ownership_status {
+        OwnershipStatus::Verified => count_owned(runner, &candidate.project_name)?,
+        OwnershipStatus::NoContainers => 0,
+        // Something is running under this project name that this Compose file
+        // does not account for. Stopping it would be acting on somebody else's
+        // container.
+        OwnershipStatus::Mismatch => {
+            return Err(AppError::new(
+                ErrorCode::UnsafePath,
+                "Containers using this project name do not match the retained setup files. Review them in Docker before recovering.",
+            ))
+        }
+        OwnershipStatus::NotChecked => {
+            return Err(AppError::invalid(
+                "Docker ownership could not be checked, so nothing was removed.",
+            ))
+        }
+    };
+
+    // Built from the managed root rather than from the canonicalized Compose
+    // path: `confined_to_managed_root` compares against exactly this shape,
+    // and on Windows a canonical path carries a `\?\` prefix that would
+    // never match it. `inspect_at` has already proven the two resolve to the
+    // same directory.
+    let project_dir = apps.join(recipe_id);
+
+    // Only the retained Compose file, only this project name, and only from
+    // inside its own directory.
+    let mut args = vec![
+        "compose".to_owned(),
+        "-f".to_owned(),
+        candidate.compose_file.to_string_lossy().into_owned(),
+        "-p".to_owned(),
+        candidate.project_name.clone(),
+        "down".to_owned(),
+    ];
+    if delete_data {
+        args.push("--volumes".to_owned());
+    }
+    let output = runner
+        .run(&CommandSpec::docker(
+            args,
+            Some(project_dir.clone()),
+            crate::runtime::LIFECYCLE_TIMEOUT,
+        ))
+        .map_err(AppError::from)?;
+    if !output.success {
+        return Err(AppError::new(
+            ErrorCode::ProcessFailed,
+            "Docker could not remove the retained containers. Nothing was deleted.",
+        ));
+    }
+
+    // Containers first, files second: a failure above leaves the files, which
+    // is the recoverable order.
+    if delete_data {
+        crate::runtime::confined_to_managed_root(&project_dir, recipe_id, &apps)?;
+        std::fs::remove_dir_all(&project_dir).map_err(AppError::from)?;
+    }
+
+    // The removal is only done when Docker agrees it is.
+    if count_owned(runner, &candidate.project_name)? != 0 {
+        return Err(AppError::new(
+            ErrorCode::ProcessFailed,
+            "Containers for this app are still present after recovery. Review them in Docker.",
+        ));
+    }
+    Ok(Discarded {
+        recipe_id: recipe_id.to_owned(),
+        containers_removed: containers,
+        data_deleted: delete_data,
+    })
+}
+
+/// How many containers carry this Compose project label right now.
+fn count_owned(runner: &dyn ProcessRunner, project_name: &str) -> AppResult<usize> {
+    let output = runner
+        .run(&CommandSpec::new(
+            "docker",
+            vec![
+                "container".into(),
+                "ls".into(),
+                "--all".into(),
+                "--quiet".into(),
+                "--filter".into(),
+                format!("label=com.docker.compose.project={project_name}"),
+            ],
+            None,
+            DIAGNOSTIC_TIMEOUT,
+        ))
+        .map_err(AppError::from)?;
+    if !output.success || output.truncated {
+        return Err(AppError::invalid(
+            "Docker ownership inspection failed or returned incomplete output.",
+        ));
+    }
+    Ok(output.stdout.split_whitespace().count())
+}

@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "id": "codimd",
+  "display_name": "CodiMD",
+  "catalog_name": "CodiMD",
+  "description": "Realtime collaborative Markdown notes.",
+  "category": "Note-taking & Editors",
+  "license": "AGPL-3.0-only",
+  "source_url": "https://github.com/hackmdio/codimd",
+  "documentation_url": "https://github.com/hackmdio/codimd/blob/master/docs/setup/docker.md",
+  "verified_at": "2026-09-08",
+  "lifecycle_proof": "docs/evidence/caprover-codimd-windows-2026-09-08.json",
+  "origin": {
+    "importer": "caprover",
+    "repository": "caprover/one-click-apps",
+    "revision": "7f1f329125dde0cb915f47c8b33293eca45f7d0e",
+    "path": "public/v4/apps/codimd.yml",
+    "license": "Apache-2.0"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "linuxserver/codimd:1.6.0-ls44",
+        "source_url": "https://hub.docker.com/v2/repositories/linuxserver/codimd/tags/1.6.0-ls44",
+        "checked_at": "2026-09-08",
+        "last_updated": "2020-08-19",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm",
+          "linux/arm64/v8"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:5d209f8ac2b5c72f86b85777ca63b752756372c3648058269f71134c4a5e150f",
+          "linux/arm": "sha256:ec8c8435ad977eebc0d470ccf828436ba8310d432461edbb758c47a6204873ae",
+          "linux/arm64/v8": "sha256:4f983b197c5f3ad2051e6446bc843b68bde1132c3a0281976d8d5d2dc4616609"
+        }
+      },
+      {
+        "image": "linuxserver/mariadb:110.4.14mariabionic-ls77",
+        "source_url": "https://hub.docker.com/v2/repositories/linuxserver/mariadb/tags/110.4.14mariabionic-ls77",
+        "checked_at": "2026-09-08",
+        "last_updated": "2020-08-15",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm",
+          "linux/arm64/v8"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:5137b266a0d9adcdbeaa76b8f8c8713542139739ab71a303a98f3f0adec3d6aa",
+          "linux/arm": "sha256:5c182ca8c61b1251ad09658a3e379f97abfb59fb4384eb16ccfe0b82c3eff821",
+          "linux/arm64/v8": "sha256:c316e47688b1d54f4a709ccbd6587da168cfe15c17e1c93a1630914c1270be0d"
+        }
+      }
+    ]
+  },
+  "promotion": {
+    "state": "withheld",
+    "reason": "Both images were last rebuilt in August 2020 and carry five years of unpatched base-image changes. CodiMD's own development moved to HedgeDoc, so no fix is coming from upstream either. The template is correct and its lifecycle is proven; the app is not one to hand somebody."
+  },
+  "data_storage": "Local Store managed folder / codimd, plus a Docker volume for the database",
+  "risk_notes": [
+    "Creates two Docker containers, one for CodiMD and one for its MariaDB database.",
+    "Publishes one port on this computer's loopback interface only; the database is not reachable from outside the app.",
+    "Generates a database password, stores it beside the app's data, and reuses it if the app is reinstalled.",
+    "Stores notes in a Docker volume that survives an uninstall unless data deletion is chosen.",
+    "CodiMD 1.6.0 is the most recent image linuxserver publishes; upstream development moved to HedgeDoc, so security fixes should not be assumed."
+  ],
+  "fields": {
+    "CAP_TIMEZONE": {
+      "label": "Time zone",
+      "sensitive": false
+    }
+  },
+  "definition": "{\n  \"caproverOneClickApp\": {\n    \"description\": \"Realtime collaborative Markdown notes on all platforms\",\n    \"displayName\": \"CodiMD\",\n    \"documentation\": \"https://hackmd.io/c/codimd-documentation\",\n    \"instructions\": {\n      \"end\": \"Aaaand you're done! \\ud83d\\ude04\\n\\nYour service is available as $$cap_appname\",\n      \"start\": \"Realtime collaborative Markdown notes on all platforms.\\n\\nGitHub: https://github.com/hackmdio/codimd\"\n    },\n    \"isOfficial\": true,\n    \"variables\": [\n      {\n        \"defaultValue\": \"$$cap_gen_random_hex(16)\",\n        \"description\": \"Password to connect to the database\",\n        \"id\": \"$$cap_DB_PASS\",\n        \"label\": \"Database Password\"\n      },\n      {\n        \"defaultValue\": \"Europe/London\",\n        \"description\": \"This is the timezone for the application, find yours at https://en.wikipedia.org/wiki/List_of_tz_database_time_zones\",\n        \"id\": \"$$cap_timezone\",\n        \"label\": \"Timezone\"\n      }\n    ]\n  },\n  \"captainVersion\": 4,\n  \"services\": {\n    \"$$cap_appname\": {\n      \"caproverExtra\": {\n        \"containerHttpPort\": \"3000\"\n      },\n      \"environment\": {\n        \"DB_HOST\": \"srv-captain--$$cap_appname-mariadb\",\n        \"DB_NAME\": \"codimd\",\n        \"DB_PASS\": \"$$cap_DB_PASS\",\n        \"DB_PORT\": 3306,\n        \"DB_USER\": \"codimd\",\n        \"PGID\": 1000,\n        \"PUID\": 1000,\n        \"TZ\": \"$$cap_timezone\"\n      },\n      \"image\": \"linuxserver/codimd:1.6.0-ls44\",\n      \"restart\": \"always\",\n      \"volumes\": [\n        \"$$cap_appname-config:/config\"\n      ]\n    },\n    \"$$cap_appname-mariadb\": {\n      \"caproverExtra\": {\n        \"notExposeAsWebApp\": \"true\"\n      },\n      \"environment\": {\n        \"MYSQL_DATABASE\": \"codimd\",\n        \"MYSQL_PASSWORD\": \"$$cap_DB_PASS\",\n        \"MYSQL_ROOT_PASSWORD\": \"$$cap_DB_PASS\",\n        \"MYSQL_USER\": \"codimd\",\n        \"PGID\": 1000,\n        \"PUID\": 1000,\n        \"TZ\": \"$$cap_timezone\"\n      },\n      \"image\": \"linuxserver/mariadb:110.4.14mariabionic-ls77\",\n      \"volumes\": [\n        \"$$cap_appname-mariadb-config:/config\"\n      ]\n    }\n  }\n}"
+}

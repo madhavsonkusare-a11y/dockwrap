@@ -203,7 +203,7 @@ h1 { font-size: 33px; line-height: 1.2; font-weight: 560; letter-spacing: -1.2px
 .status { display: inline-flex; align-items: center; gap: 5px; color: #bbbcc3; font-size: 9px; text-transform: capitalize; }
 .status::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
 .status-running, .status-connected { color: var(--success); }
-.status-error, .installed-info .inline-error { color: #ffb0a3; }
+.status-error, .status-unreachable, .installed-info .inline-error { color: #ffb0a3; }
 .inline-error:empty { display: none; }
 
 dialog { padding: 30px; width: min(520px, calc(100vw - 32px)); max-height: calc(100dvh - 40px); overflow: auto; border: 1px solid #ffffff26; border-radius: 20px; color: var(--ink); background: linear-gradient(150deg, #27282c, #1e2023 60%); box-shadow: 0 32px 110px #0009, inset 0 1px 0 #ffffff08; transform-origin: center; }
@@ -346,3 +346,30 @@ dialog h2 { font-size: 26px; font-weight: 550; line-height: 1.25; letter-spacing
   .app-card, .installed-app, .search-box, .category-label select, dialog, button.secondary { border-color: #8c9097; }
   .card-description, .card-category, .feature-copy > p:not(.eyebrow), .intro, .field-hint { color: #d2d3d8; }
 }
+
+/* Operation feedback is immediate and still: no false percentage or motion
+   that competes with reading diagnostics. Focus remains on the active control. */
+.installed-app.operation-pending { border-color: #ffac9252; background: linear-gradient(120deg, #302824, #1b1d20 72%); }
+.status.status-busy { color: var(--accent); }
+.installed-actions button[aria-disabled="true"] { opacity: .48; cursor: default; transform: none; }
+.operation-notice { padding: 16px 18px; margin-top: 20px; border: 1px solid #ffac9240; border-radius: 12px; background: linear-gradient(120deg, #ffac9210, #ffac9203); }
+.operation-notice strong { display: block; font-size: 13px; font-weight: 550; color: var(--accent); }
+.operation-notice p { color: var(--muted); font-size: 12px; line-height: 1.65; margin: 6px 0 0; }
+.operation-notice button { margin-top: 12px; padding: 7px 14px; font-size: 12px; }
+
+/* Setup answers a person types before an install. Laid out like the rest of
+   the review so the form reads as part of it rather than a separate step. */
+#setup-fields .setup-row { margin-top: 14px; }
+#setup-fields .setup-row:first-of-type { margin-top: 0; }
+.setup-field { display: block; }
+.setup-label { display: block; font-size: 11px; color: #d2d3d8; margin-bottom: 6px; }
+.setup-required { color: var(--muted); font-weight: 400; }
+.setup-field input[type="text"], .setup-field input[type="password"],
+.setup-field input[type="number"], .setup-field select { width: 100%; padding: 8px 10px; }
+.setup-field input[type="checkbox"] { width: auto; }
+#setup-fields .field-hint { margin-top: 6px; display: block; }
+#setup-fields [aria-invalid="true"] { border-color: #ffb0a3; }
+
+.inline-field { display: inline-flex; align-items: center; gap: 8px; }
+.inline-field input { width: 96px; padding: 6px 8px; }
+#port-help { display: block; margin-top: 6px; }

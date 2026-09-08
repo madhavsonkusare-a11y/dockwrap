@@ -1,0 +1,17 @@
+{
+  "checks": [
+    "install and health",
+    "encryption key reaches container",
+    "stop/status/start/health",
+    "keep-data uninstall",
+    "pending lock held through commit",
+    "failed registry commit rolls back and preserves credentials",
+    "reinstall reuses encryption key",
+    "volume marker survives",
+    "explicit deletion removes owned resources and registry entry"
+  ],
+  "image": "docker.n8n.io/n8nio/n8n:2.37.10",
+  "image_id": "sha256:307d6065be25619aa24cfc63a7c2f04ca56d084a08c05c8e9f189a89f353b1ec",
+  "passed": true,
+  "scope": "plan transaction and registry; no GUI or encrypted workflow migration"
+}

@@ -1,7 +1,7 @@
 # Catalog contribution and refresh guide
 
 Local Store ships 1,672 discovery projects from a September 5, 2026 snapshot.
-There are 508 cached SVG identities; other entries retain a stable monogram.
+There are 752 cached SVG/PNG identities; other entries retain a stable monogram.
 The three install previews remain Memos, n8n and Uptime Kuma. Catalog inclusion
 does not establish desktop compatibility or verified automatic installation.
 
@@ -47,9 +47,14 @@ python scripts/catalog_pipeline.py --check
 python scripts/cache-catalog-icons.py --check
 ```
 
-The icon refresh reuses the revision in `catalog/icons.json`; change that pin
-explicitly to update the artwork inventory. Initial discovery of the icon pin
-is used only when creating a new manifest. Review generated diffs before merging.
+The icon refresh reuses the Homarr revision in `catalog/icons.json`; change that
+pin explicitly to update its artwork inventory. Coolify artwork follows its
+existing pin in `catalog/sources.lock.json`, matched through each project's
+listing provenance. Reviewed Homarr name differences belong in
+`catalog/icon-aliases.json`; a full asset path can select a visually reviewed
+theme variant when upstream suffixes are inconsistent. Fuzzy matching is avoided.
+Existing valid artwork at the same pin is preserved. Initial discovery of the
+Homarr pin is used only when creating a new manifest. Review diffs before merging.
 An interrupted source refresh leaves the embedded last-good catalog untouched;
 finish the refresh or restore the source-input changes before committing.
 
@@ -83,6 +88,10 @@ actively maintained or tested by Local Store. `snapshot_only` means retained onl
 from the old catalog. An upstream update date is metadata, not a local test date.
 Architecture filters describe deployment metadata, not desktop installers.
 
+The three install previews have separate [schema-3 recipe requirements](recipe-requirements.md)
+with cached upstream image-platform evidence. Discovery architecture labels do
+not automatically become install requirements or graduate a catalog entry.
+
 ## Browsing and artwork
 
 `browse_first` in the overrides is an editorial introduction spanning finance,
@@ -92,11 +101,16 @@ Interest collections match category/tag terms in `src/catalog_index.rs`; they
 can be combined with search, category, license, architecture and capability.
 The Web apps filter includes install previews with a known web interface.
 
-The icon importer reuses [Homarr dashboard icons](https://github.com/homarr-labs/dashboard-icons).
+The icon importer reuses [Homarr dashboard icons](https://github.com/homarr-labs/dashboard-icons)
+and artwork referenced by [Coolify templates](https://github.com/coollabsio/coolify).
 Requests require HTTPS on two explicit GitHub hosts, reject redirects, time out
-after 20 seconds and cap SVGs at 512 KiB. XML validation rejects declarations,
-active elements, event handlers and external references; SHA-256 binds each
-committed file to the manifest. Missing/rejected artwork uses a monogram.
+after 20 seconds and cap files at 512 KiB. XML validation rejects declarations,
+active elements, event handlers and external references. SVGs that fail validation
+can use the same upstream identity's PNG instead. Pillow verifies and decodes
+PNG files, rejects animation, and bounds dimensions to 2,048 pixels per side.
+SHA-256 binds each committed file to the manifest. Missing/rejected artwork uses
+a monogram; the manifest records the reason. New Homarr matches prefer light
+variants for the dark interface where available.
 Rendering accepts local paths only, and the launcher CSP blocks remote images.
 
 This build-time cache replaces the originally planned runtime Rust downloader:

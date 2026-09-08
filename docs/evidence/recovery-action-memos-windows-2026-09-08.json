@@ -1,0 +1,25 @@
+{
+  "checks": [
+    "a healthy pre-commit install is killed, leaving a daemon-owned container and retained setup files",
+    "the orphan is detected by the read-only inventory with Docker ownership verified",
+    "a retry install refuses on the busy port and names the retained files",
+    "`local-store recover memos` removes exactly one container and reports it",
+    "recovery keeps setup files and data by default; the marker file is unchanged",
+    "no container carrying the project label remains after recovery",
+    "once the app is installed properly, `recover` refuses it as not a candidate",
+    "reinstall over the preserved data succeeds and the marker survives",
+    "uninstall --delete-data removes the directory, registry entry and all Docker resources",
+    "containers belonging to unrelated projects were untouched"
+  ],
+  "duration_seconds": 22.69,
+  "host": "Windows 11, Docker Desktop 4.68.0, engine 29.3.1",
+  "not_covered": [
+    "interruption during image pull or Compose startup",
+    "adopting an interrupted install rather than clearing it",
+    "recovery of apps other than memos"
+  ],
+  "passed": true,
+  "ran_at": "2026-09-08",
+  "recipe": "memos",
+  "scope": "one interruption stage (killed healthy pre-commit CLI) recovered by the product's own action"
+}

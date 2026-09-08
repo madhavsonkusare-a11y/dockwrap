@@ -7,7 +7,7 @@ export function avatar(name, url) {
   const initials = name.trim().split(/\s+/).slice(0, 2).map(word => [...word][0] || '').join('').toUpperCase();
   const localIcons = { actual: 'actual-budget', memos: 'memos', n8n: 'n8n', 'uptime kuma': 'uptime-kuma', immich: 'immich', 'actual budget': 'actual-budget' };
   const localIcon = Object.hasOwn(localIcons, name.toLowerCase()) && localIcons[name.toLowerCase()];
-  const source = localIcon ? `assets/apps/${localIcon}.svg` : url && /^assets\/catalog\/[a-z0-9-]+\.svg$/.test(url) ? url : null;
+  const source = localIcon ? `assets/apps/${localIcon}.svg` : url && /^assets\/catalog\/[a-z0-9-]+\.(svg|png)$/.test(url) ? url : null;
   return `<span class="app-avatar" aria-hidden="true">${escapeHtml(initials)}${source ? `<img src="${escapeHtml(source)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : ''}</span>`;
 }
 export function discoveryCard(app, index) {
@@ -21,7 +21,7 @@ export function installedRow(app, index) {
   const controls = managed
     ? `${running ? `<button class="primary" data-open="${index}">Open ${icon('arrow-up-right')}</button><button class="secondary" data-stop="${index}">Stop</button>` : `<button class="primary" data-start="${index}">Start</button>`}<button class="secondary" data-logs="${index}">Logs</button><button class="icon-button" data-uninstall="${index}" aria-label="Uninstall ${escapeHtml(app.display_name)}">${icon('ellipsis')}</button>`
     : `<button class="secondary" data-shortcut="${index}">Shortcut</button><button class="primary" data-open="${index}">Open ${icon('arrow-up-right')}</button><button class="icon-button" data-remove="${index}" aria-label="Remove ${escapeHtml(app.display_name)}">${icon('ellipsis')}</button>`;
-  return `<article class="installed-app">${avatar(app.display_name, app.icon_path)}<div class="installed-info"><div class="installed-title"><h3>${escapeHtml(app.display_name)}</h3><span class="status status-${escapeHtml(status)}">${escapeHtml(status)}</span></div><p>${escapeHtml(app.launch_url)}</p><div class="installed-type">${managed ? 'Managed by Local Store' : 'Connected instance'}</div><p class="inline-error" id="app-error-${index}" role="alert"></p></div><div class="installed-actions">${controls}</div></article>`;
+  return `<article class="installed-app" data-app-id="${escapeHtml(app.id)}" data-status="${escapeHtml(status)}">${avatar(app.display_name, app.icon_path)}<div class="installed-info"><div class="installed-title"><h3>${escapeHtml(app.display_name)}</h3><span role="status" class="status status-${escapeHtml(status)}">${escapeHtml(status)}</span></div><p>${escapeHtml(app.launch_url)}</p><div class="installed-type">${managed ? 'Managed by Local Store' : 'Connected instance'}</div><p class="inline-error" id="app-error-${index}" role="alert"></p></div><div class="installed-actions">${controls}</div></article>`;
 }
 export function emptyState(title, text, action, label, glyph = 'layout-grid') {
   return `<div class="empty-state">${icon(glyph)}<h3>${escapeHtml(title)}</h3><p>${escapeHtml(text)}</p><button class="primary" data-action="${action}">${escapeHtml(label)}</button></div>`;
@@ -35,7 +35,7 @@ export function doctorView(report) {
   return `<ul class="doctor-list">${checks}</ul>`;
 }
 export function recipeView(recipe, report) {
-  return `<p class="preview-note">Install preview · This recipe has passed configuration checks. Full real-container lifecycle verification is pending.</p><div class="recipe-summary"><div><span>Version</span><strong>${escapeHtml(recipe.version)}</strong></div><div><span>Container</span><strong>${escapeHtml(recipe.image)}</strong></div><div><span>Address</span><strong>${escapeHtml(recipe.launch_url)}</strong></div><div><span>Data storage</span><strong>${escapeHtml(recipe.data_storage)}</strong></div></div><h3 class="section-label">System check</h3>${doctorView(report)}<h3 class="section-label">What this changes</h3><ul class="risk-list">${recipe.risk_notes.map(note => `<li>${escapeHtml(note)}</li>`).join('')}</ul>`;
+  return `<p class="preview-note">Install preview · This recipe has passed configuration checks. Full real-container lifecycle verification is pending.</p><div class="recipe-summary"><div><span>Version</span><strong>${escapeHtml(recipe.version)}</strong></div><div><span>Container</span><strong>${escapeHtml(recipe.image)}</strong></div><div><span>Address</span><strong id="recipe-address">${escapeHtml(recipe.launch_url)}</strong></div><div><span>Data storage</span><strong>${escapeHtml(recipe.data_storage)}</strong></div></div><p class="field-hint" id="port-row"><button type="button" class="text-button" id="change-port">Use a different port</button><label class="inline-field" id="port-field" hidden>Published port <input id="recipe-port" type="number" min="1024" max="65535" step="1" inputmode="numeric" value="${escapeHtml(recipe.host_port)}" aria-describedby="port-help"></label><span id="port-help" hidden>The app still listens on ${escapeHtml(recipe.container_port)} inside its container.</span></p><h3 class="section-label">System check</h3>${doctorView(report)}<h3 class="section-label">What this changes</h3><ul class="risk-list">${recipe.risk_notes.map(note => `<li>${escapeHtml(note)}</li>`).join('')}</ul>`;
 }
 
 function provenance(app) {
