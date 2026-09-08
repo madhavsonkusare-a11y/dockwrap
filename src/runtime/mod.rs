@@ -1749,8 +1749,14 @@ mod tests {
             "the guard let a link redirect a delete outside the managed root"
         );
 
-        // Remove the link itself, never the directory it points at.
+        // Remove the link itself, never the directory it points at. A Windows
+        // junction is removed as a directory and a Unix symlink as a file;
+        // using the wrong one fails rather than following the link, which is
+        // how this went unnoticed until it first ran on Linux.
+        #[cfg(windows)]
         fs::remove_dir(&link).unwrap();
+        #[cfg(unix)]
+        fs::remove_file(&link).unwrap();
         assert!(outside.join("important.db").exists());
         fs::remove_dir_all(&root).unwrap();
         fs::remove_dir_all(&outside).unwrap();
