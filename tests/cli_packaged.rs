@@ -73,17 +73,22 @@ fn the_packaged_binary_reports_its_version() {
 }
 
 #[test]
-fn packaged_doctor_writes_only_json_and_fails_without_docker() {
+fn packaged_doctor_writes_only_json_and_its_exit_code_tracks_readiness() {
     let output = run(&["doctor", "--json"]);
-    assert_eq!(
-        output.status.code(),
-        Some(1),
-        "readiness must set the exit code"
-    );
     assert!(output.stderr.is_empty(), "stdout-only contract");
     let report: Value =
         serde_json::from_slice(&output.stdout).expect("stdout must contain only JSON");
-    assert_eq!(report["ready"], false);
+
+    // The contract is that the exit code reports what the JSON says, not that
+    // Docker is absent. Asserting the latter made this pass only on a machine
+    // without Docker: the Windows CI runner has it, so the packaged binary
+    // correctly reported ready and exited zero.
+    let ready = report["ready"].as_bool().expect("ready must be a boolean");
+    assert_eq!(
+        output.status.code(),
+        Some(if ready { 0 } else { 1 }),
+        "exit code must follow readiness (ready={ready})"
+    );
     assert_eq!(report["checks"].as_array().unwrap().len(), 2);
     // Task 13's deadline means an unreachable Docker fails rather than hanging;
     // if this ever blocks, the packaged runner has lost its bound.
