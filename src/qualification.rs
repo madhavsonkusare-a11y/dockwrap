@@ -561,7 +561,16 @@ pub fn qualify(
 
     // The failure that looks exactly like data loss: a reinstall that mints
     // fresh credentials cannot open the data it was reinstalled onto.
-    steps.run("keeps the credentials it generated", || {
+    //
+    // An app that generates nothing passes this trivially, so it is named for
+    // what was actually checked. Evidence that reads "keeps the credentials it
+    // generated" for an app with no credentials is evidence nobody can trust.
+    let credential_step = if secrets_before.is_some() {
+        "keeps the credentials it generated"
+    } else {
+        "generates no credentials, so there are none to lose"
+    };
+    steps.run(credential_step, || {
         let after = std::fs::read_to_string(project_dir.join(crate::runtime::SECRETS_FILE)).ok();
         match (&secrets_before, &after) {
             (None, None) => Ok(()),

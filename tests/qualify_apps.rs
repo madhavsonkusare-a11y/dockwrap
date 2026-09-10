@@ -24,11 +24,18 @@ fn script(name: &str) -> PathBuf {
 /// A probe script takes the phase and the address; anything after that is the
 /// app's own business.
 ///
-/// `flatnotes` is deliberately absent: its probe still relies on a note the
-/// old test wrote into the managed folder from the host, so it is not yet
-/// self-contained. Its dedicated test stays until the probe creates that note
-/// through the app itself.
+fn answers(pairs: &[(&str, &str)]) -> BTreeMap<String, String> {
+    pairs
+        .iter()
+        .map(|(key, value)| ((*key).to_owned(), (*value).to_owned()))
+        .collect()
+}
+
 fn plan() -> Vec<(&'static str, BTreeMap<String, String>, ScriptProbe)> {
+    // The answers flatnotes is installed with are also what its probe signs in
+    // as, because the whole point of checking it is that they took effect.
+    let user = "local-store-probe";
+    let secret = "a-password-somebody-chose-9271";
     vec![
         (
             "privatebin",
@@ -53,6 +60,19 @@ fn plan() -> Vec<(&'static str, BTreeMap<String, String>, ScriptProbe)> {
                 .join("nodered-probe-state.json")
                 .to_string_lossy()
                 .into_owned()]),
+        ),
+        (
+            "flatnotes",
+            answers(&[
+                ("FLATNOTES_AUTH_TYPE", "password"),
+                ("FLATNOTES_USERNAME", user),
+                ("FLATNOTES_PASSWORD", secret),
+            ]),
+            ScriptProbe::new(
+                script("flatnotes-probe.mjs"),
+                "the typed password signs in through a real browser, a wrong one does not,                  and a note written through the app is still there afterwards",
+            )
+            .with_args(vec![user.to_owned(), secret.to_owned()]),
         ),
     ]
 }

@@ -1,5 +1,48 @@
 # Local Store: agent handoff
 
+## September 10 — flatnotes ported; all three offered apps run through one harness
+
+`tests/flatnotes_lifecycle.rs` is gone. Its probe used to depend on a note the
+Rust test wrote into the managed folder from the host, which is what kept it
+from being self-contained; it now creates that note through flatnotes' own API
+(`POST /api/token`, `POST /api/notes`), so the harness needs to know nothing
+about how flatnotes stores things.
+
+All three offered apps now qualify through `tests/qualify_apps.rs`: 111s for a
+cold run of the three, and a second run finishes instantly. Three bespoke test
+files totalling about 750 lines are replaced by three entries in a list.
+
+**An honesty fix in the harness.** The credential step passed trivially for an
+app that generates no credentials, while still reading "keeps the credentials
+it generated" in the evidence. It now names what was actually checked —
+PrivateBin's record says *generates no credentials, so there are none to lose*,
+flatnotes' says *keeps the credentials it generated*. Evidence that overstates
+for the easy case is evidence nobody can trust for the hard one.
+
+**Verified non-vacuous through the harness itself**, not just through the old
+per-app test: making the keep-data reinstall destructive fails flatnotes at
+*keeps the credentials it generated* with "the reinstall replaced the
+credentials it should have reused". That run also exercised resume in anger —
+two apps skipped, one run.
+
+Validation: 272 Rust tests across 25 binaries, strict Clippy, fmt and the
+offline gates. No leftover container, network or volume.
+
+**Next:** `runtipi:nextcloud-mini`. It is now a manifest and a probe rather
+than a test file. It is the first candidate that would prove a generated
+credential reaching a *second* container in an app somebody installs — one
+`NEXTCLOUD_MINI_DB_PASSWORD` handed to both the app and its database. Both
+images are on Docker Hub (nextcloud 34.0.2 rebuilt 2026-08-12, upstream is on
+34.0.3), so the existing platform gate works. Its `postgres:16` is a floating
+tag whose digests will drift, which is what `ImagePin` is for: move it to a
+concrete patch tag with a recorded reason.
+
+Still open from the planka investigation: **43 images across 42 importable
+candidates live on ghcr.io and none can be audited**, because
+`check-template-platforms.py` speaks Docker Hub's JSON and GHCR is an OCI
+registry needing a bearer token. That is a real ceiling on coverage.
+
+
 ## September 10 — B3: one harness instead of a test per app
 
 The plan (`backend-app-coverage-plan.md`) sequences B1 inventory, B2 **first**

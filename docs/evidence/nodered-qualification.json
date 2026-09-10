@@ -41,7 +41,7 @@
       "passed": true
     },
     {
-      "step": "keeps the credentials it generated",
+      "step": "generates no credentials, so there are none to lose",
       "passed": true
     },
     {
