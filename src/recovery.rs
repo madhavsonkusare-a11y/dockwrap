@@ -341,25 +341,6 @@ fn count_owned(runner: &dyn ProcessRunner, project_name: &str) -> AppResult<usiz
     Ok(output.stdout.split_whitespace().count())
 }
 
-/// A canonical path in the form Docker can actually use.
-///
-/// `inspect_at` canonicalizes, which is what stops a symlink or a relative
-/// segment pointing somewhere else — and on Windows canonicalizing produces an
-/// extended-length path (`\?\D:\...`). Docker Compose resolves a relative
-/// bind mount like `./data` against the directory of the file it was given, so
-/// handing it that form makes it build a mount source containing `\?\D:` and
-/// refuse the whole thing with "too many colons". `compose down` never
-/// resolves mounts, which is why only starting an app ran into it.
-///
-/// Stripping the prefix keeps the resolved target — this is the same
-/// directory, named the way the rest of the system names it.
-fn docker_path(path: &Path) -> PathBuf {
-    match path.to_str().and_then(|text| text.strip_prefix(r"\\?\")) {
-        Some(plain) => PathBuf::from(plain),
-        None => path.to_path_buf(),
-    }
-}
-
 /// What an adoption actually did, so a caller can say so rather than guess.
 #[derive(Debug, Serialize, PartialEq, Eq)]
 pub struct Adopted {
@@ -451,7 +432,7 @@ pub fn adopt_with(
         }
     }
 
-    let project_dir = docker_path(
+    let project_dir = crate::folders::docker_path(
         candidate
             .compose_file
             .parent()
@@ -460,7 +441,7 @@ pub fn adopt_with(
     // Everything handed to Docker, and everything written into the registry,
     // uses this form: an entry recorded with an extended-length path would
     // start today and fail every time the app was started afterwards.
-    let compose_file = docker_path(&candidate.compose_file);
+    let compose_file = crate::folders::docker_path(&candidate.compose_file);
 
     // The address comes from the file that is actually there, not from what
     // the app would prefer today: an interrupted install may have taken a

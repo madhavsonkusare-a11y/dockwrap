@@ -4,6 +4,7 @@ pub mod catalog;
 mod catalog_schema;
 pub mod commands;
 pub mod error;
+pub mod folders;
 pub mod importers;
 pub mod model;
 pub mod native;
