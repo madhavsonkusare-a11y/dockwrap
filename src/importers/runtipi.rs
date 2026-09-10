@@ -33,6 +33,85 @@ const APP_DATA_DIR: &str = "${APP_DATA_DIR}/";
 /// ensured in its place.
 const CLOCK_FILES: &[&str] = &["/etc/localtime", "/etc/timezone"];
 
+/// Runtipi's placeholder for the machine's own storage root.
+///
+/// On a Runtipi box this is the install directory, and `media/data/<kind>` is
+/// a library several apps share. Local Store has no such root, and inventing
+/// one would put a person's music inside an application's data directory. What
+/// it has instead is a folder the person picks, so a path *under* this
+/// placeholder becomes a question rather than a refusal.
+///
+/// The bare placeholder stays refused: that is the whole storage root, not a
+/// folder anybody meant to share.
+const ROOT_FOLDER_HOST: &str = "${ROOT_FOLDER_HOST}/";
+
+/// Container paths a shared folder may never be mounted over.
+///
+/// These belong to the image, not to the person. Replacing them changes what
+/// runs rather than what it can read.
+fn container_path_is_system(target: &str) -> bool {
+    let cleaned = target.trim_end_matches('/');
+    if cleaned.is_empty() || cleaned == "/" {
+        return true;
+    }
+    const SYSTEM: &[&str] = &[
+        "/etc", "/usr", "/bin", "/sbin", "/lib", "/lib64", "/boot", "/dev", "/proc", "/sys",
+        "/run", "/var/run",
+    ];
+    SYSTEM
+        .iter()
+        .any(|system| cleaned == *system || cleaned.starts_with(&format!("{system}/")))
+}
+
+/// A setup key and a human label for a shared library path.
+///
+/// `media/data/music` becomes `FOLDER_MUSIC` and "Music folder". The key has
+/// to be NAME_LIKE_THIS because it is also an environment-style placeholder,
+/// and it has to be derived from the path so two mounts of the same library in
+/// one definition ask the person once rather than twice.
+fn shared_folder_field(subpath: &str) -> Option<(String, String)> {
+    let cleaned = subpath.trim_matches('/');
+    if cleaned.is_empty() || cleaned.contains("..") {
+        return None;
+    }
+    // Only the shared library. Everything else under this placeholder is
+    // Runtipi's own installation — its `etc`, its state, its other apps — and
+    // none of that is a folder a person meant to hand over.
+    if cleaned != "media" && !cleaned.starts_with("media/") {
+        return None;
+    }
+    let parts: Vec<&str> = cleaned
+        .split('/')
+        // `media` and `data` are Runtipi's own scaffolding, not what the
+        // folder is. Dropping them turns `media/data/music` into "Music".
+        .filter(|part| !matches!(*part, "media" | "data") && !part.is_empty())
+        .collect();
+    let named: Vec<&str> = if parts.is_empty() {
+        vec!["media"]
+    } else {
+        parts
+    };
+    let key: String = named
+        .join("_")
+        .chars()
+        .map(|c| {
+            if c.is_ascii_alphanumeric() {
+                c.to_ascii_uppercase()
+            } else {
+                '_'
+            }
+        })
+        .collect();
+    if key.is_empty() || !key.starts_with(|c: char| c.is_ascii_alphabetic()) {
+        return None;
+    }
+    let mut label = named.join(" ").replace(['-', '_'], " ");
+    if let Some(first) = label.get_mut(0..1) {
+        first.make_ascii_uppercase();
+    }
+    Some((format!("FOLDER_{key}"), format!("{label} folder")))
+}
+
 /// Settings this project will not express, on purpose. Accepting them would
 /// hand a container privileges the reviewed recipes deliberately refuse.
 const REFUSED_KEYS: &[(&str, &str)] = &[
@@ -343,6 +422,47 @@ pub fn import(id: &str, definition: &str, config: Option<&str>) -> Result<Import
                 }
                 continue;
             }
+            if let Some(subpath) = host.strip_prefix(ROOT_FOLDER_HOST) {
+                // Where it lands inside the container matters as much as where
+                // it comes from. A person's folder mounted over the container's
+                // own `/etc` or `/usr` is not a shared library, it is a way to
+                // replace the software that is about to run.
+                if container_path_is_system(&container) {
+                    limitations.push(refused(
+                        "host path",
+                        format!("{name} mounts a folder over {container:?}, which is the container's own system"),
+                    ));
+                    continue;
+                }
+                match shared_folder_field(subpath) {
+                    Some((key, label)) => {
+                        // One question per library, however many services
+                        // mount it.
+                        if !fields.iter().any(|field: &SetupField| field.key == key) {
+                            fields.push(SetupField {
+                                key: key.clone(),
+                                label,
+                                kind: FieldKind::Folder { read_only },
+                                required: true,
+                                default: None,
+                                sensitive: false,
+                            });
+                        }
+                        mounts.push(PlanMount::Host {
+                            source: format!("${{{key}}}"),
+                            target: container,
+                            read_only,
+                        });
+                    }
+                    None => limitations.push(refused(
+                        "host path",
+                        format!(
+                            "{name} mounts {host:?}, which names no folder a person could choose"
+                        ),
+                    )),
+                }
+                continue;
+            }
             match host.strip_prefix(APP_DATA_DIR) {
                 Some(relative) if !relative.is_empty() => mounts.push(PlanMount::Directory {
                     source: relative.trim_end_matches('/').to_owned(),
@@ -485,6 +605,16 @@ pub fn import(id: &str, definition: &str, config: Option<&str>) -> Result<Import
         .map(|(_, value)| value.clone())
         .collect();
 
+    // Every host-mount source, so a folder answer counts as referenced.
+    let planned_mount_sources: Vec<String> = planned
+        .iter()
+        .flat_map(|service| &service.mounts)
+        .filter_map(|mount| match mount {
+            PlanMount::Host { source, .. } => Some(source.clone()),
+            _ => None,
+        })
+        .collect();
+
     // Only build a template when nothing was dropped. One assembled from a
     // partially understood definition would look installable and would not be.
     let template = if limitations.is_empty() {
@@ -495,10 +625,17 @@ pub fn import(id: &str, definition: &str, config: Option<&str>) -> Result<Import
                 named_volumes: Vec::new(),
             },
             // Only keep what the definition actually uses; Runtipi declares
-            // fields for optional features an app may never reference.
+            // fields for optional features an app may never reference. A
+            // shared folder is referenced by a mount rather than by an
+            // environment value, so both are consulted — checking only the
+            // environment dropped the folder field and then refused the
+            // template for referring to a key nothing declared.
             fields: fields
                 .into_iter()
-                .filter(|field| uses_placeholder(&planned_environment, &field.key))
+                .filter(|field| {
+                    uses_placeholder(&planned_environment, &field.key)
+                        || uses_placeholder(&planned_mount_sources, &field.key)
+                })
                 .collect(),
             secrets: secrets
                 .into_iter()
@@ -619,6 +756,94 @@ mod tests {
         assert_eq!(zone.default.as_deref(), Some("UTC"));
     }
 
+    /// The libraries people actually keep outside an app: photos, music,
+    /// books. Runtipi shares one directory between apps; Local Store has no
+    /// such place, so it asks instead.
+    #[test]
+    fn a_shared_library_path_becomes_a_folder_a_person_chooses() {
+        let definition = r#"{"services":[{"name":"app","image":"example/app:1.0","isMain":true,"internalPort":8080,"volumes":[{"hostPath":"${ROOT_FOLDER_HOST}/media/data/music","containerPath":"/music","readOnly":true},{"hostPath":"${APP_DATA_DIR}/data","containerPath":"/data"}]}]}"#;
+        let outcome = import("app", definition, None).expect("import should not fail");
+        let template = outcome.template.clone().unwrap_or_else(|| {
+            panic!(
+                "blocked: {:?}",
+                outcome
+                    .limitations
+                    .iter()
+                    .map(|l| (l.category(), l.feature()))
+                    .collect::<Vec<_>>()
+            )
+        });
+
+        let folder = template
+            .fields
+            .iter()
+            .find(|field| field.key == "FOLDER_MUSIC")
+            .expect("the music folder is asked for");
+        assert_eq!(folder.label, "Music folder");
+        assert!(folder.required);
+        assert_eq!(folder.kind, FieldKind::Folder { read_only: true });
+
+        // The mount refers to the answer, never to a path nobody chose.
+        let mounts = &template.plan.services[0].mounts;
+        assert!(mounts.contains(&PlanMount::Host {
+            source: "${FOLDER_MUSIC}".into(),
+            target: "/music".into(),
+            read_only: true,
+        }));
+        assert!(mounts.iter().any(|mount| matches!(
+            mount,
+            PlanMount::Directory { source, .. } if source == "data"
+        )));
+    }
+
+    /// Two services sharing one library is one question, not two.
+    #[test]
+    fn the_same_library_mounted_twice_is_asked_about_once() {
+        let definition = r#"{"services":[{"name":"app","image":"example/app:1.0","isMain":true,"internalPort":8080,"volumes":[{"hostPath":"${ROOT_FOLDER_HOST}/media/data/books","containerPath":"/books"}]},{"name":"worker","image":"example/worker:1.0","volumes":[{"hostPath":"${ROOT_FOLDER_HOST}/media/data/books","containerPath":"/library"}]}]}"#;
+        let outcome = import("app", definition, None).expect("import should not fail");
+        let template = outcome.template.expect("this should import");
+        assert_eq!(
+            template
+                .fields
+                .iter()
+                .filter(|field| field.key == "FOLDER_BOOKS")
+                .count(),
+            1
+        );
+        let targets: Vec<&str> = template
+            .plan
+            .services
+            .iter()
+            .flat_map(|service| &service.mounts)
+            .filter_map(|mount| match mount {
+                PlanMount::Host { target, .. } => Some(target.as_str()),
+                _ => None,
+            })
+            .collect();
+        assert_eq!(targets, vec!["/books", "/library"]);
+    }
+
+    /// Where a folder lands inside the container matters as much as where it
+    /// came from: mounted over the container's own system it would replace the
+    /// software rather than feed it.
+    #[test]
+    fn a_shared_folder_may_not_be_mounted_over_the_containers_own_system() {
+        for target in ["/etc", "/usr/bin", "/", "/var/run"] {
+            let definition = format!(
+                r#"{{"services":[{{"name":"app","image":"example/app:1.0","isMain":true,"internalPort":8080,"volumes":[{{"hostPath":"${{ROOT_FOLDER_HOST}}/media/data/music","containerPath":"{target}"}}]}}]}}"#
+            );
+            let outcome = import("app", &definition, None).expect("import should not fail");
+            assert!(
+                outcome
+                    .limitations
+                    .iter()
+                    .any(|limit| limit.feature() == "host path"),
+                "{target} was allowed"
+            );
+            assert!(outcome.template.is_none(), "{target} produced a template");
+        }
+    }
+
     /// A host path that is not the clock stays refused. This is the guard that
     /// stops the exception above from becoming a general permission to mount
     /// host directories.
@@ -627,7 +852,11 @@ mod tests {
         for host in [
             "/var/run/docker.sock",
             "/var/log/auth.log",
-            "${ROOT_FOLDER_HOST}/media",
+            // The storage root itself, not a folder inside it.
+            "${ROOT_FOLDER_HOST}",
+            // Runtipi's own installation, which is not a shared library.
+            "${ROOT_FOLDER_HOST}/etc",
+            "${ROOT_FOLDER_HOST}/state",
         ] {
             let definition = format!(
                 r#"{{"services":[{{"name":"app","image":"example/app:1.0","isMain":true,"internalPort":8080,"volumes":[{{"hostPath":"{host}","containerPath":"/x"}}]}}]}}"#

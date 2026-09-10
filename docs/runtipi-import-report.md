@@ -9,8 +9,8 @@ and no app becomes a reviewed recipe by appearing in this table.
 | Result | Apps |
 | --- | --- |
 | Definitions read | 250 |
-| Fully expressible as a plan today | 94 |
-| Blocked by at least one limitation | 156 |
+| Fully expressible as a plan today | 111 |
+| Blocked by at least one limitation | 139 |
 
 A blocked app is not a rejected app. Every row below is a named gap, and
 the ones marked *not modelled* or *needs input* are the work queue for the
@@ -20,10 +20,10 @@ remaining phase 2 features.
 
 | Category | Feature | Apps | Examples |
 | --- | --- | --- | --- |
-| refused | `host path` | 62 | booksonic, budibase, calibre-web |
 | not modelled | `addPorts` | 31 | bitcoind, bitmagnet, chatgpt-ui |
+| refused | `host path` | 27 | budibase, code-server, cross-seed |
+| refused | `plan policy` | 25 | bookstack, chatpad, codex-docs |
 | not modelled | `internalPort` | 19 | cloudflare-ddns, cross-seed, electrs |
-| refused | `plan policy` | 18 | bookstack, chatpad, codex-docs |
 | not modelled | `healthCheck` | 17 | bitmagnet, invidious, kimai |
 | not modelled | `user` | 14 | bitcoind, cross-seed, electrs |
 | needs input | `platform placeholder` | 13 | bewcloud, calcom, chatgpt-ui |
@@ -57,6 +57,8 @@ need an upstream change or a different source, not more of this importer.
 
 | App | Services | Published port | Setup fields | Secrets |
 | --- | --- | --- | --- | --- |
+| booksonic | 1 | 4040 | 3 | 0 |
+| calibre-web | 1 | 8083 | 2 | 0 |
 | changedetection | 1 | 5000 | 0 | 0 |
 | cheshire-cat-ai | 1 | 8080 | 0 | 0 |
 | ctfd | 3 | 8000 | 0 | 3 |
@@ -67,7 +69,9 @@ need an upstream change or a different source, not more of this importer.
 | docmost | 3 | 3000 | 0 | 2 |
 | dokuwiki | 1 | 8080 | 1 | 0 |
 | email-oauth2-proxy | 1 | 8080 | 0 | 0 |
+| emby | 1 | 8096 | 2 | 0 |
 | firefly-iii-data-importer | 1 | 8080 | 4 | 0 |
+| fireshare | 1 | 8080 | 4 | 1 |
 | flaresolverr | 1 | 8191 | 1 | 0 |
 | flatnotes | 1 | 8080 | 3 | 2 |
 | flightlog | 1 | 8080 | 0 | 0 |
@@ -92,10 +96,14 @@ need an upstream change or a different source, not more of this importer.
 | jellyseerr | 1 | 5055 | 1 | 0 |
 | joplin | 2 | 22300 | 0 | 1 |
 | kanboard | 1 | 8080 | 1 | 0 |
+| kapowarr | 1 | 5656 | 3 | 0 |
+| kavita | 1 | 5000 | 4 | 0 |
 | kiwix-serve | 1 | 8080 | 0 | 0 |
 | koillection | 2 | 8080 | 1 | 0 |
+| komga | 1 | 25600 | 2 | 0 |
 | librespeed | 1 | 8080 | 2 | 0 |
 | libretranslate | 1 | 5000 | 0 | 0 |
+| lidarr | 1 | 8686 | 2 | 0 |
 | linkwarden | 2 | 3000 | 1 | 2 |
 | maintainerr | 1 | 6246 | 1 | 0 |
 | memos | 1 | 5230 | 0 | 0 |
@@ -108,6 +116,9 @@ need an upstream change or a different source, not more of this importer.
 | monica | 2 | 8080 | 1 | 2 |
 | moodist | 1 | 8080 | 1 | 0 |
 | mqttx | 1 | 8080 | 1 | 0 |
+| mstream | 1 | 3000 | 2 | 0 |
+| mylar3 | 1 | 8090 | 3 | 0 |
+| navidrome | 1 | 4533 | 1 | 0 |
 | nextcloud-mini | 2 | 8080 | 3 | 1 |
 | nextgba | 1 | 3000 | 0 | 0 |
 | nginx | 1 | 8080 | 0 | 0 |
@@ -118,6 +129,7 @@ need an upstream change or a different source, not more of this importer.
 | octobot | 1 | 5001 | 1 | 0 |
 | ollama-cpu | 1 | 11434 | 0 | 0 |
 | open-webui | 1 | 8080 | 2 | 0 |
+| openbooks | 1 | 8080 | 1 | 0 |
 | outline | 5 | 8080 | 2 | 6 |
 | overseerr | 1 | 5055 | 1 | 0 |
 | pairdrop | 1 | 3000 | 1 | 0 |
@@ -128,7 +140,11 @@ need an upstream change or a different source, not more of this importer.
 | plausible-ce | 3 | 8000 | 21 | 3 |
 | privatebin | 1 | 8080 | 0 | 0 |
 | prowlarr | 1 | 9696 | 1 | 0 |
+| radarr | 1 | 7878 | 2 | 0 |
+| readarr | 1 | 8787 | 2 | 0 |
+| romm | 2 | 8080 | 5 | 3 |
 | rss | 1 | 8080 | 0 | 0 |
+| sabnzbd | 1 | 8080 | 2 | 0 |
 | seerr | 1 | 5055 | 1 | 0 |
 | semaphore | 2 | 3000 | 4 | 2 |
 | serge | 1 | 8008 | 0 | 0 |
@@ -136,6 +152,7 @@ need an upstream change or a different source, not more of this importer.
 | silverbullet | 1 | 3000 | 3 | 0 |
 | simplex-smp | 1 | 5223 | 1 | 0 |
 | siyuan | 1 | 6806 | 1 | 0 |
+| sonarr | 1 | 8989 | 2 | 0 |
 | spacedrive | 1 | 8080 | 2 | 0 |
 | spoolman | 1 | 8000 | 1 | 0 |
 | suwayomi | 1 | 4567 | 1 | 0 |

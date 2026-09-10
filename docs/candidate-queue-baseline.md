@@ -10,7 +10,7 @@ Generated offline by `python scripts/build-candidate-queue.py` using actual Rust
   },
   "runtipi": {
     "definitions": 250,
-    "expressible": 94
+    "expressible": 111
   },
   "resolved_project_groups": 233,
   "unresolved_definitions": 365,

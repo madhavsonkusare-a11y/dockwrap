@@ -1,5 +1,63 @@
 # Local Store: agent handoff
 
+## September 10 — a folder a person chooses, and Runtipi at 111
+
+**Open-source top 150 by reach now holds 91 importable apps, and the top 200
+holds 107.** Runtipi expressible went 94 to 111; overall importable is 228.
+
+Runtipi keeps one shared library at `${ROOT_FOLDER_HOST}/media/data/<kind>` and
+lets several apps mount it. Local Store has no such root, and inventing one
+would put a person's music inside an application's data directory. So a path
+under that placeholder becomes a **question** — `media/data/music` becomes a
+required `FOLDER_MUSIC` answer labelled "Music folder" — and the mount refers
+to the answer rather than to any path.
+
+Three refusals bound it, each with a test:
+
+- **The bare placeholder stays refused.** `${ROOT_FOLDER_HOST}` is the whole
+  storage root, not a folder anybody meant to share, and so do
+  `${ROOT_FOLDER_HOST}/etc` and `/state`: Runtipi's own installation is not a
+  library.
+- **Where it lands in the container matters as much as where it came from.** A
+  folder mounted over `/etc`, `/usr`, `/`, `/var/run` and the rest replaces the
+  software that is about to run rather than feeding it.
+- **`share_folder` still decides the answer itself**, so the operating system,
+  a whole drive, a home folder and Local Store's own directory stay refused at
+  install time regardless of what any definition asked for.
+
+One library mounted by two services asks once and mounts at both container
+paths.
+
+**The same blind spot three times in one day.** A folder field is referenced by
+a *mount*, not by an environment value, and three separate places only looked
+at environment values: `PlanTemplate::validate` (declared-but-unused), the
+importer's field filter (dropped the field, then refused the template for
+referring to a key nothing declared), and earlier the inert time-zone field.
+Anything that asks "is this declared value used?" has to look at mounts too.
+
+### Where v1 stands
+
+| Open-source, by reach | Importable |
+| --- | --- |
+| top 100 | 59 |
+| top 150 | 91 |
+| top 200 | 107 |
+
+Remaining capability work, by apps unlocked inside the open-source top 150:
+plan policy (10 — Ghost, SearXNG, Excalidraw), healthCheck (4), addPorts (3 —
+Gitea, EMQX, Owncast).
+
+**None of these 107 is verified or tested yet.** They are importable, which
+means a plan can be built from them; the harness still has to run each one.
+That is the next large piece of work and it is mostly machine time.
+
+Not done here: the setup form renders a `folder` control but there is no native
+folder picker, so a person types or pastes a path. A picker needs
+`tauri-plugin-dialog` and is worth doing before v1.
+
+Validation: 293 Rust tests, strict Clippy, fmt and the offline gates.
+
+
 ## September 10 — licences resolved, and the first capability landed
 
 **Open-source top 200 by reach now holds exactly 100 importable apps**, up from

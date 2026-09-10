@@ -146,7 +146,6 @@
    "importable": false,
    "blockers": [
     "addPorts",
-    "host path",
     "stopGracePeriod"
    ],
    "services": null,
@@ -505,7 +504,6 @@
    "catalogues": 4,
    "importable": false,
    "blockers": [
-    "host path",
     "overrides",
     "workingDir"
    ],
@@ -1570,12 +1568,10 @@
    "pulls": 11171663,
    "stars": 11644,
    "catalogues": 4,
-   "importable": false,
-   "blockers": [
-    "host path"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 3,
    "images": [
     "jvmilazz0/kavita:0.9.1"
    ]
@@ -1591,12 +1587,10 @@
    "pulls": 53719832,
    "stars": 23430,
    "catalogues": 1,
-   "importable": false,
-   "blockers": [
-    "host path"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 1,
    "images": [
     "deluan/navidrome:0.63.2"
    ]
@@ -1635,7 +1629,6 @@
    "blockers": [
     "capAdd",
     "devices",
-    "host path",
     "logging",
     "platform placeholder",
     "sysctls"
@@ -2692,7 +2685,6 @@
    "catalogues": 1,
    "importable": false,
    "blockers": [
-    "host path",
     "internalPort",
     "logging",
     "networkMode",
@@ -2864,7 +2856,7 @@
    "catalogues": 1,
    "importable": false,
    "blockers": [
-    "host path"
+    "plan policy"
    ],
    "services": null,
    "required_inputs": null,
@@ -2970,7 +2962,6 @@
    "catalogues": 1,
    "importable": false,
    "blockers": [
-    "host path",
     "platform placeholder",
     "privileged"
    ],
@@ -3181,12 +3172,10 @@
    "pulls": 3065063,
    "stars": 1062,
    "catalogues": 3,
-   "importable": false,
-   "blockers": [
-    "host path"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 2,
    "images": [
     "mrcas/kapowarr:v1.3.1"
    ]
@@ -3270,12 +3259,10 @@
    "pulls": 4802254,
    "stars": 2401,
    "catalogues": 1,
-   "importable": false,
-   "blockers": [
-    "host path"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 1,
    "images": [
     "evanbuss/openbooks:4.5.0"
    ]
@@ -3587,7 +3574,7 @@
    "catalogues": 4,
    "importable": false,
    "blockers": [
-    "host path"
+    "plan policy"
    ],
    "services": null,
    "required_inputs": null,
@@ -3646,12 +3633,10 @@
    "pulls": 731440,
    "stars": 1468,
    "catalogues": 1,
-   "importable": false,
-   "blockers": [
-    "host path"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 4,
    "images": [
     "shaneisrael/fireshare:1.7.9"
    ]
@@ -3825,7 +3810,6 @@
    "catalogues": 1,
    "importable": false,
    "blockers": [
-    "host path",
     "user"
    ],
    "services": null,
@@ -3862,8 +3846,7 @@
    "catalogues": 1,
    "importable": false,
    "blockers": [
-    "addPorts",
-    "host path"
+    "addPorts"
    ],
    "services": null,
    "required_inputs": null,
@@ -4511,7 +4494,7 @@
    "catalogues": 5,
    "importable": false,
    "blockers": [
-    "host path"
+    "plan policy"
    ],
    "services": null,
    "required_inputs": null,
@@ -4608,7 +4591,6 @@
    "importable": false,
    "blockers": [
     "addPorts",
-    "host path",
     "internalPort"
    ],
    "services": null,
@@ -4870,12 +4852,10 @@
    "pulls": null,
    "stars": 18149,
    "catalogues": 5,
-   "importable": false,
-   "blockers": [
-    "host path"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 1,
    "images": [
     "lscr.io/linuxserver/calibre-web:0.6.27"
    ]
@@ -4996,12 +4976,10 @@
    "pulls": null,
    "stars": 15418,
    "catalogues": 5,
-   "importable": false,
-   "blockers": [
-    "host path"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 1,
    "images": [
     "lscr.io/linuxserver/sonarr:4.0.19"
    ]
@@ -5040,8 +5018,7 @@
    "catalogues": 5,
    "importable": false,
    "blockers": [
-    "addPorts",
-    "host path"
+    "addPorts"
    ],
    "services": null,
    "required_inputs": null,
@@ -5187,12 +5164,10 @@
    "pulls": null,
    "stars": 14322,
    "catalogues": 5,
-   "importable": false,
-   "blockers": [
-    "host path"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 1,
    "images": [
     "ghcr.io/linuxserver/radarr:6.3.0"
    ]
@@ -5744,7 +5719,7 @@
    "catalogues": 4,
    "importable": false,
    "blockers": [
-    "host path"
+    "plan policy"
    ],
    "services": null,
    "required_inputs": null,
@@ -5764,12 +5739,10 @@
    "pulls": null,
    "stars": 12706,
    "catalogues": 4,
-   "importable": false,
-   "blockers": [
-    "host path"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 1,
    "images": [
     "ghcr.io/rommapp/romm:5.2.0",
     "lscr.io/linuxserver/mariadb:11.4.4"
@@ -6228,12 +6201,10 @@
    "pulls": null,
    "stars": 6655,
    "catalogues": 4,
-   "importable": false,
-   "blockers": [
-    "host path"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 1,
    "images": [
     "ghcr.io/gotson/komga:1.26.3"
    ]
@@ -6462,12 +6433,10 @@
    "pulls": null,
    "stars": 5638,
    "catalogues": 4,
-   "importable": false,
-   "blockers": [
-    "host path"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 1,
    "images": [
     "ghcr.io/linuxserver/lidarr:3.1.0"
    ]
@@ -6901,7 +6870,6 @@
    "catalogues": 4,
    "importable": false,
    "blockers": [
-    "host path",
     "networkMode"
    ],
    "services": null,
@@ -6923,7 +6891,7 @@
    "catalogues": 2,
    "importable": false,
    "blockers": [
-    "host path"
+    "plan policy"
    ],
    "services": null,
    "required_inputs": null,
@@ -7936,12 +7904,10 @@
    "pulls": null,
    "stars": 1455,
    "catalogues": 4,
-   "importable": false,
-   "blockers": [
-    "host path"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 2,
    "images": [
     "lscr.io/linuxserver/mylar3:v0.7.1-ls84"
    ]
@@ -8060,12 +8026,10 @@
    "pulls": null,
    "stars": 2383,
    "catalogues": 3,
-   "importable": false,
-   "blockers": [
-    "host path"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 1,
    "images": [
     "lscr.io/linuxserver/mstream:v5.12.2-ls190"
    ]
@@ -8282,12 +8246,10 @@
    "pulls": null,
    "stars": 3470,
    "catalogues": 2,
-   "importable": false,
-   "blockers": [
-    "host path"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 1,
    "images": [
     "lscr.io/linuxserver/readarr:0.4.19-nightly"
    ]
@@ -8325,12 +8287,10 @@
    "pulls": null,
    "stars": 3095,
    "catalogues": 2,
-   "importable": false,
-   "blockers": [
-    "host path"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 1,
    "images": [
     "lscr.io/linuxserver/sabnzbd:5.1.2"
    ]
@@ -8819,8 +8779,7 @@
    "catalogues": 4,
    "importable": false,
    "blockers": [
-    "addPorts",
-    "host path"
+    "addPorts"
    ],
    "services": null,
    "required_inputs": null,
@@ -9065,7 +9024,7 @@
    "catalogues": 1,
    "importable": false,
    "blockers": [
-    "host path"
+    "plan policy"
    ],
    "services": null,
    "required_inputs": null,
@@ -9324,12 +9283,10 @@
    "pulls": null,
    "stars": 223,
    "catalogues": 1,
-   "importable": false,
-   "blockers": [
-    "host path"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 2,
    "images": [
     "lscr.io/linuxserver/booksonic-air:2201.1.0"
    ]
@@ -9446,12 +9403,10 @@
    "pulls": null,
    "stars": null,
    "catalogues": 4,
-   "importable": false,
-   "blockers": [
-    "host path"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 1,
    "images": [
     "lscr.io/linuxserver/emby:4.9.5"
    ]
@@ -10034,7 +9989,7 @@
    "catalogues": 1,
    "importable": false,
    "blockers": [
-    "host path"
+    "plan policy"
    ],
    "services": null,
    "required_inputs": null,

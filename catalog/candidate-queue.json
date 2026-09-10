@@ -7,7 +7,7 @@
     },
     "runtipi": {
       "definitions": 250,
-      "expressible": 94
+      "expressible": 111
     },
     "resolved_project_groups": 233,
     "unresolved_definitions": 365,
@@ -4763,7 +4763,9 @@
       "image_family": "lscr.io/linuxserver/calibre-web",
       "maintenance_status": "not_screened",
       "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
+      "possible_matches": [
+        "runtipi:calibre-web"
+      ]
     },
     {
       "blockers": [],
@@ -5571,7 +5573,9 @@
       "image_family": "lscr.io/linuxserver/readarr",
       "maintenance_status": "not_screened",
       "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
+      "possible_matches": [
+        "runtipi:readarr"
+      ]
     },
     {
       "blockers": [],
@@ -8791,6 +8795,40 @@
       "fields": [
         {
           "has_default": false,
+          "key": "FOLDER_BOOKS",
+          "required": true,
+          "sensitive": false
+        }
+      ],
+      "generated_credentials": 0,
+      "id": "openbooks",
+      "images": [
+        "evanbuss/openbooks:4.5.0"
+      ],
+      "importable": true,
+      "primary_image": "evanbuss/openbooks:4.5.0",
+      "required_inputs": 1,
+      "service_count": 1,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/openbooks/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": "github:evan-buss/openbooks"
+      },
+      "identity": "github:evan-buss/openbooks",
+      "identity_status": "source_declared_repository",
+      "image_family": "evanbuss/openbooks",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": []
+    },
+    {
+      "blockers": [],
+      "fields": [
+        {
+          "has_default": false,
           "key": "GRAMPSWEB_TREE",
           "required": true,
           "sensitive": false
@@ -8850,6 +8888,40 @@
       "identity": "github:gristlabs/grist-core",
       "identity_status": "source_declared_repository",
       "image_family": "gristlabs/grist",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": []
+    },
+    {
+      "blockers": [],
+      "fields": [
+        {
+          "has_default": false,
+          "key": "FOLDER_MUSIC",
+          "required": true,
+          "sensitive": false
+        }
+      ],
+      "generated_credentials": 0,
+      "id": "navidrome",
+      "images": [
+        "deluan/navidrome:0.63.2"
+      ],
+      "importable": true,
+      "primary_image": "deluan/navidrome:0.63.2",
+      "required_inputs": 1,
+      "service_count": 1,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/navidrome/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": "github:navidrome/navidrome"
+      },
+      "identity": "github:navidrome/navidrome",
+      "identity_status": "source_declared_repository",
+      "image_family": "deluan/navidrome",
       "maintenance_status": "not_screened",
       "verification_status": "not_qualified_by_this_queue",
       "possible_matches": []
@@ -8927,6 +8999,128 @@
       "fields": [
         {
           "has_default": false,
+          "key": "FOLDER_MEDIA",
+          "required": true,
+          "sensitive": false
+        },
+        {
+          "has_default": true,
+          "key": "TZ",
+          "required": false,
+          "sensitive": false
+        }
+      ],
+      "generated_credentials": 0,
+      "id": "komga",
+      "images": [
+        "ghcr.io/gotson/komga:1.26.3"
+      ],
+      "importable": true,
+      "primary_image": "ghcr.io/gotson/komga:1.26.3",
+      "required_inputs": 1,
+      "service_count": 1,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/komga/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": "github:gotson/komga"
+      },
+      "identity": "github:gotson/komga",
+      "identity_status": "source_declared_repository",
+      "image_family": "ghcr.io/gotson/komga",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": []
+    },
+    {
+      "blockers": [],
+      "fields": [
+        {
+          "has_default": false,
+          "key": "FOLDER_MUSIC",
+          "required": true,
+          "sensitive": false
+        },
+        {
+          "has_default": true,
+          "key": "TZ",
+          "required": false,
+          "sensitive": false
+        }
+      ],
+      "generated_credentials": 0,
+      "id": "mstream",
+      "images": [
+        "lscr.io/linuxserver/mstream:v5.12.2-ls190"
+      ],
+      "importable": true,
+      "primary_image": "lscr.io/linuxserver/mstream:v5.12.2-ls190",
+      "required_inputs": 1,
+      "service_count": 1,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/mstream/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": "github:irosthebeggar/mstream"
+      },
+      "identity": "github:irosthebeggar/mstream",
+      "identity_status": "source_declared_repository",
+      "image_family": "lscr.io/linuxserver/mstream",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": []
+    },
+    {
+      "blockers": [],
+      "fields": [
+        {
+          "has_default": false,
+          "key": "FOLDER_BOOKS",
+          "required": true,
+          "sensitive": false
+        },
+        {
+          "has_default": true,
+          "key": "TZ",
+          "required": false,
+          "sensitive": false
+        }
+      ],
+      "generated_credentials": 0,
+      "id": "calibre-web",
+      "images": [
+        "lscr.io/linuxserver/calibre-web:0.6.27"
+      ],
+      "importable": true,
+      "primary_image": "lscr.io/linuxserver/calibre-web:0.6.27",
+      "required_inputs": 1,
+      "service_count": 1,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/calibre-web/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": "github:janeczku/calibre-web"
+      },
+      "identity": "github:janeczku/calibre-web",
+      "identity_status": "source_declared_repository",
+      "image_family": "lscr.io/linuxserver/calibre-web",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": [
+        "caprover:calibre"
+      ]
+    },
+    {
+      "blockers": [],
+      "fields": [
+        {
+          "has_default": false,
           "key": "APP_PASSWORD",
           "required": true,
           "sensitive": true
@@ -8958,6 +9152,208 @@
       "identity": "github:librespeed/speedtest",
       "identity_status": "source_declared_repository",
       "image_family": "lscr.io/linuxserver/librespeed",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": []
+    },
+    {
+      "blockers": [],
+      "fields": [
+        {
+          "has_default": false,
+          "key": "FOLDER_MEDIA",
+          "required": true,
+          "sensitive": false
+        },
+        {
+          "has_default": true,
+          "key": "TZ",
+          "required": false,
+          "sensitive": false
+        }
+      ],
+      "generated_credentials": 0,
+      "id": "lidarr",
+      "images": [
+        "ghcr.io/linuxserver/lidarr:3.1.0"
+      ],
+      "importable": true,
+      "primary_image": "ghcr.io/linuxserver/lidarr:3.1.0",
+      "required_inputs": 1,
+      "service_count": 1,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/lidarr/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": "github:lidarr/lidarr"
+      },
+      "identity": "github:lidarr/lidarr",
+      "identity_status": "source_declared_repository",
+      "image_family": "ghcr.io/linuxserver/lidarr",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": []
+    },
+    {
+      "blockers": [],
+      "fields": [
+        {
+          "has_default": false,
+          "key": "FOLDER_MEDIA",
+          "required": true,
+          "sensitive": false
+        },
+        {
+          "has_default": true,
+          "key": "TZ",
+          "required": false,
+          "sensitive": false
+        }
+      ],
+      "generated_credentials": 0,
+      "id": "radarr",
+      "images": [
+        "ghcr.io/linuxserver/radarr:6.3.0"
+      ],
+      "importable": true,
+      "primary_image": "ghcr.io/linuxserver/radarr:6.3.0",
+      "required_inputs": 1,
+      "service_count": 1,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/radarr/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": "github:radarr/radarr"
+      },
+      "identity": "github:radarr/radarr",
+      "identity_status": "source_declared_repository",
+      "image_family": "ghcr.io/linuxserver/radarr",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": []
+    },
+    {
+      "blockers": [],
+      "fields": [
+        {
+          "has_default": false,
+          "key": "FOLDER_MEDIA",
+          "required": true,
+          "sensitive": false
+        },
+        {
+          "has_default": true,
+          "key": "TZ",
+          "required": false,
+          "sensitive": false
+        }
+      ],
+      "generated_credentials": 0,
+      "id": "readarr",
+      "images": [
+        "lscr.io/linuxserver/readarr:0.4.19-nightly"
+      ],
+      "importable": true,
+      "primary_image": "lscr.io/linuxserver/readarr:0.4.19-nightly",
+      "required_inputs": 1,
+      "service_count": 1,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/readarr/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": "github:readarr/readarr"
+      },
+      "identity": "github:readarr/readarr",
+      "identity_status": "source_declared_repository",
+      "image_family": "lscr.io/linuxserver/readarr",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": [
+        "caprover:readarr"
+      ]
+    },
+    {
+      "blockers": [],
+      "fields": [
+        {
+          "has_default": false,
+          "key": "FOLDER_USENET",
+          "required": true,
+          "sensitive": false
+        },
+        {
+          "has_default": true,
+          "key": "TZ",
+          "required": false,
+          "sensitive": false
+        }
+      ],
+      "generated_credentials": 0,
+      "id": "sabnzbd",
+      "images": [
+        "lscr.io/linuxserver/sabnzbd:5.1.2"
+      ],
+      "importable": true,
+      "primary_image": "lscr.io/linuxserver/sabnzbd:5.1.2",
+      "required_inputs": 1,
+      "service_count": 1,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/sabnzbd/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": "github:sabnzbd/sabnzbd"
+      },
+      "identity": "github:sabnzbd/sabnzbd",
+      "identity_status": "source_declared_repository",
+      "image_family": "lscr.io/linuxserver/sabnzbd",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": []
+    },
+    {
+      "blockers": [],
+      "fields": [
+        {
+          "has_default": false,
+          "key": "FOLDER_MEDIA",
+          "required": true,
+          "sensitive": false
+        },
+        {
+          "has_default": true,
+          "key": "TZ",
+          "required": false,
+          "sensitive": false
+        }
+      ],
+      "generated_credentials": 0,
+      "id": "sonarr",
+      "images": [
+        "lscr.io/linuxserver/sonarr:4.0.19"
+      ],
+      "importable": true,
+      "primary_image": "lscr.io/linuxserver/sonarr:4.0.19",
+      "required_inputs": 1,
+      "service_count": 1,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/sonarr/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": "github:sonarr/sonarr"
+      },
+      "identity": "github:sonarr/sonarr",
+      "identity_status": "source_declared_repository",
+      "image_family": "lscr.io/linuxserver/sonarr",
       "maintenance_status": "not_screened",
       "verification_status": "not_qualified_by_this_queue",
       "possible_matches": []
@@ -8998,6 +9394,46 @@
       "identity": "unresolved:caprover:rstudio",
       "identity_status": "unresolved",
       "image_family": "rocker/rstudio",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": []
+    },
+    {
+      "blockers": [],
+      "fields": [
+        {
+          "has_default": false,
+          "key": "FOLDER_MEDIA",
+          "required": true,
+          "sensitive": false
+        },
+        {
+          "has_default": true,
+          "key": "TZ",
+          "required": false,
+          "sensitive": false
+        }
+      ],
+      "generated_credentials": 0,
+      "id": "emby",
+      "images": [
+        "lscr.io/linuxserver/emby:4.9.5"
+      ],
+      "importable": true,
+      "primary_image": "lscr.io/linuxserver/emby:4.9.5",
+      "required_inputs": 1,
+      "service_count": 1,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/emby/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": null
+      },
+      "identity": "unresolved:runtipi:emby",
+      "identity_status": "unresolved",
+      "image_family": "lscr.io/linuxserver/emby",
       "maintenance_status": "not_screened",
       "verification_status": "not_qualified_by_this_queue",
       "possible_matches": []
@@ -9332,6 +9768,65 @@
       "fields": [
         {
           "has_default": false,
+          "key": "ROMM_IGDB_CLIENT_ID",
+          "required": false,
+          "sensitive": false
+        },
+        {
+          "has_default": false,
+          "key": "ROMM_IGDB_CLIENT_SECRET",
+          "required": false,
+          "sensitive": true
+        },
+        {
+          "has_default": false,
+          "key": "ROMM_MOBYGAMES_API_KEY",
+          "required": false,
+          "sensitive": true
+        },
+        {
+          "has_default": false,
+          "key": "ROMM_STEAMGRIDDB_API_KEY",
+          "required": false,
+          "sensitive": true
+        },
+        {
+          "has_default": false,
+          "key": "FOLDER_ROMS",
+          "required": true,
+          "sensitive": false
+        }
+      ],
+      "generated_credentials": 3,
+      "id": "romm",
+      "images": [
+        "ghcr.io/rommapp/romm:5.2.0",
+        "lscr.io/linuxserver/mariadb:11.4.4"
+      ],
+      "importable": true,
+      "primary_image": "ghcr.io/rommapp/romm:5.2.0",
+      "required_inputs": 1,
+      "service_count": 2,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/romm/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": "github:rommapp/romm"
+      },
+      "identity": "github:rommapp/romm",
+      "identity_status": "source_declared_repository",
+      "image_family": "ghcr.io/rommapp/romm",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": []
+    },
+    {
+      "blockers": [],
+      "fields": [
+        {
+          "has_default": false,
           "key": "CAP_DB_PASS",
           "required": true,
           "sensitive": true
@@ -9523,6 +10018,144 @@
       "identity": "github:vrtmrz/self-hosted-livesync-server",
       "identity_status": "source_declared_repository",
       "image_family": "couchdb",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": []
+    },
+    {
+      "blockers": [],
+      "fields": [
+        {
+          "has_default": false,
+          "key": "FOLDER_DOWNLOADS_KAPOWARR",
+          "required": true,
+          "sensitive": false
+        },
+        {
+          "has_default": false,
+          "key": "FOLDER_MEDIA",
+          "required": true,
+          "sensitive": false
+        },
+        {
+          "has_default": true,
+          "key": "TZ",
+          "required": false,
+          "sensitive": false
+        }
+      ],
+      "generated_credentials": 0,
+      "id": "kapowarr",
+      "images": [
+        "mrcas/kapowarr:v1.3.1"
+      ],
+      "importable": true,
+      "primary_image": "mrcas/kapowarr:v1.3.1",
+      "required_inputs": 2,
+      "service_count": 1,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/kapowarr/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": "github:casvt/kapowarr"
+      },
+      "identity": "github:casvt/kapowarr",
+      "identity_status": "source_declared_repository",
+      "image_family": "mrcas/kapowarr",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": []
+    },
+    {
+      "blockers": [],
+      "fields": [
+        {
+          "has_default": false,
+          "key": "FOLDER_COMICS",
+          "required": true,
+          "sensitive": false
+        },
+        {
+          "has_default": false,
+          "key": "FOLDER_DOWNLOADS_MYLAR3",
+          "required": true,
+          "sensitive": false
+        },
+        {
+          "has_default": true,
+          "key": "TZ",
+          "required": false,
+          "sensitive": false
+        }
+      ],
+      "generated_credentials": 0,
+      "id": "mylar3",
+      "images": [
+        "lscr.io/linuxserver/mylar3:v0.7.1-ls84"
+      ],
+      "importable": true,
+      "primary_image": "lscr.io/linuxserver/mylar3:v0.7.1-ls84",
+      "required_inputs": 2,
+      "service_count": 1,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/mylar3/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": "github:mylar3/mylar3"
+      },
+      "identity": "github:mylar3/mylar3",
+      "identity_status": "source_declared_repository",
+      "image_family": "lscr.io/linuxserver/mylar3",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": []
+    },
+    {
+      "blockers": [],
+      "fields": [
+        {
+          "has_default": false,
+          "key": "FOLDER_BOOKS_SPOKEN",
+          "required": true,
+          "sensitive": false
+        },
+        {
+          "has_default": false,
+          "key": "FOLDER_PODCASTS",
+          "required": true,
+          "sensitive": false
+        },
+        {
+          "has_default": true,
+          "key": "TZ",
+          "required": false,
+          "sensitive": false
+        }
+      ],
+      "generated_credentials": 0,
+      "id": "booksonic",
+      "images": [
+        "lscr.io/linuxserver/booksonic-air:2201.1.0"
+      ],
+      "importable": true,
+      "primary_image": "lscr.io/linuxserver/booksonic-air:2201.1.0",
+      "required_inputs": 2,
+      "service_count": 1,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/booksonic/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": "github:popeen/booksonic-air"
+      },
+      "identity": "github:popeen/booksonic-air",
+      "identity_status": "source_declared_repository",
+      "image_family": "lscr.io/linuxserver/booksonic-air",
       "maintenance_status": "not_screened",
       "verification_status": "not_qualified_by_this_queue",
       "possible_matches": []
@@ -10094,6 +10727,58 @@
       "fields": [
         {
           "has_default": false,
+          "key": "FOLDER_BOOKS",
+          "required": true,
+          "sensitive": false
+        },
+        {
+          "has_default": false,
+          "key": "FOLDER_COMICS",
+          "required": true,
+          "sensitive": false
+        },
+        {
+          "has_default": false,
+          "key": "FOLDER_MANGA",
+          "required": true,
+          "sensitive": false
+        },
+        {
+          "has_default": true,
+          "key": "TZ",
+          "required": false,
+          "sensitive": false
+        }
+      ],
+      "generated_credentials": 0,
+      "id": "kavita",
+      "images": [
+        "jvmilazz0/kavita:0.9.1"
+      ],
+      "importable": true,
+      "primary_image": "jvmilazz0/kavita:0.9.1",
+      "required_inputs": 3,
+      "service_count": 1,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/kavita/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": "github:kareadita/kavita"
+      },
+      "identity": "github:kareadita/kavita",
+      "identity_status": "source_declared_repository",
+      "image_family": "jvmilazz0/kavita",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": []
+    },
+    {
+      "blockers": [],
+      "fields": [
+        {
+          "has_default": false,
           "key": "CAP_DB_URL",
           "required": true,
           "sensitive": true
@@ -10251,6 +10936,58 @@
       "identity": "unresolved:caprover:statping",
       "identity_status": "unresolved",
       "image_family": "statping/statping",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": []
+    },
+    {
+      "blockers": [],
+      "fields": [
+        {
+          "has_default": false,
+          "key": "FIRESHARE_USERNAME",
+          "required": true,
+          "sensitive": false
+        },
+        {
+          "has_default": false,
+          "key": "FIRESHARE_PASSWORD",
+          "required": true,
+          "sensitive": true
+        },
+        {
+          "has_default": false,
+          "key": "FOLDER_VIDEOS_FIRESHARE_VIDEOS",
+          "required": true,
+          "sensitive": false
+        },
+        {
+          "has_default": false,
+          "key": "FOLDER_IMAGES_FIRESHARE_IMAGES",
+          "required": true,
+          "sensitive": false
+        }
+      ],
+      "generated_credentials": 1,
+      "id": "fireshare",
+      "images": [
+        "shaneisrael/fireshare:1.7.9"
+      ],
+      "importable": true,
+      "primary_image": "shaneisrael/fireshare:1.7.9",
+      "required_inputs": 4,
+      "service_count": 1,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/fireshare/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": "github:shaneisrael/fireshare"
+      },
+      "identity": "github:shaneisrael/fireshare",
+      "identity_status": "source_declared_repository",
+      "image_family": "shaneisrael/fireshare",
       "maintenance_status": "not_screened",
       "verification_status": "not_qualified_by_this_queue",
       "possible_matches": []
@@ -10536,7 +11273,7 @@
       "blockers": [
         {
           "category": "refused",
-          "feature": "host path"
+          "feature": "plan policy"
         }
       ],
       "id": "metube",
@@ -10781,34 +11518,6 @@
         {
           "category": "refused",
           "feature": "host path"
-        },
-        {
-          "category": "refused",
-          "feature": "host path"
-        }
-      ],
-      "id": "kapowarr",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/kapowarr/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": "github:casvt/kapowarr"
-      },
-      "identity": "github:casvt/kapowarr",
-      "identity_status": "source_declared_repository",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
-          "category": "refused",
-          "feature": "host path"
         }
       ],
       "id": "code-server",
@@ -10902,10 +11611,6 @@
     },
     {
       "blockers": [
-        {
-          "category": "refused",
-          "feature": "host path"
-        },
         {
           "category": "refused",
           "feature": "host path"
@@ -11196,30 +11901,6 @@
       "blockers": [
         {
           "category": "refused",
-          "feature": "host path"
-        }
-      ],
-      "id": "openbooks",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/openbooks/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": "github:evan-buss/openbooks"
-      },
-      "identity": "github:evan-buss/openbooks",
-      "identity_status": "source_declared_repository",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
-          "category": "refused",
           "feature": "plan policy"
         }
       ],
@@ -11242,10 +11923,6 @@
     },
     {
       "blockers": [
-        {
-          "category": "refused",
-          "feature": "host path"
-        },
         {
           "category": "refused",
           "feature": "host path"
@@ -11443,30 +12120,6 @@
           "feature": "host path"
         }
       ],
-      "id": "komga",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/komga/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": "github:gotson/komga"
-      },
-      "identity": "github:gotson/komga",
-      "identity_status": "source_declared_repository",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
-          "category": "refused",
-          "feature": "host path"
-        }
-      ],
       "id": "halo",
       "importable": false,
       "source": "runtipi",
@@ -11517,10 +12170,6 @@
         {
           "category": "refused",
           "feature": "devices"
-        },
-        {
-          "category": "refused",
-          "feature": "host path"
         },
         {
           "category": "not modelled",
@@ -11807,10 +12456,6 @@
     {
       "blockers": [
         {
-          "category": "refused",
-          "feature": "host path"
-        },
-        {
           "category": "not modelled",
           "feature": "user"
         }
@@ -11826,30 +12471,6 @@
         "declared_project": "github:ipsingh06/seedsync"
       },
       "identity": "github:ipsingh06/seedsync",
-      "identity_status": "source_declared_repository",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
-          "category": "refused",
-          "feature": "host path"
-        }
-      ],
-      "id": "mstream",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/mstream/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": "github:irosthebeggar/mstream"
-      },
-      "identity": "github:irosthebeggar/mstream",
       "identity_status": "source_declared_repository",
       "image_family": null,
       "maintenance_status": "not_screened",
@@ -11924,7 +12545,7 @@
       "blockers": [
         {
           "category": "refused",
-          "feature": "host path"
+          "feature": "plan policy"
         }
       ],
       "id": "jackett",
@@ -11938,30 +12559,6 @@
         "declared_project": "github:jackett/jackett"
       },
       "identity": "github:jackett/jackett",
-      "identity_status": "source_declared_repository",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
-          "category": "refused",
-          "feature": "host path"
-        }
-      ],
-      "id": "calibre-web",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/calibre-web/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": "github:janeczku/calibre-web"
-      },
-      "identity": "github:janeczku/calibre-web",
       "identity_status": "source_declared_repository",
       "image_family": null,
       "maintenance_status": "not_screened",
@@ -11996,7 +12593,7 @@
       "blockers": [
         {
           "category": "refused",
-          "feature": "host path"
+          "feature": "plan policy"
         }
       ],
       "id": "jellyfin",
@@ -12062,38 +12659,6 @@
         "declared_project": "github:joshuaavalon/docker-cloudflare"
       },
       "identity": "github:joshuaavalon/docker-cloudflare",
-      "identity_status": "source_declared_repository",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
-          "category": "refused",
-          "feature": "host path"
-        },
-        {
-          "category": "refused",
-          "feature": "host path"
-        },
-        {
-          "category": "refused",
-          "feature": "host path"
-        }
-      ],
-      "id": "kavita",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/kavita/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": "github:kareadita/kavita"
-      },
-      "identity": "github:kareadita/kavita",
       "identity_status": "source_declared_repository",
       "image_family": null,
       "maintenance_status": "not_screened",
@@ -12203,10 +12768,6 @@
     {
       "blockers": [
         {
-          "category": "refused",
-          "feature": "host path"
-        },
-        {
           "category": "not modelled",
           "feature": "internalPort"
         },
@@ -12300,30 +12861,6 @@
       "blockers": [
         {
           "category": "refused",
-          "feature": "host path"
-        }
-      ],
-      "id": "lidarr",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/lidarr/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": "github:lidarr/lidarr"
-      },
-      "identity": "github:lidarr/lidarr",
-      "identity_status": "source_declared_repository",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
-          "category": "refused",
           "feature": "plan policy"
         }
       ],
@@ -12349,10 +12886,6 @@
         {
           "category": "not modelled",
           "feature": "addPorts"
-        },
-        {
-          "category": "refused",
-          "feature": "host path"
         }
       ],
       "id": "deluge",
@@ -12795,34 +13328,6 @@
     {
       "blockers": [
         {
-          "category": "refused",
-          "feature": "host path"
-        },
-        {
-          "category": "refused",
-          "feature": "host path"
-        }
-      ],
-      "id": "mylar3",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/mylar3/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": "github:mylar3/mylar3"
-      },
-      "identity": "github:mylar3/mylar3",
-      "identity_status": "source_declared_repository",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
           "category": "not modelled",
           "feature": "healthCheck"
         }
@@ -12838,30 +13343,6 @@
         "declared_project": "github:n8n-io/n8n"
       },
       "identity": "github:n8n-io/n8n",
-      "identity_status": "source_declared_repository",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
-          "category": "refused",
-          "feature": "host path"
-        }
-      ],
-      "id": "navidrome",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/navidrome/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": "github:navidrome/navidrome"
-      },
-      "identity": "github:navidrome/navidrome",
       "identity_status": "source_declared_repository",
       "image_family": null,
       "maintenance_status": "not_screened",
@@ -13275,10 +13756,6 @@
     {
       "blockers": [
         {
-          "category": "refused",
-          "feature": "host path"
-        },
-        {
           "category": "not modelled",
           "feature": "overrides"
         },
@@ -13336,10 +13813,6 @@
       "blockers": [
         {
           "category": "refused",
-          "feature": "host path"
-        },
-        {
-          "category": "refused",
           "feature": "networkMode"
         }
       ],
@@ -13387,34 +13860,6 @@
     {
       "blockers": [
         {
-          "category": "refused",
-          "feature": "host path"
-        },
-        {
-          "category": "refused",
-          "feature": "host path"
-        }
-      ],
-      "id": "booksonic",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/booksonic/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": "github:popeen/booksonic-air"
-      },
-      "identity": "github:popeen/booksonic-air",
-      "identity_status": "source_declared_repository",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
           "category": "not modelled",
           "feature": "extraLabels"
         },
@@ -13447,10 +13892,6 @@
           "feature": "addPorts"
         },
         {
-          "category": "refused",
-          "feature": "host path"
-        },
-        {
           "category": "not modelled",
           "feature": "internalPort"
         }
@@ -13466,54 +13907,6 @@
         "declared_project": "github:qbittorrent/qbittorrent"
       },
       "identity": "github:qbittorrent/qbittorrent",
-      "identity_status": "source_declared_repository",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
-          "category": "refused",
-          "feature": "host path"
-        }
-      ],
-      "id": "radarr",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/radarr/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": "github:radarr/radarr"
-      },
-      "identity": "github:radarr/radarr",
-      "identity_status": "source_declared_repository",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
-          "category": "refused",
-          "feature": "host path"
-        }
-      ],
-      "id": "readarr",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/readarr/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": "github:readarr/readarr"
-      },
-      "identity": "github:readarr/readarr",
       "identity_status": "source_declared_repository",
       "image_family": null,
       "maintenance_status": "not_screened",
@@ -13628,55 +14021,7 @@
       "blockers": [
         {
           "category": "refused",
-          "feature": "host path"
-        }
-      ],
-      "id": "romm",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/romm/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": "github:rommapp/romm"
-      },
-      "identity": "github:rommapp/romm",
-      "identity_status": "source_declared_repository",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
-          "category": "refused",
-          "feature": "host path"
-        }
-      ],
-      "id": "sabnzbd",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/sabnzbd/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": "github:sabnzbd/sabnzbd"
-      },
-      "identity": "github:sabnzbd/sabnzbd",
-      "identity_status": "source_declared_repository",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
-          "category": "refused",
-          "feature": "host path"
+          "feature": "plan policy"
         }
       ],
       "id": "podfetch",
@@ -13773,46 +14118,6 @@
         {
           "category": "refused",
           "feature": "host path"
-        },
-        {
-          "category": "refused",
-          "feature": "host path"
-        }
-      ],
-      "id": "fireshare",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/fireshare/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": "github:shaneisrael/fireshare"
-      },
-      "identity": "github:shaneisrael/fireshare",
-      "identity_status": "source_declared_repository",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
-          "category": "refused",
-          "feature": "host path"
-        },
-        {
-          "category": "refused",
-          "feature": "host path"
-        },
-        {
-          "category": "refused",
-          "feature": "host path"
-        },
-        {
-          "category": "refused",
-          "feature": "host path"
         }
       ],
       "id": "slskd",
@@ -13826,30 +14131,6 @@
         "declared_project": "github:slskd/slskd"
       },
       "identity": "github:slskd/slskd",
-      "identity_status": "source_declared_repository",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
-          "category": "refused",
-          "feature": "host path"
-        }
-      ],
-      "id": "sonarr",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/sonarr/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": "github:sonarr/sonarr"
-      },
-      "identity": "github:sonarr/sonarr",
       "identity_status": "source_declared_repository",
       "image_family": null,
       "maintenance_status": "not_screened",
@@ -14025,10 +14306,6 @@
         {
           "category": "not modelled",
           "feature": "addPorts"
-        },
-        {
-          "category": "refused",
-          "feature": "host path"
         }
       ],
       "id": "transmission",
@@ -14100,7 +14377,7 @@
       "blockers": [
         {
           "category": "refused",
-          "feature": "host path"
+          "feature": "plan policy"
         }
       ],
       "id": "tubearchivist",
@@ -14146,10 +14423,6 @@
     },
     {
       "blockers": [
-        {
-          "category": "refused",
-          "feature": "host path"
-        },
         {
           "category": "needs input",
           "feature": "platform placeholder"
@@ -14216,7 +14489,7 @@
       "blockers": [
         {
           "category": "refused",
-          "feature": "host path"
+          "feature": "plan policy"
         }
       ],
       "id": "whisparr",
@@ -14329,22 +14602,6 @@
         {
           "category": "not modelled",
           "feature": "addPorts"
-        },
-        {
-          "category": "refused",
-          "feature": "host path"
-        },
-        {
-          "category": "refused",
-          "feature": "host path"
-        },
-        {
-          "category": "refused",
-          "feature": "host path"
-        },
-        {
-          "category": "refused",
-          "feature": "host path"
         }
       ],
       "id": "lidarr-deemix",
@@ -22604,15 +22861,7 @@
       "blockers": [
         {
           "category": "refused",
-          "feature": "host path"
-        },
-        {
-          "category": "refused",
-          "feature": "host path"
-        },
-        {
-          "category": "refused",
-          "feature": "host path"
+          "feature": "plan policy"
         }
       ],
       "id": "deemix",
@@ -22626,30 +22875,6 @@
         "declared_project": null
       },
       "identity": "unresolved:runtipi:deemix",
-      "identity_status": "unresolved",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
-          "category": "refused",
-          "feature": "host path"
-        }
-      ],
-      "id": "emby",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/emby/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": null
-      },
-      "identity": "unresolved:runtipi:emby",
       "identity_status": "unresolved",
       "image_family": null,
       "maintenance_status": "not_screened",
@@ -22857,10 +23082,6 @@
         {
           "category": "not modelled",
           "feature": "addPorts"
-        },
-        {
-          "category": "refused",
-          "feature": "host path"
         },
         {
           "category": "not modelled",
