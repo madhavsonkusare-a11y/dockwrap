@@ -3,7 +3,7 @@ import { chromium, expect } from '@playwright/test';
 import { readFile, writeFile } from 'node:fs/promises';
 
 const [mode, endpoint, statePath] = process.argv.slice(2);
-if (!['create', 'read'].includes(mode) || !statePath) throw new Error('create|read URL STATE required');
+if (!['first-use', 'verify'].includes(mode) || !statePath) throw new Error('first-use|verify URL STATE required');
 const target = new URL(endpoint);
 if (target.protocol !== 'http:' || !['127.0.0.1', 'localhost', '[::1]'].includes(target.hostname)) throw new Error('loopback only');
 const browser = await chromium.launch({ headless: true, channel: 'msedge' });
@@ -11,7 +11,7 @@ try {
   const page = await browser.newPage();
   page.setDefaultTimeout(30000);
   const marker = 'Local Store encrypted browser qualification';
-  if (mode === 'create') {
+  if (mode === 'first-use') {
     await page.goto(endpoint);
     if (!await page.evaluate(() => Boolean(window.isSecureContext && window.crypto.subtle))) {
       throw new Error('loopback browser crypto unavailable');

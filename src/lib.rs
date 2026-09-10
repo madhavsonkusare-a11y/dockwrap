@@ -11,6 +11,7 @@ pub mod offerings;
 pub mod operations;
 pub mod plan;
 pub mod platform;
+pub mod qualification;
 pub mod recipes;
 pub mod recovery;
 pub mod runtime;

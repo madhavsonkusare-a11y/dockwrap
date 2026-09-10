@@ -8,8 +8,8 @@ import { chromium } from '@playwright/test';
 import { readFile, writeFile } from 'node:fs/promises';
 
 const [mode, endpoint, statePath] = process.argv.slice(2);
-if (!['deploy', 'verify'].includes(mode) || !statePath) {
-  throw new Error('deploy|verify URL STATE required');
+if (!['first-use', 'verify'].includes(mode) || !statePath) {
+  throw new Error('first-use|verify URL STATE required');
 }
 const target = new URL(endpoint);
 if (target.protocol !== 'http:' || !['127.0.0.1', 'localhost', '[::1]'].includes(target.hostname)) {
@@ -97,7 +97,7 @@ async function editor() {
   }
 }
 
-if (mode === 'deploy') {
+if (mode === 'first-use') {
   await deploy();
   await runFlow('after deploy');
   await editor();

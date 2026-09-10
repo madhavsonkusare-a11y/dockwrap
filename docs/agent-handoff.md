@@ -1,5 +1,70 @@
 # Local Store: agent handoff
 
+## September 10 — B3: one harness instead of a test per app
+
+The plan (`backend-app-coverage-plan.md`) sequences B1 inventory, B2 **first**
+approved app, B3 reusable runner. B2 got done three times — PrivateBin,
+Node-RED, flatnotes — and each app arrived with its own copy of the same
+scaffolding: a Docker helper, a cleanup guard, a private config root, a
+hand-written evidence file. Planka would have been a fourth. `src/qualification.rs`
+is that scaffolding once.
+
+**What an app now supplies is only what is genuinely its own:** the answers it
+is installed with, and a probe that says whether a person could use it. The
+harness supplies the rest, and the step names are the product promise in order
+— installs with one action, answers on its address, is usable, survives a
+restart, reinstalls over data it kept, keeps the credentials it generated, is
+usable again, removes everything it created, leaves other containers alone.
+
+**The B3 gate, item by item, each with a fixture that fails when it should:**
+
+- *Timeout*: an app that never answers ends the run as an ordinary step
+  failure, in well under the wait.
+- *Cleanup*: a run that fails part way still removes what it created — the guard
+  is a `Drop`, and the fixture asserts three removals after a failed step.
+- *Redaction*: everything recorded passes through `redact`, checked with a
+  password in a failure message. A passing step records no detail at all, so a
+  green report cannot carry output nobody read.
+- *Unrelated-container protection*: containers noted before the run must all
+  exist after; new containers of our own do not read as harm.
+- *Preserved credentials*: the generated-secret file must be byte-identical
+  across a keep-data reinstall, which is the failure that looks exactly like
+  data loss.
+- *Deterministic output*: evidence carries no timestamps or durations, so a
+  diff shows a real change rather than a re-run.
+- *Resume*: `Batch` skips anything with a recorded result, writes atomically so
+  an interruption leaves no half answer, treats an unreadable file as no
+  answer, and can retry only the failures on request.
+
+**Proven against real Docker.** `tests/qualify_apps.rs` ran PrivateBin and
+Node-RED through the harness in 66s; a second run did nothing and finished
+instantly, which is the resume behaviour working. `tests/privatebin_lifecycle.rs`
+and `tests/nodered_lifecycle.rs` are deleted — 475 lines replaced by two entries
+in a list — and both manifests now name evidence the harness regenerates.
+
+**Not yet ported: flatnotes.** Its probe still depends on a note the old test
+wrote into the managed folder from the host, so it is not self-contained. Its
+dedicated test stays until the probe creates that note through the app itself.
+That is the first thing to finish here.
+
+**Planka was investigated and must be withheld**, on four independent counts:
+the definition pins 1.26.3, built 2025-09-04, while upstream is on v2.2.1; the
+database runs `POSTGRES_HOST_AUTH_METHOD=trust` so it has no password at all;
+`postgres:14-alpine` is a floating tag and Postgres 14 reaches end of life in
+November 2026; and `check-template-platforms.py` cannot audit `ghcr.io` at all,
+because it speaks Docker Hub's JSON. No manifest was added for it.
+
+Two things that came out of that investigation and are worth acting on:
+**43 images across 42 importable candidates are on ghcr.io** and none can be
+audited today. And planka does **not** exercise a generated credential reaching
+a second container, which was the reason it was picked;
+**`runtipi:nextcloud-mini` does** — one `NEXTCLOUD_MINI_DB_PASSWORD` presented
+to both the app and its database, both images on Docker Hub, rebuilt 2026-08-12.
+
+Validation: 272 Rust tests across 26 binaries, strict Clippy, fmt, and the
+offline gates. No leftover container, network or volume.
+
+
 ## September 10 — tasks 14 and 15 close; an interrupted install can be finished
 
 **Nothing left in the original 33 can be picked up without the owner.** 29
