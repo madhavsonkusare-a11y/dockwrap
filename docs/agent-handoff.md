@@ -1,5 +1,67 @@
 # Local Store: agent handoff
 
+## September 10 — the batch runs, and it found three real bugs
+
+**Eight of the eight highest-reach open-source candidates now pass**
+qualification end to end: grafana, nginx, wordpress, metabase, uptime-kuma,
+node-red, ollama-cpu, actual. The first run of the same eight was one pass,
+three failures and four skipped. Nothing about those apps changed; three
+defects in this product did.
+
+`examples/qualify_batch.rs` runs ranked candidates through
+`qualification::qualify_template`, resumably. **It is evidence gathering, not
+offering** — `offerings` still resolves only reviewed recipes and approved
+templates, and none of these eight is installable by anybody. What it produces
+is something a promotion decision can read.
+
+### The three defects
+
+**Every keep-data reinstall of an app with a nested data path was refused.**
+The guard that stops a reinstall running over files it does not recognise
+compared the directory listing against the *full* declared path. An app that
+keeps its data in `data/.ollama` puts a single `data` directory on disk, so the
+listing and the list never matched. It now compares the directory that holds
+the data. This would have hit a real person on their second install of Ollama,
+Metabase or anything else nested.
+
+**The first-start health wait was sixty seconds.** Enough for something that
+only opens a port; not enough for WordPress, which runs its own installer on
+first boot, or Metabase, which initialises a schema. Both were rolled back
+while still working. `FIRST_START_TIMEOUT` is three minutes now — cancellable,
+with the interface saying what it is waiting for, so a longer wait is bounded
+and visible while giving up early throws away a working app.
+
+**Half the candidates could not be read at all.** CapRover ships YAML and its
+importer takes JSON; the import report converts in Python, and the batch runner
+did not. Four of eight apps reported "no longer importable" when they were
+fine. `scripts/extract-definitions.py` normalises at extraction.
+
+### What this says about the v1 number
+
+A hundred percent pass rate on eight apps is not a hundred percent pass rate on
+a hundred; these were the highest-reach and best-maintained. But it does say the
+harness works, the fixes are real, and the remaining work is mostly machine
+time — roughly 40 to 90 seconds per app, resumable.
+
+Two limits worth stating. There is still no app-agnostic first-use check, so
+these runs prove install, health, restart, keep-data reinstall, credential
+preservation and clean removal — not that a person could use the app. That is
+V3 in the plan and it is what separates *tested* from merely installed. And
+136 of the 172 open-source importable candidates need no answers and can run
+unattended; the other 36 need a password or a folder before they can.
+
+### How to continue
+
+    python scripts/extract-definitions.py
+    LOCAL_STORE_RUN_DOCKER_TEST=1 cargo run --release --example qualify_batch -- --limit 40
+
+Results land in `.cache/qualification/`; run it again and it resumes. Add
+`--retry-failures` to re-run only what failed.
+
+Validation: 296 Rust tests, strict Clippy, fmt. No leftover container, network
+or volume.
+
+
 ## September 10 — one wrong rule was costing ten apps
 
 **Overall importable is 238**, up from 228. CapRover 117 to 125, Runtipi 111 to

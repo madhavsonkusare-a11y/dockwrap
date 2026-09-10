@@ -18,6 +18,7 @@
 //! review reads it, and a person approves it.
 use crate::error::{AppError, AppResult};
 use crate::runtime::{CommandSpec, HealthProbe, ProcessRunner, DIAGNOSTIC_TIMEOUT};
+use crate::setup::PlanTemplate;
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
@@ -466,14 +467,57 @@ pub fn qualify(
     first_use: &dyn FirstUse,
     scratch: &Path,
 ) -> AppResult<Evidence> {
-    let runner = crate::runtime::SystemProcessRunner;
-    let probe = crate::runtime::HttpHealthProbe;
-    let health = Duration::from_secs(120);
-
     let offering = crate::offerings::offering(app)
         .ok_or_else(|| AppError::invalid(format!("{app} is not offered, so it cannot be run")))?;
     let reviewed = crate::templates::reviewed_template(app);
-    let mut template = offering.plan_template(None)?;
+    let template = offering.plan_template(None)?;
+    let about = Subject {
+        app: app.to_owned(),
+        kind: if offering.is_recipe() {
+            "reviewed recipe"
+        } else {
+            "reviewed mapping"
+        },
+        promotion: reviewed
+            .as_ref()
+            .map(|reviewed| reviewed.promotion.state.clone())
+            .unwrap_or_else(|| "recipe".to_owned()),
+        source_revision: reviewed
+            .as_ref()
+            .map(|reviewed| reviewed.origin.revision.clone())
+            .unwrap_or_default(),
+    };
+    qualify_template(&about, template, answers, first_use, scratch)
+}
+
+/// What a run is about, for the evidence it writes.
+///
+/// Kept separate from the template so the same run flow can qualify something
+/// that is not offered yet. Gathering evidence about a candidate is how it
+/// might one day be offered; it is not itself an offer, and nothing here
+/// changes what `offerings` will resolve.
+#[derive(Debug, Clone)]
+pub struct Subject {
+    pub app: String,
+    pub kind: &'static str,
+    pub promotion: String,
+    pub source_revision: String,
+}
+
+/// Qualify a template that has already been built.
+pub fn qualify_template(
+    about: &Subject,
+    template: PlanTemplate,
+    answers: &BTreeMap<String, String>,
+    first_use: &dyn FirstUse,
+    scratch: &Path,
+) -> AppResult<Evidence> {
+    let app = about.app.as_str();
+    let runner = crate::runtime::SystemProcessRunner;
+    let probe = crate::runtime::HttpHealthProbe;
+    let health = Duration::from_secs(120);
+    let mut template = template;
+    let display_name = app.to_owned();
 
     let isolation = Isolation::new(app, scratch)?;
     isolation.take_over_config_root();
@@ -514,19 +558,11 @@ pub fn qualify(
     }
 
     let installed = steps.run("installs with one action", || {
-        crate::runtime::install_template(&template, offering.display_name(), answers)
+        crate::runtime::install_template(&template, &display_name, answers)
             .map_err(|error| error.message)
     });
     let Some(installed) = installed else {
-        return Ok(finish(
-            app,
-            &offering,
-            reviewed.as_ref(),
-            images,
-            BTreeMap::new(),
-            first_use,
-            steps,
-        ));
+        return Ok(finish(about, images, BTreeMap::new(), first_use, steps));
     };
 
     steps.run("answers on its address", || {
@@ -553,7 +589,7 @@ pub fn qualify(
 
     let again = steps.run("reinstalls over data it kept", || {
         crate::runtime::uninstall_and_remove(&installed, false).map_err(|error| error.message)?;
-        let again = crate::runtime::install_template(&template, offering.display_name(), answers)
+        let again = crate::runtime::install_template(&template, &display_name, answers)
             .map_err(|error| error.message)?;
         answered(&probe, &again.launch_url, health)?;
         Ok(again)
@@ -606,15 +642,7 @@ pub fn qualify(
         bystanders.survived(&runner)
     });
 
-    Ok(finish(
-        app,
-        &offering,
-        reviewed.as_ref(),
-        images,
-        image_ids,
-        first_use,
-        steps,
-    ))
+    Ok(finish(about, images, image_ids, first_use, steps))
 }
 
 /// Container image ids for what this run actually ran, so evidence names the
@@ -662,9 +690,7 @@ fn resolved_images(runner: &dyn ProcessRunner, project: &str) -> BTreeMap<String
 }
 
 fn finish(
-    app: &str,
-    offering: &crate::offerings::Offering,
-    reviewed: Option<&crate::templates::ReviewedTemplate>,
+    about: &Subject,
     images: Vec<String>,
     image_ids: BTreeMap<String, String>,
     first_use: &dyn FirstUse,
@@ -672,22 +698,14 @@ fn finish(
 ) -> Evidence {
     let results = steps.into_results();
     Evidence {
-        app: app.to_owned(),
+        app: about.app.clone(),
         passed: results.iter().all(|step| step.passed),
         scope: format!(
-            "{} on one host and one architecture; not a promotion",
-            if offering.is_recipe() {
-                "reviewed recipe, transaction, managed storage and first use"
-            } else {
-                "reviewed mapping, transaction, managed storage and first use"
-            }
+            "{}, transaction, managed storage and first use, on one host and one architecture",
+            about.kind
         ),
-        promotion: reviewed
-            .map(|reviewed| reviewed.promotion.state.clone())
-            .unwrap_or_else(|| "recipe".to_owned()),
-        source_revision: reviewed
-            .map(|reviewed| reviewed.origin.revision.clone())
-            .unwrap_or_default(),
+        promotion: about.promotion.clone(),
+        source_revision: about.source_revision.clone(),
         images,
         image_ids,
         first_use: first_use.describes().to_owned(),

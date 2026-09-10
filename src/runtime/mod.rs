@@ -20,8 +20,8 @@ use std::{
 mod process;
 pub use process::{
     redact, redact_diagnostic, CancelToken, CommandSpec, ProcessError, ProcessErrorCode,
-    ProcessOutput, ProcessRunner, SystemProcessRunner, DIAGNOSTIC_TIMEOUT, LIFECYCLE_TIMEOUT,
-    MAX_CAPTURED_BYTES, PROVISION_TIMEOUT, REDACTED,
+    ProcessOutput, ProcessRunner, SystemProcessRunner, DIAGNOSTIC_TIMEOUT, FIRST_START_TIMEOUT,
+    LIFECYCLE_TIMEOUT, MAX_CAPTURED_BYTES, PROVISION_TIMEOUT, REDACTED,
 };
 
 /// The operation in flight for an app. One mutating operation at a time: two
@@ -794,10 +794,19 @@ pub fn install_source_with(
     let project_dir = root.join(&source.id);
     let created_project = !project_dir.exists();
     if !created_project {
+        // Compared against the first segment of each declared directory, not
+        // the whole relative path. An app that keeps its data in `data/.ollama`
+        // puts a `data` directory here, and matching on the full path made the
+        // listing and the list disagree — so every keep-data reinstall of any
+        // app with a nested data path was refused as unrecognised.
         let allowed = source
             .data_directories
             .iter()
-            .map(String::as_str)
+            .filter_map(|directory| {
+                directory
+                    .split(['/', '\\'])
+                    .find(|segment| !segment.is_empty())
+            })
             .chain(std::iter::once("compose.yaml"))
             .chain(source.extra_files.iter().map(|(name, _)| name.as_str()))
             .collect::<Vec<_>>();
@@ -855,7 +864,7 @@ pub fn install_source_with(
         wait_for_health_with(
             context.health,
             &source.health_url,
-            Duration::from_secs(60),
+            FIRST_START_TIMEOUT,
             context.cancel,
         )?;
         Ok(app)
@@ -1791,6 +1800,51 @@ mod tests {
         assert!(runner.calls.lock().unwrap()[0]
             .args
             .ends_with(&["down".to_owned(), "--volumes".to_owned()]));
+    }
+
+    /// An app that keeps its data somewhere nested — `data/.ollama`, say —
+    /// still puts a single `data` directory here. Matching the listing against
+    /// the full relative path made the two disagree, so every keep-data
+    /// reinstall of such an app was refused as unrecognised. A batch run found
+    /// it on the second and third apps it tried.
+    #[test]
+    fn a_nested_data_path_is_recognised_by_the_directory_that_holds_it() {
+        let root = scratch_root("nested");
+        let project = root.join("nested-app");
+        fs::create_dir_all(project.join("data/.ollama")).unwrap();
+        fs::write(project.join("data/.ollama/model.bin"), b"weights").unwrap();
+        fs::write(
+            project.join("compose.yaml"),
+            b"services: {}
+",
+        )
+        .unwrap();
+
+        let source = InstallSource {
+            id: "nested-app".into(),
+            display_name: "Nested".into(),
+            catalog_id: None,
+            launch_url: "http://localhost:11434".into(),
+            health_url: "http://localhost:11434".into(),
+            host_port: 11434,
+            compose: "services: {}
+"
+            .into(),
+            data_directories: vec!["data/.ollama".into()],
+            extra_files: Vec::new(),
+        };
+        let runner = FakeRunner::passing(6);
+        let installed = install_source_with(
+            &context(&runner, &Ready(true), &Ports(true), &CancelToken::new()),
+            &source,
+            &root,
+            7,
+        )
+        .expect("a nested data path must not block a reinstall");
+        assert_eq!(installed.id, "nested-app");
+        // The person's data is still there, untouched.
+        assert!(project.join("data/.ollama/model.bin").exists());
+        fs::remove_dir_all(&root).ok();
     }
 
     #[test]

@@ -25,6 +25,17 @@ pub const LIFECYCLE_TIMEOUT: Duration = Duration::from_secs(180);
 /// First start and image downloads, which are bounded by network speed.
 pub const PROVISION_TIMEOUT: Duration = Duration::from_secs(900);
 
+/// How long a freshly installed app has to start answering.
+///
+/// A minute is enough for something that only has to open a port, and not
+/// enough for the apps people actually install: WordPress runs its own
+/// installer on first boot, Metabase initialises a schema, and a batch run
+/// found both timing out at sixty seconds while they were still working. It is
+/// cancellable and the interface says what it is waiting for, so the cost of
+/// waiting longer is bounded and visible — whereas the cost of giving up too
+/// early is an install that rolls back a perfectly good app.
+pub const FIRST_START_TIMEOUT: Duration = Duration::from_secs(180);
+
 /// Maximum bytes retained per stream. Reading continues past this point and is
 /// discarded, so the child never blocks writing into a full pipe.
 pub const MAX_CAPTURED_BYTES: usize = 256 * 1024;
