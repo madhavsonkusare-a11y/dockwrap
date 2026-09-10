@@ -106,12 +106,54 @@ the same thing more quietly for apps on ghcr.io, which publishes no pull count
 at all. A pull count now counts only when the image is identifiably the app's
 own: **borrowing a database's popularity is worse than having no number.**
 
+The same mistake came back in a different place. The batch skipped any
+definition that *contained* an infrastructure image, so every app shipping its
+own Postgres or MariaDB — WordPress, Nextcloud, Joplin, Monica, Guacamole, fifty
+in all — was passed over as "not an app". The rule now asks whether *every*
+image is infrastructure. **An app is what it is, not what it stores its data
+in.**
+
 Also: `NOASSERTION` from GitHub means "no licence file detected", not "not open
 source". Reading it as a refusal excluded WordPress and qBittorrent, both GPL.
 
 And a cache keyed on the wrong field never refills: stars and licence came from
 one call, but the skip was keyed on stars, so every project cached before
 licences were collected kept a null licence permanently.
+
+## Rank orders apps, not the definitions of one app
+
+When two sources package the same app, the batch ran whichever ranked higher.
+For Grocy and Tautulli that was CapRover, whose definitions pin images from
+2020 and 2021; Runtipi's pinned the releases upstream published that week. Both
+qualified either way — the old images work — and both would have been withheld
+for their age.
+
+A qualification result proves one definition. Choose the packaging before
+proving it (`--only app --source runtipi`), and make anything that consumes the
+proof check it is about the same definition: the template generator now reads
+the source from the result and refuses a mismatch.
+
+## A timeout carries no reason, and the reason is about to be deleted
+
+Five candidates in a row failed with "Health check timed out" and nothing else.
+Every other install failure explains itself; a timeout only reports that time
+passed. The explanation is in the containers' state and logs — and a failed
+install rolls back, removing exactly those containers.
+
+A timed-out install now reads `ps` and the log tail *before* cleaning up and
+carries them in the error. That helps a person whose install failed as much as
+it helps a batch.
+
+## Registries say how to authenticate; ask them
+
+The image audit refused anything not on Docker Hub, which blocked 89 images.
+Docker Hub, ghcr.io and quay.io each put their token endpoint somewhere
+different, and lscr.io hands callers to ghcr.io. Rather than special-casing
+each, request unauthenticated, read the `WWW-Authenticate` challenge, and fetch
+the token it names. Read the build date from the image config — `created` — not
+a push date, because "last rebuilt" is what a promotion decision turns on.
+
+And a registry answering 429 has said how long to wait. Waiting is not failing.
 
 ## Prove a test can fail
 
