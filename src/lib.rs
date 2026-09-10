@@ -7,6 +7,7 @@ pub mod error;
 pub mod importers;
 pub mod model;
 pub mod native;
+pub mod offerings;
 pub mod operations;
 pub mod plan;
 pub mod platform;

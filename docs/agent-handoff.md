@@ -1,5 +1,246 @@
 # Local Store: agent handoff
 
+## September 10 — Node-RED offered, and a reviewed way to move a pin
+
+Node-RED is approved and offered. Two apps are now installable that came from
+an upstream catalogue rather than a hand-written recipe.
+
+**A correction worth carrying forward: Node-RED does not exercise the setup
+form.** The previous handoff said it would. Its Runtipi definition declares
+`form_fields: []`, exactly like PrivateBin, so the setup form has *still* never
+rendered a real app's fields. The candidates that would are in the queue and
+measured: **121 importable definitions declare fields, 34 of them required**.
+Best first choices are `runtipi:flatnotes` (three required answers, two
+generated credentials, one service) and `runtipi:planka` (four required, one
+generated, two services). That is the next gap, and nothing so far has closed
+it.
+
+**`ImagePin`: a review may move a tag, and nothing else.** The Runtipi
+definition pins 5.0.6; Node-RED released 5.0.7 a week later, migrating to a
+patched JSONata and updating body-parser — dependency fixes worth having in an
+app whose purpose is evaluating expressions somebody writes. The template model
+had no way to say that: definitions are kept verbatim, so the only options were
+to ship the older release or withhold the app. Upstream catalogues lag upstream
+projects constantly, so this would have recurred for every app.
+
+The override is deliberately narrow, with a test for each way it could stop
+being an override and become a second definition wearing the first one's
+provenance: the same repository only, a tag that actually changes, a stated
+reason, a tag that exists at all, and a pin that names an image the definition
+really runs. Pins are applied *before* the image audit, so the audit is forced
+to be about what runs — auditing 5.0.6 while running 5.0.7 fails.
+
+**First use, proven in a real browser and against the real admin API.**
+`scripts/nodered-probe.mjs` deploys a flow through Node-RED's own API, then
+checks what only a running app can show: the editor renders its workspace and
+palette, opens and holds its `/comms` websocket, and draws the deployed
+function node on the canvas; a `GET /probe` returns `local-store-42`, a value
+the function computes rather than echoes, so a reply proves the runtime
+executed user-authored JavaScript. Credentials are asserted encrypted at rest
+and never written in plain text. Passed in 46.92s.
+
+**Verified non-vacuous.** Making the keep-data uninstall destructive turns the
+post-restart flow check into a 404 rather than passing anyway.
+
+**The judgement call, stated plainly: the Node-RED editor has no sign-in.**
+Anyone who can reach it can change flows and run code inside the container.
+That is inherent to Node-RED and normal for a local tool, it is bound to
+loopback only — asserted, including that nothing binds `0.0.0.0` — and it is
+the first of the risk notes the install review shows. If that is the wrong
+call, `promotion.state` in `src/templates/nodered.json` is the one line that
+reverses it.
+
+**An identity mismatch the tests caught.** The catalog lists Node-RED as
+`node-red`; the Runtipi definition describing it is `nodered`. Discovery
+matched offerings by raw id, so an approved app was installable by id and
+findable by nobody. `catalog_index` now resolves through `catalog::catalog_id`,
+which is the alias table that already existed for exactly this.
+
+**Both evidence files stated a promotion state that had gone stale.** They said
+`withheld` while both apps were approved. That field now reads from the
+manifest, so it cannot disagree with the thing it describes.
+
+Proven through the product: `local-store recipes` lists five apps, `install
+nodered` committed `catalog_id: "node-red"` with the editor answering HTTP 200,
+and `uninstall --delete-data` left no container, network or volume.
+
+Validation: 251 Rust tests across 24 binaries, strict Clippy, `cargo fmt
+--check`, thirteen offline gates, 52 Playwright. Scope is unchanged and worth
+repeating: one host, one architecture actually executed.
+
+
+## September 10 — the first imported app a person can actually install
+
+PrivateBin is approved and reachable. Before this, approving anything would
+have been a no-op: `ReviewedTemplate::offerable` was called by nothing but its
+own guard test, and every user-facing path — the catalog listing,
+`recipe_details`, `install_app`, the CLI — resolved through
+`recipes::recipe(id)`, which never looked at a template. The allowlist was a
+shelf.
+
+**`src/offerings.rs` is the one lookup now.** An `Offering` is either a
+reviewed recipe or an approved reviewed template, and `offerings()` filters the
+withheld ones out once rather than asking every call site to remember. Both the
+review a person is shown and the install that follows resolve through it, so
+they cannot describe different things — the same reason `template_for` was made
+a single function when the setup form was built. `OfferingSummary` keeps the
+field names the launcher already read off a recipe, so the review dialog needed
+no new vocabulary to describe an imported app.
+
+Recipes are unchanged where it matters: `Offering::recipe()` still hands
+`begin_install` the recipe's own Compose file, byte for byte. Only an app with
+no such file is rendered from a plan.
+
+**The guard test was narrowed, not deleted.** It used to assert nothing was
+approved, which was true and useful right up until it wasn't. It now asserts
+the approved set equals a named `APPROVED` list, so approving a *second* app
+still has to appear in a diff, and a companion test requires an approved
+template to carry the evidence its approval claims. The catalog, CLI-query and
+facet tests were changed to derive their expected set from `offerings()` rather
+than hardcode three ids — approving an app should update them, not break them.
+
+**Order mattered.** The flag was flipped last, after the wiring, with the guard
+already demanding it. Flipping first would have meant doing the whole refactor
+with a broken guard and no way to tell an accidental approval from the intended
+one.
+
+**An icon fix the test caught.** Imported apps committed with `catalog_id:
+None`, so they installed without an icon while recipes had one. It now resolves
+through the offering named by the plan's id. That is sound only while a plan
+carries its offering's own id, which nothing in the type system enforces, so
+`an_offering_maps_to_a_plan_that_carries_its_own_id` asserts it. The lifecycle
+test renames the plan for isolation and therefore gets no icon — that is the
+guard working, and it asserts exactly that rather than the production value.
+
+**Proven through the product, not around it.**
+`tests/privatebin_lifecycle.rs` now resolves through `offerings::offering`, so
+it fails if the review is withheld or unwired; passed in 32.37s. Then the real
+CLI, against an isolated config root: `local-store install privatebin`
+committed `catalog_id: "privatebin"`, the app answered HTTP 200 on
+`http://localhost:8080`, and `uninstall --delete-data` removed it leaving no
+container, network or volume.
+
+Scope, unchanged by any of this: one host, one architecture actually executed;
+the seven-architecture claim is registry metadata. **Neither offered app
+declares setup fields, so the setup form has still never rendered a real app's
+fields.** Node-RED is the next candidate, and it is the one that would close
+that gap — review the 5.0.7 patch before pinning.
+
+
+## September 10 — PrivateBin qualified, and one decision left for the owner
+
+The B2 gate the last handoff described is met, and the review now ships as
+`src/templates/privatebin.json` rather than living as a test fixture. That move
+is the point: in `tests/fixtures/` the manifest was covered by two unit tests
+and nothing else. In the allowlist it is covered by
+`every_reviewed_template_resolves_to_a_valid_plan` — pinned upstream commit,
+audited images, per-architecture digests, a named lifecycle proof that has to
+exist, a recorded promotion decision — and by
+`scripts/check-template-platforms.py`, which verified its seven published
+architectures against live registry metadata and now re-verifies them offline.
+
+**Browser first use is proven, and the evidence file no longer says otherwise.**
+`tests/privatebin_lifecycle.rs` called `browser_probe` three times while the
+evidence it wrote declared `browser_first_use: "not_tested"` — a stale string
+from a run that predated those calls. The claim is now derived: each probe is an
+assert, so reaching the evidence write means all three passed, and the checks it
+lists say what they were. Passed in 33.68s against the shipped manifest.
+
+What the probes actually establish, which an HTTP readiness check cannot: the
+loopback origin is a secure context exposing `window.crypto.subtle`; a paste
+typed into the real page encrypts, saves and decrypts again from its own link;
+that link still decrypts after a stop/start; and it still decrypts after a
+keep-data uninstall and reinstall.
+
+**Verified non-vacuous.** Turning the keep-data uninstall into a destructive one
+makes the second read fail on `expect(locator).toContainText` rather than
+passing anyway, so the persistence claim is doing work. The tree was restored
+from a byte-identical backup afterwards and the run repeated.
+
+Storage side, unchanged from the previous batch and re-confirmed: writes as the
+documented UID 65534 / GID 82 rather than root, one loopback port binding, the
+data survives restart and keep-data reinstall, delete-data removes every owned
+container, network and volume, and unrelated containers are counted before and
+after and survive. Evidence:
+`docs/evidence/privatebin-storage-windows-2026-09-09.json`.
+
+**Promotion stays withheld, and that is not a gap in the evidence.** The image
+was rebuilt 2026-08-08, publishes linux/amd64 and arm64 among seven
+architectures, and installs and works. What is missing is a decision, not a
+measurement: offering an app to people is the owner's call, and
+`no_reviewed_template_is_offerable_without_an_explicit_approval` exists so that
+call appears in a diff instead of arriving as a side effect of a passing test.
+Flipping `promotion.state` to `"approved"` is the whole change, and it will make
+that guard test fail until somebody rewrites it deliberately.
+
+Scope limits worth keeping in front of whoever picks this up: one host (Windows
+with Docker's Linux engine), one definition, one architecture actually executed.
+The seven-architecture claim is registry metadata, not seven runs. PrivateBin
+declares no setup fields, so **the setup form still has never rendered a real
+app's fields** — approving this app would not close that gap either, and
+Node-RED remains the next candidate after it.
+
+Validation for this batch: 183 library tests, 23 test binaries green, strict
+all-target/all-feature Clippy clean, `cargo fmt --check` clean, and fourteen
+offline gates passing including the refreshed template-platform check. No
+leftover container, network or volume; scratch directories removed. No commit
+or push in this batch.
+
+
+## September 9 — B1 candidate inventory
+
+Implemented `scripts/build-candidate-queue.py` and `examples/candidate_queue.rs`.
+Run `python scripts/build-candidate-queue.py` with the pinned ZIPs in
+`.cache/catalog`; it runs both production Rust importers without installing apps.
+Outputs: `catalog/candidate-queue.json` and `docs/candidate-queue-baseline.md`.
+Baseline: 356 CapRover definitions / 117 expressible; 250 Runtipi / 85 expressible.
+After shortlist reconciliation there are 233 repository groups (source-declared
+or explicitly reviewed) and 365 unresolved definitions. The original baseline
+was 232 groups / 369 unresolved; three cross-source duplicates were reconciled
+and linkding gained its own repository identity.
+These are NOT counts of verified unique installable apps. Image-family matches
+are reconciliation hints only. Blocked candidates retain blockers; normalized
+images and field requirements are available where the importer produces a template.
+No defaults, answers or generated credential values are exported.
+
+Source ZIP hashes live in `catalog/import-audit-sources.json`. The Runtipi
+`sources.lock.json` hash covers normalized discovery data, not its ZIP. A fresh
+codeload download matched the cached ZIP; the separate archive pin preserves
+both meanings without altering the discovery lock.
+
+Validation: full queue generation succeeded with the baseline above;
+`cargo clippy --example candidate_queue --locked -- -D warnings` passed;
+`python scripts/test_candidate_queue.py` passed (3 identity/hint/stale-review tests).
+B1 bounded shortlist screening is now delivered in `docs/candidate-screening.md`,
+with public release/platform evidence in `catalog/candidate-screening-evidence.json`
+and revision/image-bound decisions in `catalog/candidate-reviews.json`.
+Use `python scripts/screen-candidate-images.py --refresh` for metadata refresh;
+without the flag it prints saved evidence. Refresh does not approve anything.
+PrivateBin 2.0.6 is first for B2 qualification, Node-RED second (review newer
+5.0.7 patch before choosing its final pin). Linkding's current definition pins
+a 2023 image; Joplin's pins a 2022 database image. Both are withheld for updates.
+All four have linux/amd64 metadata, but none has first-use proof from this batch.
+Next agent: add reviewed-template support for Runtipi config/provenance through
+the existing importer (the review module currently handles CapRover only), then
+qualify PrivateBin browser paste creation/reopening and lifecycle on Windows.
+Check managed-folder ownership and loopback browser crypto before promotion.
+Do not expose arbitrary-template execution or infer readiness from HTTP 200.
+Full-catalog maintenance screening and identity reconciliation remain ongoing.
+Do not mistake
+old CodiMD lifecycle proof for promotion approval. No candidate was promoted.
+No Docker resources, production UI edits, commits or pushes in this batch.
+V2 work remains owned by the other session. Other-session icon provenance files
+also appeared during this work and were left untouched. The usage window reset;
+latest check was 34% used / 66% remaining. Recheck before starting another batch.
+
+September 9 planning update: the owner requested an Umbrel architecture review
+and a new backend plan for maximum one-click app coverage. The result is
+`docs/backend-app-coverage-plan.md`. Next implementation cycle: deduplicated
+candidate queue, one maintained candidate with complete promotion evidence,
+then reusable batch verification. No candidate was promoted or implementation
+changed in that research/planning turn. V2 design is being handled in another
+session and must remain untouched by this backend work.
+
 Updated September 8, 2026. This is the current starting point for any coding
 agent. [Upgrade status](upgrade-status.md) tracks all 33 original deliverables;
 [archived checkpoints](agent-history-2026-09-07.md) preserve the complete prior
@@ -1064,6 +1305,19 @@ permissions. All test-created containers, networks, volumes and managed app
 directories were removed by the successful harness; downloaded images remain
 cached. Existing unrelated containers were not changed. The earlier failed
 Memos install rolled itself back. Historical socket diagnosis stays in the archive.
+
+## V2 icon pipeline requirements
+
+The V2 catalog icon contract is frozen in `docs/design/v2/ICON-PIPELINE.md`.
+Every catalog entry must resolve to a local manifest asset; runtime network
+icons and CSS-only initials are not acceptable. Preserve source precedence,
+explicit aliases, checksums, validation limits, attribution, original aspect
+ratio, `object-fit: contain`, and the deterministic Satin monogram fallback.
+Never use or reintroduce the removed Ember Paper treatment. Treat Umbrel gallery
+artwork as `NOASSERTION` until permissions or asset-specific licenses are
+verified; `catalog/notices/umbrel-apps-gallery/NOTICE.md` is a release gate.
+Regenerate and review the audit and contact sheet whenever a pin or mapping
+changes.
 
 ## Commands for the next agent
 

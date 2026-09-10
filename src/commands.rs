@@ -3,7 +3,6 @@ use crate::{
     catalog,
     error::{AppError, AppResult, ErrorCode},
     model::{InstalledApp, RuntimeSpec},
-    recipes,
     runtime::{self, AppStatus, DoctorReport},
     storage, windowing,
 };
@@ -196,35 +195,34 @@ pub async fn doctor(window: tauri::WebviewWindow) -> AppResult<DoctorReport> {
 /// One function so the setup a person reviews and the setup an install
 /// enforces are the same thing. Reviewed recipes declare no typed fields yet;
 /// when one does, both sides gain it together.
-fn template_for(recipe: &recipes::Recipe) -> AppResult<crate::setup::PlanTemplate> {
-    Ok(crate::setup::PlanTemplate {
-        plan: crate::plan::plan_for_recipe(recipe).map_err(AppError::invalid)?,
-        fields: Vec::new(),
-        secrets: Vec::new(),
+fn offering_for(id: &str) -> AppResult<crate::offerings::Offering> {
+    crate::offerings::offering(id).ok_or_else(|| {
+        AppError::new(
+            ErrorCode::NotFound,
+            "This recipe is not verified for installation.",
+        )
     })
 }
 
 #[derive(serde::Serialize)]
 pub struct RecipeReview {
+    /// Flattened so the launcher reads the same field names whether this app
+    /// came from a reviewed recipe or an approved imported template.
     #[serde(flatten)]
-    pub recipe: recipes::Recipe,
+    pub recipe: crate::offerings::OfferingSummary,
     pub setup_review: crate::setup::SetupReview,
 }
 
 #[tauri::command]
 pub fn recipe_details(window: tauri::WebviewWindow, id: String) -> AppResult<RecipeReview> {
     require_launcher(&window)?;
-    let recipe = recipes::recipe(&id).ok_or_else(|| {
-        AppError::new(
-            ErrorCode::NotFound,
-            "This recipe is not verified for installation.",
-        )
-    })?;
-    let setup_review = template_for(&recipe)?
+    let offering = offering_for(&id)?;
+    let setup_review = offering
+        .plan_template(None)?
         .setup_review()
         .map_err(AppError::invalid)?;
     Ok(RecipeReview {
-        recipe,
+        recipe: offering.summary(None)?,
         setup_review,
     })
 }
@@ -287,25 +285,24 @@ pub async fn install_app(
     answers: Option<std::collections::BTreeMap<String, String>>,
 ) -> AppResult<()> {
     require_launcher(&window)?;
-    let recipe = recipes::recipe(&recipe_id).ok_or_else(|| {
-        AppError::new(
-            ErrorCode::NotFound,
-            "This recipe is not verified for installation.",
-        )
-    })?;
+    // The same lookup `recipe_details` used, so the install cannot resolve to
+    // something other than what the person was shown — and a withheld template
+    // is not resolvable at all.
+    let offering = offering_for(&recipe_id)?;
     // A chosen port republishes the pinned recipe; the recipe itself is a
     // reviewed constant and is never mutated. The remap re-validates, so an
     // address left behind by the rewrite fails here rather than at the daemon.
-    let recipe = match host_port {
-        Some(port) => recipe.with_host_port(port).map_err(AppError::invalid)?,
-        None => recipe,
-    };
-    // Answers are checked against what this recipe actually declares, before
+    // An imported template has no Compose text to rewrite, so its single
+    // published endpoint moves instead.
+    let recipe = offering.recipe(host_port)?;
+    // Answers are checked against what this app actually declares, before
     // anything is locked or written. `accept_answers` refuses a key no field
     // asked for, so a client cannot supply an environment value the review
     // never showed anyone.
     let answers = answers.unwrap_or_default();
-    let template = template_for(&recipe)?;
+    let template = offering.plan_template(host_port)?;
+    let app_id = offering.id().to_owned();
+    let display_name = offering.display_name().to_owned();
     template.accept_answers(&answers).map_err(|errors| {
         let mut listed: Vec<String> = errors
             .iter()
@@ -319,16 +316,16 @@ pub async fn install_app(
         .map_err(AppError::from)?
         .apps
         .iter()
-        .any(|app| app.id == recipe.id)
+        .any(|app| app.id == app_id)
     {
         return Err(AppError::new(
             ErrorCode::AlreadyExists,
-            format!("{} is already in My Apps.", recipe.display_name),
+            format!("{display_name} is already in My Apps."),
         ));
     }
     // Claimed before any worker starts, so a busy app is reported at once and
     // the operation id can travel with the very first event.
-    let lock = runtime::lock_operation(&recipe.id)?;
+    let lock = runtime::lock_operation(&app_id)?;
     let cancel_id = lock.id();
     crate::operations::track_install(
         &window,
@@ -344,17 +341,19 @@ pub async fn install_app(
             tauri::async_runtime::spawn_blocking(move || {
                 // A recipe with no typed setup installs from its own reviewed
                 // Compose file, byte for byte. Rendering it from a plan would
-                // put a second author between the review and what ships.
-                let pending = if template.fields.is_empty() && template.secrets.is_empty() {
-                    runtime::begin_install(&recipe, lock, worker_progress.as_ref())?
-                } else {
-                    runtime::begin_template_install(
+                // put a second author between the review and what ships. An
+                // imported template has no such file and is always rendered.
+                let pending = match &recipe {
+                    Some(recipe) if template.fields.is_empty() && template.secrets.is_empty() => {
+                        runtime::begin_install(recipe, lock, worker_progress.as_ref())?
+                    }
+                    _ => runtime::begin_template_install(
                         &template,
-                        &recipe.display_name,
+                        &display_name,
                         &answers,
                         lock,
                         worker_progress.as_ref(),
-                    )?
+                    )?,
                 };
                 pending.commit(commit_progress.as_ref())
             })
@@ -434,11 +433,15 @@ mod tests {
 
     /// The form a person fills in and the answers an install accepts have to
     /// come from the same template, or the review shows one thing and the
-    /// install enforces another.
+    /// install enforces another. Both sides now go through `offering_for`, so
+    /// this covers imported apps as well as recipes.
     #[test]
     fn a_reviewed_recipe_offers_no_setup_fields_and_accepts_no_answers() {
         for recipe in crate::recipes::reviewed_recipes() {
-            let template = template_for(&recipe).expect("recipe should convert");
+            let template = offering_for(&recipe.id)
+                .expect("a reviewed recipe is offered")
+                .plan_template(None)
+                .expect("recipe should convert");
             let review = template.setup_review().expect("template should project");
             assert!(
                 review.fields.is_empty(),

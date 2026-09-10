@@ -45,7 +45,16 @@ fn catalog_pages_are_distinct_and_supply_a_next_offset() {
 #[test]
 fn catalog_preview_filter_preserves_the_recipe_allowlist() {
     let result = json(&["catalog", "--capability", "preview_install", "--json"]);
-    assert_eq!(result["total"], 3);
+    // Derived from the allowlist rather than written down here: approving an
+    // app should update this test, not break it. What it actually checks is
+    // that every offering survives the trip out through the packaged CLI, and
+    // that nothing else picks up an install capability on the way.
+    let mut expected: Vec<String> = local_store::offerings::offerings()
+        .iter()
+        .map(|offering| offering.id().to_owned())
+        .collect();
+    expected.sort();
+    assert_eq!(result["total"], expected.len());
     assert!(result["next_offset"].is_null());
     let mut ids: Vec<_> = result["entries"]
         .as_array()
@@ -54,7 +63,7 @@ fn catalog_preview_filter_preserves_the_recipe_allowlist() {
         .map(|entry| entry["recipe_id"].as_str().unwrap())
         .collect();
     ids.sort();
-    assert_eq!(ids, ["memos", "n8n", "uptime-kuma"]);
+    assert_eq!(ids, expected);
     let none = json(&[
         "catalog",
         "--query",

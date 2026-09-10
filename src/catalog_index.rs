@@ -94,14 +94,36 @@ pub struct CatalogPage {
     pub source_count: usize,
 }
 
-fn recipe_id(entry: &Project) -> Option<&'static str> {
-    // Explicit IDs: upstream catalog metadata cannot promote an install recipe.
-    match entry.id.as_str() {
-        "memos" => Some("memos"),
-        "n8n" => Some("n8n"),
-        "uptime-kuma" => Some("uptime-kuma"),
-        _ => None,
-    }
+/// Catalog entry id to offering id, read once.
+///
+/// Driven by our own allowlist rather than by upstream metadata, which is the
+/// property the previous hardcoded match existed to guarantee: a catalog entry
+/// cannot promote itself by claiming an id, because being listed upstream is
+/// not what makes something installable — a review is. A withheld template is
+/// absent from `offerings`, so it cannot appear here either.
+///
+/// The two ids are not always the same string. The catalog knows Node-RED as
+/// `node-red`; the Runtipi definition describing it is `nodered`. The
+/// catalog's own name and alias table is what reconciles them, so this goes
+/// through `catalog::catalog_id` rather than comparing ids directly.
+fn installable_ids() -> &'static std::collections::BTreeMap<String, String> {
+    static IDS: std::sync::OnceLock<std::collections::BTreeMap<String, String>> =
+        std::sync::OnceLock::new();
+    IDS.get_or_init(|| {
+        crate::offerings::offerings()
+            .iter()
+            .filter_map(|offering| {
+                crate::catalog::catalog_id(offering.catalog_name())
+                    .map(|catalog| (catalog, offering.id().to_owned()))
+            })
+            .collect()
+    })
+}
+
+fn recipe_id(entry: &Project) -> Option<&str> {
+    installable_ids()
+        .get(&entry.id)
+        .map(std::string::String::as_str)
 }
 
 fn capability(entry: &Project) -> &'static str {
@@ -241,13 +263,17 @@ mod tests {
             ..Default::default()
         };
         let all = search("", "", 0, 48, &filters);
-        assert_eq!(all.total, 3);
+        // Derived from the allowlist rather than written down, so approving an
+        // app updates this instead of breaking it. Every offering has to reach
+        // the catalog: one that does not is installable but undiscoverable.
+        let offered = crate::offerings::offerings().len();
+        assert_eq!(all.total, offered);
         assert_eq!(
             all.category_counts
                 .iter()
                 .map(|facet| facet.count)
                 .sum::<usize>(),
-            3
+            offered
         );
         assert_eq!(search("Memos", "", 0, 12, &filters).total, 1);
         assert_eq!(search("Memos", "Analytics", 0, 12, &filters).total, 0);

@@ -722,7 +722,12 @@ pub fn install_template_with(
     let source = InstallSource {
         id: plan.id.clone(),
         display_name: display_name.to_owned(),
-        catalog_id: None,
+        // An installed app gets its icon from the catalog entry its offering
+        // names, the same way a recipe does. Looked up by the id the plan
+        // carries rather than by the display name, so a test plan or an
+        // unoffered id resolves to no icon instead of somebody else's.
+        catalog_id: crate::offerings::offering(&plan.id)
+            .and_then(|offering| crate::catalog::catalog_id(offering.catalog_name())),
         launch_url: address.clone(),
         health_url: address,
         host_port,

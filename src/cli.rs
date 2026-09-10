@@ -1,9 +1,9 @@
 //! Standalone command-line interface for Local Store.
 use local_store::{
-    brand::CLI_NAME,
+    brand::{CLI_NAME, PRODUCT_NAME},
     error::{AppError, AppResult, ErrorCode},
     model::{next_available_installed_app_id, InstalledApp, RuntimeSpec},
-    platform, recipes, runtime, storage, windowing,
+    offerings, platform, runtime, storage, windowing,
 };
 use std::time::{SystemTime, UNIX_EPOCH};
 #[path = "cli_queries.rs"]
@@ -238,20 +238,73 @@ pub fn run_cli() -> i32 {
                 Ok(value) => value,
                 Err(code) => return code,
             };
-            let Some(recipe) = recipes::recipe(&id) else {
+            let Some(offering) = offerings::offering(&id) else {
                 eprintln!("No reviewed install recipe named \"{id}\".");
                 return 1;
             };
-            // `install_recipe` commits to the registry inside the same
-            // operation lock, so there is no separate insert here.
-            report(
-                runtime::install_recipe(&recipe).map(|_| ()),
-                "Installed and started.",
-            )
+            match offering.recipe(None) {
+                // `install_recipe` commits to the registry inside the same
+                // operation lock, so there is no separate insert here.
+                Ok(Some(recipe)) => report(
+                    runtime::install_recipe(&recipe).map(|_| ()),
+                    "Installed and started.",
+                ),
+                // An imported app has no Compose file of its own and is
+                // rendered from its reviewed plan.
+                Ok(None) => {
+                    let answers = std::collections::BTreeMap::new();
+                    match offering.plan_template(None) {
+                        Ok(template) => {
+                            // This command has no way to ask a question, so an
+                            // app that needs an answer is sent to the window
+                            // that can, rather than installed with a guess.
+                            if let Err(errors) = template.accept_answers(&answers) {
+                                for error in errors {
+                                    eprintln!("{}: {}", error.key, error.message);
+                                }
+                                eprintln!(
+                                    "This app needs setup answers. Install it from the {} window.",
+                                    PRODUCT_NAME
+                                );
+                                return 1;
+                            }
+                            report(
+                                runtime::install_template(
+                                    &template,
+                                    offering.display_name(),
+                                    &answers,
+                                )
+                                .map(|_| ()),
+                                "Installed and started.",
+                            )
+                        }
+                        Err(error) => {
+                            eprintln!("{}", error.message);
+                            1
+                        }
+                    }
+                }
+                Err(error) => {
+                    eprintln!("{}", error.message);
+                    1
+                }
+            }
         }
         "recipes" => {
-            for recipe in recipes::reviewed_recipes() {
-                println!("{:<14} {:<12} {}", recipe.id, recipe.version, recipe.image);
+            // Everything installable, from either reviewed source, so the CLI
+            // and the launcher cannot disagree about what is on offer.
+            for offering in offerings::offerings() {
+                let summary = match offering.summary(None) {
+                    Ok(summary) => summary,
+                    Err(error) => {
+                        eprintln!("{}: {}", offering.id(), error.message);
+                        continue;
+                    }
+                };
+                println!(
+                    "{:<14} {:<12} {}",
+                    summary.id, summary.version, summary.image
+                );
             }
             0
         }

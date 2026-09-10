@@ -1,0 +1,45 @@
+{
+  "creator": 606431,
+  "id": 1299457837,
+  "images": [
+    {
+      "architecture": "amd64",
+      "features": "",
+      "variant": null,
+      "digest": "sha256:24799a6a926ec436418bb394c269aa35f5c634258b09ac0c919cfc577f26c798",
+      "os": "linux",
+      "os_features": "",
+      "os_version": null,
+      "size": 231554540,
+      "status": "active",
+      "last_pulled": "2026-09-10T03:20:10.240212981Z",
+      "last_pushed": "2026-09-08T13:57:03.063734417Z"
+    },
+    {
+      "architecture": "arm64",
+      "features": "",
+      "variant": null,
+      "digest": "sha256:8f96685b222b90ad8cb29ffe7f4607bfefc999d368952dfe57bdfa6e7ed178a9",
+      "os": "linux",
+      "os_features": "",
+      "os_version": null,
+      "size": 222760044,
+      "status": "active",
+      "last_pulled": "2026-09-10T03:24:59.283545101Z",
+      "last_pushed": "2026-09-08T13:57:03.896853313Z"
+    }
+  ],
+  "last_updated": "2026-09-08T13:57:19.848199Z",
+  "last_updater": 606431,
+  "last_updater_username": "hardillb",
+  "name": "5.0.7",
+  "repository": 7779663,
+  "full_size": 231554540,
+  "v2": true,
+  "tag_status": "active",
+  "tag_last_pulled": "2026-09-10T03:24:59.283545101Z",
+  "tag_last_pushed": "2026-09-08T13:57:19.848199Z",
+  "media_type": "application/vnd.oci.image.index.v1+json",
+  "content_type": "image",
+  "digest": "sha256:a649dd711d55490151a2c39a8e48ad0c44325488fbc0e66315f2d2e19e5e1ace"
+}

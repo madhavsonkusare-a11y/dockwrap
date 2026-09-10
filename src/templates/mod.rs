@@ -80,6 +80,63 @@ pub struct FieldReview {
     pub sensitive: bool,
 }
 
+/// A tag this review runs instead of the one its definition names.
+///
+/// Upstream catalogues lag upstream projects. When a definition is pinned to a
+/// release that has since been superseded — and the newer one carries fixes
+/// worth having — the choice used to be to offer the old version or nothing,
+/// because the definition is kept verbatim and there was no way to say
+/// otherwise. This is that way, and it is deliberately narrow: the same
+/// repository, a different tag, and a reason somebody could disagree with.
+///
+/// It cannot point at a different image. A review that could swap
+/// `nodered/node-red` for something else would not be a pin, it would be a
+/// second definition wearing the first one's provenance.
+#[derive(Debug, Clone, Deserialize, PartialEq)]
+#[serde(deny_unknown_fields)]
+pub struct ImagePin {
+    /// The image as the upstream definition writes it.
+    pub definition: String,
+    /// The image this review runs instead.
+    pub replacement: String,
+    pub reason: String,
+}
+
+impl ImagePin {
+    /// Repository and tag, or an error naming which half is missing.
+    fn split(image: &str) -> Result<(&str, &str), String> {
+        image
+            .rsplit_once(':')
+            .filter(|(repository, tag)| !repository.is_empty() && !tag.is_empty())
+            .ok_or_else(|| format!("image {image:?} names no tag"))
+    }
+
+    fn check(&self) -> Result<(), String> {
+        let (from, from_tag) = Self::split(&self.definition)?;
+        let (to, to_tag) = Self::split(&self.replacement)?;
+        if from != to {
+            return Err(format!(
+                "an image pin may change a tag, not the image: {from:?} to {to:?}"
+            ));
+        }
+        if from_tag == to_tag {
+            return Err(format!("image pin for {from:?} changes nothing"));
+        }
+        if self.reason.len() <= 20 {
+            return Err(format!("image pin for {from:?} gives no reason"));
+        }
+        Ok(())
+    }
+}
+
+/// Companion config from the same repository and commit as the definition.
+#[derive(Debug, Clone, Deserialize, PartialEq)]
+#[serde(deny_unknown_fields)]
+pub struct TemplateConfig {
+    pub path: String,
+    pub content: String,
+}
+
 #[derive(Debug, Clone, Deserialize, PartialEq)]
 #[serde(deny_unknown_fields)]
 pub struct ReviewedTemplate {
@@ -111,6 +168,11 @@ pub struct ReviewedTemplate {
     /// report normalizes all of them. Kept verbatim so the mapping can be
     /// reproduced and audited without the archive.
     pub definition: String,
+    #[serde(default)]
+    pub config: Option<TemplateConfig>,
+    /// Tags this review runs in place of the ones the definition names.
+    #[serde(default)]
+    pub image_pins: Vec<ImagePin>,
 }
 
 impl ReviewedTemplate {
@@ -126,14 +188,30 @@ impl ReviewedTemplate {
 
     /// The template this review permits, or why it does not permit one.
     pub fn plan_template(&self) -> Result<PlanTemplate, String> {
-        if self.origin.importer != "caprover" {
-            return Err(format!(
-                "no importer named {:?} to map this definition",
-                self.origin.importer
-            ));
-        }
-        let outcome = crate::importers::caprover::import(&self.id, &self.definition)
-            .map_err(|reason| format!("{}: {reason}", self.id))?;
+        let outcome = match self.origin.importer.as_str() {
+            "caprover" => {
+                if self.config.is_some() {
+                    return Err("CapRover review cannot carry an unused companion config".into());
+                }
+                crate::importers::caprover::import(&self.id, &self.definition)
+            }
+            "runtipi" => {
+                let config = self.config.as_ref().ok_or("Runtipi review requires its companion config")?;
+                let expected = format!("apps/{}/config.json", self.id);
+                if self.origin.path != format!("apps/{}/docker-compose.json", self.id)
+                    || config.path != expected
+                {
+                    return Err("Runtipi definition and config must name the reviewed app in the same pinned source".into());
+                }
+                let value: serde_json::Value = serde_json::from_str(&config.content)
+                    .map_err(|_| "Runtipi companion config is invalid JSON")?;
+                if !value.is_object() || value.get("id").and_then(serde_json::Value::as_str) != Some(&self.id) {
+                    return Err("Runtipi companion config must identify the reviewed app".into());
+                }
+                crate::importers::runtipi::import(&self.id, &self.definition, Some(&config.content))
+            }
+            other => return Err(format!("no importer named {other:?} to map this definition")),
+        }.map_err(|reason| format!("{}: {reason}", self.id))?;
         let mut template = outcome.template.ok_or_else(|| {
             let named: Vec<&str> = outcome
                 .limitations
@@ -146,6 +224,25 @@ impl ReviewedTemplate {
                 named.join(", ")
             )
         })?;
+
+        // Applied before the audit below, so what gets audited is what runs.
+        for pin in &self.image_pins {
+            pin.check()
+                .map_err(|reason| format!("{}: {reason}", self.id))?;
+            let mut replaced = 0usize;
+            for service in &mut template.plan.services {
+                if service.image == pin.definition {
+                    service.image = pin.replacement.clone();
+                    replaced += 1;
+                }
+            }
+            if replaced == 0 {
+                return Err(format!(
+                    "{}: image pin names {:?}, which this definition does not run",
+                    self.id, pin.definition
+                ));
+            }
+        }
 
         for field in &mut template.fields {
             let review = self.fields.get(&field.key).ok_or_else(|| {
@@ -202,10 +299,12 @@ impl ReviewedTemplate {
 }
 
 const CODIMD: &str = include_str!("codimd.json");
+const PRIVATEBIN: &str = include_str!("privatebin.json");
+const NODERED: &str = include_str!("nodered.json");
 
 /// Every template a review has passed. Being here is not being offered.
 pub fn reviewed_templates() -> Vec<ReviewedTemplate> {
-    [CODIMD]
+    [CODIMD, PRIVATEBIN, NODERED]
         .into_iter()
         .map(|source| serde_json::from_str(source).expect("bundled reviewed templates must parse"))
         .collect()
@@ -220,6 +319,48 @@ pub fn reviewed_template(id: &str) -> Option<ReviewedTemplate> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    fn runtipi_review() -> ReviewedTemplate {
+        reviewed_template("privatebin").expect("privatebin is reviewed")
+    }
+
+    #[test]
+    fn runtipi_review_uses_the_existing_importer_and_requires_companion_identity() {
+        let reviewed = runtipi_review();
+        let plan = reviewed.plan_template().unwrap();
+        assert_eq!(plan.plan.services.len(), 1);
+        assert!(plan.fields.is_empty());
+        // One service, published, and nothing left for a person to answer.
+        assert!(plan.plan.published().is_some());
+        assert!(plan.secrets.is_empty());
+        let mut missing = reviewed.clone();
+        missing.config = None;
+        assert!(missing.plan_template().unwrap_err().contains("requires"));
+        let mut wrong = reviewed.clone();
+        wrong.config.as_mut().unwrap().path = "apps/other/config.json".into();
+        assert!(wrong.plan_template().is_err());
+        let mut wrong = reviewed.clone();
+        wrong.config.as_mut().unwrap().content = r#"{"id":"other"}"#.into();
+        assert!(wrong.plan_template().is_err());
+        let mut wrong = reviewed;
+        wrong.definition = r#"{"services":[{"name":"privatebin","image":"privatebin/nginx-fpm-alpine:2.0.6","isMain":true,"internalPort":8080,"privileged":true}]}"#.into();
+        assert!(wrong.plan_template().is_err());
+    }
+
+    #[test]
+    fn runtipi_review_rejects_unreviewed_images_and_fields() {
+        let mut reviewed = runtipi_review();
+        reviewed.requirements.images.clear();
+        assert!(reviewed.plan_template().unwrap_err().contains("audited"));
+        let mut reviewed = runtipi_review();
+        reviewed.config.as_mut().unwrap().content = r#"{"id":"privatebin","form_fields":[{"type":"text","env_variable":"TZ","label":"Zone","default":"UTC"}]}"#.into();
+        // A newly declared setup field must not silently inherit an old review.
+        reviewed.definition = reviewed.definition.replace(
+            "\"internalPort\": 8080",
+            "\"environment\": [{\"key\":\"TZ\",\"value\":\"${TZ}\"}], \"internalPort\": 8080",
+        );
+        assert!(reviewed.plan_template().is_err());
+    }
 
     #[test]
     fn every_reviewed_template_resolves_to_a_valid_plan() {
@@ -329,20 +470,140 @@ mod tests {
         assert!(!review.fields.iter().any(|field| field.key.contains("PASS")));
     }
 
-    /// Nothing is offered yet, and that is the current state of the project
-    /// rather than an oversight. When this starts failing, somebody approved a
-    /// template, which is a decision that should be visible in a diff.
+    /// Every app this project offers to install, named here on purpose.
+    ///
+    /// This list started empty, which was the honest state of the project
+    /// before anything had been qualified. Emptiness was never the point,
+    /// though — the point is that approving an app is a decision somebody
+    /// makes, so it has to appear in a diff rather than arrive as a side
+    /// effect of a manifest edit or a passing test. Adding a second name here
+    /// costs exactly as much deliberation as the first one did.
+    const APPROVED: &[&str] = &["nodered", "privatebin"];
+
     #[test]
     fn no_reviewed_template_is_offerable_without_an_explicit_approval() {
-        let offerable: Vec<String> = reviewed_templates()
+        let mut offerable: Vec<String> = reviewed_templates()
             .into_iter()
             .filter(ReviewedTemplate::offerable)
             .map(|template| template.id)
             .collect();
-        assert!(
-            offerable.is_empty(),
-            "these templates are marked approved: {offerable:?}"
+        // Compared as a set, so reordering the allowlist is not a failure but
+        // adding to it still is.
+        offerable.sort();
+        assert_eq!(
+            offerable, APPROVED,
+            "the approved templates changed without this list changing with them"
         );
+    }
+
+    /// An approval is a claim that somebody checked this app, so the evidence
+    /// it rests on has to be there. A withheld template is held to the same
+    /// standard everywhere else; this is the part that only matters once an
+    /// app can actually reach a person.
+    #[test]
+    fn an_approved_template_carries_the_evidence_its_approval_claims() {
+        for id in APPROVED {
+            let reviewed = reviewed_template(id).expect("an approved template must exist");
+            assert!(reviewed.offerable(), "{id} is listed but not approved");
+            assert!(
+                reviewed.promotion.reason.len() > 20,
+                "{id} gives no reason for its approval"
+            );
+            assert!(
+                !reviewed.verified_at.is_empty(),
+                "{id} records no review date"
+            );
+            let proof =
+                std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join(&reviewed.lifecycle_proof);
+            assert!(
+                proof.is_file(),
+                "{id} names a lifecycle proof that is not there"
+            );
+            // It has to map, and to map to something installable.
+            let template = reviewed
+                .plan_template()
+                .expect("an approved template must map");
+            assert!(
+                template.plan.published().is_some(),
+                "{id} publishes no address to open"
+            );
+        }
+    }
+
+    /// The override exists so an app is not stuck on whatever tag an upstream
+    /// catalogue last bumped. It must stay an override of a *tag*, though —
+    /// everything below is a way it could become a second definition wearing
+    /// the first one's provenance.
+    #[test]
+    fn an_image_pin_may_move_a_tag_and_nothing_else() {
+        let reviewed = reviewed_template("nodered").expect("nodered is reviewed");
+        // The definition says 5.0.6; what runs is what the review pinned.
+        assert!(reviewed.definition.contains("nodered/node-red:5.0.6"));
+        let template = reviewed.plan_template().expect("nodered should map");
+        assert_eq!(template.plan.services[0].image, "nodered/node-red:5.0.7");
+
+        let refuse = |pin: ImagePin, expect: &str| {
+            let mut broken = reviewed.clone();
+            broken.image_pins = vec![pin];
+            let error = broken
+                .plan_template()
+                .expect_err("this pin should have been refused");
+            assert!(error.contains(expect), "{error}");
+        };
+        // A different image is not a pin.
+        refuse(
+            ImagePin {
+                definition: "nodered/node-red:5.0.6".into(),
+                replacement: "someone-else/node-red:5.0.7".into(),
+                reason: "a reason long enough to pass the length check".into(),
+            },
+            "not the image",
+        );
+        // A pin for something this definition does not run is a stale review.
+        refuse(
+            ImagePin {
+                definition: "nodered/node-red:4.0.0".into(),
+                replacement: "nodered/node-red:5.0.7".into(),
+                reason: "a reason long enough to pass the length check".into(),
+            },
+            "does not run",
+        );
+        // A decision with no stated reason is not a review.
+        refuse(
+            ImagePin {
+                definition: "nodered/node-red:5.0.6".into(),
+                replacement: "nodered/node-red:5.0.7".into(),
+                reason: "because".into(),
+            },
+            "no reason",
+        );
+        // An untagged replacement would float, which is what pinning prevents.
+        refuse(
+            ImagePin {
+                definition: "nodered/node-red:5.0.6".into(),
+                replacement: "nodered/node-red".into(),
+                reason: "a reason long enough to pass the length check".into(),
+            },
+            "names no tag",
+        );
+    }
+
+    /// The audit has to be about what runs, not about what the definition said
+    /// before the review moved it.
+    #[test]
+    fn an_image_pin_must_be_audited_at_the_tag_it_moves_to() {
+        let mut reviewed = reviewed_template("nodered").expect("nodered is reviewed");
+        assert_eq!(
+            reviewed.requirements.images[0].image,
+            "nodered/node-red:5.0.7"
+        );
+        // Auditing the tag the definition names, rather than the one that
+        // runs, is exactly the mistake this must not permit.
+        reviewed.requirements.images[0].image = "nodered/node-red:5.0.6".into();
+        let error = reviewed
+            .plan_template()
+            .expect_err("the audit must not drift");
+        assert!(error.contains("has not been audited"), "{error}");
     }
 
     #[test]

@@ -123,14 +123,20 @@ mod tests {
             .unwrap();
         assert_eq!(memos.capability, "preview_install");
         assert_eq!(memos.recipe_id.as_deref(), Some("memos"));
-        for (name, id) in [("n8n", "n8n"), ("Uptime Kuma", "uptime-kuma")] {
-            let entry = search_catalog(name, "", 0, 48)
+        // Every offering, not a list that has to be remembered: an approved
+        // app that never reaches a catalog entry can be installed by id and
+        // found by nobody. Matched on the recipe id rather than the name,
+        // because the catalog's name for an app is not always the offering's:
+        // Node-RED is listed as "Node RED", with the hyphenated spelling as an
+        // alias, and searching either has to find it.
+        for offering in crate::offerings::offerings() {
+            let name = offering.catalog_name().to_owned();
+            let entry = search_catalog(&name, "", 0, 48)
                 .entries
                 .into_iter()
-                .find(|entry| entry.name.eq_ignore_ascii_case(name))
-                .unwrap();
+                .find(|entry| entry.recipe_id.as_deref() == Some(offering.id()))
+                .unwrap_or_else(|| panic!("searching {name:?} does not find the app it names"));
             assert_eq!(entry.capability, "preview_install");
-            assert_eq!(entry.recipe_id.as_deref(), Some(id));
         }
         assert!(search_catalog("Immich", "", 0, 48)
             .entries
