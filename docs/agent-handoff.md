@@ -1,5 +1,53 @@
 # Local Store: agent handoff
 
+## September 10 — the standard, and what it refuses
+
+`scripts/standard-probe.mjs` is the app-agnostic first-use check (plan step
+V3). It applies Umbrel's stated bar, which is nearly this product's own goal:
+the address has to open a web UI, setup flow, login page or status page giving
+a clear next step. It is now what `qualify_batch` runs for every candidate, so
+a passing run means **tested** rather than merely installed.
+
+Of the eight highest-reach open-source candidates, **six pass and two are
+refused — correctly**:
+
+| App | Outcome |
+| --- | --- |
+| grafana, wordpress, metabase, uptime-kuma, node-red, actual | passed |
+| nginx | refused: serves "If you see this page, nginx is successful" |
+| ollama-cpu | refused: 17 characters, no controls — it is an API, not a screen |
+
+Both refusals are the standard working. A bare web server and a
+headless API are not apps somebody installs from a desktop store, and the
+ranking flagged exactly this risk earlier: `nginx` and `mongo` rank high on
+pull count because they are infrastructure. **Reach orders the queue; the
+standard is part of what decides the catalogue.**
+
+**One probe bug, of a familiar kind.** The first version sampled the page once
+after waiting for network idle. Node-RED holds a websocket open, so network
+idle never arrives, and it judged an empty document — failing an app that had
+passed the same check twice already. It now polls until the page has something
+on it, then decides. Same shape as the sixty-second health timeout: answering
+is not the same as being ready.
+
+What the standard proves is narrow and worth restating: the address opens
+something a person could act on, and it is still the same page after a restart
+and a keep-data reinstall. It does not prove they could finish a task. That is
+what an app-specific probe is for, and it is the difference between *tested*
+and *verified*.
+
+**`docs/lessons.md` is new** and collects what has cost real time: Windows
+canonical paths that cannot be mounted, "is this declared value used?" needing
+to look at mounts, guards comparing at the wrong granularity, timeouts tuned
+for the simple case, rules stricter than the thing they model, sources that
+disagree on format, and evidence that must be derived rather than declared.
+Read it before touching the plan model, the importers or anything that talks to
+Docker.
+
+Validation: 296 Rust tests, strict Clippy, fmt. No leftover container, network
+or volume.
+
+
 ## September 10 — the batch runs, and it found three real bugs
 
 **Eight of the eight highest-reach open-source candidates now pass**

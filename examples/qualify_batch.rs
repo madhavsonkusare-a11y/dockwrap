@@ -15,7 +15,7 @@
 //! Run again and it picks up where it stopped.
 //!
 //!     LOCAL_STORE_RUN_DOCKER_TEST=1 cargo run --release --example qualify_batch -- --limit 10
-use local_store::qualification::{qualify_template, AnswersOnly, Batch, Resume, Subject};
+use local_store::qualification::{qualify_template, Batch, Resume, ScriptProbe, Subject};
 use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
 
@@ -195,7 +195,19 @@ fn main() {
             source_revision: candidate.revision.clone(),
         };
         println!("{}: running…", candidate.id);
-        match qualify_template(&about, template, &BTreeMap::new(), &AnswersOnly, &scratch) {
+        // The App Store standard, applied to every app the same way: it has to
+        // open something a person could act on, and it has to still be the same
+        // page after a restart and a reinstall. Passing this makes an app
+        // *tested*; only an app-specific probe makes one *verified*.
+        let probe = ScriptProbe::new(
+            root().join("scripts/standard-probe.mjs"),
+            "it opens a page with a clear next step, and the same page after a restart and reinstall",
+        )
+        .with_args(vec![scratch
+            .join(format!("standard-{}.json", candidate.id))
+            .to_string_lossy()
+            .into_owned()]);
+        match qualify_template(&about, template, &BTreeMap::new(), &probe, &scratch) {
             Ok(evidence) => {
                 let ok = evidence.passed;
                 if let Err(error) = batch.record(&evidence) {
