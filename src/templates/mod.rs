@@ -320,6 +320,7 @@ const OMBI: &str = include_str!("ombi.json");
 const PRIVATEBIN: &str = include_str!("privatebin.json");
 const TAUTULLI: &str = include_str!("tautulli.json");
 const VAULTWARDEN: &str = include_str!("vaultwarden.json");
+const WALLOS: &str = include_str!("wallos.json");
 
 /// Every template a review has passed. Being here is not being offered.
 pub fn reviewed_templates() -> Vec<ReviewedTemplate> {
@@ -346,6 +347,7 @@ pub fn reviewed_templates() -> Vec<ReviewedTemplate> {
         PRIVATEBIN,
         TAUTULLI,
         VAULTWARDEN,
+        WALLOS,
     ]
     .into_iter()
     .map(|source| serde_json::from_str(source).expect("bundled reviewed templates must parse"))
@@ -535,6 +537,7 @@ mod tests {
         "privatebin",
         "tautulli",
         "vaultwarden",
+        "wallos",
     ];
 
     #[test]

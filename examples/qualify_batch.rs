@@ -181,18 +181,26 @@ const NOT_AN_APP: &[&str] = &[
     "library/elasticsearch",
 ];
 
+/// Whether a definition is *only* infrastructure.
+///
+/// This asked whether *any* image was infrastructure, which skipped every app
+/// that ships its own database: WordPress, Nextcloud, Joplin, Monica and
+/// Guacamole were all passed over as "not an app" because of a Postgres or
+/// MariaDB sidecar. An app is judged by what it is, not by what it stores its
+/// data in — the same mistake the ranking once made with pull counts.
 fn is_infrastructure(images: &[String]) -> bool {
-    images.iter().any(|image| {
-        let repository = image
-            .rsplit_once(':')
-            .map_or(image.as_str(), |(name, _)| name);
-        let repository = if repository.contains('/') {
-            repository.to_owned()
-        } else {
-            format!("library/{repository}")
-        };
-        NOT_AN_APP.iter().any(|known| repository == *known)
-    })
+    !images.is_empty()
+        && images.iter().all(|image| {
+            let repository = image
+                .rsplit_once(':')
+                .map_or(image.as_str(), |(name, _)| name);
+            let repository = if repository.contains('/') {
+                repository.to_owned()
+            } else {
+                format!("library/{repository}")
+            };
+            NOT_AN_APP.iter().any(|known| repository == *known)
+        })
 }
 
 /// Answers a batch can supply for itself, so an app that asks a question is
@@ -321,15 +329,22 @@ fn main() {
 
     let results = root().join(".cache/qualification");
     let batch = Batch::open(&results).expect("a results directory");
-    let candidates = ranked(if only.is_empty() { limit } else { only.len() }, &only, source);
+    let candidates = ranked(
+        if only.is_empty() { limit } else { only.len() },
+        &only,
+        source,
+    );
     if !only.is_empty() && candidates.len() < only.len() {
         let found: Vec<&str> = candidates.iter().map(|c| c.id.as_str()).collect();
         for id in &only {
             if !found.contains(&id.as_str()) {
-                println!("{id}: no importable candidate{}", match source {
-                    Some(name) => format!(" from {name}"),
-                    None => String::new(),
-                });
+                println!(
+                    "{id}: no importable candidate{}",
+                    match source {
+                        Some(name) => format!(" from {name}"),
+                        None => String::new(),
+                    }
+                );
             }
         }
     }
