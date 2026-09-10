@@ -917,7 +917,10 @@ pub fn install_source_with(
         };
         cleanup.map_err(|cleanup| AppError::rollback(&original, cleanup))?;
         if let Some(last_words) = last_words {
-            return Err(AppError::new(original.code, format!("{original} {last_words}")));
+            return Err(AppError::new(
+                original.code,
+                format!("{original} {last_words}"),
+            ));
         }
     }
     install
@@ -1347,24 +1350,22 @@ mod tests {
     /// which is why this exists.
     #[test]
     fn a_timed_out_install_says_what_the_containers_said() {
-        let root = std::env::temp_dir().join(format!("local-store-lastwords-{}", std::process::id()));
+        let root =
+            std::env::temp_dir().join(format!("local-store-lastwords-{}", std::process::id()));
         let _ = fs::remove_dir_all(&root);
         fs::create_dir_all(&root).unwrap();
         let runner = FakeRunner {
             outputs: Mutex::new(VecDeque::from([
                 Ok(ProcessOutput {
                     success: true,
-                    stdout: "NAME       STATUS
-glance-1   Exited (1)
-".into(),
+                    stdout: "NAME       STATUS\nglance-1   Exited (1)\n".into(),
                     stderr: String::new(),
                     truncated: false,
                 }),
                 Ok(ProcessOutput {
                     success: true,
                     stdout: String::new(),
-                    stderr: "glance-1 | failed to read config: no such file
-".into(),
+                    stderr: "glance-1 | failed to read config: no such file\n".into(),
                     truncated: false,
                 }),
             ])),
