@@ -15,6 +15,9 @@
 //! Run again and it picks up where it stopped.
 //!
 //!     LOCAL_STORE_RUN_DOCKER_TEST=1 cargo run --release --example qualify_batch -- --limit 10
+//!
+//! `--only app,app` runs named candidates and re-runs them even if a
+//! result exists; `--source runtipi` picks which packaging of them to prove.
 use local_store::qualification::{qualify_template, Batch, Evidence, Resume, ScriptProbe, Subject};
 use local_store::setup::{FieldKind, PlanTemplate};
 use std::collections::BTreeMap;
@@ -32,7 +35,7 @@ struct Candidate {
     path: String,
 }
 
-fn ranked(limit: usize) -> Vec<Candidate> {
+fn ranked(limit: usize, only: &[String], source: Option<&str>) -> Vec<Candidate> {
     let ranking: serde_json::Value = serde_json::from_str(
         &std::fs::read_to_string(root().join("catalog/candidate-ranking.json"))
             .expect("run scripts/rank-candidates.py first"),
@@ -87,8 +90,18 @@ fn ranked(limit: usize) -> Vec<Candidate> {
         // them, which matters because almost every required answer is a folder
         // and folders are most of what the popular apps need.
         let _ = &required;
-        // One definition per app: two sources packaging the same thing is one
-        // question, and the higher-ranked one is already first.
+        if !only.is_empty() && !only.contains(&key.0) {
+            continue;
+        }
+        // Rank orders apps, not the definitions of one app, and the
+        // higher-ranked source is not always the better-maintained package:
+        // CapRover's grocy pinned an image from 2020 where Runtipi's was four
+        // days old. `--source` is how a run says which packaging to prove.
+        if source.is_some_and(|wanted| wanted != key.1) {
+            continue;
+        }
+        // Otherwise one definition per app: two sources packaging the same
+        // thing is one question, and the higher-ranked one is already first.
         if !seen.insert(key.0.clone()) {
             continue;
         }
@@ -283,7 +296,20 @@ fn main() {
         .and_then(|value| value.parse().ok())
         .unwrap_or(10usize);
     let keep_images = args.iter().any(|arg| arg == "--keep-images");
-    let resume = if args.iter().any(|arg| arg == "--retry-failures") {
+    // Naming apps is how a re-run proves one packaging against another, so it
+    // implies retrying whatever was already recorded about them.
+    let only: Vec<String> = args
+        .iter()
+        .position(|arg| arg == "--only")
+        .and_then(|at| args.get(at + 1))
+        .map(|value| value.split(',').map(|id| id.trim().to_owned()).collect())
+        .unwrap_or_default();
+    let source = args
+        .iter()
+        .position(|arg| arg == "--source")
+        .and_then(|at| args.get(at + 1))
+        .map(String::as_str);
+    let resume = if args.iter().any(|arg| arg == "--retry-failures") || !only.is_empty() {
         Resume::RetryFailures
     } else {
         Resume::SkipRecorded
@@ -291,7 +317,18 @@ fn main() {
 
     let results = root().join(".cache/qualification");
     let batch = Batch::open(&results).expect("a results directory");
-    let candidates = ranked(limit);
+    let candidates = ranked(if only.is_empty() { limit } else { only.len() }, &only, source);
+    if !only.is_empty() && candidates.len() < only.len() {
+        let found: Vec<&str> = candidates.iter().map(|c| c.id.as_str()).collect();
+        for id in &only {
+            if !found.contains(&id.as_str()) {
+                println!("{id}: no importable candidate{}", match source {
+                    Some(name) => format!(" from {name}"),
+                    None => String::new(),
+                });
+            }
+        }
+    }
     let ids: Vec<String> = candidates.iter().map(|c| c.id.clone()).collect();
     let todo = batch.remaining(&ids, resume);
     println!(
