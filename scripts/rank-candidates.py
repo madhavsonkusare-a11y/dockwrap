@@ -24,6 +24,7 @@ import argparse
 import json
 import math
 import subprocess
+import importlib.util
 import re
 import urllib.error
 import urllib.request
@@ -43,6 +44,84 @@ RANKED = ROOT / "catalog" / "candidate-ranking.json"
 PRIVATE_REGISTRIES = ("ghcr.io/", "lscr.io/", "quay.io/", "gcr.io/", "registry.gitlab.com/")
 
 IMAGE_PATTERN = re.compile(r'"image"\s*:\s*"([^"\s]+)"')
+GITHUB_PATTERN = re.compile(r"github\.com/([^/\s]+)/([^/\s#?]+)")
+
+# The dependency gate accepts permissive and weak-copyleft licences only,
+# because those are the terms this project can ship under. Judging whether a
+# *catalogued app* is open source is a different question with a different
+# answer: GPL and AGPL are open source, and are what most self-hosted software
+# uses. The expression parser is shared; only the accepted set differs.
+_spec = importlib.util.spec_from_file_location(
+    "check_licenses", Path(__file__).with_name("check-licenses.py")
+)
+_licenses = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_licenses)
+
+OPEN_SOURCE = _licenses.ACCEPTED | {
+    "GPL-2.0",
+    "GPL-2.0-only",
+    "GPL-2.0-or-later",
+    "GPL-3.0",
+    "GPL-3.0-only",
+    "GPL-3.0-or-later",
+    "AGPL-3.0",
+    "AGPL-3.0-only",
+    "AGPL-3.0-or-later",
+    "LGPL-2.1",
+    "LGPL-3.0",
+    "LGPL-3.0-only",
+    "LGPL-3.0-or-later",
+    "EUPL-1.2",
+    "EPL-2.0",
+    "CDDL-1.0",
+    "OSL-3.0",
+    "Artistic-2.0",
+    "PostgreSQL",
+    "WTFPL",
+    "BSD-4-Clause",
+}
+
+# Source-available, not open source. Named rather than inferred, so a licence
+# nobody has classified reads as unknown instead of quietly passing.
+#
+# `NOASSERTION` is deliberately absent: GitHub returns it when it cannot detect
+# a licence file, which means unknown, not proprietary. Treating it as a
+# refusal excluded WordPress and qBittorrent — both GPL — from an open-source
+# release.
+NOT_OPEN_SOURCE = {
+    "BUSL-1.1",
+    "Elastic-2.0",
+    "SSPL-1.0",
+    "SUL-1.0",
+    "Commons-Clause",
+    "Proprietary",
+}
+
+# Values that carry no information, so they must not decide anything.
+UNDECIDED = {"NOASSERTION", "NONE", "UNLICENSED", ""}
+
+
+def is_open_source(expressions):
+    """True, False, or None when nothing establishes it either way."""
+    cleaned = [
+        stripped
+        for expression in expressions
+        if (stripped := expression.replace("⊘", "").strip())
+        and stripped.upper() not in UNDECIDED
+    ]
+    if not cleaned:
+        return None
+    decided = None
+    for expression in cleaned:
+        if any(name.lower() in expression.lower() for name in NOT_OPEN_SOURCE):
+            return False
+        try:
+            if _licenses.satisfiable(expression, accepted=OPEN_SOURCE):
+                return True
+            decided = False
+        except Exception:
+            continue
+    return decided
 
 
 # Pinned source archives, opened once. Blocked candidates record no images at
@@ -110,11 +189,17 @@ def fetch_json(url, timeout=20):
         return None
 
 
-def fetch_stars(repo):
-    """Stars via the gh CLI, which is already authenticated for this repo."""
+def fetch_project(repo):
+    """Stars and declared licence in one call, via the already-authenticated gh."""
     try:
         done = subprocess.run(
-            ["gh", "api", f"repos/{repo}", "--jq", ".stargazers_count"],
+            [
+                "gh",
+                "api",
+                f"repos/{repo}",
+                "--jq",
+                "[(.stargazers_count|tostring), (.license.spdx_id // \"\")]|join(\"|\")",
+            ],
             capture_output=True,
             text=True,
             timeout=30,
@@ -123,19 +208,39 @@ def fetch_stars(repo):
         return None
     if done.returncode != 0:
         return None
-    try:
-        return int(done.stdout.strip())
-    except ValueError:
+    parts = done.stdout.strip().split("|")
+    if not parts or not parts[0].isdigit():
         return None
+    return {"stars": int(parts[0]), "license": parts[1] if len(parts) > 1 else ""}
+
+
+def project_for(candidate, catalog_sources):
+    """The GitHub project behind a candidate.
+
+    The queue resolves an identity for well under half of them. The catalog
+    records a source URL for every entry, and for a great many that URL is the
+    project's repository — which is what establishes a licence. Without this,
+    Uptime Kuma and Netdata read as "licence unknown" and would be excluded
+    from an open-source-only release for no real reason.
+    """
+    identity = str(candidate.get("identity", ""))
+    if identity.startswith("github:"):
+        return identity[len("github:") :]
+    match = GITHUB_PATTERN.search(catalog_sources.get(candidate["id"], "") or "")
+    if match:
+        return f"{match.group(1)}/{match.group(2).removesuffix('.git')}"
+    return None
 
 
 def load_signals():
     if CACHE.exists():
-        return json.loads(CACHE.read_text(encoding="utf-8"))
-    return {"pulls": {}, "stars": {}}
+        saved = json.loads(CACHE.read_text(encoding="utf-8"))
+        saved.setdefault("licenses", {})
+        return saved
+    return {"pulls": {}, "stars": {}, "licenses": {}}
 
 
-def refresh(candidates, signals):
+def refresh(candidates, signals, catalog_sources):
     repos = sorted(
         {
             repository
@@ -156,16 +261,18 @@ def refresh(candidates, signals):
 
     projects = sorted(
         {
-            candidate["identity"][len("github:") :]
+            project
             for candidate in candidates
-            if str(candidate.get("identity", "")).startswith("github:")
+            if (project := project_for(candidate, catalog_sources))
         }
     )
     print(f"fetching stars for {len(projects)} GitHub projects")
     for index, repo in enumerate(projects, 1):
         if repo in signals["stars"]:
             continue
-        signals["stars"][repo] = fetch_stars(repo)
+        project = fetch_project(repo)
+        signals["stars"][repo] = project["stars"] if project else None
+        signals["licenses"][repo] = project["license"] if project else None
         if index % 25 == 0:
             print(f"  {index}/{len(projects)}")
             CACHE.write_text(json.dumps(signals, indent=1, sort_keys=True), encoding="utf-8")
@@ -216,9 +323,9 @@ def reach(candidate, signals, listings):
     pulls = signals["pulls"].get(repository) if repository else None
 
     stars = None
-    identity = str(candidate.get("identity", ""))
-    if identity.startswith("github:"):
-        stars = signals["stars"].get(identity[len("github:") :])
+    project = candidate.get("_project")
+    if project:
+        stars = signals["stars"].get(project)
 
     sources = listings.get(candidate["id"], 1)
     score = 1.5 * sources
@@ -233,6 +340,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--refresh", action="store_true")
     parser.add_argument("--top", type=int, default=150)
+    parser.add_argument("--open-source-only", action="store_true")
     args = parser.parse_args()
 
     queue = json.loads(QUEUE.read_text(encoding="utf-8"))
@@ -243,21 +351,41 @@ def main():
         for entry in catalog["entries"]
     }
 
+    catalog_sources = {
+        entry["id"]: entry.get("source_url", "") for entry in catalog["entries"]
+    }
     signals = load_signals()
     if args.refresh:
-        signals = refresh(candidates, signals)
+        signals = refresh(candidates, signals, catalog_sources)
     if not signals["pulls"]:
         raise SystemExit("no cached signals; run with --refresh")
+
+    catalog_licenses = {
+        entry["id"]: entry.get("licenses") or [] for entry in catalog["entries"]
+    }
+
+    for candidate in candidates:
+        candidate["_project"] = project_for(candidate, catalog_sources)
 
     ranked = []
     for candidate in candidates:
         score, pulls, stars, sources = reach(candidate, signals, listings)
+        project = project_for(candidate, catalog_sources)
+        declared = []
+        if project:
+            spdx = signals["licenses"].get(project)
+            if spdx:
+                declared.append(spdx)
+        declared += catalog_licenses.get(candidate["id"], [])
+        open_source = is_open_source(declared)
         blockers = sorted({blocker["feature"] for blocker in candidate["blockers"]})
         ranked.append(
             {
                 "id": candidate["id"],
                 "source": candidate["source"],
                 "reach": score,
+                "open_source": open_source,
+                "licenses": declared,
                 "pulls": pulls,
                 "stars": stars,
                 "catalogues": sources,
@@ -275,6 +403,10 @@ def main():
         encoding="utf-8",
     )
 
+    if args.open_source_only:
+        # Unknown is not open source. A licence nobody established is a licence
+        # nobody checked, and the owner asked for open source only.
+        ranked = [row for row in ranked if row["open_source"] is True]
     top = ranked[: args.top]
     installable = [row for row in top if row["importable"]]
     lines = [
@@ -288,8 +420,8 @@ def main():
         f"**Top {len(top)}: {len(installable)} importable today, "
         f"{len(top) - len(installable)} blocked.**",
         "",
-        "| # | App | Reach | Pulls | Stars | Importable | Blocked on |",
-        "| --- | --- | --- | --- | --- | --- | --- |",
+        "| # | App | Reach | Pulls | Stars | Licence | Importable | Blocked on |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- |",
     ]
     for position, row in enumerate(top, 1):
         pulls = f"{row['pulls']:,}" if row["pulls"] else "—"
@@ -297,7 +429,8 @@ def main():
         blocked = ", ".join(row["blockers"][:3]) if row["blockers"] else ""
         lines.append(
             f"| {position} | {row['id']} ({row['source']}) | {row['reach']} | {pulls} | "
-            f"{stars} | {'yes' if row['importable'] else 'no'} | {blocked} |"
+            f"{stars} | {(row['licenses'] or ['—'])[0]} | "
+            f"{'yes' if row['importable'] else 'no'} | {blocked} |"
         )
 
     # What to build next, weighted by the reach of what it unblocks.

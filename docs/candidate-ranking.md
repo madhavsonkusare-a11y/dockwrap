@@ -5,160 +5,110 @@ Docker Hub pull count of the app's own image, GitHub stars where the
 queue resolved a repository, and how many upstream catalogues list it.
 It orders what to look at first; it approves nothing.
 
-**Top 150: 62 importable today, 88 blocked.**
+**Top 100: 64 importable today, 36 blocked.**
 
-| # | App | Reach | Pulls | Stars | Importable | Blocked on |
-| --- | --- | --- | --- | --- | --- | --- |
-| 1 | nginx (runtipi) | 67.5 | 13,348,360,026 | 31,610 | yes |  |
-| 2 | outline (runtipi) | 66.54 | 13,348,360,026 | 40,513 | yes |  |
-| 3 | vaultwarden (runtipi) | 65.7 | 328,138,779 | 67,092 | yes |  |
-| 4 | gitea (runtipi) | 65.66 | 385,041,008 | 57,923 | no | addPorts |
-| 5 | nextcloud (runtipi) | 64.87 | 1,027,130,969 | 36,765 | no | user |
-| 6 | wordpress (runtipi) | 64.34 | 1,488,429,454 | 21,405 | yes |  |
-| 7 | portainer (runtipi) | 64.18 | 1,539,529,733 | 38,475 | no | extraLabels, host path |
-| 8 | ghost (runtipi) | 64.03 | 379,714,187 | 55,250 | no | plan policy |
-| 9 | metabase (runtipi) | 63.19 | 271,189,671 | 49,171 | yes |  |
-| 10 | mongo (runtipi) | 62.52 | 4,851,613,635 | 28,544 | yes |  |
-| 11 | netdata (runtipi) | 62.41 | 524,417,292 | 80,471 | no | capAdd, host path, pid |
-| 12 | uptime-kuma (runtipi) | 62.33 | 180,863,543 | 91,194 | no | host path |
-| 13 | node-red (caprover) | 61.91 | 323,222,345 | 23,639 | yes |  |
-| 14 | n8n-2 (runtipi) | 61.69 | 257,842,446 | 203,895 | no | healthCheck |
-| 15 | pihole (runtipi) | 61.4 | 985,926,149 | 60,829 | no | addPorts, capAdd |
-| 16 | ollama-amd (runtipi) | 60.74 | 173,324,585 | 180,544 | no | devices |
-| 17 | ollama-cpu (runtipi) | 60.74 | 173,324,585 | 180,544 | yes |  |
-| 18 | ollama-nvidia (runtipi) | 60.74 | 173,324,585 | 180,544 | no | deploy |
-| 19 | photoprism (runtipi) | 60.67 | 81,876,705 | 40,175 | no | host path, overrides, workingDir |
-| 20 | odoo (runtipi) | 60.59 | 53,651,188 | 54,259 | no | tty, user |
-| 21 | searxng (runtipi) | 60.42 | 79,235,342 | 36,726 | no | plan policy |
-| 22 | nextcloud-mini (runtipi) | 60.37 | 1,027,130,969 | 36,765 | yes |  |
-| 23 | grafana (runtipi) | 60.17 | 64,818,076 | 76,661 | yes |  |
-| 24 | memos (runtipi) | 59.64 | 10,906,459 | 62,877 | yes |  |
-| 25 | ghost-dev (runtipi) | 59.53 | 379,714,187 | 55,250 | no | plan policy |
-| 26 | glances (runtipi) | 59.45 | 120,431,212 | 33,549 | no | host path, pid |
-| 27 | stirling-pdf (runtipi) | 59.35 | 13,659,554 | 91,632 | no | privileged |
-| 28 | tailscale (runtipi) | 58.71 | 168,529,493 | 36,308 | no | capAdd, host path, internalPort |
-| 29 | joplin (runtipi) | 58.49 | 15,324,563 | 56,306 | yes |  |
-| 30 | joplin (caprover) | 58.49 | 15,324,563 | 56,306 | yes |  |
-| 31 | minecraft-server (runtipi) | 58.32 | 431,989,316 | 14,283 | no | stdinOpen, tty |
-| 32 | ntfy (runtipi) | 58.11 | 22,922,531 | 34,125 | yes |  |
-| 33 | nocodb (runtipi) | 57.92 | 21,813,704 | 64,912 | no | healthCheck |
-| 34 | dozzle (runtipi) | 57.91 | 340,809,527 | 14,319 | no | host path |
-| 35 | excalidraw (runtipi) | 57.86 | 8,712,821 | 131,533 | no | plan policy |
-| 36 | firefly-iii (runtipi) | 57.81 | 29,091,634 | 24,563 | no | plan policy |
-| 37 | nodered (runtipi) | 57.41 | 323,222,345 | 23,639 | yes |  |
-| 38 | filebrowser (runtipi) | 57.32 | 182,208,257 | 35,958 | no | host path |
-| 39 | rsshub (runtipi) | 57.1 | 20,877,398 | 46,087 | no | ulimits |
-| 40 | eclipse-mosquitto (runtipi) | 57.08 | 681,314,268 | 11,187 | no | addPorts |
-| 41 | siyuan (runtipi) | 57.03 | 3,556,133 | 46,244 | yes |  |
-| 42 | glance (runtipi) | 56.47 | 8,088,819 | 36,966 | yes |  |
-| 43 | notemark (runtipi) | 56.43 | 13,348,360,026 | 766 | yes |  |
-| 44 | emqx (runtipi) | 56.3 | 46,842,913 | 16,704 | no | addPorts |
-| 45 | owncloud (runtipi) | 55.79 | 32,637,930 | 8,832 | no | healthCheck |
-| 46 | privatebin (runtipi) | 55.79 | 33,799,601 | 8,597 | yes |  |
-| 47 | privatebin (caprover) | 55.79 | 33,799,601 | 8,597 | yes |  |
-| 48 | mongo-express (runtipi) | 55.65 | 276,069,355 | 5,985 | yes |  |
-| 49 | it-tools (runtipi) | 55.63 | 24,972,003 | 40,535 | no | plan policy |
-| 50 | homer (runtipi) | 55.41 | 44,442,473 | 11,593 | yes |  |
-| 51 | penpot (runtipi) | 55.31 | 5,399,653 | 59,816 | no | stopSignal |
-| 52 | monica (runtipi) | 55.05 | 13,608,967 | 25,262 | yes |  |
-| 53 | zigbee2mqtt (runtipi) | 54.87 | 125,828,944 | 15,620 | no | devices |
-| 54 | lobe-chat (runtipi) | 54.72 | 6,099,311 | 82,366 | no | platform placeholder |
-| 55 | invoice-ninja (runtipi) | 54.57 | 32,669,147 | 10,070 | no | field pattern, user |
-| 56 | kavita (runtipi) | 54.52 | 11,171,663 | 11,644 | no | host path |
-| 57 | navidrome (runtipi) | 54.27 | 53,719,832 | 23,430 | no | host path |
-| 58 | transmission-vpn (runtipi) | 54.18 | 394,831,738 | 4,565 | no | capAdd, devices, host path |
-| 59 | guacamole (runtipi) | 54.06 | 77,582,212 | 3,983 | yes |  |
-| 60 | kanboard (runtipi) | 53.96 | 23,588,312 | 9,858 | yes |  |
-| 61 | jellyseerr (runtipi) | 53.83 | 38,346,373 | 12,536 | yes |  |
-| 62 | filestash (runtipi) | 53.71 | 12,435,907 | 14,650 | no | securityOpt |
-| 63 | dockge (runtipi) | 53.27 | 28,783,590 | 24,305 | no | host path, platform placeholder |
-| 64 | grist (runtipi) | 52.76 | 4,014,972 | 11,749 | yes |  |
-| 65 | linkding (caprover) | 52.68 | 9,641,471 | 11,163 | yes |  |
-| 66 | halo (runtipi) | 52.59 | 1,880,625 | 39,706 | no | host path |
-| 67 | flowise (runtipi) | 52.57 | 6,899,527 | 55,451 | yes |  |
-| 68 | windows (runtipi) | 52.55 | 3,027,673 | 53,213 | no | addPorts, capAdd, devices |
-| 69 | sftpgo (runtipi) | 52.35 | 38,922,171 | 12,498 | no | addPorts, healthCheck, internalPort |
-| 70 | budibase (runtipi) | 52.12 | 2,187,215 | 28,267 | no | host path |
-| 71 | homebridge (runtipi) | 52.07 | 13,621,308 | 25,486 | no | internalPort, logging, networkMode |
-| 72 | kimai (runtipi) | 52.05 | 7,795,020 | 4,968 | no | healthCheck |
-| 73 | wallos (runtipi) | 51.83 | 8,359,474 | 8,470 | no | host path |
-| 74 | calcom (runtipi) | 51.66 | 4,849,163 | 48,336 | no | platform placeholder |
-| 75 | crowdsec (runtipi) | 51.66 | 21,188,244 | 14,806 | no | host path |
-| 76 | whoogle (runtipi) | 51.05 | 20,314,974 | 11,577 | yes |  |
-| 77 | drawio (runtipi) | 50.85 | 28,616,549 | 8,031 | no | stdinOpen, tty |
-| 78 | gotify (runtipi) | 50.72 | 850,941 | 15,867 | no | overrides |
-| 79 | watchyourlan (runtipi) | 50.57 | 4,639,841 | 7,616 | no | networkMode |
-| 80 | libretranslate (runtipi) | 50.5 | 9,614,030 | 16,339 | yes |  |
-| 81 | ghostfolio (runtipi) | 50.38 | 3,248,128 | 9,270 | yes |  |
-| 82 | slskd (runtipi) | 50.0 | 7,781,724 | 3,872 | no | host path |
-| 83 | docmost (runtipi) | 49.92 | 4,847,240 | 21,628 | yes |  |
-| 84 | nitter (runtipi) | 49.85 | 7,729,307 | 14,428 | no | plan policy |
-| 85 | librephotos (runtipi) | 49.7 | 2,610,819 | 8,063 | no | healthCheck, platform placeholder |
-| 86 | semaphore (runtipi) | 49.67 | 7,163,328 | 14,124 | yes |  |
-| 87 | ddns-updater (runtipi) | 49.57 | 18,146,098 | 3,207 | yes |  |
-| 88 | gladys (runtipi) | 49.52 | 7,527,646 | 3,185 | no | host path, internalPort, networkMode |
-| 89 | rallly (runtipi) | 49.29 | 1,482,485 | 5,251 | no | healthCheck |
-| 90 | zerotier (runtipi) | 49.09 | 4,030,934 | 17,088 | no | capAdd, devices, internalPort |
-| 91 | pingvin-share (runtipi) | 48.9 | 3,262,120 | 4,671 | yes |  |
-| 92 | scrypted (runtipi) | 48.9 | 13,654,959 | 5,901 | no | host path, internalPort, logging |
-| 93 | ctfd (runtipi) | 48.76 | 10,541,058 | 6,828 | yes |  |
-| 94 | your-spotify (runtipi) | 48.64 | 2,881,263 | 4,572 | no | addPorts, platform placeholder |
-| 95 | owncast (runtipi) | 48.61 | 891,864 | 11,519 | no | addPorts |
-| 96 | obsidian-livesync (runtipi) | 48.42 | 205,077,851 | 271 | yes |  |
-| 97 | silverbullet (runtipi) | 48.35 | 729,846 | 6,028 | no | host path |
-| 98 | octobot (runtipi) | 48.22 | 1,445,330 | 6,549 | yes |  |
-| 99 | sshwifty (runtipi) | 48.02 | 3,262,379 | 3,119 | no | privileged |
-| 100 | tubearchivist (runtipi) | 47.75 | 4,507,853 | 8,435 | no | host path |
-| 101 | whoami (runtipi) | 47.74 | 41,607,458 | 1,418 | no | internalPort |
-| 102 | pinchflat (runtipi) | 47.58 | 548,868 | 5,301 | no | host path |
-| 103 | unmanic (runtipi) | 47.29 | 15,905,317 | 2,494 | no | host path, platform placeholder, privileged |
-| 104 | flatnotes (runtipi) | 47.17 | 1,919,295 | 3,218 | yes |  |
-| 105 | logto (runtipi) | 47.06 | 649,872 | 14,512 | no | addPorts, extraLabels |
-| 106 | olivetin (runtipi) | 46.99 | 1,405,019 | 3,792 | no | plan policy |
-| 107 | inspircd (runtipi) | 46.74 | 4,445,786 | 1,346 | yes |  |
-| 108 | dashdot (runtipi) | 46.53 | 6,641,173 | 3,536 | no | host path, privileged |
-| 109 | kapowarr (runtipi) | 45.58 | 3,065,063 | 1,062 | no | host path |
-| 110 | tooljet (runtipi) | 45.56 | 31,699 | 40,874 | no | stdinOpen, tty |
-| 111 | openbooks (runtipi) | 45.13 | 4,802,254 | 2,401 | no | host path |
-| 112 | mqttx (runtipi) | 44.76 | 1,537,126 | 5,049 | no | host path |
-| 113 | firefly-iii-data-importer (runtipi) | 44.57 | 13,093,690 | 830 | yes |  |
-| 114 | grafana (caprover) | 43.4 | 5,320,360,401 | — | yes |  |
-| 115 | tasks-md (runtipi) | 43.4 | 354,023 | 2,193 | yes |  |
-| 116 | peppermint (runtipi) | 43.27 | 491,310 | 3,163 | no | addPorts |
-| 117 | koillection (runtipi) | 43.21 | 604,154 | 1,310 | yes |  |
-| 118 | cloudflared (runtipi) | 43.08 | 2,133,073 | 449 | no | networkMode, platform placeholder |
-| 119 | databag (runtipi) | 42.73 | 164,375 | 1,487 | no | plan policy |
-| 120 | linkstack (runtipi) | 42.7 | 1,425,926 | 519 | no | plan policy |
-| 121 | wordpress (caprover) | 42.69 | 1,488,429,454 | — | yes |  |
-| 122 | mempool (runtipi) | 42.54 | 877,709 | 2,837 | no | host path, stopGracePeriod, user |
-| 123 | podfetch (runtipi) | 42.23 | 474,279 | 506 | no | host path |
-| 124 | viewtube (runtipi) | 41.69 | 1,222,024 | 1,475 | yes |  |
-| 125 | hello-world (runtipi) | 41.29 | 11,538,706 | 202 | no | plan policy |
-| 126 | fireshare (runtipi) | 40.79 | 731,440 | 1,467 | no | host path |
-| 127 | mixpost (runtipi) | 40.73 | 223,816 | 3,674 | no | healthCheck |
-| 128 | traefik-certs-dumper (runtipi) | 40.68 | 7,786,930 | 209 | no | host path, internalPort |
-| 129 | electrs (runtipi) | 40.49 | 655,716 | 1,393 | no | addPorts, host path, internalPort |
-| 130 | ombi (caprover) | 40.45 | 972,787,412 | — | yes |  |
-| 131 | jenkins (caprover) | 40.29 | 4,986,433,167 | — | yes |  |
-| 132 | syncthing (runtipi) | 40.06 | 138,392,770 | — | no | addPorts, host path, stopGracePeriod |
-| 133 | dailytxt (runtipi) | 39.93 | 303,575 | 501 | yes |  |
-| 134 | mixpost-pro (runtipi) | 39.84 | 134,423 | 3,674 | no | healthCheck |
-| 135 | metabase (caprover) | 39.73 | 271,189,671 | — | yes |  |
-| 136 | movary (runtipi) | 39.18 | 114,523 | 775 | no | user |
-| 137 | seedsync (runtipi) | 39.18 | 1,830,200 | 334 | no | host path, user |
-| 138 | adminer (caprover) | 38.93 | 404,793,923 | — | yes |  |
-| 139 | wordpress-only (caprover) | 38.19 | 1,488,429,454 | — | yes |  |
-| 140 | lidarr-deemix (runtipi) | 37.83 | 473,449 | 530 | no | addPorts, host path |
-| 141 | actual (caprover) | 37.69 | 35,373,304 | — | yes |  |
-| 142 | simplex-smp (runtipi) | 37.61 | 233,751 | 846 | yes |  |
-| 143 | uptime-kuma (caprover) | 37.53 | 180,863,543 | — | yes |  |
-| 144 | grocy (caprover) | 37.05 | 58,031,865 | — | yes |  |
-| 145 | bitcoind (runtipi) | 36.85 | 1,973,040 | 107 | no | addPorts, stopGracePeriod, user |
-| 146 | gotify (caprover) | 36.65 | 45,867,802 | — | yes |  |
-| 147 | monerod (runtipi) | 36.33 | 752,710 | 183 | yes |  |
-| 148 | tautulli (caprover) | 36.32 | 213,529,291 | — | yes |  |
-| 149 | joomla (caprover) | 36.26 | 87,288,815 | — | yes |  |
-| 150 | guacamole (caprover) | 36.06 | 77,582,212 | — | yes |  |
+| # | App | Reach | Pulls | Stars | Licence | Importable | Blocked on |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | nginx (runtipi) | 67.5 | 13,348,360,026 | 31,610 | BSD-2-Clause | yes |  |
+| 2 | vaultwarden (runtipi) | 65.7 | 328,138,779 | 67,092 | GPL-3.0 | yes |  |
+| 3 | gitea (runtipi) | 65.66 | 385,041,008 | 57,923 | MIT | no | addPorts |
+| 4 | nextcloud (runtipi) | 64.87 | 1,027,130,969 | 36,765 | AGPL-3.0 | no | user |
+| 5 | syncthing (runtipi) | 64.8 | 138,392,770 | 88,441 | MPL-2.0 | no | addPorts, host path, stopGracePeriod |
+| 6 | wordpress (runtipi) | 64.34 | 1,488,429,454 | 21,405 | GPL-2.0 | yes |  |
+| 7 | wordpress (caprover) | 64.34 | 1,488,429,454 | 21,405 | NOASSERTION | yes |  |
+| 8 | ghost (runtipi) | 64.03 | 379,714,187 | 55,250 | MIT | no | plan policy |
+| 9 | metabase (runtipi) | 63.19 | 271,189,671 | 49,171 | AGPL-3.0 | yes |  |
+| 10 | metabase (caprover) | 63.19 | 271,189,671 | 49,171 | AGPL-3.0 | yes |  |
+| 11 | node-red (caprover) | 61.91 | 323,222,345 | 23,639 | Apache-2.0 | yes |  |
+| 12 | photoprism (runtipi) | 60.67 | 81,876,705 | 40,175 | AGPL-3.0 | no | host path, overrides, workingDir |
+| 13 | odoo (runtipi) | 60.59 | 53,651,188 | 54,259 | LGPL-3.0 | no | tty, user |
+| 14 | searxng (runtipi) | 60.42 | 79,235,342 | 36,726 | AGPL-3.0 | no | plan policy |
+| 15 | actual (caprover) | 59.98 | 35,373,304 | 28,660 | MIT | yes |  |
+| 16 | memos (runtipi) | 59.64 | 10,906,459 | 62,877 | MIT | yes |  |
+| 17 | memos (caprover) | 59.64 | 10,906,459 | 62,877 | MIT | yes |  |
+| 18 | stirling-pdf (runtipi) | 59.35 | 13,659,554 | 91,632 | Apache-2.0 | no | privileged |
+| 19 | ombi (caprover) | 58.52 | 972,787,412 | 4,102 | GPL-2.0 | yes |  |
+| 20 | joplin (runtipi) | 58.49 | 15,324,563 | 56,306 | MIT | yes |  |
+| 21 | joplin (caprover) | 58.49 | 15,324,563 | 56,306 | MIT | yes |  |
+| 22 | adminer (caprover) | 58.41 | 404,793,923 | 7,870 | NOASSERTION | yes |  |
+| 23 | ntfy (runtipi) | 58.11 | 22,922,531 | 34,125 | Apache-2.0 | yes |  |
+| 24 | firefly-iii (caprover) | 57.81 | 29,091,634 | 24,563 | AGPL-3.0 | yes |  |
+| 25 | firefly-iii (runtipi) | 57.81 | 29,091,634 | 24,563 | AGPL-3.0 | no | plan policy |
+| 26 | gotify (caprover) | 57.65 | 45,867,802 | 15,867 | MIT | yes |  |
+| 27 | rsshub (runtipi) | 57.1 | 20,877,398 | 46,087 | MIT | no | ulimits |
+| 28 | siyuan (runtipi) | 57.03 | 3,556,133 | 46,244 | AGPL-3.0 | yes |  |
+| 29 | grocy (caprover) | 56.94 | 58,031,865 | 9,475 | MIT | yes |  |
+| 30 | appsmith (caprover) | 56.77 | 20,114,393 | 40,850 | Apache-2.0 | yes |  |
+| 31 | glance (runtipi) | 56.47 | 8,088,819 | 36,966 | AGPL-3.0 | yes |  |
+| 32 | emqx (runtipi) | 56.3 | 46,842,913 | 16,704 | Apache-2.0 | no | addPorts |
+| 33 | owncloud (runtipi) | 55.79 | 32,637,930 | 8,832 | AGPL-3.0 | no | healthCheck |
+| 34 | privatebin (runtipi) | 55.79 | 33,799,601 | 8,597 | Zlib | yes |  |
+| 35 | privatebin (caprover) | 55.79 | 33,799,601 | 8,597 | Zlib | yes |  |
+| 36 | homer (runtipi) | 55.41 | 44,442,473 | 11,593 | Apache-2.0 | yes |  |
+| 37 | tautulli (caprover) | 55.41 | 213,529,291 | 6,579 | GPL-3.0 | yes |  |
+| 38 | penpot (runtipi) | 55.31 | 5,399,653 | 59,816 | MPL-2.0 | no | stopSignal |
+| 39 | monica (runtipi) | 55.05 | 13,608,967 | 25,262 | AGPL-3.0 | yes |  |
+| 40 | joomla (caprover) | 54.82 | 87,288,815 | 5,133 | GPL-2.0 | yes |  |
+| 41 | etherpad (caprover) | 54.61 | 15,530,227 | 18,543 | Apache-2.0 | yes |  |
+| 42 | kavita (runtipi) | 54.52 | 11,171,663 | 11,644 | GPL-3.0 | no | host path |
+| 43 | beszel (caprover) | 54.23 | 20,136,636 | 25,254 | MIT | yes |  |
+| 44 | guacamole (runtipi) | 54.06 | 77,582,212 | 3,983 | Apache-2.0 | yes |  |
+| 45 | guacamole (caprover) | 54.06 | 77,582,212 | 3,983 | Apache-2.0 | yes |  |
+| 46 | kanboard (runtipi) | 53.96 | 23,588,312 | 9,858 | MIT | yes |  |
+| 47 | filestash (caprover) | 53.71 | 12,435,907 | 14,650 | AGPL-3.0 | yes |  |
+| 48 | filestash (runtipi) | 53.71 | 12,435,907 | 14,650 | AGPL-3.0 | no | securityOpt |
+| 49 | activepieces (caprover) | 53.33 | 2,225,881 | 24,383 | NOASSERTION | yes |  |
+| 50 | yourls (caprover) | 52.91 | 23,402,217 | 12,219 | MIT | yes |  |
+| 51 | grist (runtipi) | 52.76 | 4,014,972 | 11,749 | Apache-2.0 | yes |  |
+| 52 | vikunja (caprover) | 52.73 | 10,532,758 | 5,340 | AGPL-3.0 | yes |  |
+| 53 | vikunja (runtipi) | 52.73 | 10,532,758 | 5,340 | AGPL-3.0 | no | healthCheck |
+| 54 | linkding (caprover) | 52.68 | 9,641,471 | 11,163 | MIT | yes |  |
+| 55 | halo (runtipi) | 52.59 | 1,880,625 | 39,706 | GPL-3.0 | no | host path |
+| 56 | kimai (runtipi) | 52.05 | 7,795,020 | 4,968 | AGPL-3.0 | no | healthCheck |
+| 57 | transfer-sh (caprover) | 51.91 | 9,484,160 | 15,893 | MIT | yes |  |
+| 58 | wallos (runtipi) | 51.83 | 8,359,474 | 8,470 | GPL-3.0 | no | host path |
+| 59 | docuseal (caprover) | 51.23 | 2,230,188 | 18,490 | AGPL-3.0 | yes |  |
+| 60 | the-lounge (caprover) | 51.22 | 20,150,024 | 6,327 | MIT | yes |  |
+| 61 | rss-bridge (caprover) | 50.94 | 10,674,098 | 9,231 | Unlicense | yes |  |
+| 62 | radicale (caprover) | 50.88 | 22,319,709 | 4,983 | GPL-3.0 | yes |  |
+| 63 | gotify (runtipi) | 50.72 | 850,941 | 15,867 | MIT | no | overrides |
+| 64 | thumbor (caprover) | 50.66 | 7,715,767 | 10,517 | MIT | yes |  |
+| 65 | watchyourlan (runtipi) | 50.57 | 4,639,841 | 7,616 | MIT | no | networkMode |
+| 66 | ghostfolio (runtipi) | 50.38 | 3,248,128 | 9,270 | AGPL-3.0 | yes |  |
+| 67 | slskd (runtipi) | 50.0 | 7,781,724 | 3,872 | AGPL-3.0 | no | host path |
+| 68 | baikal (caprover) | 49.77 | 8,287,115 | 3,298 | GPL-3.0 | yes |  |
+| 69 | smokeping (caprover) | 49.76 | 88,593,776 | 1,963 | GPL-2.0 | yes |  |
+| 70 | librephotos (runtipi) | 49.7 | 2,610,819 | 8,063 | MIT | no | healthCheck, platform placeholder |
+| 71 | gladys (runtipi) | 49.52 | 7,527,646 | 3,185 | Apache-2.0 | no | host path, internalPort, networkMode |
+| 72 | rallly (runtipi) | 49.29 | 1,482,485 | 5,251 | AGPL-3.0 | no | healthCheck |
+| 73 | your-spotify (runtipi) | 48.64 | 2,881,263 | 4,572 | MIT | no | addPorts, platform placeholder |
+| 74 | owncast (runtipi) | 48.61 | 891,864 | 11,519 | MIT | no | addPorts |
+| 75 | silverbullet (runtipi) | 48.35 | 729,846 | 6,028 | MIT | no | host path |
+| 76 | octobot (runtipi) | 48.22 | 1,445,330 | 6,549 | GPL-3.0 | yes |  |
+| 77 | sshwifty (runtipi) | 48.02 | 3,262,379 | 3,119 | AGPL-3.0 | no | privileged |
+| 78 | lychee (caprover) | 47.64 | 4,160,340 | 4,286 | MIT | yes |  |
+| 79 | pinchflat (runtipi) | 47.58 | 548,868 | 5,301 | AGPL-3.0 | no | host path |
+| 80 | limesurvey (caprover) | 47.44 | 1,869,719 | 3,716 | NOASSERTION | yes |  |
+| 81 | flatnotes (runtipi) | 47.17 | 1,919,295 | 3,218 | MIT | yes |  |
+| 82 | olivetin (runtipi) | 46.99 | 1,405,019 | 3,792 | AGPL-3.0 | no | plan policy |
+| 83 | inspircd (runtipi) | 46.74 | 4,445,786 | 1,346 | GPL-2.0 | yes |  |
+| 84 | dolibarr (caprover) | 46.5 | 445,114 | 7,597 | GPL-3.0 | yes |  |
+| 85 | chevereto (caprover) | 46.46 | 13,163,721 | 989 | AGPL-3.0 | yes |  |
+| 86 | projectsend (caprover) | 46.27 | 4,907,379 | 2,004 | GPL-2.0 | yes |  |
+| 87 | kapowarr (runtipi) | 45.58 | 3,065,063 | 1,062 | GPL-3.0 | no | host path |
+| 88 | tooljet (runtipi) | 45.56 | 31,699 | 40,874 | GPL-3.0 | no | stdinOpen, tty |
+| 89 | coral (caprover) | 45.2 | 2,650,082 | 1,998 | NOASSERTION | yes |  |
+| 90 | humhub (caprover) | 45.15 | 564,657 | 6,743 | NOASSERTION | yes |  |
+| 91 | pydio (caprover) | 45.02 | 2,066,252 | 2,245 | AGPL-3.0 | yes |  |
+| 92 | picoshare (caprover) | 44.84 | 1,283,221 | 3,032 | NOASSERTION | yes |  |
+| 93 | tasks-md (runtipi) | 43.4 | 354,023 | 2,193 | MIT | yes |  |
+| 94 | koillection (runtipi) | 43.21 | 604,154 | 1,310 | MIT | yes |  |
+| 95 | papermerge (caprover) | 42.85 | 3,578,827 | 532 | Apache-2.0 | yes |  |
+| 96 | databag (caprover) | 42.73 | 164,375 | 1,487 | Apache-2.0 | yes |  |
+| 97 | databag (runtipi) | 42.73 | 164,375 | 1,487 | Apache-2.0 | no | plan policy |
+| 98 | linkstack (runtipi) | 42.7 | 1,425,926 | 519 | AGPL-3.0 | no | plan policy |
+| 99 | cockpit (caprover) | 42.31 | 728,333 | 745 | NOASSERTION | yes |  |
+| 100 | podfetch (runtipi) | 42.23 | 474,279 | 506 | Apache-2.0 | no | host path |
 
 ## What one capability would unlock, within this top list
 
@@ -166,18 +116,14 @@ Counting only apps whose *sole* remaining blocker is that feature.
 
 | Feature | Apps | Combined reach | Examples |
 | --- | --- | --- | --- |
-| host path | 18 | 906.7 | uptime-kuma, dozzle, filebrowser, kavita |
-| plan policy | 11 | 578.8 | ghost, searxng, ghost-dev, excalidraw |
-| healthCheck | 7 | 357.3 | n8n-2, nocodb, owncloud, kimai |
-| addPorts | 5 | 270.9 | gitea, eclipse-mosquitto, emqx, owncast |
-| devices | 2 | 115.6 | ollama-amd, zigbee2mqtt |
+| host path | 8 | 392.7 | kavita, halo, wallos, slskd |
+| plan policy | 6 | 314.7 | ghost, searxng, firefly-iii, olivetin |
+| healthCheck | 4 | 209.9 | owncloud, vikunja, kimai, rallly |
+| addPorts | 3 | 170.6 | gitea, emqx, owncast |
 | privileged | 2 | 107.4 | stirling-pdf, sshwifty |
-| platform placeholder | 2 | 106.4 | lobe-chat, calcom |
-| user | 2 | 104.1 | nextcloud, movary |
-| deploy | 1 | 60.7 | ollama-nvidia |
+| user | 1 | 64.9 | nextcloud |
 | ulimits | 1 | 57.1 | rsshub |
 | stopSignal | 1 | 55.3 | penpot |
 | securityOpt | 1 | 53.7 | filestash |
 | overrides | 1 | 50.7 | gotify |
 | networkMode | 1 | 50.6 | watchyourlan |
-| internalPort | 1 | 47.7 | whoami |
