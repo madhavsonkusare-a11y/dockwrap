@@ -154,7 +154,7 @@ Two things that follow:
   turned 0.3 GB free into 47 GB here.
 
 Recovering a Docker Desktop that will not start, in order: quit it and
-`com.docker.backend`, remove or rename `%LOCALAPPDATA%\Dockerun` and
+`com.docker.backend`, remove or rename `%LOCALAPPDATA%\Docker\run` and
 `%LOCALAPPDATA%\docker-secrets-engine` (their socket files become undeletable
 when the disk fills), `wsl --shutdown`, then start Docker Desktop and let *it*
 boot the VM — starting the distro by hand leaves the data disk unmounted and
