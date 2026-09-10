@@ -722,6 +722,11 @@ pub enum Resume {
     /// Try the failures again, keeping the passes. For when the failures were
     /// about the machine rather than the app.
     RetryFailures,
+    /// Run everything asked for, recorded or not. For when the question has
+    /// changed rather than the answer — proving a different packaging of an
+    /// app already qualified, where the existing pass is about a definition
+    /// that is no longer the one under consideration.
+    RunAnyway,
 }
 
 /// A directory of qualification results that a run can be resumed from.
@@ -777,6 +782,7 @@ impl Batch {
                 (None, _) => true,
                 (Some(_), Resume::SkipRecorded) => false,
                 (Some(evidence), Resume::RetryFailures) => !evidence.passed,
+                (Some(_), Resume::RunAnyway) => true,
             })
             .collect()
     }
@@ -1107,6 +1113,11 @@ ccc",
         // done.
         let retry = batch.remaining(&apps, Resume::RetryFailures);
         assert_eq!(retry, vec![&"two".to_owned(), &"three".to_owned()]);
+
+        // And a new question about an app reruns even its pass: the pass was
+        // about a different definition.
+        let anyway = batch.remaining(&apps, Resume::RunAnyway);
+        assert_eq!(anyway.len(), 3);
 
         let all = batch.results();
         assert_eq!(all.len(), 2);

@@ -28,6 +28,7 @@ import hashlib
 import json
 import re
 import subprocess
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -51,9 +52,27 @@ MANIFEST_TYPES = ", ".join(
 )
 
 
+def opened(request, attempts=5):
+    """urlopen, waiting out a registry that says it is being asked too often.
+
+    ghcr.io answers a burst of anonymous requests with 429 and a Retry-After.
+    Treating that as a refusal fails a manifest over nothing; the registry has
+    said exactly how long to wait.
+    """
+    for attempt in range(attempts):
+        try:
+            return urllib.request.urlopen(request, timeout=30)
+        except urllib.error.HTTPError as error:
+            if error.code != 429 or attempt == attempts - 1:
+                raise
+            wait = error.headers.get("Retry-After", "")
+            delay = int(wait) if wait.isdigit() else 2 ** (attempt + 2)
+            time.sleep(min(delay, 120))
+
+
 def fetch(url):
     request = urllib.request.Request(url, headers=USER_AGENT)
-    with urllib.request.urlopen(request, timeout=30) as response:
+    with opened(request) as response:
         return json.loads(response.read(2 * 1024 * 1024))
 
 
@@ -82,9 +101,7 @@ def registry_get(host, path, accept=None):
     if accept:
         headers["Accept"] = accept
     try:
-        with urllib.request.urlopen(
-            urllib.request.Request(url, headers=headers), timeout=30
-        ) as response:
+        with opened(urllib.request.Request(url, headers=headers)) as response:
             return response.read(8 * 1024 * 1024)
     except urllib.error.HTTPError as refusal:
         if refusal.code != 401:
@@ -102,9 +119,7 @@ def registry_get(host, path, accept=None):
     if not token:
         raise SystemExit(f"{host}: its token endpoint returned no token")
     headers["Authorization"] = f"Bearer {token}"
-    with urllib.request.urlopen(
-        urllib.request.Request(url, headers=headers), timeout=30
-    ) as response:
+    with opened(urllib.request.Request(url, headers=headers)) as response:
         return response.read(8 * 1024 * 1024)
 
 

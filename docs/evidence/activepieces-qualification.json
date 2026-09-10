@@ -1,0 +1,60 @@
+{
+  "app": "activepieces",
+  "passed": true,
+  "scope": "candidate mapping, transaction, managed storage and first use, on one host and one architecture",
+  "promotion": "not reviewed",
+  "source_revision": "7f1f329125dde0cb915f47c8b33293eca45f7d0e",
+  "images": [
+    "index.docker.io/activepieces/activepieces:0.12.2"
+  ],
+  "image_ids": {
+    "activepieces/activepieces:0.12.2": "sha256:dc203c97c22827e7a51a11341121a1fad19a2d1f93e07322428b6d477daff1a0"
+  },
+  "first_use": "it opens a page with a clear next step, and the same page after a restart and reinstall",
+  "steps": [
+    {
+      "step": "pull index.docker.io/activepieces/activepieces:0.12.2",
+      "passed": true
+    },
+    {
+      "step": "installs with one action",
+      "passed": true
+    },
+    {
+      "step": "answers on its address",
+      "passed": true
+    },
+    {
+      "step": "is usable first install",
+      "passed": true
+    },
+    {
+      "step": "survives a restart",
+      "passed": true
+    },
+    {
+      "step": "is usable after restart",
+      "passed": true
+    },
+    {
+      "step": "reinstalls over data it kept",
+      "passed": true
+    },
+    {
+      "step": "generates no credentials, so there are none to lose",
+      "passed": true
+    },
+    {
+      "step": "is usable after a keep-data reinstall",
+      "passed": true
+    },
+    {
+      "step": "removes everything it created",
+      "passed": true
+    },
+    {
+      "step": "leaves other containers alone",
+      "passed": true
+    }
+  ]
+}

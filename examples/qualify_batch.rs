@@ -309,7 +309,11 @@ fn main() {
         .position(|arg| arg == "--source")
         .and_then(|at| args.get(at + 1))
         .map(String::as_str);
-    let resume = if args.iter().any(|arg| arg == "--retry-failures") || !only.is_empty() {
+    let resume = if !only.is_empty() {
+        // Naming apps is asking a new question about them, so an old answer
+        // does not settle it.
+        Resume::RunAnyway
+    } else if args.iter().any(|arg| arg == "--retry-failures") {
         Resume::RetryFailures
     } else {
         Resume::SkipRecorded

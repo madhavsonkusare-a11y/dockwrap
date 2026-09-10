@@ -298,14 +298,17 @@ impl ReviewedTemplate {
     }
 }
 
+const ACTIVEPIECES: &str = include_str!("activepieces.json");
 const ACTUAL: &str = include_str!("actual.json");
 const ADMINER: &str = include_str!("adminer.json");
 const BESZEL: &str = include_str!("beszel.json");
 const CODIMD: &str = include_str!("codimd.json");
+const FILESTASH: &str = include_str!("filestash.json");
 const FLATNOTES: &str = include_str!("flatnotes.json");
 const GHOST_DEV: &str = include_str!("ghost-dev.json");
 const GOTIFY: &str = include_str!("gotify.json");
 const GRAFANA: &str = include_str!("grafana.json");
+const GROCY: &str = include_str!("grocy.json");
 const HOMER: &str = include_str!("homer.json");
 const JELLYSEERR: &str = include_str!("jellyseerr.json");
 const KANBOARD: &str = include_str!("kanboard.json");
@@ -315,19 +318,23 @@ const NODERED: &str = include_str!("nodered.json");
 const NTFY: &str = include_str!("ntfy.json");
 const OMBI: &str = include_str!("ombi.json");
 const PRIVATEBIN: &str = include_str!("privatebin.json");
+const TAUTULLI: &str = include_str!("tautulli.json");
 const VAULTWARDEN: &str = include_str!("vaultwarden.json");
 
 /// Every template a review has passed. Being here is not being offered.
 pub fn reviewed_templates() -> Vec<ReviewedTemplate> {
     [
+        ACTIVEPIECES,
         ACTUAL,
         ADMINER,
         BESZEL,
         CODIMD,
+        FILESTASH,
         FLATNOTES,
         GHOST_DEV,
         GOTIFY,
         GRAFANA,
+        GROCY,
         HOMER,
         JELLYSEERR,
         KANBOARD,
@@ -337,6 +344,7 @@ pub fn reviewed_templates() -> Vec<ReviewedTemplate> {
         NTFY,
         OMBI,
         PRIVATEBIN,
+        TAUTULLI,
         VAULTWARDEN,
     ]
     .into_iter()
@@ -517,6 +525,7 @@ mod tests {
         "beszel",
         "flatnotes",
         "grafana",
+        "grocy",
         "homer",
         "kanboard",
         "metabase",
@@ -524,6 +533,7 @@ mod tests {
         "nodered",
         "ntfy",
         "privatebin",
+        "tautulli",
         "vaultwarden",
     ];
 
