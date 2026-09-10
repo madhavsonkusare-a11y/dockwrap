@@ -1,5 +1,58 @@
 # Local Store: agent handoff
 
+## September 10 — one wrong rule was costing ten apps
+
+**Overall importable is 238**, up from 228. CapRover 117 to 125, Runtipi 111 to
+113. The open-source top 150 by reach holds 92 importable apps and the top 200
+holds 110.
+
+The plan required every environment name to be `NAME_LIKE_THIS`. Uppercase is a
+convention, not a rule: Ghost configures itself with `database__client`,
+Jellyfin with `JELLYFIN_PublishedServerUrl`, codex-docs with
+`APP_CONFIG_auth_password`. All are ordinary environment names Docker accepts,
+and all were refused for a house style wearing a safety rule's clothes. The
+check now asks what actually matters — that the name cannot break out of the
+`key: value` line it renders into — and refuses an empty name, a leading digit,
+whitespace, `=`, `$`, quotes and control characters, each with a test.
+
+**How the remaining "plan policy" refusals actually break down**, which needed
+a one-off tool because the queue recorded only the feature name:
+
+| Reason | Apps | Verdict |
+| --- | --- | --- |
+| image not pinned to a fixed tag | 17 | The rule is right. These want `:latest`. |
+| environment name not uppercase | 4 | Our bug, now fixed |
+| control characters in a command | 1 | Right to refuse |
+| upstream default fails its own rule | 1 | Right to refuse |
+| hostname is a placeholder | 1 | Right to refuse |
+| mount source escapes the project | 1 | Right to refuse |
+
+So `plan policy` is mostly not one problem. Seventeen of the twenty-five are
+apps whose definitions ship `:latest`, and relaxing that would trade
+reproducibility for a number — the plan's own capability priority four is the
+answer: resolve a tag to its digests once, record them, and pin to that under
+review.
+
+**The queue now records each blocker's detail**, so the next person does not
+need the one-off tool. "plan policy: 25 apps" was a number; with the detail it
+is a list that separates a rule worth relaxing from one worth keeping.
+
+### Where v1 stands
+
+| Open-source, by reach | Importable |
+| --- | --- |
+| top 100 | 60 |
+| top 150 | 92 |
+| top 200 | 110 |
+
+Still none of them verified or tested — that is the harness's work and it is
+mostly machine time. Remaining capability wins inside the open-source top 150
+are small now: healthCheck (4) and addPorts (3). The larger remaining levers
+are digest resolution for `:latest` (17 apps) and running the batch.
+
+Validation: 295 Rust tests, strict Clippy, fmt and the offline gates.
+
+
 ## September 10 — a folder a person chooses, and Runtipi at 111
 
 **Open-source top 150 by reach now holds 91 importable apps, and the top 200

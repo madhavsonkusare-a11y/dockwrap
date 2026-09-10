@@ -10,8 +10,8 @@ and no app becomes a reviewed recipe by appearing in this table.
 | Result | Apps |
 | --- | --- |
 | Definitions read | 356 |
-| Fully expressible as a plan today | 117 |
-| Blocked by at least one limitation | 239 |
+| Fully expressible as a plan today | 125 |
+| Blocked by at least one limitation | 231 |
 
 Expressible is not verified. Every app in the second table still needs a
 real install, health, restart, preserved-data reinstall and deletion run
@@ -29,9 +29,9 @@ before it could be offered to anyone.
 | refused | `public domain` | 46 | azuracast, bazarr, boxy-hq-only |
 | refused | `ports` | 37 | adguard-home, azuracast, bitwardenrs |
 | needs input | `image` | 20 | corteza, forge_minecraft, formbricks |
-| refused | `plan rule` | 15 | dragonflydb, duplicati, filerun |
 | refused | `host path` | 14 | Home-Assistant, appwrite, authentik |
 | refused | `containerHttpPort` | 10 | btcpayserver, elasticsearch, fusionauth |
+| refused | `plan rule` | 7 | duplicati, filerun, moodle |
 | not modelled | `environment` | 3 | cronicle, pairdrop, stirling-pdf |
 | not modelled | `networks` | 3 | n8n-io-queue-mode, seafile, seatable |
 | not modelled | `user` | 3 | airflow, authentik, invoiceninja |
@@ -91,6 +91,7 @@ upstream change or a different source, not more of this importer.
 | docuseal | 1 | 3000 | 0 | - |
 | dokuwiki | 1 | 80 | 0 | - |
 | dolibarr | 2 | 80 | 0 | CAP_PG_PASS*, CAP_ADMIN_LOGIN*, CAP_ADMIN_PASS* |
+| dragonflydb | 1 | 80 | 0 | CAP_DRAGONFLYDB_PASSWORD, CAP_DRAGONFLYDB_MAXMEM* |
 | droppy | 1 | 8989 | 0 | - |
 | elkarbackup | 2 | 80 | 0 | CAP_TZ, CAP_MARIADB_DB, CAP_MARIADB_USER, CAP_MARIADB_PASS |
 | etesync | 1 | 3735 | 0 | CAP_SUPER_USER, CAP_SUPER_EMAIL, CAP_SUPER_PASS* |
@@ -102,6 +103,7 @@ upstream change or a different source, not more of this importer.
 | firefox | 1 | 3000 | 0 | CAP_PUID*, CAP_PGID*, CAP_TZ |
 | flaresolverr | 1 | 8191 | 0 | CAP_LOG_LEVEL*, CAP_LOG_HTML*, CAP_CAPTCHA_SOLVER*, CAP_TZ*, CAP_LANG*, CAP_HEADLESS*, CAP_BROWSER_TIMEOUT*, CAP_TEST_URL*, CAP_PROMETHEUS_ENABLED*, CAP_PROMETHEUS_PORT* |
 | foundryvtt | 1 | 30000 | 0 | CAP_FOUNDRY_USERNAME*, CAP_FOUNDRY_PASSWORD*, CAP_FOUNDRY_ADMIN_KEY, CAP_FOUNDRY_PROXY_SSL*, CAP_FOUNDRY_MINIFY_STATIC_FILES*, CAP_FOUNDRY_CONTAINER_CACHE, CAP_FOUNDRY_TIMEZONE* |
+| ghost-only | 1 | 2368 | 0 | CAP_DB_HOST, CAP_DB_PORT, CAP_DB_NAME, CAP_DB_USER, CAP_DB_PASSWORD, CAP_GHOST_HOST*, CAP_SMTP_HOST, CAP_SMTP_PORT, CAP_SMTP_SECURE, CAP_SMTP_USER, CAP_SMTP_PASSWORD, CAP_SMTP_FROM |
 | gotify | 1 | 80 | 0 | - |
 | grafana | 1 | 3000 | 0 | - |
 | grocy | 1 | 80 | 0 | CAP_PUID*, CAP_GUID*, CAP_TZ* |
@@ -109,10 +111,13 @@ upstream change or a different source, not more of this importer.
 | humhub | 2 | 80 | 2 | CAP_MYSQL_DATABASE_NAME, CAP_MYSQL_USER, CAP_HUMHUB_AUTO_INSTALL |
 | imagor-local | 1 | 80 | 1 | CAP_ENV_IMAGOR_UNSAFE* |
 | invoiceplane | 2 | 80 | 2 | CAP_DB_USERNAME*, CAP_DB_DATABASE* |
+| jellyfin | 1 | 8096 | 0 | CAP_PUID*, CAP_PGID*, CAP_TZ* |
 | jenkins | 1 | 8080 | 0 | - |
 | joomla | 1 | 80 | 0 | CAP_DB_HOST, CAP_DB_NAME, CAP_DB_USER, CAP_DB_PASS* |
 | joplin | 2 | 22300 | 0 | CAP_POSTGRES_DB, CAP_POSTGRES_USER, CAP_POSTGRES_PASSWORD |
+| jsreport | 1 | 5488 | 0 | CAP_JSREPORT_ADMINUSERNAME*, CAP_JSREPORT_PASSWORD*, CAP_JSREPORT_SECRET* |
 | karakeep | 3 | 3000 | 2 | CAP_OPENAI_API_KEY, CAP_OLLAMA_BASE_URL, CAP_INFERENCE_TEXT_MODEL, CAP_INFERENCE_IMAGE_MODEL, CAP_INFERENCE_CONTEXT_LENGTH |
+| languagetool | 1 | 8010 | 0 | CAP_MIN_SIZE, CAP_MAX_SIZE |
 | limesurvey | 2 | 80 | 0 | CAP_DB_PASS*, CAP_DB_NAME*, CAP_DB_USER* |
 | linkding | 1 | 9090 | 0 | CAP_LD_SUPERUSER_NAME, CAP_LD_SUPERUSER_PASSWORD |
 | linkwarden | 3 | 3000 | 3 | CAP_PG_USER*, CAP_PG_DB* |
@@ -130,6 +135,7 @@ upstream change or a different source, not more of this importer.
 | node-red | 1 | 1880 | 0 | CAP_NODE_RED_TIMEZONE |
 | ohmyform | 3 | 5000 | 1 | CAP_OHMYFORM_EMAIL*, CAP_OHMYFORM_USER* |
 | ombi | 1 | 3579 | 0 | CAP_TZ* |
+| openhabittracker | 1 | 8080 | 2 | CAP_USERNAME*, CAP_EMAIL* |
 | openspeedtest | 1 | 3000 | 0 | - |
 | orangehrm | 2 | 80 | 0 | CAP_ADMIN_NAME*, CAP_ADMIN_PASS*, CAP_DB_PASS*, CAP_DB_NAME*, CAP_DB_USER*, CAP_SMTP_HOST, CAP_SMTP_PORT, CAP_SMTP_USER, CAP_SMTP_PASS |
 | outline | 3 | 3000 | 4 | CAP_DB_USER*, CAP_DEFAULT_LANGUAGE*, CAP_FILE_STORAGE*, CAP_UPLOAD_MAX_SIZE*, CAP_S3_BUCKET_URL, CAP_S3_BUCKET_NAME, CAP_S3_REGION, CAP_S3_ACCESS_KEY_ID, CAP_S3_SECRET_ACCESS_KEY, CAP_S3_FORCE_PATH_STYLE*, CAP_GOOGLE_CLIENT_ID, CAP_GOOGLE_CLIENT_SECRET, CAP_OIDC_CLIENT_ID, CAP_OIDC_CLIENT_SECRET, CAP_OIDC_AUTH_URI, CAP_OIDC_TOKEN_URI, CAP_OIDC_USERINFO_URI, CAP_OIDC_LOGOUT_URI, CAP_OIDC_USERNAME_CLAIM, CAP_OIDC_DISPLAY_NAME, CAP_OIDC_SCOPES, CAP_SMTP_HOST, CAP_SMTP_PORT, CAP_SMTP_SECURE*, CAP_SMTP_USERNAME, CAP_SMTP_PASSWORD, CAP_SMTP_FROM_EMAIL, CAP_SMTP_REPLY_EMAIL |
@@ -161,11 +167,13 @@ upstream change or a different source, not more of this importer.
 | smokeping | 1 | 80 | 0 | CAP_PUID*, CAP_PGID*, CAP_TZ |
 | sourcegraph | 1 | 7080 | 0 | - |
 | statping | 2 | 8080 | 1 | CAP_DB_USER*, CAP_DB_NAME*, CAP_ADMIN_USER*, CAP_ADMIN_PASS*, CAP_ADMIN_EMAIL* |
+| steam-openid-provider | 1 | 80 | 1 | CAP_CLIENT_ID*, CAP_ORIGIN, CAP_API_KEY, CAP_REDIRECT_URI |
 | tautulli | 1 | 8181 | 0 | CAP_TZ, CAP_PUID*, CAP_GUID* |
 | termix | 2 | 8080 | 0 | - |
 | the-lounge | 1 | 9000 | 0 | - |
 | thumbor | 1 | 80 | 0 | - |
 | transfer-sh | 1 | 8080 | 0 | - |
+| trudesk | 3 | 8118 | 1 | CAP_APPNAME_MONGODB_PORT*, CAP_ELASTICSEARCH_SECURITY_ENABLED*, CAP_NODE_ENV* |
 | tubesync | 1 | 4848 | 1 | CAP_USERNAME, CAP_TIMEZONE, CAP_PUID, CAP_PGID |
 | umami-only | 1 | 3000 | 0 | CAP_DB_URL*, CAP_DB_USER, CAP_DB_NAME*, CAP_DB_PASS* |
 | umami-postgresql | 2 | 3000 | 1 | CAP_PG_INITDB_ARGS |

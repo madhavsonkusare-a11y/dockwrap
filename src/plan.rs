@@ -460,12 +460,24 @@ impl PlanService {
             return Err("image contains whitespace or control characters".into());
         }
         for (key, value) in &self.environment {
-            if key.is_empty()
+            // Uppercase is a convention, not a rule. Ghost configures itself
+            // with `database__client`, Jellyfin with
+            // `JELLYFIN_PublishedServerUrl`, and both are ordinary environment
+            // names that Docker accepts — requiring SHOUTING_CASE refused four
+            // real apps for a house style. What actually matters is that the
+            // name cannot break out of the `key: value` it renders into.
+            let first_is_name_like = key
+                .chars()
+                .next()
+                .is_some_and(|c| c.is_ascii_alphabetic() || c == '_');
+            if !first_is_name_like
                 || !key
                     .chars()
-                    .all(|c| c.is_ascii_uppercase() || c.is_ascii_digit() || c == '_')
+                    .all(|c| c.is_ascii_alphanumeric() || c == '_' || c == '.')
             {
-                return Err(format!("environment key {key:?} is not NAME_LIKE_THIS"));
+                return Err(format!(
+                    "environment key {key:?} is not a plain environment name"
+                ));
             }
             if value.chars().any(|c| c.is_control()) {
                 return Err(format!(
@@ -688,6 +700,70 @@ pub fn plan_for_recipe(recipe: &Recipe) -> Result<DeploymentPlan, String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// Uppercase is a convention. Ghost and Jellyfin both configure themselves
+    /// with names that are not, and refusing them was a house style masquerading
+    /// as a safety rule.
+    #[test]
+    fn an_ordinary_environment_name_is_accepted_whatever_its_case() {
+        for key in [
+            "DATABASE_URL",
+            "database__client",
+            "JELLYFIN_PublishedServerUrl",
+            "APP_CONFIG_auth_password",
+            "_LEADING_UNDERSCORE",
+            "log.level",
+        ] {
+            let mut plan = plan_with_environment(key, "value");
+            assert!(
+                plan.validate().is_ok(),
+                "{key} was refused: {:?}",
+                plan.validate()
+            );
+            // And it survives rendering as its own line.
+            let compose = plan.to_compose().expect("it should render");
+            assert!(compose.contains(key), "{compose}");
+            plan.services[0].environment.clear();
+        }
+    }
+
+    /// What the rule is actually for: a name that could stop being a name.
+    #[test]
+    fn an_environment_name_that_could_break_its_own_line_is_refused() {
+        for key in [
+            "",
+            "9LEADING_DIGIT",
+            "HAS SPACE",
+            "HAS=EQUALS",
+            "HAS
+NEWLINE",
+            "HAS$DOLLAR",
+            "HAS\"QUOTE",
+        ] {
+            let plan = plan_with_environment(key, "value");
+            assert!(plan.validate().is_err(), "{key:?} was accepted");
+        }
+    }
+
+    fn plan_with_environment(key: &str, value: &str) -> DeploymentPlan {
+        DeploymentPlan {
+            id: "example".into(),
+            services: vec![PlanService {
+                name: "example".into(),
+                image: "example/app:1.0".into(),
+                environment: vec![(key.to_owned(), value.to_owned())],
+                published: Some(PublishedPort {
+                    host: 8080,
+                    container: 80,
+                }),
+                mounts: Vec::new(),
+                depends_on: Vec::new(),
+                overrides: PlanOverrides::default(),
+            }],
+            named_volumes: Vec::new(),
+        }
+    }
+
     use crate::recipes::reviewed_recipes;
 
     /// The gate for this model: it must express what already ships, exactly.

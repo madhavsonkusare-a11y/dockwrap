@@ -671,12 +671,10 @@
    "pulls": 379714187,
    "stars": 55251,
    "catalogues": 1,
-   "importable": false,
-   "blockers": [
-    "plan policy"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
    "images": [
     "ghost:5.130.6"
    ]
@@ -3974,6 +3972,23 @@
    ]
   },
   {
+   "id": "ghost-only",
+   "source": "caprover",
+   "reach": 35.82,
+   "open_source": null,
+   "licenses": [],
+   "pulls": 379714187,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "ghost:6.44.0-alpine"
+   ]
+  },
+  {
    "id": "chatgpt-ui",
    "source": "runtipi",
    "reach": 35.71,
@@ -4482,28 +4497,6 @@
   },
   {
    "id": "jellyfin",
-   "source": "runtipi",
-   "reach": 31.27,
-   "open_source": true,
-   "licenses": [
-    "GPL-2.0",
-    "GPL-2.0"
-   ],
-   "pulls": null,
-   "stars": 56866,
-   "catalogues": 5,
-   "importable": false,
-   "blockers": [
-    "plan policy"
-   ],
-   "services": null,
-   "required_inputs": null,
-   "images": [
-    "lscr.io/linuxserver/jellyfin:10.11.11"
-   ]
-  },
-  {
-   "id": "jellyfin",
    "source": "caprover",
    "reach": 31.27,
    "open_source": true,
@@ -4514,13 +4507,33 @@
    "pulls": null,
    "stars": 56866,
    "catalogues": 5,
-   "importable": false,
-   "blockers": [
-    "plan rule"
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/linuxserver/jellyfin:10.10.1"
+   ]
+  },
+  {
+   "id": "jellyfin",
+   "source": "runtipi",
+   "reach": 31.27,
+   "open_source": true,
+   "licenses": [
+    "GPL-2.0",
+    "GPL-2.0"
    ],
-   "services": null,
-   "required_inputs": null,
-   "images": []
+   "pulls": null,
+   "stars": 56866,
+   "catalogues": 5,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 1,
+   "images": [
+    "lscr.io/linuxserver/jellyfin:10.11.11"
+   ]
   },
   {
    "id": "rainloop",
@@ -6951,13 +6964,13 @@
    "pulls": null,
    "stars": 14998,
    "catalogues": 2,
-   "importable": false,
-   "blockers": [
-    "plan rule"
-   ],
-   "services": null,
-   "required_inputs": null,
-   "images": []
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "erikvl87/languagetool:6.1"
+   ]
   },
   {
    "id": "hedgedoc",
@@ -9165,13 +9178,13 @@
    "pulls": null,
    "stars": 279,
    "catalogues": 2,
-   "importable": false,
-   "blockers": [
-    "plan rule"
-   ],
-   "services": null,
-   "required_inputs": null,
-   "images": []
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "jinjinov/openhabittracker:1.2.3"
+   ]
   },
   {
    "id": "suwayomi",
@@ -10042,13 +10055,13 @@
    "pulls": null,
    "stars": null,
    "catalogues": 1,
-   "importable": false,
-   "blockers": [
-    "plan rule"
-   ],
-   "services": null,
-   "required_inputs": null,
-   "images": []
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "docker.dragonflydb.io/dragonflydb/dragonfly:v1.14.0"
+   ]
   },
   {
    "id": "drone-gitea",
@@ -10247,23 +10260,6 @@
    "blockers": [
     "containerHttpPort",
     "endpoint"
-   ],
-   "services": null,
-   "required_inputs": null,
-   "images": []
-  },
-  {
-   "id": "ghost-only",
-   "source": "caprover",
-   "reach": 1.5,
-   "open_source": null,
-   "licenses": [],
-   "pulls": null,
-   "stars": null,
-   "catalogues": 1,
-   "importable": false,
-   "blockers": [
-    "plan rule"
    ],
    "services": null,
    "required_inputs": null,
@@ -10495,13 +10491,13 @@
    "pulls": null,
    "stars": null,
    "catalogues": 1,
-   "importable": false,
-   "blockers": [
-    "plan rule"
-   ],
-   "services": null,
-   "required_inputs": null,
-   "images": []
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 1,
+   "images": [
+    "jsreport/jsreport:2.4.0-full"
+   ]
   },
   {
    "id": "jupyter-lab",
@@ -11823,13 +11819,13 @@
    "pulls": null,
    "stars": null,
    "catalogues": 1,
-   "importable": false,
-   "blockers": [
-    "plan rule"
-   ],
-   "services": null,
-   "required_inputs": null,
-   "images": []
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/byo-software/steam-openid-connect-provider:sha-c8305ce"
+   ]
   },
   {
    "id": "supabase-postgres",
@@ -11946,13 +11942,15 @@
    "pulls": null,
    "stars": null,
    "catalogues": 1,
-   "importable": false,
-   "blockers": [
-    "plan rule"
-   ],
-   "services": null,
-   "required_inputs": null,
-   "images": []
+   "importable": true,
+   "blockers": [],
+   "services": 3,
+   "required_inputs": 0,
+   "images": [
+    "polonel/trudesk:1.2.10",
+    "elasticsearch:8.13.0",
+    "mongo:5.0.26"
+   ]
   },
   {
    "id": "ubooquity",

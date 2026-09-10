@@ -6,11 +6,11 @@ Generated offline by `python scripts/build-candidate-queue.py` using actual Rust
 {
   "caprover": {
     "definitions": 356,
-    "expressible": 117
+    "expressible": 125
   },
   "runtipi": {
     "definitions": 250,
-    "expressible": 111
+    "expressible": 113
   },
   "resolved_project_groups": 233,
   "unresolved_definitions": 365,

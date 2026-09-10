@@ -9,8 +9,8 @@ and no app becomes a reviewed recipe by appearing in this table.
 | Result | Apps |
 | --- | --- |
 | Definitions read | 250 |
-| Fully expressible as a plan today | 111 |
-| Blocked by at least one limitation | 139 |
+| Fully expressible as a plan today | 113 |
+| Blocked by at least one limitation | 137 |
 
 A blocked app is not a rejected app. Every row below is a named gap, and
 the ones marked *not modelled* or *needs input* are the work queue for the
@@ -22,7 +22,7 @@ remaining phase 2 features.
 | --- | --- | --- | --- |
 | not modelled | `addPorts` | 31 | bitcoind, bitmagnet, chatgpt-ui |
 | refused | `host path` | 27 | budibase, code-server, cross-seed |
-| refused | `plan policy` | 25 | bookstack, chatpad, codex-docs |
+| refused | `plan policy` | 23 | bookstack, chatpad, codex-docs |
 | not modelled | `internalPort` | 19 | cloudflare-ddns, cross-seed, electrs |
 | not modelled | `healthCheck` | 17 | bitmagnet, invidious, kimai |
 | not modelled | `user` | 14 | bitcoind, cross-seed, electrs |
@@ -77,6 +77,7 @@ need an upstream change or a different source, not more of this importer.
 | flightlog | 1 | 8080 | 0 | 0 |
 | flowise | 1 | 8009 | 7 | 1 |
 | freshrss | 1 | 8080 | 1 | 0 |
+| ghost-dev | 1 | 2368 | 0 | 0 |
 | ghostfolio | 3 | 3333 | 0 | 3 |
 | glance | 1 | 8080 | 0 | 0 |
 | grafana | 1 | 3000 | 0 | 0 |
@@ -92,6 +93,7 @@ need an upstream change or a different source, not more of this importer.
 | homeassistant-1 | 1 | 8123 | 1 | 0 |
 | homer | 1 | 8080 | 0 | 0 |
 | inspircd | 1 | 6697 | 0 | 0 |
+| jellyfin | 1 | 8096 | 2 | 0 |
 | jellyfin-vue | 1 | 8080 | 0 | 0 |
 | jellyseerr | 1 | 5055 | 1 | 0 |
 | joplin | 2 | 22300 | 0 | 1 |
