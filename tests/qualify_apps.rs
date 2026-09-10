@@ -123,9 +123,7 @@ fn every_offered_app_is_usable_and_keeps_its_data() {
             PathBuf::from(env!("CARGO_MANIFEST_DIR"))
                 .join("docs/evidence")
                 .join(format!("{app}-qualification.json")),
-            evidence.to_json()
-                + "
-",
+            evidence.to_json() + "\n",
         )
         .expect("evidence is written where a review can read it");
         println!(

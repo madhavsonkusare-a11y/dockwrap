@@ -893,6 +893,13 @@ pub fn install_source_with(
         let last_words = (original.code == ErrorCode::TimedOut)
             .then(|| last_words(runner, &fallback))
             .flatten();
+        // Attached before cleanup runs, because a cleanup that fails returns
+        // early — and a failed cleanup is exactly when somebody needs to know
+        // what the containers were doing.
+        let original = match last_words {
+            Some(said) => AppError::new(original.code, format!("{original} {said}")),
+            None => original,
+        };
         // Keep the Compose file and data if Docker cleanup fails: they may
         // still be needed by running containers and for manual recovery.
         // `checked_run` deliberately uses a fresh token: a cancelled install
@@ -916,12 +923,7 @@ pub fn install_source_with(
             }
         };
         cleanup.map_err(|cleanup| AppError::rollback(&original, cleanup))?;
-        if let Some(last_words) = last_words {
-            return Err(AppError::new(
-                original.code,
-                format!("{original} {last_words}"),
-            ));
-        }
+        return Err(original);
     }
     install
 }

@@ -18,6 +18,7 @@
 //!
 //! `--only app,app` runs named candidates and re-runs them even if a
 //! result exists; `--source runtipi` picks which packaging of them to prove.
+//! `--offered --only app` proves an app as it is offered, image pins and all.
 use local_store::qualification::{qualify_template, Batch, Evidence, Resume, ScriptProbe, Subject};
 use local_store::setup::{FieldKind, PlanTemplate};
 use std::collections::BTreeMap;
@@ -291,6 +292,70 @@ fn is_environmental(evidence: &Evidence) -> bool {
     .any(|sign| detail.contains(sign))
 }
 
+/// Prove apps exactly as they are offered, rather than as an importer maps them.
+///
+/// A candidate run proves the raw mapping. An offered app can differ from that
+/// — an image pin moves it to a patched release — and the proof has to be
+/// about what somebody would actually install. This runs the reviewed mapping
+/// through the same harness and writes the result where the review names it.
+/// It is also how an offered app is re-verified before a release.
+fn run_offered(only: &[String], batch: &Batch) {
+    if only.is_empty() {
+        eprintln!("--offered needs --only app,app: it re-proves named apps, not a ranking");
+        std::process::exit(2);
+    }
+    let scratch = root().join(".cache");
+    for app in only {
+        let Some(offering) = local_store::offerings::offering(app) else {
+            println!("{app}: not offered, so there is nothing to prove as offered");
+            continue;
+        };
+        let template = match offering.plan_template(None) {
+            Ok(template) => template,
+            Err(error) => {
+                println!(
+                    "{app}: its reviewed mapping does not resolve: {}",
+                    error.message
+                );
+                continue;
+            }
+        };
+        let answers = auto_answers(&template, &scratch);
+        let probe = ScriptProbe::new(
+            root().join("scripts/standard-probe.mjs"),
+            "it opens a page with a clear next step, and the same page after a restart and reinstall",
+        )
+        .with_args(vec![scratch
+            .join(format!("standard-{app}.json"))
+            .to_string_lossy()
+            .into_owned()]);
+        println!("{app}: running as offered…");
+        match local_store::qualification::qualify(app, &answers, &probe, &scratch) {
+            Ok(evidence) => {
+                if let Err(error) = batch.record(&evidence) {
+                    println!("  could not record: {}", error.message);
+                }
+                let proof = root()
+                    .join("docs/evidence")
+                    .join(format!("{app}-qualification.json"));
+                if let Err(error) = std::fs::write(&proof, evidence.to_json() + "\n") {
+                    println!("  could not write {}: {error}", proof.display());
+                }
+                if evidence.passed {
+                    println!("  passed");
+                } else {
+                    println!(
+                        "  FAILED at {:?}: {:?}",
+                        evidence.failure().map(|step| &step.step),
+                        evidence.failure().and_then(|step| step.detail.as_deref())
+                    );
+                }
+            }
+            Err(error) => println!("  could not run: {}", error.message),
+        }
+    }
+}
+
 fn main() {
     if std::env::var("LOCAL_STORE_RUN_DOCKER_TEST").as_deref() != Ok("1") {
         eprintln!("This starts real containers. Set LOCAL_STORE_RUN_DOCKER_TEST=1 to run it.");
@@ -329,6 +394,10 @@ fn main() {
 
     let results = root().join(".cache/qualification");
     let batch = Batch::open(&results).expect("a results directory");
+    if args.iter().any(|arg| arg == "--offered") {
+        run_offered(&only, &batch);
+        return;
+    }
     let candidates = ranked(
         if only.is_empty() { limit } else { only.len() },
         &only,
