@@ -127,6 +127,39 @@ because its images were last rebuilt in 2020; Planka because it is proprietary,
 pins a release a year old, runs its database with `trust` authentication, and
 uses a floating tag. Writing that down is more useful than a longer catalogue.
 
+## Qualifying apps in bulk costs system-drive space permanently
+
+Docker Desktop on Windows keeps its images in a virtual disk under
+`%LOCALAPPDATA%`, on C:. That file **only grows**. Deleting images frees space
+*inside* it and returns nothing to the drive, and compacting it needs
+Administrator rights.
+
+A batch that pulls a hundred images therefore consumes tens of gigabytes of the
+system drive whatever it cleans up afterwards. On this machine it took C: from
+6 GB to 331 MB, at which point Docker could no longer create its own sockets and
+crashed on every start with "The file cannot be accessed by the system" — an
+error that looks nothing like "the disk is full".
+
+Two things that follow:
+
+- **Check free space before a long batch, not after.** An option added to make
+  re-runs fast (`--keep-images`) is the same option that fills a drive.
+- **Move Docker's disk off the system drive.** Stop Docker, `wsl --shutdown`,
+  move `%LOCALAPPDATA%\Docker\wsl\disk` to another drive, and junction the old
+  path to the new one:
+
+      New-Item -ItemType Junction -Path "$env:LOCALAPPDATA\Docker\wsl\disk" -Target "D:\DockerData\disk"
+
+  No elevation, no data loss, and every image and container survives. That
+  turned 0.3 GB free into 47 GB here.
+
+Recovering a Docker Desktop that will not start, in order: quit it and
+`com.docker.backend`, remove or rename `%LOCALAPPDATA%\Dockerun` and
+`%LOCALAPPDATA%\docker-secrets-engine` (their socket files become undeletable
+when the disk fills), `wsl --shutdown`, then start Docker Desktop and let *it*
+boot the VM — starting the distro by hand leaves the data disk unmounted and
+every API call returns 500.
+
 ## What the batch is for
 
 Running candidates in bulk found three real defects in one afternoon — the
