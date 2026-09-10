@@ -300,12 +300,15 @@ impl ReviewedTemplate {
 
 const ACTUAL: &str = include_str!("actual.json");
 const ADMINER: &str = include_str!("adminer.json");
+const BESZEL: &str = include_str!("beszel.json");
 const CODIMD: &str = include_str!("codimd.json");
 const FLATNOTES: &str = include_str!("flatnotes.json");
 const GHOST_DEV: &str = include_str!("ghost-dev.json");
 const GOTIFY: &str = include_str!("gotify.json");
 const GRAFANA: &str = include_str!("grafana.json");
 const HOMER: &str = include_str!("homer.json");
+const JELLYSEERR: &str = include_str!("jellyseerr.json");
+const KANBOARD: &str = include_str!("kanboard.json");
 const METABASE: &str = include_str!("metabase.json");
 const NAVIDROME: &str = include_str!("navidrome.json");
 const NODERED: &str = include_str!("nodered.json");
@@ -319,12 +322,15 @@ pub fn reviewed_templates() -> Vec<ReviewedTemplate> {
     [
         ACTUAL,
         ADMINER,
+        BESZEL,
         CODIMD,
         FLATNOTES,
         GHOST_DEV,
         GOTIFY,
         GRAFANA,
         HOMER,
+        JELLYSEERR,
+        KANBOARD,
         METABASE,
         NAVIDROME,
         NODERED,
@@ -508,9 +514,11 @@ mod tests {
     /// costs exactly as much deliberation as the first one did.
     const APPROVED: &[&str] = &[
         "adminer",
+        "beszel",
         "flatnotes",
         "grafana",
         "homer",
+        "kanboard",
         "metabase",
         "navidrome",
         "nodered",

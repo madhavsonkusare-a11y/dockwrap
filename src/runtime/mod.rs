@@ -824,7 +824,7 @@ pub fn install_source_with(
     fs::create_dir_all(&project_dir).map_err(AppError::from)?;
     let compose_file = project_dir.join("compose.yaml");
     let previous_compose = fs::read(&compose_file).ok();
-    let install = (|| {
+    let install: AppResult<InstalledApp> = (|| {
         // Atomic: Docker must never read a half-written Compose file.
         storage::write_file_atomically(&compose_file, source.compose.as_bytes())
             .map_err(AppError::from)?;
@@ -869,7 +869,8 @@ pub fn install_source_with(
         )?;
         Ok(app)
     })();
-    if let Err(original) = &install {
+    if let Err(failure) = &install {
+        let original = failure.clone();
         context.report(InstallStage::RollingBack);
         let fallback = InstalledApp {
             id: source.id.clone(),
@@ -885,6 +886,13 @@ pub fn install_source_with(
             created_at_unix: now,
             updated_at_unix: now,
         };
+        // Every other failure says what went wrong: Compose reports a bad
+        // file, a pull reports a missing image. A timeout reports only that
+        // time passed, and the reason is inside containers the cleanup below
+        // is about to remove — so that is the one worth asking about.
+        let last_words = (original.code == ErrorCode::TimedOut)
+            .then(|| last_words(runner, &fallback))
+            .flatten();
         // Keep the Compose file and data if Docker cleanup fails: they may
         // still be needed by running containers and for manual recovery.
         // `checked_run` deliberately uses a fresh token: a cancelled install
@@ -895,7 +903,7 @@ pub fn install_source_with(
             &compose_command(&fallback, &["down"], LIFECYCLE_TIMEOUT)?,
             "Install cleanup",
         )
-        .map_err(|cleanup| AppError::rollback(original, cleanup))?;
+        .map_err(|cleanup| AppError::rollback(&original, cleanup))?;
         let cleanup = if created_project {
             fs::remove_dir_all(&project_dir).map_err(AppError::from)
         } else if let Some(previous) = previous_compose {
@@ -907,9 +915,65 @@ pub fn install_source_with(
                 Err(error) => Err(AppError::from(error)),
             }
         };
-        cleanup.map_err(|cleanup| AppError::rollback(original, cleanup))?;
+        cleanup.map_err(|cleanup| AppError::rollback(&original, cleanup))?;
+        if let Some(last_words) = last_words {
+            return Err(AppError::new(original.code, format!("{original} {last_words}")));
+        }
     }
     install
+}
+
+/// What the containers said before a failed install removed them.
+///
+/// Compose keeps the two halves of the answer apart: `ps` knows which service
+/// stopped and how, and the log holds the reason it gives. Neither survives
+/// the cleanup, so both are read while they still exist. Best effort by
+/// design — a diagnosis that fails must not replace the failure it explains.
+fn last_words(runner: &dyn ProcessRunner, app: &InstalledApp) -> Option<String> {
+    let mut parts = Vec::new();
+    if let Ok(command) = compose_command(app, &["ps", "--all"], DIAGNOSTIC_TIMEOUT) {
+        if let Ok(output) = runner.run(&command) {
+            let states: Vec<&str> = output
+                .stdout
+                .lines()
+                .skip(1) // the header
+                .map(str::trim)
+                .filter(|line| !line.is_empty())
+                .collect();
+            if !states.is_empty() {
+                parts.push(format!("Containers: {}.", states.join("; ")));
+            }
+        }
+    }
+    if let Ok(logs) = logs_with(runner, app) {
+        let mut tail: Vec<&str> = logs
+            .lines()
+            .rev()
+            .map(str::trim)
+            .filter(|line| !line.is_empty())
+            .take(12)
+            .collect();
+        tail.reverse();
+        if !tail.is_empty() {
+            parts.push(format!("Last log lines: {}", tail.join(" | ")));
+        }
+    }
+    if parts.is_empty() {
+        return None;
+    }
+    let mut said = parts.join(" ");
+    // Long enough to hold a stack trace's first frames, short enough that the
+    // failure it explains is still the first thing read.
+    if said.chars().count() > 800 {
+        let cut = said
+            .char_indices()
+            .nth(800)
+            .map(|(index, _)| index)
+            .unwrap_or(said.len());
+        said.truncate(cut);
+        said.push('…');
+    }
+    Some(said)
 }
 /// An install whose containers are up and healthy but which is not yet in the
 /// registry.
@@ -1277,6 +1341,56 @@ mod tests {
             updated_at_unix: 1,
         }
     }
+    /// A timeout is the one failure that explains nothing by itself, and the
+    /// containers holding the explanation are removed moments later. Five
+    /// candidates in a row failed with nothing but "Health check timed out",
+    /// which is why this exists.
+    #[test]
+    fn a_timed_out_install_says_what_the_containers_said() {
+        let root = std::env::temp_dir().join(format!("local-store-lastwords-{}", std::process::id()));
+        let _ = fs::remove_dir_all(&root);
+        fs::create_dir_all(&root).unwrap();
+        let runner = FakeRunner {
+            outputs: Mutex::new(VecDeque::from([
+                Ok(ProcessOutput {
+                    success: true,
+                    stdout: "NAME       STATUS
+glance-1   Exited (1)
+".into(),
+                    stderr: String::new(),
+                    truncated: false,
+                }),
+                Ok(ProcessOutput {
+                    success: true,
+                    stdout: String::new(),
+                    stderr: "glance-1 | failed to read config: no such file
+".into(),
+                    truncated: false,
+                }),
+            ])),
+            calls: Mutex::new(Vec::new()),
+        };
+        let said = last_words(&runner, &managed(&root)).expect("both halves answered");
+        assert!(said.contains("Exited (1)"), "no container state: {said}");
+        assert!(said.contains("no such file"), "no log line: {said}");
+        let _ = fs::remove_dir_all(&root);
+    }
+
+    /// Best effort means best effort: a diagnosis that cannot be gathered must
+    /// leave the failure it was meant to explain exactly as it was.
+    #[test]
+    fn a_diagnosis_that_cannot_be_gathered_reports_nothing() {
+        let root = std::env::temp_dir().join(format!("local-store-nowords-{}", std::process::id()));
+        let _ = fs::remove_dir_all(&root);
+        fs::create_dir_all(&root).unwrap();
+        let runner = FakeRunner {
+            outputs: Mutex::new(VecDeque::new()),
+            calls: Mutex::new(Vec::new()),
+        };
+        assert_eq!(last_words(&runner, &managed(&root)), None);
+        let _ = fs::remove_dir_all(&root);
+    }
+
     #[test]
     fn an_unsafe_link_is_refused_before_any_browser_is_launched() {
         // Every rejection here is decided by validation alone, so no browser is
