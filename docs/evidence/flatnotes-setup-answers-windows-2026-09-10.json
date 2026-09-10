@@ -1,0 +1,24 @@
+{
+  "browser_first_use": "passed",
+  "checks": [
+    "loopback endpoint, and no binding on any other interface",
+    "HTTP readiness",
+    "the typed username reaches the container as the value typed",
+    "two credentials are generated, distinct, and are not any typed answer",
+    "a wrong password is refused by the running app",
+    "the typed password signs in through a real browser",
+    "notes are plain markdown in the managed folder, and the app reads them",
+    "generated credentials are stored beside the data, without any typed answer",
+    "sign-in and the note survive a restart",
+    "a keep-data reinstall reuses both generated credentials rather than minting new ones",
+    "sign-in and the note survive that reinstall",
+    "delete-data removes the notes folder",
+    "unrelated containers retained"
+  ],
+  "image": "dullage/flatnotes:v5.5.5",
+  "image_id": "sha256:ca4b40ee7491aabf6b52bbb20ab140145cb96981d4b3fe96ab1e797ac6cd93e5",
+  "passed": true,
+  "promotion": "approved",
+  "scope": "Runtipi reviewed mapping with typed setup answers, transaction, managed storage and browser first use, on one Windows host and one architecture",
+  "source_revision": "3c878baaf22361a515abc9fc648d0e4821c6d593"
+}

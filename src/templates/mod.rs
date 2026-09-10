@@ -301,10 +301,11 @@ impl ReviewedTemplate {
 const CODIMD: &str = include_str!("codimd.json");
 const PRIVATEBIN: &str = include_str!("privatebin.json");
 const NODERED: &str = include_str!("nodered.json");
+const FLATNOTES: &str = include_str!("flatnotes.json");
 
 /// Every template a review has passed. Being here is not being offered.
 pub fn reviewed_templates() -> Vec<ReviewedTemplate> {
-    [CODIMD, PRIVATEBIN, NODERED]
+    [CODIMD, PRIVATEBIN, NODERED, FLATNOTES]
         .into_iter()
         .map(|source| serde_json::from_str(source).expect("bundled reviewed templates must parse"))
         .collect()
@@ -478,7 +479,7 @@ mod tests {
     /// makes, so it has to appear in a diff rather than arrive as a side
     /// effect of a manifest edit or a passing test. Adding a second name here
     /// costs exactly as much deliberation as the first one did.
-    const APPROVED: &[&str] = &["nodered", "privatebin"];
+    const APPROVED: &[&str] = &["flatnotes", "nodered", "privatebin"];
 
     #[test]
     fn no_reviewed_template_is_offerable_without_an_explicit_approval() {
@@ -528,6 +529,66 @@ mod tests {
                 "{id} publishes no address to open"
             );
         }
+    }
+
+    /// The other direction of the same decision CodiMD's time zone shows.
+    ///
+    /// Runtipi marks a field sensitive only when upstream types it `password`.
+    /// flatnotes types its password as plain `text`, so without a review the
+    /// setup form would render the one field on that form that is genuinely a
+    /// credential as a visible box, with its value echoed back on screen. A
+    /// review is where somebody who read the app says otherwise.
+    #[test]
+    fn a_review_masks_a_credential_upstream_declared_as_plain_text() {
+        let reviewed = reviewed_template("flatnotes").expect("flatnotes is reviewed");
+        // Upstream really does declare it as text; if that ever changes this
+        // test stops being about anything and should be revisited.
+        assert!(reviewed
+            .config
+            .as_ref()
+            .expect("flatnotes carries its config")
+            .content
+            .contains(
+                "\"type\": \"text\",
+      \"label\": \"Flatnotes Password\""
+            ));
+
+        let review = reviewed
+            .plan_template()
+            .expect("flatnotes should map")
+            .setup_review()
+            .expect("flatnotes should project");
+
+        let password = review
+            .fields
+            .iter()
+            .find(|field| field.key == "FLATNOTES_PASSWORD")
+            .expect("flatnotes asks for a password");
+        assert_eq!(password.control, "password");
+        assert!(password.sensitive);
+        assert_eq!(password.label, "Password");
+        // A sensitive field's default is described, never sent.
+        assert_eq!(password.default, None);
+
+        // The two answers that are not credentials stay ordinary text, so a
+        // username is not asked for behind dots.
+        for key in ["FLATNOTES_USERNAME", "FLATNOTES_AUTH_TYPE"] {
+            let field = review
+                .fields
+                .iter()
+                .find(|field| field.key == key)
+                .unwrap_or_else(|| panic!("flatnotes asks for {key}"));
+            assert_eq!(field.control, "text", "{key}");
+            assert!(!field.sensitive, "{key}");
+        }
+
+        // Both generated credentials are counted and neither is ever asked
+        // for or shown.
+        assert_eq!(review.generated_credential_count, 2);
+        assert!(!review
+            .fields
+            .iter()
+            .any(|field| field.key.contains("SECRET") || field.key.contains("TOTP")));
     }
 
     /// The override exists so an app is not stuck on whatever tag an upstream

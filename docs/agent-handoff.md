@@ -1,5 +1,57 @@
 # Local Store: agent handoff
 
+## September 10 — the setup form finally has a real app
+
+flatnotes v5.5.5 is approved. It is the first offered app whose install asks a
+person questions, which closes the gap every handoff since the setup form was
+built has had to restate: **the form had never rendered a real app's fields.**
+Three typed answers, two generated credentials.
+
+**The review earned its keep in the opposite direction from CodiMD.** Runtipi
+marks a field sensitive only when upstream types it `password`. flatnotes types
+its password as plain `text`, so without a review the one field on that form
+that is genuinely a credential would render as a visible box with the value
+echoed on screen. The review says otherwise, and
+`a_review_masks_a_credential_upstream_declared_as_plain_text` asserts the
+projection comes back as a password control. Verified non-vacuous: flipping the
+review to `sensitive: false` makes the control come back as `text`.
+
+**The proof is about the answers, not the transaction.** Previous apps proved a
+plan installs. This proves what a person typed reaches the running app and
+takes effect: the typed username arrives in the container as typed, the typed
+password signs in through a real browser, and **a wrong password is refused** —
+without that last check the sign-in proves only that some password works.
+
+**The claim that needed the most care: a reinstall must not mint new
+credentials.** `FLATNOTES_SECRET_KEY` signs sessions and `FLATNOTES_TOTP_KEY`
+backs two-factor codes. Minting either again over preserved notes would
+invalidate every session and every enrolment while the notes sit there looking
+fine. The test asserts both values are byte-identical after a keep-data
+reinstall; making the uninstall destructive fails it with "the reinstall minted
+a new signing credential over preserved notes".
+
+Notes are plain markdown in the managed folder, so the test writes one from the
+host and finds it in the app at `/note/<title>` — which proves that folder
+really is the notes folder, the claim `data_storage` makes. Passed in 43.01s.
+
+**The CLI refuses what it cannot ask.** `local-store install flatnotes` names
+each missing answer and points at the window rather than installing with a
+guess or a default nobody chose.
+
+Six apps are now installable: three recipes plus PrivateBin, Node-RED and
+flatnotes. Validation: 252 Rust tests across 25 binaries, strict Clippy, fmt,
+eleven offline gates and 52 Playwright tests. Scope is unchanged — one host,
+one architecture actually executed.
+
+**What is left.** Inside the 33: only tasks 14/15, and only the parts about
+interruption during image pull or Compose startup, and adopting an interrupted
+install rather than only discarding it. Everything else is owner-blocked
+(signing key, a tag push, macOS/Linux hosts). Outside the 33, the next natural
+step is a two-service app with typed setup — `runtipi:planka` is the measured
+candidate — because nothing yet proves a generated credential reaching a second
+container in an app somebody actually installs.
+
+
 ## September 10 — Node-RED offered, and a reviewed way to move a pin
 
 Node-RED is approved and offered. Two apps are now installable that came from

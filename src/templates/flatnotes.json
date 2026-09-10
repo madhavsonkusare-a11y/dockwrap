@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "id": "flatnotes",
+  "display_name": "flatnotes",
+  "catalog_name": "flatnotes",
+  "description": "Note taking in plain markdown files, with no database.",
+  "category": "Note-taking & Editors",
+  "license": "MIT",
+  "source_url": "https://github.com/Dullage/flatnotes",
+  "documentation_url": "https://github.com/Dullage/flatnotes#configuration",
+  "verified_at": "2026-09-10",
+  "lifecycle_proof": "docs/evidence/flatnotes-setup-answers-windows-2026-09-10.json",
+  "origin": {
+    "importer": "runtipi",
+    "repository": "runtipi/runtipi-appstore",
+    "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+    "path": "apps/flatnotes/docker-compose.json",
+    "license": "GPL-3.0"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "dullage/flatnotes:v5.5.5",
+        "source_url": "https://hub.docker.com/v2/repositories/dullage/flatnotes/tags/v5.5.5",
+        "checked_at": "2026-09-10",
+        "last_updated": "2026-08-29",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:c3c883b677ecf840bb5abca2cdd8955357fdd1cb1b2d82f91d9502d0db5b2c1a",
+          "linux/arm64": "sha256:7818e97428b610efd8b244c2224a86ac589f57f39fbb15fbcebe120a5b56c367"
+        }
+      }
+    ]
+  },
+  "promotion": {
+    "state": "approved",
+    "reason": "Qualification is complete and the owner approved it on 2026-09-10. v5.5.5 is the current release, built 2026-08-29, published for amd64 and arm64. This is the first offered app whose install asks questions, and the proof is about the answers: the typed username reaches the container as typed, the typed password signs in through a real browser, a wrong password is refused, and the two credentials the app generates are distinct, are not any typed answer, and are reused rather than minted again on a keep-data reinstall — which is what stops a reinstall from invalidating every signed session over preserved notes. Upstream declares the password as a plain text field, so the review marks it sensitive and the form masks it. Notes are plain markdown in the managed folder, which the risk notes say plainly. Proven on Windows with Docker's Linux engine only."
+  },
+  "data_storage": "Local Store managed folder / flatnotes, holding every note as a markdown file",
+  "risk_notes": [
+    "Creates one Docker container and publishes one port on this computer's loopback interface only.",
+    "You choose the username and password at install. They are the only thing between this app and anyone who can reach that address on this computer, so pick a real password rather than a placeholder.",
+    "Notes are stored as ordinary markdown files in this app's managed folder, readable by anything on this computer that can read that folder. A keep-data uninstall leaves them; deleting data removes them permanently.",
+    "Generates two credentials of its own, for signing sessions and for two-factor codes. They are kept beside the notes and reused if you reinstall.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified."
+  ],
+  "fields": {
+    "FLATNOTES_AUTH_TYPE": {
+      "label": "Sign-in method",
+      "sensitive": false
+    },
+    "FLATNOTES_USERNAME": {
+      "label": "Username",
+      "sensitive": false
+    },
+    "FLATNOTES_PASSWORD": {
+      "label": "Password",
+      "sensitive": true
+    }
+  },
+  "definition": "{\n  \"services\": [\n    {\n      \"name\": \"flatnotes\",\n      \"image\": \"dullage/flatnotes:v5.5.5\",\n      \"isMain\": true,\n      \"internalPort\": 8080,\n      \"environment\": [\n        {\n          \"key\": \"FLATNOTES_AUTH_TYPE\",\n          \"value\": \"${FLATNOTES_AUTH_TYPE}\"\n        },\n        {\n          \"key\": \"FLATNOTES_USERNAME\",\n          \"value\": \"${FLATNOTES_USERNAME}\"\n        },\n        {\n          \"key\": \"FLATNOTES_PASSWORD\",\n          \"value\": \"${FLATNOTES_PASSWORD}\"\n        },\n        {\n          \"key\": \"FLATNOTES_SECRET_KEY\",\n          \"value\": \"${FLATNOTES_SECRET_KEY}\"\n        },\n        {\n          \"key\": \"FLATNOTES_TOTP_KEY\",\n          \"value\": \"${FLATNOTES_TOTP_KEY}\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data\",\n          \"containerPath\": \"/data\"\n        }\n      ]\n    }\n  ],\n  \"schemaVersion\": 2,\n  \"$schema\": \"https://schemas.runtipi.io/v2/dynamic-compose.json\"\n}\n",
+  "config": {
+    "path": "apps/flatnotes/config.json",
+    "content": "{\n  \"$schema\": \"../app-info-schema.json\",\n  \"name\": \"flatnotes\",\n  \"available\": true,\n  \"exposable\": true,\n  \"dynamic_config\": true,\n  \"id\": \"flatnotes\",\n  \"port\": 8137,\n  \"tipi_version\": 42,\n  \"version\": \"v5.5.5\",\n  \"categories\": [\"utilities\"],\n  \"description\": \"A self-hosted, database-less note taking web app that utilises a flat folder of markdown files for storage.\",\n  \"short_desc\": \"A self-hosted, database-less note taking web app\",\n  \"author\": \"Dullage\",\n  \"source\": \"https://github.com/Dullage/flatnotes\",\n  \"website\": \"https://demo.flatnotes.io/\",\n  \"form_fields\": [\n    {\n      \"type\": \"text\",\n      \"label\": \"Flatnotes Auth Type\",\n      \"hint\": \"Either `password` or `totp` for 2FA\",\n      \"placeholder\": \"password\",\n      \"required\": true,\n      \"env_variable\": \"FLATNOTES_AUTH_TYPE\"\n    },\n    {\n      \"type\": \"text\",\n      \"label\": \"Flatnotes Username\",\n      \"min\": 2,\n      \"required\": true,\n      \"env_variable\": \"FLATNOTES_USERNAME\"\n    },\n    {\n      \"type\": \"text\",\n      \"label\": \"Flatnotes Password\",\n      \"min\": 5,\n      \"required\": true,\n      \"env_variable\": \"FLATNOTES_PASSWORD\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"FLATNOTES_SECRET_KEY\",\n      \"min\": 32,\n      \"env_variable\": \"FLATNOTES_SECRET_KEY\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"FLATNOTES_TOTP_KEY\",\n      \"min\": 32,\n      \"env_variable\": \"FLATNOTES_TOTP_KEY\"\n    }\n  ],\n  \"supported_architectures\": [\"arm64\", \"amd64\"],\n  \"created_at\": 1691943801422,\n  \"updated_at\": 1788001853870,\n  \"min_tipi_version\": \"4.5.0\"\n}\n"
+  }
+}

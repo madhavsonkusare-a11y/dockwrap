@@ -1,25 +1,29 @@
 # Hermes upgrade status
 
-Updated September 10, 2026 (PrivateBin and Node-RED offered). This is the current ledger for the original 33-task
+Updated September 10, 2026 (PrivateBin, Node-RED and flatnotes offered). This is the current ledger for the original 33-task
 plan; earlier phase documents are historical checkpoints. A complete core
 deliverable does not replace the separately counted native/release gates.
 
 **27 core deliverables complete, 4 partial, one deferred, one final gate
-blocked. Four tasks have work remaining that anyone can pick up now.**
+blocked.** Of the four partial ones, only **14 and 15** can be picked up
+without something from the owner: what remains there is interruption during
+image pull or Compose startup, and adopting an interrupted install rather than
+only discarding it. Task 29 needs a tag push, 31 needs macOS and Linux hosts,
+30 is deferred and 33 waits on 30.
 
-**Outside the 33: two imported apps are now installable.** PrivateBin and
-Node-RED are approved and offered; CodiMD stays withheld because its images
-were last rebuilt in August 2020. `src/offerings.rs` is the single lookup
-behind the catalog, the install review, the desktop install and the CLI, and it
-admits recipes plus approved templates only. A review may also move an image to
-a different tag of the same repository, with a stated reason and an audit of
-the tag that actually runs — Node-RED runs 5.0.7 where its upstream definition
-says 5.0.6.
+**Outside the 33: three imported apps are now installable, and the setup form
+has a real app at last.** PrivateBin, Node-RED and flatnotes are approved;
+CodiMD stays withheld because its images were last rebuilt in August 2020.
+`src/offerings.rs` is the single lookup behind the catalog, the install review,
+the desktop install and the CLI. flatnotes is the first offered app whose
+install asks questions — three typed answers and two generated credentials —
+so the long-standing note that the setup form had never rendered a real app's
+fields no longer applies. A review may also move an image to a different tag of
+the same repository, with a stated reason and an audit of the tag that runs.
 
-**Still open, and now measured: the setup form has never rendered a real app's
-fields.** Neither approved app declares any. 121 importable definitions do, 34
-with required answers; `runtipi:flatnotes` and `runtipi:planka` are the best
-next candidates.
+**Next outside the 33:** a two-service app with typed setup (`runtipi:planka`),
+because nothing yet proves a generated credential reaching a second container
+in an app somebody actually installs.
 
 **Scope decision, September 8 2026: Windows is the shipping target.** macOS and
 Linux proof is deferred by the owner and is no longer counted as outstanding
