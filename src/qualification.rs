@@ -505,6 +505,37 @@ pub struct Subject {
 }
 
 /// Qualify a template that has already been built.
+/// The machine-wide qualification slot, held until dropped.
+struct QualificationSlot(std::fs::File);
+
+impl Drop for QualificationSlot {
+    fn drop(&mut self) {
+        let _ = fs4::FileExt::unlock(&self.0);
+    }
+}
+
+/// One qualification at a time on this machine, across processes.
+///
+/// The bystander check notes every container that is not this run's and fails
+/// if any of them disappear. A second harness running at the same time makes
+/// and removes containers of its own, so each run's check blames the other:
+/// Grafana failed "leaves other containers alone" because a concurrent batch
+/// had just cleaned up after Joplin. Runs in one process are already
+/// sequential — the configuration root is process-global — and this extends
+/// the rule to every process. A second run waits its turn rather than failing.
+fn take_qualification_slot(scratch: &Path) -> AppResult<QualificationSlot> {
+    std::fs::create_dir_all(scratch).map_err(AppError::from)?;
+    let file = std::fs::OpenOptions::new()
+        .read(true)
+        .write(true)
+        .create(true)
+        .truncate(false)
+        .open(scratch.join("qualification.lock"))
+        .map_err(AppError::from)?;
+    fs4::FileExt::lock(&file).map_err(AppError::from)?;
+    Ok(QualificationSlot(file))
+}
+
 pub fn qualify_template(
     about: &Subject,
     template: PlanTemplate,
@@ -513,6 +544,9 @@ pub fn qualify_template(
     scratch: &Path,
 ) -> AppResult<Evidence> {
     let app = about.app.as_str();
+    // Taken first so it is released last, after every container this run
+    // made is gone.
+    let _slot = take_qualification_slot(scratch)?;
     let runner = crate::runtime::SystemProcessRunner;
     let probe = crate::runtime::HttpHealthProbe;
     let health = Duration::from_secs(120);
@@ -1122,6 +1156,30 @@ ccc",
         let all = batch.results();
         assert_eq!(all.len(), 2);
         assert_eq!(all[0].app, "one");
+        std::fs::remove_dir_all(&dir).ok();
+    }
+
+    /// Two harnesses at once each blame the other for removing containers,
+    /// so the slot has to keep a second one out while the first holds it.
+    #[test]
+    fn a_second_qualification_waits_for_the_first() {
+        let dir = std::env::temp_dir().join(format!("local-store-slot-{}", std::process::id()));
+        let held = take_qualification_slot(&dir).expect("the first run takes the slot");
+        let second = std::fs::OpenOptions::new()
+            .read(true)
+            .write(true)
+            .open(dir.join("qualification.lock"))
+            .unwrap();
+        assert!(
+            fs4::FileExt::try_lock(&second).is_err(),
+            "a second run got the slot while the first held it"
+        );
+        drop(held);
+        assert!(
+            fs4::FileExt::try_lock(&second).is_ok(),
+            "the slot was not released when the first run finished"
+        );
+        let _ = fs4::FileExt::unlock(&second);
         std::fs::remove_dir_all(&dir).ok();
     }
 
