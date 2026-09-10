@@ -291,6 +291,24 @@ def risk_notes(facts, catalog):
     return notes
 
 
+def upstream_release(source_url):
+    """Upstream's latest release, when the project publishes them on GitHub.
+
+    Every promotion so far has turned on one question — is this the release
+    upstream is on? — and it was being answered by hand each time. This only
+    reports it; deciding what a gap means stays with the reviewer.
+    """
+    match = re.match(r"https://github\.com/([^/]+/[^/#?]+)", source_url or "")
+    if not match:
+        return None
+    repository = match.group(1).removesuffix(".git")
+    try:
+        release = fetch(f"https://api.github.com/repos/{repository}/releases/latest")
+    except urllib.error.HTTPError:
+        return None
+    return release.get("tag_name"), (release.get("published_at") or "")[:10]
+
+
 def catalog_entry(catalog, app):
     """The catalog entry this app is, by whichever name the catalog knows it.
 
@@ -457,6 +475,16 @@ def main():
         )
     else:
         print(f"  images last rebuilt {oldest}, which is current enough to consider offering")
+    latest = upstream_release(manifest["source_url"])
+    if latest:
+        tag, published = latest
+        pinned = [image["image"].rsplit(":", 1)[-1] for image in manifest["requirements"]["images"]]
+        bare = tag.lstrip("vV")
+        same = any(pin.lstrip("vV").split("-")[0] == bare for pin in pinned)
+        print(
+            f"  upstream's latest release is {tag}, published {published}: "
+            + ("the definition pins it" if same else f"the definition pins {', '.join(pinned)}")
+        )
     print("then: record a lifecycle proof, set verified_at, and decide promotion")
 
 
