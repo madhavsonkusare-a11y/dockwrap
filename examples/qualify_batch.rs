@@ -131,6 +131,12 @@ fn definition(candidate: &Candidate) -> Option<(String, Option<String>)> {
 
 /// Whether this machine already has an image, so the batch can tell what it
 /// pulled from what it found.
+/// Free space on the drive this project lives on, in gigabytes.
+fn free_gigabytes() -> Option<u64> {
+    let free = fs4::available_space(root()).ok()?;
+    Some(free / (1024 * 1024 * 1024))
+}
+
 fn image_present(image: &str) -> bool {
     std::process::Command::new("docker")
         .args(["image", "inspect", image])
@@ -276,6 +282,7 @@ fn main() {
         .and_then(|at| args.get(at + 1))
         .and_then(|value| value.parse().ok())
         .unwrap_or(10usize);
+    let keep_images = args.iter().any(|arg| arg == "--keep-images");
     let resume = if args.iter().any(|arg| arg == "--retry-failures") {
         Resume::RetryFailures
     } else {
@@ -413,10 +420,21 @@ fn main() {
                 println!("  could not run: {}", error.message);
             }
         }
-        for image in &ours {
-            let _ = std::process::Command::new("docker")
-                .args(["image", "rm", "-f", image])
-                .output();
+        // Keeping images makes a re-run fast, which matters while a batch is
+        // being iterated on; removing them keeps a hundred apps from filling
+        // the disk. Keep them when asked, but never past the point where the
+        // machine is in trouble — a batch that fills somebody's drive is worse
+        // than a slow one.
+        let low_on_space = free_gigabytes().is_some_and(|free| free < 20);
+        if !keep_images || low_on_space {
+            if low_on_space && keep_images {
+                println!("  low on disk, removing the images this run pulled");
+            }
+            for image in &ours {
+                let _ = std::process::Command::new("docker")
+                    .args(["image", "rm", "-f", image])
+                    .output();
+            }
         }
     }
     println!(

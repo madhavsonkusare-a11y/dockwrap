@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "id": "adminer",
+  "display_name": "Adminer",
+  "catalog_name": "Adminer",
+  "description": "Database management in a single PHP file. Available for MySQL, MariaDB, PostgreSQL, SQLite, MS SQL, Oracle, Elasticsearch, MongoDB and others.",
+  "category": "Database Management",
+  "license": "NOASSERTION",
+  "source_url": "https://github.com/vrana/adminer",
+  "documentation_url": "https://www.adminer.org/",
+  "verified_at": "2026-09-10",
+  "lifecycle_proof": "docs/evidence/adminer-qualification.json",
+  "origin": {
+    "importer": "caprover",
+    "repository": "caprover/one-click-apps",
+    "revision": "7f1f329125dde0cb915f47c8b33293eca45f7d0e",
+    "path": "public/v4/apps/adminer.yml",
+    "license": "Apache-2.0"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "adminer:4",
+        "source_url": "https://hub.docker.com/v2/repositories/library/adminer/tags/4",
+        "checked_at": "2026-08-02",
+        "last_updated": "2026-08-02",
+        "container_platforms": [
+          "linux/386",
+          "linux/amd64",
+          "linux/arm/v6",
+          "linux/arm/v7",
+          "linux/arm64/v8",
+          "linux/ppc64le",
+          "linux/riscv64",
+          "linux/s390x"
+        ],
+        "digests": {
+          "linux/386": "sha256:61c80f97ab5c1ca01e1d9d78310477724f40037a5f77a3eb7d6d3d37b525c038",
+          "linux/amd64": "sha256:c641103725c7f99a3e7c7f5008324bc081ff9bdee3a746b1e3ffd3b80e83ed91",
+          "linux/arm/v6": "sha256:3600230ce2dea565fb19a11bd6e0435fa9c87ff73c212e3b11c9e0ec349d18c9",
+          "linux/arm/v7": "sha256:31a3eff35b60daa1fc491557d9af0ec639fdc494f8926d0f2dfa628cfb4e044c",
+          "linux/arm64/v8": "sha256:cfce97bf450fe2c18fe7b30e3c5c69b9d9bc8361d990c69a0a751ba4b25994e9",
+          "linux/ppc64le": "sha256:13cd568eff91be930bfc3156fde57bdfd955cf154ebef03aa35a46ad523c321f",
+          "linux/riscv64": "sha256:d26c038c8630c0c4a0691162d21270bd9cbe06ec05b227cc836cebf2e387774b",
+          "linux/s390x": "sha256:71d4fb57b6b32f0aad0d59b8e7d3d722ca30e942ec9d2ff5151a8a99cfee9efd"
+        }
+      }
+    ]
+  },
+  "promotion": {
+    "state": "approved",
+    "reason": "Qualified on 2026-09-10 and approved by the owner. A real install proved it starts, opens to a usable screen, survives a restart and a keep-data reinstall with its data and generated credentials intact, and removes everything it created on delete-data. Evidence: docs/evidence/adminer-qualification.json. Proven on Windows with Docker's Linux engine and one architecture only."
+  },
+  "data_storage": "Local Store managed folder / adminer",
+  "risk_notes": [
+    "Creates 1 Docker container and publishes one port on this computer's loopback interface only.",
+    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Connects to databases you point it at, using credentials you type in the browser. Anyone who can reach this address can reach any database this computer can."
+  ],
+  "fields": {
+    "CAP_ADMINER_DESIGN": {
+      "label": "Colour scheme",
+      "sensitive": false
+    },
+    "CAP_ADMINER_PLUGINS": {
+      "label": "Plugins to enable, separated by spaces",
+      "sensitive": false
+    }
+  },
+  "definition": "{\"captainVersion\": 4, \"services\": {\"$$cap_appname\": {\"image\": \"adminer:$$cap_adminer_version\", \"restart\": \"always\", \"environment\": {\"ADMINER_PLUGINS\": \"$$cap_adminer_plugins\", \"ADMINER_DESIGN\": \"$$cap_adminer_design\"}, \"caproverExtra\": {\"containerHttpPort\": \"8080\"}}}, \"caproverOneClickApp\": {\"variables\": [{\"id\": \"$$cap_adminer_version\", \"label\": \"Adminer Version Tag\", \"description\": \"Check out their Docker page for the valid tags https://hub.docker.com/r/library/adminer/tags/\", \"defaultValue\": \"4\", \"validRegex\": \"/^([^\\\\s^\\\\/])+$/\"}, {\"id\": \"$$cap_adminer_design\", \"label\": \"OPTIONAL: Adminer Design\", \"description\": \"List of designs: https://github.com/vrana/adminer/tree/master/designs\", \"validRegex\": \"/^([a-zA-Z0-9-.])*$/\"}, {\"id\": \"$$cap_adminer_plugins\", \"label\": \"OPTIONAL: Adminer plugins (space separated)\", \"defaultValue\": \"\", \"validRegex\": \"/^([a-zA-Z0-9-.\\\\s])*$/\"}], \"instructions\": {\"start\": \"Adminer (formerly phpMinAdmin) is a full-featured database management tool written in PHP. Conversely to phpMyAdmin, it consist of a single file ready to deploy to the target server. Adminer is available for MySQL, PostgreSQL, SQLite, MS SQL, Oracle, Firebird, SimpleDB, Elasticsearch and MongoDB. \\nFor more details, see: https://github.com/vrana/adminer\\nEnter your Adminer Configuration parameters and click on next. It will take about a minute for the process to finish.\", \"end\": \"Adminer is deployed and available as $$cap_appname\"}, \"displayName\": \"Adminer\", \"isOfficial\": true, \"description\": \"Adminer (formerly phpMinAdmin) is a full-featured database management tool written in PHP\", \"documentation\": \"Taken from https://hub.docker.com/_/adminer \"}}"
+}

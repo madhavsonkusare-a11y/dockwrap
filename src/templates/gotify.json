@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "id": "gotify",
+  "display_name": "Gotify",
+  "catalog_name": "Gotify",
+  "description": "Notification server with Android and CLI clients (alternative to PushBullet).",
+  "category": "Communication - Custom Communication Systems",
+  "license": "NOASSERTION",
+  "source_url": "https://github.com/gotify/server",
+  "documentation_url": "https://gotify.net/",
+  "verified_at": "2026-09-10",
+  "lifecycle_proof": "docs/evidence/gotify-qualification.json",
+  "origin": {
+    "importer": "caprover",
+    "repository": "caprover/one-click-apps",
+    "revision": "7f1f329125dde0cb915f47c8b33293eca45f7d0e",
+    "path": "public/v4/apps/gotify.yml",
+    "license": "Apache-2.0"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "gotify/server:2.1.7",
+        "source_url": "https://hub.docker.com/v2/repositories/gotify/server/tags/2.1.7",
+        "checked_at": "2022-09-11",
+        "last_updated": "2022-09-11",
+        "container_platforms": [
+          "linux/amd64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:b58c3ed7195dd3ddc6e1322621e60888334b62bfac82435991a8507b60c6fc90"
+        }
+      }
+    ]
+  },
+  "promotion": {
+    "state": "withheld",
+    "reason": "The pinned image was last rebuilt on 2022-09-11. Four years of unpatched base-image changes. Revisit when the definition pins a current release."
+  },
+  "data_storage": "Local Store managed folder / gotify",
+  "risk_notes": [
+    "Creates 1 Docker container and publishes one port on this computer's loopback interface only.",
+    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Anyone who can reach this address can read the notifications sent to it. It creates an administrator account on first start whose password you should change immediately."
+  ],
+  "fields": {},
+  "definition": "{\"captainVersion\": 4, \"services\": {\"$$cap_appname\": {\"image\": \"gotify/server:$$cap_version\", \"volumes\": [\"$$cap_appname-data:/app/data\", \"$$cap_appname-config:/etc/gotify/\"]}}, \"caproverOneClickApp\": {\"variables\": [{\"id\": \"$$cap_version\", \"label\": \"Gotify Version\", \"defaultValue\": \"2.1.7\", \"description\": \"Check out their Docker page for the valid tags https://hub.docker.com/r/gotify/server/tags\", \"validRegex\": \"/^([^\\\\s^\\\\/])+$/\"}], \"instructions\": {\"start\": \"Gotify is a simple server for sending and receiving messages\\nMore details: https://gotify.net/\", \"end\": \"Gotify has been successfully deployed!\\nFirst you need to enable websocket.\\nThen, log into your instance during the next minutes with user admin password admin and change this password.\"}, \"displayName\": \"Gotify\", \"isOfficial\": true, \"description\": \"Gotify is a simple server for sending and receiving messages.\", \"documentation\": \"See https://github.com/gotify\"}}"
+}

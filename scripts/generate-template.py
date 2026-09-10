@@ -84,19 +84,22 @@ def facts_for(candidate):
         path = path.with_suffix(".json")
     if not path.is_file():
         raise SystemExit(f"{path} is missing; run scripts/extract-definitions.py first")
+    # Prefer the built binary. Going through `cargo run` takes the build lock,
+    # which fights a batch running in another window and fails to link.
+    built = [
+        ROOT / "target" / "release" / "examples" / "template_facts.exe",
+        ROOT / "target" / "debug" / "examples" / "template_facts.exe",
+        ROOT / "target" / "release" / "examples" / "template_facts",
+        ROOT / "target" / "debug" / "examples" / "template_facts",
+    ]
+    binary = next((path for path in built if path.is_file()), None)
+    command = (
+        [str(binary)]
+        if binary
+        else ["cargo", "run", "--quiet", "--locked", "--example", "template_facts", "--"]
+    )
     done = subprocess.run(
-        [
-            "cargo",
-            "run",
-            "--quiet",
-            "--locked",
-            "--example",
-            "template_facts",
-            "--",
-            candidate["source"],
-            candidate["id"],
-            str(path),
-        ],
+        command + [candidate["source"], candidate["id"], str(path)],
         cwd=ROOT,
         capture_output=True,
         text=True,
@@ -253,11 +256,26 @@ def main():
     evidence = ROOT / "docs" / "evidence" / f"{args.app}-qualification.json"
     evidence.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
 
+    # A recent rebuild is the fact a promotion turns on most often, and eight
+    # apps were once approved in a batch without anybody looking at it — three
+    # of them ran images last rebuilt in 2021, 2022 and 2023. Say it loudly.
+    oldest = min(image["last_updated"] for image in manifest["requirements"]["images"])
+    age_days = (datetime.date.today() - datetime.date.fromisoformat(oldest)).days
+    stale = age_days > 365
+
     target = ROOT / "src" / "templates" / f"{args.app}.json"
     target.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     outstanding = json.dumps(manifest).count(REVIEW)
     print(f"wrote {target.relative_to(ROOT)} and {evidence.relative_to(ROOT)}")
     print(f"{outstanding} thing(s) marked {REVIEW.strip()} still need a person")
+    if stale:
+        print(
+            f"  WARNING: the oldest image was last rebuilt {oldest} — {age_days // 365} year(s) "
+            "ago. An old image is not a fault by itself, but it is the fact a promotion decision "
+            "turns on most often. Withhold unless there is a reason not to."
+        )
+    else:
+        print(f"  images last rebuilt {oldest}, which is current enough to consider offering")
     print("then: record a lifecycle proof, set verified_at, and decide promotion")
 
 

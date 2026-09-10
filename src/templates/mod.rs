@@ -298,17 +298,38 @@ impl ReviewedTemplate {
     }
 }
 
+const ACTUAL: &str = include_str!("actual.json");
+const ADMINER: &str = include_str!("adminer.json");
 const CODIMD: &str = include_str!("codimd.json");
-const PRIVATEBIN: &str = include_str!("privatebin.json");
-const NODERED: &str = include_str!("nodered.json");
 const FLATNOTES: &str = include_str!("flatnotes.json");
+const GOTIFY: &str = include_str!("gotify.json");
+const GRAFANA: &str = include_str!("grafana.json");
+const METABASE: &str = include_str!("metabase.json");
+const NODERED: &str = include_str!("nodered.json");
+const NTFY: &str = include_str!("ntfy.json");
+const OMBI: &str = include_str!("ombi.json");
+const PRIVATEBIN: &str = include_str!("privatebin.json");
+const VAULTWARDEN: &str = include_str!("vaultwarden.json");
 
 /// Every template a review has passed. Being here is not being offered.
 pub fn reviewed_templates() -> Vec<ReviewedTemplate> {
-    [CODIMD, PRIVATEBIN, NODERED, FLATNOTES]
-        .into_iter()
-        .map(|source| serde_json::from_str(source).expect("bundled reviewed templates must parse"))
-        .collect()
+    [
+        ACTUAL,
+        ADMINER,
+        CODIMD,
+        FLATNOTES,
+        GOTIFY,
+        GRAFANA,
+        METABASE,
+        NODERED,
+        NTFY,
+        OMBI,
+        PRIVATEBIN,
+        VAULTWARDEN,
+    ]
+    .into_iter()
+    .map(|source| serde_json::from_str(source).expect("bundled reviewed templates must parse"))
+    .collect()
 }
 
 pub fn reviewed_template(id: &str) -> Option<ReviewedTemplate> {
@@ -479,7 +500,16 @@ mod tests {
     /// makes, so it has to appear in a diff rather than arrive as a side
     /// effect of a manifest edit or a passing test. Adding a second name here
     /// costs exactly as much deliberation as the first one did.
-    const APPROVED: &[&str] = &["flatnotes", "nodered", "privatebin"];
+    const APPROVED: &[&str] = &[
+        "adminer",
+        "flatnotes",
+        "grafana",
+        "metabase",
+        "nodered",
+        "ntfy",
+        "privatebin",
+        "vaultwarden",
+    ];
 
     #[test]
     fn no_reviewed_template_is_offerable_without_an_explicit_approval() {
