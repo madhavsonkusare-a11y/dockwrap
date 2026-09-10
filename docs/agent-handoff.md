@@ -1,5 +1,65 @@
 # Local Store: agent handoff
 
+## September 10 — tasks 14 and 15 close; an interrupted install can be finished
+
+**Nothing left in the original 33 can be picked up without the owner.** 29
+complete, 2 partial (29 needs a tag push, 31 needs macOS and Linux hosts), 30
+deferred, 33 waiting on 30.
+
+**Adoption exists.** `discard` was the honest first answer to an interrupted
+install — files from a transaction that never committed have no proven health,
+so clearing them is always safe — but it throws away a download and a database
+that may be minutes old. `local-store adopt <id>` finishes the install instead:
+it takes the app's operation lock, re-derives the candidate under it,
+re-verifies Docker ownership, brings the retained project up, and writes a
+registry entry **only after the app answers**. That last line is the whole
+design: an install commits only after health, and adoption holds the same line,
+or it would put a broken app in My Apps and call it installed. Seven refusal
+tests cover an app that never answers, containers somebody else owns, an app
+already installed, a busy app, a failed start, and retained files that publish
+no address.
+
+**Two real bugs, both found by running the thing rather than reasoning about
+it.**
+
+The first would have broken every adopted app permanently. `inspect_at`
+canonicalizes paths, which on Windows produces the extended-length form
+`\?\D:\...`. Docker Compose resolves a relative bind mount like `./data`
+against the directory of the file it is given, so that form makes it build a
+mount source containing `\?\D:` and refuse with "too many colons". `compose
+down` never resolves mounts, which is why `discard` never hit it and only
+starting an app did. Worse, that path would have been written into the
+registry, so the app would have failed to start for the rest of its life.
+`docker_path` strips the prefix for both.
+
+The second is not ours to fix but is worth knowing: **killing the CLI does not
+kill the `docker compose` it started.** Docker keeps pulling on its own, so a
+person who kills an install and immediately retries can watch the retry fail on
+a collision. The test waits for Docker's own work to settle and says why.
+
+**Recovery covered only the three recipes.** Once imported apps became
+installable, an interrupted PrivateBin or flatnotes install left files recovery
+could not see. It now iterates `offerings()`.
+
+**Adoption failures now carry Docker's own words.** "Could not start" alone
+leaves a person nothing to act on, and this is the step most likely to fail for
+a reason they can fix.
+
+Both new interruption stages pass twice in a row: a pull interrupted before any
+container exists leaves nothing running or registered and a retry succeeds; a
+startup interrupted once a container exists is adopted, answers on its address,
+refuses a second adoption, and uninstalls like any other app.
+
+Validation: 259 Rust tests across 27 binaries, strict Clippy, fmt and eight
+offline gates. The original healthy-pre-commit interruption test still passes.
+
+**Next:** `runtipi:planka` — a two-service app with typed setup. 58 of 202
+importable candidates are multi-service and none is offered yet. Note its
+`postgres:14-alpine` pin is a floating tag whose digests will go stale, and
+Postgres 14 reaches end of life in November 2026, so expect to pin it or
+withhold.
+
+
 ## September 10 — the setup form finally has a real app
 
 flatnotes v5.5.5 is approved. It is the first offered app whose install asks a

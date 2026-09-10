@@ -7,7 +7,6 @@
 //! shown.
 use crate::{
     error::{AppError, AppResult, ErrorCode},
-    recipes,
     runtime::{CommandSpec, ProcessRunner, DIAGNOSTIC_TIMEOUT},
     storage,
 };
@@ -135,11 +134,16 @@ pub fn inspect_at(config: &Path) -> AppResult<Vec<RecoveryCandidate>> {
     }
     let resolved_root = root.canonicalize()?;
     let mut candidates = Vec::new();
-    for recipe in recipes::reviewed_recipes() {
-        if installed.iter().any(|app| app.id == recipe.id) {
+    // Every app a person could have started installing, not only the recipes.
+    // Once imported apps became installable, an interrupted PrivateBin or
+    // flatnotes install left files that recovery could not see, so the only
+    // way out was to find them by hand.
+    for offering in crate::offerings::offerings() {
+        let id = offering.id().to_owned();
+        if installed.iter().any(|app| app.id == id) {
             continue;
         }
-        let project = root.join(&recipe.id);
+        let project = root.join(&id);
         let compose = project.join("compose.yaml");
         if !compose.exists() {
             continue;
@@ -147,7 +151,7 @@ pub fn inspect_at(config: &Path) -> AppResult<Vec<RecoveryCandidate>> {
         let resolved_project = project.canonicalize()?;
         let resolved_compose = compose.canonicalize()?;
         if resolved_project.parent() != Some(resolved_root.as_path())
-            || resolved_project.file_name() != Some(std::ffi::OsStr::new(&recipe.id))
+            || resolved_project.file_name() != Some(std::ffi::OsStr::new(&id))
             || resolved_compose.parent() != Some(resolved_project.as_path())
             || !resolved_compose.is_file()
         {
@@ -156,9 +160,9 @@ pub fn inspect_at(config: &Path) -> AppResult<Vec<RecoveryCandidate>> {
             ));
         }
         candidates.push(RecoveryCandidate {
-            project_name: format!("local-store-{}", recipe.id),
-            recipe_id: recipe.id,
-            display_name: recipe.display_name,
+            project_name: format!("local-store-{id}"),
+            recipe_id: id,
+            display_name: offering.display_name().to_owned(),
             compose_file: resolved_compose,
             docker_ownership_verified: false,
             ownership_status: OwnershipStatus::NotChecked,
@@ -335,4 +339,226 @@ fn count_owned(runner: &dyn ProcessRunner, project_name: &str) -> AppResult<usiz
         ));
     }
     Ok(output.stdout.split_whitespace().count())
+}
+
+/// A canonical path in the form Docker can actually use.
+///
+/// `inspect_at` canonicalizes, which is what stops a symlink or a relative
+/// segment pointing somewhere else — and on Windows canonicalizing produces an
+/// extended-length path (`\?\D:\...`). Docker Compose resolves a relative
+/// bind mount like `./data` against the directory of the file it was given, so
+/// handing it that form makes it build a mount source containing `\?\D:` and
+/// refuse the whole thing with "too many colons". `compose down` never
+/// resolves mounts, which is why only starting an app ran into it.
+///
+/// Stripping the prefix keeps the resolved target — this is the same
+/// directory, named the way the rest of the system names it.
+fn docker_path(path: &Path) -> PathBuf {
+    match path.to_str().and_then(|text| text.strip_prefix(r"\\?\")) {
+        Some(plain) => PathBuf::from(plain),
+        None => path.to_path_buf(),
+    }
+}
+
+/// What an adoption actually did, so a caller can say so rather than guess.
+#[derive(Debug, Serialize, PartialEq, Eq)]
+pub struct Adopted {
+    pub recipe_id: String,
+    pub launch_url: String,
+    /// Containers the retained project owned once it was running.
+    pub containers: usize,
+}
+
+/// Finish an install that was interrupted, instead of clearing it.
+///
+/// `discard` was the honest first answer: files from a transaction that never
+/// committed have no proven health and no registry entry, so clearing them and
+/// letting an ordinary install proceed is always safe. But it throws away a
+/// download and a database that may be minutes old, and for anyone on a slow
+/// connection that is the difference between a recoverable hiccup and starting
+/// over.
+///
+/// Adoption is the other answer, and the reason it took a separate change is
+/// the health story. An install commits a registry entry only after the app
+/// answers on its own address; adopting must hold that same line, or it would
+/// put a broken app in My Apps and call it installed. So this brings the
+/// retained project up and waits for the app to actually answer. If it never
+/// does, nothing is registered and the files are left exactly where they were,
+/// which keeps `discard` available.
+pub fn adopt(recipe_id: &str) -> AppResult<Adopted> {
+    adopt_with(
+        &crate::runtime::SystemProcessRunner,
+        &crate::runtime::HttpHealthProbe,
+        recipe_id,
+        // The same sixty seconds an install allows itself.
+        std::time::Duration::from_secs(60),
+    )
+}
+
+pub fn adopt_with(
+    runner: &dyn ProcessRunner,
+    probe: &dyn crate::runtime::HealthProbe,
+    recipe_id: &str,
+    health_timeout: std::time::Duration,
+) -> AppResult<Adopted> {
+    // Taken before anything is read and held until the entry is written, so an
+    // install of this app running right now cannot have its files adopted out
+    // from under it.
+    let _lock = crate::runtime::lock_operation(recipe_id)?;
+
+    let apps = storage::managed_apps_root();
+    let config = apps
+        .parent()
+        .and_then(Path::parent)
+        .ok_or_else(|| AppError::invalid("Invalid managed configuration root."))?
+        .to_path_buf();
+
+    // Re-derived under the lock. This also refuses an app that has since been
+    // installed properly: `inspect_at` skips anything the registry lists.
+    let mut candidate = inspect_at(&config)?
+        .into_iter()
+        .find(|candidate| candidate.recipe_id == recipe_id)
+        .ok_or_else(|| {
+            AppError::new(
+                ErrorCode::NotFound,
+                "There are no retained setup files for this app. If it is installed, there is nothing to adopt.",
+            )
+        })?;
+
+    // The offering is what says who this app is. Adopting an id nothing offers
+    // would put an app in My Apps that no review stands behind.
+    let offering = crate::offerings::offering(recipe_id).ok_or_else(|| {
+        AppError::new(
+            ErrorCode::NotFound,
+            "This app is not one this version offers, so it cannot be adopted.",
+        )
+    })?;
+
+    // A snapshot taken before the lock proves nothing about now.
+    verify_with(&mut candidate, runner)?;
+    match candidate.ownership_status {
+        OwnershipStatus::Verified | OwnershipStatus::NoContainers => {}
+        OwnershipStatus::Mismatch => {
+            return Err(AppError::new(
+                ErrorCode::UnsafePath,
+                "Containers using this project name do not match the retained setup files. Review them in Docker before recovering.",
+            ))
+        }
+        OwnershipStatus::NotChecked => {
+            return Err(AppError::invalid(
+                "Docker ownership could not be checked, so nothing was adopted.",
+            ))
+        }
+    }
+
+    let project_dir = docker_path(
+        candidate
+            .compose_file
+            .parent()
+            .ok_or_else(|| AppError::invalid("Retained setup files have no project directory."))?,
+    );
+    // Everything handed to Docker, and everything written into the registry,
+    // uses this form: an entry recorded with an extended-length path would
+    // start today and fail every time the app was started afterwards.
+    let compose_file = docker_path(&candidate.compose_file);
+
+    // The address comes from the file that is actually there, not from what
+    // the app would prefer today: an interrupted install may have taken a
+    // different port, and adopting it under the wrong address would register a
+    // link that goes nowhere.
+    let compose = std::fs::read_to_string(&candidate.compose_file).map_err(AppError::from)?;
+    let host_port = crate::plan::published_host_port(&compose)
+        .ok_or_else(|| AppError::invalid("The retained setup files publish no address to open."))?;
+    let launch_url = format!("http://localhost:{host_port}");
+
+    // Bring up whatever the interruption left down. This is the same command
+    // the install itself would have run, against the same file, under the same
+    // project name.
+    let output = runner
+        .run(&CommandSpec::docker(
+            vec![
+                "compose".to_owned(),
+                "-f".to_owned(),
+                compose_file.to_string_lossy().into_owned(),
+                "-p".to_owned(),
+                candidate.project_name.clone(),
+                "up".to_owned(),
+                "-d".to_owned(),
+            ],
+            Some(project_dir.clone()),
+            crate::runtime::LIFECYCLE_TIMEOUT,
+        ))
+        .map_err(AppError::from)?;
+    if !output.success {
+        // Say what Docker said. "Could not start" alone leaves a person with
+        // nothing to act on, and this is the step most likely to fail for a
+        // reason they can fix — a port taken since, an image since removed.
+        let detail = crate::runtime::redact(
+            output
+                .stderr
+                .lines()
+                .rev()
+                .take(5)
+                .collect::<Vec<_>>()
+                .iter()
+                .rev()
+                .copied()
+                .collect::<Vec<_>>()
+                .join(
+                    "
+",
+                )
+                .trim(),
+        );
+        let message = if detail.is_empty() {
+            "Docker could not start the retained containers, so nothing was adopted.".to_owned()
+        } else {
+            format!(
+                "Docker could not start the retained containers, so nothing was adopted: {detail}"
+            )
+        };
+        return Err(AppError::new(ErrorCode::ProcessFailed, message));
+    }
+
+    // The line an install holds, held here too. Without this, adoption would
+    // be a way to register an app nobody has seen work.
+    crate::runtime::wait_for_health_with(
+        probe,
+        &launch_url,
+        health_timeout,
+        &crate::runtime::CancelToken::new(),
+    )
+        .map_err(|_| {
+            AppError::new(
+                ErrorCode::TimedOut,
+                "The app did not answer on its address, so it was not added. The setup files are untouched, and you can recover them instead.",
+            )
+        })?;
+
+    let containers = count_owned(runner, &candidate.project_name)?;
+    let now = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .map(|since| since.as_secs())
+        .unwrap_or_default();
+    storage::insert_installed_app(crate::model::InstalledApp {
+        id: recipe_id.to_owned(),
+        catalog_id: crate::catalog::catalog_id(offering.catalog_name()),
+        display_name: offering.display_name().to_owned(),
+        launch_url: launch_url.clone(),
+        icon_path: None,
+        runtime: crate::model::RuntimeSpec::Compose {
+            project_name: candidate.project_name.clone(),
+            project_dir,
+            compose_file,
+        },
+        created_at_unix: now,
+        updated_at_unix: now,
+    })
+    .map_err(AppError::from)?;
+
+    Ok(Adopted {
+        recipe_id: recipe_id.to_owned(),
+        launch_url,
+        containers,
+    })
 }
