@@ -305,15 +305,18 @@ fn all_containers(runner: &dyn ProcessRunner) -> AppResult<Vec<String>> {
 /// somebody else's machine.
 pub struct OwnedResources<'a> {
     runner: &'a dyn ProcessRunner,
-    project: String,
+    /// Borrowed from the run's `Isolation` rather than copied, so the compiler
+    /// keeps that isolation — and the directory it removes when dropped —
+    /// alive until these containers are gone. On Windows, deleting a directory
+    /// out from under a container still writing to it succeeds, and then
+    /// leaves that container unremovable for minutes — far longer than the
+    /// removal below is given.
+    project: &'a str,
 }
 
 impl<'a> OwnedResources<'a> {
-    pub fn new(runner: &'a dyn ProcessRunner, project: impl Into<String>) -> Self {
-        Self {
-            runner,
-            project: project.into(),
-        }
+    pub fn new(runner: &'a dyn ProcessRunner, project: &'a str) -> Self {
+        Self { runner, project }
     }
 
     /// What this project still owns, by resource kind.
@@ -385,6 +388,10 @@ impl Drop for OwnedResources<'_> {
 
 /// A private configuration root and a project name nothing else can collide
 /// with, so a run never touches a real installation of the same app.
+///
+/// The root is removed when this is dropped, however the run ended. It holds a
+/// whole configuration root and, when a run stops before its removal step, the
+/// app's data too; leaving it behind gave `.cache` a directory per app run.
 pub struct Isolation {
     pub run_id: String,
     pub project: String,
@@ -402,7 +409,12 @@ impl Isolation {
                 .unwrap_or_default()
         );
         let root = scratch.join(&run_id);
-        std::fs::create_dir_all(&root).map_err(AppError::from)?;
+        if let Some(parent) = root.parent() {
+            std::fs::create_dir_all(parent).map_err(AppError::from)?;
+        }
+        // Made here rather than found: dropping this removes the root and
+        // everything in it, so it has to be a directory this run created.
+        std::fs::create_dir(&root).map_err(AppError::from)?;
         Ok(Self {
             project: format!("local-store-{run_id}"),
             run_id,
@@ -436,6 +448,32 @@ impl Isolation {
             .join(crate::brand::CONFIG_SLUG)
             .join("apps")
             .join(&self.run_id)
+    }
+}
+
+impl Drop for Isolation {
+    fn drop(&mut self) {
+        use std::io::Write as _;
+        // The process stays pointed at this root after it is gone. That is
+        // the safe direction: pointing it back would let anything that ran
+        // next write to a person's real registry. Nothing does — the next run
+        // takes over a root of its own before it installs anything.
+        //
+        // Best effort. Whether the app works was decided before this ran, and
+        // a scratch directory left behind says nothing about the app, so it is
+        // reported rather than allowed to fail a pass. Written rather than
+        // `eprintln!`-ed because that can panic, and a drop must not.
+        match std::fs::remove_dir_all(&self.root) {
+            Ok(()) => {}
+            Err(error) if error.kind() == std::io::ErrorKind::NotFound => {}
+            Err(error) => {
+                let _ = writeln!(
+                    std::io::stderr(),
+                    "the isolated root {} could not be removed: {error}",
+                    self.root.display()
+                );
+            }
+        }
     }
 }
 
@@ -570,6 +608,8 @@ pub fn qualify_template(
         .collect();
 
     let bystanders = Bystanders::note(&runner)?;
+    // Borrows `isolation`, so it is dropped first: the containers go before
+    // the root they mount.
     let owned = OwnedResources::new(&runner, &isolation.project);
     let mut steps = Steps::new();
 
@@ -1070,6 +1110,86 @@ ccc",
                     "{args:?}"
                 );
             }
+        }
+    }
+
+    /// Answers like Docker for one run, with one resource of each kind still
+    /// there when `running`, and notes at every removal whether the run's
+    /// isolated root still existed for a container to mount.
+    struct Mounting {
+        root: PathBuf,
+        running: bool,
+        removals: std::sync::Mutex<Vec<bool>>,
+    }
+
+    impl ProcessRunner for Mounting {
+        fn run_cancellable(
+            &self,
+            spec: &CommandSpec,
+            _: &crate::runtime::CancelToken,
+        ) -> Result<crate::runtime::ProcessOutput, crate::runtime::ProcessError> {
+            let stdout = match spec.args.get(1).map(String::as_str) {
+                Some("ls") if self.running => "ours".to_owned(),
+                Some("rm") => {
+                    self.removals.lock().unwrap().push(self.root.exists());
+                    String::new()
+                }
+                _ => String::new(),
+            };
+            Ok(crate::runtime::ProcessOutput {
+                success: true,
+                stdout,
+                stderr: String::new(),
+                truncated: false,
+            })
+        }
+    }
+
+    /// An isolated root holds a whole configuration root, and the app's data
+    /// when a run stopped early. Leaving it gave `.cache` a directory per app
+    /// run; removing it before the containers that mount it can leave them
+    /// stuck.
+    #[test]
+    fn a_run_removes_its_isolated_root_once_its_containers_are_gone() {
+        // A pass has removed its containers by the time it ends; a failure
+        // can end with them still there.
+        for (outcome, running) in [("passed", false), ("failed", true)] {
+            let scratch = scratch("isolation");
+            // Results are recorded beside isolated roots, in the same scratch.
+            let batch = Batch::open(scratch.join("qualification")).unwrap();
+            batch.record(&evidence_for("earlier", true)).unwrap();
+
+            let docker;
+            let root = {
+                let isolation = Isolation::new("example", &scratch).unwrap();
+                let data = isolation.project_dir().join("data");
+                std::fs::create_dir_all(&data).unwrap();
+                std::fs::write(data.join("note.txt"), b"a person's note").unwrap();
+                docker = Mounting {
+                    root: isolation.root.clone(),
+                    running,
+                    removals: Default::default(),
+                };
+                let _owned = OwnedResources::new(&docker, &isolation.project);
+                isolation.root.clone()
+            };
+
+            assert!(
+                !root.exists(),
+                "a run that {outcome} left its isolated root behind"
+            );
+            let removals = docker.removals.lock().unwrap();
+            assert_eq!(removals.len(), if running { 3 } else { 0 }, "{removals:?}");
+            assert!(
+                removals.iter().all(|present| *present),
+                "a run that {outcome} removed its root while a container could still mount it"
+            );
+            // Only the run's own root: the results beside it are untouched.
+            assert_eq!(
+                batch.recorded("earlier"),
+                Some(evidence_for("earlier", true))
+            );
+            std::fs::remove_dir_all(&scratch).ok();
         }
     }
 

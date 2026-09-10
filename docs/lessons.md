@@ -202,6 +202,28 @@ when the disk fills), `wsl --shutdown`, then start Docker Desktop and let *it*
 boot the VM — starting the distro by hand leaves the data disk unmounted and
 every API call returns 500.
 
+## Deleting a mounted directory works; removing its container then does not
+
+A qualification run's isolated root was believed to be undeletable while a
+container still had it bind-mounted, so its removal was ordered after the
+containers'. The order is right. The reason was wrong.
+
+On Docker Desktop 29.3.1 with the WSL2 backend, `std::fs::remove_dir_all`
+removed a bind-mount source in 6 ms under an idle container, and in 14 ms under
+one holding two files in it open and writing to one of them. Nothing refused.
+The damage comes afterwards: `docker rm -f` on the writing container took **over
+two minutes**, passed through `Dead`, and turned away a second attempt as
+"already in progress". Cleanup gives each removal thirty seconds, so it would
+have stopped waiting with the container still there.
+
+**Remove containers before the directories they mount.** The harness does not
+rely on anybody remembering that: `OwnedResources` borrows its project name
+from the `Isolation`, so dropping the isolation first does not compile.
+
+This is one machine and one way of deleting; another tool may be refused where
+Rust was not. The order is the same either way. Reproducing it leaves a `Dead`
+container for minutes, so try it only with a throwaway one.
+
 ## What the batch is for
 
 Running candidates in bulk found three real defects in one afternoon — the
