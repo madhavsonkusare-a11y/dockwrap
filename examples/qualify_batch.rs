@@ -129,6 +129,16 @@ fn definition(candidate: &Candidate) -> Option<(String, Option<String>)> {
     Some((definition, config))
 }
 
+/// Whether this machine already has an image, so the batch can tell what it
+/// pulled from what it found.
+fn image_present(image: &str) -> bool {
+    std::process::Command::new("docker")
+        .args(["image", "inspect", image])
+        .output()
+        .map(|out| out.status.success())
+        .unwrap_or(false)
+}
+
 fn main() {
     if std::env::var("LOCAL_STORE_RUN_DOCKER_TEST").as_deref() != Ok("1") {
         eprintln!("This starts real containers. Set LOCAL_STORE_RUN_DOCKER_TEST=1 to run it.");
@@ -194,6 +204,22 @@ fn main() {
             promotion: "not reviewed".to_owned(),
             source_revision: candidate.revision.clone(),
         };
+        // Qualifying a hundred apps means pulling a hundred images, which is
+        // tens of gigabytes on somebody's real machine. Anything this run
+        // pulls, it removes; anything that was already there is left exactly
+        // as it was found.
+        let images: Vec<String> = template
+            .plan
+            .services
+            .iter()
+            .map(|service| service.image.clone())
+            .collect();
+        let ours: Vec<String> = images
+            .iter()
+            .filter(|image| !image_present(image))
+            .cloned()
+            .collect();
+
         println!("{}: running…", candidate.id);
         // The App Store standard, applied to every app the same way: it has to
         // open something a person could act on, and it has to still be the same
@@ -229,6 +255,11 @@ fn main() {
                 failed += 1;
                 println!("  could not run: {}", error.message);
             }
+        }
+        for image in &ours {
+            let _ = std::process::Command::new("docker")
+                .args(["image", "rm", "-f", image])
+                .output();
         }
     }
     println!("passed {passed}, failed {failed}, skipped {skipped}");
