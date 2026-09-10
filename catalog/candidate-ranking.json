@@ -5,10 +5,12 @@
    "id": "grafana",
    "source": "caprover",
    "reach": 67.83,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "AGPL-3.0"
+   ],
    "pulls": 5320360401,
-   "stars": 76661,
+   "stars": 76666,
    "catalogues": 3,
    "importable": true,
    "blockers": [],
@@ -24,6 +26,7 @@
    "reach": 67.5,
    "open_source": true,
    "licenses": [
+    "BSD-2-Clause",
     "BSD-2-Clause"
    ],
    "pulls": 13348360026,
@@ -43,10 +46,11 @@
    "reach": 66.54,
    "open_source": false,
    "licenses": [
+    "NOASSERTION",
     "BUSL-1.1"
    ],
    "pulls": 13348360026,
-   "stars": 40513,
+   "stars": 40512,
    "catalogues": 2,
    "importable": true,
    "blockers": [],
@@ -66,10 +70,11 @@
    "reach": 65.7,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "GPL-3.0"
    ],
    "pulls": 328138779,
-   "stars": 67092,
+   "stars": 67097,
    "catalogues": 5,
    "importable": true,
    "blockers": [],
@@ -85,10 +90,11 @@
    "reach": 65.66,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": 385041008,
-   "stars": 57923,
+   "stars": 57925,
    "catalogues": 5,
    "importable": false,
    "blockers": [
@@ -107,6 +113,7 @@
    "reach": 64.87,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": 1027130969,
@@ -154,6 +161,7 @@
    "reach": 64.34,
    "open_source": true,
    "licenses": [
+    "NOASSERTION",
     "GPL-2.0"
    ],
    "pulls": 1488429454,
@@ -193,8 +201,10 @@
    "id": "portainer",
    "source": "runtipi",
    "reach": 64.18,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "Zlib"
+   ],
    "pulls": 1539529733,
    "stars": 38475,
    "catalogues": 3,
@@ -215,10 +225,11 @@
    "reach": 64.03,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": 379714187,
-   "stars": 55250,
+   "stars": 55251,
    "catalogues": 4,
    "importable": false,
    "blockers": [
@@ -237,10 +248,11 @@
    "reach": 63.19,
    "open_source": true,
    "licenses": [
+    "NOASSERTION",
     "AGPL-3.0"
    ],
    "pulls": 271189671,
-   "stars": 49171,
+   "stars": 49174,
    "catalogues": 4,
    "importable": true,
    "blockers": [],
@@ -256,10 +268,11 @@
    "reach": 63.19,
    "open_source": true,
    "licenses": [
+    "NOASSERTION",
     "AGPL-3.0"
    ],
    "pulls": 271189671,
-   "stars": 49171,
+   "stars": 49174,
    "catalogues": 4,
    "importable": true,
    "blockers": [],
@@ -275,7 +288,9 @@
    "source": "runtipi",
    "reach": 62.52,
    "open_source": null,
-   "licenses": [],
+   "licenses": [
+    "NOASSERTION"
+   ],
    "pulls": 4851613635,
    "stars": 28544,
    "catalogues": 1,
@@ -291,10 +306,12 @@
    "id": "netdata",
    "source": "runtipi",
    "reach": 62.41,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "GPL-3.0"
+   ],
    "pulls": 524417292,
-   "stars": 80471,
+   "stars": 80470,
    "catalogues": 2,
    "importable": false,
    "blockers": [
@@ -313,10 +330,12 @@
    "id": "uptime-kuma",
    "source": "caprover",
    "reach": 62.33,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": 180863543,
-   "stars": 91194,
+   "stars": 91198,
    "catalogues": 3,
    "importable": true,
    "blockers": [],
@@ -330,10 +349,12 @@
    "id": "uptime-kuma",
    "source": "runtipi",
    "reach": 62.33,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": 180863543,
-   "stars": 91194,
+   "stars": 91198,
    "catalogues": 3,
    "importable": false,
    "blockers": [
@@ -351,10 +372,11 @@
    "reach": 61.91,
    "open_source": true,
    "licenses": [
+    "Apache-2.0",
     "Apache-2.0"
    ],
    "pulls": 323222345,
-   "stars": 23639,
+   "stars": 23640,
    "catalogues": 4,
    "importable": true,
    "blockers": [],
@@ -369,9 +391,11 @@
    "source": "runtipi",
    "reach": 61.69,
    "open_source": null,
-   "licenses": [],
+   "licenses": [
+    "NOASSERTION"
+   ],
    "pulls": 257842446,
-   "stars": 203895,
+   "stars": 203902,
    "catalogues": 1,
    "importable": false,
    "blockers": [
@@ -389,9 +413,11 @@
    "source": "runtipi",
    "reach": 61.4,
    "open_source": null,
-   "licenses": [],
+   "licenses": [
+    "NOASSERTION"
+   ],
    "pulls": 985926149,
-   "stars": 60829,
+   "stars": 60831,
    "catalogues": 1,
    "importable": false,
    "blockers": [
@@ -408,10 +434,12 @@
    "id": "ollama-amd",
    "source": "runtipi",
    "reach": 60.74,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": 173324585,
-   "stars": 180544,
+   "stars": 180547,
    "catalogues": 1,
    "importable": false,
    "blockers": [
@@ -427,10 +455,12 @@
    "id": "ollama-cpu",
    "source": "runtipi",
    "reach": 60.74,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": 173324585,
-   "stars": 180544,
+   "stars": 180547,
    "catalogues": 1,
    "importable": true,
    "blockers": [],
@@ -444,10 +474,12 @@
    "id": "ollama-nvidia",
    "source": "runtipi",
    "reach": 60.74,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": 173324585,
-   "stars": 180544,
+   "stars": 180547,
    "catalogues": 1,
    "importable": false,
    "blockers": [
@@ -465,6 +497,7 @@
    "reach": 60.67,
    "open_source": true,
    "licenses": [
+    "NOASSERTION",
     "AGPL-3.0"
    ],
    "pulls": 81876705,
@@ -490,10 +523,11 @@
    "reach": 60.59,
    "open_source": true,
    "licenses": [
+    "NOASSERTION",
     "LGPL-3.0"
    ],
    "pulls": 53651188,
-   "stars": 54259,
+   "stars": 54261,
    "catalogues": 4,
    "importable": false,
    "blockers": [
@@ -513,10 +547,11 @@
    "reach": 60.42,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": 79235342,
-   "stars": 36726,
+   "stars": 36729,
    "catalogues": 4,
    "importable": false,
    "blockers": [
@@ -532,8 +567,10 @@
    "id": "nextcloud-mini",
    "source": "runtipi",
    "reach": 60.37,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "AGPL-3.0"
+   ],
    "pulls": 1027130969,
    "stars": 36765,
    "catalogues": 1,
@@ -550,10 +587,12 @@
    "id": "grafana",
    "source": "runtipi",
    "reach": 60.17,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "AGPL-3.0"
+   ],
    "pulls": 64818076,
-   "stars": 76661,
+   "stars": 76666,
    "catalogues": 3,
    "importable": true,
    "blockers": [],
@@ -589,10 +628,11 @@
    "reach": 59.64,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": 10906459,
-   "stars": 62877,
+   "stars": 62879,
    "catalogues": 5,
    "importable": true,
    "blockers": [],
@@ -608,10 +648,11 @@
    "reach": 59.64,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": 10906459,
-   "stars": 62877,
+   "stars": 62879,
    "catalogues": 5,
    "importable": true,
    "blockers": [],
@@ -625,10 +666,12 @@
    "id": "ghost-dev",
    "source": "runtipi",
    "reach": 59.53,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": 379714187,
-   "stars": 55250,
+   "stars": 55251,
    "catalogues": 1,
    "importable": false,
    "blockers": [
@@ -645,9 +688,11 @@
    "source": "runtipi",
    "reach": 59.45,
    "open_source": null,
-   "licenses": [],
+   "licenses": [
+    "NOASSERTION"
+   ],
    "pulls": 120431212,
-   "stars": 33549,
+   "stars": 33548,
    "catalogues": 3,
    "importable": false,
    "blockers": [
@@ -666,10 +711,11 @@
    "reach": 59.35,
    "open_source": true,
    "licenses": [
+    "NOASSERTION",
     "Apache-2.0"
    ],
    "pulls": 13659554,
-   "stars": 91632,
+   "stars": 91636,
    "catalogues": 4,
    "importable": false,
    "blockers": [
@@ -685,10 +731,12 @@
    "id": "tailscale",
    "source": "runtipi",
    "reach": 58.71,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "BSD-3-Clause"
+   ],
    "pulls": 168529493,
-   "stars": 36308,
+   "stars": 36318,
    "catalogues": 2,
    "importable": false,
    "blockers": [
@@ -728,10 +776,11 @@
    "reach": 58.49,
    "open_source": true,
    "licenses": [
+    "NOASSERTION",
     "MIT"
    ],
    "pulls": 15324563,
-   "stars": 56306,
+   "stars": 56308,
    "catalogues": 4,
    "importable": true,
    "blockers": [],
@@ -748,10 +797,11 @@
    "reach": 58.49,
    "open_source": true,
    "licenses": [
+    "NOASSERTION",
     "MIT"
    ],
    "pulls": 15324563,
-   "stars": 56306,
+   "stars": 56308,
    "catalogues": 4,
    "importable": true,
    "blockers": [],
@@ -788,10 +838,12 @@
    "id": "minecraft-server",
    "source": "runtipi",
    "reach": 58.32,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "Apache-2.0"
+   ],
    "pulls": 431989316,
-   "stars": 14283,
+   "stars": 14282,
    "catalogues": 2,
    "importable": false,
    "blockers": [
@@ -811,11 +863,12 @@
    "open_source": true,
    "licenses": [
     "Apache-2.0",
+    "Apache-2.0",
     "Apache-2.0/GPL-2.0",
     "GPL-2.0"
    ],
    "pulls": 22922531,
-   "stars": 34125,
+   "stars": 34124,
    "catalogues": 4,
    "importable": true,
    "blockers": [],
@@ -831,6 +884,7 @@
    "reach": 57.92,
    "open_source": false,
    "licenses": [
+    "NOASSERTION",
     "SUL-1.0"
    ],
    "pulls": 21813704,
@@ -850,6 +904,7 @@
    "reach": 57.92,
    "open_source": false,
    "licenses": [
+    "NOASSERTION",
     "SUL-1.0"
    ],
    "pulls": 21813704,
@@ -871,10 +926,12 @@
    "id": "dozzle",
    "source": "runtipi",
    "reach": 57.91,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": 340809527,
-   "stars": 14319,
+   "stars": 14320,
    "catalogues": 2,
    "importable": false,
    "blockers": [
@@ -890,10 +947,12 @@
    "id": "excalidraw",
    "source": "runtipi",
    "reach": 57.86,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": 8712821,
-   "stars": 131533,
+   "stars": 131537,
    "catalogues": 3,
    "importable": false,
    "blockers": [
@@ -911,10 +970,11 @@
    "reach": 57.81,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": 29091634,
-   "stars": 24563,
+   "stars": 24564,
    "catalogues": 4,
    "importable": true,
    "blockers": [],
@@ -931,10 +991,11 @@
    "reach": 57.81,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": 29091634,
-   "stars": 24563,
+   "stars": 24564,
    "catalogues": 4,
    "importable": false,
    "blockers": [
@@ -954,6 +1015,7 @@
    "reach": 57.65,
    "open_source": true,
    "licenses": [
+    "NOASSERTION",
     "MIT"
    ],
    "pulls": 45867802,
@@ -971,10 +1033,12 @@
    "id": "nodered",
    "source": "runtipi",
    "reach": 57.41,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "Apache-2.0"
+   ],
    "pulls": 323222345,
-   "stars": 23639,
+   "stars": 23640,
    "catalogues": 1,
    "importable": true,
    "blockers": [],
@@ -988,10 +1052,12 @@
    "id": "filebrowser",
    "source": "runtipi",
    "reach": 57.32,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "Apache-2.0"
+   ],
    "pulls": 182208257,
-   "stars": 35958,
+   "stars": 35959,
    "catalogues": 1,
    "importable": false,
    "blockers": [
@@ -1009,10 +1075,11 @@
    "reach": 57.1,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "MIT"
    ],
    "pulls": 20877398,
-   "stars": 46087,
+   "stars": 46090,
    "catalogues": 3,
    "importable": false,
    "blockers": [
@@ -1031,7 +1098,9 @@
    "source": "runtipi",
    "reach": 57.08,
    "open_source": null,
-   "licenses": [],
+   "licenses": [
+    "NOASSERTION"
+   ],
    "pulls": 681314268,
    "stars": 11187,
    "catalogues": 1,
@@ -1052,10 +1121,11 @@
    "reach": 57.03,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": 3556133,
-   "stars": 46244,
+   "stars": 46246,
    "catalogues": 5,
    "importable": true,
    "blockers": [],
@@ -1071,10 +1141,11 @@
    "reach": 56.94,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": 58031865,
-   "stars": 9475,
+   "stars": 9476,
    "catalogues": 4,
    "importable": true,
    "blockers": [],
@@ -1110,10 +1181,11 @@
    "reach": 56.47,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": 8088819,
-   "stars": 36966,
+   "stars": 36968,
    "catalogues": 4,
    "importable": true,
    "blockers": [],
@@ -1127,8 +1199,10 @@
    "id": "notemark",
    "source": "runtipi",
    "reach": 56.43,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "AGPL-3.0"
+   ],
    "pulls": 13348360026,
    "stars": 766,
    "catalogues": 1,
@@ -1148,10 +1222,11 @@
    "reach": 56.3,
    "open_source": true,
    "licenses": [
+    "NOASSERTION",
     "Apache-2.0"
    ],
    "pulls": 46842913,
-   "stars": 16704,
+   "stars": 16705,
    "catalogues": 3,
    "importable": false,
    "blockers": [
@@ -1169,6 +1244,7 @@
    "reach": 55.79,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": 32637930,
@@ -1192,6 +1268,7 @@
    "reach": 55.79,
    "open_source": true,
    "licenses": [
+    "NOASSERTION",
     "Zlib"
    ],
    "pulls": 33799601,
@@ -1211,6 +1288,7 @@
    "reach": 55.79,
    "open_source": true,
    "licenses": [
+    "NOASSERTION",
     "Zlib"
    ],
    "pulls": 33799601,
@@ -1228,8 +1306,10 @@
    "id": "mongo-express",
    "source": "runtipi",
    "reach": 55.65,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": 276069355,
    "stars": 5985,
    "catalogues": 2,
@@ -1245,10 +1325,12 @@
    "id": "it-tools",
    "source": "runtipi",
    "reach": 55.63,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "GPL-3.0"
+   ],
    "pulls": 24972003,
-   "stars": 40535,
+   "stars": 40537,
    "catalogues": 2,
    "importable": false,
    "blockers": [
@@ -1266,6 +1348,7 @@
    "reach": 55.41,
    "open_source": true,
    "licenses": [
+    "Apache-2.0",
     "Apache-2.0"
    ],
    "pulls": 44442473,
@@ -1304,10 +1387,11 @@
    "reach": 55.31,
    "open_source": true,
    "licenses": [
+    "MPL-2.0",
     "MPL-2.0"
    ],
    "pulls": 5399653,
-   "stars": 59816,
+   "stars": 59822,
    "catalogues": 3,
    "importable": false,
    "blockers": [
@@ -1329,10 +1413,11 @@
    "reach": 55.05,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": 13608967,
-   "stars": 25262,
+   "stars": 25263,
    "catalogues": 3,
    "importable": true,
    "blockers": [],
@@ -1347,10 +1432,12 @@
    "id": "zigbee2mqtt",
    "source": "runtipi",
    "reach": 54.87,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "GPL-3.0"
+   ],
    "pulls": 125828944,
-   "stars": 15620,
+   "stars": 15621,
    "catalogues": 1,
    "importable": false,
    "blockers": [
@@ -1387,9 +1474,11 @@
    "source": "runtipi",
    "reach": 54.72,
    "open_source": null,
-   "licenses": [],
+   "licenses": [
+    "NOASSERTION"
+   ],
    "pulls": 6099311,
-   "stars": 82366,
+   "stars": 82363,
    "catalogues": 2,
    "importable": false,
    "blockers": [
@@ -1407,10 +1496,11 @@
    "reach": 54.7,
    "open_source": false,
    "licenses": [
+    "NOASSERTION",
     "BUSL-1.1"
    ],
    "pulls": 14642702,
-   "stars": 40513,
+   "stars": 40512,
    "catalogues": 2,
    "importable": true,
    "blockers": [],
@@ -1449,6 +1539,7 @@
    "reach": 54.57,
    "open_source": false,
    "licenses": [
+    "NOASSERTION",
     "Elastic-2.0"
    ],
    "pulls": 32669147,
@@ -1473,6 +1564,7 @@
    "reach": 54.52,
    "open_source": true,
    "licenses": [
+    "GPL-3.0",
     "GPL-3.0"
    ],
    "pulls": 11171663,
@@ -1492,8 +1584,10 @@
    "id": "navidrome",
    "source": "runtipi",
    "reach": 54.27,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "GPL-3.0"
+   ],
    "pulls": 53719832,
    "stars": 23430,
    "catalogues": 1,
@@ -1530,8 +1624,10 @@
    "id": "transmission-vpn",
    "source": "runtipi",
    "reach": 54.18,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "GPL-3.0"
+   ],
    "pulls": 394831738,
    "stars": 4565,
    "catalogues": 1,
@@ -1556,6 +1652,7 @@
    "reach": 54.06,
    "open_source": true,
    "licenses": [
+    "Apache-2.0",
     "Apache-2.0"
    ],
    "pulls": 77582212,
@@ -1577,6 +1674,7 @@
    "reach": 54.06,
    "open_source": true,
    "licenses": [
+    "Apache-2.0",
     "Apache-2.0"
    ],
    "pulls": 77582212,
@@ -1598,6 +1696,7 @@
    "reach": 53.96,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": 23588312,
@@ -1615,10 +1714,12 @@
    "id": "jellyseerr",
    "source": "runtipi",
    "reach": 53.83,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": 38346373,
-   "stars": 12536,
+   "stars": 12537,
    "catalogues": 2,
    "importable": true,
    "blockers": [],
@@ -1634,6 +1735,7 @@
    "reach": 53.71,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": 12435907,
@@ -1653,6 +1755,7 @@
    "reach": 53.71,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": 12435907,
@@ -1693,8 +1796,10 @@
    "id": "dockge",
    "source": "runtipi",
    "reach": 53.27,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": 28783590,
    "stars": 24305,
    "catalogues": 1,
@@ -1733,13 +1838,14 @@
   {
    "id": "grist",
    "source": "runtipi",
-   "reach": 52.76,
+   "reach": 52.77,
    "open_source": true,
    "licenses": [
+    "Apache-2.0",
     "Apache-2.0"
    ],
    "pulls": 4014972,
-   "stars": 11749,
+   "stars": 11750,
    "catalogues": 4,
    "importable": true,
    "blockers": [],
@@ -1803,6 +1909,7 @@
    "reach": 52.68,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": 9641471,
@@ -1822,6 +1929,7 @@
    "reach": 52.59,
    "open_source": true,
    "licenses": [
+    "GPL-3.0",
     "GPL-3.0"
    ],
    "pulls": 1880625,
@@ -1843,9 +1951,11 @@
    "source": "runtipi",
    "reach": 52.57,
    "open_source": null,
-   "licenses": [],
+   "licenses": [
+    "NOASSERTION"
+   ],
    "pulls": 6899527,
-   "stars": 55451,
+   "stars": 55453,
    "catalogues": 1,
    "importable": true,
    "blockers": [],
@@ -1859,8 +1969,10 @@
    "id": "windows",
    "source": "runtipi",
    "reach": 52.55,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": 3027673,
    "stars": 53213,
    "catalogues": 2,
@@ -1882,8 +1994,10 @@
    "id": "sftpgo",
    "source": "runtipi",
    "reach": 52.35,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "AGPL-3.0"
+   ],
    "pulls": 38922171,
    "stars": 12498,
    "catalogues": 1,
@@ -1927,6 +2041,7 @@
    "reach": 52.12,
    "open_source": false,
    "licenses": [
+    "NOASSERTION",
     "\u2298 Proprietary"
    ],
    "pulls": 2187215,
@@ -1946,8 +2061,10 @@
    "id": "homebridge",
    "source": "runtipi",
    "reach": 52.07,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "Apache-2.0"
+   ],
    "pulls": 13621308,
    "stars": 25486,
    "catalogues": 1,
@@ -1970,6 +2087,7 @@
    "reach": 52.05,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": 7795020,
@@ -2013,10 +2131,11 @@
    "reach": 51.83,
    "open_source": true,
    "licenses": [
+    "GPL-3.0",
     "GPL-3.0"
    ],
    "pulls": 8359474,
-   "stars": 8470,
+   "stars": 8472,
    "catalogues": 3,
    "importable": false,
    "blockers": [
@@ -2032,10 +2151,12 @@
    "id": "calcom",
    "source": "runtipi",
    "reach": 51.66,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": 4849163,
-   "stars": 48336,
+   "stars": 48338,
    "catalogues": 1,
    "importable": false,
    "blockers": [
@@ -2052,10 +2173,12 @@
    "id": "crowdsec",
    "source": "runtipi",
    "reach": 51.66,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": 21188244,
-   "stars": 14806,
+   "stars": 14807,
    "catalogues": 1,
    "importable": false,
    "blockers": [
@@ -2113,8 +2236,10 @@
    "id": "whoogle",
    "source": "runtipi",
    "reach": 51.05,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": 20314974,
    "stars": 11577,
    "catalogues": 1,
@@ -2170,10 +2295,12 @@
    "id": "drawio",
    "source": "runtipi",
    "reach": 50.85,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "Apache-2.0"
+   ],
    "pulls": 28616549,
-   "stars": 8031,
+   "stars": 8035,
    "catalogues": 1,
    "importable": false,
    "blockers": [
@@ -2192,6 +2319,7 @@
    "reach": 50.72,
    "open_source": true,
    "licenses": [
+    "NOASSERTION",
     "MIT"
    ],
    "pulls": 850941,
@@ -2234,6 +2362,7 @@
    "reach": 50.57,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": 4639841,
@@ -2253,10 +2382,12 @@
    "id": "libretranslate",
    "source": "runtipi",
    "reach": 50.5,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "AGPL-3.0"
+   ],
    "pulls": 9614030,
-   "stars": 16339,
+   "stars": 16340,
    "catalogues": 1,
    "importable": true,
    "blockers": [],
@@ -2272,6 +2403,7 @@
    "reach": 50.38,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": 3248128,
@@ -2293,6 +2425,7 @@
    "reach": 50.0,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": 7781724,
@@ -2312,10 +2445,12 @@
    "id": "docmost",
    "source": "runtipi",
    "reach": 49.92,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "AGPL-3.0"
+   ],
    "pulls": 4847240,
-   "stars": 21628,
+   "stars": 21629,
    "catalogues": 1,
    "importable": true,
    "blockers": [],
@@ -2331,10 +2466,12 @@
    "id": "nitter",
    "source": "runtipi",
    "reach": 49.85,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "AGPL-3.0"
+   ],
    "pulls": 7729307,
-   "stars": 14428,
+   "stars": 14430,
    "catalogues": 1,
    "importable": false,
    "blockers": [
@@ -2392,6 +2529,7 @@
    "reach": 49.7,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": 2610819,
@@ -2416,8 +2554,10 @@
    "id": "semaphore",
    "source": "runtipi",
    "reach": 49.67,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": 7163328,
    "stars": 14124,
    "catalogues": 1,
@@ -2434,8 +2574,10 @@
    "id": "ddns-updater",
    "source": "runtipi",
    "reach": 49.57,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": 18146098,
    "stars": 3207,
    "catalogues": 2,
@@ -2453,10 +2595,11 @@
    "reach": 49.52,
    "open_source": true,
    "licenses": [
+    "Apache-2.0",
     "Apache-2.0"
    ],
    "pulls": 7527646,
-   "stars": 3185,
+   "stars": 3186,
    "catalogues": 3,
    "importable": false,
    "blockers": [
@@ -2478,6 +2621,7 @@
    "reach": 49.29,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": 1482485,
@@ -2499,9 +2643,11 @@
    "source": "runtipi",
    "reach": 49.09,
    "open_source": null,
-   "licenses": [],
+   "licenses": [
+    "NOASSERTION"
+   ],
    "pulls": 4030934,
-   "stars": 17088,
+   "stars": 17089,
    "catalogues": 1,
    "importable": false,
    "blockers": [
@@ -2520,10 +2666,12 @@
    "id": "pingvin-share",
    "source": "runtipi",
    "reach": 48.9,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "BSD-2-Clause"
+   ],
    "pulls": 3262120,
-   "stars": 4671,
+   "stars": 4670,
    "catalogues": 3,
    "importable": true,
    "blockers": [],
@@ -2538,7 +2686,9 @@
    "source": "runtipi",
    "reach": 48.9,
    "open_source": null,
-   "licenses": [],
+   "licenses": [
+    "NOASSERTION"
+   ],
    "pulls": 13654959,
    "stars": 5901,
    "catalogues": 1,
@@ -2560,8 +2710,10 @@
    "id": "ctfd",
    "source": "runtipi",
    "reach": 48.76,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "Apache-2.0"
+   ],
    "pulls": 10541058,
    "stars": 6828,
    "catalogues": 1,
@@ -2581,6 +2733,7 @@
    "reach": 48.64,
    "open_source": true,
    "licenses": [
+    "GPL-3.0",
     "MIT"
    ],
    "pulls": 2881263,
@@ -2605,6 +2758,7 @@
    "reach": 48.61,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": 891864,
@@ -2643,10 +2797,11 @@
    "reach": 48.35,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": 729846,
-   "stars": 6028,
+   "stars": 6030,
    "catalogues": 4,
    "importable": false,
    "blockers": [
@@ -2664,6 +2819,7 @@
    "reach": 48.22,
    "open_source": true,
    "licenses": [
+    "GPL-3.0",
     "GPL-3.0"
    ],
    "pulls": 1445330,
@@ -2683,6 +2839,7 @@
    "reach": 48.02,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": 3262379,
@@ -2702,10 +2859,12 @@
    "id": "tubearchivist",
    "source": "runtipi",
    "reach": 47.75,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "GPL-3.0"
+   ],
    "pulls": 4507853,
-   "stars": 8435,
+   "stars": 8436,
    "catalogues": 1,
    "importable": false,
    "blockers": [
@@ -2723,8 +2882,10 @@
    "id": "whoami",
    "source": "runtipi",
    "reach": 47.74,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "Apache-2.0"
+   ],
    "pulls": 41607458,
    "stars": 1418,
    "catalogues": 1,
@@ -2765,6 +2926,7 @@
    "reach": 47.58,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": 548868,
@@ -2805,8 +2967,10 @@
    "id": "unmanic",
    "source": "runtipi",
    "reach": 47.29,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "GPL-3.0"
+   ],
    "pulls": 15905317,
    "stars": 2494,
    "catalogues": 1,
@@ -2828,6 +2992,7 @@
    "reach": 47.17,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": 1919295,
@@ -2845,10 +3010,12 @@
    "id": "logto",
    "source": "runtipi",
    "reach": 47.06,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MPL-2.0"
+   ],
    "pulls": 649872,
-   "stars": 14512,
+   "stars": 14513,
    "catalogues": 2,
    "importable": false,
    "blockers": [
@@ -2868,6 +3035,7 @@
    "reach": 46.99,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": 1405019,
@@ -2927,8 +3095,10 @@
    "id": "dashdot",
    "source": "runtipi",
    "reach": 46.53,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": 6641173,
    "stars": 3536,
    "catalogues": 1,
@@ -3011,6 +3181,7 @@
    "reach": 45.58,
    "open_source": true,
    "licenses": [
+    "GPL-3.0",
     "GPL-3.0"
    ],
    "pulls": 3065063,
@@ -3032,10 +3203,11 @@
    "reach": 45.56,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "GPL-3.0"
    ],
    "pulls": 31699,
-   "stars": 40874,
+   "stars": 40876,
    "catalogues": 3,
    "importable": false,
    "blockers": [
@@ -3097,8 +3269,10 @@
    "id": "openbooks",
    "source": "runtipi",
    "reach": 45.13,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": 4802254,
    "stars": 2401,
    "catalogues": 1,
@@ -3157,8 +3331,10 @@
    "id": "mqttx",
    "source": "runtipi",
    "reach": 44.76,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "Apache-2.0"
+   ],
    "pulls": 1537126,
    "stars": 5049,
    "catalogues": 1,
@@ -3176,8 +3352,10 @@
    "id": "firefly-iii-data-importer",
    "source": "runtipi",
    "reach": 44.57,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "AGPL-3.0"
+   ],
    "pulls": 13093690,
    "stars": 830,
    "catalogues": 1,
@@ -3195,6 +3373,7 @@
    "reach": 43.4,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": 354023,
@@ -3213,7 +3392,9 @@
    "source": "runtipi",
    "reach": 43.27,
    "open_source": null,
-   "licenses": [],
+   "licenses": [
+    "NOASSERTION"
+   ],
    "pulls": 491310,
    "stars": 3163,
    "catalogues": 2,
@@ -3234,6 +3415,7 @@
    "reach": 43.21,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": 604154,
@@ -3252,8 +3434,10 @@
    "id": "cloudflared",
    "source": "runtipi",
    "reach": 43.08,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "GPL-2.0"
+   ],
    "pulls": 2133073,
    "stars": 449,
    "catalogues": 3,
@@ -3294,6 +3478,7 @@
    "reach": 42.73,
    "open_source": true,
    "licenses": [
+    "Apache-2.0",
     "Apache-2.0"
    ],
    "pulls": 164375,
@@ -3313,6 +3498,7 @@
    "reach": 42.73,
    "open_source": true,
    "licenses": [
+    "Apache-2.0",
     "Apache-2.0"
    ],
    "pulls": 164375,
@@ -3334,6 +3520,7 @@
    "reach": 42.7,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": 1425926,
@@ -3354,7 +3541,9 @@
    "source": "runtipi",
    "reach": 42.54,
    "open_source": null,
-   "licenses": [],
+   "licenses": [
+    "NOASSERTION"
+   ],
    "pulls": 877709,
    "stars": 2837,
    "catalogues": 1,
@@ -3398,6 +3587,7 @@
    "reach": 42.23,
    "open_source": true,
    "licenses": [
+    "Apache-2.0",
     "Apache-2.0"
    ],
    "pulls": 474279,
@@ -3417,8 +3607,10 @@
    "id": "viewtube",
    "source": "runtipi",
    "reach": 41.69,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "AGPL-3.0"
+   ],
    "pulls": 1222024,
    "stars": 1475,
    "catalogues": 1,
@@ -3455,10 +3647,12 @@
    "id": "fireshare",
    "source": "runtipi",
    "reach": 40.79,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "GPL-3.0"
+   ],
    "pulls": 731440,
-   "stars": 1467,
+   "stars": 1468,
    "catalogues": 1,
    "importable": false,
    "blockers": [
@@ -3474,10 +3668,12 @@
    "id": "mixpost",
    "source": "runtipi",
    "reach": 40.73,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": 223816,
-   "stars": 3674,
+   "stars": 3675,
    "catalogues": 1,
    "importable": false,
    "blockers": [
@@ -3495,8 +3691,10 @@
    "id": "traefik-certs-dumper",
    "source": "runtipi",
    "reach": 40.68,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "Apache-2.0"
+   ],
    "pulls": 7786930,
    "stars": 209,
    "catalogues": 1,
@@ -3515,10 +3713,12 @@
    "id": "electrs",
    "source": "runtipi",
    "reach": 40.49,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": 655716,
-   "stars": 1393,
+   "stars": 1394,
    "catalogues": 1,
    "importable": false,
    "blockers": [
@@ -3560,6 +3760,7 @@
    "reach": 39.93,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": 303575,
@@ -3577,10 +3778,12 @@
    "id": "mixpost-pro",
    "source": "runtipi",
    "reach": 39.84,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": 134423,
-   "stars": 3674,
+   "stars": 3675,
    "catalogues": 1,
    "importable": false,
    "blockers": [
@@ -3600,6 +3803,7 @@
    "reach": 39.18,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": 114523,
@@ -3620,8 +3824,10 @@
    "id": "seedsync",
    "source": "runtipi",
    "reach": 39.18,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "Apache-2.0"
+   ],
    "pulls": 1830200,
    "stars": 334,
    "catalogues": 1,
@@ -3677,8 +3883,10 @@
    "id": "simplex-smp",
    "source": "runtipi",
    "reach": 37.61,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "AGPL-3.0"
+   ],
    "pulls": 233751,
    "stars": 846,
    "catalogues": 1,
@@ -3715,8 +3923,10 @@
    "id": "bitcoind",
    "source": "runtipi",
    "reach": 36.85,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": 1973040,
    "stars": 107,
    "catalogues": 1,
@@ -3736,8 +3946,10 @@
    "id": "monerod",
    "source": "runtipi",
    "reach": 36.33,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": 752710,
    "stars": 183,
    "catalogues": 1,
@@ -3790,8 +4002,10 @@
    "id": "chatgpt-ui",
    "source": "runtipi",
    "reach": 35.71,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": 34468,
    "stars": 1625,
    "catalogues": 1,
@@ -3813,8 +4027,10 @@
    "id": "mind",
    "source": "runtipi",
    "reach": 35.44,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "GPL-3.0"
+   ],
    "pulls": 245938,
    "stars": 298,
    "catalogues": 1,
@@ -3882,8 +4098,10 @@
    "id": "gandi-livedns",
    "source": "runtipi",
    "reach": 34.86,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "GPL-3.0"
+   ],
    "pulls": 2876530,
    "stars": 31,
    "catalogues": 1,
@@ -3952,8 +4170,10 @@
    "id": "hammond",
    "source": "runtipi",
    "reach": 33.97,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "AGPL-3.0"
+   ],
    "pulls": 226596,
    "stars": 161,
    "catalogues": 1,
@@ -4025,10 +4245,11 @@
    "reach": 32.78,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": null,
-   "stars": 113722,
+   "stars": 113726,
    "catalogues": 5,
    "importable": false,
    "blockers": [
@@ -4049,10 +4270,11 @@
    "reach": 32.78,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": null,
-   "stars": 113722,
+   "stars": 113726,
    "catalogues": 5,
    "importable": false,
    "blockers": [
@@ -4123,8 +4345,10 @@
    "id": "postfix-relay",
    "source": "runtipi",
    "reach": 32.15,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": 655815,
    "stars": 29,
    "catalogues": 1,
@@ -4159,8 +4383,10 @@
    "id": "planning-poker",
    "source": "runtipi",
    "reach": 32.09,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": 98552,
    "stars": 132,
    "catalogues": 1,
@@ -4195,10 +4421,11 @@
    "reach": 31.9,
    "open_source": true,
    "licenses": [
+    "NOASSERTION",
     "BSD-3-Clause"
    ],
    "pulls": null,
-   "stars": 151498,
+   "stars": 151511,
    "catalogues": 4,
    "importable": true,
    "blockers": [],
@@ -4248,10 +4475,11 @@
    "reach": 31.31,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": null,
-   "stars": 57923,
+   "stars": 57925,
    "catalogues": 5,
    "importable": false,
    "blockers": [
@@ -4285,10 +4513,11 @@
    "reach": 31.27,
    "open_source": true,
    "licenses": [
+    "GPL-2.0",
     "GPL-2.0"
    ],
    "pulls": null,
-   "stars": 56861,
+   "stars": 56866,
    "catalogues": 5,
    "importable": false,
    "blockers": [
@@ -4306,10 +4535,11 @@
    "reach": 31.27,
    "open_source": true,
    "licenses": [
+    "GPL-2.0",
     "GPL-2.0"
    ],
    "pulls": null,
-   "stars": 56861,
+   "stars": 56866,
    "catalogues": 5,
    "importable": false,
    "blockers": [
@@ -4379,10 +4609,11 @@
    "reach": 30.51,
    "open_source": true,
    "licenses": [
+    "NOASSERTION",
     "GPL-2.0"
    ],
    "pulls": null,
-   "stars": 40015,
+   "stars": 40017,
    "catalogues": 5,
    "importable": false,
    "blockers": [
@@ -4425,10 +4656,11 @@
    "reach": 30.5,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": null,
-   "stars": 79250,
+   "stars": 79251,
    "catalogues": 4,
    "importable": false,
    "blockers": [
@@ -4461,10 +4693,12 @@
    "id": "excalidraw",
    "source": "caprover",
    "reach": 30.1,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": null,
-   "stars": 131533,
+   "stars": 131537,
    "catalogues": 3,
    "importable": false,
    "blockers": [
@@ -4540,10 +4774,11 @@
    "reach": 29.67,
    "open_source": true,
    "licenses": [
+    "NOASSERTION",
     "LGPL-3.0"
    ],
    "pulls": null,
-   "stars": 54259,
+   "stars": 54261,
    "catalogues": 4,
    "importable": false,
    "blockers": [
@@ -4595,6 +4830,7 @@
    "reach": 29.02,
    "open_source": true,
    "licenses": [
+    "NOASSERTION",
     "AGPL-3.0"
    ],
    "pulls": null,
@@ -4617,6 +4853,7 @@
    "reach": 28.83,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": null,
@@ -4637,6 +4874,7 @@
    "reach": 28.79,
    "open_source": true,
    "licenses": [
+    "GPL-3.0",
     "GPL-3.0"
    ],
    "pulls": null,
@@ -4678,6 +4916,7 @@
    "reach": 28.77,
    "open_source": true,
    "licenses": [
+    "Apache-2.0",
     "Apache-2.0"
    ],
    "pulls": null,
@@ -4720,11 +4959,12 @@
    "open_source": true,
    "licenses": [
     "Apache-2.0",
+    "Apache-2.0",
     "Apache-2.0/GPL-2.0",
     "GPL-2.0"
    ],
    "pulls": null,
-   "stars": 34125,
+   "stars": 34124,
    "catalogues": 4,
    "importable": false,
    "blockers": [
@@ -4739,8 +4979,10 @@
    "id": "flightlog",
    "source": "runtipi",
    "reach": 28.53,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "Apache-2.0"
+   ],
    "pulls": 36539,
    "stars": 56,
    "catalogues": 1,
@@ -4758,6 +5000,7 @@
    "reach": 28.44,
    "open_source": true,
    "licenses": [
+    "GPL-3.0",
     "GPL-3.0"
    ],
    "pulls": null,
@@ -4799,10 +5042,11 @@
    "reach": 28.41,
    "open_source": true,
    "licenses": [
+    "NOASSERTION",
     "GPL-3.0"
    ],
    "pulls": null,
-   "stars": 15182,
+   "stars": 15183,
    "catalogues": 5,
    "importable": false,
    "blockers": [
@@ -4821,10 +5065,11 @@
    "reach": 28.41,
    "open_source": true,
    "licenses": [
+    "NOASSERTION",
     "GPL-3.0"
    ],
    "pulls": null,
-   "stars": 15182,
+   "stars": 15183,
    "catalogues": 5,
    "importable": false,
    "blockers": [
@@ -4841,10 +5086,11 @@
    "reach": 28.38,
    "open_source": true,
    "licenses": [
+    "MPL-2.0",
     "MPL-2.0"
    ],
    "pulls": null,
-   "stars": 59816,
+   "stars": 59822,
    "catalogues": 3,
    "importable": false,
    "blockers": [
@@ -4945,6 +5191,7 @@
    "reach": 28.28,
    "open_source": true,
    "licenses": [
+    "GPL-3.0",
     "GPL-3.0"
    ],
    "pulls": null,
@@ -5061,8 +5308,10 @@
    "id": "mdns-repeater",
    "source": "runtipi",
    "reach": 28.16,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "GPL-2.0"
+   ],
    "pulls": 260637,
    "stars": 9,
    "catalogues": 1,
@@ -5083,6 +5332,7 @@
    "reach": 28.11,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": null,
@@ -5102,10 +5352,11 @@
    "reach": 28.01,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": null,
-   "stars": 50295,
+   "stars": 50296,
    "catalogues": 3,
    "importable": false,
    "blockers": [
@@ -5127,10 +5378,11 @@
    "reach": 28.01,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": null,
-   "stars": 50295,
+   "stars": 50296,
    "catalogues": 3,
    "importable": false,
    "blockers": [
@@ -5149,6 +5401,7 @@
    "reach": 27.76,
    "open_source": true,
    "licenses": [
+    "GPL-3.0",
     "GPL-3.0"
    ],
    "pulls": null,
@@ -5174,6 +5427,7 @@
    "reach": 27.76,
    "open_source": true,
    "licenses": [
+    "GPL-3.0",
     "GPL-3.0"
    ],
    "pulls": null,
@@ -5239,6 +5493,7 @@
    "reach": 27.47,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "MIT"
    ],
    "pulls": null,
@@ -5259,6 +5514,7 @@
    "reach": 27.47,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "MIT"
    ],
    "pulls": null,
@@ -5299,8 +5555,10 @@
    "id": "portainer",
    "source": "caprover",
    "reach": 27.43,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "Zlib"
+   ],
    "pulls": null,
    "stars": 38475,
    "catalogues": 3,
@@ -5319,10 +5577,11 @@
    "reach": 27.4,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": null,
-   "stars": 19033,
+   "stars": 19034,
    "catalogues": 4,
    "importable": false,
    "blockers": [
@@ -5378,6 +5637,7 @@
    "reach": 27.02,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": null,
@@ -5417,8 +5677,10 @@
    "id": "minio",
    "source": "runtipi",
    "reach": 26.94,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "AGPL-3.0"
+   ],
    "pulls": null,
    "stars": 61365,
    "catalogues": 2,
@@ -5437,8 +5699,10 @@
    "id": "minio",
    "source": "caprover",
    "reach": 26.94,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "AGPL-3.0"
+   ],
    "pulls": null,
    "stars": 61365,
    "catalogues": 2,
@@ -5482,10 +5746,11 @@
    "reach": 26.83,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": null,
-   "stars": 14669,
+   "stars": 14670,
    "catalogues": 4,
    "importable": false,
    "blockers": [
@@ -5503,10 +5768,11 @@
    "reach": 26.52,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": null,
-   "stars": 12705,
+   "stars": 12706,
    "catalogues": 4,
    "importable": false,
    "blockers": [
@@ -5525,10 +5791,11 @@
    "reach": 26.51,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": null,
-   "stars": 25262,
+   "stars": 25263,
    "catalogues": 3,
    "importable": false,
    "blockers": [
@@ -5559,8 +5826,10 @@
    "id": "moneroblock",
    "source": "runtipi",
    "reach": 26.47,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "BSD-3-Clause"
+   ],
    "pulls": 23831,
    "stars": 30,
    "catalogues": 1,
@@ -5578,10 +5847,11 @@
    "reach": 26.43,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": null,
-   "stars": 24331,
+   "stars": 24338,
    "catalogues": 3,
    "importable": false,
    "blockers": [
@@ -5605,10 +5875,11 @@
    "reach": 26.43,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": null,
-   "stars": 24331,
+   "stars": 24338,
    "catalogues": 3,
    "importable": false,
    "blockers": [
@@ -5665,10 +5936,12 @@
    "id": "homeassistant-1",
    "source": "runtipi",
    "reach": 26.28,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "Apache-2.0"
+   ],
    "pulls": null,
-   "stars": 90355,
+   "stars": 90356,
    "catalogues": 1,
    "importable": false,
    "blockers": [
@@ -5686,6 +5959,7 @@
    "reach": 26.12,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": null,
@@ -5708,6 +5982,7 @@
    "reach": 26.12,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": null,
@@ -5788,10 +6063,11 @@
    "reach": 25.88,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": null,
-   "stars": 9475,
+   "stars": 9476,
    "catalogues": 4,
    "importable": true,
    "blockers": [],
@@ -5807,6 +6083,7 @@
    "reach": 25.85,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": null,
@@ -5959,6 +6236,7 @@
    "reach": 25.12,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": null,
@@ -6084,6 +6362,7 @@
    "reach": 24.99,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": null,
@@ -6168,6 +6447,7 @@
    "reach": 24.81,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": null,
@@ -6190,6 +6470,7 @@
    "reach": 24.76,
    "open_source": true,
    "licenses": [
+    "GPL-3.0",
     "GPL-3.0"
    ],
    "pulls": null,
@@ -6289,10 +6570,11 @@
    "reach": 24.61,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": null,
-   "stars": 5276,
+   "stars": 5277,
    "catalogues": 4,
    "importable": true,
    "blockers": [],
@@ -6329,6 +6611,7 @@
    "reach": 24.6,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": null,
@@ -6386,9 +6669,11 @@
    "source": "runtipi",
    "reach": 24.45,
    "open_source": null,
-   "licenses": [],
+   "licenses": [
+    "NOASSERTION"
+   ],
    "pulls": null,
-   "stars": 38937,
+   "stars": 38936,
    "catalogues": 1,
    "importable": true,
    "blockers": [],
@@ -6402,10 +6687,12 @@
    "id": "umami-analytics",
    "source": "runtipi",
    "reach": 24.44,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": null,
-   "stars": 38713,
+   "stars": 38716,
    "catalogues": 1,
    "importable": false,
    "blockers": [
@@ -6443,10 +6730,12 @@
    "id": "trilium",
    "source": "runtipi",
    "reach": 24.39,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "AGPL-3.0"
+   ],
    "pulls": null,
-   "stars": 37779,
+   "stars": 37780,
    "catalogues": 1,
    "importable": true,
    "blockers": [],
@@ -6462,6 +6751,7 @@
    "reach": 24.37,
    "open_source": true,
    "licenses": [
+    "GPL-2.0",
     "GPL-2.0"
    ],
    "pulls": null,
@@ -6481,6 +6771,7 @@
    "reach": 24.37,
    "open_source": true,
    "licenses": [
+    "GPL-2.0",
     "GPL-2.0"
    ],
    "pulls": null,
@@ -6500,6 +6791,7 @@
    "reach": 24.35,
    "open_source": true,
    "licenses": [
+    "Apache-2.0",
     "MIT"
    ],
    "pulls": null,
@@ -6519,6 +6811,7 @@
    "reach": 24.34,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": null,
@@ -6573,10 +6866,12 @@
    "id": "changedetection",
    "source": "runtipi",
    "reach": 24.14,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "Apache-2.0"
+   ],
    "pulls": null,
-   "stars": 33782,
+   "stars": 33785,
    "catalogues": 1,
    "importable": true,
    "blockers": [],
@@ -6590,10 +6885,12 @@
    "id": "homepage",
    "source": "runtipi",
    "reach": 24.06,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "GPL-3.0"
+   ],
    "pulls": null,
-   "stars": 32497,
+   "stars": 32495,
    "catalogues": 1,
    "importable": false,
    "blockers": [
@@ -6631,10 +6928,12 @@
    "id": "jackett",
    "source": "runtipi",
    "reach": 24.02,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "GPL-2.0"
+   ],
    "pulls": null,
-   "stars": 16015,
+   "stars": 16016,
    "catalogues": 2,
    "importable": false,
    "blockers": [
@@ -6671,8 +6970,10 @@
    "id": "librespeed",
    "source": "runtipi",
    "reach": 23.9,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "LGPL-3.0"
+   ],
    "pulls": null,
    "stars": 15153,
    "catalogues": 2,
@@ -6710,6 +7011,7 @@
    "reach": 23.85,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": null,
@@ -6730,6 +7032,7 @@
    "reach": 23.85,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": null,
@@ -6771,10 +7074,12 @@
    "id": "hoarder",
    "source": "runtipi",
    "reach": 23.81,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "AGPL-3.0"
+   ],
    "pulls": null,
-   "stars": 28932,
+   "stars": 28935,
    "catalogues": 1,
    "importable": true,
    "blockers": [],
@@ -6790,8 +7095,10 @@
    "id": "wikijs",
    "source": "runtipi",
    "reach": 23.8,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "AGPL-3.0"
+   ],
    "pulls": null,
    "stars": 28876,
    "catalogues": 1,
@@ -6810,10 +7117,12 @@
    "id": "dozzle",
    "source": "caprover",
    "reach": 23.78,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": null,
-   "stars": 14319,
+   "stars": 14320,
    "catalogues": 2,
    "importable": false,
    "blockers": [
@@ -6828,8 +7137,10 @@
    "id": "prowlarr",
    "source": "runtipi",
    "reach": 23.78,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "GPL-3.0"
+   ],
    "pulls": null,
    "stars": 7182,
    "catalogues": 3,
@@ -6864,8 +7175,10 @@
    "id": "wg-easy-1",
    "source": "runtipi",
    "reach": 23.65,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "AGPL-3.0"
+   ],
    "pulls": null,
    "stars": 26895,
    "catalogues": 1,
@@ -6887,10 +7200,11 @@
    "reach": 23.49,
    "open_source": false,
    "licenses": [
+    "NOASSERTION",
     "\u2298 Proprietary"
    ],
    "pulls": null,
-   "stars": 12532,
+   "stars": 12533,
    "catalogues": 2,
    "importable": true,
    "blockers": [],
@@ -6907,10 +7221,11 @@
    "reach": 23.49,
    "open_source": false,
    "licenses": [
+    "NOASSERTION",
     "\u2298 Proprietary"
    ],
    "pulls": null,
-   "stars": 12532,
+   "stars": 12533,
    "catalogues": 2,
    "importable": false,
    "blockers": [
@@ -6969,6 +7284,7 @@
    "reach": 23.37,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": null,
@@ -7010,8 +7326,10 @@
    "id": "pairdrop",
    "source": "runtipi",
    "reach": 23.28,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "GPL-3.0"
+   ],
    "pulls": null,
    "stars": 11364,
    "catalogues": 2,
@@ -7131,8 +7449,10 @@
    "id": "overseerr",
    "source": "caprover",
    "reach": 22.99,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": null,
    "stars": 4981,
    "catalogues": 3,
@@ -7148,8 +7468,10 @@
    "id": "overseerr",
    "source": "runtipi",
    "reach": 22.99,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": null,
    "stars": 4981,
    "catalogues": 3,
@@ -7270,6 +7592,7 @@
    "reach": 22.69,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": null,
@@ -7335,8 +7658,10 @@
    "id": "grav",
    "source": "runtipi",
    "reach": 22.47,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": null,
    "stars": 15663,
    "catalogues": 1,
@@ -7352,10 +7677,12 @@
    "id": "flaresolverr",
    "source": "runtipi",
    "reach": 22.46,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": null,
-   "stars": 15525,
+   "stars": 15526,
    "catalogues": 1,
    "importable": true,
    "blockers": [],
@@ -7429,10 +7756,12 @@
    "id": "mealie-1",
    "source": "runtipi",
    "reach": 22.1,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "AGPL-3.0"
+   ],
    "pulls": null,
-   "stars": 13181,
+   "stars": 13182,
    "catalogues": 1,
    "importable": false,
    "blockers": [
@@ -7448,8 +7777,10 @@
    "id": "tautulli",
    "source": "runtipi",
    "reach": 22.09,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "GPL-3.0"
+   ],
    "pulls": null,
    "stars": 6579,
    "catalogues": 2,
@@ -7506,8 +7837,10 @@
    "id": "netbootxyz",
    "source": "runtipi",
    "reach": 21.94,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "Apache-2.0"
+   ],
    "pulls": null,
    "stars": 12233,
    "catalogues": 1,
@@ -7525,8 +7858,10 @@
    "id": "mongo-express",
    "source": "caprover",
    "reach": 21.89,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": null,
    "stars": 5985,
    "catalogues": 2,
@@ -7567,7 +7902,9 @@
    "source": "runtipi",
    "reach": 21.84,
    "open_source": null,
-   "licenses": [],
+   "licenses": [
+    "NOASSERTION"
+   ],
    "pulls": null,
    "stars": 11669,
    "catalogues": 1,
@@ -7609,6 +7946,7 @@
    "reach": 21.82,
    "open_source": true,
    "licenses": [
+    "GPL-3.0",
     "GPL-3.0"
    ],
    "pulls": null,
@@ -7630,6 +7968,7 @@
    "reach": 21.75,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": null,
@@ -7652,7 +7991,9 @@
    "source": "caprover",
    "reach": 21.74,
    "open_source": null,
-   "licenses": [],
+   "licenses": [
+    "NOASSERTION"
+   ],
    "pulls": null,
    "stars": 11187,
    "catalogues": 1,
@@ -7693,6 +8034,7 @@
    "reach": 21.74,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": null,
@@ -7729,6 +8071,7 @@
    "reach": 21.39,
    "open_source": true,
    "licenses": [
+    "GPL-3.0",
     "GPL-3.0"
    ],
    "pulls": null,
@@ -7749,7 +8092,9 @@
    "source": "runtipi",
    "reach": 21.17,
    "open_source": null,
-   "licenses": [],
+   "licenses": [
+    "NOASSERTION"
+   ],
    "pulls": null,
    "stars": 8583,
    "catalogues": 1,
@@ -7787,8 +8132,10 @@
    "id": "emulatorjs",
    "source": "runtipi",
    "reach": 21.1,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "GPL-3.0"
+   ],
    "pulls": null,
    "stars": 4162,
    "catalogues": 2,
@@ -7806,10 +8153,12 @@
    "id": "tinyauth",
    "source": "runtipi",
    "reach": 21.08,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "AGPL-3.0"
+   ],
    "pulls": null,
-   "stars": 8227,
+   "stars": 8228,
    "catalogues": 1,
    "importable": true,
    "blockers": [],
@@ -7903,8 +8252,10 @@
    "id": "homebox",
    "source": "runtipi",
    "reach": 20.77,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "AGPL-3.0"
+   ],
    "pulls": null,
    "stars": 7131,
    "catalogues": 1,
@@ -7941,8 +8292,10 @@
    "id": "readarr",
    "source": "runtipi",
    "reach": 20.7,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "GPL-3.0"
+   ],
    "pulls": null,
    "stars": 3470,
    "catalogues": 2,
@@ -7983,7 +8336,9 @@
    "source": "runtipi",
    "reach": 20.45,
    "open_source": null,
-   "licenses": [],
+   "licenses": [
+    "NOASSERTION"
+   ],
    "pulls": null,
    "stars": 3095,
    "catalogues": 2,
@@ -8041,8 +8396,10 @@
    "id": "serge",
    "source": "runtipi",
    "reach": 20.28,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "Apache-2.0"
+   ],
    "pulls": null,
    "stars": 5710,
    "catalogues": 1,
@@ -8136,6 +8493,7 @@
    "reach": 19.95,
    "open_source": true,
    "licenses": [
+    "AGPL-3.0",
     "AGPL-3.0"
    ],
    "pulls": null,
@@ -8156,8 +8514,10 @@
    "id": "homarr-1",
    "source": "runtipi",
    "reach": 19.85,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "Apache-2.0"
+   ],
    "pulls": null,
    "stars": 4675,
    "catalogues": 1,
@@ -8242,8 +8602,10 @@
    "id": "moodist",
    "source": "runtipi",
    "reach": 19.4,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": null,
    "stars": 3795,
    "catalogues": 1,
@@ -8263,6 +8625,7 @@
    "reach": 19.38,
    "open_source": true,
    "licenses": [
+    "GPL-3.0",
     "GPL-3.0"
    ],
    "pulls": null,
@@ -8302,8 +8665,10 @@
    "id": "kometa",
    "source": "runtipi",
    "reach": 19.17,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": null,
    "stars": 3416,
    "catalogues": 1,
@@ -8321,8 +8686,10 @@
    "id": "zipline-1",
    "source": "runtipi",
    "reach": 19.16,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": null,
    "stars": 3405,
    "catalogues": 1,
@@ -8362,6 +8729,7 @@
    "reach": 19.02,
    "open_source": true,
    "licenses": [
+    "MIT",
     "MIT"
    ],
    "pulls": null,
@@ -8382,8 +8750,10 @@
    "id": "wizarr",
    "source": "runtipi",
    "reach": 19.02,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": null,
    "stars": 3185,
    "catalogues": 1,
@@ -8399,8 +8769,10 @@
    "id": "cheshire-cat-ai",
    "source": "runtipi",
    "reach": 18.95,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "GPL-3.0"
+   ],
    "pulls": null,
    "stars": 3085,
    "catalogues": 1,
@@ -8416,8 +8788,10 @@
    "id": "plausible-ce",
    "source": "runtipi",
    "reach": 18.77,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": null,
    "stars": 2848,
    "catalogues": 1,
@@ -8456,6 +8830,7 @@
    "reach": 18.36,
    "open_source": true,
    "licenses": [
+    "GPL-3.0",
     "GPL-3.0"
    ],
    "pulls": null,
@@ -8476,10 +8851,12 @@
    "id": "maintainerr",
    "source": "runtipi",
    "reach": 18.27,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": null,
-   "stars": 2258,
+   "stars": 2259,
    "catalogues": 1,
    "importable": true,
    "blockers": [],
@@ -8493,8 +8870,10 @@
    "id": "recyclarr",
    "source": "runtipi",
    "reach": 18.11,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": null,
    "stars": 2099,
    "catalogues": 1,
@@ -8513,8 +8892,10 @@
    "id": "duplicati",
    "source": "runtipi",
    "reach": 17.75,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "GPL-3.0"
+   ],
    "pulls": null,
    "stars": 445,
    "catalogues": 3,
@@ -8532,8 +8913,10 @@
    "id": "duplicati",
    "source": "caprover",
    "reach": 17.75,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "GPL-3.0"
+   ],
    "pulls": null,
    "stars": 445,
    "catalogues": 3,
@@ -8549,8 +8932,10 @@
    "id": "jellyfin-vue",
    "source": "runtipi",
    "reach": 17.66,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "GPL-3.0"
+   ],
    "pulls": null,
    "stars": 1703,
    "catalogues": 1,
@@ -8566,10 +8951,12 @@
    "id": "grampsweb",
    "source": "runtipi",
    "reach": 17.61,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "AGPL-3.0"
+   ],
    "pulls": null,
-   "stars": 1664,
+   "stars": 1665,
    "catalogues": 1,
    "importable": true,
    "blockers": [],
@@ -8604,8 +8991,10 @@
    "id": "cross-seed",
    "source": "runtipi",
    "reach": 17.44,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "Apache-2.0"
+   ],
    "pulls": null,
    "stars": 1541,
    "catalogues": 1,
@@ -8625,8 +9014,10 @@
    "id": "chatpad",
    "source": "runtipi",
    "reach": 17.36,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "AGPL-3.0"
+   ],
    "pulls": null,
    "stars": 1487,
    "catalogues": 1,
@@ -8644,8 +9035,10 @@
    "id": "email-oauth2-proxy",
    "source": "runtipi",
    "reach": 17.34,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "Apache-2.0"
+   ],
    "pulls": null,
    "stars": 1469,
    "catalogues": 1,
@@ -8661,8 +9054,10 @@
    "id": "cup",
    "source": "runtipi",
    "reach": 17.14,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "AGPL-3.0"
+   ],
    "pulls": null,
    "stars": 1343,
    "catalogues": 1,
@@ -8680,8 +9075,10 @@
    "id": "whisparr",
    "source": "runtipi",
    "reach": 16.63,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "GPL-3.0"
+   ],
    "pulls": null,
    "stars": 1061,
    "catalogues": 1,
@@ -8699,8 +9096,10 @@
    "id": "matter-server",
    "source": "runtipi",
    "reach": 16.6,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "Apache-2.0"
+   ],
    "pulls": null,
    "stars": 1044,
    "catalogues": 1,
@@ -8777,8 +9176,10 @@
    "id": "codex-docs",
    "source": "runtipi",
    "reach": 16.14,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "Apache-2.0"
+   ],
    "pulls": null,
    "stars": 846,
    "catalogues": 1,
@@ -8797,8 +9198,10 @@
    "id": "rss",
    "source": "runtipi",
    "reach": 15.28,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": null,
    "stars": 568,
    "catalogues": 1,
@@ -8834,8 +9237,10 @@
    "id": "suwayomi",
    "source": "runtipi",
    "reach": 15.23,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MPL-2.0"
+   ],
    "pulls": null,
    "stars": 556,
    "catalogues": 1,
@@ -8852,7 +9257,9 @@
    "source": "runtipi",
    "reach": 15.06,
    "open_source": null,
-   "licenses": [],
+   "licenses": [
+    "NOASSERTION"
+   ],
    "pulls": null,
    "stars": 514,
    "catalogues": 1,
@@ -8887,8 +9294,10 @@
    "id": "duckdns",
    "source": "runtipi",
    "reach": 14.37,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "GPL-3.0"
+   ],
    "pulls": null,
    "stars": 374,
    "catalogues": 1,
@@ -8906,8 +9315,10 @@
    "id": "cloudflare-ddns",
    "source": "runtipi",
    "reach": 13.45,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
    "pulls": null,
    "stars": 244,
    "catalogues": 1,
@@ -8925,8 +9336,10 @@
    "id": "booksonic",
    "source": "runtipi",
    "reach": 13.25,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "GPL-3.0"
+   ],
    "pulls": null,
    "stars": 223,
    "catalogues": 1,
@@ -8944,8 +9357,10 @@
    "id": "lodestone-core",
    "source": "runtipi",
    "reach": 10.39,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "AGPL-3.0"
+   ],
    "pulls": null,
    "stars": 59,
    "catalogues": 1,
@@ -8964,8 +9379,10 @@
    "id": "nextgba",
    "source": "runtipi",
    "reach": 9.99,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "GPL-3.0"
+   ],
    "pulls": null,
    "stars": 49,
    "catalogues": 1,
@@ -8981,8 +9398,10 @@
    "id": "qdirstat",
    "source": "runtipi",
    "reach": 9.22,
-   "open_source": null,
-   "licenses": [],
+   "open_source": true,
+   "licenses": [
+    "GPL-3.0"
+   ],
    "pulls": null,
    "stars": 34,
    "catalogues": 1,

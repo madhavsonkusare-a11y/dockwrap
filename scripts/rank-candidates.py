@@ -226,6 +226,13 @@ def project_for(candidate, catalog_sources):
     identity = str(candidate.get("identity", ""))
     if identity.startswith("github:"):
         return identity[len("github:") :]
+    # What the source definition itself says the project is. The queue only
+    # promotes this to an identity once it has reconciled it against other
+    # sources, but for establishing a licence the definition's own claim is
+    # good enough and covers 135 candidates the identity pass leaves unknown.
+    declared = str((candidate.get("provenance") or {}).get("declared_project", ""))
+    if declared.startswith("github:"):
+        return declared[len("github:") :]
     match = GITHUB_PATTERN.search(catalog_sources.get(candidate["id"], "") or "")
     if match:
         return f"{match.group(1)}/{match.group(2).removesuffix('.git')}"
@@ -268,7 +275,10 @@ def refresh(candidates, signals, catalog_sources):
     )
     print(f"fetching stars for {len(projects)} GitHub projects")
     for index, repo in enumerate(projects, 1):
-        if repo in signals["stars"]:
+        # Both facts come from one call, so a project cached before licences
+        # were collected has to be asked again. Keying the skip on stars alone
+        # left every such project without a licence, permanently.
+        if repo in signals["stars"] and repo in signals["licenses"]:
             continue
         project = fetch_project(repo)
         signals["stars"][repo] = project["stars"] if project else None
