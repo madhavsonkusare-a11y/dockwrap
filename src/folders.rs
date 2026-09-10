@@ -9,7 +9,7 @@ use std::path::{Component, Path, PathBuf};
 /// many colons". Stripping the prefix keeps the resolved target — the same
 /// directory, named the way the rest of the system names it.
 pub fn docker_path(path: &Path) -> PathBuf {
-    match path.to_str().and_then(|text| text.strip_prefix(r"\?\")) {
+    match path.to_str().and_then(|text| text.strip_prefix(r"\\?\")) {
         Some(plain) => PathBuf::from(plain),
         None => path.to_path_buf(),
     }
@@ -193,7 +193,13 @@ mod tests {
     fn a_folder_a_person_owns_is_shared_with_its_resolved_path() {
         let dir = scratch("ok");
         let shared = share_folder(dir.to_str().unwrap(), false, &managed()).expect("allowed");
-        assert_eq!(shared.path, dir.canonicalize().unwrap());
+        // The same directory, in the form Docker can mount: comparing against
+        // the raw canonical path would compare against a form that cannot be
+        // used, which is what `docker_path` exists to avoid.
+        assert_eq!(
+            shared.path.canonicalize().unwrap(),
+            dir.canonicalize().unwrap()
+        );
         assert!(!shared.read_only);
         // Read-only travels with the decision rather than being reapplied later.
         let locked = share_folder(dir.to_str().unwrap(), true, &managed()).unwrap();

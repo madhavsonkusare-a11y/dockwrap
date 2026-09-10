@@ -26,6 +26,10 @@ pub struct SetupFieldReview {
     pub max: Option<i64>,
     #[serde(skip_serializing_if = "Vec::is_empty")]
     pub options: Vec<String>,
+    /// For a folder answer: whether the app may only read what is in there.
+    /// A person deciding whether to share their photos should be told which.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub read_only: Option<bool>,
 }
 
 impl PlanTemplate {
@@ -50,6 +54,7 @@ impl PlanTemplate {
                     },
                     control: "text",
                     server_validated: true,
+                    read_only: None,
                     min: None,
                     max: None,
                     options: vec![],
@@ -70,6 +75,14 @@ impl PlanTemplate {
                     FieldKind::Choice { options } => {
                         view.control = "choice";
                         view.options = options.clone();
+                    }
+                    FieldKind::Folder { read_only } => {
+                        // A distinct control, because asking for a folder is
+                        // not asking for a line of text: the interface has to
+                        // be able to say what will be shared and whether the
+                        // app may change it.
+                        view.control = "folder";
+                        view.read_only = Some(*read_only);
                     }
                     FieldKind::Text { .. } | FieldKind::Pattern { .. } => {}
                 }

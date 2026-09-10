@@ -60,6 +60,15 @@ pub enum FieldKind {
     Choice {
         options: Vec<String>,
     },
+    /// A folder on this computer the person chooses to share with the app.
+    ///
+    /// The only answer that hands a container something outside the storage
+    /// this product manages. `crate::folders::share_folder` decides whether a
+    /// given folder is allowed; `read_only` travels with the field so the
+    /// review can say plainly whether the app may change what is in there.
+    Folder {
+        read_only: bool,
+    },
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -222,6 +231,24 @@ impl SetupField {
                 if !options.iter().any(|option| option == &value) {
                     return Err(fail(&format!("Choose one of: {}.", options.join(", "))));
                 }
+            }
+            FieldKind::Folder { read_only } => {
+                // Checked here rather than at install time, so a folder that
+                // cannot be shared is refused while the person is still
+                // looking at the form.
+                let shared = crate::folders::share_folder(
+                    &value,
+                    *read_only,
+                    // The managed apps root's parent is Local Store's own
+                    // configuration directory, which must never be shared.
+                    crate::storage::managed_apps_root()
+                        .parent()
+                        .unwrap_or(std::path::Path::new("")),
+                )
+                .map_err(|refusal| fail(&refusal.0))?;
+                // The answer becomes the resolved path, so what is mounted is
+                // what was judged rather than what was typed.
+                return Ok(shared.path.to_string_lossy().into_owned());
             }
         }
         Ok(value)
@@ -515,6 +542,28 @@ impl PlanTemplate {
             .chain(self.secrets.iter().map(|secret| secret.key.as_str()))
             .collect();
         let mut used = vec![false; declared.len()];
+        // A folder answer is referenced by a mount rather than by an
+        // environment value. Without this it reads as declared-but-unused and
+        // the whole template is refused — the same way a time zone field
+        // nothing referenced used to be dropped as inert.
+        for service in &self.plan.services {
+            for mount in &service.mounts {
+                let crate::plan::PlanMount::Host { source, .. } = mount else {
+                    continue;
+                };
+                for placeholder in placeholders(source) {
+                    match declared.iter().position(|key| *key == placeholder.key) {
+                        Some(index) => used[index] = true,
+                        None => {
+                            return Err(format!(
+                            "a shared folder mount refers to {:?}, which no setup field declares",
+                            placeholder.key
+                        ))
+                        }
+                    }
+                }
+            }
+        }
         for (_, value) in self.environment() {
             for placeholder in placeholders(value) {
                 if PLATFORM_KEYS.contains(&placeholder.key) {
@@ -628,6 +677,18 @@ impl PlanTemplate {
                     format!("{key} needs a value for {missing:?}")
                 })?;
                 *value = filled;
+            }
+        }
+        // A shared folder is an answer like any other, but it lands in a mount
+        // rather than in the environment. Doing it here means the plan that
+        // reaches Docker carries the path `share_folder` approved, and the
+        // validation below sees a resolved path rather than a placeholder.
+        for service in &mut resolved.services {
+            for mount in &mut service.mounts {
+                if let crate::plan::PlanMount::Host { source, .. } = mount {
+                    *source = substitute(source, &accepted, secrets)
+                        .map_err(|missing| format!("no folder was chosen for {missing:?}"))?;
+                }
             }
         }
         resolved.validate()?;

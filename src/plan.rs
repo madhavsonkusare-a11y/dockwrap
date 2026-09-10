@@ -35,6 +35,20 @@ pub enum PlanMount {
         target: String,
         read_only: bool,
     },
+    /// A folder on this computer that a person chose, mounted at `target`.
+    ///
+    /// This is the only mount that reaches outside the storage this product
+    /// manages, and it exists because the apps people most want — a photo
+    /// library, a music collection — keep their files where the person keeps
+    /// them. `source` holds a `${KEY}` placeholder until an answer replaces
+    /// it, and `crate::folders::share_folder` decides whether that answer is
+    /// allowed. A plan may not carry a literal path here before resolution: it
+    /// would be a mount nobody consented to.
+    Host {
+        source: String,
+        target: String,
+        read_only: bool,
+    },
 }
 impl PlanMount {
     /// A writable bind mount, the shape every reviewed recipe uses.
@@ -53,16 +67,21 @@ impl PlanMount {
         match self {
             Self::Directory { source, target, .. } => format!("./{source}:{target}{suffix}"),
             Self::Volume { name, target, .. } => format!("{name}:{target}{suffix}"),
+            Self::Host { source, target, .. } => format!("{source}:{target}{suffix}"),
         }
     }
     fn target(&self) -> &str {
         match self {
-            Self::Directory { target, .. } | Self::Volume { target, .. } => target,
+            Self::Directory { target, .. }
+            | Self::Volume { target, .. }
+            | Self::Host { target, .. } => target,
         }
     }
     fn read_only(&self) -> bool {
         match self {
-            Self::Directory { read_only, .. } | Self::Volume { read_only, .. } => *read_only,
+            Self::Directory { read_only, .. }
+            | Self::Volume { read_only, .. }
+            | Self::Host { read_only, .. } => *read_only,
         }
     }
 }
@@ -243,7 +262,10 @@ impl DeploymentPlan {
             .flat_map(|service| &service.mounts)
             .filter_map(|mount| match mount {
                 PlanMount::Directory { source, .. } => Some(source.as_str()),
-                PlanMount::Volume { .. } => None,
+                // A shared folder already exists — the person chose it, and
+                // `share_folder` refused it if it did not. The installer must
+                // not create it, and must never treat it as its own to delete.
+                PlanMount::Volume { .. } | PlanMount::Host { .. } => None,
             })
             .collect();
         directories.sort_unstable();
@@ -458,21 +480,53 @@ impl PlanService {
                     "mount target {target:?} must be an absolute container path"
                 ));
             }
-            if let PlanMount::Directory { source, .. } = mount {
-                if source.is_empty()
-                    || source.starts_with('/')
-                    || source.contains("..")
-                    || source.contains('\\')
-                    || source.contains(':')
-                {
-                    return Err(format!(
-                        "mount source {source:?} must stay inside the project directory"
-                    ));
+            match mount {
+                PlanMount::Directory { source, .. } => {
+                    if source.is_empty()
+                        || source.starts_with('/')
+                        || source.contains("..")
+                        || source.contains('\\')
+                        || source.contains(':')
+                    {
+                        return Err(format!(
+                            "mount source {source:?} must stay inside the project directory"
+                        ));
+                    }
                 }
+                PlanMount::Host { source, .. } => {
+                    // Before resolution this must be a placeholder and nothing
+                    // else. A plan carrying a literal path would be a folder
+                    // nobody was asked about; after resolution the path has
+                    // already been through `share_folder`.
+                    let placeholder = source.starts_with("${")
+                        && source.ends_with('}')
+                        && !source[2..source.len() - 1].contains(['$', '{', '}']);
+                    if !placeholder && !is_resolved_host_path(source) {
+                        return Err(format!(
+                            "host mount source {source:?} must be a declared folder answer"
+                        ));
+                    }
+                }
+                PlanMount::Volume { .. } => {}
             }
         }
         Ok(())
     }
+}
+
+/// Whether a host mount source is an absolute path a person's answer produced.
+///
+/// Deliberately narrow: no relative segments, no quotes, and nothing that could
+/// turn one mount argument into two.
+fn is_resolved_host_path(source: &str) -> bool {
+    let bytes = source.as_bytes();
+    let absolute = source.starts_with('/')
+        || (bytes.len() > 2 && bytes[0].is_ascii_alphabetic() && &source[1..3] == ":\\");
+    absolute
+        && !source.contains("..")
+        && !source
+            .chars()
+            .any(|c| c.is_control() || c == '"' || c == '\'')
 }
 
 fn is_plain_name(value: &str) -> bool {
