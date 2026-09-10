@@ -1,0 +1,9956 @@
+{
+ "schema_version": 1,
+ "candidates": [
+  {
+   "id": "nginx",
+   "source": "runtipi",
+   "reach": 67.5,
+   "pulls": 13348360026,
+   "stars": 31610,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "nginx:1.31.5"
+   ]
+  },
+  {
+   "id": "outline",
+   "source": "runtipi",
+   "reach": 66.54,
+   "pulls": 13348360026,
+   "stars": 40513,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 5,
+   "required_inputs": 2,
+   "images": [
+    "outlinewiki/outline:1.9.2",
+    "postgres:16-alpine",
+    "redis:7-alpine",
+    "ghcr.io/sergi0g/oidc-provider:v0.2.0",
+    "nginx:alpine"
+   ]
+  },
+  {
+   "id": "vaultwarden",
+   "source": "runtipi",
+   "reach": 65.7,
+   "pulls": 328138779,
+   "stars": 67092,
+   "catalogues": 5,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 1,
+   "images": [
+    "vaultwarden/server:1.37.2"
+   ]
+  },
+  {
+   "id": "gitea",
+   "source": "runtipi",
+   "reach": 65.66,
+   "pulls": 385041008,
+   "stars": 57923,
+   "catalogues": 5,
+   "importable": false,
+   "blockers": [
+    "addPorts"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "gitea/gitea:1.27.3",
+    "postgres:14"
+   ]
+  },
+  {
+   "id": "nextcloud",
+   "source": "runtipi",
+   "reach": 64.87,
+   "pulls": 1027130969,
+   "stars": 36765,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "user"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "nextcloud:33-apache",
+    "postgres:14.2",
+    "redis:6.2.6"
+   ]
+  },
+  {
+   "id": "wordpress",
+   "source": "runtipi",
+   "reach": 64.34,
+   "pulls": 1488429454,
+   "stars": 21405,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "wordpress:7.1.0",
+    "mariadb:11.1.3"
+   ]
+  },
+  {
+   "id": "portainer",
+   "source": "runtipi",
+   "reach": 64.18,
+   "pulls": 1539529733,
+   "stars": 38475,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "extraLabels",
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "portainer/portainer-ce:2.45.0"
+   ]
+  },
+  {
+   "id": "ghost",
+   "source": "runtipi",
+   "reach": 64.03,
+   "pulls": 379714187,
+   "stars": 55250,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "plan policy"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghost:5.130.6",
+    "mariadb:latest"
+   ]
+  },
+  {
+   "id": "metabase",
+   "source": "runtipi",
+   "reach": 63.19,
+   "pulls": 271189671,
+   "stars": 49171,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "metabase/metabase:v0.63.16"
+   ]
+  },
+  {
+   "id": "mongo",
+   "source": "runtipi",
+   "reach": 62.52,
+   "pulls": 4851613635,
+   "stars": 28544,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 2,
+   "images": [
+    "mongo:7.0.40"
+   ]
+  },
+  {
+   "id": "netdata",
+   "source": "runtipi",
+   "reach": 62.41,
+   "pulls": 524417292,
+   "stars": 80471,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "capAdd",
+    "host path",
+    "pid",
+    "securityOpt"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "netdata/netdata:v2.11.0"
+   ]
+  },
+  {
+   "id": "uptime-kuma",
+   "source": "runtipi",
+   "reach": 62.33,
+   "pulls": 180863543,
+   "stars": 91194,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "louislam/uptime-kuma:2"
+   ]
+  },
+  {
+   "id": "node-red",
+   "source": "caprover",
+   "reach": 61.91,
+   "pulls": 323222345,
+   "stars": 23639,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "nodered/node-red:3.1.8-18-minimal"
+   ]
+  },
+  {
+   "id": "n8n-2",
+   "source": "runtipi",
+   "reach": 61.69,
+   "pulls": 257842446,
+   "stars": 203895,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "healthCheck"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "n8nio/n8n:2.38.3",
+    "postgres:18"
+   ]
+  },
+  {
+   "id": "pihole",
+   "source": "runtipi",
+   "reach": 61.4,
+   "pulls": 985926149,
+   "stars": 60829,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "addPorts",
+    "capAdd"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "pihole/pihole:2026.07.2"
+   ]
+  },
+  {
+   "id": "ollama-amd",
+   "source": "runtipi",
+   "reach": 60.74,
+   "pulls": 173324585,
+   "stars": 180544,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "devices"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ollama/ollama:0.32.15-rocm"
+   ]
+  },
+  {
+   "id": "ollama-cpu",
+   "source": "runtipi",
+   "reach": 60.74,
+   "pulls": 173324585,
+   "stars": 180544,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "ollama/ollama:0.32.15"
+   ]
+  },
+  {
+   "id": "ollama-nvidia",
+   "source": "runtipi",
+   "reach": 60.74,
+   "pulls": 173324585,
+   "stars": 180544,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "deploy"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ollama/ollama:0.32.15"
+   ]
+  },
+  {
+   "id": "photoprism",
+   "source": "runtipi",
+   "reach": 60.67,
+   "pulls": 81876705,
+   "stars": 40175,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "host path",
+    "overrides",
+    "workingDir"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "mariadb:10.8",
+    "photoprism/photoprism:arm64",
+    "photoprism/photoprism:latest"
+   ]
+  },
+  {
+   "id": "odoo",
+   "source": "runtipi",
+   "reach": 60.59,
+   "pulls": 53651188,
+   "stars": 54259,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "tty",
+    "user"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "odoo:19",
+    "postgres:15"
+   ]
+  },
+  {
+   "id": "searxng",
+   "source": "runtipi",
+   "reach": 60.42,
+   "pulls": 79235342,
+   "stars": 36726,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "plan policy"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "searxng/searxng:latest"
+   ]
+  },
+  {
+   "id": "nextcloud-mini",
+   "source": "runtipi",
+   "reach": 60.37,
+   "pulls": 1027130969,
+   "stars": 36765,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 2,
+   "images": [
+    "nextcloud:34.0.2",
+    "postgres:16"
+   ]
+  },
+  {
+   "id": "grafana",
+   "source": "runtipi",
+   "reach": 60.17,
+   "pulls": 64818076,
+   "stars": 76661,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "grafana/grafana-oss:13.0.2"
+   ]
+  },
+  {
+   "id": "memos",
+   "source": "runtipi",
+   "reach": 59.64,
+   "pulls": 10906459,
+   "stars": 62877,
+   "catalogues": 5,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "neosmemo/memos:0.30.0"
+   ]
+  },
+  {
+   "id": "ghost-dev",
+   "source": "runtipi",
+   "reach": 59.53,
+   "pulls": 379714187,
+   "stars": 55250,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "plan policy"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghost:5.130.6"
+   ]
+  },
+  {
+   "id": "glances",
+   "source": "runtipi",
+   "reach": 59.45,
+   "pulls": 120431212,
+   "stars": 33549,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "host path",
+    "pid"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "nicolargo/glances:4.5.3.2-full"
+   ]
+  },
+  {
+   "id": "stirling-pdf",
+   "source": "runtipi",
+   "reach": 59.35,
+   "pulls": 13659554,
+   "stars": 91632,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "privileged"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "stirlingtools/stirling-pdf:2.14.3"
+   ]
+  },
+  {
+   "id": "tailscale",
+   "source": "runtipi",
+   "reach": 58.71,
+   "pulls": 168529493,
+   "stars": 36308,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "capAdd",
+    "host path",
+    "internalPort"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "tailscale/tailscale:v1.102.3"
+   ]
+  },
+  {
+   "id": "joplin",
+   "source": "runtipi",
+   "reach": 58.49,
+   "pulls": 15324563,
+   "stars": 56306,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "joplin/server:3.7.1",
+    "postgres:14.2"
+   ]
+  },
+  {
+   "id": "joplin",
+   "source": "caprover",
+   "reach": 58.49,
+   "pulls": 15324563,
+   "stars": 56306,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "joplin/server:1.7.2",
+    "postgres:13.1"
+   ]
+  },
+  {
+   "id": "minecraft-server",
+   "source": "runtipi",
+   "reach": 58.32,
+   "pulls": 431989316,
+   "stars": 14283,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "stdinOpen",
+    "tty"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "itzg/minecraft-server:latest"
+   ]
+  },
+  {
+   "id": "ntfy",
+   "source": "runtipi",
+   "reach": 58.11,
+   "pulls": 22922531,
+   "stars": 34125,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "binwiederhier/ntfy:v2.28.0"
+   ]
+  },
+  {
+   "id": "nocodb",
+   "source": "runtipi",
+   "reach": 57.92,
+   "pulls": 21813704,
+   "stars": 64912,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "healthCheck"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "nocodb/nocodb:2026.08.2",
+    "postgres:16",
+    "redis:alpine"
+   ]
+  },
+  {
+   "id": "dozzle",
+   "source": "runtipi",
+   "reach": 57.91,
+   "pulls": 340809527,
+   "stars": 14319,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "amir20/dozzle:v10.9.2"
+   ]
+  },
+  {
+   "id": "excalidraw",
+   "source": "runtipi",
+   "reach": 57.86,
+   "pulls": 8712821,
+   "stars": 131533,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "plan policy"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "excalidraw/excalidraw:latest"
+   ]
+  },
+  {
+   "id": "firefly-iii",
+   "source": "runtipi",
+   "reach": 57.81,
+   "pulls": 29091634,
+   "stars": 24563,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "plan policy"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "alpine",
+    "fireflyiii/core:version-6",
+    "mariadb"
+   ]
+  },
+  {
+   "id": "nodered",
+   "source": "runtipi",
+   "reach": 57.41,
+   "pulls": 323222345,
+   "stars": 23639,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "nodered/node-red:5.0.6"
+   ]
+  },
+  {
+   "id": "filebrowser",
+   "source": "runtipi",
+   "reach": 57.32,
+   "pulls": 182208257,
+   "stars": 35958,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "filebrowser/filebrowser:v2.63.23"
+   ]
+  },
+  {
+   "id": "rsshub",
+   "source": "runtipi",
+   "reach": 57.1,
+   "pulls": 20877398,
+   "stars": 46087,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "ulimits"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "browserless/chrome",
+    "diygod/rsshub:2026-04-17",
+    "redis:alpine"
+   ]
+  },
+  {
+   "id": "eclipse-mosquitto",
+   "source": "runtipi",
+   "reach": 57.08,
+   "pulls": 681314268,
+   "stars": 11187,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "addPorts"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "cedalo/management-center:2",
+    "eclipse-mosquitto:2.0.22"
+   ]
+  },
+  {
+   "id": "siyuan",
+   "source": "runtipi",
+   "reach": 57.03,
+   "pulls": 3556133,
+   "stars": 46244,
+   "catalogues": 5,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "b3log/siyuan:v3.8.2"
+   ]
+  },
+  {
+   "id": "glance",
+   "source": "runtipi",
+   "reach": 56.47,
+   "pulls": 8088819,
+   "stars": 36966,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "glanceapp/glance:v0.8.6"
+   ]
+  },
+  {
+   "id": "notemark",
+   "source": "runtipi",
+   "reach": 56.43,
+   "pulls": 13348360026,
+   "stars": 766,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 3,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/enchant97/note-mark-frontend:0.19.3",
+    "ghcr.io/enchant97/note-mark-backend:0.19.5",
+    "nginx:alpine"
+   ]
+  },
+  {
+   "id": "emqx",
+   "source": "runtipi",
+   "reach": 56.3,
+   "pulls": 46842913,
+   "stars": 16704,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "addPorts"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "emqx/emqx:6.3.0"
+   ]
+  },
+  {
+   "id": "owncloud",
+   "source": "runtipi",
+   "reach": 55.79,
+   "pulls": 32637930,
+   "stars": 8832,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "healthCheck"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "mariadb:10.6",
+    "owncloud/server:11.0.0",
+    "redis:6"
+   ]
+  },
+  {
+   "id": "privatebin",
+   "source": "runtipi",
+   "reach": 55.79,
+   "pulls": 33799601,
+   "stars": 8597,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "privatebin/nginx-fpm-alpine:2.0.6"
+   ]
+  },
+  {
+   "id": "privatebin",
+   "source": "caprover",
+   "reach": 55.79,
+   "pulls": 33799601,
+   "stars": 8597,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "privatebin/nginx-fpm-alpine:1.5.1"
+   ]
+  },
+  {
+   "id": "mongo-express",
+   "source": "runtipi",
+   "reach": 55.65,
+   "pulls": 276069355,
+   "stars": 5985,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 5,
+   "images": [
+    "mongo-express:1.0.2"
+   ]
+  },
+  {
+   "id": "it-tools",
+   "source": "runtipi",
+   "reach": 55.63,
+   "pulls": 24972003,
+   "stars": 40535,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "plan policy"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "corentinth/it-tools:latest"
+   ]
+  },
+  {
+   "id": "homer",
+   "source": "runtipi",
+   "reach": 55.41,
+   "pulls": 44442473,
+   "stars": 11593,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "b4bz/homer:v26.08.3"
+   ]
+  },
+  {
+   "id": "penpot",
+   "source": "runtipi",
+   "reach": 55.31,
+   "pulls": 5399653,
+   "stars": 59816,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "stopSignal"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "penpotapp/backend:latest",
+    "penpotapp/exporter:latest",
+    "penpotapp/frontend:latest",
+    "postgres:14",
+    "redis:7"
+   ]
+  },
+  {
+   "id": "monica",
+   "source": "runtipi",
+   "reach": 55.05,
+   "pulls": 13608967,
+   "stars": 25262,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "monica:4.1.2",
+    "mariadb:10.6.11"
+   ]
+  },
+  {
+   "id": "zigbee2mqtt",
+   "source": "runtipi",
+   "reach": 54.87,
+   "pulls": 125828944,
+   "stars": 15620,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "devices"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "koenkk/zigbee2mqtt:2.14.1"
+   ]
+  },
+  {
+   "id": "lobe-chat",
+   "source": "runtipi",
+   "reach": 54.72,
+   "pulls": 6099311,
+   "stars": 82366,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "platform placeholder"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "lobehub/lobe-chat:1.143.3"
+   ]
+  },
+  {
+   "id": "invoice-ninja",
+   "source": "runtipi",
+   "reach": 54.57,
+   "pulls": 32669147,
+   "stars": 10070,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "field pattern",
+    "user"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "invoiceninja/invoiceninja:5.13",
+    "mariadb:10.7",
+    "nginx:1.31"
+   ]
+  },
+  {
+   "id": "kavita",
+   "source": "runtipi",
+   "reach": 54.52,
+   "pulls": 11171663,
+   "stars": 11644,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "jvmilazz0/kavita:0.9.1"
+   ]
+  },
+  {
+   "id": "navidrome",
+   "source": "runtipi",
+   "reach": 54.27,
+   "pulls": 53719832,
+   "stars": 23430,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "deluan/navidrome:0.63.2"
+   ]
+  },
+  {
+   "id": "transmission-vpn",
+   "source": "runtipi",
+   "reach": 54.18,
+   "pulls": 394831738,
+   "stars": 4565,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "capAdd",
+    "devices",
+    "host path",
+    "logging",
+    "platform placeholder",
+    "sysctls"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "haugene/transmission-openvpn:5.5.2"
+   ]
+  },
+  {
+   "id": "guacamole",
+   "source": "runtipi",
+   "reach": 54.06,
+   "pulls": 77582212,
+   "stars": 3983,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 3,
+   "required_inputs": 0,
+   "images": [
+    "guacamole/guacamole:1.6.0",
+    "guacamole/guacd:1.5.5",
+    "postgres:14"
+   ]
+  },
+  {
+   "id": "kanboard",
+   "source": "runtipi",
+   "reach": 53.96,
+   "pulls": 23588312,
+   "stars": 9858,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "kanboard/kanboard:v1.2.54"
+   ]
+  },
+  {
+   "id": "jellyseerr",
+   "source": "runtipi",
+   "reach": 53.83,
+   "pulls": 38346373,
+   "stars": 12536,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "fallenbagel/jellyseerr:2.7.3"
+   ]
+  },
+  {
+   "id": "filestash",
+   "source": "runtipi",
+   "reach": 53.71,
+   "pulls": 12435907,
+   "stars": 14650,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "securityOpt"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "machines/filestash:latest",
+    "onlyoffice/documentserver:9.4.0.1"
+   ]
+  },
+  {
+   "id": "dockge",
+   "source": "runtipi",
+   "reach": 53.27,
+   "pulls": 28783590,
+   "stars": 24305,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "host path",
+    "platform placeholder"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "louislam/dockge:1.5.0"
+   ]
+  },
+  {
+   "id": "grist",
+   "source": "runtipi",
+   "reach": 52.76,
+   "pulls": 4014972,
+   "stars": 11749,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 1,
+   "images": [
+    "gristlabs/grist:1.7.18"
+   ]
+  },
+  {
+   "id": "linkding",
+   "source": "caprover",
+   "reach": 52.68,
+   "pulls": 9641471,
+   "stars": 11163,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "sissbruecker/linkding:1.23.0"
+   ]
+  },
+  {
+   "id": "halo",
+   "source": "runtipi",
+   "reach": 52.59,
+   "pulls": 1880625,
+   "stars": 39706,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "halohub/halo:2.26.1",
+    "postgres:15.4"
+   ]
+  },
+  {
+   "id": "flowise",
+   "source": "runtipi",
+   "reach": 52.57,
+   "pulls": 6899527,
+   "stars": 55451,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 2,
+   "images": [
+    "flowiseai/flowise:3.1.4"
+   ]
+  },
+  {
+   "id": "windows",
+   "source": "runtipi",
+   "reach": 52.55,
+   "pulls": 3027673,
+   "stars": 53213,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "addPorts",
+    "capAdd",
+    "devices",
+    "stopGracePeriod",
+    "sysctls"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "dockurr/windows:6.05"
+   ]
+  },
+  {
+   "id": "sftpgo",
+   "source": "runtipi",
+   "reach": 52.35,
+   "pulls": 38922171,
+   "stars": 12498,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "addPorts",
+    "healthCheck",
+    "internalPort",
+    "user"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "drakkan/sftpgo:v2.7.5-alpine",
+    "postgres:17.2-alpine"
+   ]
+  },
+  {
+   "id": "budibase",
+   "source": "runtipi",
+   "reach": 52.12,
+   "pulls": 2187215,
+   "stars": 28267,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "budibase/budibase:v3.44.0"
+   ]
+  },
+  {
+   "id": "homebridge",
+   "source": "runtipi",
+   "reach": 52.07,
+   "pulls": 13621308,
+   "stars": 25486,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "internalPort",
+    "logging",
+    "networkMode",
+    "privileged"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "homebridge/homebridge:2024-05-02"
+   ]
+  },
+  {
+   "id": "kimai",
+   "source": "runtipi",
+   "reach": 52.05,
+   "pulls": 7795020,
+   "stars": 4968,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "healthCheck"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "kimai/kimai2:fpm-2.19.1-prod",
+    "mysql:5.7",
+    "tobybatch/nginx-fpm-reverse-proxy:latest"
+   ]
+  },
+  {
+   "id": "wallos",
+   "source": "runtipi",
+   "reach": 51.83,
+   "pulls": 8359474,
+   "stars": 8470,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "bellamy/wallos:5.5.0"
+   ]
+  },
+  {
+   "id": "calcom",
+   "source": "runtipi",
+   "reach": 51.66,
+   "pulls": 4849163,
+   "stars": 48336,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "platform placeholder"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "calcom/cal.com:v6.2.0",
+    "postgres:16.1"
+   ]
+  },
+  {
+   "id": "crowdsec",
+   "source": "runtipi",
+   "reach": 51.66,
+   "pulls": 21188244,
+   "stars": 14806,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "crowdsecurity/crowdsec:v1.7.8",
+    "fbonalair/traefik-crowdsec-bouncer:latest",
+    "metabase/metabase"
+   ]
+  },
+  {
+   "id": "whoogle",
+   "source": "runtipi",
+   "reach": 51.05,
+   "pulls": 20314974,
+   "stars": 11577,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "benbusby/whoogle-search:1.2.4"
+   ]
+  },
+  {
+   "id": "drawio",
+   "source": "runtipi",
+   "reach": 50.85,
+   "pulls": 28616549,
+   "stars": 8031,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "stdinOpen",
+    "tty"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "jgraph/drawio:31.4.2"
+   ]
+  },
+  {
+   "id": "gotify",
+   "source": "runtipi",
+   "reach": 50.72,
+   "pulls": 850941,
+   "stars": 15867,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "overrides"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "gotify/server-arm64:2.6.3",
+    "gotify/server:3.1.0"
+   ]
+  },
+  {
+   "id": "watchyourlan",
+   "source": "runtipi",
+   "reach": 50.57,
+   "pulls": 4639841,
+   "stars": 7616,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "networkMode"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "aceberg/watchyourlan:2.1.4"
+   ]
+  },
+  {
+   "id": "libretranslate",
+   "source": "runtipi",
+   "reach": 50.5,
+   "pulls": 9614030,
+   "stars": 16339,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "libretranslate/libretranslate:v1.9.6"
+   ]
+  },
+  {
+   "id": "ghostfolio",
+   "source": "runtipi",
+   "reach": 50.38,
+   "pulls": 3248128,
+   "stars": 9270,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 3,
+   "required_inputs": 0,
+   "images": [
+    "ghostfolio/ghostfolio:3.66.0",
+    "postgres:15.4-alpine",
+    "redis:7-alpine"
+   ]
+  },
+  {
+   "id": "slskd",
+   "source": "runtipi",
+   "reach": 50.0,
+   "pulls": 7781724,
+   "stars": 3872,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "slskd/slskd:0.26.0"
+   ]
+  },
+  {
+   "id": "docmost",
+   "source": "runtipi",
+   "reach": 49.92,
+   "pulls": 4847240,
+   "stars": 21628,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 3,
+   "required_inputs": 0,
+   "images": [
+    "docmost/docmost:0.95.0",
+    "postgres:16-alpine",
+    "redis:7.2-alpine"
+   ]
+  },
+  {
+   "id": "nitter",
+   "source": "runtipi",
+   "reach": 49.85,
+   "pulls": 7729307,
+   "stars": 14428,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "plan policy"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "redis:alpine",
+    "zedeus/nitter:latest"
+   ]
+  },
+  {
+   "id": "librephotos",
+   "source": "runtipi",
+   "reach": 49.7,
+   "pulls": 2610819,
+   "stars": 8063,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "healthCheck",
+    "platform placeholder"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "postgres:14",
+    "reallibrephotos/librephotos-frontend:2023w48",
+    "reallibrephotos/librephotos-proxy:2023w48",
+    "reallibrephotos/librephotos:2023w48",
+    "redis:6"
+   ]
+  },
+  {
+   "id": "semaphore",
+   "source": "runtipi",
+   "reach": 49.67,
+   "pulls": 7163328,
+   "stars": 14124,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 3,
+   "images": [
+    "semaphoreui/semaphore:v2.19.12",
+    "postgres:14"
+   ]
+  },
+  {
+   "id": "ddns-updater",
+   "source": "runtipi",
+   "reach": 49.57,
+   "pulls": 18146098,
+   "stars": 3207,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "qmcgaw/ddns-updater:v2.10.0"
+   ]
+  },
+  {
+   "id": "gladys",
+   "source": "runtipi",
+   "reach": 49.52,
+   "pulls": 7527646,
+   "stars": 3185,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "host path",
+    "internalPort",
+    "networkMode",
+    "privileged",
+    "stopGracePeriod"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "gladysassistant/gladys:v4.86.1"
+   ]
+  },
+  {
+   "id": "rallly",
+   "source": "runtipi",
+   "reach": 49.29,
+   "pulls": 1482485,
+   "stars": 5251,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "healthCheck"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "lukevella/rallly:4.14.0",
+    "postgres:14"
+   ]
+  },
+  {
+   "id": "zerotier",
+   "source": "runtipi",
+   "reach": 49.09,
+   "pulls": 4030934,
+   "stars": 17088,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "capAdd",
+    "devices",
+    "internalPort",
+    "networkMode"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "zerotier/zerotier:1.14.2"
+   ]
+  },
+  {
+   "id": "pingvin-share",
+   "source": "runtipi",
+   "reach": 48.9,
+   "pulls": 3262120,
+   "stars": 4671,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "stonith404/pingvin-share:v1.13.0"
+   ]
+  },
+  {
+   "id": "scrypted",
+   "source": "runtipi",
+   "reach": 48.9,
+   "pulls": 13654959,
+   "stars": 5901,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "host path",
+    "internalPort",
+    "logging",
+    "networkMode",
+    "privileged"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "koush/scrypted:20-jammy-full.s6-v0.94.5"
+   ]
+  },
+  {
+   "id": "ctfd",
+   "source": "runtipi",
+   "reach": 48.76,
+   "pulls": 10541058,
+   "stars": 6828,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 3,
+   "required_inputs": 0,
+   "images": [
+    "ctfd/ctfd:3.8.7",
+    "mariadb:10.4.12",
+    "redis:4"
+   ]
+  },
+  {
+   "id": "your-spotify",
+   "source": "runtipi",
+   "reach": 48.64,
+   "pulls": 2881263,
+   "stars": 4572,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "addPorts",
+    "platform placeholder"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "mongo:4.4.30",
+    "yooooomi/your_spotify_client:1.20.0",
+    "yooooomi/your_spotify_server"
+   ]
+  },
+  {
+   "id": "owncast",
+   "source": "runtipi",
+   "reach": 48.61,
+   "pulls": 891864,
+   "stars": 11519,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "addPorts"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "owncast/owncast:0.3.0"
+   ]
+  },
+  {
+   "id": "obsidian-livesync",
+   "source": "runtipi",
+   "reach": 48.42,
+   "pulls": 205077851,
+   "stars": 271,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 2,
+   "images": [
+    "couchdb:3.5.2"
+   ]
+  },
+  {
+   "id": "silverbullet",
+   "source": "runtipi",
+   "reach": 48.35,
+   "pulls": 729846,
+   "stars": 6028,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "zefhemel/silverbullet:2.10.0"
+   ]
+  },
+  {
+   "id": "octobot",
+   "source": "runtipi",
+   "reach": 48.22,
+   "pulls": 1445330,
+   "stars": 6549,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "drakkarsoftware/octobot:2.1.13"
+   ]
+  },
+  {
+   "id": "sshwifty",
+   "source": "runtipi",
+   "reach": 48.02,
+   "pulls": 3262379,
+   "stars": 3119,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "privileged"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "niruix/sshwifty:0.4.10-beta-release"
+   ]
+  },
+  {
+   "id": "tubearchivist",
+   "source": "runtipi",
+   "reach": 47.75,
+   "pulls": 4507853,
+   "stars": 8435,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "bbilly1/tubearchivist:v0.5.12",
+    "elasticsearch:8.17.2",
+    "redislabs/rejson:latest"
+   ]
+  },
+  {
+   "id": "whoami",
+   "source": "runtipi",
+   "reach": 47.74,
+   "pulls": 41607458,
+   "stars": 1418,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "internalPort"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "traefik/whoami:v1.12.0"
+   ]
+  },
+  {
+   "id": "pinchflat",
+   "source": "runtipi",
+   "reach": 47.58,
+   "pulls": 548868,
+   "stars": 5301,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "keglin/pinchflat:v2025.6.6"
+   ]
+  },
+  {
+   "id": "unmanic",
+   "source": "runtipi",
+   "reach": 47.29,
+   "pulls": 15905317,
+   "stars": 2494,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "host path",
+    "platform placeholder",
+    "privileged"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "josh5/unmanic:staging"
+   ]
+  },
+  {
+   "id": "flatnotes",
+   "source": "runtipi",
+   "reach": 47.17,
+   "pulls": 1919295,
+   "stars": 3218,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 3,
+   "images": [
+    "dullage/flatnotes:v5.5.5"
+   ]
+  },
+  {
+   "id": "logto",
+   "source": "runtipi",
+   "reach": 47.06,
+   "pulls": 649872,
+   "stars": 14512,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "addPorts",
+    "extraLabels"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "postgres:14",
+    "svhd/logto:1.43.0"
+   ]
+  },
+  {
+   "id": "olivetin",
+   "source": "runtipi",
+   "reach": 46.99,
+   "pulls": 1405019,
+   "stars": 3792,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "plan policy"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "jamesread/olivetin:latest"
+   ]
+  },
+  {
+   "id": "inspircd",
+   "source": "runtipi",
+   "reach": 46.74,
+   "pulls": 4445786,
+   "stars": 1346,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "inspircd/inspircd-docker:4.11.0"
+   ]
+  },
+  {
+   "id": "dashdot",
+   "source": "runtipi",
+   "reach": 46.53,
+   "pulls": 6641173,
+   "stars": 3536,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "host path",
+    "privileged"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "mauricenino/dashdot:6.3.4"
+   ]
+  },
+  {
+   "id": "kapowarr",
+   "source": "runtipi",
+   "reach": 45.58,
+   "pulls": 3065063,
+   "stars": 1062,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "mrcas/kapowarr:v1.3.1"
+   ]
+  },
+  {
+   "id": "tooljet",
+   "source": "runtipi",
+   "reach": 45.56,
+   "pulls": 31699,
+   "stars": 40874,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "stdinOpen",
+    "tty"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "postgres:11",
+    "tooljet/tooljet-client-ce:v2.4.2",
+    "tooljet/tooljet-server-ce:v2.24.0"
+   ]
+  },
+  {
+   "id": "openbooks",
+   "source": "runtipi",
+   "reach": 45.13,
+   "pulls": 4802254,
+   "stars": 2401,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "evanbuss/openbooks:4.5.0"
+   ]
+  },
+  {
+   "id": "mqttx",
+   "source": "runtipi",
+   "reach": 44.76,
+   "pulls": 1537126,
+   "stars": 5049,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "emqx/mqttx-web:v1.13.0"
+   ]
+  },
+  {
+   "id": "firefly-iii-data-importer",
+   "source": "runtipi",
+   "reach": 44.57,
+   "pulls": 13093690,
+   "stars": 830,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "fireflyiii/data-importer:version-2"
+   ]
+  },
+  {
+   "id": "grafana",
+   "source": "caprover",
+   "reach": 43.4,
+   "pulls": 5320360401,
+   "stars": null,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "grafana/grafana:7.4.3"
+   ]
+  },
+  {
+   "id": "tasks-md",
+   "source": "runtipi",
+   "reach": 43.4,
+   "pulls": 354023,
+   "stars": 2193,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 1,
+   "images": [
+    "baldissaramatheus/tasks.md:3.3.0"
+   ]
+  },
+  {
+   "id": "peppermint",
+   "source": "runtipi",
+   "reach": 43.27,
+   "pulls": 491310,
+   "stars": 3163,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "addPorts"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "pepperlabs/peppermint:latest",
+    "postgres:latest"
+   ]
+  },
+  {
+   "id": "koillection",
+   "source": "runtipi",
+   "reach": 43.21,
+   "pulls": 604154,
+   "stars": 1310,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "koillection/koillection:1.8.4",
+    "postgres:15"
+   ]
+  },
+  {
+   "id": "cloudflared",
+   "source": "runtipi",
+   "reach": 43.08,
+   "pulls": 2133073,
+   "stars": 449,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "networkMode",
+    "platform placeholder"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "wisdomsky/cloudflared-web:2026.8.2"
+   ]
+  },
+  {
+   "id": "databag",
+   "source": "runtipi",
+   "reach": 42.73,
+   "pulls": 164375,
+   "stars": 1487,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "plan policy"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "balzack/databag:latest"
+   ]
+  },
+  {
+   "id": "linkstack",
+   "source": "runtipi",
+   "reach": 42.7,
+   "pulls": 1425926,
+   "stars": 519,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "plan policy"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "linkstackorg/linkstack:latest"
+   ]
+  },
+  {
+   "id": "wordpress",
+   "source": "caprover",
+   "reach": 42.69,
+   "pulls": 1488429454,
+   "stars": null,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "mysql:8.4.8",
+    "wordpress:6.9.4"
+   ]
+  },
+  {
+   "id": "mempool",
+   "source": "runtipi",
+   "reach": 42.54,
+   "pulls": 877709,
+   "stars": 2837,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "host path",
+    "stopGracePeriod",
+    "user"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "mariadb:10.5.21",
+    "mempool/backend:v3.3.1",
+    "mempool/frontend:v3.3.1"
+   ]
+  },
+  {
+   "id": "podfetch",
+   "source": "runtipi",
+   "reach": 42.23,
+   "pulls": 474279,
+   "stars": 506,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "samuel19982/podfetch:latest"
+   ]
+  },
+  {
+   "id": "viewtube",
+   "source": "runtipi",
+   "reach": 41.69,
+   "pulls": 1222024,
+   "stars": 1475,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 3,
+   "required_inputs": 0,
+   "images": [
+    "mauriceo/viewtube:0.17.0",
+    "mongo:5",
+    "redis:7"
+   ]
+  },
+  {
+   "id": "hello-world",
+   "source": "runtipi",
+   "reach": 41.29,
+   "pulls": 11538706,
+   "stars": 202,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "plan policy"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "crccheck/hello-world:latest"
+   ]
+  },
+  {
+   "id": "fireshare",
+   "source": "runtipi",
+   "reach": 40.79,
+   "pulls": 731440,
+   "stars": 1467,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "shaneisrael/fireshare:1.7.9"
+   ]
+  },
+  {
+   "id": "mixpost",
+   "source": "runtipi",
+   "reach": 40.73,
+   "pulls": 223816,
+   "stars": 3674,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "healthCheck"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "inovector/mixpost:v2.6.0",
+    "mysql/mysql-server:8.0",
+    "redis:latest"
+   ]
+  },
+  {
+   "id": "traefik-certs-dumper",
+   "source": "runtipi",
+   "reach": 40.68,
+   "pulls": 7786930,
+   "stars": 209,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "host path",
+    "internalPort"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "humenius/traefik-certs-dumper:1.6.1-alpine"
+   ]
+  },
+  {
+   "id": "electrs",
+   "source": "runtipi",
+   "reach": 40.49,
+   "pulls": 655716,
+   "stars": 1393,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "addPorts",
+    "host path",
+    "internalPort",
+    "main service",
+    "platform placeholder",
+    "stopGracePeriod",
+    "user"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "getumbrel/electrs:v0.11.1",
+    "ghcr.io/montejojorge/electrs-ui:v0.9.2"
+   ]
+  },
+  {
+   "id": "ombi",
+   "source": "caprover",
+   "reach": 40.45,
+   "pulls": 972787412,
+   "stars": null,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "linuxserver/ombi:development-v4.0.1446-ls143"
+   ]
+  },
+  {
+   "id": "jenkins",
+   "source": "caprover",
+   "reach": 40.29,
+   "pulls": 4986433167,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "jenkins/jenkins:lts-jdk11"
+   ]
+  },
+  {
+   "id": "syncthing",
+   "source": "runtipi",
+   "reach": 40.06,
+   "pulls": 138392770,
+   "stars": null,
+   "catalogues": 5,
+   "importable": false,
+   "blockers": [
+    "addPorts",
+    "host path",
+    "stopGracePeriod"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "syncthing/syncthing:2.1.3"
+   ]
+  },
+  {
+   "id": "dailytxt",
+   "source": "runtipi",
+   "reach": 39.93,
+   "pulls": 303575,
+   "stars": 501,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "phitux/dailytxt:2.6.3"
+   ]
+  },
+  {
+   "id": "mixpost-pro",
+   "source": "runtipi",
+   "reach": 39.84,
+   "pulls": 134423,
+   "stars": 3674,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "healthCheck"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "inovector/mixpost-pro-team:latest",
+    "mysql/mysql-server:8.0",
+    "redis:latest"
+   ]
+  },
+  {
+   "id": "metabase",
+   "source": "caprover",
+   "reach": 39.73,
+   "pulls": 271189671,
+   "stars": null,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "metabase/metabase:v0.38.0-rc1",
+    "postgres:12-alpine"
+   ]
+  },
+  {
+   "id": "movary",
+   "source": "runtipi",
+   "reach": 39.18,
+   "pulls": 114523,
+   "stars": 775,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "user"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "leepeuker/movary:0.72.0",
+    "mysql:8.0"
+   ]
+  },
+  {
+   "id": "seedsync",
+   "source": "runtipi",
+   "reach": 39.18,
+   "pulls": 1830200,
+   "stars": 334,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "host path",
+    "user"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ipsingh06/seedsync:0.8.6"
+   ]
+  },
+  {
+   "id": "adminer",
+   "source": "caprover",
+   "reach": 38.93,
+   "pulls": 404793923,
+   "stars": null,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "adminer:4"
+   ]
+  },
+  {
+   "id": "wordpress-only",
+   "source": "caprover",
+   "reach": 38.19,
+   "pulls": 1488429454,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "wordpress:5.4.0"
+   ]
+  },
+  {
+   "id": "lidarr-deemix",
+   "source": "runtipi",
+   "reach": 37.83,
+   "pulls": 473449,
+   "stars": 530,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "addPorts",
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "youegraillot/lidarr-on-steroids:1.5.2"
+   ]
+  },
+  {
+   "id": "actual",
+   "source": "caprover",
+   "reach": 37.69,
+   "pulls": 35373304,
+   "stars": null,
+   "catalogues": 5,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "actualbudget/actual-server:23.8.1-alpine"
+   ]
+  },
+  {
+   "id": "simplex-smp",
+   "source": "runtipi",
+   "reach": 37.61,
+   "pulls": 233751,
+   "stars": 846,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 1,
+   "images": [
+    "simplexchat/smp-server:v6.5.2"
+   ]
+  },
+  {
+   "id": "uptime-kuma",
+   "source": "caprover",
+   "reach": 37.53,
+   "pulls": 180863543,
+   "stars": null,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "louislam/uptime-kuma:2.3.2"
+   ]
+  },
+  {
+   "id": "grocy",
+   "source": "caprover",
+   "reach": 37.05,
+   "pulls": 58031865,
+   "stars": null,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "linuxserver/grocy:v2.7.1-ls58"
+   ]
+  },
+  {
+   "id": "bitcoind",
+   "source": "runtipi",
+   "reach": 36.85,
+   "pulls": 1973040,
+   "stars": 107,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "addPorts",
+    "stopGracePeriod",
+    "user"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "lncm/bitcoind:v28.0"
+   ]
+  },
+  {
+   "id": "gotify",
+   "source": "caprover",
+   "reach": 36.65,
+   "pulls": 45867802,
+   "stars": null,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "gotify/server:2.1.7"
+   ]
+  },
+  {
+   "id": "monerod",
+   "source": "runtipi",
+   "reach": 36.33,
+   "pulls": 752710,
+   "stars": 183,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "sethsimmons/simple-monerod:v0.18.3.4"
+   ]
+  },
+  {
+   "id": "tautulli",
+   "source": "caprover",
+   "reach": 36.32,
+   "pulls": 213529291,
+   "stars": null,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "tautulli/tautulli:v2.7.5"
+   ]
+  },
+  {
+   "id": "joomla",
+   "source": "caprover",
+   "reach": 36.26,
+   "pulls": 87288815,
+   "stars": null,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 1,
+   "images": [
+    "joomla:php7.3-apache"
+   ]
+  },
+  {
+   "id": "guacamole",
+   "source": "caprover",
+   "reach": 36.06,
+   "pulls": 77582212,
+   "stars": null,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 3,
+   "required_inputs": 1,
+   "images": [
+    "guacamole/guacamole:1.3.0",
+    "mysql:8.0.26",
+    "guacamole/guacd:1.3.0"
+   ]
+  },
+  {
+   "id": "redmine",
+   "source": "caprover",
+   "reach": 35.99,
+   "pulls": 74415272,
+   "stars": null,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "redmine:5.0.4",
+    "postgres:15.1"
+   ]
+  },
+  {
+   "id": "phpmyadmin",
+   "source": "caprover",
+   "reach": 35.94,
+   "pulls": 407307037,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "phpmyadmin/phpmyadmin:5.0.2"
+   ]
+  },
+  {
+   "id": "firefly-iii",
+   "source": "caprover",
+   "reach": 35.86,
+   "pulls": 29091634,
+   "stars": null,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 2,
+   "images": [
+    "fireflyiii/core:version-5.5.13",
+    "mariadb:10.5.4"
+   ]
+  },
+  {
+   "id": "chatgpt-ui",
+   "source": "runtipi",
+   "reach": 35.71,
+   "pulls": 34468,
+   "stars": 1625,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "addPorts",
+    "platform placeholder"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "lscr.io/linuxserver/mariadb:latest",
+    "wongsaang/chatgpt-ui-client:v2.5.9",
+    "wongsaang/chatgpt-ui-web-server:v2.5.2",
+    "wongsaang/chatgpt-ui-wsgi-server:v2.5.2"
+   ]
+  },
+  {
+   "id": "memos",
+   "source": "caprover",
+   "reach": 35.65,
+   "pulls": 10906459,
+   "stars": null,
+   "catalogues": 5,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "neosmemo/memos:0.8.3"
+   ]
+  },
+  {
+   "id": "mind",
+   "source": "runtipi",
+   "reach": 35.44,
+   "pulls": 245938,
+   "stars": 298,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "mrcas/mind:v1.4.1"
+   ]
+  },
+  {
+   "id": "n8n-io",
+   "source": "caprover",
+   "reach": 35.15,
+   "pulls": 257842446,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "n8nio/n8n:1.106.3",
+    "postgres:15.0-alpine"
+   ]
+  },
+  {
+   "id": "n8n-io-sqlite",
+   "source": "caprover",
+   "reach": 35.15,
+   "pulls": 257842446,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "n8nio/n8n:1.77.0"
+   ]
+  },
+  {
+   "id": "verdaccio",
+   "source": "caprover",
+   "reach": 34.92,
+   "pulls": 226087667,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "verdaccio/verdaccio:3.11.6"
+   ]
+  },
+  {
+   "id": "gandi-livedns",
+   "source": "runtipi",
+   "reach": 34.86,
+   "pulls": 2876530,
+   "stars": 31,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "internalPort"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "jbbodart/gandi-livedns:latest"
+   ]
+  },
+  {
+   "id": "nexus3",
+   "source": "caprover",
+   "reach": 34.72,
+   "pulls": 201810395,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "sonatype/nexus3:3.15.2"
+   ]
+  },
+  {
+   "id": "filebrowser",
+   "source": "caprover",
+   "reach": 34.54,
+   "pulls": 182208257,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "filebrowser/filebrowser:v2.63.23-s6"
+   ]
+  },
+  {
+   "id": "browserless",
+   "source": "caprover",
+   "reach": 34.48,
+   "pulls": 175750991,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "browserless/chrome:1-chrome-stable"
+   ]
+  },
+  {
+   "id": "vikunja",
+   "source": "caprover",
+   "reach": 34.09,
+   "pulls": 10532758,
+   "stars": null,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "vikunja/vikunja:2.3",
+    "postgres:18"
+   ]
+  },
+  {
+   "id": "vikunja",
+   "source": "runtipi",
+   "reach": 34.09,
+   "pulls": 10532758,
+   "stars": null,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "healthCheck"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "postgres:14",
+    "vikunja/vikunja:2.6.0"
+   ]
+  },
+  {
+   "id": "hammond",
+   "source": "runtipi",
+   "reach": 33.97,
+   "pulls": 226596,
+   "stars": 161,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "alfhou/hammond:v0.0.24"
+   ]
+  },
+  {
+   "id": "nocodb",
+   "source": "caprover",
+   "reach": 33.85,
+   "pulls": 21813704,
+   "stars": null,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "nocodb/nocodb:0.83.8"
+   ]
+  },
+  {
+   "id": "appsmith",
+   "source": "caprover",
+   "reach": 33.71,
+   "pulls": 20114393,
+   "stars": null,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "index.docker.io/appsmith/appsmith-ce:v1.6.5"
+   ]
+  },
+  {
+   "id": "couchbase",
+   "source": "caprover",
+   "reach": 33.32,
+   "pulls": 90345968,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "couchbase:community-6.6.0"
+   ]
+  },
+  {
+   "id": "smokeping",
+   "source": "caprover",
+   "reach": 33.29,
+   "pulls": 88593776,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "linuxserver/smokeping:2.7.3"
+   ]
+  },
+  {
+   "id": "etherpad",
+   "source": "caprover",
+   "reach": 33.26,
+   "pulls": 15530227,
+   "stars": null,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 1,
+   "images": [
+    "etherpad/etherpad:1.8.0",
+    "mysql:5.7"
+   ]
+  },
+  {
+   "id": "rethinkdb",
+   "source": "caprover",
+   "reach": 33.06,
+   "pulls": 77420548,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "rethinkdb:2.3.6"
+   ]
+  },
+  {
+   "id": "redmine-mysql",
+   "source": "caprover",
+   "reach": 32.99,
+   "pulls": 74415272,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "redmine:5.0.4",
+    "mysql:5.7"
+   ]
+  },
+  {
+   "id": "filestash",
+   "source": "caprover",
+   "reach": 32.88,
+   "pulls": 12435907,
+   "stars": null,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "machines/filestash:b7b45f2"
+   ]
+  },
+  {
+   "id": "immich",
+   "source": "runtipi",
+   "reach": 32.78,
+   "pulls": null,
+   "stars": 113722,
+   "catalogues": 5,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/immich-app/immich-machine-learning:v3.1.0",
+    "ghcr.io/immich-app/immich-server:v3.1.0",
+    "ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0",
+    "redis:6.2"
+   ]
+  },
+  {
+   "id": "openspeedtest",
+   "source": "caprover",
+   "reach": 32.5,
+   "pulls": 56195898,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "index.docker.io/openspeedtest/latest:speedtest"
+   ]
+  },
+  {
+   "id": "yourls",
+   "source": "caprover",
+   "reach": 32.48,
+   "pulls": 23402217,
+   "stars": null,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "yourls:1.9.2",
+    "mysql:5.7"
+   ]
+  },
+  {
+   "id": "radicale",
+   "source": "caprover",
+   "reach": 32.39,
+   "pulls": 22319709,
+   "stars": null,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "tomsquest/docker-radicale:2.1.12.1"
+   ]
+  },
+  {
+   "id": "statping",
+   "source": "caprover",
+   "reach": 32.35,
+   "pulls": 51456818,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 3,
+   "images": [
+    "statping/statping:v0.90.74",
+    "postgres:13-alpine"
+   ]
+  },
+  {
+   "id": "beszel",
+   "source": "caprover",
+   "reach": 32.22,
+   "pulls": 20136636,
+   "stars": null,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "henrygd/beszel:0.18.6"
+   ]
+  },
+  {
+   "id": "the-lounge",
+   "source": "caprover",
+   "reach": 32.22,
+   "pulls": 20150024,
+   "stars": null,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "thelounge/thelounge:4.1.0"
+   ]
+  },
+  {
+   "id": "baikal",
+   "source": "caprover",
+   "reach": 32.17,
+   "pulls": 8287115,
+   "stars": null,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "ckulka/baikal:0.9.2-nginx"
+   ]
+  },
+  {
+   "id": "postfix-relay",
+   "source": "runtipi",
+   "reach": 32.15,
+   "pulls": 655815,
+   "stars": 29,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "healthCheck"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "simenduev/postfix-relay:1.4.0"
+   ]
+  },
+  {
+   "id": "qdrant",
+   "source": "caprover",
+   "reach": 32.11,
+   "pulls": 44956230,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "qdrant/qdrant:v1.18.0"
+   ]
+  },
+  {
+   "id": "planning-poker",
+   "source": "runtipi",
+   "reach": 32.09,
+   "pulls": 98552,
+   "stars": 132,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "axeleroy/self-host-planning-poker:1.2.1"
+   ]
+  },
+  {
+   "id": "arangodb",
+   "source": "caprover",
+   "reach": 31.96,
+   "pulls": 41093754,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 1,
+   "images": [
+    "arangodb:3.4"
+   ]
+  },
+  {
+   "id": "open-webui",
+   "source": "runtipi",
+   "reach": 31.9,
+   "pulls": null,
+   "stars": 151498,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/open-webui/open-webui:v0.11.3"
+   ]
+  },
+  {
+   "id": "pgweb",
+   "source": "caprover",
+   "reach": 31.78,
+   "pulls": 37224227,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "sosedoff/pgweb:0.11.2"
+   ]
+  },
+  {
+   "id": "outline",
+   "source": "caprover",
+   "reach": 31.66,
+   "pulls": 14642702,
+   "stars": null,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 3,
+   "required_inputs": 0,
+   "images": [
+    "outlinewiki/outline:1.9.2",
+    "postgres:17-alpine",
+    "redis:7.4-alpine"
+   ]
+  },
+  {
+   "id": "chevereto",
+   "source": "caprover",
+   "reach": 31.48,
+   "pulls": 13163721,
+   "stars": null,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "nmtan/chevereto:1.2.3",
+    "mariadb:10.5.6"
+   ]
+  },
+  {
+   "id": "foundryvtt",
+   "source": "caprover",
+   "reach": 31.43,
+   "pulls": 30408933,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "felddy/foundryvtt:0.8.9"
+   ]
+  },
+  {
+   "id": "activepieces",
+   "source": "caprover",
+   "reach": 31.39,
+   "pulls": 2225881,
+   "stars": null,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "index.docker.io/activepieces/activepieces:0.12.2"
+   ]
+  },
+  {
+   "id": "rstudio",
+   "source": "caprover",
+   "reach": 31.31,
+   "pulls": 28413600,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 1,
+   "images": [
+    "rocker/rstudio:4.0.4"
+   ]
+  },
+  {
+   "id": "jellyfin",
+   "source": "runtipi",
+   "reach": 31.27,
+   "pulls": null,
+   "stars": 56861,
+   "catalogues": 5,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "lscr.io/linuxserver/jellyfin:10.11.11"
+   ]
+  },
+  {
+   "id": "rss-bridge",
+   "source": "caprover",
+   "reach": 31.11,
+   "pulls": 10674098,
+   "stars": null,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "rssbridge/rss-bridge:2021-04-25"
+   ]
+  },
+  {
+   "id": "transfer-sh",
+   "source": "caprover",
+   "reach": 30.91,
+   "pulls": 9484160,
+   "stars": null,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "dutchcoders/transfer.sh:v1.4.0"
+   ]
+  },
+  {
+   "id": "rainloop",
+   "source": "caprover",
+   "reach": 30.88,
+   "pulls": 22159274,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "hardware/rainloop:1.12.0"
+   ]
+  },
+  {
+   "id": "sourcegraph",
+   "source": "caprover",
+   "reach": 30.66,
+   "pulls": 19513938,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "sourcegraph/server:3.2.2"
+   ]
+  },
+  {
+   "id": "thumbor",
+   "source": "caprover",
+   "reach": 30.55,
+   "pulls": 7715767,
+   "stars": null,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "minimalcompact/thumbor:6.7.0"
+   ]
+  },
+  {
+   "id": "qbittorrent",
+   "source": "runtipi",
+   "reach": 30.51,
+   "pulls": null,
+   "stars": 40015,
+   "catalogues": 5,
+   "importable": false,
+   "blockers": [
+    "addPorts",
+    "host path",
+    "internalPort"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "lscr.io/linuxserver/qbittorrent:5.2.3"
+   ]
+  },
+  {
+   "id": "code-server",
+   "source": "runtipi",
+   "reach": 30.5,
+   "pulls": null,
+   "stars": 79250,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "lscr.io/linuxserver/code-server:4.135.0"
+   ]
+  },
+  {
+   "id": "mercure",
+   "source": "caprover",
+   "reach": 30.23,
+   "pulls": 15194888,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "dunglas/mercure:v0.13"
+   ]
+  },
+  {
+   "id": "docuseal",
+   "source": "caprover",
+   "reach": 29.89,
+   "pulls": 2230188,
+   "stars": null,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "index.docker.io/docuseal/docuseal:1.2.4"
+   ]
+  },
+  {
+   "id": "budibase",
+   "source": "caprover",
+   "reach": 29.86,
+   "pulls": 2187215,
+   "stars": null,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 1,
+   "images": [
+    "budibase/budibase:v2.0.31"
+   ]
+  },
+  {
+   "id": "projectsend",
+   "source": "caprover",
+   "reach": 29.76,
+   "pulls": 4907379,
+   "stars": null,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "linuxserver/projectsend:version-r1295"
+   ]
+  },
+  {
+   "id": "changedetection",
+   "source": "caprover",
+   "reach": 29.7,
+   "pulls": 11206733,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "dgtlmoon/changedetection.io:0.40.2"
+   ]
+  },
+  {
+   "id": "limesurvey",
+   "source": "caprover",
+   "reach": 29.59,
+   "pulls": 1869719,
+   "stars": null,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 1,
+   "images": [
+    "crramirez/limesurvey:3",
+    "mariadb:10.5.3"
+   ]
+  },
+  {
+   "id": "lychee",
+   "source": "caprover",
+   "reach": 29.48,
+   "pulls": 4160340,
+   "stars": null,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "lycheeorg/lychee:v4.0.7",
+    "mariadb:10.5.6"
+   ]
+  },
+  {
+   "id": "sinusbot",
+   "source": "caprover",
+   "reach": 29.41,
+   "pulls": 9493826,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "sinusbot/docker:1.0.0-beta.10-202ee4d"
+   ]
+  },
+  {
+   "id": "papermerge",
+   "source": "caprover",
+   "reach": 29.21,
+   "pulls": 3578827,
+   "stars": null,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "linuxserver/papermerge:v2.0.1-ls10"
+   ]
+  },
+  {
+   "id": "baserow",
+   "source": "caprover",
+   "reach": 29.03,
+   "pulls": 3208323,
+   "stars": null,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "baserow/baserow:1.18.0"
+   ]
+  },
+  {
+   "id": "calibre-web",
+   "source": "runtipi",
+   "reach": 28.79,
+   "pulls": null,
+   "stars": 18149,
+   "catalogues": 5,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "lscr.io/linuxserver/calibre-web:0.6.27"
+   ]
+  },
+  {
+   "id": "cyberchef",
+   "source": "runtipi",
+   "reach": 28.77,
+   "pulls": null,
+   "stars": 35799,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/gchq/cyberchef:11.4.0"
+   ]
+  },
+  {
+   "id": "gotosocial",
+   "source": "runtipi",
+   "reach": 28.71,
+   "pulls": 1125914,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "user"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "postgres:14",
+    "superseriousbusiness/gotosocial:0.22.1"
+   ]
+  },
+  {
+   "id": "coral",
+   "source": "caprover",
+   "reach": 28.69,
+   "pulls": 2650082,
+   "stars": null,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 3,
+   "required_inputs": 0,
+   "images": [
+    "mongo:4.2",
+    "redis:3.2",
+    "coralproject/talk:6"
+   ]
+  },
+  {
+   "id": "flightlog",
+   "source": "runtipi",
+   "reach": 28.53,
+   "pulls": 36539,
+   "stars": 56,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "perdian/flightlog:v2.1.14"
+   ]
+  },
+  {
+   "id": "sonarr",
+   "source": "runtipi",
+   "reach": 28.44,
+   "pulls": null,
+   "stars": 15418,
+   "catalogues": 5,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "lscr.io/linuxserver/sonarr:4.0.19"
+   ]
+  },
+  {
+   "id": "transmission",
+   "source": "runtipi",
+   "reach": 28.41,
+   "pulls": null,
+   "stars": 15182,
+   "catalogues": 5,
+   "importable": false,
+   "blockers": [
+    "addPorts",
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "lscr.io/linuxserver/transmission:4.1.3"
+   ]
+  },
+  {
+   "id": "radarr",
+   "source": "runtipi",
+   "reach": 28.28,
+   "pulls": null,
+   "stars": 14322,
+   "catalogues": 5,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/linuxserver/radarr:6.3.0"
+   ]
+  },
+  {
+   "id": "pydio",
+   "source": "caprover",
+   "reach": 28.26,
+   "pulls": 2066252,
+   "stars": null,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "pydio/cells:2.2.8",
+    "mariadb:10.6.1"
+   ]
+  },
+  {
+   "id": "calcom",
+   "source": "caprover",
+   "reach": 28.24,
+   "pulls": 4849163,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "calcom/cal.com:v3.1.3",
+    "postgres:15.0-alpine"
+   ]
+  },
+  {
+   "id": "call-only",
+   "source": "caprover",
+   "reach": 28.24,
+   "pulls": 4849163,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "calcom/cal.com:v2.5.4"
+   ]
+  },
+  {
+   "id": "mdns-repeater",
+   "source": "runtipi",
+   "reach": 28.16,
+   "pulls": 260637,
+   "stars": 9,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "internalPort",
+    "networkMode"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "angelnu/mdns_repeater:latest"
+   ]
+  },
+  {
+   "id": "dashy",
+   "source": "runtipi",
+   "reach": 28.11,
+   "pulls": null,
+   "stars": 26411,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/lissy93/dashy:4.6.12"
+   ]
+  },
+  {
+   "id": "mastodon",
+   "source": "runtipi",
+   "reach": 28.01,
+   "pulls": null,
+   "stars": 50295,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "extraLabels",
+    "platform placeholder",
+    "shmSize"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "lscr.io/linuxserver/mastodon:4.7.1",
+    "postgres:14-alpine",
+    "redis:7-alpine"
+   ]
+  },
+  {
+   "id": "cockpit",
+   "source": "caprover",
+   "reach": 27.95,
+   "pulls": 728333,
+   "stars": null,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "cockpithq/cockpit:core-2.5.2"
+   ]
+  },
+  {
+   "id": "paperless-ngx",
+   "source": "runtipi",
+   "reach": 27.76,
+   "pulls": null,
+   "stars": 44970,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "platform placeholder"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "apache/tika:latest",
+    "ghcr.io/paperless-ngx/paperless-ngx:3.1.3",
+    "gotenberg/gotenberg:8.36",
+    "postgres:17",
+    "redis:7"
+   ]
+  },
+  {
+   "id": "codimd",
+   "source": "caprover",
+   "reach": 27.54,
+   "pulls": 3228011,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "linuxserver/codimd:1.6.0-ls44",
+    "linuxserver/mariadb:110.4.14mariabionic-ls77"
+   ]
+  },
+  {
+   "id": "linkwarden",
+   "source": "runtipi",
+   "reach": 27.47,
+   "pulls": null,
+   "stars": 19721,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/linkwarden/linkwarden:v2.16.2",
+    "postgres:16-alpine"
+   ]
+  },
+  {
+   "id": "picoshare",
+   "source": "caprover",
+   "reach": 27.43,
+   "pulls": 1283221,
+   "stars": null,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "mtlynch/picoshare:1.4.4"
+   ]
+  },
+  {
+   "id": "bookstack",
+   "source": "runtipi",
+   "reach": 27.4,
+   "pulls": null,
+   "stars": 19033,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "plan policy"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "lscr.io/linuxserver/bookstack:26.05.20260608",
+    "lscr.io/linuxserver/mariadb"
+   ]
+  },
+  {
+   "id": "request-baskets",
+   "source": "caprover",
+   "reach": 27.36,
+   "pulls": 2909265,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "darklynx/request-baskets:v1.1.0"
+   ]
+  },
+  {
+   "id": "dolibarr",
+   "source": "caprover",
+   "reach": 27.09,
+   "pulls": 445114,
+   "stars": null,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 2,
+   "images": [
+    "upshift/dolibarr:11.0",
+    "postgres:9.6-alpine"
+   ]
+  },
+  {
+   "id": "freshrss",
+   "source": "runtipi",
+   "reach": 27.02,
+   "pulls": null,
+   "stars": 15975,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "lscr.io/linuxserver/freshrss:1.29.1"
+   ]
+  },
+  {
+   "id": "minio",
+   "source": "runtipi",
+   "reach": 26.94,
+   "pulls": null,
+   "stars": 61365,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "addPorts",
+    "extraLabels"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/golithus/minio:latest"
+   ]
+  },
+  {
+   "id": "databag",
+   "source": "caprover",
+   "reach": 26.86,
+   "pulls": 164375,
+   "stars": null,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "balzack/databag:0.1.17"
+   ]
+  },
+  {
+   "id": "metube",
+   "source": "runtipi",
+   "reach": 26.83,
+   "pulls": null,
+   "stars": 14669,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/alexta69/metube:latest"
+   ]
+  },
+  {
+   "id": "akaunting",
+   "source": "caprover",
+   "reach": 26.57,
+   "pulls": 1846571,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "akaunting/akaunting:3",
+    "mariadb:10.5.9"
+   ]
+  },
+  {
+   "id": "romm",
+   "source": "runtipi",
+   "reach": 26.52,
+   "pulls": null,
+   "stars": 12705,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/rommapp/romm:5.2.0",
+    "lscr.io/linuxserver/mariadb:11.4.4"
+   ]
+  },
+  {
+   "id": "databasus",
+   "source": "caprover",
+   "reach": 26.49,
+   "pulls": 1769689,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "databasus/databasus:v3.4.0"
+   ]
+  },
+  {
+   "id": "moneroblock",
+   "source": "runtipi",
+   "reach": 26.47,
+   "pulls": 23831,
+   "stars": 30,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "sethsimmons/moneroblock:v0.1.2"
+   ]
+  },
+  {
+   "id": "invidious",
+   "source": "runtipi",
+   "reach": 26.43,
+   "pulls": null,
+   "stars": 24331,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "capDrop",
+    "healthCheck",
+    "overrides",
+    "securityOpt"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "postgres:14",
+    "quay.io/invidious/invidious-companion:latest",
+    "quay.io/invidious/invidious:master",
+    "quay.io/invidious/invidious:master-arm64"
+   ]
+  },
+  {
+   "id": "homeassistant-1",
+   "source": "runtipi",
+   "reach": 26.28,
+   "pulls": null,
+   "stars": 90355,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/home-assistant/home-assistant:2026.9.0"
+   ]
+  },
+  {
+   "id": "wekan",
+   "source": "runtipi",
+   "reach": 26.12,
+   "pulls": null,
+   "stars": 21074,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/wekan/wekan:v11.49",
+    "mongo:6"
+   ]
+  },
+  {
+   "id": "humhub",
+   "source": "caprover",
+   "reach": 26.01,
+   "pulls": 564657,
+   "stars": null,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "mriedmann/humhub:1.6.2",
+    "mysql:5.7"
+   ]
+  },
+  {
+   "id": "elkarbackup",
+   "source": "caprover",
+   "reach": 25.95,
+   "pulls": 1292700,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "elkarbackup/elkarbackup:2",
+    "mariadb:10.6.2"
+   ]
+  },
+  {
+   "id": "grocy",
+   "source": "runtipi",
+   "reach": 25.88,
+   "pulls": null,
+   "stars": 9475,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "lscr.io/linuxserver/grocy:4.7.1"
+   ]
+  },
+  {
+   "id": "heimdall",
+   "source": "runtipi",
+   "reach": 25.85,
+   "pulls": null,
+   "stars": 9315,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "lscr.io/linuxserver/heimdall:2.8.2"
+   ]
+  },
+  {
+   "id": "komga",
+   "source": "runtipi",
+   "reach": 25.12,
+   "pulls": null,
+   "stars": 6655,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/gotson/komga:1.26.3"
+   ]
+  },
+  {
+   "id": "seerr",
+   "source": "runtipi",
+   "reach": 24.99,
+   "pulls": null,
+   "stars": 12537,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/seerr-team/seerr:v3.4.1"
+   ]
+  },
+  {
+   "id": "ohmyform",
+   "source": "caprover",
+   "reach": 24.81,
+   "pulls": 673447,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 3,
+   "required_inputs": 1,
+   "images": [
+    "ohmyform/ohmyform:0.9.9",
+    "mailhog/mailhog:v1.0.1",
+    "mongo:4"
+   ]
+  },
+  {
+   "id": "lidarr",
+   "source": "runtipi",
+   "reach": 24.76,
+   "pulls": null,
+   "stars": 5638,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/linuxserver/lidarr:3.1.0"
+   ]
+  },
+  {
+   "id": "matrix-conduit",
+   "source": "runtipi",
+   "reach": 24.73,
+   "pulls": 641570,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "extraLabels",
+    "field pattern",
+    "host path",
+    "internalPort"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "matrixconduit/matrix-conduit:v0.10.12",
+    "nginx"
+   ]
+  },
+  {
+   "id": "filezilla",
+   "source": "caprover",
+   "reach": 24.7,
+   "pulls": 632192,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "linuxserver/filezilla:3.51.0-r1-ls6"
+   ]
+  },
+  {
+   "id": "prerender",
+   "source": "caprover",
+   "reach": 24.68,
+   "pulls": 625278,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "tvanro/prerender-alpine:6.4.0"
+   ]
+  },
+  {
+   "id": "shlink",
+   "source": "runtipi",
+   "reach": 24.61,
+   "pulls": null,
+   "stars": 5276,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/shlinkio/shlink:5.1.5",
+    "postgres:17.2-alpine"
+   ]
+  },
+  {
+   "id": "imagor-local",
+   "source": "caprover",
+   "reach": 24.45,
+   "pulls": 546472,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "shumc/imagor:0.8.11"
+   ]
+  },
+  {
+   "id": "spacedrive",
+   "source": "runtipi",
+   "reach": 24.45,
+   "pulls": null,
+   "stars": 38937,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 2,
+   "images": [
+    "ghcr.io/spacedriveapp/spacedrive/server:0.4.2"
+   ]
+  },
+  {
+   "id": "umami-analytics",
+   "source": "runtipi",
+   "reach": 24.44,
+   "pulls": null,
+   "stars": 38713,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "healthCheck"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/umami-software/umami:3.3.1",
+    "postgres:15-alpine"
+   ]
+  },
+  {
+   "id": "trilium",
+   "source": "runtipi",
+   "reach": 24.39,
+   "pulls": null,
+   "stars": 37779,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/triliumnext/trilium:v0.105.0"
+   ]
+  },
+  {
+   "id": "dokuwiki",
+   "source": "runtipi",
+   "reach": 24.37,
+   "pulls": null,
+   "stars": 4713,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "lscr.io/linuxserver/dokuwiki:2024-02-06b-ls250"
+   ]
+  },
+  {
+   "id": "countly",
+   "source": "caprover",
+   "reach": 24.32,
+   "pulls": 507694,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "countly/countly-server:19.08.1"
+   ]
+  },
+  {
+   "id": "changedetection",
+   "source": "runtipi",
+   "reach": 24.14,
+   "pulls": null,
+   "stars": 33782,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/dgtlmoon/changedetection.io:0.60.3"
+   ]
+  },
+  {
+   "id": "homepage",
+   "source": "runtipi",
+   "reach": 24.06,
+   "pulls": null,
+   "stars": 32497,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "plan policy"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/gethomepage/homepage:v2.2.0"
+   ]
+  },
+  {
+   "id": "plex",
+   "source": "runtipi",
+   "reach": 24.03,
+   "pulls": null,
+   "stars": 4029,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "host path",
+    "networkMode"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "lscr.io/linuxserver/plex:1.43.3"
+   ]
+  },
+  {
+   "id": "jackett",
+   "source": "runtipi",
+   "reach": 24.02,
+   "pulls": null,
+   "stars": 16015,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "lscr.io/linuxserver/jackett:latest"
+   ]
+  },
+  {
+   "id": "librespeed",
+   "source": "runtipi",
+   "reach": 23.9,
+   "pulls": null,
+   "stars": 15153,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 1,
+   "images": [
+    "lscr.io/linuxserver/librespeed:6.2.1"
+   ]
+  },
+  {
+   "id": "hedgedoc",
+   "source": "runtipi",
+   "reach": 23.85,
+   "pulls": null,
+   "stars": 7407,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 1,
+   "images": [
+    "quay.io/hedgedoc/hedgedoc:1.12.0",
+    "postgres:13.4-alpine"
+   ]
+  },
+  {
+   "id": "hoarder",
+   "source": "runtipi",
+   "reach": 23.81,
+   "pulls": null,
+   "stars": 28932,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 3,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/hoarder-app/hoarder:0.33.2",
+    "gcr.io/zenika-hub/alpine-chrome:124",
+    "getmeili/meilisearch:v1.53"
+   ]
+  },
+  {
+   "id": "wikijs",
+   "source": "runtipi",
+   "reach": 23.8,
+   "pulls": null,
+   "stars": 28876,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "logging"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/requarks/wiki:2.5.314",
+    "postgres:11-alpine"
+   ]
+  },
+  {
+   "id": "prowlarr",
+   "source": "runtipi",
+   "reach": 23.78,
+   "pulls": null,
+   "stars": 7182,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/linuxserver/prowlarr:2.5.2"
+   ]
+  },
+  {
+   "id": "wg-easy-1",
+   "source": "runtipi",
+   "reach": 23.65,
+   "pulls": null,
+   "stars": 26895,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "addPorts",
+    "capAdd",
+    "sysctls"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/wg-easy/wg-easy:15.4.0"
+   ]
+  },
+  {
+   "id": "planka",
+   "source": "runtipi",
+   "reach": 23.49,
+   "pulls": null,
+   "stars": 12532,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 4,
+   "images": [
+    "ghcr.io/plankanban/planka:1.26.3",
+    "postgres:14-alpine"
+   ]
+  },
+  {
+   "id": "speedtest-tracker",
+   "source": "runtipi",
+   "reach": 23.37,
+   "pulls": null,
+   "stars": 5949,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "healthCheck"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "lscr.io/linuxserver/speedtest-tracker:1.15.0",
+    "postgres:15"
+   ]
+  },
+  {
+   "id": "pairdrop",
+   "source": "runtipi",
+   "reach": 23.28,
+   "pulls": null,
+   "stars": 11364,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "lscr.io/linuxserver/pairdrop:1.11.2"
+   ]
+  },
+  {
+   "id": "overseerr",
+   "source": "runtipi",
+   "reach": 22.99,
+   "pulls": null,
+   "stars": 4981,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/linuxserver/overseerr:1.35.0"
+   ]
+  },
+  {
+   "id": "orangehrm",
+   "source": "caprover",
+   "reach": 22.98,
+   "pulls": 234875,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 2,
+   "images": [
+    "orangehrm/orangehrm:5.4",
+    "mariadb:10.11.4"
+   ]
+  },
+  {
+   "id": "proxypool",
+   "source": "caprover",
+   "reach": 22.81,
+   "pulls": 212247,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "jhao104/proxy_pool:2.2.0",
+    "redis:6-alpine"
+   ]
+  },
+  {
+   "id": "bitmagnet",
+   "source": "runtipi",
+   "reach": 22.69,
+   "pulls": null,
+   "stars": 4343,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "addPorts",
+    "healthCheck"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/bitmagnet-io/bitmagnet:v0.10.1",
+    "postgres:17-alpine",
+    "redis:alpine"
+   ]
+  },
+  {
+   "id": "grav",
+   "source": "runtipi",
+   "reach": 22.47,
+   "pulls": null,
+   "stars": 15663,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "lscr.io/linuxserver/grav:2.0.24"
+   ]
+  },
+  {
+   "id": "flaresolverr",
+   "source": "runtipi",
+   "reach": 22.46,
+   "pulls": null,
+   "stars": 15525,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/flaresolverr/flaresolverr:v3.5.0"
+   ]
+  },
+  {
+   "id": "mealie-1",
+   "source": "runtipi",
+   "reach": 22.1,
+   "pulls": null,
+   "stars": 13181,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "deploy"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/mealie-recipes/mealie:v3.25.1"
+   ]
+  },
+  {
+   "id": "tautulli",
+   "source": "runtipi",
+   "reach": 22.09,
+   "pulls": null,
+   "stars": 6579,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "lscr.io/linuxserver/tautulli:2.18.1"
+   ]
+  },
+  {
+   "id": "netbootxyz",
+   "source": "runtipi",
+   "reach": 21.94,
+   "pulls": null,
+   "stars": 12233,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "addPorts"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/netbootxyz/netbootxyz:0.7.6-nbxyz18"
+   ]
+  },
+  {
+   "id": "esphome",
+   "source": "runtipi",
+   "reach": 21.84,
+   "pulls": null,
+   "stars": 11669,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/esphome/esphome:2026.8.2"
+   ]
+  },
+  {
+   "id": "mylar3",
+   "source": "runtipi",
+   "reach": 21.82,
+   "pulls": null,
+   "stars": 1455,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "lscr.io/linuxserver/mylar3:v0.7.1-ls84"
+   ]
+  },
+  {
+   "id": "lubelogger",
+   "source": "runtipi",
+   "reach": 21.75,
+   "pulls": null,
+   "stars": 2813,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "healthCheck",
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/hargata/lubelogger:v1.7.2",
+    "postgres:16.4-alpine"
+   ]
+  },
+  {
+   "id": "spoolman",
+   "source": "runtipi",
+   "reach": 21.74,
+   "pulls": null,
+   "stars": 2798,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/donkie/spoolman:0.26.1"
+   ]
+  },
+  {
+   "id": "etesync",
+   "source": "caprover",
+   "reach": 21.48,
+   "pulls": 98938,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 1,
+   "images": [
+    "grburst/etesync:alpine"
+   ]
+  },
+  {
+   "id": "mstream",
+   "source": "runtipi",
+   "reach": 21.39,
+   "pulls": null,
+   "stars": 2383,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "lscr.io/linuxserver/mstream:v5.12.2-ls190"
+   ]
+  },
+  {
+   "id": "tandoor",
+   "source": "runtipi",
+   "reach": 21.17,
+   "pulls": null,
+   "stars": 8583,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "healthCheck"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/tandoorrecipes/recipes:2.6.13",
+    "postgres:15-alpine"
+   ]
+  },
+  {
+   "id": "emulatorjs",
+   "source": "runtipi",
+   "reach": 21.1,
+   "pulls": null,
+   "stars": 4162,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "addPorts"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "lscr.io/linuxserver/emulatorjs:1.9.2"
+   ]
+  },
+  {
+   "id": "tinyauth",
+   "source": "runtipi",
+   "reach": 21.08,
+   "pulls": null,
+   "stars": 8227,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 2,
+   "images": [
+    "ghcr.io/tinyauthapp/tinyauth:v5.1.3"
+   ]
+  },
+  {
+   "id": "write-freely",
+   "source": "runtipi",
+   "reach": 20.83,
+   "pulls": 68192,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "addPorts"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "nephatrine/write-freely:0.16"
+   ]
+  },
+  {
+   "id": "homebox",
+   "source": "runtipi",
+   "reach": 20.77,
+   "pulls": null,
+   "stars": 7131,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "user"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/sysadminsmedia/homebox:0.26.2-rootless"
+   ]
+  },
+  {
+   "id": "readarr",
+   "source": "runtipi",
+   "reach": 20.7,
+   "pulls": null,
+   "stars": 3470,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "lscr.io/linuxserver/readarr:0.4.19-nightly"
+   ]
+  },
+  {
+   "id": "sabnzbd",
+   "source": "runtipi",
+   "reach": 20.45,
+   "pulls": null,
+   "stars": 3095,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "lscr.io/linuxserver/sabnzbd:5.1.2"
+   ]
+  },
+  {
+   "id": "serge",
+   "source": "runtipi",
+   "reach": 20.28,
+   "pulls": null,
+   "stars": 5710,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/serge-chat/serge:0.9.0"
+   ]
+  },
+  {
+   "id": "vvveb",
+   "source": "caprover",
+   "reach": 19.99,
+   "pulls": 41956,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "mysql:8.4.2",
+    "vvveb/vvvebcms:php8.3-fpm-alpine"
+   ]
+  },
+  {
+   "id": "vvveb-only",
+   "source": "caprover",
+   "reach": 19.99,
+   "pulls": 41956,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "vvveb/vvvebcms:php8.3-fpm-alpine"
+   ]
+  },
+  {
+   "id": "bewcloud",
+   "source": "runtipi",
+   "reach": 19.95,
+   "pulls": null,
+   "stars": 1229,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "platform placeholder"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/bewcloud/bewcloud:v1.9.2",
+    "postgres:15"
+   ]
+  },
+  {
+   "id": "homarr-1",
+   "source": "runtipi",
+   "reach": 19.85,
+   "pulls": null,
+   "stars": 4675,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/homarr-labs/homarr:v1.76.2"
+   ]
+  },
+  {
+   "id": "invoiceplane",
+   "source": "caprover",
+   "reach": 19.73,
+   "pulls": 15181,
+   "stars": null,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "thomascenni/alpine-invoiceplane:v1.5.11",
+    "mysql:5.7.32"
+   ]
+  },
+  {
+   "id": "moodist",
+   "source": "runtipi",
+   "reach": 19.4,
+   "pulls": null,
+   "stars": 3795,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/remvze/moodist:v2.6.1"
+   ]
+  },
+  {
+   "id": "kiwix-serve",
+   "source": "runtipi",
+   "reach": 19.38,
+   "pulls": null,
+   "stars": 946,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/kiwix/kiwix-serve:3.7.0-2"
+   ]
+  },
+  {
+   "id": "kometa",
+   "source": "runtipi",
+   "reach": 19.17,
+   "pulls": null,
+   "stars": 3416,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "internalPort"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/linuxserver/kometa:2.4.8"
+   ]
+  },
+  {
+   "id": "zipline-1",
+   "source": "runtipi",
+   "reach": 19.16,
+   "pulls": null,
+   "stars": 3405,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/diced/zipline:4.7.0",
+    "postgres:18"
+   ]
+  },
+  {
+   "id": "haven",
+   "source": "runtipi",
+   "reach": 19.02,
+   "pulls": null,
+   "stars": 802,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "plan policy"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/havenweb/haven:latest",
+    "postgres:13.2-alpine"
+   ]
+  },
+  {
+   "id": "wizarr",
+   "source": "runtipi",
+   "reach": 19.02,
+   "pulls": null,
+   "stars": 3185,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/wizarrrr/wizarr:v2026.9.0"
+   ]
+  },
+  {
+   "id": "cheshire-cat-ai",
+   "source": "runtipi",
+   "reach": 18.95,
+   "pulls": null,
+   "stars": 3085,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/cheshire-cat-ai/core:1.9.2"
+   ]
+  },
+  {
+   "id": "plausible-ce",
+   "source": "runtipi",
+   "reach": 18.77,
+   "pulls": null,
+   "stars": 2848,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 3,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/plausible/community-edition:v2.1.5",
+    "postgres:16-alpine",
+    "clickhouse/clickhouse-server:26.8.2.7-alpine"
+   ]
+  },
+  {
+   "id": "deluge",
+   "source": "runtipi",
+   "reach": 18.36,
+   "pulls": null,
+   "stars": 295,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "addPorts",
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "lscr.io/linuxserver/deluge:18.04.1"
+   ]
+  },
+  {
+   "id": "maintainerr",
+   "source": "runtipi",
+   "reach": 18.27,
+   "pulls": null,
+   "stars": 2258,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/maintainerr/maintainerr:3.26.0"
+   ]
+  },
+  {
+   "id": "recyclarr",
+   "source": "runtipi",
+   "reach": 18.11,
+   "pulls": null,
+   "stars": 2099,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "internalPort",
+    "user"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/recyclarr/recyclarr:8.7.2"
+   ]
+  },
+  {
+   "id": "duplicati",
+   "source": "runtipi",
+   "reach": 17.75,
+   "pulls": null,
+   "stars": 445,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "lscr.io/linuxserver/duplicati:2.4.0"
+   ]
+  },
+  {
+   "id": "jellyfin-vue",
+   "source": "runtipi",
+   "reach": 17.66,
+   "pulls": null,
+   "stars": 1703,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/jellyfin/jellyfin-vue:unstable.2024-10-14.a47a7d5"
+   ]
+  },
+  {
+   "id": "grampsweb",
+   "source": "runtipi",
+   "reach": 17.61,
+   "pulls": null,
+   "stars": 1664,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 1,
+   "images": [
+    "ghcr.io/gramps-project/grampsweb:26.8.1"
+   ]
+  },
+  {
+   "id": "cross-seed",
+   "source": "runtipi",
+   "reach": 17.44,
+   "pulls": null,
+   "stars": 1541,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "host path",
+    "internalPort",
+    "user"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/cross-seed/cross-seed:6.13.7"
+   ]
+  },
+  {
+   "id": "chatpad",
+   "source": "runtipi",
+   "reach": 17.36,
+   "pulls": null,
+   "stars": 1487,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "plan policy"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/deiucanta/chatpad:latest"
+   ]
+  },
+  {
+   "id": "email-oauth2-proxy",
+   "source": "runtipi",
+   "reach": 17.34,
+   "pulls": null,
+   "stars": 1469,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/blacktirion/email-oauth2-proxy-docker:2026.01.06"
+   ]
+  },
+  {
+   "id": "cup",
+   "source": "runtipi",
+   "reach": 17.14,
+   "pulls": null,
+   "stars": 1343,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/sergi0g/cup:v3.5.1"
+   ]
+  },
+  {
+   "id": "whisparr",
+   "source": "runtipi",
+   "reach": 16.63,
+   "pulls": null,
+   "stars": 1061,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/hotio/whisparr:nightly-2.0.0.548"
+   ]
+  },
+  {
+   "id": "matter-server",
+   "source": "runtipi",
+   "reach": 16.6,
+   "pulls": null,
+   "stars": 1044,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "host path",
+    "internalPort",
+    "networkMode",
+    "securityOpt"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/home-assistant-libs/python-matter-server:8.1.0"
+   ]
+  },
+  {
+   "id": "louez",
+   "source": "caprover",
+   "reach": 16.54,
+   "pulls": 5743,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 3,
+   "required_inputs": 0,
+   "images": [
+    "synapsr/louez:2.1.0",
+    "mysql:8.4",
+    "minio/minio:RELEASE.2025-09-07T16-13-09Z"
+   ]
+  },
+  {
+   "id": "chatwoot-botpress-bridge",
+   "source": "caprover",
+   "reach": 16.28,
+   "pulls": 4961,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 1,
+   "images": [
+    "douglara/chatwoot-botpress-bridge:1"
+   ]
+  },
+  {
+   "id": "codex-docs",
+   "source": "runtipi",
+   "reach": 16.14,
+   "pulls": null,
+   "stars": 846,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "plan policy"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/codex-team/codex.docs:v2.3",
+    "mongo:latest"
+   ]
+  },
+  {
+   "id": "rss",
+   "source": "runtipi",
+   "reach": 15.28,
+   "pulls": null,
+   "stars": 568,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "codeberg.org/danb/rss:v2.2.2"
+   ]
+  },
+  {
+   "id": "suwayomi",
+   "source": "runtipi",
+   "reach": 15.23,
+   "pulls": null,
+   "stars": 556,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/suwayomi/tachidesk:v2.3.2358"
+   ]
+  },
+  {
+   "id": "smallweb",
+   "source": "runtipi",
+   "reach": 15.06,
+   "pulls": null,
+   "stars": 514,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "extraLabels"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/pomdtr/smallweb:0.28.4"
+   ]
+  },
+  {
+   "id": "quireink",
+   "source": "caprover",
+   "reach": 14.79,
+   "pulls": 2099,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "quireink/quireink:2.2.2"
+   ]
+  },
+  {
+   "id": "duckdns",
+   "source": "runtipi",
+   "reach": 14.37,
+   "pulls": null,
+   "stars": 374,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "main service"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "lscr.io/linuxserver/duckdns:b14c520a-ls8"
+   ]
+  },
+  {
+   "id": "cloudflare-ddns",
+   "source": "runtipi",
+   "reach": 13.45,
+   "pulls": null,
+   "stars": 244,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "internalPort"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/joshuaavalon/cloudflare-ddns:3.3.0"
+   ]
+  },
+  {
+   "id": "booksonic",
+   "source": "runtipi",
+   "reach": 13.25,
+   "pulls": null,
+   "stars": 223,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "lscr.io/linuxserver/booksonic-air:2201.1.0"
+   ]
+  },
+  {
+   "id": "lodestone-core",
+   "source": "runtipi",
+   "reach": 10.39,
+   "pulls": null,
+   "stars": 59,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "addPorts",
+    "user"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/lodestone-team/lodestone_core:0.5.1"
+   ]
+  },
+  {
+   "id": "nextgba",
+   "source": "runtipi",
+   "reach": 9.99,
+   "pulls": null,
+   "stars": 49,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/nicotsx/nextgba:v0.1.0"
+   ]
+  },
+  {
+   "id": "qdirstat",
+   "source": "runtipi",
+   "reach": 9.22,
+   "pulls": null,
+   "stars": 34,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "lscr.io/linuxserver/qdirstat:1.8.1-ls82"
+   ]
+  },
+  {
+   "id": "audiobookshelf",
+   "source": "caprover",
+   "reach": 7.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 5,
+   "importable": false,
+   "blockers": [
+    "setup variable",
+    "volume"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "gitea",
+   "source": "caprover",
+   "reach": 7.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 5,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "immich",
+   "source": "caprover",
+   "reach": 7.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 5,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "jellyfin",
+   "source": "caprover",
+   "reach": 7.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 5,
+   "importable": false,
+   "blockers": [
+    "plan rule"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "qbittorrent",
+   "source": "caprover",
+   "reach": 7.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 5,
+   "importable": false,
+   "blockers": [
+    "containerHttpPort",
+    "endpoint",
+    "ports",
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "radarr",
+   "source": "caprover",
+   "reach": 7.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 5,
+   "importable": false,
+   "blockers": [
+    "plan rule"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "sonarr",
+   "source": "caprover",
+   "reach": 7.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 5,
+   "importable": false,
+   "blockers": [
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "syncthing",
+   "source": "caprover",
+   "reach": 7.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 5,
+   "importable": false,
+   "blockers": [
+    "ports"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "transmission",
+   "source": "caprover",
+   "reach": 7.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 5,
+   "importable": false,
+   "blockers": [
+    "ports",
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "archivebox",
+   "source": "caprover",
+   "reach": 6.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "bookstack",
+   "source": "caprover",
+   "reach": 6.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "lscr.io/linuxserver/bookstack:v24.10-ls172",
+    "lscr.io/linuxserver/mariadb:10.11.10-r0-ls161"
+   ]
+  },
+  {
+   "id": "cyberchef",
+   "source": "caprover",
+   "reach": 6.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/gchq/cyberchef:10"
+   ]
+  },
+  {
+   "id": "deluge",
+   "source": "caprover",
+   "reach": 6.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "dokuwiki",
+   "source": "caprover",
+   "reach": 6.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "lscr.io/linuxserver/dokuwiki:version-2025-05-14a"
+   ]
+  },
+  {
+   "id": "emby",
+   "source": "runtipi",
+   "reach": 6.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "lscr.io/linuxserver/emby:4.9.5"
+   ]
+  },
+  {
+   "id": "freshrss",
+   "source": "caprover",
+   "reach": 6.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "public domain",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "ghost",
+   "source": "caprover",
+   "reach": 6.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "heimdall",
+   "source": "caprover",
+   "reach": 6.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "homarr",
+   "source": "caprover",
+   "reach": 6.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "karakeep",
+   "source": "caprover",
+   "reach": 6.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 3,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/karakeep-app/karakeep:0.24.1",
+    "gcr.io/zenika-hub/alpine-chrome:123",
+    "getmeili/meilisearch:v1.13.3"
+   ]
+  },
+  {
+   "id": "linkwarden",
+   "source": "caprover",
+   "reach": 6.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 3,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/linkwarden/linkwarden:v2.13.1",
+    "getmeili/meilisearch:v1.12.8",
+    "postgres:16-alpine"
+   ]
+  },
+  {
+   "id": "nextcloud",
+   "source": "caprover",
+   "reach": 6.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "image",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "ntfy",
+   "source": "caprover",
+   "reach": 6.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "odoo",
+   "source": "caprover",
+   "reach": 6.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "networks"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "onedev",
+   "source": "runtipi",
+   "reach": 6.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "addPorts",
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "1dev/server:16.5.11",
+    "postgres:14"
+   ]
+  },
+  {
+   "id": "photoprism",
+   "source": "caprover",
+   "reach": 6.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "image",
+    "labels",
+    "setup variable",
+    "working_dir"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "plex",
+   "source": "caprover",
+   "reach": 6.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "ports",
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "pocketbase",
+   "source": "caprover",
+   "reach": 6.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "rallly",
+   "source": "caprover",
+   "reach": 6.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "stirling-pdf",
+   "source": "caprover",
+   "reach": 6.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "environment"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "wiki-js",
+   "source": "caprover",
+   "reach": 6.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "endpoint"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "adguard-home",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "ports"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "appwrite",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "host path",
+    "image"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "duplicati",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "plan rule"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "excalidraw",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "endpoint",
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "fider",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "environment"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "forgejo",
+   "source": "runtipi",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "addPorts"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "codeberg.org/forgejo/forgejo:16.0.3",
+    "postgres:14"
+   ]
+  },
+  {
+   "id": "formbricks",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "image",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "ghostfolio",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "glitchtip",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "gotenberg",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "healthchecks",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "hedgedoc",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "image",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "invidious",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "image",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "kasm-workspaces",
+   "source": "runtipi",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "addPorts",
+    "internalPort",
+    "privileged"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "lscr.io/linuxserver/kasm:1.120.20221218"
+   ]
+  },
+  {
+   "id": "leantime",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "environment",
+    "image",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "listmonk",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "mastodon",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "environment",
+    "image",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "mautic",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "caproverExtra property"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "meilisearch",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "environment"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "miniflux",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "monica",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "environment"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "moodle",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "plan rule"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "overseerr",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "lscr.io/linuxserver/overseerr:1.33.2"
+   ]
+  },
+  {
+   "id": "owncast",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "containerHttpPort",
+    "endpoint",
+    "ports",
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "paperless-ngx",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "public domain",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "passbolt",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "image",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "penpot",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "portainer",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "image",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "posthog",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "endpoint",
+    "environment",
+    "image",
+    "ports",
+    "public domain",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "prowlarr",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/linuxserver/prowlarr:amd64-nightly-version-0.1.0.718"
+   ]
+  },
+  {
+   "id": "pyload",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "ports",
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "redlib",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "quay.io/redlib/redlib:sha-6c64ebd"
+   ]
+  },
+  {
+   "id": "seafile",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "depends_on",
+    "environment",
+    "networks",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "termix",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/lukegus/termix:release-2.5.0",
+    "guacamole/guacd:1.6.0"
+   ]
+  },
+  {
+   "id": "wakapi",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/muety/wakapi:2.9.3",
+    "postgres:16.1-alpine"
+   ]
+  },
+  {
+   "id": "wallabag",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "environment"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "weblate",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "wekan",
+   "source": "caprover",
+   "reach": 4.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 3,
+   "importable": false,
+   "blockers": [
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "apprise",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "volume"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "authentik",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "healthcheck",
+    "host path",
+    "user"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "azuracast",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "ports",
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "bazarr",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "bugsink",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "depends_on",
+    "endpoint",
+    "environment",
+    "healthcheck",
+    "ports"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "calibre",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "lscr.io/linuxserver/calibre-web:2021.10.24"
+   ]
+  },
+  {
+   "id": "chatwoot",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "environment",
+    "image",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "claper",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "corteza",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "image",
+    "public domain",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "cronicle",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "host path",
+    "logging"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "dagu",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "directus",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "discourse",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "dozzle",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "elasticsearch",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "containerHttpPort",
+    "endpoint"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "flagsmith",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "gokapi",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "env_file"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "hasura",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "imgproxy",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "image",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "iredmail",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "keila",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "containerHttpPort",
+    "endpoint"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "kutt",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "containerHttpPort",
+    "endpoint"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "lago",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image",
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "languagetool",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "plan rule"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "lemmy",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "command",
+    "endpoint",
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "libredb-studio",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "environment"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "linkace",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "environment",
+    "image"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "matomo",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "mayan-edms",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "minio",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "mongo-express",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "mumble",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "endpoint",
+    "environment",
+    "ports",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "novu",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "containerHttpPort",
+    "endpoint",
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "openhabittracker",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "plan rule"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "pairdrop",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "environment"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "peertube",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "photoview",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "plan rule"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "planka",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "raneto",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "readarr",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "lscr.io/linuxserver/readarr:0.3.12-nightly"
+   ]
+  },
+  {
+   "id": "redash",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "remark42",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "public domain",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "resilio-sync",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "ports"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "resilio-sync",
+   "source": "runtipi",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "addPorts"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "lscr.io/linuxserver/resilio-sync:3.1.2"
+   ]
+  },
+  {
+   "id": "saleor",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "endpoint",
+    "image",
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "shiori",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/go-shiori/shiori:v1.5.5",
+    "mariadb:11.0.2"
+   ]
+  },
+  {
+   "id": "squidex",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "teslamate",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "endpoint",
+    "environment",
+    "image",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "tiddlywiki",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "plan rule"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "traggo",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "tubesync",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/meeb/tubesync:v0.12.0"
+   ]
+  },
+  {
+   "id": "typebot",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "endpoint",
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "zammad",
+   "source": "caprover",
+   "reach": 3.0,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "environment",
+    "image",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "Home-Assistant",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "ackee",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "affine",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "depends_on",
+    "environment",
+    "logging",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "airflow",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "user"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "bitwardenrs",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "ports"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "botpress",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "boxy-hq-only",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "btcpayserver",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "containerHttpPort",
+    "dockerfileLines",
+    "environment",
+    "image",
+    "ports",
+    "public domain",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "cachet",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "chadburn",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint",
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "chaskiq",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "environment",
+    "image",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "checkmk",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "host path",
+    "ports"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "clickhouse",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "cloudflare-tunnel",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "cloudflareddns",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint",
+    "environment",
+    "public domain",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "collabora-online",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "commento",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "couchdb",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "couchdb-clouseau",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "crafty",
+   "source": "runtipi",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "addPorts",
+    "extraLabels"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "registry.gitlab.com/crafty-controller/crafty-4:4.10.8"
+   ]
+  },
+  {
+   "id": "crater",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "davos",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "lscr.io/linuxserver/davos:2.2.1"
+   ]
+  },
+  {
+   "id": "deemix",
+   "source": "runtipi",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "registry.gitlab.com/bockiii/deemix-docker:latest"
+   ]
+  },
+  {
+   "id": "directus-mysql-redis",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "docmost",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "dragonflydb",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "plan rule"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "drone-gitea",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "host path",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "droppy",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/droppyjs/droppy:v0.0.6"
+   ]
+  },
+  {
+   "id": "eclipse-mosquitto",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint",
+    "ports"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "evolution-api",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "ferretdb",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "filerun",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "plan rule"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "fireflyiii-data-importer",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "firefox",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "lscr.io/linuxserver/firefox:78.13.0"
+   ]
+  },
+  {
+   "id": "flaresolverr",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/flaresolverr/flaresolverr:v3.3.21"
+   ]
+  },
+  {
+   "id": "focalboard",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "forge_minecraft",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "image",
+    "ports",
+    "setup variable",
+    "stdin_open",
+    "tty"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "formance-ledger",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "environment",
+    "image",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "formio",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "image",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "fusionauth",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "containerHttpPort",
+    "endpoint"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "ghost-only",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "plan rule"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "gitlab-ce",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "gitlab-runner",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint",
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "gogost",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "containerHttpPort",
+    "endpoint",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "grampsweb",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "ports"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "greenlight",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "hasura-only",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "homepage",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "image",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "imagor-s3",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "influxdb",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint",
+    "ports"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "influxdb2",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "invoiceninja",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "environment",
+    "image",
+    "setup variable",
+    "user"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "jitsi",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "ports"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "jsreport",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "plan rule"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "jupyter-lab",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "jupyter-tensorflow",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "kanboard-sqlite",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "image",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "keycloak",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "keydb",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "kibana",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "kimai2",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "public domain",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "litestream",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "logzio-collector",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint",
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "maildev",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "ports",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "mailtrain",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint",
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "mariadb",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "matrix-conduit",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "matrix-synapse",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "matrix-synapse-only",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "mattermost-ee",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "image",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "mattermost-team",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "image",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "mautic-only",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "maybe-finance",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/maybe-finance/maybe:0.4.3",
+    "postgres:16"
+   ]
+  },
+  {
+   "id": "mcp-context-forge",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "minecraft-bedrock",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint",
+    "ports"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "mixpost",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "mongodb",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "mongodb-backup-s3",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 5,
+   "images": [
+    "halvves/mongodb-backup-s3@sha256:e709db5e0fe5d44873ac5a385af214e951f2a0366a7c02b515ebf7c983658b0c"
+   ]
+  },
+  {
+   "id": "mssql",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint",
+    "ports"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "mysql",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "mysql-backup",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint",
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "n8n-io-queue-mode",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint",
+    "networks",
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "neo4j",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint",
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "netbox",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "environment",
+    "image",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "nginx-redirect",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "plan rule"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "nginx-reverse-proxy",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "nightscout",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "node-exporter",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint",
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "offen-docker-backup",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "offen-local-docker-backup",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "onlyoffice-documentserver",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "openvpn-as",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "cap_add",
+    "containerHttpPort",
+    "endpoint",
+    "ports",
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "openvscode-server",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "organizr",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "papercups",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image",
+    "public domain",
+    "volume"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "paperless-ng",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "endpoint",
+    "environment",
+    "image",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "parse",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint",
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "percona",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "endpoint",
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "pgadmin4",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "phpldapadmin",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "pigallery2",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "setup variable",
+    "volume"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "pihole",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "ports",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "plausible",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "plex-arm",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "ports",
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "poste-io",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "ports"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "postgres",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "prisma",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "ports",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "prometheus",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "image",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "rabbitmq",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "rclone",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "redis",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "rocketchat",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "rsync-looped",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "rudder-stack",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "rustfs",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint",
+    "environment",
+    "public domain",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "seafile-nomemcached",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "seatable",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image",
+    "networks",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "send",
+   "source": "runtipi",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "plan policy"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "redis:alpine",
+    "registry.gitlab.com/timvisee/send:latest"
+   ]
+  },
+  {
+   "id": "serpbear",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "image",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "shopware",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "silex-platform",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "sonarqube",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "caproverExtra property"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "spigot",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint",
+    "ports"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "splitpro",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "sshd",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint",
+    "ports"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "stalwart",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "ports"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "stalwart-mail",
+   "source": "runtipi",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "addPorts"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "ghcr.io/stalwartlabs/stalwart:v0.16.20"
+   ]
+  },
+  {
+   "id": "steam-openid-provider",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "plan rule"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "supabase-postgres",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "supertokens",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "surrealdb",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "teamspeak",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint",
+    "ports"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "telegraf",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "thingsboard-postgres",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "ports",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "trudesk",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "plan rule"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "ubooquity",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "ports",
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "umami-only",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 3,
+   "images": [
+    "ghcr.io/umami-software/umami:3.0.3"
+   ]
+  },
+  {
+   "id": "umami-postgresql",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/umami-software/umami:3.0.3",
+    "postgres:18.1-alpine"
+   ]
+  },
+  {
+   "id": "valheim",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "cap_add",
+    "endpoint",
+    "environment",
+    "ports",
+    "service property",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "valkey",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "endpoint"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "vitodeploy",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "vscode-coder",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "vsts",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "host path"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "webtop",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "windmill",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "host path",
+    "ports"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "woodpecker",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "image",
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "yagpdb",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "dockerfileLines",
+    "environment",
+    "image",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
+   "id": "zpan",
+   "source": "caprover",
+   "reach": 1.5,
+   "pulls": null,
+   "stars": null,
+   "catalogues": 1,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "ports",
+    "public domain"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  }
+ ]
+}
