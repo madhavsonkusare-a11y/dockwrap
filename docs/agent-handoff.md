@@ -1,5 +1,60 @@
 # Local Store: agent handoff
 
+## September 10 — licences resolved, and the first capability landed
+
+**Open-source top 200 by reach now holds exactly 100 importable apps**, up from
+87. Top 150 holds 86, up from 82. Overall importable is 211, up from 202.
+
+**Licences: 252 confirmed open source became 377, unknowns 332 to 207.** Two
+causes, both in the ranker. The queue only promotes a repository to an
+`identity` after reconciling it across sources, but a definition's own
+`declared_project` is good enough to establish a licence and covers 135
+candidates the identity pass leaves unknown. Worse, the refresh loop keyed its
+skip on stars alone — and stars and licence come from one call — so every
+project cached before licences were collected kept `licence: null` forever, no
+matter how often it was refreshed. Uptime Kuma, Netdata, Pi-hole, n8n and
+Portainer all sat in the unknown pile with their stars already known.
+
+Also corrected: `NOASSERTION` was being read as "not open source". GitHub
+returns it when it cannot detect a licence file, which means unknown. That was
+excluding WordPress and qBittorrent, both GPL.
+
+### The host-path blocker was three different problems
+
+Measuring what the refused paths actually are, across open-source candidates:
+
+| What it is | Apps | Answer |
+| --- | --- | --- |
+| `/etc/localtime`, `/etc/timezone` | 10 | Drop the mount, ask for a time zone |
+| `${ROOT_FOLDER_HOST}/media/...` | 41 | A folder the person chooses — the real feature |
+| `/var/run/docker.sock`, `/var/log/...` | 10 | Refuse permanently |
+
+The first is done and cost nothing in privilege: **Runtipi went from 85 to 94
+expressible.** Mounting the host clock is not a privilege request, it is an app
+wanting to show local time, and it is a Linux-server habit that does not
+survive the trip to Docker Desktop where the host filesystem is not the
+daemon's filesystem. The mount is dropped and `TZ=${TZ}` is set in its place,
+which makes the existing optional time-zone answer real — without that
+environment entry the field is dropped as inert and the app sits in UTC with no
+way to change it. Two tests: the substitution happens, and every other host
+path is still refused, so the exception cannot become a general permission.
+
+**Correction to an earlier note: Uptime Kuma is not unlocked by the folder
+feature.** It mounts `/var/run/docker.sock`, which is root-equivalent on the
+host. It stays refused, along with Netdata, Portainer, Dozzle, Dockge, crowdsec
+and homarr. Those apps exist to inspect Docker; a one-click store cannot hand
+them the daemon without a privilege conversation that has not happened.
+
+### What is left to reach one hundred verified
+
+The 100 importable apps in the open-source top 200 still have to *pass*
+qualification before any of them is verified or tested. Next capabilities, by
+apps unlocked inside the open-source top 150: **user-chosen folder (41)**, plan
+policy (10), healthCheck (4), addPorts (3).
+
+Validation: 274 Rust tests, strict Clippy, fmt, six offline gates.
+
+
 ## September 10 — flatnotes ported; all three offered apps run through one harness
 
 `tests/flatnotes_lifecycle.rs` is gone. Its probe used to depend on a note the

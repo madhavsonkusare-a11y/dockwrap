@@ -22,6 +22,17 @@ use std::collections::BTreeMap;
 /// It is the only host path that maps onto a managed project directory.
 const APP_DATA_DIR: &str = "${APP_DATA_DIR}/";
 
+/// Host files an app mounts only to read the machine's clock setting.
+///
+/// These are the single most common reason a definition is refused, and they
+/// are not a privilege request: the app wants to show local time. Mounting
+/// host files to achieve that is a Linux-server habit that does not survive
+/// the trip to Docker Desktop on Windows anyway, where the host filesystem is
+/// not the daemon's filesystem. The supported mechanism is `TZ`, which this
+/// importer already models, so the mount is dropped and a time zone answer is
+/// ensured in its place.
+const CLOCK_FILES: &[&str] = &["/etc/localtime", "/etc/timezone"];
+
 /// Settings this project will not express, on purpose. Accepting them would
 /// hand a container privileges the reviewed recipes deliberately refuse.
 const REFUSED_KEYS: &[(&str, &str)] = &[
@@ -193,6 +204,9 @@ pub fn import(id: &str, definition: &str, config: Option<&str>) -> Result<Import
     let root: Value = serde_json::from_str(definition)
         .map_err(|error| format!("{id}: definition is not valid JSON: {error}"))?;
     let mut limitations = Vec::new();
+    // Set when a service asked for the host clock, so the time zone answer is
+    // offered in place of the mount that was dropped.
+    let mut wants_clock = false;
     let declared = match config {
         Some(config) => read_form_fields(config).map_err(|error| format!("{id}: {error}"))?,
         None => DeclaredInputs {
@@ -317,6 +331,18 @@ pub fn import(id: &str, definition: &str, config: Option<&str>) -> Result<Import
             // carried through rather than blocking the import. The host path
             // check below still decides whether the mount is allowed at all.
             let read_only = volume.get("readOnly").and_then(Value::as_bool) == Some(true);
+            if CLOCK_FILES.contains(&host) {
+                // Dropped rather than refused, and replaced by the mechanism
+                // that actually works here. The environment entry is what
+                // makes the substitution real: a time zone field nothing
+                // references would be dropped as inert, leaving the app in UTC
+                // with no way to change it.
+                wants_clock = true;
+                if !environment.iter().any(|(key, _)| key == "TZ") {
+                    environment.push(("TZ".to_owned(), "${TZ}".to_owned()));
+                }
+                continue;
+            }
             match host.strip_prefix(APP_DATA_DIR) {
                 Some(relative) if !relative.is_empty() => mounts.push(PlanMount::Directory {
                     source: relative.trim_end_matches('/').to_owned(),
@@ -415,10 +441,11 @@ pub fn import(id: &str, definition: &str, config: Option<&str>) -> Result<Import
     // Runtipi supplies TZ globally. Local Store has no global timezone setting,
     // so expose an optional per-app answer instead of guessing the host zone.
     // Preserve an upstream declaration (including its default) when present.
-    let uses_timezone = planned
-        .iter()
-        .flat_map(|service| &service.environment)
-        .any(|(_, value)| placeholder_keys(value).iter().any(|key| key == "TZ"));
+    let uses_timezone = wants_clock
+        || planned
+            .iter()
+            .flat_map(|service| &service.environment)
+            .any(|(_, value)| placeholder_keys(value).iter().any(|key| key == "TZ"));
     if uses_timezone
         && !fields.iter().any(|field| field.key == "TZ")
         && !secrets.iter().any(|secret| secret.key == "TZ")
@@ -560,6 +587,62 @@ mod tests {
         "volumes": [{"hostPath": "${APP_DATA_DIR}/data", "containerPath": "/data"}]
       }]
     }"#;
+
+    /// The commonest reason a Runtipi definition was refused was not a
+    /// privilege request at all: the app mounted the host clock so it could
+    /// show local time. Dropping that mount and asking for a time zone instead
+    /// is the same intent through a mechanism that works on Windows, where the
+    /// host filesystem is not the daemon's filesystem.
+    #[test]
+    fn mounting_the_host_clock_asks_for_a_time_zone_instead_of_being_refused() {
+        let definition = r#"{"services":[{"name":"app","image":"example/app:1.0","isMain":true,"internalPort":8080,"volumes":[{"hostPath":"/etc/localtime","containerPath":"/etc/localtime","readOnly":true},{"hostPath":"/etc/timezone","containerPath":"/etc/timezone","readOnly":true},{"hostPath":"${APP_DATA_DIR}/data","containerPath":"/data"}]}]}"#;
+        let outcome = import("app", definition, None).expect("import should not fail");
+        let template = outcome
+            .template
+            .expect("clock mounts must not block an import");
+
+        // The clock mounts are gone; the app's own storage is untouched.
+        let mounts = &template.plan.services[0].mounts;
+        assert_eq!(mounts.len(), 1, "{mounts:?}");
+        assert!(!outcome
+            .limitations
+            .iter()
+            .any(|limit| limit.feature() == "host path"));
+
+        // And the intent survives as an answer with a sane default.
+        let zone = template
+            .fields
+            .iter()
+            .find(|field| field.key == "TZ")
+            .expect("a dropped clock mount must offer a time zone");
+        assert!(!zone.required);
+        assert_eq!(zone.default.as_deref(), Some("UTC"));
+    }
+
+    /// A host path that is not the clock stays refused. This is the guard that
+    /// stops the exception above from becoming a general permission to mount
+    /// host directories.
+    #[test]
+    fn any_other_host_path_is_still_refused() {
+        for host in [
+            "/var/run/docker.sock",
+            "/var/log/auth.log",
+            "${ROOT_FOLDER_HOST}/media",
+        ] {
+            let definition = format!(
+                r#"{{"services":[{{"name":"app","image":"example/app:1.0","isMain":true,"internalPort":8080,"volumes":[{{"hostPath":"{host}","containerPath":"/x"}}]}}]}}"#
+            );
+            let outcome = import("app", &definition, None).expect("import should not fail");
+            assert!(
+                outcome
+                    .limitations
+                    .iter()
+                    .any(|limit| limit.feature() == "host path"),
+                "{host} was not refused"
+            );
+            assert!(outcome.template.is_none(), "{host} produced a template");
+        }
+    }
 
     #[test]
     fn a_plain_single_service_app_becomes_a_plan() {

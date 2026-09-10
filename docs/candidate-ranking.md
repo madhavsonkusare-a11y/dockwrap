@@ -5,7 +5,7 @@ Docker Hub pull count of the app's own image, GitHub stars where the
 queue resolved a repository, and how many upstream catalogues list it.
 It orders what to look at first; it approves nothing.
 
-**Top 400: 175 importable today, 225 blocked.**
+**Top 400: 183 importable today, 217 blocked.**
 
 | # | App | Reach | Pulls | Stars | Licence | Importable | Blocked on |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -108,7 +108,7 @@ It orders what to look at first; it approves nothing.
 | 97 | homebridge (runtipi) | 52.07 | 13,621,308 | 25,486 | Apache-2.0 | no | internalPort, logging, networkMode |
 | 98 | kimai (runtipi) | 52.05 | 7,795,020 | 4,968 | AGPL-3.0 | no | healthCheck |
 | 99 | transfer-sh (caprover) | 51.91 | 9,484,160 | 15,893 | MIT | yes |  |
-| 100 | wallos (runtipi) | 51.83 | 8,359,474 | 8,472 | GPL-3.0 | no | host path |
+| 100 | wallos (runtipi) | 51.83 | 8,359,474 | 8,472 | GPL-3.0 | yes |  |
 | 101 | calcom (runtipi) | 51.66 | 4,849,163 | 48,338 | MIT | no | platform placeholder |
 | 102 | crowdsec (runtipi) | 51.66 | 21,188,244 | 14,807 | MIT | no | host path |
 | 103 | docuseal (caprover) | 51.23 | 2,230,188 | 18,490 | AGPL-3.0 | yes |  |
@@ -139,13 +139,13 @@ It orders what to look at first; it approves nothing.
 | 128 | your-spotify (runtipi) | 48.64 | 2,881,263 | 4,572 | GPL-3.0 | no | addPorts, platform placeholder |
 | 129 | owncast (runtipi) | 48.61 | 891,864 | 11,519 | MIT | no | addPorts |
 | 130 | obsidian-livesync (runtipi) | 48.42 | 205,077,851 | 271 | — | yes |  |
-| 131 | silverbullet (runtipi) | 48.35 | 729,846 | 6,030 | MIT | no | host path |
+| 131 | silverbullet (runtipi) | 48.35 | 729,846 | 6,030 | MIT | yes |  |
 | 132 | octobot (runtipi) | 48.22 | 1,445,330 | 6,549 | GPL-3.0 | yes |  |
 | 133 | sshwifty (runtipi) | 48.02 | 3,262,379 | 3,119 | AGPL-3.0 | no | privileged |
 | 134 | tubearchivist (runtipi) | 47.75 | 4,507,853 | 8,436 | GPL-3.0 | no | host path |
 | 135 | whoami (runtipi) | 47.74 | 41,607,458 | 1,418 | Apache-2.0 | no | internalPort |
 | 136 | lychee (caprover) | 47.64 | 4,160,340 | 4,286 | MIT | yes |  |
-| 137 | pinchflat (runtipi) | 47.58 | 548,868 | 5,301 | AGPL-3.0 | no | host path |
+| 137 | pinchflat (runtipi) | 47.58 | 548,868 | 5,301 | AGPL-3.0 | yes |  |
 | 138 | limesurvey (caprover) | 47.44 | 1,869,719 | 3,716 | NOASSERTION | yes |  |
 | 139 | unmanic (runtipi) | 47.29 | 15,905,317 | 2,494 | GPL-3.0 | no | host path, platform placeholder, privileged |
 | 140 | flatnotes (runtipi) | 47.17 | 1,919,295 | 3,218 | MIT | yes |  |
@@ -164,7 +164,7 @@ It orders what to look at first; it approves nothing.
 | 153 | openbooks (runtipi) | 45.13 | 4,802,254 | 2,401 | MIT | no | host path |
 | 154 | pydio (caprover) | 45.02 | 2,066,252 | 2,245 | AGPL-3.0 | yes |  |
 | 155 | picoshare (caprover) | 44.84 | 1,283,221 | 3,032 | NOASSERTION | yes |  |
-| 156 | mqttx (runtipi) | 44.76 | 1,537,126 | 5,049 | Apache-2.0 | no | host path |
+| 156 | mqttx (runtipi) | 44.76 | 1,537,126 | 5,049 | Apache-2.0 | yes |  |
 | 157 | firefly-iii-data-importer (runtipi) | 44.57 | 13,093,690 | 830 | AGPL-3.0 | yes |  |
 | 158 | tasks-md (runtipi) | 43.4 | 354,023 | 2,193 | MIT | yes |  |
 | 159 | peppermint (runtipi) | 43.27 | 491,310 | 3,163 | NOASSERTION | no | addPorts |
@@ -205,7 +205,7 @@ It orders what to look at first; it approves nothing.
 | 194 | nexus3 (caprover) | 34.72 | 201,810,395 | — | — | yes |  |
 | 195 | filebrowser (caprover) | 34.54 | 182,208,257 | — | — | yes |  |
 | 196 | browserless (caprover) | 34.48 | 175,750,991 | — | — | yes |  |
-| 197 | hammond (runtipi) | 33.97 | 226,596 | 161 | AGPL-3.0 | no | host path |
+| 197 | hammond (runtipi) | 33.97 | 226,596 | 161 | AGPL-3.0 | yes |  |
 | 198 | couchbase (caprover) | 33.32 | 90,345,968 | — | — | yes |  |
 | 199 | rethinkdb (caprover) | 33.06 | 77,420,548 | — | — | yes |  |
 | 200 | redmine-mysql (caprover) | 32.99 | 74,415,272 | — | — | yes |  |
@@ -291,8 +291,8 @@ It orders what to look at first; it approves nothing.
 | 280 | invidious (caprover) | 26.43 | — | 24,338 | AGPL-3.0 | no | image, setup variable |
 | 281 | discourse (caprover) | 26.4 | — | 47,812 | GPL-2.0 | no | dockerfileLines, image |
 | 282 | listmonk (caprover) | 26.34 | — | 23,344 | AGPL-3.0 | no | dockerfileLines, image |
-| 283 | homeassistant-1 (runtipi) | 26.28 | — | 90,356 | Apache-2.0 | no | host path |
-| 284 | wekan (runtipi) | 26.12 | — | 21,074 | MIT | no | host path |
+| 283 | homeassistant-1 (runtipi) | 26.28 | — | 90,356 | Apache-2.0 | yes |  |
+| 284 | wekan (runtipi) | 26.12 | — | 21,074 | MIT | yes |  |
 | 285 | wekan (caprover) | 26.12 | — | 21,074 | MIT | no | public domain |
 | 286 | novu (caprover) | 26.01 | — | 39,963 | NOASSERTION | no | containerHttpPort, endpoint, public domain |
 | 287 | elkarbackup (caprover) | 25.95 | 1,292,700 | — | — | yes |  |
@@ -364,8 +364,8 @@ It orders what to look at first; it approves nothing.
 | 353 | kutt (caprover) | 23.22 | — | 11,086 | MIT | no | containerHttpPort, endpoint |
 | 354 | lago (caprover) | 23.11 | — | 10,520 | AGPL-3.0 | no | dockerfileLines, image, public domain |
 | 355 | typebot (caprover) | 23.07 | — | 10,314 | NOASSERTION | no | endpoint, public domain |
-| 356 | overseerr (caprover) | 22.99 | — | 4,981 | MIT | yes |  |
-| 357 | overseerr (runtipi) | 22.99 | — | 4,981 | MIT | no | host path |
+| 356 | overseerr (runtipi) | 22.99 | — | 4,981 | MIT | yes |  |
+| 357 | overseerr (caprover) | 22.99 | — | 4,981 | MIT | yes |  |
 | 358 | orangehrm (caprover) | 22.98 | 234,875 | — | — | yes |  |
 | 359 | proxypool (caprover) | 22.81 | 212,247 | — | — | yes |  |
 | 360 | fider (caprover) | 22.77 | — | 4,512 | AGPL-3.0 | no | environment |
@@ -386,10 +386,10 @@ It orders what to look at first; it approves nothing.
 | 375 | netbootxyz (runtipi) | 21.94 | — | 12,233 | Apache-2.0 | no | addPorts |
 | 376 | mongo-express (caprover) | 21.89 | — | 5,985 | MIT | no | environment, setup variable |
 | 377 | zammad (caprover) | 21.86 | — | 5,902 | AGPL-3.0 | no | dockerfileLines, environment, image |
-| 378 | esphome (runtipi) | 21.84 | — | 11,669 | NOASSERTION | no | host path |
+| 378 | esphome (runtipi) | 21.84 | — | 11,669 | NOASSERTION | no | plan policy |
 | 379 | cronicle (caprover) | 21.83 | — | 5,826 | NOASSERTION | no | environment, host path, logging |
 | 380 | mylar3 (runtipi) | 21.82 | — | 1,455 | GPL-3.0 | no | host path |
-| 381 | lubelogger (runtipi) | 21.75 | — | 2,813 | MIT | no | healthCheck, host path |
+| 381 | lubelogger (runtipi) | 21.75 | — | 2,813 | MIT | no | healthCheck |
 | 382 | eclipse-mosquitto (caprover) | 21.74 | — | 11,187 | NOASSERTION | no | endpoint, ports |
 | 383 | remark42 (caprover) | 21.74 | — | 5,606 | MIT | no | environment, public domain, setup variable |
 | 384 | spoolman (runtipi) | 21.74 | — | 2,798 | MIT | yes |  |
@@ -416,9 +416,9 @@ Counting only apps whose *sole* remaining blocker is that feature.
 
 | Feature | Apps | Combined reach | Examples |
 | --- | --- | --- | --- |
-| host path | 39 | 1450.5 | uptime-kuma, dozzle, filebrowser, kavita |
-| plan policy | 13 | 630.3 | ghost, searxng, ghost-dev, excalidraw |
-| healthCheck | 12 | 511.2 | n8n-2, nocodb, owncloud, vikunja |
+| host path | 30 | 1126.8 | uptime-kuma, dozzle, filebrowser, kavita |
+| plan policy | 14 | 652.1 | ghost, searxng, ghost-dev, excalidraw |
+| healthCheck | 13 | 532.9 | n8n-2, nocodb, owncloud, vikunja |
 | addPorts | 8 | 334.8 | gitea, eclipse-mosquitto, emqx, owncast |
 | public domain | 7 | 170.6 | sonarr, wekan, heimdall, homarr |
 | environment | 6 | 156.8 | stirling-pdf, meilisearch, monica, wallabag |

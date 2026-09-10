@@ -2137,12 +2137,10 @@
    "pulls": 8359474,
    "stars": 8472,
    "catalogues": 3,
-   "importable": false,
-   "blockers": [
-    "host path"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
    "images": [
     "bellamy/wallos:5.5.0"
    ]
@@ -2803,12 +2801,10 @@
    "pulls": 729846,
    "stars": 6030,
    "catalogues": 4,
-   "importable": false,
-   "blockers": [
-    "host path"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 2,
    "images": [
     "zefhemel/silverbullet:2.10.0"
    ]
@@ -2932,12 +2928,10 @@
    "pulls": 548868,
    "stars": 5301,
    "catalogues": 4,
-   "importable": false,
-   "blockers": [
-    "host path"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
    "images": [
     "keglin/pinchflat:v2025.6.6"
    ]
@@ -3338,12 +3332,10 @@
    "pulls": 1537126,
    "stars": 5049,
    "catalogues": 1,
-   "importable": false,
-   "blockers": [
-    "host path"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
    "images": [
     "emqx/mqttx-web:v1.13.0"
    ]
@@ -4177,12 +4169,10 @@
    "pulls": 226596,
    "stars": 161,
    "catalogues": 1,
-   "importable": false,
-   "blockers": [
-    "host path"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
    "images": [
     "alfhou/hammond:v0.0.24"
    ]
@@ -5943,12 +5933,10 @@
    "pulls": null,
    "stars": 90356,
    "catalogues": 1,
-   "importable": false,
-   "blockers": [
-    "host path"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
    "images": [
     "ghcr.io/home-assistant/home-assistant:2026.9.0"
    ]
@@ -5965,12 +5953,10 @@
    "pulls": null,
    "stars": 21074,
    "catalogues": 3,
-   "importable": false,
-   "blockers": [
-    "host path"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 2,
    "images": [
     "ghcr.io/wekan/wekan:v11.49",
     "mongo:6"
@@ -7447,6 +7433,25 @@
   },
   {
    "id": "overseerr",
+   "source": "runtipi",
+   "reach": 22.99,
+   "open_source": true,
+   "licenses": [
+    "MIT"
+   ],
+   "pulls": null,
+   "stars": 4981,
+   "catalogues": 3,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "ghcr.io/linuxserver/overseerr:1.35.0"
+   ]
+  },
+  {
+   "id": "overseerr",
    "source": "caprover",
    "reach": 22.99,
    "open_source": true,
@@ -7462,27 +7467,6 @@
    "required_inputs": 0,
    "images": [
     "lscr.io/linuxserver/overseerr:1.33.2"
-   ]
-  },
-  {
-   "id": "overseerr",
-   "source": "runtipi",
-   "reach": 22.99,
-   "open_source": true,
-   "licenses": [
-    "MIT"
-   ],
-   "pulls": null,
-   "stars": 4981,
-   "catalogues": 3,
-   "importable": false,
-   "blockers": [
-    "host path"
-   ],
-   "services": null,
-   "required_inputs": null,
-   "images": [
-    "ghcr.io/linuxserver/overseerr:1.35.0"
    ]
   },
   {
@@ -7910,7 +7894,7 @@
    "catalogues": 1,
    "importable": false,
    "blockers": [
-    "host path"
+    "plan policy"
    ],
    "services": null,
    "required_inputs": null,
@@ -7976,8 +7960,7 @@
    "catalogues": 3,
    "importable": false,
    "blockers": [
-    "healthCheck",
-    "host path"
+    "healthCheck"
    ],
    "services": null,
    "required_inputs": null,
@@ -8609,12 +8592,10 @@
    "pulls": null,
    "stars": 3795,
    "catalogues": 1,
-   "importable": false,
-   "blockers": [
-    "host path"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
    "images": [
     "ghcr.io/remvze/moodist:v2.6.1"
    ]

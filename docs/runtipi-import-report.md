@@ -9,8 +9,8 @@ and no app becomes a reviewed recipe by appearing in this table.
 | Result | Apps |
 | --- | --- |
 | Definitions read | 250 |
-| Fully expressible as a plan today | 85 |
-| Blocked by at least one limitation | 165 |
+| Fully expressible as a plan today | 94 |
+| Blocked by at least one limitation | 156 |
 
 A blocked app is not a rejected app. Every row below is a named gap, and
 the ones marked *not modelled* or *needs input* are the work queue for the
@@ -20,11 +20,11 @@ remaining phase 2 features.
 
 | Category | Feature | Apps | Examples |
 | --- | --- | --- | --- |
-| refused | `host path` | 73 | booksonic, budibase, calibre-web |
+| refused | `host path` | 62 | booksonic, budibase, calibre-web |
 | not modelled | `addPorts` | 31 | bitcoind, bitmagnet, chatgpt-ui |
 | not modelled | `internalPort` | 19 | cloudflare-ddns, cross-seed, electrs |
+| refused | `plan policy` | 18 | bookstack, chatpad, codex-docs |
 | not modelled | `healthCheck` | 17 | bitmagnet, invidious, kimai |
-| refused | `plan policy` | 17 | bookstack, chatpad, codex-docs |
 | not modelled | `user` | 14 | bitcoind, cross-seed, electrs |
 | needs input | `platform placeholder` | 13 | bewcloud, calcom, chatgpt-ui |
 | refused | `networkMode` | 9 | cloudflared, gladys, homebridge |
@@ -81,9 +81,11 @@ need an upstream change or a different source, not more of this importer.
 | grist | 1 | 8484 | 1 | 0 |
 | grocy | 1 | 8080 | 1 | 0 |
 | guacamole | 3 | 8080 | 1 | 1 |
+| hammond | 1 | 3000 | 1 | 0 |
 | hedgedoc | 2 | 3000 | 1 | 1 |
 | heimdall | 1 | 8080 | 1 | 0 |
 | hoarder | 3 | 3000 | 1 | 2 |
+| homeassistant-1 | 1 | 8123 | 1 | 0 |
 | homer | 1 | 8080 | 0 | 0 |
 | inspircd | 1 | 6697 | 0 | 0 |
 | jellyfin-vue | 1 | 8080 | 0 | 0 |
@@ -104,6 +106,8 @@ need an upstream change or a different source, not more of this importer.
 | mongo | 1 | 27017 | 2 | 0 |
 | mongo-express | 1 | 8081 | 5 | 0 |
 | monica | 2 | 8080 | 1 | 2 |
+| moodist | 1 | 8080 | 1 | 0 |
+| mqttx | 1 | 8080 | 1 | 0 |
 | nextcloud-mini | 2 | 8080 | 3 | 1 |
 | nextgba | 1 | 3000 | 0 | 0 |
 | nginx | 1 | 8080 | 0 | 0 |
@@ -115,7 +119,9 @@ need an upstream change or a different source, not more of this importer.
 | ollama-cpu | 1 | 11434 | 0 | 0 |
 | open-webui | 1 | 8080 | 2 | 0 |
 | outline | 5 | 8080 | 2 | 6 |
+| overseerr | 1 | 5055 | 1 | 0 |
 | pairdrop | 1 | 3000 | 1 | 0 |
+| pinchflat | 1 | 8945 | 3 | 0 |
 | pingvin-share | 1 | 3000 | 0 | 0 |
 | planka | 2 | 1337 | 4 | 1 |
 | planning-poker | 1 | 8000 | 0 | 0 |
@@ -127,6 +133,7 @@ need an upstream change or a different source, not more of this importer.
 | semaphore | 2 | 3000 | 4 | 2 |
 | serge | 1 | 8008 | 0 | 0 |
 | shlink | 2 | 8080 | 0 | 1 |
+| silverbullet | 1 | 3000 | 3 | 0 |
 | simplex-smp | 1 | 5223 | 1 | 0 |
 | siyuan | 1 | 6806 | 1 | 0 |
 | spacedrive | 1 | 8080 | 2 | 0 |
@@ -138,6 +145,8 @@ need an upstream change or a different source, not more of this importer.
 | trilium | 1 | 8080 | 0 | 0 |
 | vaultwarden | 1 | 8080 | 1 | 0 |
 | viewtube | 3 | 8066 | 0 | 0 |
+| wallos | 1 | 8080 | 1 | 0 |
+| wekan | 2 | 8080 | 3 | 0 |
 | whoogle | 1 | 8255 | 0 | 0 |
 | wizarr | 1 | 5690 | 0 | 0 |
 | wordpress | 2 | 8080 | 0 | 2 |
