@@ -282,12 +282,13 @@ def generate(lock):
             {"source": "legacy", "upstream_id": item["name"], "revision": "52a36e45fbd403c1c1348f200105d9e31be2bc3c",
              "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/52a36e45fbd403c1c1348f200105d9e31be2bc3c/src/catalog_full.json"})
     # Local Store's own definitions are a source too: an app no store packages
-    # usably still needs a catalogue entry for its listing and its icon.
+    # usably still needs a catalogue entry for its listing and its icon. The
+    # entry comes from config.json alone, so that is the file cited.
     for config_path in sorted((ROOT / "definitions/apps").glob("*/config.json")):
         config = json.loads(config_path.read_text(encoding="utf-8"))
         folder = config_path.parent.relative_to(ROOT).as_posix()
         revision = subprocess.run(
-            ["git", "log", "-1", "--format=%H", "--", folder],
+            ["git", "log", "-1", "--format=%H", "--", f"{folder}/config.json"],
             cwd=ROOT, capture_output=True, text=True, check=True,
         ).stdout.strip()
         if not revision:
