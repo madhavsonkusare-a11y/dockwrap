@@ -2798,6 +2798,12 @@
           "source": "legacy",
           "upstream_id": "AnythingLLM",
           "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/52a36e45fbd403c1c1348f200105d9e31be2bc3c/src/catalog_full.json"
+        },
+        {
+          "revision": "924357fde8f7d4e414e5cae241b1e137f5f60038",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/anythingllm",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/924357fde8f7d4e414e5cae241b1e137f5f60038/definitions/apps/anythingllm/config.json"
         }
       ],
       "tags": [
@@ -2813,6 +2819,7 @@
         " rag",
         " team",
         "AI",
+        "Artificial Intelligence",
         "Generative Artificial Intelligence (GenAI)",
         "ai",
         "lowcode"
@@ -5291,6 +5298,39 @@
       "warning": false,
       "web_ui": false,
       "website_url": "https://github.com/knrdl/bicimon"
+    },
+    {
+      "aliases": [
+        "Big-AGI"
+      ],
+      "architectures": [],
+      "archived": false,
+      "category": "Artificial Intelligence",
+      "description": "A chat interface for many AI models at once, with personas, voice and multi-model replies.",
+      "icon": null,
+      "id": "big-agi",
+      "licenses": [
+        "MIT"
+      ],
+      "maintenance": "tracked",
+      "name": "Big-AGI",
+      "platforms": [],
+      "source_url": "https://github.com/enricoros/big-AGI",
+      "sources": [
+        {
+          "revision": "924357fde8f7d4e414e5cae241b1e137f5f60038",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/big-agi",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/924357fde8f7d4e414e5cae241b1e137f5f60038/definitions/apps/big-agi/config.json"
+        }
+      ],
+      "tags": [
+        "Artificial Intelligence"
+      ],
+      "updated_at": null,
+      "warning": false,
+      "web_ui": true,
+      "website_url": "https://big-agi.com"
     },
     {
       "aliases": [
@@ -27410,6 +27450,12 @@
           "source": "legacy",
           "upstream_id": "Huginn",
           "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/52a36e45fbd403c1c1348f200105d9e31be2bc3c/src/catalog_full.json"
+        },
+        {
+          "revision": "924357fde8f7d4e414e5cae241b1e137f5f60038",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/huginn",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/924357fde8f7d4e414e5cae241b1e137f5f60038/definitions/apps/huginn/config.json"
         }
       ],
       "tags": [
@@ -27417,7 +27463,7 @@
       ],
       "updated_at": "2026-08-29",
       "warning": false,
-      "web_ui": false,
+      "web_ui": true,
       "website_url": "https://github.com/huginn/huginn"
     },
     {
@@ -31660,6 +31706,39 @@
     },
     {
       "aliases": [
+        "Kotaemon"
+      ],
+      "architectures": [],
+      "archived": false,
+      "category": "Artificial Intelligence",
+      "description": "Chat with your documents: a clean RAG interface for any model.",
+      "icon": null,
+      "id": "kotaemon",
+      "licenses": [
+        "Apache-2.0"
+      ],
+      "maintenance": "tracked",
+      "name": "Kotaemon",
+      "platforms": [],
+      "source_url": "https://github.com/Cinnamon/kotaemon",
+      "sources": [
+        {
+          "revision": "924357fde8f7d4e414e5cae241b1e137f5f60038",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/kotaemon",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/924357fde8f7d4e414e5cae241b1e137f5f60038/definitions/apps/kotaemon/config.json"
+        }
+      ],
+      "tags": [
+        "Artificial Intelligence"
+      ],
+      "updated_at": null,
+      "warning": false,
+      "web_ui": true,
+      "website_url": "https://cinnamon.github.io/kotaemon/"
+    },
+    {
+      "aliases": [
         "Krayin"
       ],
       "architectures": [],
@@ -32056,7 +32135,9 @@
       "description": "Open-source UI for building and debugging multi-agent and RAG applications",
       "icon": "assets/catalog/langflow.png",
       "id": "langflow",
-      "licenses": [],
+      "licenses": [
+        "MIT"
+      ],
       "maintenance": "tracked",
       "name": "Langflow",
       "platforms": [],
@@ -32073,6 +32154,12 @@
           "source": "coolify",
           "upstream_id": "templates/compose/langflow.yaml",
           "url": "https://github.com/coollabsio/coolify/blob/08f68016dd342fe944564f79969f4ceceddc88d6/templates/compose/langflow.yaml"
+        },
+        {
+          "revision": "924357fde8f7d4e414e5cae241b1e137f5f60038",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/langflow",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/924357fde8f7d4e414e5cae241b1e137f5f60038/definitions/apps/langflow/config.json"
         }
       ],
       "tags": [
@@ -32085,6 +32172,7 @@
         " openai",
         " workflow",
         "AI",
+        "Artificial Intelligence",
         "ai",
         "langflow"
       ],
@@ -57331,6 +57419,39 @@
     },
     {
       "aliases": [
+        "SillyTavern"
+      ],
+      "architectures": [],
+      "archived": false,
+      "category": "Artificial Intelligence",
+      "description": "A front end for chatting and roleplaying with AI models and characters.",
+      "icon": null,
+      "id": "sillytavern",
+      "licenses": [
+        "AGPL-3.0"
+      ],
+      "maintenance": "tracked",
+      "name": "SillyTavern",
+      "platforms": [],
+      "source_url": "https://github.com/SillyTavern/SillyTavern",
+      "sources": [
+        {
+          "revision": "924357fde8f7d4e414e5cae241b1e137f5f60038",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/sillytavern",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/924357fde8f7d4e414e5cae241b1e137f5f60038/definitions/apps/sillytavern/config.json"
+        }
+      ],
+      "tags": [
+        "Artificial Intelligence"
+      ],
+      "updated_at": null,
+      "warning": false,
+      "web_ui": true,
+      "website_url": "https://sillytavern.app"
+    },
+    {
+      "aliases": [
         "SilverBullet",
         "Silverbullet"
       ],
@@ -66885,14 +67006,21 @@
           "source": "legacy",
           "upstream_id": "Vane",
           "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/52a36e45fbd403c1c1348f200105d9e31be2bc3c/src/catalog_full.json"
+        },
+        {
+          "revision": "924357fde8f7d4e414e5cae241b1e137f5f60038",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/vane",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/924357fde8f7d4e414e5cae241b1e137f5f60038/definitions/apps/vane/config.json"
         }
       ],
       "tags": [
+        "Artificial Intelligence",
         "Generative Artificial Intelligence (GenAI)"
       ],
       "updated_at": "2026-09-01",
       "warning": false,
-      "web_ui": false,
+      "web_ui": true,
       "website_url": "https://github.com/ItzCrazyKns/Vane"
     },
     {

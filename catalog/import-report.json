@@ -1688,7 +1688,8 @@
         "awesome-selfhosted",
         "casaos",
         "coolify",
-        "legacy"
+        "legacy",
+        "local-store"
       ]
     },
     {
@@ -6131,7 +6132,8 @@
       ],
       "sources": [
         "awesome-selfhosted",
-        "legacy"
+        "legacy",
+        "local-store"
       ]
     },
     {
@@ -13472,7 +13474,8 @@
       ],
       "sources": [
         "awesome-selfhosted",
-        "legacy"
+        "legacy",
+        "local-store"
       ]
     },
     {
@@ -15023,7 +15026,8 @@
       ],
       "sources": [
         "casaos",
-        "coolify"
+        "coolify",
+        "local-store"
       ]
     },
     {
@@ -15291,6 +15295,6 @@
     "coolify": 367,
     "runtipi": 270
   },
-  "total": 1673,
-  "tracked": 1665
+  "total": 1676,
+  "tracked": 1668
 }
