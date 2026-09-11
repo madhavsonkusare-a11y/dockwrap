@@ -1,0 +1,28 @@
+{
+  "id": "paperclip",
+  "name": "Paperclip",
+  "version": "2026.831.1",
+  "source": "https://github.com/paperclipai/paperclip",
+  "note": "Authored by Local Store from Paperclip's docker/docker-compose.quickstart.yml, using the published image instead of a local build.",
+  "form_fields": [
+    {
+      "type": "random",
+      "label": "Session signing secret",
+      "min": 64,
+      "max": 64,
+      "env_variable": "PAPERCLIP_AUTH_SECRET"
+    },
+    {
+      "type": "password",
+      "label": "Anthropic API key (optional)",
+      "required": false,
+      "env_variable": "ANTHROPIC_API_KEY"
+    },
+    {
+      "type": "password",
+      "label": "OpenAI API key (optional)",
+      "required": false,
+      "env_variable": "OPENAI_API_KEY"
+    }
+  ]
+}

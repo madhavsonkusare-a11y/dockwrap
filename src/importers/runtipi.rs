@@ -136,7 +136,6 @@ const NOT_MODELLED_KEYS: &[(&str, &str)] = &[
     ("tty", "allocates a TTY"),
     ("stdinOpen", "keeps stdin open"),
     ("stopGracePeriod", "sets a stop grace period"),
-    ("stopSignal", "sets a stop signal"),
     ("shmSize", "sets shared memory size"),
     ("workingDir", "sets a working directory"),
     ("ulimits", "sets resource limits"),
@@ -536,6 +535,15 @@ pub fn import(id: &str, definition: &str, config: Option<&str>) -> Result<Import
                 )),
             }
         }
+        if let Some(value) = service.get("stopSignal") {
+            match value.as_str() {
+                Some(signal) => overrides.stop_signal = Some(signal.to_owned()),
+                None => limitations.push(not_modelled(
+                    "stopSignal",
+                    format!("{name} declares a stop signal this importer cannot read"),
+                )),
+            }
+        }
 
         planned.push(PlanService {
             name,
@@ -886,6 +894,27 @@ mod tests {
         assert_eq!(port.host, 8080);
         // It has to render, not merely construct.
         assert!(plan.to_compose().unwrap().contains("127.0.0.1:8080:8080"));
+    }
+
+    /// Postgres shuts down cleanly only on SIGINT. Penpot's definition says
+    /// so, and refusing it cost Penpot its import.
+    #[test]
+    fn a_stop_signal_is_carried_through_and_a_bad_one_refused() {
+        let definition = r#"{"services": [{"name": "db", "image": "postgres:15.14",
+            "isMain": true, "internalPort": 5432, "stopSignal": "SIGINT"}]}"#;
+        let outcome = import("db", definition, None).unwrap();
+        assert!(outcome.limitations.is_empty(), "{:?}", outcome.limitations);
+        let compose = outcome.plan().expect("a plan").to_compose().unwrap();
+        assert!(compose.contains("stop_signal: SIGINT"), "{compose}");
+
+        let hostile = definition.replace("SIGINT", "SIGINT\\n    privileged: true");
+        let outcome = import("db", &hostile, None).unwrap();
+        assert!(
+            outcome
+                .plan()
+                .map_or(true, |plan| plan.to_compose().is_err()),
+            "a stop signal carried something else into the file"
+        );
     }
 
     #[test]

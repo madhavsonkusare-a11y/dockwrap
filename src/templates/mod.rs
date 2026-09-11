@@ -202,10 +202,14 @@ impl ReviewedTemplate {
             }
             "runtipi" => {
                 let config = self.config.as_ref().ok_or("Runtipi review requires its companion config")?;
-                let expected = format!("apps/{}/config.json", self.id);
-                if self.origin.path != format!("apps/{}/docker-compose.json", self.id)
-                    || config.path != expected
-                {
+                // Runtipi's store keeps an app at `apps/<id>/`; Local Store's
+                // own definitions, written in the same format, keep it at
+                // `definitions/apps/<id>/`. Either way the definition and its
+                // config sit together and name this app.
+                let definition = format!("apps/{}/docker-compose.json", self.id);
+                let root = self.origin.path.strip_suffix(&definition);
+                let expected = format!("{}apps/{}/config.json", root.unwrap_or_default(), self.id);
+                if !matches!(root, Some("" | FIRST_PARTY_ROOT)) || config.path != expected {
                     return Err("Runtipi definition and config must name the reviewed app in the same pinned source".into());
                 }
                 let value: serde_json::Value = serde_json::from_str(&config.content)
@@ -339,6 +343,14 @@ const VAULTWARDEN: &str = include_str!("vaultwarden.json");
 const WALLOS: &str = include_str!("wallos.json");
 const WHOOGLE: &str = include_str!("whoogle.json");
 const WORDPRESS: &str = include_str!("wordpress.json");
+
+/// Where Local Store keeps definitions it wrote itself, in Runtipi's format.
+///
+/// For an app no store packages well — Paperclip is in none, and Runtipi's
+/// Penpot runs `:latest` with an exporter pointed at the wrong port. A
+/// definition here is reviewed exactly like an imported one; the difference
+/// is only who is answerable for it.
+pub const FIRST_PARTY_ROOT: &str = "definitions/";
 
 /// Every template a review has passed. Being here is not being offered.
 pub fn reviewed_templates() -> Vec<ReviewedTemplate> {
@@ -582,6 +594,46 @@ mod tests {
     /// it rests on has to be there. A withheld template is held to the same
     /// standard everywhere else; this is the part that only matters once an
     /// app can actually reach a person.
+    /// A definition Local Store wrote has no upstream to compare against, so
+    /// the file in this repository is the source of truth, and the manifest
+    /// has to carry it byte for byte — not an edited copy.
+    #[test]
+    fn a_first_party_definition_is_the_file_in_the_tree() {
+        let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"));
+        for reviewed in reviewed_templates() {
+            if !reviewed.origin.path.starts_with(FIRST_PARTY_ROOT) {
+                continue;
+            }
+            let on_disk =
+                std::fs::read_to_string(root.join(&reviewed.origin.path)).unwrap_or_else(|_| {
+                    panic!(
+                        "{}: {} is not in the tree",
+                        reviewed.id, reviewed.origin.path
+                    )
+                });
+            assert_eq!(
+                on_disk.replace("\r\n", "\n"),
+                reviewed.definition.replace("\r\n", "\n"),
+                "{}: the manifest carries a different definition than {}",
+                reviewed.id,
+                reviewed.origin.path
+            );
+            let config = reviewed
+                .config
+                .as_ref()
+                .expect("a first-party definition has its config");
+            let on_disk = std::fs::read_to_string(root.join(&config.path))
+                .unwrap_or_else(|_| panic!("{}: {} is not in the tree", reviewed.id, config.path));
+            assert_eq!(
+                on_disk.replace("\r\n", "\n"),
+                config.content.replace("\r\n", "\n"),
+                "{}: the manifest carries a different config than {}",
+                reviewed.id,
+                config.path
+            );
+        }
+    }
+
     #[test]
     fn an_approved_template_carries_the_evidence_its_approval_claims() {
         for id in APPROVED {

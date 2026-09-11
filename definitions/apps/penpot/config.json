@@ -1,0 +1,23 @@
+{
+  "id": "penpot",
+  "name": "Penpot",
+  "version": "2.17.2",
+  "source": "https://github.com/penpot/penpot",
+  "note": "Authored by Local Store from Penpot's official docker-compose.yaml, not taken from Runtipi's store.",
+  "form_fields": [
+    {
+      "type": "random",
+      "label": "Session signing key",
+      "min": 64,
+      "max": 64,
+      "env_variable": "PENPOT_SECRET_KEY"
+    },
+    {
+      "type": "random",
+      "label": "Database password",
+      "min": 32,
+      "max": 32,
+      "env_variable": "PENPOT_DB_PASSWORD"
+    }
+  ]
+}

@@ -148,6 +148,10 @@ pub struct PlanOverrides {
     pub entrypoint: Option<PlanArgs>,
     /// A name the container answers to on the project network.
     pub hostname: Option<String>,
+    /// The signal Docker sends to stop the container. Postgres needs SIGINT
+    /// for a fast, clean shutdown; the default SIGTERM makes it wait for every
+    /// client to leave, and Docker kills it before it does.
+    pub stop_signal: Option<String>,
 }
 
 impl PlanOverrides {
@@ -160,6 +164,22 @@ impl PlanOverrides {
         }
         if let Some(entrypoint) = &self.entrypoint {
             entrypoint.validate("entrypoint")?;
+        }
+        if let Some(signal) = &self.stop_signal {
+            // A name like SIGINT, or a number — nothing that could carry
+            // anything else into the line it renders into.
+            let named = signal.strip_prefix("SIG").is_some_and(|rest| {
+                !rest.is_empty()
+                    && rest
+                        .chars()
+                        .all(|c| c.is_ascii_uppercase() || c.is_ascii_digit())
+            });
+            let numbered = !signal.is_empty()
+                && signal.len() <= 2
+                && signal.chars().all(|c| c.is_ascii_digit());
+            if !named && !numbered {
+                return Err(format!("stop signal {signal:?} is not a signal name"));
+            }
         }
         if let Some(hostname) = &self.hostname {
             // Docker rejects anything else, and a plan should say so first.
@@ -183,6 +203,9 @@ impl PlanOverrides {
         }
         if let Some(hostname) = &self.hostname {
             out.push_str(&format!("    hostname: {}\n", scalar(hostname)));
+        }
+        if let Some(signal) = &self.stop_signal {
+            out.push_str(&format!("    stop_signal: {signal}\n"));
         }
         // Entry point before command, the order Docker applies them in.
         if let Some(entrypoint) = &self.entrypoint {
