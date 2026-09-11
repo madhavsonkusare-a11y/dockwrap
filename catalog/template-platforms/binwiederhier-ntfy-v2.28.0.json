@@ -1,0 +1,71 @@
+{
+  "creator": 18813,
+  "id": 1286390765,
+  "images": [
+    {
+      "architecture": "amd64",
+      "features": "",
+      "variant": null,
+      "digest": "sha256:f8060a494b69d53866ef505c36a205efcce3204618d6e183a87128cca6e7cac9",
+      "os": "linux",
+      "os_features": "",
+      "os_version": null,
+      "size": 35875484,
+      "status": "active",
+      "last_pulled": "2026-09-11T18:36:49.69996157Z",
+      "last_pushed": "2026-08-27T20:26:35.302989721Z"
+    },
+    {
+      "architecture": "arm64",
+      "features": "",
+      "variant": null,
+      "digest": "sha256:8d8c4f3ec657e16ee65ca5b1b22a1971a6a1ebbbf6cbe5d6951aa593ed252bc6",
+      "os": "linux",
+      "os_features": "",
+      "os_version": null,
+      "size": 34663942,
+      "status": "active",
+      "last_pulled": "2026-09-11T18:30:28.829005066Z",
+      "last_pushed": "2026-08-27T20:26:26.708677795Z"
+    },
+    {
+      "architecture": "arm",
+      "features": "",
+      "variant": "v7",
+      "digest": "sha256:f311f8a9cccf20d1c1f60214d4512625ae70794d80e4c46d4dee16b07fd25026",
+      "os": "linux",
+      "os_features": "",
+      "os_version": null,
+      "size": 34136539,
+      "status": "active",
+      "last_pulled": "2026-09-11T18:33:59.366533Z",
+      "last_pushed": "2026-08-27T20:26:09.544175636Z"
+    },
+    {
+      "architecture": "arm",
+      "features": "",
+      "variant": "v6",
+      "digest": "sha256:923a046a45b993e1a3c15db2866057c719659f3eccc4f466d1b55010c5334a7e",
+      "os": "linux",
+      "os_features": "",
+      "os_version": null,
+      "size": 34445276,
+      "status": "active",
+      "last_pulled": "2026-09-11T18:33:57.596785369Z",
+      "last_pushed": "2026-08-27T20:26:18.184224133Z"
+    }
+  ],
+  "last_updated": "2026-08-27T20:26:47.310709Z",
+  "last_updater": 18813,
+  "last_updater_username": "binwiederhier",
+  "name": "v2.28.0",
+  "repository": 15668359,
+  "full_size": 35875484,
+  "v2": true,
+  "tag_status": "active",
+  "tag_last_pulled": "2026-09-11T18:36:49.69996157Z",
+  "tag_last_pushed": "2026-08-27T20:26:47.310709Z",
+  "media_type": "application/vnd.docker.distribution.manifest.list.v2+json",
+  "content_type": "image",
+  "digest": "sha256:6ef4b819f722fccdc036af611c4774cfdc2de821ab74fdd48bbf4c9d6f8973da"
+}

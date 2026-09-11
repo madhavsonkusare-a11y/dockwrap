@@ -1,0 +1,45 @@
+{
+  "creator": 20137641,
+  "id": 1291484534,
+  "images": [
+    {
+      "architecture": "amd64",
+      "features": "",
+      "variant": null,
+      "digest": "sha256:ea6eb03b1ec6c43a20c72913ff2461e2b9aa6989e66ebb9cd1a0674cb445e873",
+      "os": "linux",
+      "os_features": "",
+      "os_version": null,
+      "size": 780528590,
+      "status": "active",
+      "last_pulled": "2026-09-11T18:35:54.83734329Z",
+      "last_pushed": "2026-09-01T13:18:58.139717469Z"
+    },
+    {
+      "architecture": "arm64",
+      "features": "",
+      "variant": null,
+      "digest": "sha256:dc2e68c3593fc24c0888e63bb38bef5c93da7c7b814d18b63a5854e880c74e7d",
+      "os": "linux",
+      "os_features": "",
+      "os_version": null,
+      "size": 780149423,
+      "status": "active",
+      "last_pulled": "2026-09-11T15:24:29.731130331Z",
+      "last_pushed": "2026-09-01T13:18:58.617915375Z"
+    }
+  ],
+  "last_updated": "2026-09-01T13:18:59.624805Z",
+  "last_updater": 20137641,
+  "last_updater_username": "metabaserelease",
+  "name": "v0.63.16",
+  "repository": 351014,
+  "full_size": 780528590,
+  "v2": true,
+  "tag_status": "active",
+  "tag_last_pulled": "2026-09-11T18:35:54.83734329Z",
+  "tag_last_pushed": "2026-09-01T13:18:59.624805Z",
+  "media_type": "application/vnd.oci.image.index.v1+json",
+  "content_type": "image",
+  "digest": "sha256:c6dd0c6a7861a612aab5825a7fd4236d803883a1c1227715bf41c0948c3cde82"
+}
