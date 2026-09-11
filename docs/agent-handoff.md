@@ -14,6 +14,10 @@ When it resumes:
 - **Umbrel gallery icons (8):** keep them, with the `NOASSERTION` notice.
 - **Second published port:** not now. Build it when a candidate actually needs
   one, designed around that app. (Penpot's MCP did not: its frontend proxies it.)
+- **Shrimply** (soirihiroka/shrimply): skipped by the owner. It is a native GTK/Qt
+  video editor — macOS zip and Linux Flatpak only, no web UI, no Windows build, no
+  server image (its Dockerfile only compiles the desktop binaries) — so it cannot
+  run the way Local Store runs apps.
 - Not chosen for now: retrying the older failures (SiYuan, Appsmith, Joomla,
   Mongo Express — candidates for the Host-header and seed fixes), pushing
   toward 30, and rewriting Notemark's definition.
