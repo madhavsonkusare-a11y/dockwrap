@@ -18,7 +18,8 @@
 //!
 //! `--only app,app` runs named candidates and re-runs them even if a
 //! result exists; `--source runtipi` picks which packaging of them to prove.
-//! `--offered --only app` proves an app as it is offered, image pins and all.
+//! `--offered --only app` proves an app as it is offered, image pins and all;
+//! `--probe scripts/app-probe.mjs` adds that app's own check.
 use local_store::qualification::{qualify_template, Batch, Evidence, Resume, ScriptProbe, Subject};
 use local_store::setup::{FieldKind, PlanTemplate};
 use std::collections::BTreeMap;
@@ -311,7 +312,7 @@ fn is_environmental(evidence: &Evidence) -> bool {
 /// about what somebody would actually install. This runs the reviewed mapping
 /// through the same harness and writes the result where the review names it.
 /// It is also how an offered app is re-verified before a release.
-fn run_offered(only: &[String], batch: &Batch) {
+fn run_offered(only: &[String], batch: &Batch, app_probe: Option<&str>) {
     if only.is_empty() {
         eprintln!("--offered needs --only app,app: it re-proves named apps, not a ranking");
         std::process::exit(2);
@@ -333,11 +334,24 @@ fn run_offered(only: &[String], batch: &Batch) {
             }
         };
         let answers = auto_answers(&template, &scratch);
-        let probe = ScriptProbe::new(
-            root().join("scripts/standard-probe.mjs"),
-            "it opens a page with a clear next step, and the same page after a restart and reinstall",
-        )
-        .with_args(vec![scratch
+        // An app's own probe checks what only that app does — Penpot's MCP
+        // server, say — on top of the standard. It is named on the command
+        // line rather than found by file name, because probes do not all
+        // take the same arguments.
+        let (script, describes) = match app_probe {
+            Some(script) => (
+                root().join(script),
+                format!(
+                    "it opens a page with a clear next step, the same page after a restart and reinstall, and {script} passed"
+                ),
+            ),
+            None => (
+                root().join("scripts/standard-probe.mjs"),
+                "it opens a page with a clear next step, and the same page after a restart and reinstall"
+                    .to_owned(),
+            ),
+        };
+        let probe = ScriptProbe::new(script, describes).with_args(vec![scratch
             .join(format!("standard-{app}.json"))
             .to_string_lossy()
             .into_owned()]);
@@ -407,7 +421,12 @@ fn main() {
     let results = root().join(".cache/qualification");
     let batch = Batch::open(&results).expect("a results directory");
     if args.iter().any(|arg| arg == "--offered") {
-        run_offered(&only, &batch);
+        let app_probe = args
+            .iter()
+            .position(|arg| arg == "--probe")
+            .and_then(|at| args.get(at + 1))
+            .map(String::as_str);
+        run_offered(&only, &batch, app_probe);
         return;
     }
     let candidates = ranked(
