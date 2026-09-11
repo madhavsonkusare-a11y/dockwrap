@@ -182,7 +182,14 @@ pub struct ReviewedTemplate {
     /// carried verbatim like the definition itself so a review covers them.
     #[serde(default)]
     pub seeds: Vec<TemplateSeed>,
+    /// Seconds the first start may take, for an app a review measured as
+    /// slower than the default. Bounded so a broken app still fails in time.
+    #[serde(default)]
+    pub first_start_seconds: Option<u64>,
 }
+
+/// The longest first start a review may allow: fifteen minutes.
+pub const MAX_FIRST_START_SECONDS: u64 = 900;
 
 #[derive(Debug, Clone, Deserialize, PartialEq)]
 #[serde(deny_unknown_fields)]
@@ -312,6 +319,16 @@ impl ReviewedTemplate {
             }
         }
 
+        if let Some(seconds) = self.first_start_seconds {
+            let default = crate::runtime::FIRST_START_TIMEOUT.as_secs();
+            if seconds <= default || seconds > MAX_FIRST_START_SECONDS {
+                return Err(format!(
+                    "{}: a first start of {seconds}s must be longer than the {default}s default and at most {MAX_FIRST_START_SECONDS}s",
+                    self.id
+                ));
+            }
+            template.first_start = Some(std::time::Duration::from_secs(seconds));
+        }
         template.seeds = self
             .seeds
             .iter()
@@ -342,7 +359,9 @@ impl ReviewedTemplate {
 const ACTIVEPIECES: &str = include_str!("activepieces.json");
 const ACTUAL: &str = include_str!("actual.json");
 const ADMINER: &str = include_str!("adminer.json");
+const ANYTHINGLLM: &str = include_str!("anythingllm.json");
 const BESZEL: &str = include_str!("beszel.json");
+const BIG_AGI: &str = include_str!("big-agi.json");
 const CODIMD: &str = include_str!("codimd.json");
 const FILESTASH: &str = include_str!("filestash.json");
 const FLATNOTES: &str = include_str!("flatnotes.json");
@@ -352,9 +371,14 @@ const GOTIFY: &str = include_str!("gotify.json");
 const GRAFANA: &str = include_str!("grafana.json");
 const GROCY: &str = include_str!("grocy.json");
 const HOMER: &str = include_str!("homer.json");
+const HUGINN: &str = include_str!("huginn.json");
 const JELLYSEERR: &str = include_str!("jellyseerr.json");
 const JOPLIN: &str = include_str!("joplin.json");
 const KANBOARD: &str = include_str!("kanboard.json");
+const KHOJ: &str = include_str!("khoj.json");
+const KOTAEMON: &str = include_str!("kotaemon.json");
+const LANGFLOW: &str = include_str!("langflow.json");
+const LIBRECHAT: &str = include_str!("librechat.json");
 const METABASE: &str = include_str!("metabase.json");
 const MONICA: &str = include_str!("monica.json");
 const NAVIDROME: &str = include_str!("navidrome.json");
@@ -364,7 +388,9 @@ const OMBI: &str = include_str!("ombi.json");
 const PAPERCLIP: &str = include_str!("paperclip.json");
 const PENPOT: &str = include_str!("penpot.json");
 const PRIVATEBIN: &str = include_str!("privatebin.json");
+const SILLYTAVERN: &str = include_str!("sillytavern.json");
 const TAUTULLI: &str = include_str!("tautulli.json");
+const VANE: &str = include_str!("vane.json");
 const VAULTWARDEN: &str = include_str!("vaultwarden.json");
 const WALLOS: &str = include_str!("wallos.json");
 const WHOOGLE: &str = include_str!("whoogle.json");
@@ -384,7 +410,9 @@ pub fn reviewed_templates() -> Vec<ReviewedTemplate> {
         ACTIVEPIECES,
         ACTUAL,
         ADMINER,
+        ANYTHINGLLM,
         BESZEL,
+        BIG_AGI,
         CODIMD,
         FILESTASH,
         FLATNOTES,
@@ -394,9 +422,14 @@ pub fn reviewed_templates() -> Vec<ReviewedTemplate> {
         GRAFANA,
         GROCY,
         HOMER,
+        HUGINN,
         JELLYSEERR,
         JOPLIN,
         KANBOARD,
+        KHOJ,
+        KOTAEMON,
+        LANGFLOW,
+        LIBRECHAT,
         METABASE,
         MONICA,
         NAVIDROME,
@@ -406,7 +439,9 @@ pub fn reviewed_templates() -> Vec<ReviewedTemplate> {
         PAPERCLIP,
         PENPOT,
         PRIVATEBIN,
+        SILLYTAVERN,
         TAUTULLI,
+        VANE,
         VAULTWARDEN,
         WALLOS,
         WHOOGLE,
@@ -587,13 +622,17 @@ mod tests {
     /// costs exactly as much deliberation as the first one did.
     const APPROVED: &[&str] = &[
         "adminer",
+        "anythingllm",
         "beszel",
+        "big-agi",
         "flatnotes",
         "glance",
         "grafana",
         "grocy",
         "homer",
         "kanboard",
+        "kotaemon",
+        "librechat",
         "metabase",
         "monica",
         "navidrome",
@@ -688,6 +727,27 @@ mod tests {
                 config.path
             );
         }
+    }
+
+    /// A review may give a slow app longer to start, but not forever and
+    /// not less than everyone already gets.
+    #[test]
+    fn a_first_start_allowance_is_bounded_and_reaches_the_plan() {
+        let mut reviewed = reviewed_template("khoj").expect("khoj is reviewed");
+        for refused in [
+            60,
+            crate::runtime::FIRST_START_TIMEOUT.as_secs(),
+            MAX_FIRST_START_SECONDS + 1,
+        ] {
+            reviewed.first_start_seconds = Some(refused);
+            assert!(reviewed.plan_template().is_err(), "{refused}s was accepted");
+        }
+        reviewed.first_start_seconds = Some(600);
+        let template = reviewed.plan_template().expect("600s is within bounds");
+        assert_eq!(
+            template.first_start,
+            Some(std::time::Duration::from_secs(600))
+        );
     }
 
     #[test]

@@ -1,0 +1,72 @@
+{
+  "app": "librechat",
+  "passed": true,
+  "scope": "reviewed mapping, transaction, managed storage and first use, on one host and one architecture",
+  "promotion": "approved",
+  "source_revision": "a333806252ca303c76836a28d64085dec5f2c637",
+  "images": [
+    "ghcr.io/danny-avila/librechat:v0.8.7",
+    "mongo:8.0.30",
+    "getmeili/meilisearch:v1.35.1"
+  ],
+  "image_ids": {
+    "getmeili/meilisearch:v1.35.1": "sha256:8b57fc3c7f46535ddef3828df1538465ac19d892eb57c9a10da6df0880bd5856",
+    "ghcr.io/danny-avila/librechat:v0.8.7": "sha256:c5db3331b845e1f289f8d04c0c77936c4bbe372f76730a804abc1c37e44d23a9",
+    "mongo:8.0.30": "sha256:4a0f30875898413139bec44c73c02a05fed172578de65b644dcdcee143ae7306"
+  },
+  "first_use": "it opens a page with a clear next step, and the same page after a restart and reinstall",
+  "steps": [
+    {
+      "step": "pull ghcr.io/danny-avila/librechat:v0.8.7",
+      "passed": true
+    },
+    {
+      "step": "pull mongo:8.0.30",
+      "passed": true
+    },
+    {
+      "step": "pull getmeili/meilisearch:v1.35.1",
+      "passed": true
+    },
+    {
+      "step": "installs with one action",
+      "passed": true
+    },
+    {
+      "step": "answers on its address",
+      "passed": true
+    },
+    {
+      "step": "is usable first install",
+      "passed": true
+    },
+    {
+      "step": "survives a restart",
+      "passed": true
+    },
+    {
+      "step": "is usable after restart",
+      "passed": true
+    },
+    {
+      "step": "reinstalls over data it kept",
+      "passed": true
+    },
+    {
+      "step": "keeps the credentials it generated",
+      "passed": true
+    },
+    {
+      "step": "is usable after a keep-data reinstall",
+      "passed": true
+    },
+    {
+      "step": "removes everything it created",
+      "passed": true
+    },
+    {
+      "step": "leaves other containers alone",
+      "passed": true
+    }
+  ]
+}

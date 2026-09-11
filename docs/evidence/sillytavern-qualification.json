@@ -1,0 +1,23 @@
+{
+  "app": "sillytavern",
+  "passed": false,
+  "scope": "reviewed mapping, transaction, managed storage and first use, on one host and one architecture",
+  "promotion": "approved",
+  "source_revision": "2d7782e9a68c3ec224bc97a198b0ccc773bc6b96",
+  "images": [
+    "ghcr.io/sillytavern/sillytavern:1.18.0"
+  ],
+  "image_ids": {},
+  "first_use": "it opens a page with a clear next step, and the same page after a restart and reinstall",
+  "steps": [
+    {
+      "step": "pull ghcr.io/sillytavern/sillytavern:1.18.0",
+      "passed": true
+    },
+    {
+      "step": "installs with one action",
+      "passed": false,
+      "detail": "Health check timed out for http://localhost:63048 sillytavern last said: Mode: Default (Root) | > sillytavern@1.18.0 init | > node src/server-init.js | Node version: v24.15.0. Running in production environment. Server directory: /home/node/app | Using config path: ./config.yaml"
+    }
+  ]
+}

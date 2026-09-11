@@ -1,0 +1,33 @@
+{
+  "app": "khoj",
+  "passed": false,
+  "scope": "reviewed mapping, transaction, managed storage and first use, on one host and one architecture",
+  "promotion": "approved",
+  "source_revision": "a333806252ca303c76836a28d64085dec5f2c637",
+  "images": [
+    "ghcr.io/khoj-ai/khoj:1.42.10",
+    "pgvector/pgvector:0.8.6-pg15",
+    "searxng/searxng:2026.9.10-931fd9787"
+  ],
+  "image_ids": {},
+  "first_use": "it opens a page with a clear next step, and the same page after a restart and reinstall",
+  "steps": [
+    {
+      "step": "pull ghcr.io/khoj-ai/khoj:1.42.10",
+      "passed": true
+    },
+    {
+      "step": "pull pgvector/pgvector:0.8.6-pg15",
+      "passed": true
+    },
+    {
+      "step": "pull searxng/searxng:2026.9.10-931fd9787",
+      "passed": true
+    },
+    {
+      "step": "installs with one action",
+      "passed": false,
+      "detail": "Health check timed out for http://localhost:58009 Containers: local-store-khoj-qualify-29720-1789143727874988000-khoj            ghcr.io/khoj-ai/khoj:1.42.10@sha256:41aa881c957a035207c11da239dc436d0f8a0c6a72b372651c5a48e08127043a          \"python3 src/khoj/ma…\"   khoj            4 minutes ago   Up 3 minutes             127.0.0.1:58009->42110/tcp; local-store-khoj-qualify-29720-1789143727874988000-khoj-database   pgvector/pgvector:0.8.6-pg15@sha256:a947c45cdc5906a1bc951f20a8709e321256343ee0f251e4ae00b5e7def4e6da          \"docker-entrypoint.s…\"   khoj-database   4 minutes ago   Up 4 minutes (healthy)   5432/tcp; local-store-khoj-qualify-29720-1789143727874988000-khoj-search     searxng/searxng:2026.9.10-931fd9787@sha256:2fb0fa85096fe6df5c3ab98ecb4d6e0ee2ef66b8fb96ce6fce0f75b51c4bd90a   \"/usr/local/searxng/…\"   khoj-search     4 minutes ago   Up 4 minutes             8080/tcp.  last said: cker-entrypoint-initdb.d/* khoj last said: [16:32:36.970884] INFO     khoj: 🌘 Starting Khoj                    main.py:147 | [16:32:36.982637] INFO     khoj: 🔒 Schedule Leader elected          main.py:171 | [16:32:37.008287] INFO     khoj: Started Background Scheduler        main.py:181 | [16:32:40.961720] INFO     khoj.configure: Initializing with    configure.py:232 | default config. khoj-database last said: 2026-09-11 16:31:27.202 UTC [1] LOG:  listening on IPv4 address \"0.0.0.0\", port 5432 | 2026-09-11 16:31:27.202 UTC [1] LOG:  listening on IPv6 address \"::\", port 5432 | 2026-09-11 16:31:27.225 UTC [1] LOG:  listening on Unix socket \"/var/run/postgresql/.s.PGSQL.5432\" | 2026-09-11 16:31:27.333 UTC [172] LOG:  database system was shut down at 2026-09-11 16:31:25 UTC | 2026-09-11 16:31:27.605 UTC [1] LOG:  database system is ready to accept connections"
+    }
+  ]
+}

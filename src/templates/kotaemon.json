@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "id": "kotaemon",
+  "display_name": "Kotaemon",
+  "catalog_name": "Kotaemon",
+  "description": "Chat with your documents: a clean RAG interface for any model.",
+  "category": "Artificial Intelligence",
+  "license": "Apache-2.0",
+  "source_url": "https://github.com/Cinnamon/kotaemon",
+  "documentation_url": "https://github.com/Cinnamon/kotaemon#with-docker-recommended",
+  "verified_at": "2026-09-11",
+  "lifecycle_proof": "docs/evidence/kotaemon-qualification.json",
+  "origin": {
+    "importer": "runtipi",
+    "repository": "madhavsonkusare-a11y/local-store",
+    "revision": "316719f140747704a483cd2cf4ca8b77e71f37e2",
+    "path": "definitions/apps/kotaemon/docker-compose.json",
+    "license": "MIT"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "ghcr.io/cinnamon/kotaemon:main-lite",
+        "source_url": "https://ghcr.io/v2/cinnamon/kotaemon/manifests/main-lite",
+        "checked_at": "2026-09-11",
+        "last_updated": "2026-05-31",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:81de41b082007df14a788327cb0306f5f08f7ea4f1d8948d4083d7bbd66b6921",
+          "linux/arm64": "sha256:f93687d81623d3faa5310c8db42d7738c678bcfdc53df9a7b7b00c513cc2138a"
+        },
+        "index_digest": "sha256:29cffbc182dda9631b8f54f382c5711eac405ca2a2f1e8958c1da64f9f144208"
+      }
+    ]
+  },
+  "promotion": {
+    "state": "approved",
+    "reason": "Approved by the owner. Qualified as offered on 2026-09-11: a real install of Kotaemon 0.12.0 (the release-day main-lite build) proved it starts, opens to a first screen with a clear next step, survives a restart and a keep-data reinstall with its data intact, and removes everything it created. Local Store wrote this definition from the project's own deployment instructions."
+  },
+  "data_storage": "Local Store managed folder / kotaemon",
+  "risk_notes": [
+    "Creates 1 Docker container and publishes one port on this computer's loopback interface only.",
+    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Written by Local Store from the project's own deployment instructions, not taken from an app store.",
+    "Starts with one account, username admin and password admin; change it the first time you sign in.",
+    "Uses the model you configure — a provider's API key or a local Ollama — and indexes the documents you upload into its folder.",
+    "Kotaemon publishes 0.12.0 only as its rolling main-lite tag; the install pins the build from its release day, 2026-05-31, by digest.",
+    "Its image is 15.9 GB — the largest Local Store offers — so the first install downloads that much and needs that much free disk."
+  ],
+  "fields": {},
+  "definition": "{\n  \"schemaVersion\": 2,\n  \"$schema\": \"https://schemas.runtipi.io/v2/dynamic-compose.json\",\n  \"services\": [\n    {\n      \"name\": \"kotaemon\",\n      \"image\": \"ghcr.io/cinnamon/kotaemon:main-lite\",\n      \"isMain\": true,\n      \"internalPort\": 7860,\n      \"environment\": [\n        {\n          \"key\": \"GRADIO_SERVER_NAME\",\n          \"value\": \"0.0.0.0\"\n        },\n        {\n          \"key\": \"GRADIO_SERVER_PORT\",\n          \"value\": \"7860\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data\",\n          \"containerPath\": \"/app/ktem_app_data\"\n        }\n      ]\n    }\n  ]\n}\n",
+  "config": {
+    "path": "definitions/apps/kotaemon/config.json",
+    "content": "{\n  \"id\": \"kotaemon\",\n  \"name\": \"Kotaemon\",\n  \"version\": \"0.12.0\",\n  \"source\": \"https://github.com/Cinnamon/kotaemon\",\n  \"website\": \"https://cinnamon.github.io/kotaemon/\",\n  \"documentation\": \"https://github.com/Cinnamon/kotaemon#with-docker-recommended\",\n  \"short_desc\": \"Chat with your documents: a clean RAG interface for any model.\",\n  \"categories\": [\n    \"Artificial Intelligence\"\n  ],\n  \"license\": \"Apache-2.0\",\n  \"form_fields\": []\n}\n"
+  }
+}

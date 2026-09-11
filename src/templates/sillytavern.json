@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "id": "sillytavern",
+  "display_name": "SillyTavern",
+  "catalog_name": "SillyTavern",
+  "description": "A front end for chatting and roleplaying with AI models and characters.",
+  "category": "Artificial Intelligence",
+  "license": "AGPL-3.0",
+  "source_url": "https://github.com/SillyTavern/SillyTavern",
+  "documentation_url": "https://docs.sillytavern.app/installation/docker/",
+  "verified_at": "",
+  "lifecycle_proof": "docs/evidence/sillytavern-qualification.json",
+  "origin": {
+    "importer": "runtipi",
+    "repository": "madhavsonkusare-a11y/local-store",
+    "revision": "9b4dc39c8919443b3e8640ea8d934464ceaa165d",
+    "path": "definitions/apps/sillytavern/docker-compose.json",
+    "license": "MIT"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "ghcr.io/sillytavern/sillytavern:1.18.0",
+        "source_url": "https://ghcr.io/v2/sillytavern/sillytavern/manifests/1.18.0",
+        "checked_at": "2026-09-11",
+        "last_updated": "2026-05-03",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:4358edc734b20f77dabd3d262738cbadd246975e3c346cd1ef91894a6f883dc1",
+          "linux/arm64": "sha256:9ce71c3bff843597debf8a1911d6d7587adefb019a37e74572400c0741d2cdec"
+        },
+        "index_digest": "sha256:7b30a1698b605d01dbd01a20459600c035f0d2c866912b69d7eee98065dcedd3"
+      }
+    ]
+  },
+  "promotion": {
+    "state": "withheld",
+    "reason": "Pending since 2026-09-11: not yet proven as offered, because its first qualification ran with the whitelist turned off, which makes SillyTavern refuse to start; the definition now widens the whitelist to Docker's networks instead. Qualification stopped when D: ran out of space; resume with qualify_batch --offered once it is compacted."
+  },
+  "data_storage": "Local Store managed folder / sillytavern",
+  "risk_notes": [
+    "Creates 1 Docker container and publishes one port on this computer's loopback interface only.",
+    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Written by Local Store from the project's own deployment instructions, not taken from an app store."
+  ],
+  "fields": {},
+  "definition": "{\n  \"schemaVersion\": 2,\n  \"$schema\": \"https://schemas.runtipi.io/v2/dynamic-compose.json\",\n  \"services\": [\n    {\n      \"name\": \"sillytavern\",\n      \"image\": \"ghcr.io/sillytavern/sillytavern:1.18.0\",\n      \"isMain\": true,\n      \"internalPort\": 8000,\n      \"environment\": [\n        {\n          \"key\": \"NODE_ENV\",\n          \"value\": \"production\"\n        },\n        {\n          \"key\": \"FORCE_COLOR\",\n          \"value\": \"1\"\n        },\n        {\n          \"key\": \"SILLYTAVERN_WHITELIST\",\n          \"value\": \"[\\\"127.0.0.1\\\", \\\"::1\\\", \\\"172.16.0.0/12\\\", \\\"192.168.0.0/16\\\"]\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/config\",\n          \"containerPath\": \"/home/node/app/config\"\n        },\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/data\",\n          \"containerPath\": \"/home/node/app/data\"\n        },\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/plugins\",\n          \"containerPath\": \"/home/node/app/plugins\"\n        },\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/extensions\",\n          \"containerPath\": \"/home/node/app/public/scripts/extensions/third-party\"\n        }\n      ]\n    }\n  ]\n}\n",
+  "config": {
+    "path": "definitions/apps/sillytavern/config.json",
+    "content": "{\n  \"id\": \"sillytavern\",\n  \"name\": \"SillyTavern\",\n  \"version\": \"1.18.0\",\n  \"source\": \"https://github.com/SillyTavern/SillyTavern\",\n  \"website\": \"https://sillytavern.app\",\n  \"documentation\": \"https://docs.sillytavern.app/installation/docker/\",\n  \"short_desc\": \"A front end for chatting and roleplaying with AI models and characters.\",\n  \"categories\": [\n    \"Artificial Intelligence\"\n  ],\n  \"license\": \"AGPL-3.0\",\n  \"form_fields\": []\n}\n"
+  }
+}

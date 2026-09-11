@@ -1,0 +1,23 @@
+{
+  "app": "vane",
+  "passed": false,
+  "scope": "reviewed mapping, transaction, managed storage and first use, on one host and one architecture",
+  "promotion": "approved",
+  "source_revision": "924357fde8f7d4e414e5cae241b1e137f5f60038",
+  "images": [
+    "itzcrazykns1337/vane:full-v1.12.2"
+  ],
+  "image_ids": {},
+  "first_use": "it opens a page with a clear next step, and the same page after a restart and reinstall",
+  "steps": [
+    {
+      "step": "pull itzcrazykns1337/vane:full-v1.12.2",
+      "passed": true
+    },
+    {
+      "step": "installs with one action",
+      "passed": false,
+      "detail": "Health check timed out for http://localhost:59801 Containers: local-store-vane-qualify-29720-1789142232780459600-vane   itzcrazykns1337/vane:full-v1.12.2@sha256:61f2bbf3386ff3df08911fb3de0e1893b04702a4d49ef13fbadbda937b47ab7c   \"docker-entrypoint.s…\"   vane      3 minutes ago   Restarting (255) 14 seconds ago. vane last said: exec /usr/local/bin/docker-entrypoint.sh: exec format error | exec /usr/local/bin/docker-entrypoint.sh: exec format error | exec /usr/local/bin/docker-entrypoint.sh: exec format error | exec /usr/local/bin/docker-entrypoint.sh: exec format error | exec /usr/local/bin/docker-entrypoint.sh: exec format error"
+    }
+  ]
+}

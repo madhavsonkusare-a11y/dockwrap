@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "id": "huginn",
+  "display_name": "Huginn",
+  "catalog_name": "Huginn",
+  "description": "Agents that watch the web and act on your behalf: an IFTTT you run yourself.",
+  "category": "Automation",
+  "license": "MIT",
+  "source_url": "https://github.com/huginn/huginn",
+  "documentation_url": "https://github.com/huginn/huginn/blob/master/doc/docker/install.md",
+  "verified_at": "",
+  "lifecycle_proof": "docs/evidence/huginn-qualification.json",
+  "origin": {
+    "importer": "runtipi",
+    "repository": "madhavsonkusare-a11y/local-store",
+    "revision": "d81999683947fb828a535300b3cdbf8f7ac6b589",
+    "path": "definitions/apps/huginn/docker-compose.json",
+    "license": "MIT"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "ghcr.io/huginn/huginn:v2026.09.09",
+        "source_url": "https://ghcr.io/v2/huginn/huginn/manifests/v2026.09.09",
+        "checked_at": "2026-09-11",
+        "last_updated": "2026-09-08",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:f696da2301fbdecd6d254886516ad95b78585858c7501903aa20016ea9364ff2",
+          "linux/arm64": "sha256:31badd57e165a4a80db3fc51b441f6ea6d1fb0e0d3fb179bbddfa4748dccd209"
+        },
+        "index_digest": "sha256:0d31724e0ce578466d9f85057d26ad2c89635ee2adc0c940def96c5ab7bb2e9a"
+      },
+      {
+        "image": "mariadb:11.4.13",
+        "source_url": "https://hub.docker.com/v2/repositories/library/mariadb/tags/11.4.13",
+        "checked_at": "2026-09-11",
+        "last_updated": "2026-09-09",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64/v8",
+          "linux/ppc64le",
+          "linux/s390x"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:ebf0b3e4493368caed4ed6dea8e9a8be0f52bf9844aa185b3e56b72a83838fb6",
+          "linux/arm64/v8": "sha256:eebec83fe506646139690097318f650e0cb294f7436123b8d4c5866f2bd46d03",
+          "linux/ppc64le": "sha256:de0335a810948bd567867f1986e28674c9cb6a01ee6c21d4eaffd43f22895a09",
+          "linux/s390x": "sha256:93e2a78e5d8a37d419ca86883d68f624e3c2dcec1dbc815eea9d9d4c460c13d4"
+        },
+        "index_digest": "sha256:80494b9810694179889f7281ec44ca928241df577159c0356a1070e2e94616a1"
+      }
+    ]
+  },
+  "promotion": {
+    "state": "withheld",
+    "reason": "Pending since 2026-09-11: not yet proven as offered, because it ran from a binary built before its manifest moved it off MySQL 8, which cannot keep data on a Windows host folder. Qualification stopped when D: ran out of space; resume with qualify_batch --offered once it is compacted."
+  },
+  "data_storage": "Local Store managed folder / huginn",
+  "risk_notes": [
+    "Creates 2 Docker containers and publishes one port on this computer's loopback interface only.",
+    "Generates 2 credentials of its own, keeps them beside the app's data, and reuses them if you reinstall.",
+    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Written by Local Store from the project's own deployment instructions, not taken from an app store."
+  ],
+  "fields": {
+    "HUGINN_USERNAME": {
+      "label": "Username",
+      "sensitive": false
+    },
+    "HUGINN_PASSWORD": {
+      "label": "Password",
+      "sensitive": true
+    },
+    "HUGINN_EMAIL": {
+      "label": "Email",
+      "sensitive": false
+    }
+  },
+  "definition": "{\n  \"schemaVersion\": 2,\n  \"$schema\": \"https://schemas.runtipi.io/v2/dynamic-compose.json\",\n  \"services\": [\n    {\n      \"name\": \"huginn\",\n      \"image\": \"ghcr.io/huginn/huginn:v2026.09.09\",\n      \"isMain\": true,\n      \"internalPort\": 3000,\n      \"environment\": [\n        {\n          \"key\": \"APP_SECRET_TOKEN\",\n          \"value\": \"${HUGINN_SECRET_TOKEN}\"\n        },\n        {\n          \"key\": \"DOMAIN\",\n          \"value\": \"${APP_DOMAIN}\"\n        },\n        {\n          \"key\": \"SEED_USERNAME\",\n          \"value\": \"${HUGINN_USERNAME}\"\n        },\n        {\n          \"key\": \"SEED_PASSWORD\",\n          \"value\": \"${HUGINN_PASSWORD}\"\n        },\n        {\n          \"key\": \"SEED_EMAIL\",\n          \"value\": \"${HUGINN_EMAIL}\"\n        },\n        {\n          \"key\": \"DATABASE_ADAPTER\",\n          \"value\": \"mysql2\"\n        },\n        {\n          \"key\": \"DATABASE_HOST\",\n          \"value\": \"huginn-db\"\n        },\n        {\n          \"key\": \"DATABASE_PORT\",\n          \"value\": \"3306\"\n        },\n        {\n          \"key\": \"DATABASE_NAME\",\n          \"value\": \"huginn\"\n        },\n        {\n          \"key\": \"DATABASE_USERNAME\",\n          \"value\": \"huginn\"\n        },\n        {\n          \"key\": \"DATABASE_PASSWORD\",\n          \"value\": \"${HUGINN_DB_PASSWORD}\"\n        },\n        {\n          \"key\": \"DATABASE_ENCODING\",\n          \"value\": \"utf8mb4\"\n        }\n      ],\n      \"dependsOn\": {\n        \"huginn-db\": {\n          \"condition\": \"service_healthy\"\n        }\n      }\n    },\n    {\n      \"name\": \"huginn-db\",\n      \"image\": \"mariadb:11.4.13\",\n      \"healthCheck\": {\n        \"test\": \"healthcheck.sh --connect --innodb_initialized\",\n        \"interval\": \"5s\",\n        \"timeout\": \"10s\",\n        \"retries\": 10,\n        \"startPeriod\": \"60s\"\n      },\n      \"environment\": [\n        {\n          \"key\": \"MARIADB_DATABASE\",\n          \"value\": \"huginn\"\n        },\n        {\n          \"key\": \"MARIADB_USER\",\n          \"value\": \"huginn\"\n        },\n        {\n          \"key\": \"MARIADB_PASSWORD\",\n          \"value\": \"${HUGINN_DB_PASSWORD}\"\n        },\n        {\n          \"key\": \"MARIADB_RANDOM_ROOT_PASSWORD\",\n          \"value\": \"true\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/mariadb\",\n          \"containerPath\": \"/var/lib/mysql\"\n        }\n      ]\n    }\n  ]\n}\n",
+  "config": {
+    "path": "definitions/apps/huginn/config.json",
+    "content": "{\n  \"id\": \"huginn\",\n  \"name\": \"Huginn\",\n  \"version\": \"2026.09.09\",\n  \"source\": \"https://github.com/huginn/huginn\",\n  \"website\": \"https://github.com/huginn/huginn\",\n  \"documentation\": \"https://github.com/huginn/huginn/blob/master/doc/docker/install.md\",\n  \"short_desc\": \"Agents that watch the web and act on your behalf: an IFTTT you run yourself.\",\n  \"categories\": [\n    \"Automation\"\n  ],\n  \"license\": \"MIT\",\n  \"form_fields\": [\n    {\n      \"type\": \"text\",\n      \"label\": \"Username\",\n      \"min\": 3,\n      \"max\": 40,\n      \"required\": true,\n      \"env_variable\": \"HUGINN_USERNAME\"\n    },\n    {\n      \"type\": \"password\",\n      \"label\": \"Password\",\n      \"min\": 8,\n      \"max\": 80,\n      \"required\": true,\n      \"env_variable\": \"HUGINN_PASSWORD\"\n    },\n    {\n      \"type\": \"email\",\n      \"label\": \"Email\",\n      \"required\": true,\n      \"env_variable\": \"HUGINN_EMAIL\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Session secret\",\n      \"min\": 64,\n      \"max\": 64,\n      \"env_variable\": \"HUGINN_SECRET_TOKEN\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Database password\",\n      \"min\": 32,\n      \"max\": 32,\n      \"env_variable\": \"HUGINN_DB_PASSWORD\"\n    }\n  ]\n}\n"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "app": "langflow",
+  "passed": false,
+  "scope": "reviewed mapping, transaction, managed storage and first use, on one host and one architecture",
+  "promotion": "approved",
+  "source_revision": "924357fde8f7d4e414e5cae241b1e137f5f60038",
+  "images": [
+    "langflowai/langflow:1.12.1"
+  ],
+  "image_ids": {},
+  "first_use": "it opens a page with a clear next step, and the same page after a restart and reinstall",
+  "steps": [
+    {
+      "step": "pull langflowai/langflow:1.12.1",
+      "passed": true
+    },
+    {
+      "step": "installs with one action",
+      "passed": false,
+      "detail": "Health check timed out for http://localhost:63931 Containers: local-store-langflow-qualify-29720-1789141757447512600-langflow   langflowai/langflow:1.12.1@sha256:3e3cac657435f292fb5da653e8eb05b330460a99f1420e169f29413ba9d11164   \"langflow run\"   langflow   3 minutes ago   Up 11 seconds   127.0.0.1:63931->7860/tcp.  last said: │ langflow last said: [uvicorn.error] service=langflow | 2026-09-11T15:51:07.531396Z [error    ] Application startup failed. Exiting. [uvicorn.error] service=langflow | 2026-09-11T15:51:07.997236Z [error    ] Worker (pid:23) exited with code 3. [gunicorn.error] service=langflow | 2026-09-11T15:51:08.070708Z [error    ] Shutting down: Master          [gunicorn.error] service=langflow | 2026-09-11T15:51:08.071106Z [error    ] Reason: Worker failed to boot. [gunicorn.error] service=langflow"
+    }
+  ]
+}

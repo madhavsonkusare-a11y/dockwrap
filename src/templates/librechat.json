@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "id": "librechat",
+  "display_name": "LibreChat",
+  "catalog_name": "LibreChat",
+  "description": "One chat interface for every AI model and provider, with agents, tools and MCP.",
+  "category": "Artificial Intelligence",
+  "license": "MIT",
+  "source_url": "https://github.com/danny-avila/LibreChat",
+  "documentation_url": "https://www.librechat.ai/docs/local/docker",
+  "verified_at": "2026-09-11",
+  "lifecycle_proof": "docs/evidence/librechat-qualification.json",
+  "origin": {
+    "importer": "runtipi",
+    "repository": "madhavsonkusare-a11y/local-store",
+    "revision": "a333806252ca303c76836a28d64085dec5f2c637",
+    "path": "definitions/apps/librechat/docker-compose.json",
+    "license": "MIT"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "ghcr.io/danny-avila/librechat:v0.8.7",
+        "source_url": "https://ghcr.io/v2/danny-avila/librechat/manifests/v0.8.7",
+        "checked_at": "2026-09-11",
+        "last_updated": "2026-06-24",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:a950bb5fe847ae3b00797bf02d0b26bcd4c12f27240ebad6fa9eedafefc59d52",
+          "linux/arm64": "sha256:2f9aee2c87131b4dab5189f3cde0ca38fa0c2875f1609124aa1cad5e2a3d89c9"
+        },
+        "index_digest": "sha256:c5db3331b845e1f289f8d04c0c77936c4bbe372f76730a804abc1c37e44d23a9"
+      },
+      {
+        "image": "mongo:8.0.30",
+        "source_url": "https://hub.docker.com/v2/repositories/library/mongo/tags/8.0.30",
+        "checked_at": "2026-09-11",
+        "last_updated": "2026-09-10",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64/v8",
+          "windows/amd64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:73459aa7c26ce73fac05c8d8d1386d60ca36e0279ae10ba5c7a254428d086a91",
+          "linux/arm64/v8": "sha256:91fe697b8446994bdcdbc2a3edd6f844976b121faf0b88427f1a90673e54d3e2",
+          "windows/amd64": "sha256:be910ff89e30ca17725a7e8201a08769bf14022906475bd2920f73b117d5a618"
+        },
+        "index_digest": "sha256:4a0f30875898413139bec44c73c02a05fed172578de65b644dcdcee143ae7306"
+      },
+      {
+        "image": "getmeili/meilisearch:v1.35.1",
+        "source_url": "https://hub.docker.com/v2/repositories/getmeili/meilisearch/tags/v1.35.1",
+        "checked_at": "2026-09-11",
+        "last_updated": "2026-02-16",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:f8d986130128f830e4439f31add56033d74a34bb8942b50b93ff9630289d761c",
+          "linux/arm64": "sha256:d6491dcad0494a321fed1932a133c1fd4eb2d1bb07067376e30b61c7fe0d62f9"
+        },
+        "index_digest": "sha256:8b57fc3c7f46535ddef3828df1538465ac19d892eb57c9a10da6df0880bd5856"
+      }
+    ]
+  },
+  "promotion": {
+    "state": "approved",
+    "reason": "Approved by the owner. Qualified as offered on 2026-09-11: a real install of LibreChat 0.8.7, upstream's current release, with MongoDB 8.0.30 and Meilisearch 1.35.1 (the version LibreChat pins) proved it starts, opens to a first screen with a clear next step, survives a restart and a keep-data reinstall with its data and generated credentials intact, and removes everything it created. Local Store wrote this definition from the project's own deployment instructions."
+  },
+  "data_storage": "Local Store managed folder / librechat",
+  "risk_notes": [
+    "Creates 3 Docker containers and publishes one port on this computer's loopback interface only.",
+    "Generates 5 credentials of its own, keeps them beside the app's data, and reuses them if you reinstall.",
+    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Written by Local Store from the project's own deployment instructions, not taken from an app store.",
+    "Anyone who can reach the address can register an account; the first account you create is yours.",
+    "Each person enters their own model API keys in the app; they are stored encrypted with a key Local Store generated.",
+    "Its document-chat (RAG) service is not included, so uploading files for retrieval is unavailable."
+  ],
+  "fields": {},
+  "definition": "{\n  \"schemaVersion\": 2,\n  \"$schema\": \"https://schemas.runtipi.io/v2/dynamic-compose.json\",\n  \"services\": [\n    {\n      \"name\": \"librechat\",\n      \"image\": \"ghcr.io/danny-avila/librechat:v0.8.7\",\n      \"isMain\": true,\n      \"internalPort\": 3080,\n      \"environment\": [\n        {\n          \"key\": \"HOST\",\n          \"value\": \"0.0.0.0\"\n        },\n        {\n          \"key\": \"NODE_ENV\",\n          \"value\": \"production\"\n        },\n        {\n          \"key\": \"MONGO_URI\",\n          \"value\": \"mongodb://librechat-mongodb:27017/LibreChat\"\n        },\n        {\n          \"key\": \"MEILI_HOST\",\n          \"value\": \"http://librechat-meilisearch:7700\"\n        },\n        {\n          \"key\": \"MEILI_MASTER_KEY\",\n          \"value\": \"${LIBRECHAT_MEILI_KEY}\"\n        },\n        {\n          \"key\": \"SEARCH\",\n          \"value\": \"true\"\n        },\n        {\n          \"key\": \"CREDS_KEY\",\n          \"value\": \"${LIBRECHAT_CREDS_KEY}\"\n        },\n        {\n          \"key\": \"CREDS_IV\",\n          \"value\": \"${LIBRECHAT_CREDS_IV}\"\n        },\n        {\n          \"key\": \"JWT_SECRET\",\n          \"value\": \"${LIBRECHAT_JWT_SECRET}\"\n        },\n        {\n          \"key\": \"JWT_REFRESH_SECRET\",\n          \"value\": \"${LIBRECHAT_JWT_REFRESH_SECRET}\"\n        },\n        {\n          \"key\": \"DOMAIN_CLIENT\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}\"\n        },\n        {\n          \"key\": \"DOMAIN_SERVER\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}\"\n        },\n        {\n          \"key\": \"ALLOW_REGISTRATION\",\n          \"value\": \"true\"\n        },\n        {\n          \"key\": \"ALLOW_EMAIL_LOGIN\",\n          \"value\": \"true\"\n        },\n        {\n          \"key\": \"ALLOW_SOCIAL_LOGIN\",\n          \"value\": \"false\"\n        },\n        {\n          \"key\": \"NO_INDEX\",\n          \"value\": \"true\"\n        },\n        {\n          \"key\": \"OPENAI_API_KEY\",\n          \"value\": \"user_provided\"\n        },\n        {\n          \"key\": \"ANTHROPIC_API_KEY\",\n          \"value\": \"user_provided\"\n        },\n        {\n          \"key\": \"GOOGLE_KEY\",\n          \"value\": \"user_provided\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/uploads\",\n          \"containerPath\": \"/app/uploads\"\n        },\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/images\",\n          \"containerPath\": \"/app/client/public/images\"\n        },\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/logs\",\n          \"containerPath\": \"/app/api/logs\"\n        }\n      ],\n      \"dependsOn\": [\n        \"librechat-mongodb\",\n        \"librechat-meilisearch\"\n      ]\n    },\n    {\n      \"name\": \"librechat-mongodb\",\n      \"image\": \"mongo:8.0.30\",\n      \"command\": [\n        \"mongod\",\n        \"--noauth\"\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/mongodb\",\n          \"containerPath\": \"/data/db\"\n        }\n      ]\n    },\n    {\n      \"name\": \"librechat-meilisearch\",\n      \"image\": \"getmeili/meilisearch:v1.35.1\",\n      \"environment\": [\n        {\n          \"key\": \"MEILI_HOST\",\n          \"value\": \"http://librechat-meilisearch:7700\"\n        },\n        {\n          \"key\": \"MEILI_NO_ANALYTICS\",\n          \"value\": \"true\"\n        },\n        {\n          \"key\": \"MEILI_MASTER_KEY\",\n          \"value\": \"${LIBRECHAT_MEILI_KEY}\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/meilisearch\",\n          \"containerPath\": \"/meili_data\"\n        }\n      ]\n    }\n  ]\n}\n",
+  "config": {
+    "path": "definitions/apps/librechat/config.json",
+    "content": "{\n  \"id\": \"librechat\",\n  \"name\": \"LibreChat\",\n  \"version\": \"0.8.7\",\n  \"source\": \"https://github.com/danny-avila/LibreChat\",\n  \"website\": \"https://www.librechat.ai\",\n  \"documentation\": \"https://www.librechat.ai/docs/local/docker\",\n  \"short_desc\": \"One chat interface for every AI model and provider, with agents, tools and MCP.\",\n  \"categories\": [\n    \"Artificial Intelligence\"\n  ],\n  \"license\": \"MIT\",\n  \"form_fields\": [\n    {\n      \"type\": \"random\",\n      \"label\": \"Credential encryption key\",\n      \"min\": 64,\n      \"max\": 64,\n      \"encoding\": \"hex\",\n      \"env_variable\": \"LIBRECHAT_CREDS_KEY\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Credential encryption IV\",\n      \"min\": 32,\n      \"max\": 32,\n      \"encoding\": \"hex\",\n      \"env_variable\": \"LIBRECHAT_CREDS_IV\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Session secret\",\n      \"min\": 64,\n      \"max\": 64,\n      \"encoding\": \"hex\",\n      \"env_variable\": \"LIBRECHAT_JWT_SECRET\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Refresh secret\",\n      \"min\": 64,\n      \"max\": 64,\n      \"encoding\": \"hex\",\n      \"env_variable\": \"LIBRECHAT_JWT_REFRESH_SECRET\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Search index key\",\n      \"min\": 32,\n      \"max\": 32,\n      \"env_variable\": \"LIBRECHAT_MEILI_KEY\"\n    }\n  ]\n}\n"
+  }
+}
