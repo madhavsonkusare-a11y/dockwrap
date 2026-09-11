@@ -15,6 +15,10 @@
         {
           "key": "FORCE_COLOR",
           "value": "1"
+        },
+        {
+          "key": "SILLYTAVERN_WHITELISTMODE",
+          "value": "false"
         }
       ],
       "volumes": [
