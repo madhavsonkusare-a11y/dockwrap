@@ -13,7 +13,7 @@ REVIEWS = {
         "Big-AGI 2.1.1, upstream's current release"),
     "sillytavern": (
         ["Talks to whichever AI service you connect it to — a local model or a provider's API — with keys it keeps in its data folder.",
-         "Open by default, with no login: anyone who can reach the address can use it. Its IP whitelist is off because the port is reachable only from this computer.",
+         "Open by default, with no login: anyone who can reach the address can use it. Its IP whitelist stays on, widened to Docker's own networks so the page reaches it through the port mapping.",
          "Characters and extensions you import come from other people; extensions are code that runs in the app."],
         "SillyTavern 1.18.0, upstream's current release"),
     "kotaemon": (
@@ -29,7 +29,7 @@ REVIEWS = {
     "huginn": (
         ["The account is the username and password you chose at setup.",
          "Agents you create fetch web pages, send email and call web hooks on their schedules, from this computer.",
-         "Runs its own MySQL inside the same container, keeping the database in its folder."],
+         "Keeps its database in a MariaDB 11.4 beside it, in its folder: MySQL 8 cannot keep its data on a Windows folder."],
         "Huginn v2026.09.09, upstream's current release"),
     "vane": (
         ["Asks on first open for a model provider and its key.",
@@ -45,7 +45,47 @@ REVIEWS = {
          "Sends questions to the model provider you configure and searches the web through a bundled SearXNG from this computer.",
          "Its code sandbox (Terrarium) is published only as :latest, so it is left out and Khoj cannot run code. Khoj 1.42.10 is what upstream's own :latest installs; 2.0 is still in beta."],
         "Khoj 1.42.10, the version upstream's own latest tag installs"),
+    "flowise": (
+        ["Asks you to create its administrator account the first time you open it.",
+         "Flows call model providers and other services with credentials you store in it; they are encrypted with a key Local Store generated.",
+         "Flowise is open core: features for its paid Enterprise edition stay locked."],
+        "Flowise 3.1.4, upstream's current release"),
+    "sim": (
+        ["Asks you to create an account on first open; anyone who can reach the address can register one.",
+         "Workflows call the model providers and services you add keys for; the keys are stored encrypted with a key Local Store generated."],
+        "Sim 0.8.33, upstream's current release"),
+    "maxun": (
+        ["Asks you to create an account on first open.",
+         "Robots load the websites you point them at from this computer, in a headless Chromium that runs with its own sandbox off, as upstream configures it; the container is what contains the pages it loads.",
+         "Local Store runs that browser without the SYS_ADMIN capability and unconfined seccomp profile upstream's file asks for, which Chromium without its sandbox does not use.",
+         "Screenshots are kept in a bundled RustFS object store, which replaces MinIO now that MinIO no longer publishes images. Telemetry to Maxun's developers is off."],
+        "Maxun 0.0.62, upstream's current backend"),
+    "lobehub": (
+        ["Asks you to create an account on first open; anyone who can reach the address can register one.",
+         "Uses the model providers you add keys for; the keys are stored encrypted with a key Local Store generated.",
+         "Files you upload go to a bundled RustFS object store, a 1.0 release candidate, on a second loopback address the page uploads to directly.",
+         "Its bucket is created by MinIO's mc client, whose last image is from September 2025; it talks only to the bundled store.",
+         "Source-available under the LobeHub Community License, which restricts commercial derivative works."],
+        "LobeHub 2.2.17, upstream's current release"),
+    "dify": (
+        ["Asks you to set up an administrator account the first time you open it.",
+         "Code in your workflows runs in a sandbox that reaches only the internet, through a proxy that refuses this computer and its network; the agent sandbox is held the same way.",
+         "Plugins install from Dify's marketplace into its folder and run inside its plugin service.",
+         "Keeps vectors in its own PostgreSQL with pgvector rather than upstream's default Weaviate. Its Redis has no password, where upstream's has a publicly known default; only Dify's own containers can reach it.",
+         "Source-available under the Dify Open Source License, Apache 2.0 with conditions on multi-tenant use and on removing its branding."],
+        "Dify 1.17.1, upstream's current release"),
+    "open-webui": (
+        ["Asks you to create an account on first open; the first account is the administrator.",
+         "Connects to an Ollama server at the address you give during setup, or to OpenAI with your key; other providers can be added in its settings.",
+         "Source-available under the Open WebUI License, BSD-3 with a clause that keeps its branding."],
+        "Open WebUI 0.11.3, upstream's current release"),
+    "joplin": (
+        ["Signs in first as admin@localhost with the password admin; change both in its settings, then connect your Joplin apps to its address."],
+        "Joplin Server 3.7.1, with its database moved to PostgreSQL 14.24"),
 }
+
+# Written by Local Store, or taken from an app store's definition.
+IMPORTED = {"open-webui": "Runtipi's app store", "joplin": "Runtipi's app store"}
 
 def apply(app, extra_note=""):
     p = Path(f"src/templates/{app}.json"); d = json.loads(p.read_text(encoding="utf-8"))
@@ -54,12 +94,16 @@ def apply(app, extra_note=""):
     notes, what = REVIEWS[app]
     d["risk_notes"] = [n for n in d["risk_notes"] if not n.startswith("REVIEW: ")] + notes
     creds = any("credentials it generated" in s["step"] for s in proof["steps"])
-    d["verified_at"] = "2026-09-11"
+    import datetime
+    today = datetime.date.today().isoformat()
+    d["verified_at"] = today
     d["promotion"] = {"state": "approved", "reason": (
-        f"Approved by the owner. Qualified as offered on 2026-09-11: a real install of {what} proved it starts, "
+        f"Approved by the owner. Qualified as offered on {today}: a real install of {what} proved it starts, "
         f"opens to a first screen with a clear next step, survives a restart and a keep-data reinstall with its data"
         f"{' and generated credentials' if creds else ''} intact, and removes everything it created. "
-        f"Local Store wrote this definition from the project's own deployment instructions.{extra_note}")}
+        + (f"The definition comes from {IMPORTED[app]}." if app in IMPORTED
+           else "Local Store wrote this definition from the project's own deployment instructions.")
+        + extra_note)}
     p.write_text(json.dumps(d, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     print(app, "reviewed; markers left:", json.dumps(d).count("REVIEW: "))
 
