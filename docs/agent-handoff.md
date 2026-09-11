@@ -82,6 +82,13 @@ To resume, once the file is smaller:
 PR #5 (icons) needs its catalogue icons regenerated once the new catalogue
 entries (SillyTavern, Big-AGI, Kotaemon, Flowise, Sim, Maxun) reach its base.
 
+**Known CI gap, owner decision: fix when each PR reaches `main`.** CI runs
+only on PRs into `main`, so #4–#6 have not been checked. When each is
+retargeted, `check-template-platforms.py` will fail: 40 images have no cached
+tag metadata (`--refresh` fetches it), and 10 are on GHCR or lscr, whose
+`source_url` the checker cannot read — it knows only Docker Hub's tag API.
+PR #3 was fixed on September 12 the same way (`fbdf910`).
+
 ## Owner decisions, September 11 — read before resuming
 
 These still stand. (Work was paused at 24 offered apps; the owner then asked
