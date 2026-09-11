@@ -107,16 +107,12 @@
           "value": "6379"
         },
         {
-          "key": "REDIS_PASSWORD",
-          "value": "${DIFY_REDIS_PASSWORD}"
-        },
-        {
           "key": "REDIS_DB",
           "value": "0"
         },
         {
           "key": "CELERY_BROKER_URL",
-          "value": "redis://:${DIFY_REDIS_PASSWORD}@dify-redis:6379/1"
+          "value": "redis://dify-redis:6379/1"
         },
         {
           "key": "CELERY_BACKEND",
@@ -329,16 +325,12 @@
           "value": "6379"
         },
         {
-          "key": "REDIS_PASSWORD",
-          "value": "${DIFY_REDIS_PASSWORD}"
-        },
-        {
           "key": "REDIS_DB",
           "value": "0"
         },
         {
           "key": "CELERY_BROKER_URL",
-          "value": "redis://:${DIFY_REDIS_PASSWORD}@dify-redis:6379/1"
+          "value": "redis://dify-redis:6379/1"
         },
         {
           "key": "CELERY_BACKEND",
@@ -524,16 +516,12 @@
           "value": "6379"
         },
         {
-          "key": "REDIS_PASSWORD",
-          "value": "${DIFY_REDIS_PASSWORD}"
-        },
-        {
           "key": "REDIS_DB",
           "value": "0"
         },
         {
           "key": "CELERY_BROKER_URL",
-          "value": "redis://:${DIFY_REDIS_PASSWORD}@dify-redis:6379/1"
+          "value": "redis://dify-redis:6379/1"
         },
         {
           "key": "CELERY_BACKEND",
@@ -718,16 +706,12 @@
           "value": "6379"
         },
         {
-          "key": "REDIS_PASSWORD",
-          "value": "${DIFY_REDIS_PASSWORD}"
-        },
-        {
           "key": "REDIS_DB",
           "value": "0"
         },
         {
           "key": "CELERY_BROKER_URL",
-          "value": "redis://:${DIFY_REDIS_PASSWORD}@dify-redis:6379/1"
+          "value": "redis://dify-redis:6379/1"
         },
         {
           "key": "CELERY_BACKEND",
@@ -927,17 +911,6 @@
     {
       "name": "dify-redis",
       "image": "redis:7.4.11-alpine",
-      "command": [
-        "sh",
-        "-c",
-        "exec redis-server --requirepass \"$$REDISCLI_AUTH\""
-      ],
-      "environment": [
-        {
-          "key": "REDISCLI_AUTH",
-          "value": "${DIFY_REDIS_PASSWORD}"
-        }
-      ],
       "volumes": [
         {
           "hostPath": "${APP_DATA_DIR}/data/redis",
@@ -1068,10 +1041,6 @@
           "value": "6379"
         },
         {
-          "key": "REDIS_PASSWORD",
-          "value": "${DIFY_REDIS_PASSWORD}"
-        },
-        {
           "key": "SERVER_PORT",
           "value": "5002"
         },
@@ -1161,7 +1130,7 @@
       "environment": [
         {
           "key": "DIFY_AGENT_REDIS_URL",
-          "value": "redis://:${DIFY_REDIS_PASSWORD}@dify-redis:6379/2"
+          "value": "redis://dify-redis:6379/2"
         },
         {
           "key": "DIFY_AGENT_PLUGIN_DAEMON_URL",

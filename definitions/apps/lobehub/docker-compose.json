@@ -7,7 +7,9 @@
       "image": "lobehub/lobehub:2.2.17",
       "isMain": true,
       "internalPort": 3210,
-      "command": ["/opt/local-store/start.cjs"],
+      "command": [
+        "/opt/local-store/start.cjs"
+      ],
       "environment": [
         {
           "key": "APP_URL",
@@ -107,7 +109,11 @@
     {
       "name": "lobehub-db",
       "image": "paradedb/paradedb:0.25.8-pg17",
-      "command": ["postgres", "-c", "shared_preload_libraries=pg_search"],
+      "command": [
+        "postgres",
+        "-c",
+        "shared_preload_libraries=pg_search"
+      ],
       "stopSignal": "SIGINT",
       "environment": [
         {
@@ -136,7 +142,14 @@
     {
       "name": "lobehub-redis",
       "image": "redis:7.4.11-alpine",
-      "command": ["redis-server", "--save", "60", "1000", "--appendonly", "yes"],
+      "command": [
+        "redis-server",
+        "--save",
+        "60",
+        "1000",
+        "--appendonly",
+        "yes"
+      ],
       "volumes": [
         {
           "hostPath": "${APP_DATA_DIR}/data/redis",
@@ -144,7 +157,11 @@
         }
       ],
       "healthCheck": {
-        "test": ["CMD", "redis-cli", "ping"],
+        "test": [
+          "CMD",
+          "redis-cli",
+          "ping"
+        ],
         "interval": "5s",
         "timeout": "3s",
         "retries": 5
@@ -193,19 +210,17 @@
     {
       "name": "lobehub-store-init",
       "image": "minio/mc:RELEASE.2025-08-13T08-35-41Z",
-      "entrypoint": ["/bin/sh"],
+      "entrypoint": [
+        "/bin/sh"
+      ],
       "command": [
         "-c",
-        "mc alias set store http://lobehub-store:9000 \"$$STORE_ACCESS\" \"$$STORE_SECRET\" && mc mb --ignore-existing store/lobe && mc anonymous set download store/lobe"
+        "mc mb --ignore-existing store/lobe && mc anonymous set download store/lobe"
       ],
       "environment": [
         {
-          "key": "STORE_ACCESS",
-          "value": "${LOBE_STORE_ACCESS_KEY}"
-        },
-        {
-          "key": "STORE_SECRET",
-          "value": "${LOBE_STORE_SECRET_KEY}"
+          "key": "MC_HOST_store",
+          "value": "http://${LOBE_STORE_ACCESS_KEY}:${LOBE_STORE_SECRET_KEY}@lobehub-store:9000"
         }
       ],
       "dependsOn": {

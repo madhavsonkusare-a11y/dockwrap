@@ -28,13 +28,6 @@
     },
     {
       "type": "random",
-      "label": "Cache password",
-      "min": 32,
-      "max": 32,
-      "env_variable": "DIFY_REDIS_PASSWORD"
-    },
-    {
-      "type": "random",
       "label": "Code sandbox key",
       "min": 32,
       "max": 32,
