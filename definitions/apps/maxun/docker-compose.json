@@ -1,0 +1,267 @@
+{
+  "schemaVersion": 2,
+  "$schema": "https://schemas.runtipi.io/v2/dynamic-compose.json",
+  "services": [
+    {
+      "name": "maxun",
+      "image": "getmaxun/maxun-frontend:v0.0.58",
+      "isMain": true,
+      "internalPort": 5173,
+      "environment": [
+        {
+          "key": "FRONTEND_PORT",
+          "value": "5173"
+        },
+        {
+          "key": "PUBLIC_URL",
+          "value": "${APP_PROTOCOL:-http}://${APP_DOMAIN}"
+        },
+        {
+          "key": "BACKEND_URL",
+          "value": "${LOCAL_STORE_URL_MAXUN_BACKEND}"
+        },
+        {
+          "key": "VITE_BACKEND_URL",
+          "value": "${LOCAL_STORE_URL_MAXUN_BACKEND}"
+        }
+      ],
+      "dependsOn": ["maxun-backend"]
+    },
+    {
+      "name": "maxun-backend",
+      "image": "getmaxun/maxun-backend:v0.0.62",
+      "addPorts": [
+        {
+          "hostPort": 8080,
+          "containerPort": 8080
+        }
+      ],
+      "environment": [
+        {
+          "key": "NODE_ENV",
+          "value": "production"
+        },
+        {
+          "key": "JWT_SECRET",
+          "value": "${MAXUN_JWT_SECRET}"
+        },
+        {
+          "key": "SESSION_SECRET",
+          "value": "${MAXUN_SESSION_SECRET}"
+        },
+        {
+          "key": "ENCRYPTION_KEY",
+          "value": "${MAXUN_ENCRYPTION_KEY}"
+        },
+        {
+          "key": "DB_NAME",
+          "value": "maxun"
+        },
+        {
+          "key": "DB_USER",
+          "value": "postgres"
+        },
+        {
+          "key": "DB_PASSWORD",
+          "value": "${MAXUN_DB_PASSWORD}"
+        },
+        {
+          "key": "DB_HOST",
+          "value": "maxun-db"
+        },
+        {
+          "key": "DB_PORT",
+          "value": "5432"
+        },
+        {
+          "key": "MINIO_ENDPOINT",
+          "value": "maxun-store"
+        },
+        {
+          "key": "MINIO_PORT",
+          "value": "9000"
+        },
+        {
+          "key": "MINIO_ACCESS_KEY",
+          "value": "${MAXUN_STORE_ACCESS_KEY}"
+        },
+        {
+          "key": "MINIO_SECRET_KEY",
+          "value": "${MAXUN_STORE_SECRET_KEY}"
+        },
+        {
+          "key": "MINIO_PUBLIC_URL",
+          "value": "${LOCAL_STORE_URL_MAXUN_STORE}"
+        },
+        {
+          "key": "BACKEND_PORT",
+          "value": "8080"
+        },
+        {
+          "key": "FRONTEND_PORT",
+          "value": "5173"
+        },
+        {
+          "key": "BACKEND_URL",
+          "value": "${LOCAL_STORE_URL_MAXUN_BACKEND}"
+        },
+        {
+          "key": "VITE_BACKEND_URL",
+          "value": "${LOCAL_STORE_URL_MAXUN_BACKEND}"
+        },
+        {
+          "key": "PUBLIC_URL",
+          "value": "${APP_PROTOCOL:-http}://${APP_DOMAIN}"
+        },
+        {
+          "key": "VITE_PUBLIC_URL",
+          "value": "${APP_PROTOCOL:-http}://${APP_DOMAIN}"
+        },
+        {
+          "key": "MAXUN_TELEMETRY",
+          "value": "false"
+        },
+        {
+          "key": "BROWSER_WS_HOST",
+          "value": "maxun-browser"
+        },
+        {
+          "key": "BROWSER_WS_PORT",
+          "value": "3001"
+        },
+        {
+          "key": "BROWSER_HEALTH_PORT",
+          "value": "3002"
+        },
+        {
+          "key": "PLAYWRIGHT_BROWSERS_PATH",
+          "value": "/ms-playwright"
+        },
+        {
+          "key": "CI",
+          "value": "true"
+        },
+        {
+          "key": "CONTAINER",
+          "value": "true"
+        },
+        {
+          "key": "CHROMIUM_FLAGS",
+          "value": "--disable-gpu --no-sandbox --headless=new"
+        }
+      ],
+      "dependsOn": {
+        "maxun-db": {
+          "condition": "service_healthy"
+        },
+        "maxun-store": {
+          "condition": "service_healthy"
+        },
+        "maxun-browser": {
+          "condition": "service_healthy"
+        }
+      }
+    },
+    {
+      "name": "maxun-browser",
+      "image": "getmaxun/maxun-browser:v0.0.2",
+      "environment": [
+        {
+          "key": "NODE_ENV",
+          "value": "production"
+        },
+        {
+          "key": "BROWSER_WS_PORT",
+          "value": "3001"
+        },
+        {
+          "key": "BROWSER_HEALTH_PORT",
+          "value": "3002"
+        },
+        {
+          "key": "BROWSER_WS_HOST",
+          "value": "maxun-browser"
+        },
+        {
+          "key": "PLAYWRIGHT_BROWSERS_PATH",
+          "value": "/ms-playwright"
+        }
+      ],
+      "healthCheck": {
+        "test": ["CMD", "curl", "-f", "http://localhost:3002/health"],
+        "interval": "10s",
+        "timeout": "5s",
+        "retries": 6,
+        "startPeriod": "20s"
+      }
+    },
+    {
+      "name": "maxun-db",
+      "image": "postgres:17.11",
+      "stopSignal": "SIGINT",
+      "environment": [
+        {
+          "key": "POSTGRES_USER",
+          "value": "postgres"
+        },
+        {
+          "key": "POSTGRES_PASSWORD",
+          "value": "${MAXUN_DB_PASSWORD}"
+        },
+        {
+          "key": "POSTGRES_DB",
+          "value": "maxun"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/postgres",
+          "containerPath": "/var/lib/postgresql/data"
+        }
+      ],
+      "healthCheck": {
+        "test": "pg_isready -U postgres",
+        "interval": "5s",
+        "timeout": "5s",
+        "retries": 10,
+        "startPeriod": "60s"
+      }
+    },
+    {
+      "name": "maxun-store",
+      "image": "rustfs/rustfs:1.0.0-rc.6",
+      "addPorts": [
+        {
+          "hostPort": 9000,
+          "containerPort": 9000
+        }
+      ],
+      "environment": [
+        {
+          "key": "RUSTFS_ACCESS_KEY",
+          "value": "${MAXUN_STORE_ACCESS_KEY}"
+        },
+        {
+          "key": "RUSTFS_SECRET_KEY",
+          "value": "${MAXUN_STORE_SECRET_KEY}"
+        },
+        {
+          "key": "RUSTFS_CONSOLE_ENABLE",
+          "value": "false"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/store",
+          "containerPath": "/data"
+        }
+      ],
+      "healthCheck": {
+        "test": "wget -qO- http://localhost:9000/health >/dev/null 2>&1 || exit 1",
+        "interval": "5s",
+        "timeout": "3s",
+        "retries": 30
+      }
+    }
+  ]
+}

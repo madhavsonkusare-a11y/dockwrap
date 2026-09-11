@@ -1,0 +1,218 @@
+{
+  "schemaVersion": 2,
+  "$schema": "https://schemas.runtipi.io/v2/dynamic-compose.json",
+  "services": [
+    {
+      "name": "lobehub",
+      "image": "lobehub/lobehub:2.2.17",
+      "isMain": true,
+      "internalPort": 3210,
+      "command": ["/opt/local-store/start.cjs"],
+      "environment": [
+        {
+          "key": "APP_URL",
+          "value": "${APP_PROTOCOL:-http}://${APP_DOMAIN}"
+        },
+        {
+          "key": "INTERNAL_APP_URL",
+          "value": "http://localhost:3210"
+        },
+        {
+          "key": "KEY_VAULTS_SECRET",
+          "value": "${LOBE_KEY_VAULTS_SECRET}"
+        },
+        {
+          "key": "AUTH_SECRET",
+          "value": "${LOBE_AUTH_SECRET}"
+        },
+        {
+          "key": "DATABASE_URL",
+          "value": "postgresql://postgres:${LOBE_DB_PASSWORD}@lobehub-db:5432/lobechat"
+        },
+        {
+          "key": "REDIS_URL",
+          "value": "redis://lobehub-redis:6379"
+        },
+        {
+          "key": "REDIS_PREFIX",
+          "value": "lobechat"
+        },
+        {
+          "key": "REDIS_TLS",
+          "value": "0"
+        },
+        {
+          "key": "S3_ENDPOINT",
+          "value": "${LOCAL_STORE_URL_LOBEHUB_STORE}"
+        },
+        {
+          "key": "S3_LOCAL_PORT",
+          "value": "${LOCAL_STORE_PORT_LOBEHUB_STORE}"
+        },
+        {
+          "key": "S3_BUCKET",
+          "value": "lobe"
+        },
+        {
+          "key": "S3_ENABLE_PATH_STYLE",
+          "value": "1"
+        },
+        {
+          "key": "S3_ACCESS_KEY",
+          "value": "${LOBE_STORE_ACCESS_KEY}"
+        },
+        {
+          "key": "S3_ACCESS_KEY_ID",
+          "value": "${LOBE_STORE_ACCESS_KEY}"
+        },
+        {
+          "key": "S3_SECRET_ACCESS_KEY",
+          "value": "${LOBE_STORE_SECRET_KEY}"
+        },
+        {
+          "key": "S3_SET_ACL",
+          "value": "0"
+        },
+        {
+          "key": "LLM_VISION_IMAGE_USE_BASE64",
+          "value": "1"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/local-store/start.cjs",
+          "containerPath": "/opt/local-store/start.cjs",
+          "readOnly": true
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data/keys",
+          "containerPath": "/keys"
+        }
+      ],
+      "dependsOn": {
+        "lobehub-db": {
+          "condition": "service_healthy"
+        },
+        "lobehub-redis": {
+          "condition": "service_healthy"
+        },
+        "lobehub-store": {
+          "condition": "service_healthy"
+        },
+        "lobehub-store-init": {
+          "condition": "service_completed_successfully"
+        }
+      }
+    },
+    {
+      "name": "lobehub-db",
+      "image": "paradedb/paradedb:0.25.8-pg17",
+      "command": ["postgres", "-c", "shared_preload_libraries=pg_search"],
+      "stopSignal": "SIGINT",
+      "environment": [
+        {
+          "key": "POSTGRES_DB",
+          "value": "lobechat"
+        },
+        {
+          "key": "POSTGRES_PASSWORD",
+          "value": "${LOBE_DB_PASSWORD}"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/postgres",
+          "containerPath": "/var/lib/postgresql/data"
+        }
+      ],
+      "healthCheck": {
+        "test": "pg_isready -U postgres",
+        "interval": "5s",
+        "timeout": "5s",
+        "retries": 10,
+        "startPeriod": "60s"
+      }
+    },
+    {
+      "name": "lobehub-redis",
+      "image": "redis:7.4.11-alpine",
+      "command": ["redis-server", "--save", "60", "1000", "--appendonly", "yes"],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/redis",
+          "containerPath": "/data"
+        }
+      ],
+      "healthCheck": {
+        "test": ["CMD", "redis-cli", "ping"],
+        "interval": "5s",
+        "timeout": "3s",
+        "retries": 5
+      }
+    },
+    {
+      "name": "lobehub-store",
+      "image": "rustfs/rustfs:1.0.0-rc.6",
+      "addPorts": [
+        {
+          "hostPort": 9000,
+          "containerPort": 9000
+        }
+      ],
+      "environment": [
+        {
+          "key": "RUSTFS_ACCESS_KEY",
+          "value": "${LOBE_STORE_ACCESS_KEY}"
+        },
+        {
+          "key": "RUSTFS_SECRET_KEY",
+          "value": "${LOBE_STORE_SECRET_KEY}"
+        },
+        {
+          "key": "RUSTFS_CONSOLE_ENABLE",
+          "value": "false"
+        },
+        {
+          "key": "RUSTFS_CORS_ALLOWED_ORIGINS",
+          "value": "${APP_PROTOCOL:-http}://${APP_DOMAIN}"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/store",
+          "containerPath": "/data"
+        }
+      ],
+      "healthCheck": {
+        "test": "wget -qO- http://localhost:9000/health >/dev/null 2>&1 || exit 1",
+        "interval": "5s",
+        "timeout": "3s",
+        "retries": 30
+      }
+    },
+    {
+      "name": "lobehub-store-init",
+      "image": "minio/mc:RELEASE.2025-08-13T08-35-41Z",
+      "entrypoint": ["/bin/sh"],
+      "command": [
+        "-c",
+        "mc alias set store http://lobehub-store:9000 \"$$STORE_ACCESS\" \"$$STORE_SECRET\" && mc mb --ignore-existing store/lobe && mc anonymous set download store/lobe"
+      ],
+      "environment": [
+        {
+          "key": "STORE_ACCESS",
+          "value": "${LOBE_STORE_ACCESS_KEY}"
+        },
+        {
+          "key": "STORE_SECRET",
+          "value": "${LOBE_STORE_SECRET_KEY}"
+        }
+      ],
+      "dependsOn": {
+        "lobehub-store": {
+          "condition": "service_healthy"
+        }
+      }
+    }
+  ]
+}

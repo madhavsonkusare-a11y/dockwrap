@@ -1,0 +1,207 @@
+{
+  "schemaVersion": 2,
+  "$schema": "https://schemas.runtipi.io/v2/dynamic-compose.json",
+  "services": [
+    {
+      "name": "sim",
+      "image": "ghcr.io/simstudioai/simstudio:v0.8.33",
+      "isMain": true,
+      "internalPort": 3000,
+      "environment": [
+        {
+          "key": "NODE_ENV",
+          "value": "production"
+        },
+        {
+          "key": "DATABASE_URL",
+          "value": "postgresql://postgres:${SIM_DB_PASSWORD}@sim-db:5432/simstudio"
+        },
+        {
+          "key": "BETTER_AUTH_URL",
+          "value": "${APP_PROTOCOL:-http}://${APP_DOMAIN}"
+        },
+        {
+          "key": "NEXT_PUBLIC_APP_URL",
+          "value": "${APP_PROTOCOL:-http}://${APP_DOMAIN}"
+        },
+        {
+          "key": "BETTER_AUTH_SECRET",
+          "value": "${SIM_AUTH_SECRET}"
+        },
+        {
+          "key": "ENCRYPTION_KEY",
+          "value": "${SIM_ENCRYPTION_KEY}"
+        },
+        {
+          "key": "INTERNAL_API_SECRET",
+          "value": "${SIM_INTERNAL_SECRET}"
+        },
+        {
+          "key": "CRON_SECRET",
+          "value": "${SIM_CRON_SECRET}"
+        },
+        {
+          "key": "REDIS_URL",
+          "value": "redis://sim-redis:6379"
+        },
+        {
+          "key": "SOCKET_SERVER_URL",
+          "value": "http://sim-realtime:3002"
+        },
+        {
+          "key": "NEXT_PUBLIC_SOCKET_URL",
+          "value": "${LOCAL_STORE_URL_SIM_REALTIME}"
+        }
+      ],
+      "dependsOn": {
+        "sim-db": {
+          "condition": "service_healthy"
+        },
+        "sim-redis": {
+          "condition": "service_healthy"
+        },
+        "sim-migrations": {
+          "condition": "service_completed_successfully"
+        },
+        "sim-realtime": {
+          "condition": "service_healthy"
+        }
+      }
+    },
+    {
+      "name": "sim-realtime",
+      "image": "ghcr.io/simstudioai/realtime:v0.8.33",
+      "addPorts": [
+        {
+          "hostPort": 3002,
+          "containerPort": 3002
+        }
+      ],
+      "environment": [
+        {
+          "key": "NODE_ENV",
+          "value": "production"
+        },
+        {
+          "key": "DATABASE_URL",
+          "value": "postgresql://postgres:${SIM_DB_PASSWORD}@sim-db:5432/simstudio"
+        },
+        {
+          "key": "NEXT_PUBLIC_APP_URL",
+          "value": "${APP_PROTOCOL:-http}://${APP_DOMAIN}"
+        },
+        {
+          "key": "BETTER_AUTH_URL",
+          "value": "${APP_PROTOCOL:-http}://${APP_DOMAIN}"
+        },
+        {
+          "key": "BETTER_AUTH_SECRET",
+          "value": "${SIM_AUTH_SECRET}"
+        },
+        {
+          "key": "INTERNAL_API_SECRET",
+          "value": "${SIM_INTERNAL_SECRET}"
+        },
+        {
+          "key": "REDIS_URL",
+          "value": "redis://sim-redis:6379"
+        }
+      ],
+      "healthCheck": {
+        "test": ["CMD", "curl", "-fsS", "http://127.0.0.1:3002/health"],
+        "interval": "10s",
+        "timeout": "5s",
+        "retries": 6,
+        "startPeriod": "30s"
+      },
+      "dependsOn": {
+        "sim-db": {
+          "condition": "service_healthy"
+        },
+        "sim-redis": {
+          "condition": "service_healthy"
+        },
+        "sim-migrations": {
+          "condition": "service_completed_successfully"
+        }
+      }
+    },
+    {
+      "name": "sim-migrations",
+      "image": "ghcr.io/simstudioai/migrations:v0.8.33",
+      "command": ["bun", "run", "db:migrate"],
+      "environment": [
+        {
+          "key": "DATABASE_URL",
+          "value": "postgresql://postgres:${SIM_DB_PASSWORD}@sim-db:5432/simstudio"
+        }
+      ],
+      "dependsOn": {
+        "sim-db": {
+          "condition": "service_healthy"
+        }
+      }
+    },
+    {
+      "name": "sim-cron",
+      "image": "ghcr.io/simstudioai/cron:v0.8.33",
+      "environment": [
+        {
+          "key": "SIM_URL",
+          "value": "http://sim:3000"
+        },
+        {
+          "key": "CRON_SECRET",
+          "value": "${SIM_CRON_SECRET}"
+        },
+        {
+          "key": "TZ",
+          "value": "UTC"
+        }
+      ],
+      "dependsOn": ["sim"]
+    },
+    {
+      "name": "sim-db",
+      "image": "pgvector/pgvector:0.8.6-pg17",
+      "stopSignal": "SIGINT",
+      "environment": [
+        {
+          "key": "POSTGRES_USER",
+          "value": "postgres"
+        },
+        {
+          "key": "POSTGRES_PASSWORD",
+          "value": "${SIM_DB_PASSWORD}"
+        },
+        {
+          "key": "POSTGRES_DB",
+          "value": "simstudio"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/postgres",
+          "containerPath": "/var/lib/postgresql/data"
+        }
+      ],
+      "healthCheck": {
+        "test": "pg_isready -U postgres",
+        "interval": "5s",
+        "timeout": "5s",
+        "retries": 10,
+        "startPeriod": "60s"
+      }
+    },
+    {
+      "name": "sim-redis",
+      "image": "redis:7.4.11-alpine",
+      "healthCheck": {
+        "test": ["CMD", "redis-cli", "ping"],
+        "interval": "5s",
+        "timeout": "5s",
+        "retries": 5
+      }
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "id": "sim",
+  "name": "Sim",
+  "version": "0.8.33",
+  "source": "https://github.com/simstudioai/sim",
+  "website": "https://www.sim.ai",
+  "documentation": "https://docs.sim.ai/self-hosting/docker",
+  "short_desc": "Build and run AI agent workflows on a visual canvas.",
+  "categories": [
+    "Artificial Intelligence"
+  ],
+  "license": "Apache-2.0",
+  "form_fields": [
+    {
+      "type": "random",
+      "label": "Database password",
+      "min": 32,
+      "max": 32,
+      "env_variable": "SIM_DB_PASSWORD"
+    },
+    {
+      "type": "random",
+      "label": "Sign-in secret",
+      "min": 64,
+      "max": 64,
+      "encoding": "hex",
+      "env_variable": "SIM_AUTH_SECRET"
+    },
+    {
+      "type": "random",
+      "label": "Encryption key for stored credentials",
+      "min": 64,
+      "max": 64,
+      "encoding": "hex",
+      "env_variable": "SIM_ENCRYPTION_KEY"
+    },
+    {
+      "type": "random",
+      "label": "Secret between Sim's services",
+      "min": 64,
+      "max": 64,
+      "encoding": "hex",
+      "env_variable": "SIM_INTERNAL_SECRET"
+    },
+    {
+      "type": "random",
+      "label": "Secret for scheduled jobs",
+      "min": 64,
+      "max": 64,
+      "encoding": "hex",
+      "env_variable": "SIM_CRON_SECRET"
+    }
+  ]
+}

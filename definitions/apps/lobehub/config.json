@@ -1,0 +1,52 @@
+{
+  "id": "lobehub",
+  "name": "LobeHub",
+  "version": "2.2.17",
+  "source": "https://github.com/lobehub/lobehub",
+  "website": "https://lobehub.com",
+  "documentation": "https://lobehub.com/docs/self-hosting/platform/docker-compose",
+  "short_desc": "A chat workspace for many AI models, with agents, a knowledge base and plugins.",
+  "categories": [
+    "Artificial Intelligence"
+  ],
+  "license": "LobeHub Community License",
+  "form_fields": [
+    {
+      "type": "random",
+      "label": "Database password",
+      "min": 32,
+      "max": 32,
+      "env_variable": "LOBE_DB_PASSWORD"
+    },
+    {
+      "type": "random",
+      "label": "Key vault secret",
+      "min": 32,
+      "max": 32,
+      "encoding": "base64",
+      "env_variable": "LOBE_KEY_VAULTS_SECRET"
+    },
+    {
+      "type": "random",
+      "label": "Sign-in secret",
+      "min": 32,
+      "max": 32,
+      "encoding": "base64",
+      "env_variable": "LOBE_AUTH_SECRET"
+    },
+    {
+      "type": "random",
+      "label": "Object store access key",
+      "min": 20,
+      "max": 20,
+      "env_variable": "LOBE_STORE_ACCESS_KEY"
+    },
+    {
+      "type": "random",
+      "label": "Object store secret key",
+      "min": 40,
+      "max": 40,
+      "env_variable": "LOBE_STORE_SECRET_KEY"
+    }
+  ]
+}
