@@ -126,6 +126,23 @@ fn main() {
         "images": images,
         "published_container_port": published.map(|(_, port)| port.container),
         "preferred_host_port": published.map(|(_, port)| port.host),
+        "companion_ports": template
+            .plan
+            .companions()
+            .iter()
+            .map(|(service, port)| serde_json::json!({
+                "service": service.name,
+                "container_port": port.container,
+                "preferred_host_port": port.host,
+            }))
+            .collect::<Vec<_>>(),
+        "jobs": template
+            .plan
+            .services
+            .iter()
+            .filter(|service| template.plan.is_job(&service.name))
+            .map(|service| service.name.as_str())
+            .collect::<Vec<_>>(),
         "generated_credentials": template.secrets.len(),
         "fields": fields,
         "managed_directories": managed,

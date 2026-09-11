@@ -166,17 +166,52 @@ pub fn is_platform_key(key: &str) -> bool {
     PLATFORM_KEYS.contains(&key)
 }
 
+/// A service's second address, as its URL and as its bare port. The suffix
+/// is the service name in capitals: `realtime` becomes
+/// `LOCAL_STORE_URL_REALTIME`.
+const COMPANION_URL: &str = "LOCAL_STORE_URL_";
+const COMPANION_PORT: &str = "LOCAL_STORE_PORT_";
+
+/// The service suffix a second-address placeholder names, if it is one.
+pub fn companion_service(key: &str) -> Option<&str> {
+    key.strip_prefix(COMPANION_URL)
+        .or_else(|| key.strip_prefix(COMPANION_PORT))
+        .filter(|suffix| !suffix.is_empty())
+}
+
+/// How a service name appears in its second-address placeholders.
+pub fn companion_suffix(service: &str) -> String {
+    service.to_ascii_uppercase().replace('-', "_")
+}
+
+/// Whether a declared field or secret would collide with what the installer
+/// supplies.
+fn is_reserved_key(key: &str) -> bool {
+    PLATFORM_KEYS.contains(&key) || companion_service(key).is_some()
+}
+
 /// Replace the platform placeholders now that the address is known.
 ///
 /// Called once, during installation, after the host port has been chosen and
 /// before any answer is resolved, so nothing downstream ever sees one of these.
+///
+/// A second address is filled from the plan itself, so its port has to be
+/// settled on the plan before this runs, the same as the main one.
 pub fn fill_platform_values(plan: &mut crate::plan::DeploymentPlan, host_port: u16) {
     let authority = format!("localhost:{host_port}");
-    let values = [
-        (PLATFORM_URL, format!("http://{authority}")),
-        (PLATFORM_HOST, authority),
-        (PLATFORM_PORT, host_port.to_string()),
+    let mut values = vec![
+        (PLATFORM_URL.to_owned(), format!("http://{authority}")),
+        (PLATFORM_HOST.to_owned(), authority),
+        (PLATFORM_PORT.to_owned(), host_port.to_string()),
     ];
+    for (service, port) in plan.companions() {
+        let suffix = companion_suffix(&service.name);
+        values.push((
+            format!("{COMPANION_URL}{suffix}"),
+            format!("http://localhost:{}", port.host),
+        ));
+        values.push((format!("{COMPANION_PORT}{suffix}"), port.host.to_string()));
+    }
     for service in &mut plan.services {
         for (_, value) in &mut service.environment {
             for (key, filled) in &values {
@@ -595,7 +630,7 @@ impl PlanTemplate {
                     field.key
                 ));
             }
-            if PLATFORM_KEYS.contains(&field.key.as_str()) {
+            if is_reserved_key(&field.key) {
                 return Err(format!(
                     "setup field key {:?} is reserved for the installer",
                     field.key
@@ -624,7 +659,7 @@ impl PlanTemplate {
             if !is_key(&secret.key) {
                 return Err(format!("secret key {:?} is not NAME_LIKE_THIS", secret.key));
             }
-            if PLATFORM_KEYS.contains(&secret.key.as_str()) {
+            if is_reserved_key(&secret.key) {
                 return Err(format!(
                     "secret key {:?} is reserved for the installer",
                     secret.key
@@ -667,12 +702,29 @@ impl PlanTemplate {
                 }
             }
         }
+        let companions: Vec<String> = self
+            .plan
+            .companions()
+            .iter()
+            .map(|(service, _)| companion_suffix(&service.name))
+            .collect();
         for (_, value) in self.environment() {
             for placeholder in placeholders(value) {
                 if PLATFORM_KEYS.contains(&placeholder.key) {
                     // Supplied by the installer, so it needs no declaration
                     // here and nobody is ever asked for it.
                     continue;
+                }
+                if let Some(wanted) = companion_service(placeholder.key) {
+                    // Supplied too, but only for a service that has one: a
+                    // placeholder naming any other would never be filled.
+                    if companions.iter().any(|suffix| suffix == wanted) {
+                        continue;
+                    }
+                    return Err(format!(
+                        "placeholder {:?} names a second address no service publishes",
+                        placeholder.key
+                    ));
                 }
                 match declared.iter().position(|key| *key == placeholder.key) {
                     Some(index) => used[index] = true,
@@ -874,6 +926,23 @@ mod tests {
     /// RFC 4648's own examples, and a key of the size Plausible and BookStack
     /// ask for: 32 random bytes, which is 44 characters with padding.
     #[test]
+    fn second_address_placeholders_are_the_installers_to_fill() {
+        assert_eq!(
+            companion_service("LOCAL_STORE_URL_REALTIME"),
+            Some("REALTIME")
+        );
+        assert_eq!(
+            companion_service("LOCAL_STORE_PORT_OBJECT_STORE"),
+            Some("OBJECT_STORE")
+        );
+        assert_eq!(companion_service("LOCAL_STORE_URL"), None);
+        assert_eq!(companion_service("LOCAL_STORE_URL_"), None);
+        assert_eq!(companion_suffix("object-store"), "OBJECT_STORE");
+        assert!(is_reserved_key("LOCAL_STORE_URL_REALTIME"));
+        assert!(!is_reserved_key("REALTIME_URL"));
+    }
+
+    #[test]
     fn base64_secrets_are_random_bytes_encoded_as_runtipi_does() {
         for (bytes, encoded) in [
             ("", ""),
@@ -1005,6 +1074,7 @@ mod tests {
                         ("DB_PASSWORD".into(), "${DB_PASSWORD}".into()),
                         ("SITE_URL".into(), "http://localhost:${PORT:-8080}".into()),
                     ],
+                    companion: None,
                     published: Some(PublishedPort {
                         host: 8080,
                         container: 8080,

@@ -33,6 +33,7 @@ fn template() -> PlanTemplate {
                 image: "example/gallery:1.0".into(),
                 digest: None,
                 environment: Vec::new(),
+                companion: None,
                 published: Some(PublishedPort {
                     host: 8080,
                     container: 80,

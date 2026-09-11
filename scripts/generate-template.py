@@ -315,10 +315,26 @@ def data_storage(facts, app):
 def risk_notes(facts, catalog):
     notes = []
     services = facts["services"]
+    ports = 1 + len(facts.get("companion_ports", []))
+    counted = "one port" if ports == 1 else f"{ports} ports"
     notes.append(
-        f"Creates {services} Docker container{'s' if services != 1 else ''} and publishes one "
-        "port on this computer's loopback interface only."
+        f"Creates {services} Docker container{'s' if services != 1 else ''} and publishes "
+        f"{counted} on this computer's loopback interface only."
     )
+    # Said, because nobody would guess it: the app's own pages call these
+    # directly, so they are addresses on this computer like the main one.
+    for companion in facts.get("companion_ports", []):
+        notes.append(
+            f"Its {companion['service']} service answers on a second loopback address, which "
+            "the app's own pages call directly. Local Store opens only the main one."
+        )
+    jobs = facts.get("jobs", [])
+    if jobs:
+        named = ", ".join(jobs)
+        notes.append(
+            f"Runs {named} once each time it starts, and starts the app only if "
+            f"{'it succeeds' if len(jobs) == 1 else 'they succeed'}."
+        )
     if facts["shared_folders"]:
         notes.append(
             "Reads and writes a folder on this computer that you choose during setup. Nothing "

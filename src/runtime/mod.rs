@@ -623,6 +623,8 @@ pub struct InstallSource {
     pub health_url: String,
     /// Checked before anything is written, so a busy port fails early.
     pub host_port: u16,
+    /// Second addresses, checked the same way.
+    pub companion_ports: Vec<u16>,
     pub compose: String,
     /// Created inside the project directory before the containers start.
     pub data_directories: Vec<String>,
@@ -647,6 +649,7 @@ impl Recipe {
             launch_url: self.launch_url.clone(),
             health_url: self.health_url.clone(),
             host_port: self.host_port,
+            companion_ports: Vec::new(),
             compose: self.compose.clone(),
             data_directories: self.data_directories.clone(),
             extra_files: Vec::new(),
@@ -722,9 +725,10 @@ pub fn install_template_with(
     // likeliest occupant is a still-running copy of this very app, and
     // starting a second one beside it is worse than reporting the conflict,
     // which install_source_with does with recovery steps.
-    let host_port = match fs::read_to_string(project_dir.join("compose.yaml"))
-        .ok()
-        .and_then(|text| crate::plan::published_host_port(&text))
+    let retained = fs::read_to_string(project_dir.join("compose.yaml")).ok();
+    let host_port = match retained
+        .as_deref()
+        .and_then(crate::plan::published_host_port)
     {
         Some(previous) => previous,
         None => crate::plan::choose_free_port(context.ports, declared.host, PORT_SEARCH_ATTEMPTS)
@@ -735,6 +739,41 @@ pub fn install_template_with(
     // actually taken, not the one the plan asked for.
     let mut template = template.clone();
     template.plan.set_published_host(host_port);
+    // Second addresses follow the same rules as the main one — kept on a
+    // reinstall, chosen near the declared port otherwise — and must not land
+    // on a port this install has already taken for something else.
+    let previous = retained
+        .as_deref()
+        .map(crate::plan::companion_host_ports)
+        .unwrap_or_default();
+    let mut taken = vec![host_port];
+    let wanted: Vec<(String, u16)> = template
+        .plan
+        .companions()
+        .iter()
+        .map(|(service, port)| (service.name.clone(), port.host))
+        .collect();
+    for (service, declared_host) in wanted {
+        let port = match previous.get(&service) {
+            Some(previous) => *previous,
+            None => {
+                let probe = ExceptTaken {
+                    inner: context.ports,
+                    taken: &taken,
+                };
+                crate::plan::choose_free_port(&probe, declared_host, PORT_SEARCH_ATTEMPTS)
+                    .map_err(|reason| AppError::new(ErrorCode::PortInUse, reason))?
+            }
+        };
+        if taken.contains(&port) {
+            return Err(AppError::new(
+                ErrorCode::PortInUse,
+                format!("Port {port} would be published twice by this app."),
+            ));
+        }
+        taken.push(port);
+        template.plan.set_companion_host(&service, port);
+    }
     crate::setup::fill_platform_values(&mut template.plan, host_port);
     let plan = template
         .resolve(answers, &secrets)
@@ -760,6 +799,7 @@ pub fn install_template_with(
         launch_url: address.clone(),
         health_url: address,
         host_port,
+        companion_ports: taken[1..].to_vec(),
         compose,
         data_directories: plan
             .data_directories()
@@ -775,6 +815,18 @@ pub fn install_template_with(
         first_start_timeout: template.first_start,
     };
     install_source_with(context, &source, root, now)
+}
+
+/// A port probe that also refuses ports this install has already chosen,
+/// which nothing is listening on yet.
+struct ExceptTaken<'a> {
+    inner: &'a dyn PortProbe,
+    taken: &'a [u16],
+}
+impl PortProbe for ExceptTaken<'_> {
+    fn available(&self, port: u16) -> bool {
+        !self.taken.contains(&port) && self.inner.available(port)
+    }
 }
 
 /// Install a reviewed recipe, unchanged: recipes carry their own reviewed
@@ -811,7 +863,10 @@ pub fn install_source_with(
     }
     // Checked before anything is written: a port already in use would otherwise
     // surface as an opaque Compose failure after the files exist.
-    if !context.ports.available(source.host_port) {
+    let busy = std::iter::once(source.host_port)
+        .chain(source.companion_ports.iter().copied())
+        .find(|port| !context.ports.available(*port));
+    if let Some(busy) = busy {
         let retained = root.join(&source.id).join("compose.yaml");
         let recovery = if retained.is_file() {
             format!(" Setup files remain at {}. If an earlier setup was interrupted, stop that retained Compose project without deleting its data, then retry.", retained.display())
@@ -821,8 +876,7 @@ pub fn install_source_with(
         return Err(AppError::new(
             ErrorCode::PortInUse,
             format!(
-                "Port {} is already in use. Stop whatever is using it and try again.{recovery}",
-                source.host_port
+                "Port {busy} is already in use. Stop whatever is using it and try again.{recovery}"
             ),
         ));
     }
@@ -2087,6 +2141,7 @@ mod tests {
             launch_url: "http://localhost:11434".into(),
             health_url: "http://localhost:11434".into(),
             host_port: 11434,
+            companion_ports: Vec::new(),
             compose: "services: {}
 "
             .into(),
@@ -2152,6 +2207,7 @@ mod tests {
                         ("DB_PASSWORD".into(), "${DB_PASSWORD}".into()),
                         ("SITE".into(), "${SITE_NAME}".into()),
                     ],
+                    companion: None,
                     published: Some(PublishedPort {
                         host: 5230,
                         container: 5230,
@@ -2269,6 +2325,76 @@ mod tests {
             "server { listen 8080; }\n",
             "a reinstall overwrote a seed file somebody had edited"
         );
+        fs::remove_dir_all(&root).unwrap();
+    }
+
+    /// Sim's realtime server: a second address the app's pages call. It
+    /// must dodge a busy port and the one the main address took, and a
+    /// reinstall must keep whatever it got.
+    #[test]
+    fn a_second_address_is_chosen_beside_the_main_one_and_kept_on_reinstall() {
+        let root = scratch_root("plan-companion");
+        let mut template = sample_template();
+        template.plan.services[0]
+            .environment
+            .push(("SOCKET".into(), "${LOCAL_STORE_URL_REALTIME}".into()));
+        template.plan.services.push(crate::plan::PlanService {
+            name: "realtime".into(),
+            image: "example/realtime:1.0.0".into(),
+            digest: None,
+            environment: vec![("PORT".into(), "${LOCAL_STORE_PORT_REALTIME}".into())],
+            // Declared on the port the main address will take, which is
+            // busy anyway: the installer has to step past both.
+            companion: Some(crate::plan::PublishedPort {
+                host: 5229,
+                container: 3002,
+            }),
+            published: None,
+            mounts: Vec::new(),
+            depends_on: Vec::new(),
+            overrides: crate::plan::PlanOverrides::default(),
+        });
+        template.validate().expect("the template is valid");
+
+        let install = |ports: &dyn PortProbe| {
+            install_template_with(
+                &InstallContext::new(
+                    &FakeRunner::passing(4),
+                    &Ready(true),
+                    ports,
+                    &CancelToken::new(),
+                ),
+                &template,
+                "Memos",
+                &answers_for("My notes"),
+                &root,
+                7,
+            )
+        };
+        let app = install(&BusyPorts(vec![5229])).expect("install with a second address");
+        assert_eq!(app.launch_url, "http://localhost:5230");
+        let compose = fs::read_to_string(root.join("memos/compose.yaml")).unwrap();
+        assert!(compose.contains("published: \"5231\""), "{compose}");
+        assert!(
+            compose.contains("SOCKET: \"http://localhost:5231\""),
+            "{compose}"
+        );
+        assert!(compose.contains("PORT: \"5231\""), "{compose}");
+        assert_eq!(crate::plan::published_host_port(&compose), Some(5230));
+
+        // Everything is free now, the declared port included; the reinstall
+        // still lands where the first install did.
+        uninstall_with(&FakeRunner::passing(1), &app, false).unwrap();
+        let app = install(&Ports(true)).expect("reinstall over kept data");
+        let compose = fs::read_to_string(root.join("memos/compose.yaml")).unwrap();
+        assert!(compose.contains("published: \"5231\""), "{compose}");
+
+        // And a second address somebody else took since is reported, not
+        // quietly moved.
+        uninstall_with(&FakeRunner::passing(1), &app, false).unwrap();
+        let error = install(&BusyPorts(vec![5231])).unwrap_err();
+        assert_eq!(error.code, ErrorCode::PortInUse);
+        assert!(error.message.contains("5231"), "{}", error.message);
         fs::remove_dir_all(&root).unwrap();
     }
 

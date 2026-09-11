@@ -129,7 +129,6 @@ const REFUSED_KEYS: &[(&str, &str)] = &[
 /// not things to refuse.
 const NOT_MODELLED_KEYS: &[(&str, &str)] = &[
     ("user", "runs as a specific user"),
-    ("addPorts", "publishes additional ports"),
     ("extraLabels", "sets container labels"),
     ("logging", "configures a logging driver"),
     ("deploy", "sets deployment resources"),
@@ -425,6 +424,23 @@ pub fn import(id: &str, definition: &str, config: Option<&str>) -> Result<Import
             (false, _) => None,
         };
 
+        // Runtipi's extra ports, which Local Store publishes on loopback as a
+        // second address the app's own pages call: Sim's realtime socket,
+        // Maxun's backend. One per service, TCP only, never the main one.
+        let mut companion = None;
+        if let Some(value) = service.get("addPorts") {
+            match companion_port(value) {
+                Ok(_) if is_main => limitations.push(not_modelled(
+                    "addPorts",
+                    format!("{name} is the main service; a second address belongs to another one"),
+                )),
+                Ok(port) => companion = Some(port),
+                Err(reason) => {
+                    limitations.push(not_modelled("addPorts", format!("{name} {reason}")))
+                }
+            }
+        }
+
         let mut environment = Vec::new();
         for entry in service
             .get("environment")
@@ -528,19 +544,21 @@ pub fn import(id: &str, definition: &str, config: Option<&str>) -> Result<Import
             }
         }
 
-        let (depends_on, healthy_dependencies) = super::dependencies(service.get("dependsOn"))
-            .unwrap_or_else(|reason| {
+        let declared_dependencies =
+            super::dependencies(service.get("dependsOn")).unwrap_or_else(|reason| {
                 limitations.push(not_modelled(
                     "dependsOn condition",
                     format!("{name}: {reason}"),
                 ));
                 Default::default()
             });
+        let depends_on = declared_dependencies.names;
 
         // Carried through rather than dropped, for the same reason as every
         // other upstream constraint: leaving it out changes what starts.
         let mut overrides = PlanOverrides {
-            healthy_dependencies,
+            healthy_dependencies: declared_dependencies.healthy,
+            completed_dependencies: declared_dependencies.completed,
             ..Default::default()
         };
         if let Some(value) = service.get("healthCheck") {
@@ -603,6 +621,7 @@ pub fn import(id: &str, definition: &str, config: Option<&str>) -> Result<Import
             image,
             digest: None,
             environment,
+            companion,
             published,
             mounts,
             depends_on,
@@ -644,11 +663,21 @@ pub fn import(id: &str, definition: &str, config: Option<&str>) -> Result<Import
             sensitive: false,
         });
     }
+    let companion_services: Vec<String> = planned
+        .iter()
+        .filter(|service| service.companion.is_some())
+        .map(|service| service.name.clone())
+        .collect();
     for service in &mut planned {
         for (key, value) in &mut service.environment {
             *value = fill_platform_values(value, &platform);
             for placeholder in placeholder_keys(value) {
                 let declared = setup::is_platform_key(&placeholder)
+                    || setup::companion_service(&placeholder).is_some_and(|wanted| {
+                        companion_services
+                            .iter()
+                            .any(|name| setup::companion_suffix(name) == wanted)
+                    })
                     || fields.iter().any(|field| field.key == placeholder)
                     || secrets.iter().any(|secret| secret.key == placeholder);
                 if !declared {
@@ -727,6 +756,52 @@ pub fn import(id: &str, definition: &str, config: Option<&str>) -> Result<Import
         id: id.to_owned(),
         template,
         limitations,
+    })
+}
+
+/// Read one service's `addPorts` as a second loopback address.
+fn companion_port(value: &Value) -> Result<PublishedPort, String> {
+    let entries = value
+        .as_array()
+        .ok_or("declares addPorts that are not a list")?;
+    let [entry] = entries.as_slice() else {
+        return Err(format!(
+            "declares {} extra ports; one is supported",
+            entries.len()
+        ));
+    };
+    let object = entry
+        .as_object()
+        .ok_or("declares an extra port that is not an object")?;
+    for key in object.keys() {
+        if !matches!(key.as_str(), "hostPort" | "containerPort" | "tcp") {
+            return Err(format!("sets {key} on an extra port"));
+        }
+    }
+    if object
+        .get("tcp")
+        .is_some_and(|tcp| tcp != &Value::Bool(true))
+    {
+        return Err("publishes an extra port that is not TCP".into());
+    }
+    let port = |key: &str| {
+        object
+            .get(key)
+            .and_then(Value::as_u64)
+            .and_then(|port| u16::try_from(port).ok())
+            .filter(|port| *port > 0)
+            .ok_or(format!("declares no usable {key}"))
+    };
+    let (host, container) = (port("hostPort")?, port("containerPort")?);
+    Ok(PublishedPort {
+        // A privileged host port is a preference the installer cannot take;
+        // the same offset as the main port keeps it recognisable.
+        host: if host < 1024 {
+            preferred_host_port(host)
+        } else {
+            host
+        },
+        container,
     })
 }
 
@@ -1150,15 +1225,21 @@ mod tests {
                 .as_deref(),
             Some("10s")
         );
-        for replacement in ["service_completed_successfully", "unknown"] {
-            let blocked = import(
-                "conditional",
-                &definition.replace("service_healthy", replacement),
-                None,
-            )
-            .unwrap();
-            assert!(blocked.template.is_none());
-        }
+        // Waiting for a service to finish makes it a one-shot job.
+        let job = import(
+            "conditional",
+            &definition.replace("service_healthy", "service_completed_successfully"),
+            None,
+        )
+        .unwrap();
+        assert!(job.plan().unwrap().is_job("db"));
+        let blocked = import(
+            "conditional",
+            &definition.replace("service_healthy", "unknown"),
+            None,
+        )
+        .unwrap();
+        assert!(blocked.template.is_none());
         let cyclic = definition.replace(
             "\"healthCheck\":",
             "\"dependsOn\":[\"web\"], \"healthCheck\":",
@@ -1225,6 +1306,84 @@ mod tests {
         let compose = plan.to_compose().unwrap();
         assert!(!compose.contains("${"), "{compose}");
         assert!(compose.contains("http://localhost:8080"), "{compose}");
+    }
+
+    /// Sim's shape: a migration that must finish before the app starts, and
+    /// a realtime server the browser reaches on a second address.
+    const WITH_JOB_AND_COMPANION: &str = r#"{
+      "services": [
+        {"name": "app", "image": "example/app:1.0", "isMain": true, "internalPort": 3000,
+         "environment": [
+           {"key": "SOCKET_URL", "value": "${LOCAL_STORE_URL_REALTIME}"},
+           {"key": "APP_URL", "value": "${LOCAL_STORE_URL}"}],
+         "dependsOn": {"migrate": {"condition": "service_completed_successfully"},
+                       "realtime": {"condition": "service_started"}}},
+        {"name": "realtime", "image": "example/realtime:1.0",
+         "addPorts": [{"hostPort": 3002, "containerPort": 3002}],
+         "environment": [{"key": "PORT", "value": "${LOCAL_STORE_PORT_REALTIME}"}]},
+        {"name": "migrate", "image": "example/migrate:1.0"}
+      ]
+    }"#;
+
+    #[test]
+    fn a_job_and_a_second_address_import_and_resolve_to_their_ports() {
+        let outcome = import("app", WITH_JOB_AND_COMPANION, None).unwrap();
+        assert!(outcome.is_importable(), "{:?}", outcome.limitations);
+        let template = outcome.template.expect("a template");
+        assert!(template.plan.is_job("migrate"));
+        assert_eq!(
+            template.plan.companions()[0].1,
+            PublishedPort {
+                host: 3002,
+                container: 3002
+            }
+        );
+
+        let mut filled = template.clone();
+        filled.plan.set_companion_host("realtime", 43002);
+        crate::setup::fill_platform_values(&mut filled.plan, 8080);
+        let plan = filled.resolve(&BTreeMap::new(), &BTreeMap::new()).unwrap();
+        let compose = plan.to_compose().unwrap();
+        assert!(!compose.contains("${"), "{compose}");
+        assert!(
+            compose.contains("SOCKET_URL: \"http://localhost:43002\""),
+            "{compose}"
+        );
+        assert!(compose.contains("PORT: \"43002\""), "{compose}");
+        assert!(compose.contains("condition: service_completed_successfully"));
+    }
+
+    #[test]
+    fn a_second_address_that_cannot_be_honoured_is_reported() {
+        let refused = |ports: &str| {
+            let definition = WITH_JOB_AND_COMPANION
+                .replace(r#"[{"hostPort": 3002, "containerPort": 3002}]"#, ports);
+            let outcome = import("app", &definition, None).unwrap();
+            assert!(!outcome.is_importable(), "{ports} was accepted");
+            assert!(
+                outcome
+                    .limitations
+                    .iter()
+                    .any(|limit| limit.feature() == "addPorts"),
+                "{ports}: {:?}",
+                outcome.limitations
+            );
+        };
+        refused(r#"[{"hostPort": 53, "containerPort": 53, "udp": true}]"#);
+        refused(r#"[{"hostPort": 53, "containerPort": 53, "tcp": false}]"#);
+        refused(
+            r#"[{"hostPort": 3002, "containerPort": 3002}, {"hostPort": 3003, "containerPort": 3003}]"#,
+        );
+        refused(r#"[{"hostPort": 3002, "containerPort": 3002, "interface": "0.0.0.0"}]"#);
+        refused(r#"[{"containerPort": 3002}]"#);
+
+        // A placeholder for a second address nobody publishes is never filled.
+        let orphan = WITH_JOB_AND_COMPANION.replace("URL_REALTIME", "URL_OTHER");
+        let outcome = import("app", &orphan, None).unwrap();
+        assert!(outcome
+            .limitations
+            .iter()
+            .any(|limit| limit.feature() == "platform placeholder"));
     }
 
     #[test]

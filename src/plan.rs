@@ -141,6 +141,11 @@ impl PlanArgs {
 pub struct PlanOverrides {
     /// A subset of depends_on that must pass a container health check first.
     pub healthy_dependencies: std::collections::BTreeSet<String>,
+    /// A subset of depends_on that must run to completion first: a one-shot
+    /// job, such as the database migration Sim runs before its app starts.
+    /// Naming a service here is what makes it a job — it runs once, is not
+    /// restarted, and its exit status decides whether the app starts.
+    pub completed_dependencies: std::collections::BTreeSet<String>,
     pub healthcheck: Option<PlanHealthcheck>,
     /// Replaces the command the image would run.
     pub command: Option<PlanArgs>,
@@ -224,6 +229,16 @@ pub struct PublishedPort {
     pub container: u16,
 }
 
+/// How many second addresses one plan may publish beside its main one.
+///
+/// Some apps' own pages call a second server directly: Sim's browser keeps
+/// a socket open to its realtime service, Maxun's frontend calls its backend,
+/// and LobeHub uploads files straight to its object store. Each needs an
+/// address on this computer. A companion is published on loopback like the
+/// main port, but it is never opened or probed — the main address is still
+/// the app.
+pub const MAX_COMPANION_PORTS: usize = 2;
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct PlanService {
     pub name: String,
@@ -234,6 +249,10 @@ pub struct PlanService {
     /// none; everything offered has one.
     pub digest: Option<String>,
     pub environment: Vec<(String, String)>,
+    /// A second address the app's own pages reach this service on. The
+    /// service learns it through `${LOCAL_STORE_URL_<SERVICE>}` and
+    /// `${LOCAL_STORE_PORT_<SERVICE>}`, filled once the port is settled.
+    pub companion: Option<PublishedPort>,
     pub published: Option<PublishedPort>,
     pub mounts: Vec<PlanMount>,
     pub depends_on: Vec<String>,
@@ -280,6 +299,34 @@ impl DeploymentPlan {
         {
             port.host = host;
         }
+    }
+
+    /// Every second address, by the service that answers on it.
+    pub fn companions(&self) -> Vec<(&PlanService, PublishedPort)> {
+        self.services
+            .iter()
+            .filter_map(|service| service.companion.map(|port| (service, port)))
+            .collect()
+    }
+
+    /// Move one service's second address onto a different host port.
+    pub fn set_companion_host(&mut self, service: &str, host: u16) {
+        if let Some(port) = self
+            .services
+            .iter_mut()
+            .find(|candidate| candidate.name == service)
+            .and_then(|candidate| candidate.companion.as_mut())
+        {
+            port.host = host;
+        }
+    }
+
+    /// Whether this service is a one-shot job: something waits for it to
+    /// finish rather than to start.
+    pub fn is_job(&self, name: &str) -> bool {
+        self.services
+            .iter()
+            .any(|service| service.overrides.completed_dependencies.contains(name))
     }
 
     /// Bind-mounted directories, which the installer creates before starting.
@@ -333,6 +380,32 @@ impl DeploymentPlan {
         if published[0].host < 1024 {
             return Err("published host port must be 1024 or above".into());
         }
+        let companions = self.companions();
+        if companions.len() > MAX_COMPANION_PORTS {
+            return Err(format!(
+                "a plan may publish at most {MAX_COMPANION_PORTS} second addresses, found {}",
+                companions.len()
+            ));
+        }
+        let mut hosts = vec![published[0].host];
+        for (service, port) in &companions {
+            if service.published.is_some() {
+                return Err(format!(
+                    "service {:?} publishes both the main address and a second one",
+                    service.name
+                ));
+            }
+            if port.host < 1024 || port.container == 0 {
+                return Err(format!(
+                    "second address for {:?} must use a host port of 1024 or above",
+                    service.name
+                ));
+            }
+            if hosts.contains(&port.host) {
+                return Err(format!("host port {} is published twice", port.host));
+            }
+            hosts.push(port.host);
+        }
 
         let mut declared_used = vec![false; self.named_volumes.len()];
         for volume in &self.named_volumes {
@@ -342,6 +415,40 @@ impl DeploymentPlan {
         }
         for service in &self.services {
             service.validate()?;
+            for dependency in &service.overrides.completed_dependencies {
+                if !service.depends_on.contains(dependency) {
+                    return Err("completion condition refers to an undeclared dependency".into());
+                }
+                if service.overrides.healthy_dependencies.contains(dependency) {
+                    return Err(format!(
+                        "{:?} waits for {dependency:?} both to finish and to be healthy",
+                        service.name
+                    ));
+                }
+            }
+            if self.is_job(&service.name) {
+                // A job runs and exits. Publishing an address nobody can
+                // reach once it has, or starting something beside it that
+                // does not wait for it, are both mistakes worth refusing.
+                if service.published.is_some() || service.companion.is_some() {
+                    return Err(format!(
+                        "one-shot job {:?} cannot publish an address",
+                        service.name
+                    ));
+                }
+                if let Some(other) = self.services.iter().find(|other| {
+                    other.depends_on.contains(&service.name)
+                        && !other
+                            .overrides
+                            .completed_dependencies
+                            .contains(&service.name)
+                }) {
+                    return Err(format!(
+                        "{:?} depends on one-shot job {:?} without waiting for it to finish",
+                        other.name, service.name
+                    ));
+                }
+            }
             for dependency in &service.overrides.healthy_dependencies {
                 if !service.depends_on.contains(dependency) {
                     return Err("health condition refers to an undeclared dependency".into());
@@ -418,12 +525,26 @@ impl DeploymentPlan {
                 "    container_name: {}\n",
                 self.container_name(service)
             ));
-            out.push_str("    restart: unless-stopped\n");
+            // A job that restarted itself would run its migration forever.
+            if self.is_job(&service.name) {
+                out.push_str("    restart: \"no\"\n");
+            } else {
+                out.push_str("    restart: unless-stopped\n");
+            }
             if let Some(port) = service.published {
                 out.push_str("    ports:\n");
                 out.push_str(&format!(
                     "      - \"127.0.0.1:{}:{}\"\n",
                     port.host, port.container
+                ));
+            }
+            // The long form, so the main address stays the only short-form
+            // line and `published_host_port` can never pick up a second one.
+            if let Some(port) = service.companion {
+                out.push_str("    ports:\n");
+                out.push_str(&format!(
+                    "      - target: {}\n        published: \"{}\"\n        host_ip: 127.0.0.1\n",
+                    port.container, port.host
                 ));
             }
             if !service.environment.is_empty() {
@@ -440,13 +561,21 @@ impl DeploymentPlan {
             }
             if !service.depends_on.is_empty() {
                 out.push_str("    depends_on:\n");
+                let conditional = !service.overrides.healthy_dependencies.is_empty()
+                    || !service.overrides.completed_dependencies.is_empty();
                 for dependency in &service.depends_on {
-                    if service.overrides.healthy_dependencies.is_empty() {
+                    if !conditional {
                         out.push_str(&format!("      - {dependency}\n"));
                     } else {
                         let condition =
                             if service.overrides.healthy_dependencies.contains(dependency) {
                                 "service_healthy"
+                            } else if service
+                                .overrides
+                                .completed_dependencies
+                                .contains(dependency)
+                            {
+                                "service_completed_successfully"
                             } else {
                                 "service_started"
                             };
@@ -657,6 +786,41 @@ pub fn published_host_port(compose: &str) -> Option<u16> {
     })
 }
 
+/// The second addresses a previously rendered Compose file publishes, by
+/// service.
+///
+/// A reinstall keeps them for the same reason it keeps the main one: an app
+/// may have stored links to its object store, and moving the port would break
+/// every one of them.
+pub fn companion_host_ports(compose: &str) -> std::collections::BTreeMap<String, u16> {
+    let mut found = std::collections::BTreeMap::new();
+    let mut service: Option<&str> = None;
+    for line in compose.lines() {
+        if let Some(name) = line
+            .strip_prefix("  ")
+            .filter(|rest| !rest.starts_with(' '))
+            .and_then(|rest| rest.strip_suffix(':'))
+        {
+            service = Some(name);
+            continue;
+        }
+        if !line.starts_with(' ') {
+            service = None;
+            continue;
+        }
+        let Some(current) = service else { continue };
+        if let Some(port) = line
+            .trim()
+            .strip_prefix("published: \"")
+            .and_then(|rest| rest.strip_suffix('"'))
+            .and_then(|port| port.parse().ok())
+        {
+            found.insert(current.to_owned(), port);
+        }
+    }
+    found
+}
+
 /// Express an existing reviewed recipe as a plan.
 ///
 /// This is the bridge that proves the model covers what already ships. Recipes
@@ -728,6 +892,7 @@ pub fn plan_for_recipe(recipe: &Recipe) -> Result<DeploymentPlan, String> {
             image: recipe.image.clone(),
             digest: Some(recipe.requirements.image_audit.index_digest.clone()),
             environment,
+            companion: None,
             published: Some(PublishedPort {
                 host: recipe.host_port,
                 container: recipe.container_port,
@@ -798,6 +963,7 @@ NEWLINE",
                 image: "example/app:1.0".into(),
                 digest: None,
                 environment: vec![(key.to_owned(), value.to_owned())],
+                companion: None,
                 published: Some(PublishedPort {
                     host: 8080,
                     container: 80,
@@ -837,6 +1003,7 @@ NEWLINE",
             image: "example/web:1.2.3".into(),
             digest: None,
             environment: vec![("DATABASE_HOST".into(), "db".into())],
+            companion: None,
             published: Some(PublishedPort {
                 host: 8080,
                 container: 8080,
@@ -852,6 +1019,7 @@ NEWLINE",
             image: "example/postgres:16.2".into(),
             digest: None,
             environment: vec![("POSTGRES_DB".into(), "app".into())],
+            companion: None,
             published: None,
             mounts: vec![PlanMount::Volume {
                 name: "db-data".into(),
@@ -1048,6 +1216,144 @@ NEWLINE",
             .healthy_dependencies
             .insert("missing".into());
         assert!(plan.validate().unwrap_err().contains("undeclared"));
+    }
+
+    /// A migration that runs once and exits, which the app waits for.
+    fn with_migration() -> DeploymentPlan {
+        let mut plan = pair();
+        let mut migrate = database();
+        migrate.name = "migrate".into();
+        migrate.mounts.clear();
+        migrate.depends_on = vec!["db".into()];
+        plan.services.push(migrate);
+        plan.services[0].depends_on.push("migrate".into());
+        plan.services[0]
+            .overrides
+            .completed_dependencies
+            .insert("migrate".into());
+        plan
+    }
+
+    #[test]
+    fn a_one_shot_job_runs_once_and_the_app_waits_for_it_to_finish() {
+        let plan = with_migration();
+        assert!(plan.is_job("migrate"));
+        assert!(!plan.is_job("db"));
+        let rendered = plan.to_compose().expect("a job should render");
+        let migrate = rendered.split("\n  migrate:\n").nth(1).unwrap();
+        assert!(
+            migrate.contains("    restart: \"no\"\n"),
+            "a job that restarts runs its migration forever:\n{rendered}"
+        );
+        assert!(rendered
+            .contains("      migrate:\n        condition: service_completed_successfully\n"));
+        // Everything else waits the ordinary way.
+        assert!(rendered.contains("      db:\n        condition: service_started\n"));
+        assert_eq!(rendered.matches("restart: unless-stopped").count(), 2);
+    }
+
+    #[test]
+    fn a_job_is_refused_when_it_publishes_or_something_does_not_wait_for_it() {
+        let mut published = with_migration();
+        published.services[2].companion = Some(PublishedPort {
+            host: 9000,
+            container: 9000,
+        });
+        assert!(published.validate().unwrap_err().contains("cannot publish"));
+
+        // A second service that only waits for the job to start would race it.
+        let mut racing = with_migration();
+        racing.services[1].depends_on.push("migrate".into());
+        assert!(racing.validate().unwrap_err().contains("without waiting"));
+
+        let mut undeclared = with_migration();
+        undeclared.services[0]
+            .depends_on
+            .retain(|name| name != "migrate");
+        assert!(undeclared.validate().unwrap_err().contains("undeclared"));
+
+        let mut both = with_migration();
+        both.services[0]
+            .overrides
+            .healthy_dependencies
+            .insert("migrate".into());
+        assert!(both.validate().unwrap_err().contains("both to finish"));
+    }
+
+    /// A realtime server the app's own pages call, beside the main address.
+    fn with_companion() -> DeploymentPlan {
+        let mut plan = pair();
+        let mut realtime = database();
+        realtime.name = "realtime".into();
+        realtime.mounts.clear();
+        realtime.companion = Some(PublishedPort {
+            host: 3002,
+            container: 3002,
+        });
+        // Listed first on purpose: the main address must still be the one a
+        // retained file is read back as.
+        plan.services.insert(0, realtime);
+        plan
+    }
+
+    #[test]
+    fn a_second_address_is_published_on_loopback_and_never_mistaken_for_the_app() {
+        let plan = with_companion();
+        plan.validate().expect("one second address is allowed");
+        let rendered = plan.to_compose().unwrap();
+        assert!(rendered.contains(
+            "      - target: 3002\n        published: \"3002\"\n        host_ip: 127.0.0.1\n"
+        ));
+        assert_eq!(published_host_port(&rendered), Some(8080));
+        assert_eq!(
+            companion_host_ports(&rendered),
+            [("realtime".to_owned(), 3002)].into_iter().collect()
+        );
+        assert_eq!(plan.published().unwrap().0.name, "web");
+
+        let mut moved = plan.clone();
+        moved.set_companion_host("realtime", 43002);
+        assert_eq!(moved.companions()[0].1.host, 43002);
+    }
+
+    #[test]
+    fn second_addresses_are_few_distinct_and_never_the_main_one() {
+        let mut clash = with_companion();
+        clash.services[0].companion = Some(PublishedPort {
+            host: 8080,
+            container: 3002,
+        });
+        assert!(clash.validate().unwrap_err().contains("published twice"));
+
+        let mut doubled = with_companion();
+        doubled.services[1].companion = Some(PublishedPort {
+            host: 9000,
+            container: 9000,
+        });
+        assert!(doubled
+            .validate()
+            .unwrap_err()
+            .contains("both the main address"));
+
+        let mut privileged = with_companion();
+        privileged.services[0].companion = Some(PublishedPort {
+            host: 80,
+            container: 80,
+        });
+        assert!(privileged.validate().unwrap_err().contains("1024"));
+
+        let mut many = with_companion();
+        for (index, host) in [9001, 9002].into_iter().enumerate() {
+            let mut extra = database();
+            extra.name = format!("extra{index}");
+            extra.mounts.clear();
+            extra.companion = Some(PublishedPort {
+                host,
+                container: host,
+            });
+            many.services.push(extra);
+        }
+        assert!(many.validate().unwrap_err().contains("at most"));
     }
 
     #[test]

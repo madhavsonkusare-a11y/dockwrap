@@ -133,6 +133,7 @@ fn template(id: &str, host_port: u16) -> PlanTemplate {
                     image: WEB_IMAGE.into(),
                     digest: None,
                     environment: vec![("ADMINER_DEFAULT_SERVER".into(), "db".into())],
+                    companion: None,
                     published: Some(PublishedPort {
                         host: host_port,
                         container: 8080,
@@ -150,6 +151,7 @@ fn template(id: &str, host_port: u16) -> PlanTemplate {
                         ("POSTGRES_DB".into(), "${DB_NAME}".into()),
                         ("POSTGRES_PASSWORD".into(), "${DB_PASSWORD}".into()),
                     ],
+                    companion: None,
                     published: None,
                     mounts: vec![PlanMount::Volume {
                         name: "db-data".into(),
