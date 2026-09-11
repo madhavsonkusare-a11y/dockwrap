@@ -34,6 +34,16 @@ upstream app, independently of these data licenses.
   records source URLs, immutable revision and checksums. Existing featured app
   identities use Homarr's icon collection. Project names and logos
   remain the property of their respective owners; inclusion implies no endorsement.
+- App artwork from an app's own repository: Paperclip's logo, Paperclip AI,
+  [MIT](catalog/notices/paperclip/LICENSE), pinned in `catalog/icon-sources.lock.json`.
+- App artwork from the [Umbrel app gallery](https://github.com/getumbrel/umbrel-apps-gallery):
+  eight icons. That repository declares no licence, so they are recorded as
+  `NOASSERTION`; see [its notice](catalog/notices/umbrel-apps-gallery/NOTICE.md) before any
+  broad redistribution.
+- Monogram icons for apps no source covers are drawn by Local Store from glyph
+  outlines of Instrument Sans, The Instrument Sans Project Authors,
+  [SIL Open Font License 1.1](docs/design/v2/assets/fonts/InstrumentSans-OFL.txt).
+  The font itself is not shipped.
 - Interface icons: Lucide Icons and Contributors, [ISC license](src/assets/LUCIDE-LICENSE).
 - Inter font: The Inter Project Authors, [SIL Open Font License 1.1](src/fonts/OFL.txt),
   [upstream source](https://github.com/rsms/inter).

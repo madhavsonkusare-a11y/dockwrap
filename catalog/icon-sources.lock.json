@@ -13,6 +13,12 @@
       "repository": "homarr-labs/dashboard-icons",
       "revision": "d84d00eef4b14084963d5996397b76f9fe22f0c7"
     },
+    "paperclip": {
+      "license": "MIT",
+      "notice": "catalog/notices/paperclip/LICENSE",
+      "repository": "paperclipai/paperclip",
+      "revision": "932c8bec56fdcb581b0a65a7999caa85047fb37f"
+    },
     "umbrel-apps-gallery": {
       "license": "NOASSERTION",
       "notice": "catalog/notices/umbrel-apps-gallery/NOTICE.md",

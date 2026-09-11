@@ -21,6 +21,8 @@ ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "catalog/icons.json"
 AUDIT = ROOT / "catalog/icon-audit.json"
 SOURCE_LOCK = ROOT / "catalog/icon-sources.lock.json"
+# Artwork from an app's own repository, for apps no icon source covers.
+OVERRIDES = ROOT / "catalog/icon-overrides.json"
 CATALOG = ROOT / "src/generated/catalog.json"
 ASSET_DIR = ROOT / "src/assets/catalog"
 FONT_PATH = ROOT / "docs/design/v2/assets/fonts/InstrumentSans-SemiBold.woff2"
@@ -299,6 +301,20 @@ def audit_manifest(manifest, projects):
     }
 
 
+def load_overrides(sources):
+    """Per-app artwork choices, each tied to a pinned source in the lock."""
+    if not OVERRIDES.exists():
+        return {}
+    overrides = {key: value for key, value in json.loads(OVERRIDES.read_text(encoding="utf-8")).items()
+                 if not key.startswith("_")}
+    for project_id, override in overrides.items():
+        if override.get("source") not in sources:
+            raise ValueError(f"Icon override for {project_id} names an unlocked source")
+        if not re.fullmatch(r"[A-Za-z0-9._/-]+\.(svg|png)", override.get("path", "")) or ".." in override["path"]:
+            raise ValueError(f"Icon override for {project_id} names an unusable path")
+    return overrides
+
+
 def validate_manifest(manifest, projects, sources):
     expected = {entry["id"] for entry in projects}
     if manifest.get("schema_version") != 2 or set(manifest.get("icons", {})) != expected:
@@ -323,6 +339,13 @@ def validate_manifest(manifest, projects, sources):
             raise ValueError(f"Unknown icon source: {project_id}")
         elif any(record[key] != sources[record["source"]][key] for key in ("repository", "revision", "license", "notice")):
             raise ValueError(f"Icon source lock mismatch: {project_id}")
+    # An override is a decision somebody made; a manifest that quietly used
+    # something else instead would read as honouring it.
+    for project_id, override in load_overrides(sources).items():
+        record = manifest["icons"].get(project_id)
+        if project_id in expected and (not record or record["source"] != override["source"]
+                                       or not record["url"].endswith("/" + override["path"])):
+            raise ValueError(f"Icon override for {project_id} is not the icon in use")
 
 
 def main():
@@ -354,8 +377,16 @@ def main():
     local_source = {"repository": "madhavsonkusare-a11y/local-store", "revision": GENERATOR_VERSION, "license": "MIT", "notice": "LICENSE"}
     ASSET_DIR.mkdir(exist_ok=True)
 
+    overrides = load_overrides(sources)
+
     def cache(entry):
         candidates = []
+        override = overrides.get(entry["id"])
+        if override:
+            source = sources[override["source"]]
+            candidates.append((override["source"], source,
+                               f"https://raw.githubusercontent.com/{source['repository']}/{source['revision']}/{override['path']}",
+                               "project-repository"))
         for path, match in homarr_candidates(entry["id"], homarr_paths, homarr_aliases):
             candidates.append(("homarr-dashboard-icons", homarr, f"https://raw.githubusercontent.com/{homarr['repository']}/{homarr['revision']}/{path}", match))
         for source in entry["sources"]:

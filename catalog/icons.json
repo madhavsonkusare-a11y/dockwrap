@@ -19322,6 +19322,22 @@
       "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/pangolin.svg",
       "width": 238.34
     },
+    "paperclip": {
+      "bytes": 367,
+      "format": "svg",
+      "height": 32.0,
+      "license": "MIT",
+      "match": "project-repository",
+      "mime": "image/svg+xml",
+      "notice": "catalog/notices/paperclip/LICENSE",
+      "path": "assets/catalog/paperclip.svg",
+      "repository": "paperclipai/paperclip",
+      "revision": "932c8bec56fdcb581b0a65a7999caa85047fb37f",
+      "sha256": "7cb6b1400ea9b38c1e9bf3f9250851849856f0311271764bb83105692baade66",
+      "source": "paperclip",
+      "url": "https://raw.githubusercontent.com/paperclipai/paperclip/932c8bec56fdcb581b0a65a7999caa85047fb37f/docs/favicon.svg",
+      "width": 32.0
+    },
     "paperless": {
       "bytes": 468,
       "format": "svg",
@@ -29510,6 +29526,12 @@
       "notice": "src/assets/apps/LICENSE",
       "repository": "homarr-labs/dashboard-icons",
       "revision": "d84d00eef4b14084963d5996397b76f9fe22f0c7"
+    },
+    "paperclip": {
+      "license": "MIT",
+      "notice": "catalog/notices/paperclip/LICENSE",
+      "repository": "paperclipai/paperclip",
+      "revision": "932c8bec56fdcb581b0a65a7999caa85047fb37f"
     },
     "umbrel-apps-gallery": {
       "license": "NOASSERTION",
