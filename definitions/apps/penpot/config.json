@@ -4,6 +4,12 @@
   "version": "2.17.2",
   "source": "https://github.com/penpot/penpot",
   "note": "Authored by Local Store from Penpot's official docker-compose.yaml, not taken from Runtipi's store.",
+  "short_desc": "Web-based design and prototyping platform meant for cross-domain teams.",
+  "categories": [
+    "Design"
+  ],
+  "website": "https://penpot.app/",
+  "license": "MPL-2.0",
   "form_fields": [
     {
       "type": "random",
