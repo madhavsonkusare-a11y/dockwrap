@@ -681,6 +681,7 @@ pub fn import(id: &str, definition: &str, config: Option<&str>) -> Result<Import
     // partially understood definition would look installable and would not be.
     let template = if limitations.is_empty() {
         let candidate = PlanTemplate {
+            first_start: None,
             seeds: Vec::new(),
             plan: DeploymentPlan {
                 id: id.to_owned(),

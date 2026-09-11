@@ -114,6 +114,12 @@ def generate(app):
     if seeds:
         manifest["seeds"] = seeds
     target = ROOT / "src" / "templates" / f"{app}.json"
+    # A measured first-start allowance is a review decision; regenerating the
+    # mechanical parts must not quietly drop it.
+    if target.exists():
+        previous = json.loads(target.read_text(encoding="utf-8"))
+        if previous.get("first_start_seconds"):
+            manifest["first_start_seconds"] = previous["first_start_seconds"]
     target.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     oldest = min(i["last_updated"] for i in images)
     print(f"{app}: {len(images)} image(s), oldest built {oldest}; {json.dumps(manifest).count(g.REVIEW)} REVIEW marker(s)")

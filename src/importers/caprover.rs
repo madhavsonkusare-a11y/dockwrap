@@ -904,6 +904,7 @@ pub fn import(id: &str, definition: &str) -> Result<ImportOutcome, String> {
         .collect();
 
     let template = PlanTemplate {
+        first_start: None,
         seeds: Vec::new(),
         plan,
         fields,

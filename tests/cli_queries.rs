@@ -44,24 +44,40 @@ fn catalog_pages_are_distinct_and_supply_a_next_offset() {
 
 #[test]
 fn catalog_preview_filter_preserves_the_recipe_allowlist() {
-    let result = json(&["catalog", "--capability", "preview_install", "--json"]);
     // Derived from the allowlist rather than written down here: approving an
     // app should update this test, not break it. What it actually checks is
     // that every offering survives the trip out through the packaged CLI, and
-    // that nothing else picks up an install capability on the way.
+    // that nothing else picks up an install capability on the way. It follows
+    // every page, because the store outgrew one page of 24 at 28 offerings.
     let mut expected: Vec<String> = local_store::offerings::offerings()
         .iter()
         .map(|offering| offering.id().to_owned())
         .collect();
     expected.sort();
-    assert_eq!(result["total"], expected.len());
-    assert!(result["next_offset"].is_null());
-    let mut ids: Vec<_> = result["entries"]
-        .as_array()
-        .unwrap()
-        .iter()
-        .map(|entry| entry["recipe_id"].as_str().unwrap())
-        .collect();
+    let mut ids: Vec<String> = Vec::new();
+    let mut offset = 0usize;
+    loop {
+        let page = json(&[
+            "catalog",
+            "--capability",
+            "preview_install",
+            "--json",
+            "--offset",
+            &offset.to_string(),
+        ]);
+        assert_eq!(page["total"], expected.len());
+        ids.extend(
+            page["entries"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .map(|entry| entry["recipe_id"].as_str().unwrap().to_owned()),
+        );
+        match page["next_offset"].as_u64() {
+            Some(next) => offset = usize::try_from(next).unwrap(),
+            None => break,
+        }
+    }
     ids.sort();
     assert_eq!(ids, expected);
     let none = json(&[

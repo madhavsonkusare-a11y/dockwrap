@@ -632,6 +632,8 @@ pub struct InstallSource {
     /// Starting files inside `data/`, written only where nothing exists yet:
     /// a keep-data reinstall must not put back a config file somebody edited.
     pub seed_files: Vec<(String, String)>,
+    /// Longer than the default when a review found the app needs it.
+    pub first_start_timeout: Option<Duration>,
 }
 
 impl Recipe {
@@ -649,6 +651,7 @@ impl Recipe {
             data_directories: self.data_directories.clone(),
             extra_files: Vec::new(),
             seed_files: Vec::new(),
+            first_start_timeout: None,
         })
     }
 }
@@ -769,6 +772,7 @@ pub fn install_template_with(
             .iter()
             .map(|seed| (seed.path.clone(), seed.content.clone()))
             .collect(),
+        first_start_timeout: template.first_start,
     };
     install_source_with(context, &source, root, now)
 }
@@ -919,7 +923,7 @@ pub fn install_source_with(
         wait_for_health_with(
             context.health,
             &source.health_url,
-            FIRST_START_TIMEOUT,
+            source.first_start_timeout.unwrap_or(FIRST_START_TIMEOUT),
             context.cancel,
         )?;
         Ok(app)
@@ -2089,6 +2093,7 @@ mod tests {
             data_directories: vec!["data/.ollama".into()],
             extra_files: Vec::new(),
             seed_files: Vec::new(),
+            first_start_timeout: None,
         };
         let runner = FakeRunner::passing(6);
         let installed = install_source_with(
@@ -2135,6 +2140,7 @@ mod tests {
         use crate::plan::{PlanService, PublishedPort};
         use crate::setup::{FieldKind, SecretSpec, SetupField};
         PlanTemplate {
+            first_start: None,
             seeds: Vec::new(),
             plan: crate::plan::DeploymentPlan {
                 id: "memos".into(),

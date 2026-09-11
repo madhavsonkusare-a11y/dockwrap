@@ -201,6 +201,10 @@ pub struct PlanTemplate {
     /// on install; without them a mount of `data/proxy/nginx.conf` becomes an
     /// empty directory and the app fails to start.
     pub seeds: Vec<SeedFile>,
+    /// How long the first start may take, when a review found an app needs
+    /// longer than the default. Khoj downloads its embedding models before
+    /// it answers — 130 seconds when measured, and more on a slower line.
+    pub first_start: Option<std::time::Duration>,
 }
 
 /// One file written into an app's data folder before it first starts.
@@ -988,6 +992,7 @@ mod tests {
 
     fn template() -> PlanTemplate {
         PlanTemplate {
+            first_start: None,
             seeds: Vec::new(),
             plan: DeploymentPlan {
                 id: "example".into(),
