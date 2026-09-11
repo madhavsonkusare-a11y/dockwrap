@@ -100,6 +100,32 @@ impl ScriptProbe {
     }
 }
 
+/// The line a failed probe actually said, out of everything it printed.
+///
+/// Node prints an uncaught error's message near the top, then the stack, then
+/// its own version last — so the tail of stderr, which is what was kept, is
+/// the one part that says nothing. WordPress's first failure was recorded as
+/// "Node.js v24.14.0 } name: 'Error'".
+fn probe_failure(stderr: &str) -> String {
+    let thrown = stderr.lines().map(str::trim).find(|line| {
+        line.split_once(": ").is_some_and(|(kind, _)| {
+            kind.ends_with("Error") && kind.chars().all(|c| c.is_ascii_alphanumeric())
+        })
+    });
+    if let Some(line) = thrown {
+        return line.to_owned();
+    }
+    let mut tail: Vec<&str> = stderr
+        .lines()
+        .map(str::trim)
+        .filter(|line| !line.is_empty() && !line.starts_with("Node.js v"))
+        .rev()
+        .take(4)
+        .collect();
+    tail.reverse();
+    tail.join(" ")
+}
+
 impl FirstUse for ScriptProbe {
     fn describes(&self) -> &str {
         &self.describes
@@ -133,15 +159,7 @@ impl FirstUse for ScriptProbe {
             Ok(())
         } else {
             // Whatever a probe prints could contain an answer somebody typed.
-            Err(crate::runtime::redact(
-                &output
-                    .stderr
-                    .lines()
-                    .rev()
-                    .take(4)
-                    .collect::<Vec<_>>()
-                    .join(" "),
-            ))
+            Err(crate::runtime::redact(&probe_failure(&output.stderr)))
         }
     }
 }
@@ -1157,6 +1175,23 @@ ccc",
         assert_eq!(all.len(), 2);
         assert_eq!(all[0].app, "one");
         std::fs::remove_dir_all(&dir).ok();
+    }
+
+    #[test]
+    fn a_failed_probe_is_recorded_by_what_it_threw() {
+        let node = concat!(
+            "file:///probe.mjs:43\n",
+            "    throw new Error(`the address answered ${status}`);\n",
+            "          ^\n",
+            "\n",
+            "Error: the address answered 500\n",
+            "    at file:///probe.mjs:43:11\n",
+            "\n",
+            "Node.js v24.14.0\n",
+        );
+        assert_eq!(probe_failure(node), "Error: the address answered 500");
+        // Something that threw nothing recognisable still reads forwards.
+        assert_eq!(probe_failure("one\ntwo\nNode.js v24\n"), "one two");
     }
 
     /// Two harnesses at once each blame the other for removing containers,

@@ -321,6 +321,7 @@ const PRIVATEBIN: &str = include_str!("privatebin.json");
 const TAUTULLI: &str = include_str!("tautulli.json");
 const VAULTWARDEN: &str = include_str!("vaultwarden.json");
 const WALLOS: &str = include_str!("wallos.json");
+const WORDPRESS: &str = include_str!("wordpress.json");
 
 /// Every template a review has passed. Being here is not being offered.
 pub fn reviewed_templates() -> Vec<ReviewedTemplate> {
@@ -348,6 +349,7 @@ pub fn reviewed_templates() -> Vec<ReviewedTemplate> {
         TAUTULLI,
         VAULTWARDEN,
         WALLOS,
+        WORDPRESS,
     ]
     .into_iter()
     .map(|source| serde_json::from_str(source).expect("bundled reviewed templates must parse"))
@@ -538,6 +540,7 @@ mod tests {
         "tautulli",
         "vaultwarden",
         "wallos",
+        "wordpress",
     ];
 
     #[test]
@@ -586,6 +589,50 @@ mod tests {
             assert!(
                 template.plan.published().is_some(),
                 "{id} publishes no address to open"
+            );
+            // And the proof has to be about what runs. An image pin changes
+            // the images without changing the file the review points at, so
+            // a proof of the old image would otherwise keep vouching for the
+            // new one.
+            let evidence: serde_json::Value =
+                serde_json::from_str(&std::fs::read_to_string(&proof).unwrap())
+                    .unwrap_or_else(|_| panic!("{id}'s proof is not JSON"));
+            let mut proven: Vec<String> = evidence["images"]
+                .as_array()
+                .unwrap_or_else(|| panic!("{id}'s proof records no images"))
+                .iter()
+                .filter_map(|image| image.as_str().map(str::to_owned))
+                .collect();
+            let mut runs: Vec<String> = template
+                .plan
+                .services
+                .iter()
+                .map(|service| service.image.clone())
+                .collect();
+            proven.sort();
+            runs.sort();
+            assert_eq!(
+                proven, runs,
+                "{id}'s proof is about different images than it runs; qualify it as offered"
+            );
+            assert_eq!(
+                evidence["passed"].as_bool(),
+                Some(true),
+                "{id} is approved on a proof that did not pass"
+            );
+            // A check that passes trivially must not be quoted as though it
+            // had tested something. Four approvals said their generated
+            // credentials survived a reinstall for apps that generate none.
+            let generates_none = evidence["steps"].as_array().is_some_and(|steps| {
+                steps.iter().any(|step| {
+                    step["step"]
+                        .as_str()
+                        .is_some_and(|name| name.starts_with("generates no credentials"))
+                })
+            });
+            assert!(
+                !(generates_none && reviewed.promotion.reason.contains("credentials intact")),
+                "{id}'s approval claims credentials survived, but its proof says it generates none"
             );
         }
     }

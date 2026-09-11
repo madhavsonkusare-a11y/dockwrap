@@ -8,7 +8,7 @@
   "license": "AGPL-3.0",
   "source_url": "https://github.com/grafana/grafana",
   "documentation_url": "https://grafana.com/",
-  "verified_at": "2026-09-10",
+  "verified_at": "2026-09-11",
   "lifecycle_proof": "docs/evidence/grafana-qualification.json",
   "origin": {
     "importer": "runtipi",
@@ -42,7 +42,7 @@
   },
   "promotion": {
     "state": "approved",
-    "reason": "Qualified on 2026-09-10 and approved by the owner. A real install proved it starts, opens to a usable screen, survives a restart and a keep-data reinstall with its data and generated credentials intact, and removes everything it created on delete-data. Evidence: docs/evidence/grafana-qualification.json. Proven on Windows with Docker's Linux engine and one architecture only."
+    "reason": "Approved by the owner. Re-proven as offered on 2026-09-11: the first approval rested on a proof of CapRover's grafana/grafana:7.4.3, not the grafana-oss:13.0.2 this template installs, which a tightened guard caught. The re-run installed 13.0.2 for real and proved it starts, opens to a usable screen, survives a restart and a keep-data reinstall with its data intact, and removes everything it created. Proven on Windows with Docker's Linux engine and one architecture only."
   },
   "data_storage": "Local Store managed folder / grafana",
   "risk_notes": [

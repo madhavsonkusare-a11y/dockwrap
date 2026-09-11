@@ -133,6 +133,26 @@ proving it (`--only app --source runtipi`), and make anything that consumes the
 proof check it is about the same definition: the template generator now reads
 the source from the result and refuses a mismatch.
 
+## A proof has to be about what runs
+
+Grafana was approved and offered on a proof of `grafana/grafana:7.4.3` —
+CapRover's definition, from 2021 — while the template installs Runtipi's
+`grafana-oss:13.0.2`. The app people would have installed had never been run.
+The guard only checked that the proof file *existed*.
+
+It now requires the proof's images to equal the images the approved template
+runs, and the proof to have passed. An image pin changes what runs without
+changing which file the review points at, so after a pin the app has to be
+qualified again *as offered* — `qualify_batch --offered --only app` runs the
+reviewed mapping, pins and all.
+
+## Two harnesses at once make each other's proofs worthless
+
+The bystander check fails if any container that is not the run's own
+disappears. A batch and a second run started side by side each saw the other's
+cleanup as a stranger's containers being removed. Qualification now takes a
+machine-wide lock; a second run waits for its turn.
+
 ## A timeout carries no reason, and the reason is about to be deleted
 
 Five candidates in a row failed with "Health check timed out" and nothing else.

@@ -52,7 +52,7 @@
   },
   "promotion": {
     "state": "approved",
-    "reason": "Qualified on 2026-09-10 and approved by the owner. A real install proved it starts, opens to a usable screen, survives a restart and a keep-data reinstall with its data and generated credentials intact, and removes everything it created on delete-data. Evidence: docs/evidence/adminer-qualification.json. Proven on Windows with Docker's Linux engine and one architecture only."
+    "reason": "Qualified on 2026-09-10 and approved by the owner. A real install proved it starts, opens to a usable screen, survives a restart and a keep-data reinstall with its data intact, and removes everything it created on delete-data. Evidence: docs/evidence/adminer-qualification.json. Proven on Windows with Docker's Linux engine and one architecture only."
   },
   "data_storage": "Local Store managed folder / adminer",
   "risk_notes": [
