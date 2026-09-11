@@ -1,5 +1,23 @@
 # Local Store: agent handoff
 
+## Owner decisions, September 11 — read before resuming
+
+Work is **paused at 24 offered apps** until PRs #3, #4 and #5 are reviewed.
+When it resumes:
+
+- **Nextcloud:** write Local Store's own definition that keeps Nextcloud's
+  program files (`/var/www/html`) in a Docker named volume, and only the
+  person's files in the managed folder. Its first start on a Windows host
+  folder took 18.5 minutes because the image copies its whole source there.
+  Runtipi's format has no named volumes, so this needs a small plan/importer
+  change or a CapRover-format first-party definition. Re-qualify as offered.
+- **Umbrel gallery icons (8):** keep them, with the `NOASSERTION` notice.
+- **Second published port:** not now. Build it when a candidate actually needs
+  one, designed around that app. (Penpot's MCP did not: its frontend proxies it.)
+- Not chosen for now: retrying the older failures (SiYuan, Appsmith, Joomla,
+  Mongo Express — candidates for the Host-header and seed fixes), pushing
+  toward 30, and rewriting Notemark's definition.
+
 ## September 11 (evening) — the known failures, run down
 
 **24 apps offered.** Monica and Glance join; Joplin is withheld.
