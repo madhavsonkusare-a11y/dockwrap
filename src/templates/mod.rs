@@ -337,6 +337,8 @@ const NAVIDROME: &str = include_str!("navidrome.json");
 const NODERED: &str = include_str!("nodered.json");
 const NTFY: &str = include_str!("ntfy.json");
 const OMBI: &str = include_str!("ombi.json");
+const PAPERCLIP: &str = include_str!("paperclip.json");
+const PENPOT: &str = include_str!("penpot.json");
 const PRIVATEBIN: &str = include_str!("privatebin.json");
 const TAUTULLI: &str = include_str!("tautulli.json");
 const VAULTWARDEN: &str = include_str!("vaultwarden.json");
@@ -374,6 +376,8 @@ pub fn reviewed_templates() -> Vec<ReviewedTemplate> {
         NODERED,
         NTFY,
         OMBI,
+        PAPERCLIP,
+        PENPOT,
         PRIVATEBIN,
         TAUTULLI,
         VAULTWARDEN,
@@ -566,6 +570,8 @@ mod tests {
         "navidrome",
         "nodered",
         "ntfy",
+        "paperclip",
+        "penpot",
         "privatebin",
         "tautulli",
         "vaultwarden",

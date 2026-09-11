@@ -1,5 +1,31 @@
 # Local Store: agent handoff
 
+## September 11 (later) — Penpot and Paperclip, from Local Store's own definitions
+
+**22 apps are offered.** The two new ones are the first written by Local
+Store rather than imported: `definitions/apps/<id>/` holds a definition in
+Runtipi's format, mapped by the same importer and reviewed the same way. A
+guard requires the manifest to embed the file in the tree byte for byte, and
+the catalogue pipeline reads these definitions as a fifth source.
+
+- **Penpot 2.17.2**, from Penpot's official Compose file: five containers,
+  health-gated start, generated session key and database password. Runtipi's
+  definition was unusable — `:latest` images and an exporter pointed at port 80
+  while the frontend listens on 8080. The first run failed because Postgres took
+  19 s to initialise on a host folder against a 12 s health window; the start
+  period is now 60 s. Penpot's MCP server is left out (one published port per app).
+- **Paperclip 2026.831.1**, from its quickstart Compose using the published
+  ghcr.io image: one container, embedded Postgres, generated session secret,
+  optional masked Anthropic/OpenAI key fields.
+- Plans can carry `stop_signal`; Postgres needs SIGINT to stop cleanly.
+
+Every install is also pinned by digest now (see below); both new apps' digests
+match the images their proofs ran.
+
+Open: Paperclip has no cached icon (the store shows its letter fallback) —
+icons come from one pinned dashboard-icons revision in `catalog/icons.json`,
+which has uncommitted work from an earlier session in this working tree.
+
 ## September 11 — twenty apps offered, and four proofs that said too much
 
 **Twenty apps are installable**, as `local-store recipes` lists them: three

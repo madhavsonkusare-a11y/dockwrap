@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "id": "paperclip",
+  "display_name": "Paperclip",
+  "catalog_name": "Paperclip",
+  "description": "Run a team of AI agents: give them roles, goals and budgets, and review their work in one place.",
+  "category": "Artificial Intelligence",
+  "license": "MIT",
+  "source_url": "https://github.com/paperclipai/paperclip",
+  "documentation_url": "https://github.com/paperclipai/paperclip/blob/master/docs/deploy/docker.md",
+  "verified_at": "2026-09-11",
+  "lifecycle_proof": "docs/evidence/paperclip-qualification.json",
+  "origin": {
+    "importer": "runtipi",
+    "repository": "madhavsonkusare-a11y/local-store",
+    "revision": "b203870e5e525c9c571287a0ed7225fc613160d5",
+    "path": "definitions/apps/paperclip/docker-compose.json",
+    "license": "MIT"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "ghcr.io/paperclipai/paperclip:2026.831.1",
+        "source_url": "https://ghcr.io/v2/paperclipai/paperclip/manifests/2026.831.1",
+        "checked_at": "2026-09-11",
+        "last_updated": "2026-09-02",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:04b98fbe39e83462f7974d11a6d26a37cd21634bc110bf0a9683e6d6dadb72e5",
+          "linux/arm64": "sha256:7d82f0f4d844f17756634eb4a25fdfe02437a4e2dcfcca21ab5977844f102851"
+        },
+        "index_digest": "sha256:f58ff8e28757eaaf1f58b7ae608e56f2a473fd0688aaab2dbade8c392fad0758"
+      }
+    ]
+  },
+  "promotion": {
+    "state": "approved",
+    "reason": "Approved by the owner. Qualified as offered on 2026-09-11: a real install of Paperclip 2026.831.1 — upstream's current release — proved it starts, opens to a first screen with a clear next step, survives a restart and a keep-data reinstall with its data and generated session secret intact, and removes everything it created. No store packages it, so Local Store wrote the definition from Paperclip's own quickstart Compose file, using the image Paperclip publishes. One container; its database is embedded and kept in the managed folder."
+  },
+  "data_storage": "Local Store managed folder / paperclip",
+  "risk_notes": [
+    "Creates 1 Docker container and publishes one port on this computer's loopback interface only.",
+    "Generates 1 credential of its own, keeps it beside the app's data, and reuses it if you reinstall.",
+    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Runs AI agents that execute commands inside its container, and bills the API keys you give it for everything they do. Set spending limits with the provider before adding a key.",
+    "API keys you enter are kept in this app's Compose file in its managed folder. It works without any; agents simply cannot run until one is added.",
+    "Written by Local Store from Paperclip's own quickstart Compose file, using the image Paperclip publishes rather than building it."
+  ],
+  "fields": {
+    "ANTHROPIC_API_KEY": {
+      "label": "Anthropic API key (optional)",
+      "sensitive": true
+    },
+    "OPENAI_API_KEY": {
+      "label": "OpenAI API key (optional)",
+      "sensitive": true
+    }
+  },
+  "definition": "{\n  \"schemaVersion\": 2,\n  \"$schema\": \"https://schemas.runtipi.io/v2/dynamic-compose.json\",\n  \"services\": [\n    {\n      \"name\": \"paperclip\",\n      \"image\": \"ghcr.io/paperclipai/paperclip:2026.831.1\",\n      \"isMain\": true,\n      \"internalPort\": 3100,\n      \"environment\": [\n        {\n          \"key\": \"HOST\",\n          \"value\": \"0.0.0.0\"\n        },\n        {\n          \"key\": \"PORT\",\n          \"value\": \"3100\"\n        },\n        {\n          \"key\": \"PAPERCLIP_HOME\",\n          \"value\": \"/paperclip\"\n        },\n        {\n          \"key\": \"PAPERCLIP_DEPLOYMENT_MODE\",\n          \"value\": \"authenticated\"\n        },\n        {\n          \"key\": \"PAPERCLIP_DEPLOYMENT_EXPOSURE\",\n          \"value\": \"private\"\n        },\n        {\n          \"key\": \"PAPERCLIP_PUBLIC_URL\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}\"\n        },\n        {\n          \"key\": \"BETTER_AUTH_SECRET\",\n          \"value\": \"${PAPERCLIP_AUTH_SECRET}\"\n        },\n        {\n          \"key\": \"ANTHROPIC_API_KEY\",\n          \"value\": \"${ANTHROPIC_API_KEY}\"\n        },\n        {\n          \"key\": \"OPENAI_API_KEY\",\n          \"value\": \"${OPENAI_API_KEY}\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data\",\n          \"containerPath\": \"/paperclip\"\n        }\n      ]\n    }\n  ]\n}\n",
+  "config": {
+    "path": "definitions/apps/paperclip/config.json",
+    "content": "{\n  \"id\": \"paperclip\",\n  \"name\": \"Paperclip\",\n  \"version\": \"2026.831.1\",\n  \"source\": \"https://github.com/paperclipai/paperclip\",\n  \"note\": \"Authored by Local Store from Paperclip's docker/docker-compose.quickstart.yml, using the published image instead of a local build.\",\n  \"short_desc\": \"Run a team of AI agents: give them roles, goals and budgets, and review their work in one place.\",\n  \"categories\": [\n    \"Artificial Intelligence\"\n  ],\n  \"website\": \"https://paperclip.ing\",\n  \"license\": \"MIT\",\n  \"form_fields\": [\n    {\n      \"type\": \"random\",\n      \"label\": \"Session signing secret\",\n      \"min\": 64,\n      \"max\": 64,\n      \"env_variable\": \"PAPERCLIP_AUTH_SECRET\"\n    },\n    {\n      \"type\": \"password\",\n      \"label\": \"Anthropic API key (optional)\",\n      \"required\": false,\n      \"env_variable\": \"ANTHROPIC_API_KEY\"\n    },\n    {\n      \"type\": \"password\",\n      \"label\": \"OpenAI API key (optional)\",\n      \"required\": false,\n      \"env_variable\": \"OPENAI_API_KEY\"\n    }\n  ]\n}\n"
+  }
+}
