@@ -99,19 +99,53 @@ pub struct SecretSpec {
 pub enum SecretFormat {
     Alphanumeric,
     Hex,
+    /// `length` random *bytes*, base64-encoded with padding — Runtipi's
+    /// `encoding: base64`. An AES-256 key is 32 bytes, which is 44 characters
+    /// here; 32 alphanumeric characters decode to 24 bytes and the app refuses
+    /// the key.
+    Base64,
 }
 
 impl SecretSpec {
     pub fn generate(&self) -> Result<String, String> {
         generate_secret_with_format(self.length, self.format)
     }
+    /// How many characters a generated value has.
+    pub fn output_len(&self) -> usize {
+        match self.format {
+            SecretFormat::Base64 => 4 * self.length.div_ceil(3),
+            _ => self.length,
+        }
+    }
     fn accepts(&self, value: &str) -> bool {
-        value.len() == self.length
+        value.len() == self.output_len()
             && value.bytes().all(|byte| match self.format {
                 SecretFormat::Alphanumeric => byte.is_ascii_alphanumeric(),
                 SecretFormat::Hex => byte.is_ascii_digit() || (b'a'..=b'f').contains(&byte),
+                SecretFormat::Base64 => {
+                    byte.is_ascii_alphanumeric() || matches!(byte, b'+' | b'/' | b'=')
+                }
             })
     }
+}
+
+/// Standard base64 with padding, for the few bytes a secret needs.
+fn base64_encode(bytes: &[u8]) -> String {
+    const TABLE: &[u8; 64] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    let mut out = String::with_capacity(4 * bytes.len().div_ceil(3));
+    for chunk in bytes.chunks(3) {
+        let n = (u32::from(chunk[0]) << 16)
+            | (u32::from(*chunk.get(1).unwrap_or(&0)) << 8)
+            | u32::from(*chunk.get(2).unwrap_or(&0));
+        for (index, shift) in [18, 12, 6, 0].into_iter().enumerate() {
+            if index <= chunk.len() {
+                out.push(TABLE[((n >> shift) & 63) as usize] as char);
+            } else {
+                out.push('=');
+            }
+        }
+    }
+    out
 }
 
 /// Placeholders the installer fills, rather than the person installing.
@@ -301,6 +335,9 @@ fn alphabet(format: SecretFormat) -> &'static [u8] {
     match format {
         SecretFormat::Alphanumeric => SECRET_ALPHABET,
         SecretFormat::Hex => b"0123456789abcdef",
+        SecretFormat::Base64 => {
+            b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
+        }
     }
 }
 
@@ -459,7 +496,7 @@ impl SecretSpec {
         if class_accepts_all(atom, alphabet(self.format)) != Some(true) {
             return false;
         }
-        if self.length < low {
+        if self.output_len() < low {
             return false;
         }
         // Only a rule anchored at both ends has to consume the whole value;
@@ -467,7 +504,7 @@ impl SecretSpec {
         // every character is already known to satisfy the class.
         if anchored_start && anchored_end {
             if let Some(high) = high {
-                if self.length > high {
+                if self.output_len() > high {
                     return false;
                 }
             }
@@ -480,11 +517,18 @@ pub fn generate_secret_with_format(length: usize, format: SecretFormat) -> Resul
     if !(16..=256).contains(&length) {
         return Err("secret length must be between 16 and 256 characters".into());
     }
+    if format == SecretFormat::Base64 {
+        let mut bytes = vec![0_u8; length];
+        getrandom::fill(&mut bytes)
+            .map_err(|error| format!("could not read the system random source: {error}"))?;
+        return Ok(base64_encode(&bytes));
+    }
     let mut secret = String::with_capacity(length);
     let alphabet = alphabet(format);
     let limit = match format {
         SecretFormat::Alphanumeric => UNBIASED_LIMIT as u16,
         SecretFormat::Hex => 256,
+        SecretFormat::Base64 => unreachable!("base64 secrets return above"),
     };
     let mut buffer = [0_u8; 64];
     while secret.len() < length {
@@ -823,6 +867,37 @@ fn is_key(value: &str) -> bool {
 
 #[cfg(test)]
 mod tests {
+    /// RFC 4648's own examples, and a key of the size Plausible and BookStack
+    /// ask for: 32 random bytes, which is 44 characters with padding.
+    #[test]
+    fn base64_secrets_are_random_bytes_encoded_as_runtipi_does() {
+        for (bytes, encoded) in [
+            ("", ""),
+            ("f", "Zg=="),
+            ("fo", "Zm8="),
+            ("foo", "Zm9v"),
+            ("foobar", "Zm9vYmFy"),
+        ] {
+            assert_eq!(super::base64_encode(bytes.as_bytes()), encoded);
+        }
+        let spec = SecretSpec {
+            key: "KEY".into(),
+            length: 32,
+            format: SecretFormat::Base64,
+        };
+        let value = spec.generate().unwrap();
+        assert_eq!(value.len(), 44, "{value}");
+        assert!(
+            value.ends_with('='),
+            "32 bytes need one padding character: {value}"
+        );
+        assert!(spec.accepts(&value));
+        assert!(
+            !spec.accepts(&"a".repeat(32)),
+            "an alphanumeric key of the old shape was accepted"
+        );
+    }
+
     use super::*;
 
     fn hex(length: usize) -> SecretSpec {

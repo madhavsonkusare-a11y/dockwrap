@@ -210,10 +210,25 @@ fn read_form_fields(config: &str) -> Result<DeclaredInputs, String> {
         if kind_name == "random" {
             let length = max.or(min).unwrap_or(32);
             let length = usize::try_from(length).unwrap_or(32).clamp(16, 256);
+            // Runtipi reads `min` as bytes for base64 and as characters for
+            // hex. Without an encoding the value stays alphanumeric, which is
+            // what every approved app was proven with.
+            let format = match entry.get("encoding").and_then(Value::as_str) {
+                None => crate::setup::SecretFormat::Alphanumeric,
+                Some("hex") => crate::setup::SecretFormat::Hex,
+                Some("base64") => crate::setup::SecretFormat::Base64,
+                Some(other) => {
+                    limitations.push(not_modelled(
+                        "secret encoding",
+                        format!("{key} asks for a {other} value"),
+                    ));
+                    continue;
+                }
+            };
             secrets.push(SecretSpec {
                 key,
                 length,
-                format: crate::setup::SecretFormat::Alphanumeric,
+                format,
             });
             continue;
         }
@@ -952,6 +967,32 @@ mod tests {
             outcome.plan().is_none_or(|plan| plan.to_compose().is_err()),
             "a stop signal carried something else into the file"
         );
+    }
+
+    /// Plausible's TOTP key is 32 bytes of base64; an alphanumeric string of
+    /// the same length decodes to 24 bytes and Plausible will not start.
+    #[test]
+    fn a_declared_secret_encoding_is_honoured() {
+        let definition = r#"{"services": [{"name": "app", "image": "example/app:1.0", "isMain": true,
+            "internalPort": 8000, "environment": [{"key": "A", "value": "${A}"}, {"key": "B", "value": "${B}"},
+            {"key": "C", "value": "${C}"}]}]}"#;
+        let config = r#"{"id": "app", "form_fields": [
+            {"type": "random", "min": 32, "encoding": "base64", "env_variable": "A"},
+            {"type": "random", "min": 64, "encoding": "hex", "env_variable": "B"},
+            {"type": "random", "min": 32, "env_variable": "C"}]}"#;
+        let outcome = import("app", definition, Some(config)).unwrap();
+        let template = outcome.template.expect("importable");
+        let format = |key: &str| {
+            template
+                .secrets
+                .iter()
+                .find(|s| s.key == key)
+                .unwrap()
+                .format
+        };
+        assert_eq!(format("A"), crate::setup::SecretFormat::Base64);
+        assert_eq!(format("B"), crate::setup::SecretFormat::Hex);
+        assert_eq!(format("C"), crate::setup::SecretFormat::Alphanumeric);
     }
 
     #[test]
