@@ -10,7 +10,7 @@
       "environment": [
         {
           "key": "PENPOT_FLAGS",
-          "value": "enable-registration enable-login-with-password disable-email-verification disable-secure-session-cookies"
+          "value": "enable-registration enable-login-with-password disable-email-verification disable-secure-session-cookies enable-mcp"
         },
         {
           "key": "PENPOT_PUBLIC_URI",
@@ -33,7 +33,8 @@
       ],
       "dependsOn": [
         "penpot-backend",
-        "penpot-exporter"
+        "penpot-exporter",
+        "penpot-mcp"
       ]
     },
     {
@@ -42,7 +43,7 @@
       "environment": [
         {
           "key": "PENPOT_FLAGS",
-          "value": "enable-registration enable-login-with-password disable-email-verification disable-secure-session-cookies"
+          "value": "enable-registration enable-login-with-password disable-email-verification disable-secure-session-cookies enable-mcp"
         },
         {
           "key": "PENPOT_PUBLIC_URI",
@@ -130,6 +131,10 @@
           "condition": "service_healthy"
         }
       }
+    },
+    {
+      "name": "penpot-mcp",
+      "image": "penpotapp/mcp:2.17.2"
     },
     {
       "name": "penpot-postgres",
