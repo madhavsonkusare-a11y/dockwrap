@@ -1,5 +1,82 @@
 # Local Store: agent handoff
 
+## September 11 — twenty apps offered, and four proofs that said too much
+
+**Twenty apps are installable**, as `local-store recipes` lists them: three
+reviewed recipes (memos, n8n, uptime-kuma) and seventeen approved templates —
+adminer, beszel, flatnotes, grafana, grocy, homer, kanboard, metabase,
+navidrome, nodered, ntfy, privatebin, tautulli, vaultwarden, wallos, whoogle,
+wordpress. Every one has a proof in `docs/evidence/` of the exact images it
+runs. Each opens in its own Tauri window like every offering.
+
+### What was wrong with what was already offered
+
+- **Grafana was offered on a proof of a different build.** Its evidence was
+  CapRover's `grafana/grafana:7.4.3` from 2021; the template installs Runtipi's
+  `grafana-oss:13.0.2`. The approval guard only checked that the proof file
+  existed. It now requires the proof's images to equal what the template runs,
+  and the proof to have passed. Grafana was re-proven as offered and passes.
+- **Four approvals quoted a check that tested nothing.** Adminer, Metabase,
+  ntfy and Vaultwarden said their generated credentials survived a reinstall;
+  their proofs say they generate none. Corrected, and the guard refuses it.
+- **Three storage descriptions were false.** Adminer and Whoogle keep no data;
+  Beszel keeps it in a named volume. The generator now describes storage from
+  what the plan mounts.
+
+### What unlocked more candidates
+
+- **Any registry, not just Docker Hub** — the audit answers the registry's own
+  `WWW-Authenticate` challenge and reads the build date from the image config.
+  89 images on ghcr.io, lscr.io, quay.io and gcr.io became auditable; Grocy and
+  Tautulli are the first offered apps from lscr.io.
+- **Apps that bring a database are apps.** The batch skipped any definition
+  containing an infrastructure image, which excluded fifty candidates including
+  WordPress, Nextcloud, Joplin and Monica. It now skips only definitions made
+  *entirely* of infrastructure.
+- **Choosing the packaging.** CapRover's Grocy and Tautulli pin 2020 and 2021
+  images; Runtipi's pin this week's releases. `--only app --source runtipi`
+  proves a chosen definition, and the generator reads the source from the proof.
+
+### New tooling
+
+- `qualify_batch --offered --only app,app` proves apps **as offered** — image
+  pins included — and writes the proof where the review names it. Use it after
+  any pin, and to re-verify before a release.
+- `--only` reruns named apps whatever is recorded (`Resume::RunAnyway`);
+  `--source` picks the packaging.
+- The generator prints upstream's latest release beside the image date.
+- One qualification at a time per machine (a lock file); two at once made each
+  other's bystander checks fail.
+
+### Diagnosis that now works
+
+A timed-out install records the container states and log tail before rollback
+removes them; a failed probe records the error it threw; a long command failure
+keeps its end, where the reason is. Joplin, Monica and Notemark fail legibly
+now — Joplin runs but never answers its address, Monica answers every request
+with 500, Notemark's nginx proxy fails to start.
+
+### Withheld, with reasons recorded
+
+ghost-dev (runs `NODE_ENV=development`), jellyseerr (2.7.3 vs upstream 3.4.1),
+activepieces (0.12.2 from 2023 vs 0.90.4), filestash (a 2020 commit-hash image),
+plus the earlier actual, codimd, gotify and ombi.
+
+### Open
+
+- Image digests are recorded and format-checked but **not enforced at install**.
+- `adminer:4` is a floating major tag; the unpinned-image guard only refuses
+  `latest`, `stable` and `main`.
+- Qualification leaves its isolation directory behind (a task chip exists).
+- The Docker VM has 7.7 GB and the owner's other stacks hold about 4 GB; heavy
+  apps (Nextcloud) time out under that load. Stop them during a long batch.
+- Batch state is resumable: `.cache/qualification/`. Continue with
+  `LOCAL_STORE_RUN_DOCKER_TEST=1 cargo run --release --example qualify_batch --
+  --limit 120 --source runtipi`.
+
+Validation: 301 Rust tests pass (10 Docker-gated ignored), strict Clippy, fmt.
+No qualification container, network, volume or directory left behind.
+
 ## September 10 — the standard, and what it refuses
 
 `scripts/standard-probe.mjs` is the app-agnostic first-use check (plan step
