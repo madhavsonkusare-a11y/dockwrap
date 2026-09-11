@@ -480,11 +480,24 @@ fn main() {
                 continue;
             }
         };
-        let Some(template) = outcome.ok().and_then(|outcome| outcome.template) else {
+        let Some(mut template) = outcome.ok().and_then(|outcome| outcome.template) else {
             println!("{}: no longer importable, skipping", candidate.id);
             skipped += 1;
             continue;
         };
+        // What Runtipi would have copied into the data folder, it gets here
+        // too; a definition mounting one of these is broken without it.
+        if candidate.source == "runtipi" {
+            let folder = root()
+                .join(".cache/definitions")
+                .join(&candidate.revision)
+                .join(Path::new(&candidate.path).parent().unwrap_or(Path::new("")));
+            let (seeds, binary) = local_store::importers::runtipi::read_seeds(&folder);
+            if !binary.is_empty() {
+                println!("  {}: cannot carry binary seed(s) {binary:?}", candidate.id);
+            }
+            template.seeds = seeds;
+        }
         // Qualifying a hundred apps means pulling a hundred images, which is
         // tens of gigabytes on somebody's real machine. Anything this run
         // pulls, it removes; anything that was already there is left exactly

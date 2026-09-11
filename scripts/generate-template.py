@@ -508,6 +508,19 @@ def main():
         },
         "definition": definition,
     }
+    # What Runtipi copies into the data folder travels with the definition,
+    # verbatim, so the review covers it. template_facts already refused to
+    # continue quietly if any of it was binary.
+    if facts.get("binary_seeds"):
+        raise SystemExit(
+            f"{args.app} ships binary seed files {facts['binary_seeds']}, which a manifest cannot carry"
+        )
+    seeds = []
+    for relative in facts.get("seed_files", []):
+        seed = definition_path.parent / relative
+        seeds.append({"path": relative, "content": seed.read_text(encoding="utf-8")})
+    if seeds:
+        manifest["seeds"] = seeds
     if candidate["source"] == "runtipi" and config_path.is_file():
         manifest["config"] = {
             "path": str(Path(provenance["path"]).parent / "config.json").replace("\\", "/"),

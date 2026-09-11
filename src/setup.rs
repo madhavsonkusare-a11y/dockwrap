@@ -161,6 +161,37 @@ pub struct PlanTemplate {
     pub plan: DeploymentPlan,
     pub fields: Vec<SetupField>,
     pub secrets: Vec<SecretSpec>,
+    /// Files an app expects to find in its data folder the first time it
+    /// starts — an nginx config, a starter settings file, SQL to initialise a
+    /// database. Runtipi ships these beside a definition and copies them in
+    /// on install; without them a mount of `data/proxy/nginx.conf` becomes an
+    /// empty directory and the app fails to start.
+    pub seeds: Vec<SeedFile>,
+}
+
+/// One file written into an app's data folder before it first starts.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct SeedFile {
+    /// Relative to the app's folder, and always inside `data/`.
+    pub path: String,
+    pub content: String,
+}
+
+/// How many seed files, and how large, a template may carry. A seed is a
+/// starting configuration, not a way to ship an application.
+pub const MAX_SEEDS: usize = 64;
+pub const MAX_SEED_BYTES: usize = 256 * 1024;
+
+/// Whether a seed path stays inside the app's data folder.
+pub fn is_confined_seed_path(path: &str) -> bool {
+    path.starts_with("data/")
+        && !path.ends_with('/')
+        && path
+            .split('/')
+            .all(|part| !part.is_empty() && part != "." && part != "..")
+        && path
+            .chars()
+            .all(|c| c.is_ascii_alphanumeric() || matches!(c, '.' | '_' | '-' | '/'))
 }
 
 /// What is wrong with one answer, in terms that can be shown against a field.
@@ -474,6 +505,30 @@ pub fn generate_secret_with_format(length: usize, format: SecretFormat) -> Resul
 
 impl PlanTemplate {
     pub fn validate(&self) -> Result<(), String> {
+        if self.seeds.len() > MAX_SEEDS {
+            return Err(format!(
+                "{} seed files is more than the {MAX_SEEDS} allowed",
+                self.seeds.len()
+            ));
+        }
+        let mut seen = std::collections::BTreeSet::new();
+        for seed in &self.seeds {
+            if !is_confined_seed_path(&seed.path) {
+                return Err(format!(
+                    "seed file {:?} is not a plain path inside data/",
+                    seed.path
+                ));
+            }
+            if seed.content.len() > MAX_SEED_BYTES {
+                return Err(format!(
+                    "seed file {:?} is larger than {MAX_SEED_BYTES} bytes",
+                    seed.path
+                ));
+            }
+            if !seen.insert(seed.path.as_str()) {
+                return Err(format!("seed file {:?} is declared twice", seed.path));
+            }
+        }
         for field in &self.fields {
             if let FieldKind::Pattern {
                 pattern,
@@ -858,6 +913,7 @@ mod tests {
 
     fn template() -> PlanTemplate {
         PlanTemplate {
+            seeds: Vec::new(),
             plan: DeploymentPlan {
                 id: "example".into(),
                 services: vec![PlanService {

@@ -24,6 +24,7 @@ fn scratch(name: &str) -> PathBuf {
 
 fn template() -> PlanTemplate {
     PlanTemplate {
+        seeds: Vec::new(),
         plan: DeploymentPlan {
             id: "gallery".into(),
             services: vec![PlanService {

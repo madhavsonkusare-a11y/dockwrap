@@ -123,6 +123,7 @@ impl Drop for ProjectCleanup {
 /// Compose at all.
 fn template(id: &str, host_port: u16) -> PlanTemplate {
     PlanTemplate {
+        seeds: Vec::new(),
         plan: DeploymentPlan {
             id: id.to_owned(),
             services: vec![

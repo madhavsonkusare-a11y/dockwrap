@@ -621,6 +621,9 @@ pub struct InstallSource {
     /// Written beside the Compose file, and permitted to already exist when a
     /// preserved directory is reused. Generated secrets travel this way.
     pub extra_files: Vec<(String, String)>,
+    /// Starting files inside `data/`, written only where nothing exists yet:
+    /// a keep-data reinstall must not put back a config file somebody edited.
+    pub seed_files: Vec<(String, String)>,
 }
 
 impl Recipe {
@@ -637,6 +640,7 @@ impl Recipe {
             compose: self.compose.clone(),
             data_directories: self.data_directories.clone(),
             extra_files: Vec::new(),
+            seed_files: Vec::new(),
         })
     }
 }
@@ -752,6 +756,11 @@ pub fn install_template_with(
             .map(str::to_owned)
             .collect(),
         extra_files,
+        seed_files: template
+            .seeds
+            .iter()
+            .map(|seed| (seed.path.clone(), seed.content.clone()))
+            .collect(),
     };
     install_source_with(context, &source, root, now)
 }
@@ -846,7 +855,31 @@ pub fn install_source_with(
             storage::write_file_atomically(&project_dir.join(name), contents.as_bytes())
                 .map_err(AppError::from)?;
         }
+        for (path, contents) in &source.seed_files {
+            // Checked again here, not only when the template was validated:
+            // this is the line that actually writes to disk.
+            if !crate::setup::is_confined_seed_path(path) {
+                return Err(AppError::new(
+                    ErrorCode::UnsafePath,
+                    format!("seed file {path:?} is not inside the app's data folder"),
+                ));
+            }
+            let target = project_dir.join(path);
+            if target.exists() {
+                continue;
+            }
+            if let Some(parent) = target.parent() {
+                fs::create_dir_all(parent).map_err(AppError::from)?;
+            }
+            storage::write_file_atomically(&target, contents.as_bytes()).map_err(AppError::from)?;
+        }
         for directory in &source.data_directories {
+            // A mount of a seeded file is a file, not a folder to create:
+            // making a directory there is exactly how an nginx config came to
+            // be an empty folder and the proxy refused to start.
+            if source.seed_files.iter().any(|(path, _)| path == directory) {
+                continue;
+            }
             fs::create_dir_all(project_dir.join(directory)).map_err(AppError::from)?;
         }
         let app = InstalledApp {
@@ -965,16 +998,33 @@ fn last_words(runner: &dyn ProcessRunner, app: &InstalledApp) -> Option<String> 
         }
     }
     if let Ok(logs) = logs_with(runner, app) {
-        let mut tail: Vec<&str> = logs
-            .lines()
-            .rev()
-            .map(str::trim)
-            .filter(|line| !line.is_empty())
-            .take(12)
-            .collect();
-        tail.reverse();
-        if !tail.is_empty() {
-            parts.push(format!("Last log lines: {}", tail.join(" | ")));
+        // Per container, not overall: Compose interleaves every service's
+        // output, and a chatty database drowned out Nextcloud's own last words
+        // entirely.
+        let mut by_service: Vec<(String, Vec<&str>)> = Vec::new();
+        for line in logs.lines().map(str::trim).filter(|line| !line.is_empty()) {
+            let (service, said) = match line.split_once(" | ") {
+                Some((prefix, rest)) => (prefix.trim().to_owned(), rest.trim()),
+                None => (String::new(), line),
+            };
+            match by_service.iter_mut().find(|(name, _)| *name == service) {
+                Some((_, lines)) => lines.push(said),
+                None => by_service.push((service, vec![said])),
+            }
+        }
+        for (service, lines) in &by_service {
+            let tail = &lines[lines.len().saturating_sub(5)..];
+            // Container names are `<project>-<service>`; the service is the
+            // part a person recognises.
+            let name = match &app.runtime {
+                RuntimeSpec::Compose { project_name, .. } => service
+                    .strip_prefix(project_name.as_str())
+                    .map(|rest| rest.trim_start_matches('-'))
+                    .filter(|rest| !rest.is_empty())
+                    .unwrap_or(service),
+                _ => service,
+            };
+            parts.push(format!("{name} last said: {}", tail.join(" | ")));
         }
     }
     if parts.is_empty() {
@@ -1981,6 +2031,7 @@ mod tests {
             .into(),
             data_directories: vec!["data/.ollama".into()],
             extra_files: Vec::new(),
+            seed_files: Vec::new(),
         };
         let runner = FakeRunner::passing(6);
         let installed = install_source_with(
@@ -2027,6 +2078,7 @@ mod tests {
         use crate::plan::{PlanService, PublishedPort};
         use crate::setup::{FieldKind, SecretSpec, SetupField};
         PlanTemplate {
+            seeds: Vec::new(),
             plan: crate::plan::DeploymentPlan {
                 id: "memos".into(),
                 services: vec![PlanService {
@@ -2108,6 +2160,71 @@ mod tests {
         );
         assert!(project.join("data").is_dir());
         fs::remove_dir_all(&root).unwrap();
+    }
+
+    /// Notemark mounts `data/proxy/nginx.conf`, a file Runtipi ships beside
+    /// the definition. Without it Docker made an empty directory there and the
+    /// proxy refused to start.
+    #[test]
+    fn seed_files_are_written_once_and_a_mounted_seed_stays_a_file() {
+        let root = scratch_root("plan-seeds");
+        let mut template = sample_template();
+        template.plan.services[0]
+            .mounts
+            .push(crate::plan::PlanMount::directory(
+                "data/proxy/nginx.conf",
+                "/etc/nginx/conf.d/default.conf",
+            ));
+        template.seeds = vec![crate::setup::SeedFile {
+            path: "data/proxy/nginx.conf".into(),
+            content: "server { listen 80; }\n".into(),
+        }];
+        let install = |runner: &FakeRunner| {
+            install_template_with(
+                &context(runner, &Ready(true), &Ports(true), &CancelToken::new()),
+                &template,
+                "Memos",
+                &answers_for("My notes"),
+                &root,
+                7,
+            )
+        };
+        let app = install(&FakeRunner::passing(4)).expect("install with a seed");
+        let seeded = root.join("memos/data/proxy/nginx.conf");
+        assert!(seeded.is_file(), "the seed was not written as a file");
+        assert_eq!(
+            fs::read_to_string(&seeded).unwrap(),
+            "server { listen 80; }\n"
+        );
+
+        // Somebody edits it; a keep-data reinstall must not put the original back.
+        fs::write(&seeded, "server { listen 8080; }\n").unwrap();
+        uninstall_with(&FakeRunner::passing(1), &app, false).unwrap();
+        install(&FakeRunner::passing(4)).expect("reinstall over kept data");
+        assert_eq!(
+            fs::read_to_string(&seeded).unwrap(),
+            "server { listen 8080; }\n",
+            "a reinstall overwrote a seed file somebody had edited"
+        );
+        fs::remove_dir_all(&root).unwrap();
+    }
+
+    #[test]
+    fn a_seed_outside_the_data_folder_is_refused() {
+        let mut template = sample_template();
+        for path in [
+            "compose.yaml",
+            "data/../compose.yaml",
+            "/etc/passwd",
+            "data/",
+            "data/a b",
+        ] {
+            template.seeds = vec![crate::setup::SeedFile {
+                path: path.into(),
+                content: String::new(),
+            }];
+            assert!(template.validate().is_err(), "seed {path:?} was accepted");
+        }
     }
 
     #[test]

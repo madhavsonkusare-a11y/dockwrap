@@ -109,6 +109,16 @@ fn main() {
         })
         .collect();
 
+    let (seeds, binary_seeds) = if source == "runtipi" {
+        local_store::importers::runtipi::read_seeds(
+            std::path::Path::new(&path)
+                .parent()
+                .unwrap_or(std::path::Path::new(".")),
+        )
+    } else {
+        (Vec::new(), Vec::new())
+    };
+
     let facts = serde_json::json!({
         "id": id,
         "source": source,
@@ -121,6 +131,8 @@ fn main() {
         "managed_directories": managed,
         "shared_folders": shared,
         "named_volumes": volumes,
+        "seed_files": seeds.iter().map(|seed| seed.path.as_str()).collect::<Vec<_>>(),
+        "binary_seeds": binary_seeds,
         "limitations": outcome
             .limitations
             .iter()

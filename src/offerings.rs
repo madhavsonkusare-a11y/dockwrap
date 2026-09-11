@@ -139,6 +139,7 @@ impl Offering {
                     None => (**recipe).clone(),
                 };
                 Ok(PlanTemplate {
+                    seeds: Vec::new(),
                     plan: crate::plan::plan_for_recipe(&recipe).map_err(AppError::invalid)?,
                     fields: Vec::new(),
                     secrets: Vec::new(),

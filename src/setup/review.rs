@@ -111,6 +111,7 @@ mod tests {
             ("SITE_NAME".into(), "${SITE_NAME}".into()),
         ]);
         PlanTemplate {
+            seeds: Vec::new(),
             plan,
             fields: vec![
                 SetupField {

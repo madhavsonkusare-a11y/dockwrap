@@ -178,6 +178,18 @@ pub struct ReviewedTemplate {
     /// Tags this review runs in place of the ones the definition names.
     #[serde(default)]
     pub image_pins: Vec<ImagePin>,
+    /// The files the definition's source copies into the app's data folder,
+    /// carried verbatim like the definition itself so a review covers them.
+    #[serde(default)]
+    pub seeds: Vec<TemplateSeed>,
+}
+
+#[derive(Debug, Clone, Deserialize, PartialEq)]
+#[serde(deny_unknown_fields)]
+pub struct TemplateSeed {
+    /// Relative to the app's folder, inside `data/`.
+    pub path: String,
+    pub content: String,
 }
 
 impl ReviewedTemplate {
@@ -299,6 +311,15 @@ impl ReviewedTemplate {
                 ));
             }
         }
+
+        template.seeds = self
+            .seeds
+            .iter()
+            .map(|seed| crate::setup::SeedFile {
+                path: seed.path.clone(),
+                content: seed.content.clone(),
+            })
+            .collect();
 
         // Install by digest, not by tag: the tag is what was audited, the
         // digest is what stops it meaning something else tomorrow.
@@ -623,6 +644,27 @@ mod tests {
                 "{}: the manifest carries a different definition than {}",
                 reviewed.id,
                 reviewed.origin.path
+            );
+            let folder = root.join(&reviewed.origin.path);
+            let (on_disk, binary) = crate::importers::runtipi::read_seeds(folder.parent().unwrap());
+            assert!(
+                binary.is_empty(),
+                "{}: binary seeds {binary:?}",
+                reviewed.id
+            );
+            let carried: Vec<(String, String)> = reviewed
+                .seeds
+                .iter()
+                .map(|seed| (seed.path.clone(), seed.content.replace("\r\n", "\n")))
+                .collect();
+            let expected: Vec<(String, String)> = on_disk
+                .into_iter()
+                .map(|seed| (seed.path, seed.content.replace("\r\n", "\n")))
+                .collect();
+            assert_eq!(
+                carried, expected,
+                "{}: seed files differ from the tree",
+                reviewed.id
             );
             let config = reviewed
                 .config
