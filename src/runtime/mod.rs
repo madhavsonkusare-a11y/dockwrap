@@ -345,6 +345,23 @@ fn checked_run_cancellable(
         ))
     }
 }
+/// The end of a long message, which is where a failing tool says why.
+///
+/// Compose prints a progress line per network and container and the error
+/// last. Keeping the first thousand characters kept the progress: Notemark's
+/// failed start was recorded as eleven lines of "Creating", "Created",
+/// "Starting" and none of the reason.
+fn last_chars(text: &str, limit: usize) -> String {
+    let count = text.chars().count();
+    if count <= limit {
+        return text.to_owned();
+    }
+    let start = text
+        .char_indices()
+        .nth(count - limit)
+        .map_or(0, |(index, _)| index);
+    format!("…{}", &text[start..])
+}
 fn concise_error(output: &ProcessOutput) -> String {
     let value = if output.stderr.trim().is_empty() {
         output.stdout.trim()
@@ -356,10 +373,7 @@ fn concise_error(output: &ProcessOutput) -> String {
     let mut detail: String = if value.is_empty() {
         "the command returned an error".into()
     } else {
-        redact_diagnostic(value, output.truncated)
-            .chars()
-            .take(1000)
-            .collect()
+        last_chars(&redact_diagnostic(value, output.truncated), 1000)
     };
     if output.truncated {
         detail.push_str("\n(output was truncated)");
@@ -1346,6 +1360,24 @@ mod tests {
             updated_at_unix: 1,
         }
     }
+    #[test]
+    fn a_long_failure_keeps_the_reason_at_its_end() {
+        let progress = "Container app Creating\n".repeat(80);
+        let output = ProcessOutput {
+            success: false,
+            stdout: String::new(),
+            stderr: format!("{progress}Error response from daemon: port is already allocated"),
+            truncated: false,
+        };
+        let detail = concise_error(&output);
+        assert!(detail.ends_with("port is already allocated"), "{detail}");
+        assert!(
+            detail.starts_with('…'),
+            "a cut message should say it was cut"
+        );
+        assert!(detail.chars().count() <= 1001);
+    }
+
     /// A timeout is the one failure that explains nothing by itself, and the
     /// containers holding the explanation are removed moments later. Five
     /// candidates in a row failed with nothing but "Health check timed out",
