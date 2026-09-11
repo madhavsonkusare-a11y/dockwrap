@@ -1,16 +1,22 @@
 # Local Store: agent handoff
 
-## AI apps, September 11 (night) — read before resuming
+## AI apps, September 12 — read before resuming
 
 The owner asked for the most-starred AI and agent projects on GitHub and chose
 twelve: AnythingLLM, LibreChat, SillyTavern, Big-AGI, Langflow, Sim, Huginn,
-Flowise, Khoj, Kotaemon, Vane (formerly Perplexica) and Maxun. The owner also
-changed the licence policy: **source-available apps are allowed**. n8n stays,
-and Open WebUI, Dify and LobeHub become eligible. `qualify_batch` still skips
-entries that are not open source unless they are named with `--only`.
+Flowise, Khoj, Kotaemon, Vane (formerly Perplexica) and Maxun. The owner then:
 
-**28 offerings** (3 recipes, 25 templates), on branch `feat/ai-apps`, stacked
-on `feat/twenty-offered-apps`.
+- allowed **source-available apps**: n8n stays, and **Open WebUI, Dify,
+  LobeHub and Joplin** were chosen to add. `qualify_batch` still skips
+  entries that are not open source unless they are named with `--only`;
+- chose to **build support for both Sim and Maxun** — one-shot jobs and a
+  second browser-facing port — accepting Maxun's privileges in its notes if
+  needed (they turned out not to be: see below);
+- chose to **keep Kotaemon offered** despite its 15.9 GB image;
+- chose to **compact Docker's disk themselves** after Local Store trimmed it.
+
+**28 offerings** (3 recipes, 25 templates), on branch `feat/ai-apps` (PR #6),
+stacked on `feat/twenty-offered-apps`.
 
 | App | State |
 | --- | --- |
@@ -23,32 +29,58 @@ on `feat/twenty-offered-apps`.
 | Huginn v2026.09.09 | pending: moved off MySQL 8 to MariaDB 11.4.13; the last run proved a stale binary |
 | Vane 1.12.2 | pending: every run used an image layer truncated when D: filled |
 | Khoj 1.42.10 | pending: reviewed 600-second first-start allowance |
-| Flowise 3.1.4 | definition committed and catalogued; manifest generated when qualification resumes |
-| Sim | not started: its migrations need one-shot job support |
-| Maxun | not started: needs a second browser-facing port, an unconfined seccomp profile, about 6 GB |
+| Joplin Server 3.7.1 | pending: database moved from PostgreSQL 14.2 (2022) to 14.24; needs an offered run with the pin |
+| Flowise 3.1.4 | definition committed; manifest generated when qualification resumes |
+| Sim 0.8.33 | definition committed: migration as a one-shot job, realtime server on a second address |
+| Maxun 0.0.62 | definition committed: backend and RustFS store on second addresses; browser without SYS_ADMIN or unconfined seccomp (Chromium already runs with --no-sandbox) |
+| LobeHub 2.2.17 | definition committed: start script makes its JWKS signing key once and forwards the S3 address inside the container; bucket made by a one-shot job |
+| Dify 1.17.1 | definition committed: 15 services, sandboxes on internal networks, Local Store's own nginx and Squid configs, pgvector instead of Weaviate |
+| Open WebUI 0.11.3 | Runtipi definition, importable; needs a candidate run, then `generate-template.py` |
+
+New plan capabilities, all tested: **one-shot jobs** (a service something
+waits for with `service_completed_successfully`), **second loopback
+addresses** (Runtipi's `addPorts`, at most two, filled through
+`LOCAL_STORE_URL_<SERVICE>` / `LOCAL_STORE_PORT_<SERVICE>`, kept on reinstall),
+and **internal networks** (Compose's `internal: true`; a service that
+publishes must stay on `default`). Placeholders are filled in environment
+values only, never in commands; the guard test refuses `$$` in rendered
+Compose, so definitions pass values to commands through the environment.
+
+A manifest must name a proof that exists, so the manifests for Flowise, Sim,
+Maxun, LobeHub and Dify are generated only when they are qualified.
 
 **Blocker: D: is full** (about 2 GB free). Docker's virtual disk
-`D:/DockerData/disk/docker_data.vhdx` is 87.8 GB while Docker uses 26 GB
-inside it, and only compacting it (as Administrator, with Docker Desktop quit
-and `wsl --shutdown`) gives the space back. Pull nothing until then. Never use
-Docker Desktop's "Reset to factory defaults": it wipes the owner's app data.
+`D:/DockerData/disk/docker_data.vhdx` is about 88 GB while Docker uses 26 GB
+inside it. Local Store ran `fstrim` inside Docker's VM on September 11; the
+owner compacts the file as Administrator (quit Docker Desktop, `wsl
+--shutdown`, then diskpart: `select vdisk file="D:\DockerData\disk\docker_data.vhdx"`,
+`attach vdisk readonly`, `compact vdisk`, `detach vdisk`). Pull nothing until
+then. Never use Docker Desktop's "Reset to factory defaults": it wipes the
+owner's app data.
 
-To resume:
+To resume, once the file is smaller:
 
 1. Export `CARGO_TARGET_DIR=C:/Users/madha/.cache/local-store-target` for
-   every cargo command; builds are kept off D:.
-2. `python scripts/generate-first-party.py flowise`, then register Flowise and
-   approve it provisionally.
+   every cargo command; builds are kept off D:. Rebuild the **release**
+   `template_facts` too — `generate-*.py` prefers it and a stale one refuses
+   the new features.
+2. `python scripts/generate-first-party.py flowise sim maxun lobehub dify`,
+   register them, and approve provisionally (state `approved`, not committed).
 3. Rebuild the batch example after regenerating any manifest; an offered run
    refuses a compiled manifest that differs from the file on disk.
-4. With a D: free-space guard running:
-   `cargo run --example qualify_batch -- --offered --only sillytavern,langflow,huginn,vane,khoj,flowise`
+4. With a D: free-space guard running, qualify as offered, a few at a time
+   (Dify is about 7 GB unpacked, Maxun about 2 GB):
+   `cargo run --example qualify_batch -- --offered --only sillytavern,langflow,huginn,vane,khoj,joplin`
+   then `flowise,sim,maxun,lobehub,dify`. Open WebUI: a candidate run
+   (`--only open-webui`, not offered), `generate-template.py open-webui`,
+   then offered.
 5. For each app that passes: `python scripts/check-proven-pins.py <app>`,
    `python scripts/review_ai.py <app>`, add it to `APPROVED`, then run the
-   full validation (tests, Clippy, catalogue and icon checks).
+   full validation (tests, Clippy, catalogue and icon checks). Check each
+   app's notes against what the run showed (who can register, first screen).
 
 PR #5 (icons) needs its catalogue icons regenerated once the new catalogue
-entries (SillyTavern, Big-AGI, Kotaemon, Flowise) reach its base.
+entries (SillyTavern, Big-AGI, Kotaemon, Flowise, Sim, Maxun) reach its base.
 
 ## Owner decisions, September 11 — read before resuming
 
@@ -62,8 +94,9 @@ for the AI apps above.)
   Runtipi's format has no named volumes, so this needs a small plan/importer
   change or a CapRover-format first-party definition. Re-qualify as offered.
 - **Umbrel gallery icons (8):** keep them, with the `NOASSERTION` notice.
-- **Second published port:** not now. Build it when a candidate actually needs
-  one, designed around that app. (Penpot's MCP did not: its frontend proxies it.)
+- **Second published port:** built on September 12, for Sim and Maxun, as
+  second loopback addresses (see above). Penpot's MCP still needs none: its
+  frontend proxies it.
 - **Shrimply** (soirihiroka/shrimply): skipped by the owner. It is a native GTK/Qt
   video editor — macOS zip and Linux Flatpak only, no web UI, no Windows build, no
   server image (its Dockerfile only compiles the desktop binaries) — so it cannot
