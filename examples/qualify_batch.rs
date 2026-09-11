@@ -280,6 +280,18 @@ fn is_environmental(evidence: &Evidence) -> bool {
         return true;
     }
     let detail = failure.detail.as_deref().unwrap_or("").to_ascii_lowercase();
+    // A timed-out install now carries what its containers said, and that can
+    // settle the question: an app that logged requests answered with 5xx, or
+    // a container that exited, is the app failing — not the machine. Monica
+    // answered every request with 500 for three minutes and was retried as
+    // though Docker had been slow.
+    let app_refused = detail.contains("exited (")
+        || ["http/1.0\" 5", "http/1.1\" 5"]
+            .iter()
+            .any(|sign| detail.contains(sign));
+    if app_refused {
+        return false;
+    }
     [
         "timed out",
         "timeout",
