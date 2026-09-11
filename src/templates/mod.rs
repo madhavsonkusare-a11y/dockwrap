@@ -354,6 +354,7 @@ const HOMER: &str = include_str!("homer.json");
 const JELLYSEERR: &str = include_str!("jellyseerr.json");
 const KANBOARD: &str = include_str!("kanboard.json");
 const METABASE: &str = include_str!("metabase.json");
+const MONICA: &str = include_str!("monica.json");
 const NAVIDROME: &str = include_str!("navidrome.json");
 const NODERED: &str = include_str!("nodered.json");
 const NTFY: &str = include_str!("ntfy.json");
@@ -393,6 +394,7 @@ pub fn reviewed_templates() -> Vec<ReviewedTemplate> {
         JELLYSEERR,
         KANBOARD,
         METABASE,
+        MONICA,
         NAVIDROME,
         NODERED,
         NTFY,
@@ -588,6 +590,7 @@ mod tests {
         "homer",
         "kanboard",
         "metabase",
+        "monica",
         "navidrome",
         "nodered",
         "ntfy",

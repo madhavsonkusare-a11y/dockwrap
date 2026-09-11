@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "id": "monica",
+  "display_name": "Monica",
+  "catalog_name": "Monica",
+  "description": "A Personal Relationship Management tool to help you document your social life.",
+  "category": "Customer Relationship Management (CRM)",
+  "license": "AGPL-3.0",
+  "source_url": "https://github.com/monicahq/monica",
+  "documentation_url": "https://github.com/monicahq/docker",
+  "verified_at": "2026-09-11",
+  "lifecycle_proof": "docs/evidence/monica-qualification.json",
+  "origin": {
+    "importer": "runtipi",
+    "repository": "runtipi/runtipi-appstore",
+    "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+    "path": "apps/monica/docker-compose.json",
+    "license": "GPL-3.0"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "monica:4.1.2",
+        "source_url": "https://hub.docker.com/v2/repositories/library/monica/tags/4.1.2",
+        "checked_at": "2026-09-11",
+        "last_updated": "2026-08-29",
+        "container_platforms": [
+          "linux/386",
+          "linux/amd64",
+          "linux/arm/v5",
+          "linux/arm/v7",
+          "linux/arm64/v8",
+          "linux/ppc64le",
+          "linux/riscv64",
+          "linux/s390x"
+        ],
+        "digests": {
+          "linux/386": "sha256:58933d174aa1bd051b30ac181eb26c22a0031d051c6736bd4ff657d1b4ea3c5f",
+          "linux/amd64": "sha256:d78a0a89d8f6613a7ca356b0717c74d983bcd409de340958fee8c291f5048144",
+          "linux/arm/v5": "sha256:f03f89250cfa7b69d02cae64358f73fd4f76e5392f3cba9bc7382fc8da0cfeaa",
+          "linux/arm/v7": "sha256:f796992009d72abaf88623df9cb4f33ca713e5a262b0e6d957cb012c1fba2357",
+          "linux/arm64/v8": "sha256:a7e7694ee52fcbd00dc07d8e999ac4dcf51c38e09515a341d77bfb32b3b305b0",
+          "linux/ppc64le": "sha256:1a96f4b1adcfc59088839b618257f71a0c3bd54e190f53247b85affa9929d461",
+          "linux/riscv64": "sha256:56187a8e143232c538caa7bdd4fcb07320f7af636538133826ae8f3e1f321098",
+          "linux/s390x": "sha256:264a96c9dae107fffe1be39cb1ea165d2a07eae89f5b3630d00950b37962cb6c"
+        },
+        "index_digest": "sha256:2278383d5815bbd75b1d40b4f6f0a5c4c2aa3b427768fbe48317d778711e76d1"
+      },
+      {
+        "image": "mariadb:10.6.28",
+        "source_url": "https://hub.docker.com/v2/repositories/library/mariadb/tags/10.6.28",
+        "checked_at": "2026-09-11",
+        "last_updated": "2026-09-09",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64/v8",
+          "linux/ppc64le",
+          "linux/s390x"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:6ece356f49e4f21982dda731f70a54b2f9de9141887298e000e00100ecf79e39",
+          "linux/arm64/v8": "sha256:d2ecb8c6f9dc0b53ac48867586a969e5d18c27d92fa58a73d1ca1d7488b011a6",
+          "linux/ppc64le": "sha256:4987b91689f456f3bb512c4eb38576b12c347c0c9e46a0637c90c3bf25800838",
+          "linux/s390x": "sha256:f8dee2d7387cf4e8e5b8ecae2da6767d7ccc076e799db450d544ef01ece45508"
+        },
+        "index_digest": "sha256:553351e202c5f01c9e703d7d1d2b037a0aedb43c4fed79b3615d9183655f02c5"
+      }
+    ]
+  },
+  "promotion": {
+    "state": "approved",
+    "reason": "Approved by the owner. Qualified as offered on 2026-09-11: a real install of Monica 4.1.2 — the current stable release; 5.x is still in beta — proved it starts, opens to a first screen with a clear next step, survives a restart and a keep-data reinstall with its data and generated credentials intact, and removes everything it created. Its database is pinned from MariaDB 10.6.11 to 10.6.28: the older build segfaulted on this machine's WSL2 kernel moments after Monica finished setting up, which is why every earlier run answered HTTP 500."
+  },
+  "data_storage": "Local Store managed folder / monica",
+  "risk_notes": [
+    "Creates 2 Docker containers and publishes one port on this computer's loopback interface only.",
+    "Generates 2 credentials of its own, keeps them beside the app's data, and reuses them if you reinstall.",
+    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Monica asks you to create the first account when you open it; the account you create is the administrator."
+  ],
+  "fields": {
+    "TZ": {
+      "label": "Time zone (for example, Asia/Kolkata)",
+      "sensitive": false
+    }
+  },
+  "definition": "{\n  \"services\": [\n    {\n      \"name\": \"monica\",\n      \"image\": \"monica:4.1.2\",\n      \"isMain\": true,\n      \"internalPort\": 80,\n      \"environment\": [\n        {\n          \"key\": \"APP_KEY\",\n          \"value\": \"${MONICA_APP_KEY}\"\n        },\n        {\n          \"key\": \"APP_TRUSTED_PROXIES\",\n          \"value\": \"172.18.0.0/16\"\n        },\n        {\n          \"key\": \"DB_HOST\",\n          \"value\": \"monica-db\"\n        },\n        {\n          \"key\": \"DB_USERNAME\",\n          \"value\": \"usermonica\"\n        },\n        {\n          \"key\": \"DB_PASSWORD\",\n          \"value\": \"${MONICA_DB_PASS}\"\n        }\n      ],\n      \"dependsOn\": [\"monica-db\"],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data\",\n          \"containerPath\": \"/var/www/html/storage\"\n        }\n      ]\n    },\n    {\n      \"name\": \"monica-db\",\n      \"image\": \"mariadb:10.6.11\",\n      \"environment\": [\n        {\n          \"key\": \"TZ\",\n          \"value\": \"${TZ}\"\n        },\n        {\n          \"key\": \"MARIADB_RANDOM_ROOT_PASSWORD\",\n          \"value\": \"true\"\n        },\n        {\n          \"key\": \"MARIADB_DATABASE\",\n          \"value\": \"monica\"\n        },\n        {\n          \"key\": \"MARIADB_USER\",\n          \"value\": \"usermonica\"\n        },\n        {\n          \"key\": \"MARIADB_PASSWORD\",\n          \"value\": \"${MONICA_DB_PASS}\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/mysql\",\n          \"containerPath\": \"/var/lib/mysql\"\n        }\n      ]\n    }\n  ],\n  \"schemaVersion\": 2,\n  \"$schema\": \"https://schemas.runtipi.io/v2/dynamic-compose.json\"\n}\n",
+  "config": {
+    "path": "apps/monica/config.json",
+    "content": "{\n  \"$schema\": \"../app-info-schema.json\",\n  \"name\": \"Monica\",\n  \"available\": true,\n  \"exposable\": true,\n  \"dynamic_config\": true,\n  \"port\": 3291,\n  \"id\": \"monica\",\n  \"tipi_version\": 7,\n  \"version\": \"4.1.2\",\n  \"categories\": [\"data\", \"social\"],\n  \"description\": \"Monica is an open-source web application to organize and record your interactions with your loved ones. We call it a PRM, or Personal Relationship Management. Think of it as a CRM (a popular tool used by sales teams in the corporate world) for your friends or family.\",\n  \"short_desc\": \"A Personal Relationship Management tool to help you document your social life.\",\n  \"author\": \"monicahq\",\n  \"source\": \"https://github.com/monicahq/monica\",\n  \"form_fields\": [\n    {\n      \"type\": \"random\",\n      \"label\": \"Database password\",\n      \"required\": false,\n      \"min\": 30,\n      \"max\": 30,\n      \"env_variable\": \"MONICA_DB_PASS\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Application key\",\n      \"required\": false,\n      \"min\": 32,\n      \"max\": 32,\n      \"env_variable\": \"MONICA_APP_KEY\"\n    }\n  ],\n  \"supported_architectures\": [\"arm64\", \"amd64\"],\n  \"created_at\": 1691943801422,\n  \"updated_at\": 1761338378485,\n  \"min_tipi_version\": \"4.5.0\"\n}\n"
+  },
+  "image_pins": [
+    {
+      "definition": "mariadb:10.6.11",
+      "replacement": "mariadb:10.6.28",
+      "reason": "The Runtipi definition runs MariaDB 10.6.11, from November 2022. On this machine's WSL2 kernel (6.6) that build segfaults moments after Monica finishes setting up — exit 139, 'Fatal signal 11' — reproduced by hand, and every request then fails with HTTP 500. 10.6.28 is the current patch of the same long-term line, so it carries no data migration."
+    }
+  ]
+}
