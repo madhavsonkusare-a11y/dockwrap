@@ -139,8 +139,8 @@
         "test": "pg_isready -U penpot",
         "interval": "2s",
         "timeout": "10s",
-        "retries": 5,
-        "startPeriod": "2s"
+        "retries": 10,
+        "startPeriod": "60s"
       },
       "environment": [
         {
