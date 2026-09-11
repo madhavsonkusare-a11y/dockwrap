@@ -13179,7 +13179,8 @@
       "id": "dify-ai",
       "licenses": [
         "Apache-2.0",
-        "Commons-Clause"
+        "Commons-Clause",
+        "Dify Open Source License"
       ],
       "maintenance": "tracked",
       "name": "Dify.ai",
@@ -13205,6 +13206,12 @@
           "source": "coolify",
           "upstream_id": "templates/compose/dify.yaml",
           "url": "https://github.com/coollabsio/coolify/blob/08f68016dd342fe944564f79969f4ceceddc88d6/templates/compose/dify.yaml"
+        },
+        {
+          "revision": "b342856562a0db400698ccbfdfb43929a9dbe622",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/dify",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/b342856562a0db400698ccbfdfb43929a9dbe622/definitions/apps/dify/config.json"
         }
       ],
       "tags": [
@@ -13220,6 +13227,7 @@
         " redis",
         " weaviate",
         "AI",
+        "Artificial Intelligence",
         "Software Development - Low Code",
         "ai"
       ],
@@ -34548,6 +34556,7 @@
       "icon": null,
       "id": "lobehub",
       "licenses": [
+        "LobeHub Community License",
         "⊘ Proprietary"
       ],
       "maintenance": "tracked",
@@ -34563,14 +34572,21 @@
           "source": "awesome-selfhosted",
           "upstream_id": "software/lobehub.yml",
           "url": "https://github.com/awesome-selfhosted/awesome-selfhosted-data/blob/31f409963ffccc17159ccc07646f38e41b8b0361/software/lobehub.yml"
+        },
+        {
+          "revision": "b342856562a0db400698ccbfdfb43929a9dbe622",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/lobehub",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/b342856562a0db400698ccbfdfb43929a9dbe622/definitions/apps/lobehub/config.json"
         }
       ],
       "tags": [
+        "Artificial Intelligence",
         "Generative Artificial Intelligence (GenAI)"
       ],
       "updated_at": "2026-09-04",
       "warning": false,
-      "web_ui": false,
+      "web_ui": true,
       "website_url": "https://www.lobehub.com"
     },
     {
@@ -36603,6 +36619,39 @@
       "warning": false,
       "web_ui": true,
       "website_url": "https://www.mautic.org/"
+    },
+    {
+      "aliases": [
+        "Maxun"
+      ],
+      "architectures": [],
+      "archived": false,
+      "category": "Artificial Intelligence",
+      "description": "Turn websites into data: train a robot by pointing at a page, then run it on a schedule.",
+      "icon": null,
+      "id": "maxun",
+      "licenses": [
+        "AGPL-3.0"
+      ],
+      "maintenance": "tracked",
+      "name": "Maxun",
+      "platforms": [],
+      "source_url": "https://github.com/getmaxun/maxun",
+      "sources": [
+        {
+          "revision": "b342856562a0db400698ccbfdfb43929a9dbe622",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/maxun",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/b342856562a0db400698ccbfdfb43929a9dbe622/definitions/apps/maxun/config.json"
+        }
+      ],
+      "tags": [
+        "Artificial Intelligence"
+      ],
+      "updated_at": null,
+      "warning": false,
+      "web_ui": true,
+      "website_url": "https://www.maxun.dev"
     },
     {
       "aliases": [
@@ -57577,6 +57626,39 @@
       "warning": false,
       "web_ui": false,
       "website_url": "https://www.silverstripe.org"
+    },
+    {
+      "aliases": [
+        "Sim"
+      ],
+      "architectures": [],
+      "archived": false,
+      "category": "Artificial Intelligence",
+      "description": "Build and run AI agent workflows on a visual canvas.",
+      "icon": null,
+      "id": "sim",
+      "licenses": [
+        "Apache-2.0"
+      ],
+      "maintenance": "tracked",
+      "name": "Sim",
+      "platforms": [],
+      "source_url": "https://github.com/simstudioai/sim",
+      "sources": [
+        {
+          "revision": "b342856562a0db400698ccbfdfb43929a9dbe622",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/sim",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/b342856562a0db400698ccbfdfb43929a9dbe622/definitions/apps/sim/config.json"
+        }
+      ],
+      "tags": [
+        "Artificial Intelligence"
+      ],
+      "updated_at": null,
+      "warning": false,
+      "web_ui": true,
+      "website_url": "https://www.sim.ai"
     },
     {
       "aliases": [

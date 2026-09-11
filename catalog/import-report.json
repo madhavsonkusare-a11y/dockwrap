@@ -3486,7 +3486,8 @@
       "sources": [
         "awesome-selfhosted",
         "casaos",
-        "coolify"
+        "coolify",
+        "local-store"
       ]
     },
     {
@@ -7514,6 +7515,16 @@
       "sources": [
         "awesome-selfhosted",
         "legacy"
+      ]
+    },
+    {
+      "id": "lobehub",
+      "names": [
+        "LobeHub"
+      ],
+      "sources": [
+        "awesome-selfhosted",
+        "local-store"
       ]
     },
     {
@@ -15298,6 +15309,6 @@
     "coolify": 367,
     "runtipi": 270
   },
-  "total": 1676,
-  "tracked": 1668
+  "total": 1678,
+  "tracked": 1670
 }
