@@ -308,6 +308,43 @@ fn is_environmental(evidence: &Evidence) -> bool {
     .any(|sign| detail.contains(sign))
 }
 
+/// Why the manifest compiled into this binary is not the one on disk, if it
+/// is not.
+fn stale_manifest(app: &str) -> Option<String> {
+    let embedded = local_store::templates::reviewed_template(app)?;
+    let path = root().join("src/templates").join(format!("{app}.json"));
+    let on_disk: serde_json::Value =
+        serde_json::from_str(&std::fs::read_to_string(&path).ok()?).ok()?;
+    let normal = |text: &str| text.replace("\r\n", "\n");
+    if on_disk["definition"].as_str().map(normal) != Some(normal(&embedded.definition)) {
+        return Some("its definition changed after this binary was built".into());
+    }
+    let embedded_config = embedded
+        .config
+        .as_ref()
+        .map(|config| normal(&config.content));
+    if on_disk["config"]["content"].as_str().map(normal) != embedded_config {
+        return Some("its config changed after this binary was built".into());
+    }
+    let images: Vec<(String, Option<String>)> = embedded
+        .requirements
+        .images
+        .iter()
+        .map(|audit| (audit.image.clone(), audit.index_digest.clone()))
+        .collect();
+    let disk_images: Vec<(String, Option<String>)> = on_disk["requirements"]["images"]
+        .as_array()?
+        .iter()
+        .map(|audit| {
+            (
+                audit["image"].as_str().unwrap_or_default().to_owned(),
+                audit["index_digest"].as_str().map(str::to_owned),
+            )
+        })
+        .collect();
+    (images != disk_images).then(|| "its pinned images changed after this binary was built".into())
+}
+
 /// Prove apps exactly as they are offered, rather than as an importer maps them.
 ///
 /// A candidate run proves the raw mapping. An offered app can differ from that
@@ -326,6 +363,13 @@ fn run_offered(only: &[String], batch: &Batch, app_probe: Option<&str>) {
             println!("{app}: not offered, so there is nothing to prove as offered");
             continue;
         };
+        // Manifests are compiled in. A binary built before a manifest was
+        // regenerated proves the old one — Huginn and Langflow were each run
+        // against definitions already replaced on disk, 21 seconds apart.
+        if let Some(reason) = stale_manifest(app) {
+            println!("{app}: {reason}; rebuild before proving it");
+            continue;
+        }
         let template = match offering.plan_template(None) {
             Ok(template) => template,
             Err(error) => {
