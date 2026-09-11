@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Local Store V2 visual system</title>
+  <link rel="stylesheet" href="specimen.css">
+</head>
+<body>
+  <div class="specimen-shell">
+    <aside class="rail" aria-label="Specimen navigation">
+      <div class="brand"><span class="brand-mark">L</span><span>Local Store</span></div>
+      <p class="rail-label">Visual system</p>
+      <button class="nav-item" aria-current="page"><span class="nav-glyph">01</span>Foundation</button>
+      <button class="nav-item"><span class="nav-glyph">02</span>Typography</button>
+      <button class="nav-item"><span class="nav-glyph">03</span>Components</button>
+      <button class="nav-item"><span class="nav-glyph">04</span>Trust surfaces</button>
+    </aside>
+
+    <main class="canvas">
+      <p class="eyebrow">Local Store · V2 system</p>
+      <h1>Warm machinery.<br>Clear consequences.</h1>
+      <p class="lede">A laptop-first visual language for software that runs on your own machine: warm near-black structure, one ember accent, generous type, and a factual mono layer for anything the system asserts.</p>
+
+      <section class="section" aria-labelledby="color-title">
+        <p class="section-kicker">01 · Color</p>
+        <h2 id="color-title">Surfaces separate by depth, not decoration.</h2>
+        <div class="swatches">
+          <div class="swatch" style="--swatch:var(--v2-surface-canvas)"><span>Canvas</span></div>
+          <div class="swatch" style="--swatch:var(--v2-surface-sunk)"><span>Sunk</span></div>
+          <div class="swatch" style="--swatch:var(--v2-surface-raised)"><span>Raised</span></div>
+          <div class="swatch" style="--swatch:var(--v2-surface-elevated)"><span>Elevated</span></div>
+          <div class="swatch bright" style="--swatch:var(--v2-action-primary)"><span>Ember</span></div>
+          <div class="swatch bright" style="--swatch:var(--v2-state-success)"><span>Running</span></div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="type-title">
+        <p class="section-kicker">02 · Typography</p>
+        <h2 id="type-title">Prose speaks. Machine facts testify.</h2>
+        <div class="type-grid">
+          <article class="type-card">
+            <p class="display-sample">Your apps, where you left them.</p>
+            <p class="body-sample">Instrument Sans carries navigation, explanations, decisions, and calls to action. The floor is 12px for quiet captions; ordinary reading begins at 14px.</p>
+          </article>
+          <article class="type-card mono-stack">
+            <div class="machine-fact"><span>IMAGE</span><strong>neosmemo/memos:0.30.0</strong></div>
+            <div class="machine-fact"><span>ADDRESS</span><strong>127.0.0.1:5230</strong></div>
+            <div class="machine-fact"><span>HEALTH</span><strong>GET /healthz · 90s</strong></div>
+            <div class="machine-fact"><span>EXIT</span><strong>code 0</strong></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="controls-title">
+        <p class="section-kicker">03 · Controls</p>
+        <h2 id="controls-title">Pills are actions. Cards are places.</h2>
+        <div class="component-grid">
+          <article class="panel">
+            <h3>Actions</h3>
+            <div class="button-row">
+              <button class="button primary">Install Memos</button>
+              <button class="button">Open app</button>
+              <button class="button ghost">Cancel</button>
+              <button class="button danger">Uninstall</button>
+            </div>
+          </article>
+          <article class="panel">
+            <h3>State language</h3>
+            <div class="chip-row">
+              <span class="chip success">Running</span>
+              <span class="chip">Linked app</span>
+              <span class="chip warning">Needs attention</span>
+              <span class="chip danger">Unreachable</span>
+            </div>
+          </article>
+          <article class="panel">
+            <label class="field-label">Published port<input class="input" value="5230" inputmode="numeric"></label>
+          </article>
+          <article class="panel">
+            <p class="notice"><strong>Concept data</strong><br>Resource history is shown to evaluate the interface. Local Store does not collect it yet.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="cards-title">
+        <p class="section-kicker">04 · Application identity</p>
+        <h2 id="cards-title">Logos stay recognizable.</h2>
+        <div class="card-grid">
+          <article class="app-card">
+            <div class="app-head"><span class="app-icon"><img src="../../../src/assets/catalog/immich.svg" alt=""></span><div><h3>Immich</h3><span class="app-meta">Photos &amp; video</span></div></div>
+            <p class="app-copy">High-performance photo and video backup from your phone.</p>
+            <span class="chip">Connect</span>
+          </article>
+          <article class="app-card">
+            <div class="app-head"><span class="app-icon"><img src="../../../src/assets/catalog/uptime-kuma.svg" alt=""></span><div><h3>Uptime Kuma</h3><span class="app-meta">Monitoring</span></div></div>
+            <p class="app-copy">Uptime monitoring with status pages and notifications.</p>
+            <span class="chip success">Reviewed install</span>
+          </article>
+          <article class="app-card">
+            <div class="app-head"><span class="app-icon"><img src="../../../src/assets/catalog/paperless-ngx.svg" alt=""></span><div><h3>Paperless-ngx</h3><span class="app-meta">Documents</span></div></div>
+            <p class="app-copy">Scan, index and archive paper with full-text search.</p>
+            <span class="chip">Connect</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="trust-title">
+        <p class="section-kicker">05 · Trust surface</p>
+        <h2 id="trust-title">Installation stays conventional and explicit.</h2>
+        <div class="trust-grid">
+          <article class="panel trust-panel">
+            <h3>Install Memos</h3>
+            <p class="body-sample">One container, one local data folder, and one loopback port. Nothing has run yet.</p>
+            <div class="machine-fact"><span>IMAGE</span><strong>neosmemo/memos:0.30.0</strong></div>
+            <div class="machine-fact"><span>PORT</span><strong>127.0.0.1:5230 → 5230</strong></div>
+            <div class="machine-fact"><span>DATA</span><strong>local-store/memos/data</strong></div>
+            <div class="button-row" style="margin-top:var(--v2-space-6)"><button class="button primary">Install Memos</button><button class="button ghost">Back</button></div>
+          </article>
+          <article class="panel">
+            <h3>System check</h3>
+            <div class="state-line"><span>Docker Engine</span><span>28.0.1</span></div>
+            <div class="state-line"><span>Docker Compose</span><span>2.35.1</span></div>
+            <p class="quiet">Only checks the product actually runs are shown.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

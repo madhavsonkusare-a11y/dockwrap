@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Laptop-first interactive design prototype for Local Store V2">
+  <title>Local Store V2 prototype</title>
+  <link rel="icon" href="assets/brand/mark-small.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="prototype.css">
+</head>
+<body>
+  <a class="skip-link" href="#screen">Skip to content</a>
+
+  <div class="app-shell">
+    <aside class="app-rail" aria-label="Workspace navigation">
+      <a class="brand" href="#overview" data-route="overview" aria-label="Local Store overview">
+        <img src="assets/brand/mark-grain-approved.svg" alt="">
+        <span><strong>Local Store</strong><small>Workspace</small></span>
+      </a>
+
+      <nav class="primary-nav" aria-label="Primary">
+        <p class="nav-label">Workspace</p>
+        <a class="nav-item" href="#overview" data-route="overview">
+          <svg aria-hidden="true"><use href="#i-overview"></use></svg><span>Overview</span>
+        </a>
+        <a class="nav-item" href="#discover" data-route="discover">
+          <svg aria-hidden="true"><use href="#i-discover"></use></svg><span>Discover</span><b>1,672</b>
+        </a>
+        <a class="nav-item" href="#my-apps" data-route="my-apps">
+          <svg aria-hidden="true"><use href="#i-grid"></use></svg><span>My Apps</span><b>5</b>
+        </a>
+        <a class="nav-item" href="#activity" data-route="activity">
+          <svg aria-hidden="true"><use href="#i-activity"></use></svg><span>Activity</span>
+        </a>
+      </nav>
+
+      <div class="rail-footer">
+        <a class="nav-item utility-nav" href="#settings" data-route="settings">
+          <svg aria-hidden="true"><use href="#i-settings"></use></svg><span>Settings</span>
+        </a>
+        <a class="environment-card" href="#settings" aria-label="Docker status. Open system check in Settings">
+          <span class="status-dot success" aria-hidden="true"></span>
+          <div><strong>Docker ready</strong><small>Engine 29.3.1</small></div>
+          <svg aria-hidden="true"><use href="#i-chevron"></use></svg>
+        </a>
+      </div>
+    </aside>
+
+    <div class="workspace">
+      <header class="workspace-bar">
+        <div class="route-context">
+          <span class="status-dot success" aria-hidden="true"></span>
+          <span>Local workspace</span>
+          <i aria-hidden="true">/</i>
+          <strong id="route-label">Overview</strong>
+        </div>
+        <div class="workspace-actions">
+          <button class="command-button" type="button" data-prototype-action="palette">
+            <svg aria-hidden="true"><use href="#i-search"></use></svg>
+            <span>Search anything</span><span class="lab-tag concept-flag">Concept</span><kbd>Ctrl K</kbd>
+          </button>
+          <button class="icon-button lab-trigger" type="button" aria-label="Open prototype controls" aria-expanded="false" aria-controls="prototype-panel">
+            <svg aria-hidden="true"><use href="#i-sliders"></use></svg>
+          </button>
+        </div>
+      </header>
+
+      <main id="screen" class="screen" tabindex="-1" aria-live="polite"></main>
+    </div>
+  </div>
+
+  <aside id="prototype-panel" class="prototype-panel" role="dialog" aria-modal="true" aria-labelledby="prototype-title" hidden>
+    <div class="panel-head">
+      <div><span class="lab-tag">Design lab</span><h2 id="prototype-title">Prototype controls</h2></div>
+      <button class="icon-button panel-close" type="button" aria-label="Close prototype controls">
+        <svg aria-hidden="true"><use href="#i-close"></use></svg>
+      </button>
+    </div>
+    <p class="panel-intro">Jump anywhere and force interface conditions without changing backend state.</p>
+
+    <label class="field-label" for="screen-jump">Screen</label>
+    <div class="select-wrap">
+      <select id="screen-jump">
+        <optgroup label="Workspace">
+          <option value="overview">Overview</option>
+          <option value="discover">Discover</option>
+          <option value="my-apps">My Apps</option>
+          <option value="activity">Activity</option>
+          <option value="settings">Settings</option>
+        </optgroup>
+        <optgroup label="Focused flows">
+          <option value="install">Install</option>
+          <option value="recovery">Recovery</option>
+          <option value="first-run">First Run</option>
+        </optgroup>
+      </select>
+      <svg aria-hidden="true"><use href="#i-chevron"></use></svg>
+    </div>
+
+    <fieldset class="state-picker">
+      <legend>Condition</legend>
+      <div class="state-grid">
+        <button type="button" data-state="default" aria-pressed="true">Default</button>
+        <button type="button" data-state="loading" aria-pressed="false">Loading</button>
+        <button type="button" data-state="empty" aria-pressed="false">Empty</button>
+        <button type="button" data-state="busy" aria-pressed="false">Busy</button>
+        <button type="button" data-state="success" aria-pressed="false">Success</button>
+        <button type="button" data-state="failure" aria-pressed="false">Failure</button>
+      </div>
+    </fieldset>
+
+    <label class="concept-toggle" for="show-overview-concepts">
+      <span><strong>Future signals</strong><small>Show the optional resource study on Overview</small></span>
+      <input id="show-overview-concepts" type="checkbox">
+    </label>
+
+    <div class="fixture-key">
+      <p class="field-label">Fixture truth</p>
+      <div><span class="truth-dot available"></span><span><strong>Available</strong> Direct backend contract</span></div>
+      <div><span class="truth-dot derivable"></span><span><strong>Derivable</strong> Computed from current data</span></div>
+      <div><span class="truth-dot concept"></span><span><strong>Concept</strong> Not yet collected</span></div>
+    </div>
+
+    <p class="panel-note">Keyboard: <kbd>Esc</kbd> closes this panel. Navigation and state changes do not reload the page.</p>
+  </aside>
+  <div class="panel-scrim" hidden></div>
+  <div id="toast-region" class="toast-region" aria-live="polite" aria-atomic="true"></div>
+
+  <svg class="svg-sprite" aria-hidden="true">
+    <symbol id="i-overview" viewBox="0 0 24 24"><path d="M4 13h6V4H4v9Zm0 7h6v-4H4v4Zm10 0h6v-9h-6v9Zm0-16v4h6V4h-6Z"/></symbol>
+    <symbol id="i-discover" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="m15.2 8.8-1.7 4.7-4.7 1.7 1.7-4.7 4.7-1.7Z"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1.5"/><rect x="14" y="4" width="6" height="6" rx="1.5"/><rect x="4" y="14" width="6" height="6" rx="1.5"/><rect x="14" y="14" width="6" height="6" rx="1.5"/></symbol>
+    <symbol id="i-activity" viewBox="0 0 24 24"><path d="M3.5 12h4l2-5 4 10 2-5h5"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1A1.7 1.7 0 0 0 9 4.6 1.7 1.7 0 0 0 10 3v-.2h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1Z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h7m4 0h5M4 17h4m4 0h8"/><circle cx="13" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 4 3.5 19h17L12 4Z"/><path d="M12 9v4m0 3v.1"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M13 5h6v6m0-6-8 8"/><path d="M18 14v5H5V6h5"/></symbol>
+    <symbol id="i-docker" viewBox="0 0 24 24"><path d="M4 11h3v3H4zm4 0h3v3H8zm4 0h3v3h-3zM8 7h3v3H8zm4 0h3v3h-3zm4 4h3v3h-3z"/><path d="M3 15h17c-.7 3.2-3.5 5-7.4 5H9c-3.2 0-5-1.8-6-5Z"/></symbol>
+  </svg>
+
+  <script type="module" src="prototype.js"></script>
+</body>
+</html>

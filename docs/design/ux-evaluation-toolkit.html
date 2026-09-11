@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UX Evaluation Toolkit</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    color-scheme: dark;
+    --bg:#0B0908; --card:#141110; --card2:#1A1615; --raise:#221D1B;
+    --line:#FFFFFF12; --line2:#FFFFFF08;
+    --ink:#F7F1E9; --body:#C9BFB6; --mut:#948A81; --sub:#665C55;
+    --ember:#F26419; --ember2:#FF8A3C; --amber:#F5B77A;
+    --ok:#62C79A; --warn:#F5C451; --bad:#E8614C;
+    --sans:'Instrument Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--body);font-family:var(--sans);font-size:16.5px;line-height:1.68;-webkit-font-smoothing:antialiased}
+  a{color:var(--ember2);text-decoration:none;border-bottom:1px solid #F2641940}
+  a:hover{border-bottom-color:var(--ember2)}
+  :focus-visible{outline:2px solid var(--ember);outline-offset:3px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 26px}
+
+  header.top{padding:66px 0 34px}
+  .mk{display:flex;align-items:center;gap:12px;margin-bottom:20px;font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut)}
+  .mk i{display:block;width:26px;height:12px;border-radius:3px;background:linear-gradient(90deg,#5A1A07,var(--ember),var(--amber))}
+  h1{font-size:clamp(34px,5vw,54px);font-weight:600;letter-spacing:-.04em;line-height:1;margin:0;color:var(--ink)}
+  header.top p{margin:16px 0 0;font-size:18px;color:var(--mut);max-width:60ch}
+
+  section{padding:52px 0;border-top:1px solid var(--line)}
+  .kick{font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ember);margin:0 0 14px}
+  h2{font-size:clamp(25px,3.4vw,34px);font-weight:600;letter-spacing:-.035em;line-height:1.12;margin:0 0 16px;color:var(--ink)}
+  h3{font-size:19px;font-weight:600;letter-spacing:-.02em;margin:0 0 8px;color:var(--ink)}
+  p{margin:0 0 16px;max-width:72ch}
+  p:last-child{margin-bottom:0}
+  strong{color:var(--ink);font-weight:600}
+  code{font-family:var(--mono);font-size:.86em;color:var(--amber);background:#1C1614;padding:2px 6px;border-radius:5px}
+
+  /* ranked picks */
+  .picks{display:flex;flex-direction:column;gap:14px;margin-top:30px}
+  .pick{display:grid;grid-template-columns:56px 1fr;gap:22px;padding:26px;border-radius:20px;background:var(--card);box-shadow:inset 0 0 0 1px var(--line)}
+  .pick.one{background:linear-gradient(150deg,#1E1310,#141110);box-shadow:inset 0 0 0 1px #F2641938}
+  .rank{font-family:var(--mono);font-size:26px;font-weight:500;color:var(--sub);line-height:1;letter-spacing:-.02em}
+  .pick.one .rank{color:var(--ember)}
+  .pick h3{margin-bottom:4px;font-size:21px}
+  .why{display:block;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ember2);margin-bottom:12px}
+  .pick p{font-size:15.5px;margin-bottom:14px}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+  .tag{font-family:var(--mono);font-size:11.5px;padding:5px 11px;border-radius:999px;background:var(--raise);color:var(--mut)}
+  .tag.g{color:var(--ok)}
+  .tag.w{color:var(--warn)}
+  pre{margin:14px 0 0;padding:16px 18px;border-radius:14px;background:#0D0B0A;box-shadow:inset 0 0 0 1px var(--line2);overflow-x:auto;font-family:var(--mono);font-size:13px;line-height:1.8;color:var(--body);white-space:pre-wrap}
+  pre b{color:var(--ember2);font-weight:400}
+
+  /* tables */
+  .tbl{overflow-x:auto;border-radius:16px;background:var(--card);box-shadow:inset 0 0 0 1px var(--line);margin-top:22px}
+  table{border-collapse:collapse;width:100%;min-width:700px}
+  th{text-align:left;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--sub);padding:16px 18px;border-bottom:1px solid var(--line)}
+  td{padding:15px 18px;border-bottom:1px solid var(--line2);font-size:15px;vertical-align:top}
+  tr:last-child td{border-bottom:0}
+  td strong{display:block;color:var(--ink);font-weight:600;margin-bottom:2px}
+  td .m{font-family:var(--mono);font-size:12.5px;color:var(--mut)}
+  .fit{white-space:nowrap;font-family:var(--mono);font-size:12px}
+  .fit.hi{color:var(--ok)} .fit.md{color:var(--warn)} .fit.lo{color:var(--sub)}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
+  .box{padding:22px;border-radius:18px;background:var(--card);box-shadow:inset 0 0 0 1px var(--line)}
+  .box h3{font-size:17px}
+  .box p{font-size:15px}
+  .note{padding-left:16px;border-left:2px solid var(--ember);font-size:15.5px;color:var(--mut)}
+
+  footer{padding:34px 0 64px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--sub)}
+  @media (max-width:760px){ .grid2{grid-template-columns:1fr} .pick{grid-template-columns:1fr;gap:10px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="mk"><i></i><span>Local Store &middot; agent tooling</span></div>
+    <h1>UX evaluation toolkit</h1>
+    <p>Twenty-two prompts, skills, runnable tools and benchmarks that let an AI agent judge an interface instead of just generating one &mdash; ranked for a dark-only Tauri desktop app with a Playwright suite already in place.</p>
+  </header>
+
+  <!-- ============ TOP PICKS ============ -->
+  <section>
+    <p class="kick">Start here</p>
+    <h2>The five worth wiring in, in order</h2>
+    <p>Ranked on leverage for <strong>this</strong> repo: an offline desktop app, dark-only, expert audience, with <code>@axe-core/playwright</code> and screenshot baselines already running at 1280&times;800, 800&times;600 and 400&times;860.</p>
+
+    <div class="picks">
+
+      <div class="pick one">
+        <span class="rank">01</span>
+        <div>
+          <h3>Design-review subagent on Playwright MCP</h3>
+          <span class="why">Highest leverage &middot; your harness already exists</span>
+          <p>A dedicated review agent that opens the real app in a browser, drives it, screenshots each state and returns triaged findings. The reference implementation is <a href="https://github.com/OneRedOak/claude-code-workflows">OneRedOak/claude-code-workflows</a> (design-review subagent + <code>/design-review</code> command + CLAUDE.md memory). It is the single biggest upgrade because you already run a preview server on <code>127.0.0.1:4173</code> and already have Playwright &mdash; the agent gets to <em>look</em> instead of guessing from source.</p>
+          <p>Point it at the preview server rather than a deployed URL, and give it the three viewports your snapshot config already uses so its findings line up with your baselines.</p>
+          <div class="meta"><span class="tag g">FREE</span><span class="tag">SUBAGENT + MCP</span><span class="tag">NEEDS: PLAYWRIGHT MCP</span></div>
+          <pre>node scripts/preview.mjs &amp;
+/design-review http://127.0.0.1:4173 <b>--viewports 1280x800,800x600,400x860</b>
+  <b>Constraints:</b> dark-only app, Tauri webview, expert users.
+  <b>Report:</b> Blocker / High / Medium / Nit, each with a screenshot
+  and the CSS selector responsible.</pre>
+        </div>
+      </div>
+
+      <div class="pick">
+        <span class="rank">02</span>
+        <div>
+          <h3>Anti-slop / fingerprint audit prompt</h3>
+          <span class="why">Fixes the exact complaint that started this project</span>
+          <p>Your original brief was "it looks generic with no identity." That is a named, checkable failure class now. <a href="https://github.com/rohitg00/awesome-claude-design">awesome-claude-design</a> catalogues the default fingerprints agents fall into (teal accents, blinking status dots, left-accent bars on every card, three-column feature grids, container nesting soup, Inter-everywhere) and ships a <code>break-default-aesthetic.md</code> counter-prompt plus an <code>audit-live-site</code> scored punch-list. Anthropic's own <a href="https://github.com/anthropics/skills/tree/main/skills/frontend-design">frontend-design</a> skill bans overused fonts before code is written.</p>
+          <p>Run this against every new screen. It is cheap, needs no tooling, and catches regressions toward the mean &mdash; which is what happened to the original Local Store UI.</p>
+          <div class="meta"><span class="tag g">FREE</span><span class="tag">PROMPT PACK</span><span class="tag">NO TOOLING</span></div>
+          <pre><b>Audit this screen for generic-AI-design fingerprints.</b>
+For each of: font choice, accent colour, card treatment, radius
+discipline, icon set, layout rhythm, copy voice &mdash; say whether it
+could appear unchanged in any other product. Quote the CSS line.
+Then name the one detail that only <b>this</b> product could have.</pre>
+        </div>
+      </div>
+
+      <div class="pick">
+        <span class="rank">03</span>
+        <div>
+          <h3>Dark-mode legibility &amp; contrast gate</h3>
+          <span class="why">Your measured, specific risk</span>
+          <p>Negative polarity (light text on dark) loses to positive polarity for acuity and proofreading, and <strong>the gap widens as type gets smaller</strong>. Local Store is dark-only with 75% of its font-size declarations at 12px or below &mdash; the worst case in that literature. Automated tools catch roughly 30&ndash;40% of WCAG issues, but contrast is squarely inside that 30&ndash;40%, so it is worth gating in CI.</p>
+          <p>You already import <code>AxeBuilder</code> in three specs. Extend rather than add: assert a minimum computed font-size on body text, and fail on any contrast violation instead of only checking the default rule set.</p>
+          <div class="meta"><span class="tag g">ALREADY INSTALLED</span><span class="tag">@axe-core/playwright 4.13</span><span class="tag w">CI GATE</span></div>
+          <pre><b>Add to tests/ui/app.spec.js:</b>
+new AxeBuilder({page})
+  .withTags(['wcag2aa','wcag22aa'])
+  .analyze()                      <b>// fail on any violation</b>
+
+<b>Plus a legibility assertion:</b>
+every text node rendered on --canvas must compute to
+>= 13px, or be a label with letter-spacing >= .08em.</pre>
+        </div>
+      </div>
+
+      <div class="pick">
+        <span class="rank">04</span>
+        <div>
+          <h3>Interaction-level critique (UXBench framing)</h3>
+          <span class="why">Right shape for the setup wizard</span>
+          <p>Most critique prompts judge a static screenshot. <a href="https://arxiv.org/html/2606.16262v1">UXBench</a> measures whether a critique is <em>actionable</em>, and evaluates critiques produced <strong>after browser interaction</strong> &mdash; treating missing feedback, silent validation, hidden consequences and weak recovery paths as evidence you have to observe by clicking, not by looking.</p>
+          <p>That is precisely the failure class a setup wizard lives or dies on, and precisely what a screenshot review cannot see. Related agent systems worth reading: <a href="https://arxiv.org/html/2606.05697v1">PerceptUI</a> (persona-conditioned synthetic users), UXAgent, SimUser.</p>
+          <div class="meta"><span class="tag g">FREE</span><span class="tag">PROMPT + BROWSER</span><span class="tag">BEST FOR FLOWS</span></div>
+          <pre><b>Drive this flow end to end, then report only what you could not
+have known from a screenshot:</b>
+  1. actions that gave no feedback within 100ms
+  2. validation that failed silently
+  3. consequences not disclosed before the point of no return
+  4. dead ends with no recovery path
+  5. state lost on Back
+Cite the step number and what you clicked for each finding.</pre>
+        </div>
+      </div>
+
+      <div class="pick">
+        <span class="rank">05</span>
+        <div>
+          <h3>Design-token / consistency linter</h3>
+          <span class="why">Would have caught your eleven border-radii</span>
+          <p><a href="https://github.com/bylapidist/design-lint">@lapidist/design-lint</a> is design-system-aware: it flags raw values that do not match your configured tokens across CSS, JS and TS, including inline styles. Spacing and radius drift is the classic silent failure &mdash; no ordinary linter flags a 13px gap, and no reviewer writes "the rhythm is broken."</p>
+          <p>Your audit found <strong>eleven distinct border-radius values across 28 declarations</strong> and sixteen font sizes. A token linter turns that from an occasional manual audit into a build-time error.</p>
+          <div class="meta"><span class="tag g">FREE</span><span class="tag">CLI / CI</span><span class="tag">CSS + JS + TS</span></div>
+          <pre>npx @lapidist/design-lint src/styles src/js
+<b>config:</b> radius [0,4,8,999] &middot; space 4/8 scale
+        type [12,13.5,15,16.5,21,26,34,42]
+        colour: only var(--*) &mdash; no raw hex in components</pre>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ SKILLS ============ -->
+  <section>
+    <p class="kick">Catalogue &middot; 01</p>
+    <h2>Installable skills &amp; agents</h2>
+    <div class="tbl">
+      <table>
+        <thead><tr><th style="width:26%">Name</th><th>What it does</th><th style="width:14%">Fit here</th></tr></thead>
+        <tbody>
+          <tr><td><strong>design-review subagent</strong><span class="m">OneRedOak/claude-code-workflows</span></td><td>Playwright-MCP review of front-end changes; subagent + <code>/design-review</code> command + CLAUDE.md memory. Catches visual issues pre-merge.</td><td class="fit hi">TOP PICK</td></tr>
+          <tr><td><strong>frontend-design</strong><span class="m">anthropics/skills</span></td><td>Anthropic's baseline aesthetic standard. Bans overused fonts and common failure patterns before code is written.</td><td class="fit hi">HIGH</td></tr>
+          <tr><td><strong>webapp-testing</strong><span class="m">ComposioHQ/awesome-codex-skills</span></td><td>Headless browser + auto-screenshot every page, so the agent can self-grade its own output. Described as the highest-leverage thing to give a design agent.</td><td class="fit hi">HIGH</td></tr>
+          <tr><td><strong>ux-ui-agent-skills</strong><span class="m">plugin87/ux-ui-agent-skills</span></td><td>DTCG design tokens, 42 component specs, WCAG 2.2 checks, 138 design-system references, runnable skills.</td><td class="fit md">MEDIUM</td></tr>
+          <tr><td><strong>designer-skills</strong><span class="m">Owl-Listener/designer-skills</span></td><td>63 skills spanning research, design systems, UI and interaction. Broad; cherry-pick the critique ones.</td><td class="fit md">MEDIUM</td></tr>
+          <tr><td><strong>taste-skill</strong><span class="m">Leonxlnx/taste-skill</span></td><td>Premium-UI generation with explicit brutalist / minimalist variants. Anti-slop oriented.</td><td class="fit md">MEDIUM</td></tr>
+          <tr><td><strong>interface-design</strong><span class="m">Dammyjay93/interface-design</span></td><td>Persistent design-system files plus slash commands, so tokens survive across sessions.</td><td class="fit md">MEDIUM</td></tr>
+          <tr><td><strong>AccessLint</strong><span class="m">accesslint/claude-marketplace</span></td><td>WCAG AA/AAA contrast thresholds and semantic HTML review as a pre-deploy gate.</td><td class="fit md">MEDIUM</td></tr>
+          <tr><td><strong>Design Process Pack</strong><span class="m">Julian Oczkowski</span></td><td>Full pipeline: requirements &rarr; brief &rarr; IA &rarr; tokens &rarr; tasks &rarr; generation &rarr; review. Stress-tests the brief before any code.</td><td class="fit lo">LOW</td></tr>
+          <tr><td><strong>figma-implement-design</strong><span class="m">openai/skills</span></td><td>Design-file to code fidelity, handling hover / selected / empty / loading states per design.</td><td class="fit lo">LOW &mdash; no Figma source</td></tr>
+          <tr><td><strong>Design Critique / Design Reviewer</strong><span class="m">mcpmarket.com skills</span></td><td>Several packaged critique skills; one advertises explicit "AI slop detection" for generic tropes.</td><td class="fit md">MEDIUM</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ PROMPTS ============ -->
+  <section>
+    <p class="kick">Catalogue &middot; 02</p>
+    <h2>Prompt frameworks worth encoding</h2>
+    <p>These are classical methods, not products. Each becomes a reusable prompt an agent can run without any tooling.</p>
+    <div class="tbl">
+      <table>
+        <thead><tr><th style="width:26%">Method</th><th>Prompt shape</th><th style="width:14%">Fit here</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Nielsen's 10 heuristics</strong></td><td>Score each heuristic 0&ndash;4 with a severity rating and one concrete fix. The most-replicated LLM critique baseline in the literature.</td><td class="fit hi">HIGH</td></tr>
+          <tr><td><strong>Cognitive walkthrough</strong></td><td>For each step: will the user know what to do, see the control, and understand the feedback? Purpose-built for first-run flows.</td><td class="fit hi">HIGH &mdash; wizard</td></tr>
+          <tr><td><strong>Five-second test</strong></td><td>Show one frame, then ask what the product does, who it is for, and what the primary action is. Mirrors the 50 ms first-impression research.</td><td class="fit hi">HIGH</td></tr>
+          <tr><td><strong>3-designer debate</strong><span class="m">awesome-claude-design /prompts</span></td><td>Three opinionated voices critique, then synthesise. Surfaces trade-offs a single critique flattens.</td><td class="fit hi">HIGH</td></tr>
+          <tr><td><strong>audit-live-site</strong><span class="m">awesome-claude-design /prompts</span></td><td>Scored audit plus a punch list. Good recurring cadence check.</td><td class="fit md">MEDIUM</td></tr>
+          <tr><td><strong>break-default-aesthetic</strong><span class="m">awesome-claude-design /prompts</span></td><td>One paste that neutralises an agent's default fingerprints.</td><td class="fit hi">HIGH</td></tr>
+          <tr><td><strong>DESIGN.md spec</strong><span class="m">google-labs-code/design.md</span></td><td>A committed design contract the agent reads before generating. Stops per-session drift.</td><td class="fit hi">HIGH</td></tr>
+          <tr><td><strong>Krug trunk test</strong></td><td>Dropped into any screen cold: where am I, what can I do here, what is one level up? Good for the catalogue's depth.</td><td class="fit md">MEDIUM</td></tr>
+          <tr><td><strong>Google HEART / SUS</strong></td><td>Turn qualitative critique into trackable metrics. Needs real users to mean anything.</td><td class="fit lo">LOW &mdash; pre-launch</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ TOOLS ============ -->
+  <section>
+    <p class="kick">Catalogue &middot; 03</p>
+    <h2>Runnable tools an agent can call</h2>
+    <div class="tbl">
+      <table>
+        <thead><tr><th style="width:26%">Tool</th><th>Use</th><th style="width:14%">Fit here</th></tr></thead>
+        <tbody>
+          <tr><td><strong>@axe-core/playwright</strong><span class="m">already in package.json</span></td><td>WCAG 2.2 rules against the rendered DOM, with selectors. Catches ~30&ndash;40% of real violations &mdash; contrast and labels among them.</td><td class="fit hi">INSTALLED</td></tr>
+          <tr><td><strong>Playwright screenshots</strong><span class="m">already configured</span></td><td>Visual regression at three viewports with a 1% diff ratio. Also the agent's eyes.</td><td class="fit hi">INSTALLED</td></tr>
+          <tr><td><strong>@lapidist/design-lint</strong></td><td>Token-aware linting of CSS/JS/TS. Flags raw values, radius and spacing drift at build time.</td><td class="fit hi">HIGH</td></tr>
+          <tr><td><strong>Playwright MCP</strong></td><td>Gives an agent live browser control rather than a test file. Prerequisite for pick 01.</td><td class="fit hi">HIGH</td></tr>
+          <tr><td><strong>Lighthouse</strong></td><td>Performance plus an accessibility subset. Overlaps axe; adds perf budgets.</td><td class="fit lo">LOW &mdash; local webview</td></tr>
+          <tr><td><strong>Pa11y</strong></td><td>CLI accessibility over URLs or a sitemap. Best for multi-page sites.</td><td class="fit lo">LOW &mdash; single page</td></tr>
+          <tr><td><strong>Figma design linters</strong><span class="m">YADL, Design System Linter Pro</span></td><td>Flags rogue padding, radius, stroke and type values inside Figma files.</td><td class="fit lo">LOW &mdash; no Figma</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ RESEARCH ============ -->
+  <section>
+    <p class="kick">Catalogue &middot; 04</p>
+    <h2>Benchmarks worth reading before you trust a score</h2>
+    <div class="grid2">
+      <div class="box">
+        <h3>UI-Bench</h3>
+        <p>10 tools, 30 prompts, 300 sites, 4,000+ expert pairwise judgments, ranked with a TrueSkill model. Crucially it <strong>isolates visual craft</strong> &mdash; layout, typography, colour, hierarchy &mdash; and deliberately ignores accessibility, performance and code quality. Useful as a taste benchmark; do not read it as a UX score. <a href="https://arxiv.org/abs/2508.20410">arXiv 2508.20410</a></p>
+      </div>
+      <div class="box">
+        <h3>UXBench</h3>
+        <p>Measures whether an LLM's critique is <em>actionable</em>, from critiques generated after real browser interaction. Its four evidence classes &mdash; missing feedback, silent validation, hidden consequences, weak recovery &mdash; are the best ready-made rubric for judging a flow. <a href="https://arxiv.org/html/2606.16262v1">arXiv 2606.16262</a></p>
+      </div>
+      <div class="box">
+        <h3>PerceptUI</h3>
+        <p>LLM agents as human-aligned synthetic users for UI/UX evaluation. Related systems: UXAgent (persona-conditioned agents on live targets), SimUser (heuristic issues in mobile apps), UXCascade (aggregating agent traces into findings). <a href="https://arxiv.org/html/2606.05697v1">arXiv 2606.05697</a></p>
+      </div>
+      <div class="box">
+        <h3>The honest caveat</h3>
+        <p>Automated accessibility tooling catches an estimated <strong>30&ndash;40%</strong> of real WCAG violations, and agent critique has no validated correlation with task success. These tools raise the floor and catch regressions. They do not replace watching five self-hosters try to install Memos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ NEXT ============ -->
+  <section>
+    <p class="kick">If you do one thing</p>
+    <h2>The 30-minute version</h2>
+    <p class="note">Install Playwright MCP, drop the design-review subagent into <code>.claude/agents/</code>, point it at <code>node scripts/preview.mjs</code> on port 4173, and paste the anti-slop prompt from pick 02 into your <code>CLAUDE.md</code> so every future UI change gets audited for genericness by default. Everything else on this page is an upgrade to that loop.</p>
+  </section>
+
+  <footer>Local Store &middot; UX evaluation toolkit &middot; 22 entries &middot; 08 Sep 2026</footer>
+</div>
+</body>
+</html>
