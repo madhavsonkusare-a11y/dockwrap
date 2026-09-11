@@ -1,0 +1,378 @@
+{
+  "catalog_entries": 1672,
+  "coverage_percent": 100.0,
+  "duplicate_upstream_groups": [
+    {
+      "ids": [
+        "adguard",
+        "adguard-home"
+      ],
+      "sha256": "4a65b23ae16bf700f35139e2c10a5f731a32530f2db832abd5612be2523b1f9f"
+    },
+    {
+      "ids": [
+        "booklore",
+        "grimmory"
+      ],
+      "sha256": "15e38179773619e81af3674b89ece884afe241c0d41b156d7d205af4e96c6bc6"
+    },
+    {
+      "ids": [
+        "firefly",
+        "firefly-iii"
+      ],
+      "sha256": "a33e8d30d625552152a529aeeb8a772ba2aa8b56d0116139ec5d32c5f3e40b57"
+    },
+    {
+      "ids": [
+        "flowise-ai",
+        "flowise-with-databases"
+      ],
+      "sha256": "13aa78005262320fb4ecfbe6b60684cdfc71d79be3db76583fe463c221fc773b"
+    },
+    {
+      "ids": [
+        "forgejo",
+        "forgejo-with-mariadb"
+      ],
+      "sha256": "ac5a9b943ffa2b0b305a4ea21dd8b7564c8a8ecc08d2e3d61274f7e61973e7a5"
+    },
+    {
+      "ids": [
+        "freshrss",
+        "freshrss-with-mariadb"
+      ],
+      "sha256": "c9fed1ab6f9e271538e041ff3f70117bf01cec9c162239534fb6a7b6bfa1c2b5"
+    },
+    {
+      "ids": [
+        "gitea",
+        "gitea-with-mariadb"
+      ],
+      "sha256": "6e2da0b8fbd4e0eec778714f5009361eb0a339967e06d265f3d7d0d50418d7c7"
+    },
+    {
+      "ids": [
+        "mixpost",
+        "mixpost-pro"
+      ],
+      "sha256": "be4a5273f3befc2e07db334258ccb78fdb5ec50e620a57e4d092c84e79db93d7"
+    },
+    {
+      "ids": [
+        "nextcloud",
+        "nextcloud-with-mariadb"
+      ],
+      "sha256": "892404c0c7c74cb22d6c728e967fcf5cb680f7d343db1cdfef92186d44cce6d3"
+    }
+  ],
+  "extra": [],
+  "format_counts": {
+    "png": 166,
+    "svg": 1506
+  },
+  "missing": [],
+  "resolved_icons": 1672,
+  "reviewed_alias_matches": [
+    {
+      "id": "actual",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/actual-budget.svg"
+    },
+    {
+      "id": "adguard",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/adguard-home.svg"
+    },
+    {
+      "id": "adventurelog",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/adventure-log.svg"
+    },
+    {
+      "id": "affine-community-edition",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/affine-light.svg"
+    },
+    {
+      "id": "airtrail",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/air-trail.svg"
+    },
+    {
+      "id": "anaconda3",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/anaconda.svg"
+    },
+    {
+      "id": "answer",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/apache-answer.svg"
+    },
+    {
+      "id": "anythingllm",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/anything-llm-light.svg"
+    },
+    {
+      "id": "apache-http-server",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/apache.svg"
+    },
+    {
+      "id": "atuin-server",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/atuin-light.svg"
+    },
+    {
+      "id": "changedetection-io",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/changedetection.svg"
+    },
+    {
+      "id": "chartdb",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/png/chart-db.png"
+    },
+    {
+      "id": "docmost-community-edition",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/png/docmost.png"
+    },
+    {
+      "id": "ente-photos-with-s3",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/png/ente-photos.png"
+    },
+    {
+      "id": "esp-home",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/esphome.svg"
+    },
+    {
+      "id": "expenseowl",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/png/expense-owl.png"
+    },
+    {
+      "id": "file-browser-quantum",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/filebrowser-quantum.svg"
+    },
+    {
+      "id": "flowise-ai",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/flowise.svg"
+    },
+    {
+      "id": "flowise-with-databases",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/flowise.svg"
+    },
+    {
+      "id": "forgejo-with-mariadb",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/forgejo.svg"
+    },
+    {
+      "id": "foundryvtt",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/png/foundry-vtt.png"
+    },
+    {
+      "id": "freshrss-with-mariadb",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/freshrss.svg"
+    },
+    {
+      "id": "gitea-with-mariadb",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/gitea.svg"
+    },
+    {
+      "id": "gladys",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/png/gladys-assistant.png"
+    },
+    {
+      "id": "grav-v2",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/grav-light.svg"
+    },
+    {
+      "id": "homebox-sysadminsmedia",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/png/homebox.png"
+    },
+    {
+      "id": "keycloak-with-postgres",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/keycloak.svg"
+    },
+    {
+      "id": "librephotos",
+      "match": "reviewed-path",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/png/librephotos.png"
+    },
+    {
+      "id": "mixpost-pro",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/mixpost.svg"
+    },
+    {
+      "id": "navidrome-music-server",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/navidrome-light.svg"
+    },
+    {
+      "id": "newapi",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/png/new-api.png"
+    },
+    {
+      "id": "nextcloud-with-mariadb",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/nextcloud.svg"
+    },
+    {
+      "id": "nexus-arm",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/nexus.svg"
+    },
+    {
+      "id": "ollama-with-open-webui",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/open-webui-light.svg"
+    },
+    {
+      "id": "omnitools",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/png/omni-tools.png"
+    },
+    {
+      "id": "opencloud",
+      "match": "reviewed-path",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/open-cloud-dark.svg"
+    },
+    {
+      "id": "openobserve",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/open-observe.svg"
+    },
+    {
+      "id": "penpot-with-s3",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/penpot-light.svg"
+    },
+    {
+      "id": "pocket-id-with-postgresql",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/pocket-id-light.svg"
+    },
+    {
+      "id": "samba",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/samba-server.svg"
+    },
+    {
+      "id": "sftpgo-community-edition",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/png/sftpgo.png"
+    },
+    {
+      "id": "solidinvoice",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/png/solid-invoice.png"
+    },
+    {
+      "id": "sparkyfitness",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/png/sparky-fitness.png"
+    },
+    {
+      "id": "speed-test-by-openspeedtesttm",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/openspeedtest.svg"
+    },
+    {
+      "id": "superset",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/apache-superset-light.svg"
+    },
+    {
+      "id": "whoogle-search",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/png/whoogle.png"
+    },
+    {
+      "id": "wiki-js",
+      "match": "reviewed-alias",
+      "source": "homarr-dashboard-icons",
+      "url": "https://raw.githubusercontent.com/homarr-labs/dashboard-icons/d84d00eef4b14084963d5996397b76f9fe22f0c7/svg/wikijs.svg"
+    }
+  ],
+  "schema_version": 1,
+  "source_counts": {
+    "coolify": 81,
+    "homarr-dashboard-icons": 669,
+    "local-store-monogram": 914,
+    "umbrel-apps-gallery": 8
+  },
+  "suspicious": [],
+  "umbrel_matches": [
+    "chatbot-ui",
+    "databag",
+    "electrs",
+    "fx",
+    "jupyterlab",
+    "kan",
+    "matter-server",
+    "strix"
+  ]
+}

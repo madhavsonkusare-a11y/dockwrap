@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "sources": {
+    "coolify": {
+      "license": "Apache-2.0",
+      "notice": "catalog/notices/coolify/LICENSE",
+      "repository": "coollabsio/coolify",
+      "revision": "08f68016dd342fe944564f79969f4ceceddc88d6"
+    },
+    "homarr-dashboard-icons": {
+      "license": "Apache-2.0",
+      "notice": "src/assets/apps/LICENSE",
+      "repository": "homarr-labs/dashboard-icons",
+      "revision": "d84d00eef4b14084963d5996397b76f9fe22f0c7"
+    },
+    "umbrel-apps-gallery": {
+      "license": "NOASSERTION",
+      "notice": "catalog/notices/umbrel-apps-gallery/NOTICE.md",
+      "repository": "getumbrel/umbrel-apps-gallery",
+      "revision": "7655ed83a9b26c50dc5f16888591da9d46d294a6"
+    }
+  }
+}
