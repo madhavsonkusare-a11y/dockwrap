@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 2,
+  "$schema": "https://schemas.runtipi.io/v2/dynamic-compose.json",
+  "services": [
+    {
+      "name": "flowise",
+      "image": "flowiseai/flowise:3.1.4",
+      "isMain": true,
+      "internalPort": 3000,
+      "environment": [
+        {
+          "key": "PORT",
+          "value": "3000"
+        },
+        {
+          "key": "DATABASE_PATH",
+          "value": "/home/node/.flowise"
+        },
+        {
+          "key": "SECRETKEY_PATH",
+          "value": "/home/node/.flowise"
+        },
+        {
+          "key": "LOG_PATH",
+          "value": "/home/node/.flowise/logs"
+        },
+        {
+          "key": "BLOB_STORAGE_PATH",
+          "value": "/home/node/.flowise/storage"
+        },
+        {
+          "key": "APP_URL",
+          "value": "${APP_PROTOCOL:-http}://${APP_DOMAIN}"
+        },
+        {
+          "key": "JWT_AUTH_TOKEN_SECRET",
+          "value": "${FLOWISE_JWT_SECRET}"
+        },
+        {
+          "key": "JWT_REFRESH_TOKEN_SECRET",
+          "value": "${FLOWISE_JWT_REFRESH_SECRET}"
+        },
+        {
+          "key": "EXPRESS_SESSION_SECRET",
+          "value": "${FLOWISE_SESSION_SECRET}"
+        },
+        {
+          "key": "TOKEN_HASH_SECRET",
+          "value": "${FLOWISE_TOKEN_HASH_SECRET}"
+        },
+        {
+          "key": "DISABLE_FLOWISE_TELEMETRY",
+          "value": "true"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data",
+          "containerPath": "/home/node/.flowise"
+        }
+      ]
+    }
+  ]
+}
