@@ -4,7 +4,7 @@
   "services": [
     {
       "name": "kotaemon",
-      "image": "ghcr.io/cinnamon/kotaemon:0.11.0-lite",
+      "image": "ghcr.io/cinnamon/kotaemon:main-lite",
       "isMain": true,
       "internalPort": 7860,
       "environment": [
