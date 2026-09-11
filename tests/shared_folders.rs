@@ -29,6 +29,7 @@ fn template() -> PlanTemplate {
             services: vec![PlanService {
                 name: "gallery".into(),
                 image: "example/gallery:1.0".into(),
+                digest: None,
                 environment: Vec::new(),
                 published: Some(PublishedPort {
                     host: 8080,

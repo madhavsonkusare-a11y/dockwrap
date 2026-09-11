@@ -46,7 +46,8 @@
           "linux/ppc64le": "sha256:ca79e5e5b39c0244708652d2e0d5a94c9a0f84bbec160c88dc18be3ed7a9dcca",
           "linux/riscv64": "sha256:3a9e6f0b70f12b7d338c1b5b6b8f05d959aa2c489ae7d48a8cc09186ee467b59",
           "linux/s390x": "sha256:738e9a1eb18cdda578785a4e5c4ece33ea8ed26648899ca8709b02ae1ab21f45"
-        }
+        },
+        "index_digest": "sha256:5a93c470ae8220fddf71f6ebe3bc94e615ddc2ae4d9810f795b830fb11c41a17"
       },
       {
         "image": "mariadb:11.4.13",
@@ -64,7 +65,8 @@
           "linux/arm64/v8": "sha256:eebec83fe506646139690097318f650e0cb294f7436123b8d4c5866f2bd46d03",
           "linux/ppc64le": "sha256:de0335a810948bd567867f1986e28674c9cb6a01ee6c21d4eaffd43f22895a09",
           "linux/s390x": "sha256:93e2a78e5d8a37d419ca86883d68f624e3c2dcec1dbc815eea9d9d4c460c13d4"
-        }
+        },
+        "index_digest": "sha256:80494b9810694179889f7281ec44ca928241df577159c0356a1070e2e94616a1"
       }
     ]
   },

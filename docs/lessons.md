@@ -175,6 +175,12 @@ a push date, because "last rebuilt" is what a promotion decision turns on.
 
 And a registry answering 429 has said how long to wait. Waiting is not failing.
 
+Docker Hub counts a manifest **GET** as a pull against an anonymous limit of a
+few per hour, and a day of batch runs spends it. A **HEAD** returns the same
+`Docker-Content-Digest` and is not counted, so resolve digests with HEAD; and
+prefer `docker pull`, which uses the engine's login and its larger allowance,
+over anonymous requests when an image has to be fetched.
+
 ## Prove a test can fail
 
 Every claim worth making has been checked by reintroducing the bug it guards

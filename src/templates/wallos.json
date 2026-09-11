@@ -36,7 +36,8 @@
           "linux/amd64": "sha256:748793798693a14c9eb443ace51dba4911c0bf76d5f3575dc30cb0e5559a9102",
           "linux/arm/v7": "sha256:0329c240f6c4e2ef30ef56a4cba236d2dee85c69e3bc073ef057891736f898a7",
           "linux/arm64": "sha256:bb2d40e312c3832af54d45181e01ac04c8c7731ea86bd1378fb8160db9ae0870"
-        }
+        },
+        "index_digest": "sha256:82a74706a343ee0713eb1c5b1d7814f656ed5a35de36c73f0cb42276d8f9d95e"
       }
     ]
   },

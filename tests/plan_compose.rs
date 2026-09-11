@@ -28,6 +28,7 @@ fn web_and_database() -> DeploymentPlan {
             PlanService {
                 name: "web".into(),
                 image: "example/web:1.2.3".into(),
+                digest: None,
                 environment: vec![
                     ("DATABASE_HOST".into(), "db".into()),
                     ("DATABASE_PORT".into(), "5432".into()),
@@ -44,6 +45,7 @@ fn web_and_database() -> DeploymentPlan {
             PlanService {
                 name: "db".into(),
                 image: "example/postgres:16.2".into(),
+                digest: None,
                 environment: vec![("POSTGRES_DB".into(), "app".into())],
                 published: None,
                 mounts: vec![PlanMount::Volume {

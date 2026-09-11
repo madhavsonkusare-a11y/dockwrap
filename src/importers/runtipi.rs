@@ -540,6 +540,7 @@ pub fn import(id: &str, definition: &str, config: Option<&str>) -> Result<Import
         planned.push(PlanService {
             name,
             image,
+            digest: None,
             environment,
             published,
             mounts,

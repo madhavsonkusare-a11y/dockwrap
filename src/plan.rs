@@ -205,6 +205,11 @@ pub struct PublishedPort {
 pub struct PlanService {
     pub name: String,
     pub image: String,
+    /// The audited manifest-list digest for `image`, when a review recorded
+    /// one. It renders as `image@digest`, so what runs is what was audited
+    /// even if somebody pushes the tag again. A candidate being qualified has
+    /// none; everything offered has one.
+    pub digest: Option<String>,
     pub environment: Vec<(String, String)>,
     pub published: Option<PublishedPort>,
     pub mounts: Vec<PlanMount>,
@@ -382,7 +387,10 @@ impl DeploymentPlan {
         let mut out = String::from("services:\n");
         for service in &self.services {
             out.push_str(&format!("  {}:\n", service.name));
-            out.push_str(&format!("    image: {}\n", service.image));
+            match &service.digest {
+                Some(digest) => out.push_str(&format!("    image: {}@{}\n", service.image, digest)),
+                None => out.push_str(&format!("    image: {}\n", service.image)),
+            }
             out.push_str(&format!(
                 "    container_name: {}\n",
                 self.container_name(service)
@@ -458,6 +466,19 @@ impl PlanService {
             .any(|c| c.is_whitespace() || c.is_control())
         {
             return Err("image contains whitespace or control characters".into());
+        }
+        if let Some(digest) = &self.digest {
+            let hex = digest.strip_prefix("sha256:").unwrap_or_default();
+            if hex.len() != 64
+                || !hex
+                    .bytes()
+                    .all(|b| b.is_ascii_digit() || (b'a'..=b'f').contains(&b))
+            {
+                return Err(format!(
+                    "digest {digest:?} for {:?} is not a sha256 digest",
+                    self.image
+                ));
+            }
         }
         for (key, value) in &self.environment {
             // Uppercase is a convention, not a rule. Ghost configures itself
@@ -682,6 +703,7 @@ pub fn plan_for_recipe(recipe: &Recipe) -> Result<DeploymentPlan, String> {
         services: vec![PlanService {
             name: recipe.id.clone(),
             image: recipe.image.clone(),
+            digest: Some(recipe.requirements.image_audit.index_digest.clone()),
             environment,
             published: Some(PublishedPort {
                 host: recipe.host_port,
@@ -751,6 +773,7 @@ NEWLINE",
             services: vec![PlanService {
                 name: "example".into(),
                 image: "example/app:1.0".into(),
+                digest: None,
                 environment: vec![(key.to_owned(), value.to_owned())],
                 published: Some(PublishedPort {
                     host: 8080,
@@ -789,6 +812,7 @@ NEWLINE",
         PlanService {
             name: "web".into(),
             image: "example/web:1.2.3".into(),
+            digest: None,
             environment: vec![("DATABASE_HOST".into(), "db".into())],
             published: Some(PublishedPort {
                 host: 8080,
@@ -803,6 +827,7 @@ NEWLINE",
         PlanService {
             name: "db".into(),
             image: "example/postgres:16.2".into(),
+            digest: None,
             environment: vec![("POSTGRES_DB".into(), "app".into())],
             published: None,
             mounts: vec![PlanMount::Volume {
@@ -909,6 +934,29 @@ NEWLINE",
         let mut relative_target = pair();
         relative_target.services[0].mounts = vec![PlanMount::directory("data", "var/lib/web")];
         assert!(relative_target.to_compose().is_err());
+    }
+
+    /// An offered app installs the manifest list that was audited, not
+    /// whatever its tag points at on the day somebody installs it.
+    #[test]
+    fn an_audited_digest_is_what_the_compose_file_pulls() {
+        let mut service = web();
+        service.depends_on.clear();
+        service.digest = Some("sha256:abababababababababababababababababababababababababababababababab".into());
+        let plan = DeploymentPlan {
+            id: "example".into(),
+            services: vec![service],
+            named_volumes: Vec::new(),
+        };
+        let compose = plan.to_compose().unwrap();
+        assert!(
+            compose.contains("image: example/web:1.2.3@sha256:abababababababababababababababababababababababababababababababab"),
+            "{compose}"
+        );
+
+        let mut broken = plan.clone();
+        broken.services[0].digest = Some("sha256:not-a-digest".into());
+        assert!(broken.to_compose().is_err(), "a malformed digest was rendered");
     }
 
     #[test]

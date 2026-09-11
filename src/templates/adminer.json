@@ -46,7 +46,8 @@
           "linux/ppc64le": "sha256:13cd568eff91be930bfc3156fde57bdfd955cf154ebef03aa35a46ad523c321f",
           "linux/riscv64": "sha256:d26c038c8630c0c4a0691162d21270bd9cbe06ec05b227cc836cebf2e387774b",
           "linux/s390x": "sha256:71d4fb57b6b32f0aad0d59b8e7d3d722ca30e942ec9d2ff5151a8a99cfee9efd"
-        }
+        },
+        "index_digest": "sha256:c1c24d89d06fcb8fc0fb5a049240dc292ff4a121ae05d7e74d64b58c421d2921"
       }
     ]
   },

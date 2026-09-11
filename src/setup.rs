@@ -863,6 +863,7 @@ mod tests {
                 services: vec![PlanService {
                     name: "example".into(),
                     image: "example/app:1.0.0".into(),
+                    digest: None,
                     environment: vec![
                         ("ADMIN_EMAIL".into(), "${ADMIN_EMAIL}".into()),
                         ("DB_PASSWORD".into(), "${DB_PASSWORD}".into()),

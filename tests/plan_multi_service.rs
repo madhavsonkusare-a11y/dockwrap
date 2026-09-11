@@ -129,6 +129,7 @@ fn template(id: &str, host_port: u16) -> PlanTemplate {
                 PlanService {
                     name: "web".into(),
                     image: WEB_IMAGE.into(),
+                    digest: None,
                     environment: vec![("ADMINER_DEFAULT_SERVER".into(), "db".into())],
                     published: Some(PublishedPort {
                         host: host_port,
@@ -141,6 +142,7 @@ fn template(id: &str, host_port: u16) -> PlanTemplate {
                 PlanService {
                     name: "db".into(),
                     image: DB_IMAGE.into(),
+                    digest: None,
                     environment: vec![
                         ("POSTGRES_USER".into(), DB_USER.into()),
                         ("POSTGRES_DB".into(), "${DB_NAME}".into()),

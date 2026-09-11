@@ -1,8 +1,8 @@
 {
   "app": "homer",
   "passed": true,
-  "scope": "candidate mapping, transaction, managed storage and first use, on one host and one architecture",
-  "promotion": "not reviewed",
+  "scope": "reviewed mapping, transaction, managed storage and first use, on one host and one architecture",
+  "promotion": "approved",
   "source_revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
   "images": [
     "b4bz/homer:v26.08.3"

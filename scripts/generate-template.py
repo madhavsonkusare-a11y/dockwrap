@@ -123,6 +123,41 @@ def registry_get(host, path, accept=None):
         return response.read(8 * 1024 * 1024)
 
 
+def registry_digest(host, repository, reference):
+    """The digest a registry serves for a tag or digest, asked with HEAD.
+
+    Docker Hub counts a manifest GET as a pull against an anonymous limit of a
+    few per hour, and a long batch spends it; a HEAD is free and carries the
+    same Docker-Content-Digest header. Returns None when the reference does not
+    exist.
+    """
+    url = f"https://{host}/v2/{repository}/manifests/{reference}"
+    headers = {**USER_AGENT, "Accept": MANIFEST_TYPES}
+    for attempt in range(2):
+        try:
+            with opened(urllib.request.Request(url, headers=headers, method="HEAD")) as response:
+                return response.headers.get("Docker-Content-Digest")
+        except urllib.error.HTTPError as refusal:
+            if refusal.code == 404:
+                return None
+            if refusal.code != 401 or attempt:
+                raise
+            challenge = refusal.headers.get("WWW-Authenticate") or ""
+        fields = dict(re.findall(r'(\w+)="([^"]*)"', challenge))
+        realm = fields.pop("realm", None)
+        if not realm:
+            raise SystemExit(f"{host}: sent an authentication challenge naming no token endpoint")
+        grant = fetch(f"{realm}?{urllib.parse.urlencode(fields)}")
+        headers["Authorization"] = f"Bearer {grant.get('token') or grant.get('access_token')}"
+    return None
+
+
+def index_digest(image):
+    """The manifest-list digest a tag points at now — what an install pins."""
+    host, repository, tag = split_image(image)
+    return registry_digest(host or "registry-1.docker.io", repository, tag)
+
+
 def registry_audit(host, repository, tag, image):
     """The same audit for any registry that speaks the distribution API.
 
@@ -450,7 +485,10 @@ def main():
             "docker_engine_os": "linux",
             "compose_major": 2,
             "local_storage_required": True,
-            "images": [image_audit(image) for image in facts["images"]],
+            "images": [
+            {**image_audit(image), "index_digest": index_digest(image)}
+            for image in facts["images"]
+        ],
         },
         "promotion": {
             "state": "withheld",

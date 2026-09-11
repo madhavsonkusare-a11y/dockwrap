@@ -38,7 +38,8 @@
           "linux/arm/v6": "sha256:f89a6fd48a1df32c227700ae4c767566990596b91b20cca1b85ba5ea57eb3814",
           "linux/arm/v7": "sha256:d05810ffe4d21bc5e71c5820696ecd744be266aa137aada353569d59d3d9f3e6",
           "linux/arm64": "sha256:236c4def6458d960e42525f461b43cde950affa8a5473a1663f2a555e3c17496"
-        }
+        },
+        "index_digest": "sha256:094b5689ed81549bd293418395c7cf495ae9d960fc2d4928cef2083ef913d912"
       }
     ]
   },

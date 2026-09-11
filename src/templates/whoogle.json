@@ -34,7 +34,8 @@
         "digests": {
           "linux/amd64": "sha256:5a74b26493da7d57bb952918740ce70f40d8c18b83325e01a6f2a3fedfe2490c",
           "linux/arm64": "sha256:765e787cd3c5ebfe2e4c244546ac573d8b656d57e945309327a7325f5ea63ac1"
-        }
+        },
+        "index_digest": "sha256:6ae072238642b7e5860c8fa7f68cf06be797eb4e2278fc41d17d3b5e8a051eea"
       }
     ]
   },

@@ -44,7 +44,8 @@
           "linux/arm64": "sha256:6d5312af5666cbdfcb1bdfa31e4002c5ad804332cefe5230c39ee7d134e989d1",
           "linux/ppc64le": "sha256:20a164031a46a6ec967d4d73cee073c86255e0843b972887e12120314573a5e7",
           "linux/s390x": "sha256:6e4ce9190a8d469c123f64553c48e015f3cce696987802c000e271f52bd81f18"
-        }
+        },
+        "index_digest": "sha256:13290e2f04bfd98cf8fc7e8d216fb76b2b2d12373d4923b859cd41c2d984fde8"
       }
     ]
   },

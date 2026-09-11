@@ -54,9 +54,14 @@ pub struct TemplateImageAudit {
     /// itself, but it is the fact a promotion decision turns on most often.
     pub last_updated: String,
     pub container_platforms: Vec<String>,
-    /// Per-architecture digests. These registries publish no index digest for
-    /// a tag, so pinning each architecture is what can actually be verified.
+    /// Per-architecture digests, as the registry lists them for the tag.
     pub digests: BTreeMap<String, String>,
+    /// The manifest list those architectures belong to. Installing by this
+    /// pins every architecture at once and leaves Docker to pick the one the
+    /// engine runs, so a tag pushed again later cannot change what installs.
+    /// Required for anything offered.
+    #[serde(default)]
+    pub index_digest: Option<String>,
 }
 
 #[derive(Debug, Clone, Deserialize, PartialEq)]
@@ -289,6 +294,17 @@ impl ReviewedTemplate {
                     self.id, audit.image
                 ));
             }
+        }
+
+        // Install by digest, not by tag: the tag is what was audited, the
+        // digest is what stops it meaning something else tomorrow.
+        for service in &mut template.plan.services {
+            service.digest = self
+                .requirements
+                .images
+                .iter()
+                .find(|audit| audit.image == service.image)
+                .and_then(|audit| audit.index_digest.clone());
         }
 
         template
@@ -623,6 +639,14 @@ mod tests {
                 Some(true),
                 "{id} is approved on a proof that did not pass"
             );
+            // What installs is pinned by digest, for every image it runs.
+            for service in &template.plan.services {
+                assert!(
+                    service.digest.is_some(),
+                    "{id}: {} would install by tag; record its audited index digest",
+                    service.image
+                );
+            }
             // A check that passes trivially must not be quoted as though it
             // had tested something. Four approvals said their generated
             // credentials survived a reinstall for apps that generate none.

@@ -798,6 +798,7 @@ pub fn import(id: &str, definition: &str) -> Result<ImportOutcome, String> {
             plan_services.push(PlanService {
                 name,
                 image,
+                digest: None,
                 environment,
                 published: None,
                 mounts,
@@ -832,6 +833,7 @@ pub fn import(id: &str, definition: &str) -> Result<ImportOutcome, String> {
         plan_services.push(PlanService {
             name,
             image,
+            digest: None,
             environment,
             published: None,
             mounts,

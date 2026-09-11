@@ -2032,6 +2032,7 @@ mod tests {
                 services: vec![PlanService {
                     name: "memos".into(),
                     image: "example/app:1.0.0".into(),
+                    digest: None,
                     environment: vec![
                         ("DB_PASSWORD".into(), "${DB_PASSWORD}".into()),
                         ("SITE".into(), "${SITE_NAME}".into()),

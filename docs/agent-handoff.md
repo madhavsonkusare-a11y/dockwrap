@@ -64,7 +64,10 @@ plus the earlier actual, codimd, gotify and ombi.
 
 ### Open
 
-- Image digests are recorded and format-checked but **not enforced at install**.
+- ~~Digests not enforced at install~~ — **done**: every offered image installs
+  as `image:tag@sha256:<index>`. Each pinned digest was checked against the image
+  its proof actually ran (local image ID equal to the proof's), and Compose was
+  shown to resolve such a reference offline to that exact image.
 - `adminer:4` is a floating major tag; the unpinned-image guard only refuses
   `latest`, `stable` and `main`.
 - Qualification leaves its isolation directory behind (a task chip exists).
