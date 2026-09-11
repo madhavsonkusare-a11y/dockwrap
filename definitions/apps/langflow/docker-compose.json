@@ -19,6 +19,18 @@
         {
           "key": "DO_NOT_TRACK",
           "value": "true"
+        },
+        {
+          "key": "LANGFLOW_SUPERUSER",
+          "value": "${LANGFLOW_USERNAME}"
+        },
+        {
+          "key": "LANGFLOW_SUPERUSER_PASSWORD",
+          "value": "${LANGFLOW_PASSWORD}"
+        },
+        {
+          "key": "LANGFLOW_AUTO_LOGIN",
+          "value": "false"
         }
       ],
       "volumes": [

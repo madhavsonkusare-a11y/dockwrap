@@ -39,6 +39,13 @@
       "min": 64,
       "max": 64,
       "env_variable": "HUGINN_SECRET_TOKEN"
+    },
+    {
+      "type": "random",
+      "label": "Database password",
+      "min": 32,
+      "max": 32,
+      "env_variable": "HUGINN_DB_PASSWORD"
     }
   ]
 }

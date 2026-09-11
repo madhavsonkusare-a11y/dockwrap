@@ -12,6 +12,23 @@
   "license": "MIT",
   "form_fields": [
     {
+      "type": "text",
+      "label": "Username",
+      "min": 3,
+      "max": 40,
+      "required": true,
+      "default": "langflow",
+      "env_variable": "LANGFLOW_USERNAME"
+    },
+    {
+      "type": "password",
+      "label": "Password",
+      "min": 8,
+      "max": 80,
+      "required": true,
+      "env_variable": "LANGFLOW_PASSWORD"
+    },
+    {
       "type": "random",
       "label": "Encryption key for stored credentials",
       "min": 48,
