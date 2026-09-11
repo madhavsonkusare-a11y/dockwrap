@@ -910,9 +910,7 @@ mod tests {
         let hostile = definition.replace("SIGINT", "SIGINT\\n    privileged: true");
         let outcome = import("db", &hostile, None).unwrap();
         assert!(
-            outcome
-                .plan()
-                .map_or(true, |plan| plan.to_compose().is_err()),
+            outcome.plan().is_none_or(|plan| plan.to_compose().is_err()),
             "a stop signal carried something else into the file"
         );
     }
