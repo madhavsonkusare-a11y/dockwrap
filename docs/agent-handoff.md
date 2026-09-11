@@ -1,5 +1,23 @@
 # Local Store: agent handoff
 
+## September 11 (evening) — the known failures, run down
+
+**24 apps offered.** Monica and Glance join; Joplin is withheld.
+
+| App | Cause | Outcome |
+| --- | --- | --- |
+| Joplin | Local Store's health probe omitted the port from `Host`; Joplin routes on it and answered 404 | probe fixed; Joplin passes, but is **withheld** — Joplin Server is under a non-commercial personal-use licence |
+| Monica | MariaDB 10.6.11 segfaults on this WSL2 kernel (exit 139) after setup | pinned to 10.6.28 (same line); **offered** |
+| Glance | Runtipi's starter `glance.yml` was never copied in | seed-file support; **offered** |
+| Notemark | same missing-seed bug, then Runtipi's definition is stale: nginx expects the frontend on 8000, frontend 0.19.3 listens on 8080, backend crash-loops | seed fixed; rest needs a rewritten definition — left |
+| Nextcloud | first start copies its whole source onto the host folder: measured 18.5 min here | open — needs a design decision |
+
+New capabilities: **seed files** (Runtipi's `data/` folder, text only, written
+only where absent — 41 candidates ship them), Penpot's **MCP server** (proxied by
+Penpot's own frontend at `/mcp/stream`, proven by `scripts/penpot-probe.mjs`),
+and `--probe` for app-specific checks in offered runs. A timeout's diagnosis now
+lists each container's last lines, the app's own first.
+
 ## September 11 (later) — Penpot and Paperclip, from Local Store's own definitions
 
 **22 apps are offered.** The two new ones are the first written by Local

@@ -189,6 +189,28 @@ the host, where the same first start took nineteen seconds, and the install
 failed with the database "unhealthy". A long start period costs nothing when
 the start is fast — the first success ends it — so give one.
 
+## A health check has to ask the way a browser does
+
+The health probe sent `Host: localhost` for `http://localhost:<port>`. HTTP
+wants the port there, every browser sends it, and Joplin routes on the whole
+Host — so it answered 404 to the probe while serving `/login` to everyone else,
+and was rolled back as unhealthy for weeks. Reproducing by hand, with the exact
+request the probe makes, found it in one step.
+
+## A definition is more than its Compose file
+
+Runtipi ships starting files beside some definitions and copies them into the
+app's data folder on install. Taking only the definition left Notemark's proxy
+mounting a file that was not there — Docker made a directory, nginx refused to
+start — and Glance with no `glance.yml`. Forty-one candidates ship such files.
+
+## "No licence detected" still has to be read
+
+`NOASSERTION` does not mean closed, which is why it is not a refusal — but it
+does not mean open either. Joplin's repository is AGPL, except `packages/server`,
+which is under a non-commercial personal-use licence; the server is what we
+would ship. Check the licence of the part you run.
+
 ## Prove a test can fail
 
 Every claim worth making has been checked by reintroducing the bug it guards

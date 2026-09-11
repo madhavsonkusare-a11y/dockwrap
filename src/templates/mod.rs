@@ -347,11 +347,13 @@ const CODIMD: &str = include_str!("codimd.json");
 const FILESTASH: &str = include_str!("filestash.json");
 const FLATNOTES: &str = include_str!("flatnotes.json");
 const GHOST_DEV: &str = include_str!("ghost-dev.json");
+const GLANCE: &str = include_str!("glance.json");
 const GOTIFY: &str = include_str!("gotify.json");
 const GRAFANA: &str = include_str!("grafana.json");
 const GROCY: &str = include_str!("grocy.json");
 const HOMER: &str = include_str!("homer.json");
 const JELLYSEERR: &str = include_str!("jellyseerr.json");
+const JOPLIN: &str = include_str!("joplin.json");
 const KANBOARD: &str = include_str!("kanboard.json");
 const METABASE: &str = include_str!("metabase.json");
 const MONICA: &str = include_str!("monica.json");
@@ -387,11 +389,13 @@ pub fn reviewed_templates() -> Vec<ReviewedTemplate> {
         FILESTASH,
         FLATNOTES,
         GHOST_DEV,
+        GLANCE,
         GOTIFY,
         GRAFANA,
         GROCY,
         HOMER,
         JELLYSEERR,
+        JOPLIN,
         KANBOARD,
         METABASE,
         MONICA,
@@ -585,6 +589,7 @@ mod tests {
         "adminer",
         "beszel",
         "flatnotes",
+        "glance",
         "grafana",
         "grocy",
         "homer",

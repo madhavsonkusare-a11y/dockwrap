@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "id": "glance",
+  "display_name": "Glance",
+  "catalog_name": "Glance",
+  "description": "Highly customizable dashboard that puts all your feeds in one place.",
+  "category": "Personal Dashboards",
+  "license": "AGPL-3.0",
+  "source_url": "https://github.com/glanceapp/glance",
+  "documentation_url": "https://github.com/glanceapp/glance",
+  "verified_at": "2026-09-11",
+  "lifecycle_proof": "docs/evidence/glance-qualification.json",
+  "origin": {
+    "importer": "runtipi",
+    "repository": "runtipi/runtipi-appstore",
+    "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+    "path": "apps/glance/docker-compose.json",
+    "license": "GPL-3.0"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "glanceapp/glance:v0.8.6",
+        "source_url": "https://hub.docker.com/v2/repositories/glanceapp/glance/tags/v0.8.6",
+        "checked_at": "2026-09-11",
+        "last_updated": "2026-09-03",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm/v7",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:e71f219c5894dde27644daea2fc77984e20bcab0e54a71f8f845a3ed5a5f06f6",
+          "linux/arm/v7": "sha256:efdc71d647a7407ad6a5e6d73787a62a3080a766d50d6a804fecaf4dab8bd9e4",
+          "linux/arm64": "sha256:b47e4c9ff27d6fc2703747db7921e4fa2b2464dbcf279d7b897f71484db41f81"
+        },
+        "index_digest": "sha256:9dfb09470b207dcb67ac715994bdb1929374ba3f9c0d7df7462c24adf10fd073"
+      }
+    ]
+  },
+  "promotion": {
+    "state": "approved",
+    "reason": "Qualified on 2026-09-11 and approved by the owner. A real install proved it starts, opens to a usable screen, survives a restart and a keep-data reinstall with its data intact, and removes everything it created. v0.8.6 is upstream's current release, built 2026-09-03. It failed every earlier run because the starter glance.yml Runtipi ships beside the definition was never copied in; seed-file support is what fixed it."
+  },
+  "data_storage": "Local Store managed folder / glance",
+  "risk_notes": [
+    "Creates 1 Docker container and publishes one port on this computer's loopback interface only.",
+    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Out of the box its dashboard fetches from Twitch, YouTube, Reddit, Hacker News, a weather service, a stock-quote service and several blogs, from this computer, every few hours. What it shows is set by data/glance.yml in its folder — Runtipi's starter file, written on first install and never overwritten — and there is no in-app editor."
+  ],
+  "fields": {},
+  "definition": "{\n  \"schemaVersion\": 2,\n  \"$schema\": \"https://schemas.runtipi.io/v2/dynamic-compose.json\",\n  \"services\": [\n    {\n      \"image\": \"glanceapp/glance:v0.8.6\",\n      \"name\": \"glance\",\n      \"internalPort\": 8080,\n      \"isMain\": true,\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/\",\n          \"containerPath\": \"/app/config/\"\n        }\n      ]\n    }\n  ]\n}\n",
+  "seeds": [
+    {
+      "path": "data/glance.yml",
+      "content": "pages:\n  - name: Home\n    columns:\n      - size: small\n        widgets:\n          - type: calendar\n\n          - type: rss\n            limit: 10\n            collapse-after: 3\n            cache: 3h\n            feeds:\n              - url: https://ciechanow.ski/atom.xml\n              - url: https://www.joshwcomeau.com/rss.xml\n                title: Josh Comeau\n              - url: https://samwho.dev/rss.xml\n              - url: https://awesomekling.github.io/feed.xml\n              - url: https://ishadeed.com/feed.xml\n                title: Ahmad Shadeed\n\n          - type: twitch-channels\n            channels:\n              - theprimeagen\n              - cohhcarnage\n              - christitustech\n              - blurbs\n              - asmongold\n              - jembawls\n\n      - size: full\n        widgets:\n          - type: hacker-news\n\n          - type: videos\n            channels:\n              - UCR-DXc1voovS8nhAvccRZhg # Jeff Geerling\n              - UCv6J_jJa8GJqFwQNgNrMuww # ServeTheHome\n              - UCOk-gHyjcWZNj3Br4oxwh0A # Techno Tim\n\n          - type: reddit\n            subreddit: selfhosted\n\n      - size: small\n        widgets:\n          - type: weather\n            location: London, United Kingdom\n\n          - type: stocks\n            stocks:\n              - symbol: SPY\n                name: S&P 500\n              - symbol: BTC-USD\n                name: Bitcoin\n              - symbol: NVDA\n                name: NVIDIA\n              - symbol: AAPL\n                name: Apple\n              - symbol: MSFT\n                name: Microsoft\n              - symbol: GOOGL\n                name: Google\n              - symbol: AMD\n                name: AMD\n              - symbol: RDDT\n                name: Reddit\n"
+    }
+  ],
+  "config": {
+    "path": "apps/glance/config.json",
+    "content": "{\n  \"$schema\": \"../app-info-schema.json\",\n  \"name\": \"Glance\",\n  \"port\": 8568,\n  \"available\": true,\n  \"exposable\": true,\n  \"id\": \"glance\",\n  \"tipi_version\": 31,\n  \"version\": \"v0.8.6\",\n  \"categories\": [\"utilities\"],\n  \"description\": \"A self-hosted dashboard that puts all your feeds in one place\",\n  \"short_desc\": \"Super configurable dashboard\",\n  \"author\": \"glanceapp\",\n  \"source\": \"https://github.com/glanceapp/glance\",\n  \"form_fields\": [],\n  \"supported_architectures\": [\"arm64\", \"amd64\"],\n  \"dynamic_config\": true,\n  \"created_at\": 1691943801422,\n  \"updated_at\": 1788596745936,\n  \"min_tipi_version\": \"4.5.0\"\n}\n"
+  }
+}
