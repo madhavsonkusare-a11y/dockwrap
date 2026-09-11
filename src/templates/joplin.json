@@ -38,37 +38,37 @@
         "index_digest": "sha256:0877bfba41a943017c42c58e90db9d8d548bfe699b5e410248b5b879371734f9"
       },
       {
-        "image": "postgres:14.2",
-        "source_url": "https://hub.docker.com/v2/repositories/library/postgres/tags/14.2",
+        "image": "postgres:14.24",
+        "source_url": "https://hub.docker.com/v2/repositories/library/postgres/tags/14.24",
         "checked_at": "2026-09-11",
-        "last_updated": "2022-05-12",
+        "last_updated": "2026-08-27",
         "container_platforms": [
           "linux/386",
           "linux/amd64",
           "linux/arm/v5",
           "linux/arm/v7",
           "linux/arm64/v8",
-          "linux/mips64le",
           "linux/ppc64le",
+          "linux/riscv64",
           "linux/s390x"
         ],
         "digests": {
-          "linux/386": "sha256:63a8b50427bd0eb47f67ab7ba2ac305dce7d3d882de7771e7a5a193d7c8a6ab5",
-          "linux/amd64": "sha256:d6809f4833ca6caf11a4969a7f41420d3e5fcf26b8c9ca4253c34d5a5fa377cc",
-          "linux/arm/v5": "sha256:37c1a1fa1c87c86fd4d4a9aefb1a474599582e46573c9846c08665315b635cae",
-          "linux/arm/v7": "sha256:7cc21e6f0424abfe173badf203551c8bc42a2a98dac41818a347e62e2adc9946",
-          "linux/arm64/v8": "sha256:204c739ba39cbc661e9cbdaea65634402405db3c3466fea634a6d7f169d115b5",
-          "linux/mips64le": "sha256:aadf9f6a0bb381aab658a79b58fab4f65fe0d00413d8601e016b6422b56f477c",
-          "linux/ppc64le": "sha256:c06d67e4abd9f2fc7cf28304ee8df4e3482b178235722ce0d950954e339c291c",
-          "linux/s390x": "sha256:17eaece2192b4021bf50d6e2e4235c7a8f8aa719263a51ac87ec6b74dea52d58"
+          "linux/386": "sha256:de74616cff61850b20562ae50ecbf0b8a506007099a072915a374b5502d851a9",
+          "linux/amd64": "sha256:7e900619df8eca59f34c7fb280a0bcb46e51c75f1697e98bb99f31183f71b762",
+          "linux/arm/v5": "sha256:988658dccfc66848997919af699a6008fd0332b87cbef10474d7d99992ccefca",
+          "linux/arm/v7": "sha256:c905c8b9d5b0e64c59630b4b4636e99876e0e731fc388e833f75ebbc76a2f6d6",
+          "linux/arm64/v8": "sha256:a296b58f430532dc08afeacbfa2ec9b0301b4c5a5bd25bed2067f54a43fb02e5",
+          "linux/ppc64le": "sha256:639b13935e941f85b137e89bb670aef298d0f32b8b162707ecb622ef28328e16",
+          "linux/riscv64": "sha256:4d98f62d269bca108f256f45d3f829b0c80f26994d00e8ca25deb022fe728091",
+          "linux/s390x": "sha256:a6b1b82449a14a47adfea098da16df73a947d89c2ab1470bc69f62451294e5e8"
         },
-        "index_digest": "sha256:2c954f8c5d03da58f8b82645b783b56c1135df17e650b186b296fa1bb71f9cfd"
+        "index_digest": "sha256:156f0b253fd61366d5fc2107ad45955027d5612f695a8436ce20167f3fa79bff"
       }
     ]
   },
   "promotion": {
     "state": "withheld",
-    "reason": "Withheld on 2026-09-11 although it qualified. Local Store offers open-source apps only, and Joplin Server is licensed under the Joplin Server Personal Use License rather than the AGPL-3.0 that covers Joplin's apps. GitHub reports NOASSERTION for the repository, which let it through the ranking. Its earlier failures were Local Store's own bug — the health probe left the port out of the Host header, and Joplin answers that with 404."
+    "reason": "Pending since 2026-09-11: the owner allowed source-available apps, which lifts the licence reason it was withheld for. It qualified before its database was moved to PostgreSQL 14.24, so it needs a run as offered with that pin before it is approved."
   },
   "data_storage": "Local Store managed folder / joplin",
   "risk_notes": [
@@ -76,12 +76,19 @@
     "Generates 1 credential of its own, keeps it beside the app's data, and reuses it if you reinstall.",
     "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
     "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
-    "Joplin Server is not open source: packages/server is under the Joplin Server Personal Use License, a non-commercial licence, though the Joplin apps are AGPL-3.0."
+    "Joplin Server is source-available, not open source: its server package is under the Joplin Server Personal Use License, which allows personal, non-commercial use only. The Joplin apps you sync with it are AGPL-3.0."
   ],
   "fields": {},
   "definition": "{\n  \"services\": [\n    {\n      \"name\": \"joplin\",\n      \"image\": \"joplin/server:3.7.1\",\n      \"isMain\": true,\n      \"internalPort\": 22300,\n      \"environment\": [\n        {\n          \"key\": \"APP_PORT\",\n          \"value\": \"22300\"\n        },\n        {\n          \"key\": \"APP_BASE_URL\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}/\"\n        },\n        {\n          \"key\": \"DB_CLIENT\",\n          \"value\": \"pg\"\n        },\n        {\n          \"key\": \"POSTGRES_PASSWORD\",\n          \"value\": \"${JOPLIN_DB_PASSWORD}\"\n        },\n        {\n          \"key\": \"POSTGRES_USER\",\n          \"value\": \"tipi\"\n        },\n        {\n          \"key\": \"POSTGRES_DATABASE\",\n          \"value\": \"joplin\"\n        },\n        {\n          \"key\": \"POSTGRES_PORT\",\n          \"value\": \"5432\"\n        },\n        {\n          \"key\": \"POSTGRES_HOST\",\n          \"value\": \"db-joplin\"\n        },\n        {\n          \"key\": \"MAX_TIME_DRIFT\",\n          \"value\": \"0\"\n        }\n      ],\n      \"dependsOn\": [\"db-joplin\"]\n    },\n    {\n      \"name\": \"db-joplin\",\n      \"image\": \"postgres:14.2\",\n      \"environment\": [\n        {\n          \"key\": \"POSTGRES_PASSWORD\",\n          \"value\": \"${JOPLIN_DB_PASSWORD}\"\n        },\n        {\n          \"key\": \"POSTGRES_USER\",\n          \"value\": \"tipi\"\n        },\n        {\n          \"key\": \"POSTGRES_DB\",\n          \"value\": \"joplin\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/postgres\",\n          \"containerPath\": \"/var/lib/postgresql/data\"\n        }\n      ]\n    }\n  ],\n  \"schemaVersion\": 2,\n  \"$schema\": \"https://schemas.runtipi.io/v2/dynamic-compose.json\"\n}\n",
   "config": {
     "path": "apps/joplin/config.json",
     "content": "{\n  \"$schema\": \"../app-info-schema.json\",\n  \"name\": \"Joplin Server\",\n  \"available\": true,\n  \"exposable\": true,\n  \"dynamic_config\": true,\n  \"port\": 8099,\n  \"id\": \"joplin\",\n  \"tipi_version\": 27,\n  \"version\": \"3.7.1\",\n  \"categories\": [\"utilities\"],\n  \"description\": \"Default credentials: admin@localhost / admin\",\n  \"short_desc\": \"Note taking and to-do application with synchronisation\",\n  \"author\": \"https://github.com/laurent22\",\n  \"source\": \"https://github.com/laurent22/joplin\",\n  \"website\": \"https://joplinapp.org\",\n  \"form_fields\": [\n    {\n      \"type\": \"random\",\n      \"label\": \"Joplin DB password\",\n      \"max\": 50,\n      \"min\": 8,\n      \"env_variable\": \"JOPLIN_DB_PASSWORD\"\n    }\n  ],\n  \"supported_architectures\": [\"arm64\", \"amd64\"],\n  \"created_at\": 1691943801422,\n  \"updated_at\": 1779263991057,\n  \"min_tipi_version\": \"4.5.0\"\n}\n"
-  }
+  },
+  "image_pins": [
+    {
+      "definition": "postgres:14.2",
+      "replacement": "postgres:14.24",
+      "reason": "The Runtipi definition runs PostgreSQL 14.2, built in May 2022 and missing four years of fixes, security fixes among them. 14.24 is the current patch of the same major version, so it reads the same data files and needs no migration."
+    }
+  ]
 }
