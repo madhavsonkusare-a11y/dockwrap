@@ -1,6 +1,6 @@
 {
   "archived": 0,
-  "cached_icons": 1672,
+  "cached_icons": 752,
   "excluded": [
     {
       "path": "Apps/Filedrop/docker-compose.yml",
@@ -9858,7 +9858,8 @@
       "sources": [
         "awesome-selfhosted",
         "runtipi",
-        "legacy"
+        "legacy",
+        "local-store"
       ]
     },
     {
@@ -15290,6 +15291,6 @@
     "coolify": 367,
     "runtipi": 270
   },
-  "total": 1672,
-  "tracked": 1664
+  "total": 1673,
+  "tracked": 1665
 }

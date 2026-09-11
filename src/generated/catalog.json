@@ -690,9 +690,16 @@
           "source": "legacy",
           "upstream_id": "penpot",
           "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/52a36e45fbd403c1c1348f200105d9e31be2bc3c/src/catalog_full.json"
+        },
+        {
+          "revision": "b203870e5e525c9c571287a0ed7225fc613160d5",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/penpot",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/b203870e5e525c9c571287a0ed7225fc613160d5/definitions/apps/penpot/config.json"
         }
       ],
       "tags": [
+        "Design",
         "Miscellaneous",
         "utilities"
       ],
@@ -46762,6 +46769,39 @@
       "warning": false,
       "web_ui": false,
       "website_url": "https://digpangolin.com/"
+    },
+    {
+      "aliases": [
+        "Paperclip"
+      ],
+      "architectures": [],
+      "archived": false,
+      "category": "Artificial Intelligence",
+      "description": "Run a team of AI agents: give them roles, goals and budgets, and review their work in one place.",
+      "icon": null,
+      "id": "paperclip",
+      "licenses": [
+        "MIT"
+      ],
+      "maintenance": "tracked",
+      "name": "Paperclip",
+      "platforms": [],
+      "source_url": "https://github.com/paperclipai/paperclip",
+      "sources": [
+        {
+          "revision": "b203870e5e525c9c571287a0ed7225fc613160d5",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/paperclip",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/b203870e5e525c9c571287a0ed7225fc613160d5/definitions/apps/paperclip/config.json"
+        }
+      ],
+      "tags": [
+        "Artificial Intelligence"
+      ],
+      "updated_at": null,
+      "warning": false,
+      "web_ui": true,
+      "website_url": "https://paperclip.ing"
     },
     {
       "aliases": [

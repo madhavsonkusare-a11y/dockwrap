@@ -7,6 +7,7 @@ import argparse
 from concurrent.futures import ThreadPoolExecutor
 import hashlib
 import json
+import subprocess
 from pathlib import Path
 import re
 import unicodedata
@@ -280,6 +281,22 @@ def generate(lock):
                 licenses=[item.get("tags", "").replace("`", "")], icon=item.get("icon"), legacy=True),
             {"source": "legacy", "upstream_id": item["name"], "revision": "52a36e45fbd403c1c1348f200105d9e31be2bc3c",
              "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/52a36e45fbd403c1c1348f200105d9e31be2bc3c/src/catalog_full.json"})
+    # Local Store's own definitions are a source too: an app no store packages
+    # usably still needs a catalogue entry for its listing and its icon.
+    for config_path in sorted((ROOT / "definitions/apps").glob("*/config.json")):
+        config = json.loads(config_path.read_text(encoding="utf-8"))
+        folder = config_path.parent.relative_to(ROOT).as_posix()
+        revision = subprocess.run(
+            ["git", "log", "-1", "--format=%H", "--", folder],
+            cwd=ROOT, capture_output=True, text=True, check=True,
+        ).stdout.strip()
+        if not revision:
+            raise ValueError(f"{folder} is not committed, so it has no revision to cite")
+        add(row(config["name"], config["source"], config.get("website"), config.get("short_desc"),
+                config.get("categories"), licenses=[config["license"]] if config.get("license") else [],
+                web_ui=True),
+            {"source": "local-store", "upstream_id": folder, "revision": revision,
+             "url": f"https://github.com/madhavsonkusare-a11y/local-store/blob/{revision}/{folder}/config.json"})
     id_file = ROOT / 'catalog/ids.json'
     saved_ids = json.loads(id_file.read_text()) if id_file.exists() else {}
     next_ids = dict(saved_ids)
