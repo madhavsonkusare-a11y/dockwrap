@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "$schema": "https://schemas.runtipi.io/v2/dynamic-compose.json",
+  "services": [
+    {
+      "name": "kotaemon",
+      "image": "ghcr.io/cinnamon/kotaemon:0.11.0-lite",
+      "isMain": true,
+      "internalPort": 7860,
+      "environment": [
+        {
+          "key": "GRADIO_SERVER_NAME",
+          "value": "0.0.0.0"
+        },
+        {
+          "key": "GRADIO_SERVER_PORT",
+          "value": "7860"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data",
+          "containerPath": "/app/ktem_app_data"
+        }
+      ]
+    }
+  ]
+}

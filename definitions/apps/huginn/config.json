@@ -1,0 +1,44 @@
+{
+  "id": "huginn",
+  "name": "Huginn",
+  "version": "2026.09.09",
+  "source": "https://github.com/huginn/huginn",
+  "website": "https://github.com/huginn/huginn",
+  "documentation": "https://github.com/huginn/huginn/blob/master/doc/docker/install.md",
+  "short_desc": "Agents that watch the web and act on your behalf: an IFTTT you run yourself.",
+  "categories": [
+    "Automation"
+  ],
+  "license": "MIT",
+  "form_fields": [
+    {
+      "type": "text",
+      "label": "Username",
+      "min": 3,
+      "max": 40,
+      "required": true,
+      "env_variable": "HUGINN_USERNAME"
+    },
+    {
+      "type": "password",
+      "label": "Password",
+      "min": 8,
+      "max": 80,
+      "required": true,
+      "env_variable": "HUGINN_PASSWORD"
+    },
+    {
+      "type": "email",
+      "label": "Email",
+      "required": true,
+      "env_variable": "HUGINN_EMAIL"
+    },
+    {
+      "type": "random",
+      "label": "Session secret",
+      "min": 64,
+      "max": 64,
+      "env_variable": "HUGINN_SECRET_TOKEN"
+    }
+  ]
+}

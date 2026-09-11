@@ -1,0 +1,14 @@
+{
+  "id": "kotaemon",
+  "name": "Kotaemon",
+  "version": "0.11.0",
+  "source": "https://github.com/Cinnamon/kotaemon",
+  "website": "https://cinnamon.github.io/kotaemon/",
+  "documentation": "https://github.com/Cinnamon/kotaemon#with-docker-recommended",
+  "short_desc": "Chat with your documents: a clean RAG interface for any model.",
+  "categories": [
+    "Artificial Intelligence"
+  ],
+  "license": "Apache-2.0",
+  "form_fields": []
+}

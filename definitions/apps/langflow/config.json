@@ -1,0 +1,22 @@
+{
+  "id": "langflow",
+  "name": "Langflow",
+  "version": "1.12.1",
+  "source": "https://github.com/langflow-ai/langflow",
+  "website": "https://www.langflow.org",
+  "documentation": "https://docs.langflow.org/deployment-docker",
+  "short_desc": "Build and run AI agents and workflows visually, with any model and tool.",
+  "categories": [
+    "Artificial Intelligence"
+  ],
+  "license": "MIT",
+  "form_fields": [
+    {
+      "type": "random",
+      "label": "Encryption key for stored credentials",
+      "min": 48,
+      "max": 48,
+      "env_variable": "LANGFLOW_SECRET_KEY"
+    }
+  ]
+}

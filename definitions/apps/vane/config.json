@@ -1,0 +1,14 @@
+{
+  "id": "vane",
+  "name": "Vane",
+  "version": "1.12.2",
+  "source": "https://github.com/ItzCrazyKns/Vane",
+  "website": "https://github.com/ItzCrazyKns/Vane",
+  "documentation": "https://github.com/ItzCrazyKns/Vane#installation",
+  "short_desc": "An AI answer engine that searches the web and cites its sources; formerly Perplexica.",
+  "categories": [
+    "Artificial Intelligence"
+  ],
+  "license": "MIT",
+  "form_fields": []
+}

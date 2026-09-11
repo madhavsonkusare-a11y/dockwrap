@@ -1,0 +1,22 @@
+{
+  "id": "anythingllm",
+  "name": "AnythingLLM",
+  "version": "1.16.1",
+  "source": "https://github.com/Mintplex-Labs/anything-llm",
+  "website": "https://anythingllm.com",
+  "documentation": "https://docs.anythingllm.com/installation-docker/local-docker",
+  "short_desc": "Chat with your documents and run AI agents privately, using any model.",
+  "categories": [
+    "Artificial Intelligence"
+  ],
+  "license": "MIT",
+  "form_fields": [
+    {
+      "type": "random",
+      "label": "Session signing secret",
+      "min": 48,
+      "max": 48,
+      "env_variable": "ANYTHINGLLM_JWT_SECRET"
+    }
+  ]
+}
