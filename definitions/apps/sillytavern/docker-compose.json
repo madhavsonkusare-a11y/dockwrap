@@ -17,8 +17,8 @@
           "value": "1"
         },
         {
-          "key": "SILLYTAVERN_WHITELISTMODE",
-          "value": "false"
+          "key": "SILLYTAVERN_WHITELIST",
+          "value": "[\"127.0.0.1\", \"::1\", \"172.16.0.0/12\", \"192.168.0.0/16\"]"
         }
       ],
       "volumes": [
