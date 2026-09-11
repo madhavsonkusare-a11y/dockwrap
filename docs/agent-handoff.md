@@ -1,9 +1,59 @@
 # Local Store: agent handoff
 
+## AI apps, September 11 (night) — read before resuming
+
+The owner asked for the most-starred AI and agent projects on GitHub and chose
+twelve: AnythingLLM, LibreChat, SillyTavern, Big-AGI, Langflow, Sim, Huginn,
+Flowise, Khoj, Kotaemon, Vane (formerly Perplexica) and Maxun. The owner also
+changed the licence policy: **source-available apps are allowed**. n8n stays,
+and Open WebUI, Dify and LobeHub become eligible. `qualify_batch` still skips
+entries that are not open source unless they are named with `--only`.
+
+**28 offerings** (3 recipes, 25 templates), on branch `feat/ai-apps`, stacked
+on `feat/twenty-offered-apps`.
+
+| App | State |
+| --- | --- |
+| AnythingLLM 1.16.1 | offered |
+| Big-AGI 2.1.1 | offered |
+| LibreChat 0.8.7, MongoDB 8.0.30, Meilisearch 1.35.1 | offered |
+| Kotaemon 0.12.0 | offered; its image is 15.9 GB |
+| SillyTavern 1.18.0 | pending: its whitelist refused Docker's port mapping; now widened to Docker's networks |
+| Langflow 1.12.1 | pending: superuser login added; the last run proved a stale binary |
+| Huginn v2026.09.09 | pending: moved off MySQL 8 to MariaDB 11.4.13; the last run proved a stale binary |
+| Vane 1.12.2 | pending: every run used an image layer truncated when D: filled |
+| Khoj 1.42.10 | pending: reviewed 600-second first-start allowance |
+| Flowise 3.1.4 | definition committed and catalogued; manifest generated when qualification resumes |
+| Sim | not started: its migrations need one-shot job support |
+| Maxun | not started: needs a second browser-facing port, an unconfined seccomp profile, about 6 GB |
+
+**Blocker: D: is full** (about 2 GB free). Docker's virtual disk
+`D:/DockerData/disk/docker_data.vhdx` is 87.8 GB while Docker uses 26 GB
+inside it, and only compacting it (as Administrator, with Docker Desktop quit
+and `wsl --shutdown`) gives the space back. Pull nothing until then. Never use
+Docker Desktop's "Reset to factory defaults": it wipes the owner's app data.
+
+To resume:
+
+1. Export `CARGO_TARGET_DIR=C:/Users/madha/.cache/local-store-target` for
+   every cargo command; builds are kept off D:.
+2. `python scripts/generate-first-party.py flowise`, then register Flowise and
+   approve it provisionally.
+3. Rebuild the batch example after regenerating any manifest; an offered run
+   refuses a compiled manifest that differs from the file on disk.
+4. With a D: free-space guard running:
+   `cargo run --example qualify_batch -- --offered --only sillytavern,langflow,huginn,vane,khoj,flowise`
+5. For each app that passes: `python scripts/check-proven-pins.py <app>`,
+   `python scripts/review_ai.py <app>`, add it to `APPROVED`, then run the
+   full validation (tests, Clippy, catalogue and icon checks).
+
+PR #5 (icons) needs its catalogue icons regenerated once the new catalogue
+entries (SillyTavern, Big-AGI, Kotaemon, Flowise) reach its base.
+
 ## Owner decisions, September 11 — read before resuming
 
-Work is **paused at 24 offered apps** until PRs #3, #4 and #5 are reviewed.
-When it resumes:
+These still stand. (Work was paused at 24 offered apps; the owner then asked
+for the AI apps above.)
 
 - **Nextcloud:** write Local Store's own definition that keeps Nextcloud's
   program files (`/var/www/html`) in a Docker named volume, and only the
