@@ -20488,7 +20488,9 @@
       "description": "Build LLM Apps Easily",
       "icon": "assets/catalog/flowise-ai.svg",
       "id": "flowise-ai",
-      "licenses": [],
+      "licenses": [
+        "Apache-2.0 (enterprise folder under a commercial licence)"
+      ],
       "maintenance": "tracked",
       "name": "Flowise AI",
       "platforms": [],
@@ -20505,10 +20507,17 @@
           "source": "casaos",
           "upstream_id": "Apps/FlowiseAi/docker-compose.yml",
           "url": "https://github.com/IceWhaleTech/CasaOS-AppStore/blob/2e8aec47d7d139363488372cb1fc6826010138fe/Apps/FlowiseAi/docker-compose.yml"
+        },
+        {
+          "revision": "cbdf7d33fb40bc9f5c69352b0b872d20b5c8153f",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/flowise",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/cbdf7d33fb40bc9f5c69352b0b872d20b5c8153f/definitions/apps/flowise/config.json"
         }
       ],
       "tags": [
         "AI",
+        "Artificial Intelligence",
         "ai",
         "automation"
       ],
@@ -27452,10 +27461,10 @@
           "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/52a36e45fbd403c1c1348f200105d9e31be2bc3c/src/catalog_full.json"
         },
         {
-          "revision": "924357fde8f7d4e414e5cae241b1e137f5f60038",
+          "revision": "d81999683947fb828a535300b3cdbf8f7ac6b589",
           "source": "local-store",
           "upstream_id": "definitions/apps/huginn",
-          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/924357fde8f7d4e414e5cae241b1e137f5f60038/definitions/apps/huginn/config.json"
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/d81999683947fb828a535300b3cdbf8f7ac6b589/definitions/apps/huginn/config.json"
         }
       ],
       "tags": [
@@ -31027,14 +31036,21 @@
           "source": "legacy",
           "upstream_id": "Khoj",
           "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/52a36e45fbd403c1c1348f200105d9e31be2bc3c/src/catalog_full.json"
+        },
+        {
+          "revision": "a333806252ca303c76836a28d64085dec5f2c637",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/khoj",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/a333806252ca303c76836a28d64085dec5f2c637/definitions/apps/khoj/config.json"
         }
       ],
       "tags": [
+        "Artificial Intelligence",
         "Generative Artificial Intelligence (GenAI)"
       ],
       "updated_at": "2026-08-02",
       "warning": false,
-      "web_ui": false,
+      "web_ui": true,
       "website_url": "https://khoj.dev/"
     },
     {
@@ -31723,10 +31739,10 @@
       "source_url": "https://github.com/Cinnamon/kotaemon",
       "sources": [
         {
-          "revision": "924357fde8f7d4e414e5cae241b1e137f5f60038",
+          "revision": "316719f140747704a483cd2cf4ca8b77e71f37e2",
           "source": "local-store",
           "upstream_id": "definitions/apps/kotaemon",
-          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/924357fde8f7d4e414e5cae241b1e137f5f60038/definitions/apps/kotaemon/config.json"
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/316719f140747704a483cd2cf4ca8b77e71f37e2/definitions/apps/kotaemon/config.json"
         }
       ],
       "tags": [
@@ -32156,10 +32172,10 @@
           "url": "https://github.com/coollabsio/coolify/blob/08f68016dd342fe944564f79969f4ceceddc88d6/templates/compose/langflow.yaml"
         },
         {
-          "revision": "924357fde8f7d4e414e5cae241b1e137f5f60038",
+          "revision": "d81999683947fb828a535300b3cdbf8f7ac6b589",
           "source": "local-store",
           "upstream_id": "definitions/apps/langflow",
-          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/924357fde8f7d4e414e5cae241b1e137f5f60038/definitions/apps/langflow/config.json"
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/d81999683947fb828a535300b3cdbf8f7ac6b589/definitions/apps/langflow/config.json"
         }
       ],
       "tags": [
@@ -32854,10 +32870,17 @@
           "source": "legacy",
           "upstream_id": "LibreChat",
           "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/52a36e45fbd403c1c1348f200105d9e31be2bc3c/src/catalog_full.json"
+        },
+        {
+          "revision": "a333806252ca303c76836a28d64085dec5f2c637",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/librechat",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/a333806252ca303c76836a28d64085dec5f2c637/definitions/apps/librechat/config.json"
         }
       ],
       "tags": [
         "AI",
+        "Artificial Intelligence",
         "Generative Artificial Intelligence (GenAI)",
         "ai",
         "anthropic",

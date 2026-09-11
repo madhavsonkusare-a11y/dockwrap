@@ -6820,7 +6820,8 @@
       ],
       "sources": [
         "awesome-selfhosted",
-        "legacy"
+        "legacy",
+        "local-store"
       ]
     },
     {
@@ -7187,7 +7188,8 @@
         "awesome-selfhosted",
         "casaos",
         "coolify",
-        "legacy"
+        "legacy",
+        "local-store"
       ]
     },
     {
@@ -14616,7 +14618,8 @@
       ],
       "sources": [
         "runtipi",
-        "casaos"
+        "casaos",
+        "local-store"
       ]
     },
     {
