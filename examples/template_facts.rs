@@ -96,6 +96,19 @@ fn main() {
         })
         .collect();
 
+    // Data can also live in a named volume, which is neither the managed
+    // folder nor something a person chose, and has to be described as such.
+    let volumes: Vec<&str> = template
+        .plan
+        .services
+        .iter()
+        .flat_map(|service| &service.mounts)
+        .filter_map(|mount| match mount {
+            local_store::plan::PlanMount::Volume { name, .. } => Some(name.as_str()),
+            _ => None,
+        })
+        .collect();
+
     let facts = serde_json::json!({
         "id": id,
         "source": source,
@@ -107,6 +120,7 @@ fn main() {
         "fields": fields,
         "managed_directories": managed,
         "shared_folders": shared,
+        "named_volumes": volumes,
         "limitations": outcome
             .limitations
             .iter()

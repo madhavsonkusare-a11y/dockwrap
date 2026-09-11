@@ -258,6 +258,19 @@ def facts_for(candidate):
     return json.loads(done.stdout)
 
 
+def data_storage(facts, app):
+    """Where this app's data actually lives, in the words the review shows."""
+    if facts["managed_directories"]:
+        where = f"Local Store managed folder / {app}"
+    elif facts.get("named_volumes"):
+        where = f"A Docker volume Local Store manages for {app}"
+    else:
+        where = "None: it keeps no data of its own"
+    if facts["shared_folders"]:
+        where += ", plus a folder you choose"
+    return where
+
+
 def risk_notes(facts, catalog):
     notes = []
     services = facts["services"]
@@ -277,10 +290,23 @@ def risk_notes(facts, catalog):
             f"{'them' if count != 1 else 'it'} beside the app's data, and reuses "
             f"{'them' if count != 1 else 'it'} if you reinstall."
         )
-    notes.append(
-        "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting "
-        "data removes it permanently."
-    )
+    # Said from what the plan mounts, not assumed: Adminer and Whoogle keep
+    # nothing, and Beszel keeps its data in a named volume, yet all three were
+    # once described as keeping it in the managed folder.
+    if facts["managed_directories"]:
+        notes.append(
+            "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; "
+            "deleting data removes it permanently."
+        )
+    elif facts.get("named_volumes"):
+        notes.append(
+            "Keeps its data in a Docker volume that Local Store manages for it. A keep-data "
+            "uninstall leaves the volume; deleting data removes it permanently."
+        )
+    else:
+        notes.append(
+            "Keeps no data of its own, so there is nothing for an uninstall to keep or delete."
+        )
     notes.append(
         "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified."
     )
@@ -431,8 +457,7 @@ def main():
             "reason": REVIEW
             + "nobody has decided whether to offer this app. Record the decision and why.",
         },
-        "data_storage": f"Local Store managed folder / {args.app}"
-        + (", plus a folder you choose" if facts["shared_folders"] else ""),
+        "data_storage": data_storage(facts, args.app),
         "risk_notes": risk_notes(facts, entry),
         # The importer's guess, marked as a guess. A review says which of these
         # answers is genuinely a credential; upstream cannot.

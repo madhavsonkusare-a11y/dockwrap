@@ -54,10 +54,10 @@
     "state": "approved",
     "reason": "Qualified on 2026-09-10 and approved by the owner. A real install proved it starts, opens to a usable screen, survives a restart and a keep-data reinstall with its data intact, and removes everything it created on delete-data. Evidence: docs/evidence/adminer-qualification.json. Proven on Windows with Docker's Linux engine and one architecture only."
   },
-  "data_storage": "Local Store managed folder / adminer",
+  "data_storage": "None: it keeps no data of its own",
   "risk_notes": [
     "Creates 1 Docker container and publishes one port on this computer's loopback interface only.",
-    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Keeps no data of its own, so there is nothing for an uninstall to keep or delete.",
     "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
     "Connects to databases you point it at, using credentials you type in the browser. Anyone who can reach this address can reach any database this computer can."
   ],

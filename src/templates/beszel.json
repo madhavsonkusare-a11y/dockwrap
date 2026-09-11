@@ -44,10 +44,10 @@
     "state": "approved",
     "reason": "Qualified on 2026-09-10 and approved by the owner. A real install proved it starts, opens to a usable screen, survives a restart and a keep-data reinstall with its data intact, and removes everything it created. 0.18.6 was built 2026-03-29; upstream released 0.19.0 on 2026-09-03, so this is one minor version behind and worth revisiting when the definition moves. One container, its own embedded database, and no access to anything outside its managed folder."
   },
-  "data_storage": "Local Store managed folder / beszel",
+  "data_storage": "A Docker volume Local Store manages for beszel",
   "risk_notes": [
     "Creates 1 Docker container and publishes one port on this computer's loopback interface only.",
-    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Keeps its data in a Docker volume that Local Store manages for it. A keep-data uninstall leaves the volume; deleting data removes it permanently.",
     "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
     "This is the Beszel hub, not the agent. On its own it shows an empty dashboard and asks you to create an administrator account; it only has anything to display once you install the Beszel agent on the machines you want to watch."
   ],

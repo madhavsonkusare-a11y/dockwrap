@@ -321,6 +321,7 @@ const PRIVATEBIN: &str = include_str!("privatebin.json");
 const TAUTULLI: &str = include_str!("tautulli.json");
 const VAULTWARDEN: &str = include_str!("vaultwarden.json");
 const WALLOS: &str = include_str!("wallos.json");
+const WHOOGLE: &str = include_str!("whoogle.json");
 const WORDPRESS: &str = include_str!("wordpress.json");
 
 /// Every template a review has passed. Being here is not being offered.
@@ -349,6 +350,7 @@ pub fn reviewed_templates() -> Vec<ReviewedTemplate> {
         TAUTULLI,
         VAULTWARDEN,
         WALLOS,
+        WHOOGLE,
         WORDPRESS,
     ]
     .into_iter()
@@ -540,6 +542,7 @@ mod tests {
         "tautulli",
         "vaultwarden",
         "wallos",
+        "whoogle",
         "wordpress",
     ];
 
