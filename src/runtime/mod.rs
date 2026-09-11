@@ -192,6 +192,14 @@ impl HealthProbe for HttpHealthProbe {
         };
         let _ = stream.set_read_timeout(Some(Duration::from_secs(2)));
         let _ = stream.set_write_timeout(Some(Duration::from_secs(2)));
+        // The port belongs in Host whenever it is not the scheme's default;
+        // that is what every browser sends. Joplin routes on the whole Host
+        // and answered `Host: localhost` with 404 — so an app that was up and
+        // serving `/login` never passed its health check.
+        let authority = match parsed.port() {
+            Some(port) => format!("{host}:{port}"),
+            None => host.to_owned(),
+        };
         let target = if parsed.path().is_empty() {
             "/"
         } else {
@@ -199,7 +207,7 @@ impl HealthProbe for HttpHealthProbe {
         };
         if write!(
             stream,
-            "GET {target} HTTP/1.0\r\nHost: {host}\r\nConnection: close\r\n\r\n"
+            "GET {target} HTTP/1.0\r\nHost: {authority}\r\nConnection: close\r\n\r\n"
         )
         .is_err()
         {
@@ -1003,10 +1011,18 @@ fn last_words(runner: &dyn ProcessRunner, app: &InstalledApp) -> Option<String> 
         // entirely.
         let mut by_service: Vec<(String, Vec<&str>)> = Vec::new();
         for line in logs.lines().map(str::trim).filter(|line| !line.is_empty()) {
+            // `name | text`, or `name |` alone for a blank line — Postgres
+            // prints several, and they are not the service's last words.
             let (service, said) = match line.split_once(" | ") {
                 Some((prefix, rest)) => (prefix.trim().to_owned(), rest.trim()),
-                None => (String::new(), line),
+                None => match line.strip_suffix(" |").or_else(|| line.strip_suffix('|')) {
+                    Some(prefix) => (prefix.trim().to_owned(), ""),
+                    None => (String::new(), line),
+                },
             };
+            if said.is_empty() {
+                continue;
+            }
             match by_service.iter_mut().find(|(name, _)| *name == service) {
                 Some((_, lines)) => lines.push(said),
                 None => by_service.push((service, vec![said])),
