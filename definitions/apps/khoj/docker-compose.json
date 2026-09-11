@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 2,
+  "$schema": "https://schemas.runtipi.io/v2/dynamic-compose.json",
+  "services": [
+    {
+      "name": "khoj",
+      "image": "ghcr.io/khoj-ai/khoj:1.42.10",
+      "isMain": true,
+      "internalPort": 42110,
+      "command": [
+        "--host=0.0.0.0",
+        "--port=42110",
+        "--anonymous-mode",
+        "--non-interactive"
+      ],
+      "environment": [
+        {
+          "key": "POSTGRES_DB",
+          "value": "khoj"
+        },
+        {
+          "key": "POSTGRES_USER",
+          "value": "khoj"
+        },
+        {
+          "key": "POSTGRES_PASSWORD",
+          "value": "${KHOJ_DB_PASSWORD}"
+        },
+        {
+          "key": "POSTGRES_HOST",
+          "value": "khoj-database"
+        },
+        {
+          "key": "POSTGRES_PORT",
+          "value": "5432"
+        },
+        {
+          "key": "KHOJ_DJANGO_SECRET_KEY",
+          "value": "${KHOJ_SECRET_KEY}"
+        },
+        {
+          "key": "KHOJ_DEBUG",
+          "value": "False"
+        },
+        {
+          "key": "KHOJ_ADMIN_EMAIL",
+          "value": "${KHOJ_ADMIN_EMAIL}"
+        },
+        {
+          "key": "KHOJ_ADMIN_PASSWORD",
+          "value": "${KHOJ_ADMIN_PASSWORD}"
+        },
+        {
+          "key": "KHOJ_SEARXNG_URL",
+          "value": "http://khoj-search:8080"
+        },
+        {
+          "key": "KHOJ_TELEMETRY_DISABLE",
+          "value": "True"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/config",
+          "containerPath": "/root/.khoj"
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data/models",
+          "containerPath": "/root/.cache/huggingface"
+        }
+      ],
+      "dependsOn": {
+        "khoj-database": {
+          "condition": "service_healthy"
+        },
+        "khoj-search": {
+          "condition": "service_started"
+        }
+      }
+    },
+    {
+      "name": "khoj-database",
+      "image": "pgvector/pgvector:0.8.6-pg15",
+      "stopSignal": "SIGINT",
+      "healthCheck": {
+        "test": "pg_isready -U khoj",
+        "interval": "5s",
+        "timeout": "10s",
+        "retries": 10,
+        "startPeriod": "60s"
+      },
+      "environment": [
+        {
+          "key": "POSTGRES_DB",
+          "value": "khoj"
+        },
+        {
+          "key": "POSTGRES_USER",
+          "value": "khoj"
+        },
+        {
+          "key": "POSTGRES_PASSWORD",
+          "value": "${KHOJ_DB_PASSWORD}"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/database",
+          "containerPath": "/var/lib/postgresql/data"
+        }
+      ]
+    },
+    {
+      "name": "khoj-search",
+      "image": "searxng/searxng:2026.9.10-931fd9787",
+      "environment": [
+        {
+          "key": "SEARXNG_BASE_URL",
+          "value": "http://khoj-search:8080/"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/searxng",
+          "containerPath": "/etc/searxng"
+        }
+      ]
+    }
+  ]
+}

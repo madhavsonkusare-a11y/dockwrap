@@ -1,0 +1,43 @@
+{
+  "id": "khoj",
+  "name": "Khoj",
+  "version": "1.42.10",
+  "source": "https://github.com/khoj-ai/khoj",
+  "website": "https://khoj.dev",
+  "documentation": "https://docs.khoj.dev/get-started/setup",
+  "short_desc": "An AI second brain: ask questions of your notes, documents and the web, with any model.",
+  "categories": [
+    "Artificial Intelligence"
+  ],
+  "license": "AGPL-3.0",
+  "form_fields": [
+    {
+      "type": "email",
+      "label": "Admin email",
+      "required": true,
+      "env_variable": "KHOJ_ADMIN_EMAIL"
+    },
+    {
+      "type": "password",
+      "label": "Admin password",
+      "min": 8,
+      "max": 80,
+      "required": true,
+      "env_variable": "KHOJ_ADMIN_PASSWORD"
+    },
+    {
+      "type": "random",
+      "label": "Database password",
+      "min": 32,
+      "max": 32,
+      "env_variable": "KHOJ_DB_PASSWORD"
+    },
+    {
+      "type": "random",
+      "label": "Signing key",
+      "min": 50,
+      "max": 50,
+      "env_variable": "KHOJ_SECRET_KEY"
+    }
+  ]
+}

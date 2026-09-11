@@ -1,0 +1,54 @@
+{
+  "id": "librechat",
+  "name": "LibreChat",
+  "version": "0.8.7",
+  "source": "https://github.com/danny-avila/LibreChat",
+  "website": "https://www.librechat.ai",
+  "documentation": "https://www.librechat.ai/docs/local/docker",
+  "short_desc": "One chat interface for every AI model and provider, with agents, tools and MCP.",
+  "categories": [
+    "Artificial Intelligence"
+  ],
+  "license": "MIT",
+  "form_fields": [
+    {
+      "type": "random",
+      "label": "Credential encryption key",
+      "min": 64,
+      "max": 64,
+      "encoding": "hex",
+      "env_variable": "LIBRECHAT_CREDS_KEY"
+    },
+    {
+      "type": "random",
+      "label": "Credential encryption IV",
+      "min": 32,
+      "max": 32,
+      "encoding": "hex",
+      "env_variable": "LIBRECHAT_CREDS_IV"
+    },
+    {
+      "type": "random",
+      "label": "Session secret",
+      "min": 64,
+      "max": 64,
+      "encoding": "hex",
+      "env_variable": "LIBRECHAT_JWT_SECRET"
+    },
+    {
+      "type": "random",
+      "label": "Refresh secret",
+      "min": 64,
+      "max": 64,
+      "encoding": "hex",
+      "env_variable": "LIBRECHAT_JWT_REFRESH_SECRET"
+    },
+    {
+      "type": "random",
+      "label": "Search index key",
+      "min": 32,
+      "max": 32,
+      "env_variable": "LIBRECHAT_MEILI_KEY"
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 2,
+  "$schema": "https://schemas.runtipi.io/v2/dynamic-compose.json",
+  "services": [
+    {
+      "name": "librechat",
+      "image": "ghcr.io/danny-avila/librechat:v0.8.7",
+      "isMain": true,
+      "internalPort": 3080,
+      "environment": [
+        {
+          "key": "HOST",
+          "value": "0.0.0.0"
+        },
+        {
+          "key": "NODE_ENV",
+          "value": "production"
+        },
+        {
+          "key": "MONGO_URI",
+          "value": "mongodb://librechat-mongodb:27017/LibreChat"
+        },
+        {
+          "key": "MEILI_HOST",
+          "value": "http://librechat-meilisearch:7700"
+        },
+        {
+          "key": "MEILI_MASTER_KEY",
+          "value": "${LIBRECHAT_MEILI_KEY}"
+        },
+        {
+          "key": "SEARCH",
+          "value": "true"
+        },
+        {
+          "key": "CREDS_KEY",
+          "value": "${LIBRECHAT_CREDS_KEY}"
+        },
+        {
+          "key": "CREDS_IV",
+          "value": "${LIBRECHAT_CREDS_IV}"
+        },
+        {
+          "key": "JWT_SECRET",
+          "value": "${LIBRECHAT_JWT_SECRET}"
+        },
+        {
+          "key": "JWT_REFRESH_SECRET",
+          "value": "${LIBRECHAT_JWT_REFRESH_SECRET}"
+        },
+        {
+          "key": "DOMAIN_CLIENT",
+          "value": "${APP_PROTOCOL:-http}://${APP_DOMAIN}"
+        },
+        {
+          "key": "DOMAIN_SERVER",
+          "value": "${APP_PROTOCOL:-http}://${APP_DOMAIN}"
+        },
+        {
+          "key": "ALLOW_REGISTRATION",
+          "value": "true"
+        },
+        {
+          "key": "ALLOW_EMAIL_LOGIN",
+          "value": "true"
+        },
+        {
+          "key": "ALLOW_SOCIAL_LOGIN",
+          "value": "false"
+        },
+        {
+          "key": "NO_INDEX",
+          "value": "true"
+        },
+        {
+          "key": "OPENAI_API_KEY",
+          "value": "user_provided"
+        },
+        {
+          "key": "ANTHROPIC_API_KEY",
+          "value": "user_provided"
+        },
+        {
+          "key": "GOOGLE_KEY",
+          "value": "user_provided"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/uploads",
+          "containerPath": "/app/uploads"
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data/images",
+          "containerPath": "/app/client/public/images"
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data/logs",
+          "containerPath": "/app/api/logs"
+        }
+      ],
+      "dependsOn": [
+        "librechat-mongodb",
+        "librechat-meilisearch"
+      ]
+    },
+    {
+      "name": "librechat-mongodb",
+      "image": "mongo:8.0.30",
+      "command": [
+        "mongod",
+        "--noauth"
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/mongodb",
+          "containerPath": "/data/db"
+        }
+      ]
+    },
+    {
+      "name": "librechat-meilisearch",
+      "image": "getmeili/meilisearch:v1.35.1",
+      "environment": [
+        {
+          "key": "MEILI_HOST",
+          "value": "http://librechat-meilisearch:7700"
+        },
+        {
+          "key": "MEILI_NO_ANALYTICS",
+          "value": "true"
+        },
+        {
+          "key": "MEILI_MASTER_KEY",
+          "value": "${LIBRECHAT_MEILI_KEY}"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/meilisearch",
+          "containerPath": "/meili_data"
+        }
+      ]
+    }
+  ]
+}
