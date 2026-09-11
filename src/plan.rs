@@ -942,7 +942,8 @@ NEWLINE",
     fn an_audited_digest_is_what_the_compose_file_pulls() {
         let mut service = web();
         service.depends_on.clear();
-        service.digest = Some("sha256:abababababababababababababababababababababababababababababababab".into());
+        service.digest =
+            Some("sha256:abababababababababababababababababababababababababababababababab".into());
         let plan = DeploymentPlan {
             id: "example".into(),
             services: vec![service],
@@ -956,7 +957,10 @@ NEWLINE",
 
         let mut broken = plan.clone();
         broken.services[0].digest = Some("sha256:not-a-digest".into());
-        assert!(broken.to_compose().is_err(), "a malformed digest was rendered");
+        assert!(
+            broken.to_compose().is_err(),
+            "a malformed digest was rendered"
+        );
     }
 
     #[test]
