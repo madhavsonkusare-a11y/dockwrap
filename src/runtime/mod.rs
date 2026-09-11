@@ -1012,8 +1012,18 @@ fn last_words(runner: &dyn ProcessRunner, app: &InstalledApp) -> Option<String> 
                 None => by_service.push((service, vec![said])),
             }
         }
+        // The app's own service first — it is almost always the shortest
+        // name (`nextcloud-mini` before `nextcloud-mini-db`) — so a cap never
+        // cuts the lines that matter most.
+        by_service.sort_by_key(|(service, _)| service.len());
         for (service, lines) in &by_service {
-            let tail = &lines[lines.len().saturating_sub(5)..];
+            let tail: Vec<String> = lines[lines.len().saturating_sub(5)..]
+                .iter()
+                .map(|line| match line.char_indices().nth(200) {
+                    Some((cut, _)) => format!("{}…", &line[..cut]),
+                    None => (*line).to_owned(),
+                })
+                .collect();
             // Container names are `<project>-<service>`; the service is the
             // part a person recognises.
             let name = match &app.runtime {
@@ -1031,12 +1041,12 @@ fn last_words(runner: &dyn ProcessRunner, app: &InstalledApp) -> Option<String> 
         return None;
     }
     let mut said = parts.join(" ");
-    // Long enough to hold a stack trace's first frames, short enough that the
+    // Room for a few lines from each container, short enough that the
     // failure it explains is still the first thing read.
-    if said.chars().count() > 800 {
+    if said.chars().count() > 2000 {
         let cut = said
             .char_indices()
-            .nth(800)
+            .nth(2000)
             .map(|(index, _)| index)
             .unwrap_or(said.len());
         said.truncate(cut);
