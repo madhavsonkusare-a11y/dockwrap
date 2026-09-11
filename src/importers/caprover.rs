@@ -805,6 +805,7 @@ pub fn import(id: &str, definition: &str) -> Result<ImportOutcome, String> {
                 digest: None,
                 environment,
                 companion: None,
+                networks: Vec::new(),
                 published: None,
                 mounts,
                 depends_on,
@@ -841,6 +842,7 @@ pub fn import(id: &str, definition: &str) -> Result<ImportOutcome, String> {
             digest: None,
             environment,
             companion: None,
+            networks: Vec::new(),
             published: None,
             mounts,
             depends_on,
@@ -884,6 +886,7 @@ pub fn import(id: &str, definition: &str) -> Result<ImportOutcome, String> {
         id: id.to_owned(),
         services: plan_services,
         named_volumes,
+        internal_networks: Vec::new(),
     };
 
     // Only what something actually reads survives. A version variable spent

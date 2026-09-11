@@ -2208,6 +2208,7 @@ mod tests {
                         ("SITE".into(), "${SITE_NAME}".into()),
                     ],
                     companion: None,
+                    networks: Vec::new(),
                     published: Some(PublishedPort {
                         host: 5230,
                         container: 5230,
@@ -2217,6 +2218,7 @@ mod tests {
                     overrides: crate::plan::PlanOverrides::default(),
                 }],
                 named_volumes: Vec::new(),
+                internal_networks: Vec::new(),
             },
             fields: vec![SetupField {
                 key: "SITE_NAME".into(),
@@ -2349,6 +2351,7 @@ mod tests {
                 host: 5229,
                 container: 3002,
             }),
+            networks: Vec::new(),
             published: None,
             mounts: Vec::new(),
             depends_on: Vec::new(),

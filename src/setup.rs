@@ -1075,6 +1075,7 @@ mod tests {
                         ("SITE_URL".into(), "http://localhost:${PORT:-8080}".into()),
                     ],
                     companion: None,
+                    networks: Vec::new(),
                     published: Some(PublishedPort {
                         host: 8080,
                         container: 8080,
@@ -1084,6 +1085,7 @@ mod tests {
                     overrides: crate::plan::PlanOverrides::default(),
                 }],
                 named_volumes: Vec::new(),
+                internal_networks: Vec::new(),
             },
             fields: vec![
                 SetupField {

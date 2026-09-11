@@ -253,6 +253,10 @@ pub struct PlanService {
     /// service learns it through `${LOCAL_STORE_URL_<SERVICE>}` and
     /// `${LOCAL_STORE_PORT_<SERVICE>}`, filled once the port is settled.
     pub companion: Option<PublishedPort>,
+    /// The networks this service joins, when it is not simply the project's
+    /// own. `default` names that one. Dify keeps its code sandbox on a network
+    /// with no route out except through its proxy, which is the point of it.
+    pub networks: Vec<String>,
     pub published: Option<PublishedPort>,
     pub mounts: Vec<PlanMount>,
     pub depends_on: Vec<String>,
@@ -266,6 +270,9 @@ pub struct DeploymentPlan {
     pub id: String,
     pub services: Vec<PlanService>,
     pub named_volumes: Vec<String>,
+    /// Networks with no route out of Docker. A service reaches the internet
+    /// from one only through something that also sits on the default network.
+    pub internal_networks: Vec<String>,
 }
 
 impl DeploymentPlan {
@@ -508,6 +515,54 @@ impl DeploymentPlan {
                 self.named_volumes[index]
             ));
         }
+        self.validate_networks()
+    }
+
+    /// Networks are declared once, joined by name, and never the only one
+    /// under an address: a port published from an internal network goes
+    /// nowhere.
+    fn validate_networks(&self) -> Result<(), String> {
+        let mut declared = std::collections::BTreeSet::new();
+        for network in &self.internal_networks {
+            if !is_plain_name(network) || network == "default" {
+                return Err(format!("network {network:?} is not a plain name"));
+            }
+            if !declared.insert(network.as_str()) {
+                return Err(format!("network {network:?} is declared twice"));
+            }
+        }
+        let mut joined = std::collections::BTreeSet::new();
+        for service in &self.services {
+            let mut seen = std::collections::BTreeSet::new();
+            for network in &service.networks {
+                if network != "default" && !declared.contains(network.as_str()) {
+                    return Err(format!(
+                        "service {:?} joins undeclared network {network:?}",
+                        service.name
+                    ));
+                }
+                if !seen.insert(network.as_str()) {
+                    return Err(format!(
+                        "service {:?} joins network {network:?} twice",
+                        service.name
+                    ));
+                }
+                joined.insert(network.as_str());
+            }
+            let on_default =
+                service.networks.is_empty() || service.networks.iter().any(|n| n == "default");
+            if !on_default && (service.published.is_some() || service.companion.is_some()) {
+                return Err(format!(
+                    "service {:?} publishes an address but is not on the default network",
+                    service.name
+                ));
+            }
+        }
+        if let Some(unused) = declared.iter().find(|network| !joined.contains(*network)) {
+            return Err(format!(
+                "network {unused:?} is declared but nothing joins it"
+            ));
+        }
         Ok(())
     }
 
@@ -585,12 +640,24 @@ impl DeploymentPlan {
                     }
                 }
             }
+            if !service.networks.is_empty() {
+                out.push_str("    networks:\n");
+                for network in &service.networks {
+                    out.push_str(&format!("      - {network}\n"));
+                }
+            }
             service.overrides.render(&mut out);
         }
         if !self.named_volumes.is_empty() {
             out.push_str("volumes:\n");
             for volume in &self.named_volumes {
                 out.push_str(&format!("  {volume}:\n"));
+            }
+        }
+        if !self.internal_networks.is_empty() {
+            out.push_str("networks:\n");
+            for network in &self.internal_networks {
+                out.push_str(&format!("  {network}:\n    internal: true\n"));
             }
         }
         Ok(out)
@@ -893,6 +960,7 @@ pub fn plan_for_recipe(recipe: &Recipe) -> Result<DeploymentPlan, String> {
             digest: Some(recipe.requirements.image_audit.index_digest.clone()),
             environment,
             companion: None,
+            networks: Vec::new(),
             published: Some(PublishedPort {
                 host: recipe.host_port,
                 container: recipe.container_port,
@@ -902,6 +970,7 @@ pub fn plan_for_recipe(recipe: &Recipe) -> Result<DeploymentPlan, String> {
             overrides: PlanOverrides::default(),
         }],
         named_volumes,
+        internal_networks: Vec::new(),
     };
     plan.validate()?;
     Ok(plan)
@@ -964,6 +1033,7 @@ NEWLINE",
                 digest: None,
                 environment: vec![(key.to_owned(), value.to_owned())],
                 companion: None,
+                networks: Vec::new(),
                 published: Some(PublishedPort {
                     host: 8080,
                     container: 80,
@@ -973,6 +1043,7 @@ NEWLINE",
                 overrides: PlanOverrides::default(),
             }],
             named_volumes: Vec::new(),
+            internal_networks: Vec::new(),
         }
     }
 
@@ -1004,6 +1075,7 @@ NEWLINE",
             digest: None,
             environment: vec![("DATABASE_HOST".into(), "db".into())],
             companion: None,
+            networks: Vec::new(),
             published: Some(PublishedPort {
                 host: 8080,
                 container: 8080,
@@ -1020,6 +1092,7 @@ NEWLINE",
             digest: None,
             environment: vec![("POSTGRES_DB".into(), "app".into())],
             companion: None,
+            networks: Vec::new(),
             published: None,
             mounts: vec![PlanMount::Volume {
                 name: "db-data".into(),
@@ -1035,6 +1108,7 @@ NEWLINE",
             id: "example".into(),
             services: vec![web(), database()],
             named_volumes: vec!["db-data".into()],
+            internal_networks: Vec::new(),
         }
     }
 
@@ -1139,6 +1213,7 @@ NEWLINE",
             id: "example".into(),
             services: vec![service],
             named_volumes: Vec::new(),
+            internal_networks: Vec::new(),
         };
         let compose = plan.to_compose().unwrap();
         assert!(
@@ -1354,6 +1429,85 @@ NEWLINE",
             many.services.push(extra);
         }
         assert!(many.validate().unwrap_err().contains("at most"));
+    }
+
+    /// Dify's shape: a sandbox that reaches nothing but its proxy, and a
+    /// proxy that sits on both sides.
+    fn with_sandbox() -> DeploymentPlan {
+        let mut plan = pair();
+        let mut sandbox = database();
+        sandbox.name = "sandbox".into();
+        sandbox.mounts.clear();
+        sandbox.networks = vec!["isolated".into()];
+        let mut proxy = database();
+        proxy.name = "proxy".into();
+        proxy.mounts.clear();
+        proxy.networks = vec!["default".into(), "isolated".into()];
+        plan.services.push(sandbox);
+        plan.services.push(proxy);
+        plan.internal_networks = vec!["isolated".into()];
+        plan
+    }
+
+    #[test]
+    fn an_internal_network_renders_and_keeps_its_members_off_the_default_one() {
+        let plan = with_sandbox();
+        let rendered = plan
+            .to_compose()
+            .expect("an internal network should render");
+        assert!(
+            rendered.ends_with("networks:\n  isolated:\n    internal: true\n"),
+            "{rendered}"
+        );
+        let sandbox = rendered.split("\n  sandbox:\n").nth(1).unwrap();
+        let sandbox = sandbox.split("\n  proxy:\n").next().unwrap();
+        assert!(
+            sandbox.ends_with("    networks:\n      - isolated"),
+            "{rendered}"
+        );
+        assert!(!sandbox.contains("- default"), "{rendered}");
+        // A service that names no network stays on the project's own, unchanged.
+        let web = rendered.split("\n  db:\n").next().unwrap();
+        assert!(!web.contains("networks:"), "{rendered}");
+    }
+
+    #[test]
+    fn a_network_is_declared_joined_and_never_the_only_one_under_an_address() {
+        let mut undeclared = with_sandbox();
+        undeclared.internal_networks.clear();
+        assert!(undeclared
+            .validate()
+            .unwrap_err()
+            .contains("undeclared network"));
+
+        let mut unused = with_sandbox();
+        unused.internal_networks.push("spare".into());
+        assert!(unused.validate().unwrap_err().contains("nothing joins it"));
+
+        let mut twice = with_sandbox();
+        twice.internal_networks.push("isolated".into());
+        assert!(twice.validate().unwrap_err().contains("declared twice"));
+
+        let mut renamed = with_sandbox();
+        renamed.internal_networks = vec!["default".into()];
+        assert!(renamed.validate().is_err());
+
+        // The address would lead nowhere.
+        let mut stranded = with_sandbox();
+        stranded.services[0].networks = vec!["isolated".into()];
+        assert!(stranded
+            .validate()
+            .unwrap_err()
+            .contains("not on the default network"));
+        let mut companion = with_sandbox();
+        companion.services[2].companion = Some(PublishedPort {
+            host: 9000,
+            container: 9000,
+        });
+        assert!(companion
+            .validate()
+            .unwrap_err()
+            .contains("not on the default network"));
     }
 
     #[test]

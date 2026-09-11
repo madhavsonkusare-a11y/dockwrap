@@ -348,6 +348,29 @@ pub fn import(id: &str, definition: &str, config: Option<&str>) -> Result<Import
     let (mut fields, secrets) = (declared.fields, declared.secrets);
     limitations.extend(declared.limitations);
 
+    // Compose's shape, but only the kind of network that takes something away:
+    // one with no route out.
+    let mut internal_networks = Vec::new();
+    if let Some(value) = root.get("networks") {
+        match value.as_object() {
+            Some(declared) => {
+                for (network, options) in declared {
+                    if options == &serde_json::json!({"internal": true}) {
+                        internal_networks.push(network.clone());
+                    } else {
+                        limitations.push(not_modelled(
+                            "networks",
+                            format!("{network} is not declared as an internal network"),
+                        ));
+                    }
+                }
+            }
+            None => limitations.push(not_modelled(
+                "networks",
+                "declares networks this importer cannot read",
+            )),
+        }
+    }
     if root.get("overrides").is_some() {
         limitations.push(not_modelled(
             "overrides",
@@ -440,6 +463,25 @@ pub fn import(id: &str, definition: &str, config: Option<&str>) -> Result<Import
                 }
             }
         }
+
+        let networks = match service.get("networks") {
+            None => Vec::new(),
+            Some(value) => match value.as_array().and_then(|values| {
+                values
+                    .iter()
+                    .map(|value| value.as_str().map(str::to_owned))
+                    .collect::<Option<Vec<_>>>()
+            }) {
+                Some(names) => names,
+                None => {
+                    limitations.push(not_modelled(
+                        "networks",
+                        format!("{name} lists networks this importer cannot read"),
+                    ));
+                    Vec::new()
+                }
+            },
+        };
 
         let mut environment = Vec::new();
         for entry in service
@@ -622,6 +664,7 @@ pub fn import(id: &str, definition: &str, config: Option<&str>) -> Result<Import
             digest: None,
             environment,
             companion,
+            networks,
             published,
             mounts,
             depends_on,
@@ -716,6 +759,7 @@ pub fn import(id: &str, definition: &str, config: Option<&str>) -> Result<Import
                 id: id.to_owned(),
                 services: planned,
                 named_volumes: Vec::new(),
+                internal_networks,
             },
             // Only keep what the definition actually uses; Runtipi declares
             // fields for optional features an app may never reference. A
@@ -1384,6 +1428,30 @@ mod tests {
             .limitations
             .iter()
             .any(|limit| limit.feature() == "platform placeholder"));
+    }
+
+    #[test]
+    fn an_internal_network_is_carried_and_any_other_kind_is_reported() {
+        let definition = r#"{
+          "networks": {"isolated": {"internal": true}},
+          "services": [
+            {"name": "app", "image": "example/app:1.0", "isMain": true, "internalPort": 3000,
+             "networks": ["default", "isolated"]},
+            {"name": "sandbox", "image": "example/sandbox:1.0", "networks": ["isolated"]}
+          ]
+        }"#;
+        let outcome = import("app", definition, None).unwrap();
+        assert!(outcome.is_importable(), "{:?}", outcome.limitations);
+        let plan = outcome.plan().unwrap();
+        assert_eq!(plan.internal_networks, vec!["isolated".to_owned()]);
+        assert_eq!(plan.services[1].networks, vec!["isolated".to_owned()]);
+
+        let routed = definition.replace(r#"{"internal": true}"#, r#"{"driver": "bridge"}"#);
+        let outcome = import("app", &routed, None).unwrap();
+        assert!(outcome
+            .limitations
+            .iter()
+            .any(|limit| limit.feature() == "networks"));
     }
 
     #[test]
