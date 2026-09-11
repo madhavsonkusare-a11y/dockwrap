@@ -983,6 +983,27 @@ pub fn install_source_with(
     install
 }
 
+/// Colour codes out of a log, so a diagnosis reads as text: Langflow's
+/// last words arrived with `ESC[31m` and `ESC[0m` around every word.
+fn strip_terminal_colours(text: &str) -> String {
+    let mut out = String::with_capacity(text.len());
+    let mut chars = text.chars().peekable();
+    while let Some(c) = chars.next() {
+        if c == '\u{1b}' && chars.peek() == Some(&'[') {
+            chars.next();
+            // A control sequence ends at its first letter.
+            for next in chars.by_ref() {
+                if next.is_ascii_alphabetic() {
+                    break;
+                }
+            }
+            continue;
+        }
+        out.push(c);
+    }
+    out
+}
+
 /// What the containers said before a failed install removed them.
 ///
 /// Compose keeps the two halves of the answer apart: `ps` knows which service
@@ -1010,7 +1031,8 @@ fn last_words(runner: &dyn ProcessRunner, app: &InstalledApp) -> Option<String> 
         // output, and a chatty database drowned out Nextcloud's own last words
         // entirely.
         let mut by_service: Vec<(String, Vec<&str>)> = Vec::new();
-        for line in logs.lines().map(str::trim).filter(|line| !line.is_empty()) {
+        let plain = strip_terminal_colours(&logs);
+        for line in plain.lines().map(str::trim).filter(|line| !line.is_empty()) {
             // `name | text`, or `name |` alone for a blank line — Postgres
             // prints several, and they are not the service's last words.
             let (service, said) = match line.split_once(" | ") {
@@ -1485,6 +1507,15 @@ mod tests {
         assert!(said.contains("Exited (1)"), "no container state: {said}");
         assert!(said.contains("no such file"), "no log line: {said}");
         let _ = fs::remove_dir_all(&root);
+    }
+
+    #[test]
+    fn colour_codes_are_stripped_from_a_diagnosis() {
+        let coloured = "\u{1b}[31mApplication \u{1b}[1;34mstartup\u{1b}[0m failed";
+        assert_eq!(
+            strip_terminal_colours(coloured),
+            "Application startup failed"
+        );
     }
 
     /// Best effort means best effort: a diagnosis that cannot be gathered must

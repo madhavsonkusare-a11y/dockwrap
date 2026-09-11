@@ -79,7 +79,10 @@ fn ranked(limit: usize, only: &[String], source: Option<&str>) -> Vec<Candidate>
         if chosen.len() >= limit {
             break;
         }
-        if entry["open_source"].as_bool() != Some(true)
+        // A licence is recorded and reviewed in the manifest; it only orders
+        // an unnamed run. Naming an app is a decision already made — Flowise,
+        // whose repository reports NOASSERTION, was silently skipped here.
+        if (only.is_empty() && entry["open_source"].as_bool() != Some(true))
             || !entry["importable"].as_bool().unwrap_or(false)
         {
             continue;

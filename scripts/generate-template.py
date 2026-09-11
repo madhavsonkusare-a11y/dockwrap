@@ -26,6 +26,7 @@ import argparse
 import datetime
 import hashlib
 import json
+import os
 import re
 import subprocess
 import time
@@ -270,7 +271,12 @@ def facts_for(candidate):
         raise SystemExit(f"{path} is missing; run scripts/extract-definitions.py first")
     # Prefer the built binary. Going through `cargo run` takes the build lock,
     # which fights a batch running in another window and fails to link.
+    # Builds may live off this drive (CARGO_TARGET_DIR), so Docker's disk and
+    # cargo's output do not fill the same one.
+    target = Path(os.environ.get("CARGO_TARGET_DIR") or ROOT / "target")
     built = [
+        target / "release" / "examples" / "template_facts.exe",
+        target / "debug" / "examples" / "template_facts.exe",
         ROOT / "target" / "release" / "examples" / "template_facts.exe",
         ROOT / "target" / "debug" / "examples" / "template_facts.exe",
         ROOT / "target" / "release" / "examples" / "template_facts",

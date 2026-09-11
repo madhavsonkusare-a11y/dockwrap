@@ -17,6 +17,7 @@ offered has run.
 
 import importlib.util
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -28,9 +29,10 @@ _spec.loader.exec_module(g)
 
 
 def facts(app, definition):
-    built = ROOT / "target" / "release" / "examples" / "template_facts.exe"
+    target = Path(os.environ.get("CARGO_TARGET_DIR") or ROOT / "target")
+    built = target / "release" / "examples" / "template_facts.exe"
     if not built.is_file():
-        built = ROOT / "target" / "release" / "examples" / "template_facts"
+        built = target / "release" / "examples" / "template_facts"
     done = subprocess.run([str(built), "runtipi", app, str(definition)], capture_output=True, text=True)
     if done.returncode:
         raise SystemExit(done.stderr.strip() or f"{app}: the importer refused its definition")
