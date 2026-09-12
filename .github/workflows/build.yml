@@ -8,7 +8,7 @@ on:
     branches: [main]
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   quality:
@@ -37,10 +37,36 @@ jobs:
       - name: Validate offline catalog, artwork and identity
         run: |
           python scripts/test_catalog.py
+          python scripts/test_recipe_platforms.py
+          python scripts/check-recipe-platforms.py
+          python scripts/check-template-platforms.py
+          python scripts/test_release.py
           python scripts/catalog_pipeline.py --check
           python scripts/cache-catalog-icons.py --check
           node scripts/generate-brand.mjs --check
       - run: npx playwright install --with-deps chromium
+      # `rust-version` is a promise Cargo never checks against the dependency
+      # graph, so a stale value passes every test on a newer toolchain. This
+      # compares it to what the graph needs; the MSRV job below then proves our
+      # own code builds there, which the comparison alone cannot.
+      - name: Check the declared minimum Rust version
+        run: python scripts/check-msrv.py
+      # A dependency whose licence cannot be satisfied permissively changes what
+      # may be shipped, and nothing else in the build would notice.
+      - name: Check dependency licences
+        run: |
+          python scripts/check-licenses.py --self-test
+          python scripts/check-licenses.py
+      # A known vulnerability in the graph is the one class of problem that
+      # arrives without anybody changing this repository, so it is checked on
+      # every run rather than at release time. Accepted findings need a
+      # recorded reason; the gate refuses to pass on an absent tool or an
+      # unfetched database, because a scan that checked nothing reads like
+      # evidence that it did.
+      - name: Install cargo-audit
+        run: cargo install cargo-audit --locked
+      - name: Check dependency advisories
+        run: python scripts/check-advisories.py --refresh
       - run: cargo fmt --all -- --check
       - run: cargo clippy --all-targets --all-features --locked -- -D warnings
       - run: cargo test --locked
@@ -58,24 +84,49 @@ jobs:
           retention-days: 7
           if-no-files-found: ignore
 
+  # Builds on the exact version the manifest promises, bypassing
+  # rust-toolchain.toml, so the claim is tested rather than asserted.
+  minimum-rust:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Tauri Linux dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libgtk-3-dev             librsvg2-dev patchelf libssl-dev
+      - name: Read the declared minimum from Cargo.toml
+        id: msrv
+        run: |
+          version=$(grep -m1 '^rust-version' Cargo.toml | cut -d '"' -f2)
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: ${{ steps.msrv.outputs.version }}
+      - uses: swatinem/rust-cache@v2
+      - env:
+          RUSTUP_TOOLCHAIN: ${{ steps.msrv.outputs.version }}
+        run: cargo check --locked --all-targets
+
   build:
-    needs: quality
+    needs: [quality, minimum-rust]
     strategy:
       fail-fast: false
       matrix:
         include:
-          - platform: windows-latest
-            args: ""
-          - platform: macos-latest
-            args: ""
-          - platform: ubuntu-latest
-            args: ""
+          - platform: windows-2022
+            target: x86_64-pc-windows-msvc
+          - platform: macos-15
+            target: aarch64-apple-darwin
+          - platform: ubuntu-24.04
+            target: x86_64-unknown-linux-gnu
     runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v5
 
       - name: Install Linux deps
-        if: matrix.platform == 'ubuntu-latest'
+        if: matrix.target == 'x86_64-unknown-linux-gnu'
         run: |
           sudo apt-get update
           sudo apt-get install -y libwebkit2gtk-4.1-dev libgtk-3-dev \
@@ -83,34 +134,48 @@ jobs:
 
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
 
       - name: Rust cache
         uses: swatinem/rust-cache@v2
 
+      # Linux runs the whole suite in `quality`. These two targets are the
+      # platform-specific ones: CLI stdout and exit codes, and the job-object
+      # and process-group termination behind the bounded process runner.
+      - name: Test CLI and bounded process execution
+        if: matrix.target != 'x86_64-unknown-linux-gnu'
+        run: |
+          cargo test --locked --target ${{ matrix.target }} --test cli_queries
+          cargo test --locked --target ${{ matrix.target }} --test process_runner
+
+      # The shipped Windows binary is a GUI-subsystem image and behaves
+      # differently from the console binary every debug test uses, so the CLI
+      # contract is verified against the release image on every platform.
+      - name: Test the packaged CLI
+        run: cargo test --locked --release --target ${{ matrix.target }} --test cli_packaged
+
       - name: Install Tauri CLI
-        run: cargo install tauri-cli --version "^2" --locked
+        run: cargo install tauri-cli --version "=2.11.4" --locked
 
       - name: Build (release)
-        run: cargo tauri build ${{ matrix.args }}
+        run: cargo tauri build --target ${{ matrix.target }} --ci
 
-      # Upload ONLY the distributable installers (not bundle internals like
-      # .app/Contents/* or AppImage .so libs) to keep the release asset count sane.
+      - name: Stage release payloads and checksums
+        run: python scripts/prepare-release.py --target ${{ matrix.target }} --build-dir target/${{ matrix.target }}/release --output-dir dist/${{ matrix.target }}
+
+      # Upload staged installers, the target-named CLI and integrity metadata.
+      # Bundle internals, debug symbols and Cargo dependency files stay out.
       - name: Upload artifacts
         uses: actions/upload-artifact@v5
         with:
-          name: local-store-${{ matrix.platform }}
-          path: |
-            target/release/bundle/**/*.msi
-            target/release/bundle/**/*setup.exe
-            target/release/bundle/**/*.dmg
-            target/release/bundle/**/*.deb
-            target/release/bundle/**/*.rpm
-            target/release/bundle/**/*.AppImage
-            target/release/local-store
-            target/release/local-store.exe
-            target/release/local-store.pdb
-            target/release/local-store.d
-          if-no-files-found: ignore
+          name: local-store-${{ matrix.target }}
+          path: dist/${{ matrix.target }}/*
+          if-no-files-found: error
 
   # Single publish job: collects installers from every platform and creates the
   # GitHub Release once, avoiding the softprops/action-gh-release concurrency
@@ -119,6 +184,13 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/')
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      # Provenance is signed by the workflow's own OIDC identity. `id-token`
+      # is what lets it prove which workflow, at which commit, produced these
+      # files; `attestations` is what lets it publish that proof.
+      id-token: write
+      attestations: write
     steps:
       - name: Download all artifacts
         uses: actions/download-artifact@v5
@@ -126,17 +198,18 @@ jobs:
           path: artifacts
           pattern: local-store-*
 
+      # Says where each artifact came from, verifiable with
+      # `gh attestation verify <file> --repo <owner>/<repo>`. This is build
+      # provenance, not a code-signing signature and not an updater signature:
+      # it tells you this workflow built the file, not that an identified
+      # publisher vouches for it. Task 30 remains outstanding.
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@v3
+        with:
+          subject-path: artifacts/local-store-*/*
+
       - name: Publish to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: |
-            artifacts/local-store-windows-latest/**/*.msi
-            artifacts/local-store-windows-latest/**/*setup.exe
-            artifacts/local-store-macos-latest/**/*.dmg
-            artifacts/local-store-ubuntu-latest/**/*.deb
-            artifacts/local-store-ubuntu-latest/**/*.rpm
-            artifacts/local-store-ubuntu-latest/**/*.AppImage
-            artifacts/local-store-ubuntu-latest/local-store
-            artifacts/local-store-windows-latest/local-store.exe
-            artifacts/local-store-windows-latest/local-store.pdb
-            artifacts/local-store-windows-latest/local-store.d
+          files: artifacts/local-store-*/*
+          fail_on_unmatched_files: true

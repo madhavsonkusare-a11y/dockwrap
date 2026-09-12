@@ -9,6 +9,7 @@ use crate::{
         RuntimeSpec,
     },
 };
+use fs4::FileExt;
 use serde::{Deserialize, Serialize};
 use std::{
     collections::HashSet,
@@ -16,7 +17,7 @@ use std::{
     fs::{self, OpenOptions},
     io::{self, Write},
     path::{Path, PathBuf},
-    time::{SystemTime, UNIX_EPOCH},
+    time::{Duration, Instant, SystemTime, UNIX_EPOCH},
 };
 
 /// Errors returned by the strict Registry V2 API.  The legacy `AppDef` facade
@@ -25,21 +26,26 @@ use std::{
 #[derive(Debug)]
 pub enum StorageError {
     Io(io::Error),
+    AlreadyExists(String),
+    NotFound(String),
     Json(serde_json::Error),
     InvalidRegistryVersion(u32),
     MigrationRefused(String),
     InvalidComposeValue(String),
+    LockUnavailable(String),
 }
 
 impl fmt::Display for StorageError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
+            Self::AlreadyExists(reason) | Self::NotFound(reason) => f.write_str(reason),
             Self::Io(error) => write!(f, "registry I/O error: {error}"),
             Self::Json(error) => write!(f, "registry JSON error: {error}"),
             Self::InvalidRegistryVersion(version) => {
                 write!(f, "unsupported registry version {version}; expected 2")
             }
             Self::MigrationRefused(reason) => write!(f, "v1 migration refused: {reason}"),
+            Self::LockUnavailable(reason) => write!(f, "registry is busy: {reason}"),
             Self::InvalidComposeValue(value) => {
                 write!(f, "v1 compose value is not a path: {value:?}")
             }
@@ -119,6 +125,79 @@ fn config_base() -> String {
         .unwrap_or_else(|| ".".to_string())
 }
 
+/// How long a registry change waits for another process to finish its own.
+const REGISTRY_LOCK_TIMEOUT: Duration = Duration::from_secs(10);
+const REGISTRY_LOCK_POLL: Duration = Duration::from_millis(25);
+
+pub fn registry_lock_path_for_root(root: &Path) -> PathBuf {
+    root.join(CONFIG_SLUG).join("registry.lock")
+}
+
+/// Holds the cross-process registry lock until dropped.
+#[must_use = "the registry stays locked only while this guard is alive"]
+pub struct RegistryLock(fs::File);
+impl Drop for RegistryLock {
+    fn drop(&mut self) {
+        // Closing the handle would release it anyway; unlocking first keeps
+        // the release explicit and immediate.
+        let _ = FileExt::unlock(&self.0);
+    }
+}
+
+/// Serialise a registry read-modify-write against other processes.
+///
+/// Saving the registry replaces the file by rename, so the registry file
+/// cannot carry the lock — the lock would be dropped along with the file it
+/// was taken on. A sidecar `registry.lock` is locked instead, and every
+/// mutation holds it across the whole read-modify-write. Without this, two
+/// processes each read the same registry and the second save silently discards
+/// the first one's change.
+///
+/// The wait is bounded: a stuck holder should surface as a clear "busy" error
+/// rather than an operation that never returns. The operating system releases
+/// the lock if a holder exits or crashes.
+pub fn lock_registry_at(root: &Path) -> StorageResult<RegistryLock> {
+    let path = registry_lock_path_for_root(root);
+    if let Some(parent) = path.parent() {
+        fs::create_dir_all(parent)?;
+    }
+    let file = OpenOptions::new()
+        .read(true)
+        .write(true)
+        .create(true)
+        .truncate(false)
+        .open(&path)?;
+    let deadline = Instant::now() + REGISTRY_LOCK_TIMEOUT;
+    loop {
+        match FileExt::try_lock(&file) {
+            Ok(()) => return Ok(RegistryLock(file)),
+            Err(_) if Instant::now() < deadline => std::thread::sleep(REGISTRY_LOCK_POLL),
+            Err(error) => {
+                return Err(StorageError::LockUnavailable(format!(
+                    "another Local Store process held the registry for over {} seconds ({error})",
+                    REGISTRY_LOCK_TIMEOUT.as_secs()
+                )))
+            }
+        }
+    }
+}
+fn lock_registry() -> StorageResult<RegistryLock> {
+    lock_registry_at(&registry_config_root())
+}
+
+/// Lock only if a registry directory already exists.
+///
+/// Read paths must not bring configuration into being: activating an app that
+/// does not exist has to leave the disk untouched. When there is no directory
+/// there is also no registry to race over, and any mutation creates both.
+fn lock_registry_if_present() -> StorageResult<Option<RegistryLock>> {
+    let root = registry_config_root();
+    match registry_lock_path_for_root(&root).parent() {
+        Some(directory) if directory.exists() => lock_registry_at(&root).map(Some),
+        _ => Ok(None),
+    }
+}
+
 pub fn registry_v2_path_for_root(root: &Path) -> PathBuf {
     root.join(CONFIG_SLUG).join("registry-v2.json")
 }
@@ -172,6 +251,9 @@ pub fn save_registry_v2(registry: &RegistryV2) -> StorageResult<()> {
 
 /// Load the canonical registry, importing an older registry once when needed.
 pub fn load_or_migrate_registry() -> StorageResult<RegistryV2> {
+    // Locked because this can migrate, which writes. Mutations call the `_at`
+    // form directly, already holding the lock.
+    let _lock = lock_registry_if_present()?;
     load_or_migrate_registry_at(&registry_config_root())
 }
 
@@ -194,9 +276,12 @@ pub fn load_or_migrate_registry_at(root: &Path) -> StorageResult<RegistryV2> {
 }
 
 pub fn insert_installed_app(app: InstalledApp) -> StorageResult<()> {
-    let mut registry = load_or_migrate_registry()?;
+    // Held across the read and the save: without it two processes read the
+    // same registry and the second save discards the first one's change.
+    let _lock = lock_registry()?;
+    let mut registry = load_or_migrate_registry_at(&registry_config_root())?;
     if registry.apps.iter().any(|saved| saved.id == app.id) {
-        return Err(StorageError::MigrationRefused(format!(
+        return Err(StorageError::AlreadyExists(format!(
             "app id {:?} already exists",
             app.id
         )));
@@ -206,24 +291,30 @@ pub fn insert_installed_app(app: InstalledApp) -> StorageResult<()> {
 }
 
 pub fn remove_installed_app(id: &str) -> StorageResult<InstalledApp> {
-    let mut registry = load_or_migrate_registry()?;
+    // Held across the read and the save: without it two processes read the
+    // same registry and the second save discards the first one's change.
+    let _lock = lock_registry()?;
+    let mut registry = load_or_migrate_registry_at(&registry_config_root())?;
     let position = registry
         .apps
         .iter()
         .position(|app| app.id == id)
-        .ok_or_else(|| StorageError::MigrationRefused(format!("app id {id:?} not found")))?;
+        .ok_or_else(|| StorageError::NotFound(format!("app id {id:?} not found")))?;
     let removed = registry.apps.remove(position);
     save_registry_v2(&registry)?;
     Ok(removed)
 }
 
 pub fn update_installed_app(app: InstalledApp) -> StorageResult<()> {
-    let mut registry = load_or_migrate_registry()?;
+    // Held across the read and the save: without it two processes read the
+    // same registry and the second save discards the first one's change.
+    let _lock = lock_registry()?;
+    let mut registry = load_or_migrate_registry_at(&registry_config_root())?;
     let saved = registry
         .apps
         .iter_mut()
         .find(|saved| saved.id == app.id)
-        .ok_or_else(|| StorageError::MigrationRefused(format!("app id {:?} not found", app.id)))?;
+        .ok_or_else(|| StorageError::NotFound(format!("app id {:?} not found", app.id)))?;
     *saved = app;
     save_registry_v2(&registry)
 }
@@ -249,9 +340,18 @@ fn atomic_replace_with_previous(path: &Path, bytes: &[u8]) -> StorageResult<()> 
     atomic_write(path, bytes)
 }
 
+/// Write `bytes` to `path` atomically.
+///
+/// A crash or a failed write leaves either the previous contents or nothing at
+/// all, never a half-written file. Used for the registry and for generated
+/// Compose files, which Docker must never read in a torn state.
+pub fn write_file_atomically(path: &Path, bytes: &[u8]) -> StorageResult<()> {
+    atomic_write(path, bytes)
+}
+
 fn atomic_write(path: &Path, bytes: &[u8]) -> StorageResult<()> {
     let parent = path.parent().ok_or_else(|| {
-        StorageError::MigrationRefused(format!("registry path has no parent: {}", path.display()))
+        StorageError::MigrationRefused(format!("path has no parent directory: {}", path.display()))
     })?;
     fs::create_dir_all(parent)?;
     let nonce = SystemTime::now()

@@ -14,6 +14,7 @@ fn main() {
     tauri_build::try_build(tauri_build::Attributes::new().app_manifest(
         tauri_build::AppManifest::new().commands(&[
             "list_apps",
+            "take_activation_errors",
             "add_app",
             "open_app",
             "create_shortcut",
@@ -21,12 +22,16 @@ fn main() {
             "search_catalog",
             "open_project",
             "doctor",
+            "inspect_recovery",
             "recipe_details",
             "install_app",
             "start_app",
             "stop_app",
             "app_logs",
             "uninstall_app",
+            "cancel_app_setup",
+            "app_readiness",
+            "check_address",
         ]),
     ))
     .expect("build Tauri application");

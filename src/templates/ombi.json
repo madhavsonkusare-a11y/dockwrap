@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "id": "ombi",
+  "display_name": "Ombi",
+  "catalog_name": "Ombi",
+  "description": "Content request system for Plex/Emby, connects to SickRage, CouchPotato, Sonarr, with a growing feature set.",
+  "category": "Media Management",
+  "license": "GPL-2.0",
+  "source_url": "https://github.com/Ombi-app/Ombi",
+  "documentation_url": "https://ombi.io/",
+  "verified_at": "2026-09-10",
+  "lifecycle_proof": "docs/evidence/ombi-qualification.json",
+  "origin": {
+    "importer": "caprover",
+    "repository": "caprover/one-click-apps",
+    "revision": "7f1f329125dde0cb915f47c8b33293eca45f7d0e",
+    "path": "public/v4/apps/ombi.yml",
+    "license": "Apache-2.0"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "linuxserver/ombi:development-v4.0.1446-ls143",
+        "source_url": "https://hub.docker.com/v2/repositories/linuxserver/ombi/tags/development-v4.0.1446-ls143",
+        "checked_at": "2021-07-09",
+        "last_updated": "2021-07-09",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm/v7",
+          "linux/arm64/v8"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:52dca412d4f0c1fa7c7113a2e41972108693864353587b565a608d1cba4ebdfb",
+          "linux/arm/v7": "sha256:b274d5e6f08ea8dcbe720ab72564dc32403a4512a5718ae801a135ed02cff6aa",
+          "linux/arm64/v8": "sha256:c35bb337769510851eba173b22ff3a4fb18b28eddaaf7045f8168d2222f7dc2a"
+        }
+      }
+    ]
+  },
+  "promotion": {
+    "state": "withheld",
+    "reason": "The pinned image was last rebuilt on 2021-07-09 and is a development build (development-v4.0.1446-ls143). Five years of unpatched base-image changes, and a build upstream does not call a release, is not something to hand somebody."
+  },
+  "data_storage": "Local Store managed folder / ombi",
+  "risk_notes": [
+    "Creates 1 Docker container and publishes one port on this computer's loopback interface only.",
+    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Asks people to request films and shows, and connects to media servers you configure. It creates an administrator account on first start."
+  ],
+  "fields": {
+    "CAP_TZ": {
+      "label": "Time zone (for example, Asia/Kolkata)",
+      "sensitive": false
+    }
+  },
+  "definition": "{\"captainVersion\": 4, \"services\": {\"$$cap_appname\": {\"image\": \"linuxserver/ombi:$$cap_ombi_version\", \"environment\": {\"TZ\": \"$$cap_tz\", \"PUID\": \"1000\", \"PGID\": \"1000\"}, \"restart\": \"unless-stopped\", \"volumes\": [\"$$cap_appname-config:/config\"], \"caproverExtra\": {\"containerHttpPort\": \"3579\"}}}, \"caproverOneClickApp\": {\"variables\": [{\"id\": \"$$cap_ombi_version\", \"label\": \"Ombi Version\", \"defaultValue\": \"development-v4.0.1446-ls143\", \"description\": \"Check out their Docker page for the valid tags https://hub.docker.com/r/linuxserver/ombi/tags\", \"validRegex\": \"/^([^\\\\s^\\\\/])+$/\"}, {\"id\": \"$$cap_tz\", \"label\": \"Time Zone\", \"defaultValue\": \"Asia/Kolkata\", \"description\": \"Get yours from https://en.wikipedia.org/wiki/List_of_tz_database_time_zones\", \"validRegex\": \"/.{1,}/\"}], \"instructions\": {\"start\": \"Ombi allows you to host your own Plex Request and user management system. If you are sharing your Plex server with other users, allow them to request new content using an easy to manage interface! Manage all your requests for Movies and TV with ease, leave notes for the user and get notification when a user requests something. Allow your users to post issues against their requests so you know there is a problem with the audio etc. Even automatically send them weekly newsletters of new content that has been added to your Plex server!\", \"end\": \"Ombi is deployed and available as http://$$cap_appname.$$cap_root_domain.\\nFollow the setup wizard on initial install. Then configure the required services.\"}, \"displayName\": \"Ombi\", \"isOfficial\": true, \"description\": \"Ombi is a self-hosted web application that automatically gives your shared Plex or Emby users the ability to request content by themselves\", \"documentation\": \"Taken from https://hub.docker.com/r/linuxserver/ombi. Website -  https://ombi.io/\"}}"
+}

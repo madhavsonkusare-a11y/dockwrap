@@ -1,0 +1,26 @@
+{
+  "checks": [
+    "previous version installs and becomes healthy",
+    "an account and a note are created through the running application's API",
+    "keep-data uninstall preserves the SQLite database",
+    "the upgraded image installs over the preserved data directory",
+    "the running container is the upgraded image, not the previous one",
+    "the account created before the upgrade can still sign in",
+    "the note written before the upgrade reads back unchanged",
+    "the database did not shrink across the migration",
+    "explicit deletion removes every owned container, network and volume"
+  ],
+  "duration_seconds": 24.46,
+  "from": "neosmemo/memos:0.29.1",
+  "host": "Windows 11, Docker Desktop 4.68.0, engine 29.3.1",
+  "not_covered": [
+    "major-version upgrades (0.x to 1.x)",
+    "recipes other than memos",
+    "downgrade"
+  ],
+  "passed": true,
+  "ran_at": "2026-09-08",
+  "recipe": "memos",
+  "scope": "one reviewed recipe across one minor version, with content written by the application itself",
+  "to": "neosmemo/memos:0.30.0"
+}

@@ -1,0 +1,728 @@
+//! Imported definitions somebody has read and taken responsibility for.
+//!
+//! An importer decides what a definition *could* become. This module decides
+//! what one is allowed to be. The difference matters most for setup fields:
+//! `caprover::setup_variable` marks every field sensitive, because an upstream
+//! catalogue has no way to say which of its variables is a credential, and
+//! masking a time zone is a smaller mistake than showing an API key. A review
+//! is where somebody who read the app says which is which.
+//!
+//! Nothing here is offered to anyone. A reviewed template is a template a
+//! person could be shown; whether it appears in the catalog is a separate
+//! decision, made by the project owner, and this module does not make it.
+use crate::setup::PlanTemplate;
+use serde::Deserialize;
+use std::collections::BTreeMap;
+
+/// Where a definition came from, precisely enough to fetch it again.
+#[derive(Debug, Clone, Deserialize, PartialEq)]
+#[serde(deny_unknown_fields)]
+pub struct TemplateOrigin {
+    /// Which importer maps this format. The only mapping path there is.
+    pub importer: String,
+    pub repository: String,
+    /// The commit the definition was taken from, not a branch.
+    pub revision: String,
+    pub path: String,
+    /// The upstream project's licence, which governs reuse of the definition.
+    pub license: String,
+}
+
+/// What a review concluded. A review that can only say yes is not a review,
+/// so the outcome is recorded either way and the reason travels with it.
+#[derive(Debug, Clone, Deserialize, PartialEq)]
+#[serde(deny_unknown_fields)]
+pub struct TemplatePromotion {
+    /// `approved` or `withheld`. Only an approved template may be offered.
+    pub state: String,
+    /// Why, in terms somebody could disagree with.
+    pub reason: String,
+}
+
+/// One image the plan runs, and what was checked about it.
+///
+/// A recipe audits a single image. A multi-service template cannot: it is only
+/// as portable as its least portable image and only as current as its oldest,
+/// so each one is recorded separately.
+#[derive(Debug, Clone, Deserialize, PartialEq)]
+#[serde(deny_unknown_fields)]
+pub struct TemplateImageAudit {
+    pub image: String,
+    pub source_url: String,
+    pub checked_at: String,
+    /// When the registry last rebuilt this tag. An old date is not a fault by
+    /// itself, but it is the fact a promotion decision turns on most often.
+    pub last_updated: String,
+    pub container_platforms: Vec<String>,
+    /// Per-architecture digests. These registries publish no index digest for
+    /// a tag, so pinning each architecture is what can actually be verified.
+    pub digests: BTreeMap<String, String>,
+}
+
+#[derive(Debug, Clone, Deserialize, PartialEq)]
+#[serde(deny_unknown_fields)]
+pub struct TemplateRequirements {
+    pub docker_engine_os: String,
+    pub compose_major: u8,
+    pub local_storage_required: bool,
+    pub images: Vec<TemplateImageAudit>,
+}
+
+/// What a review decided about one setup field.
+#[derive(Debug, Clone, Deserialize, PartialEq)]
+#[serde(deny_unknown_fields)]
+pub struct FieldReview {
+    /// What to call it, in this project's words rather than upstream's.
+    pub label: String,
+    /// Whether this answer is a credential. The importer says yes to
+    /// everything; saying no here is a decision somebody made after reading
+    /// what the app does with the value.
+    pub sensitive: bool,
+}
+
+/// A tag this review runs instead of the one its definition names.
+///
+/// Upstream catalogues lag upstream projects. When a definition is pinned to a
+/// release that has since been superseded — and the newer one carries fixes
+/// worth having — the choice used to be to offer the old version or nothing,
+/// because the definition is kept verbatim and there was no way to say
+/// otherwise. This is that way, and it is deliberately narrow: the same
+/// repository, a different tag, and a reason somebody could disagree with.
+///
+/// It cannot point at a different image. A review that could swap
+/// `nodered/node-red` for something else would not be a pin, it would be a
+/// second definition wearing the first one's provenance.
+#[derive(Debug, Clone, Deserialize, PartialEq)]
+#[serde(deny_unknown_fields)]
+pub struct ImagePin {
+    /// The image as the upstream definition writes it.
+    pub definition: String,
+    /// The image this review runs instead.
+    pub replacement: String,
+    pub reason: String,
+}
+
+impl ImagePin {
+    /// Repository and tag, or an error naming which half is missing.
+    fn split(image: &str) -> Result<(&str, &str), String> {
+        image
+            .rsplit_once(':')
+            .filter(|(repository, tag)| !repository.is_empty() && !tag.is_empty())
+            .ok_or_else(|| format!("image {image:?} names no tag"))
+    }
+
+    fn check(&self) -> Result<(), String> {
+        let (from, from_tag) = Self::split(&self.definition)?;
+        let (to, to_tag) = Self::split(&self.replacement)?;
+        if from != to {
+            return Err(format!(
+                "an image pin may change a tag, not the image: {from:?} to {to:?}"
+            ));
+        }
+        if from_tag == to_tag {
+            return Err(format!("image pin for {from:?} changes nothing"));
+        }
+        if self.reason.len() <= 20 {
+            return Err(format!("image pin for {from:?} gives no reason"));
+        }
+        Ok(())
+    }
+}
+
+/// Companion config from the same repository and commit as the definition.
+#[derive(Debug, Clone, Deserialize, PartialEq)]
+#[serde(deny_unknown_fields)]
+pub struct TemplateConfig {
+    pub path: String,
+    pub content: String,
+}
+
+#[derive(Debug, Clone, Deserialize, PartialEq)]
+#[serde(deny_unknown_fields)]
+pub struct ReviewedTemplate {
+    pub schema_version: u32,
+    pub id: String,
+    pub display_name: String,
+    pub catalog_name: String,
+    pub description: String,
+    pub category: String,
+    /// The application's own licence, which is not the definition's.
+    pub license: String,
+    pub source_url: String,
+    pub documentation_url: String,
+    pub verified_at: String,
+    /// The recorded run that proves this template installs and survives a
+    /// reinstall. A template without one has not been verified, whatever else
+    /// it declares.
+    pub lifecycle_proof: String,
+    pub origin: TemplateOrigin,
+    pub requirements: TemplateRequirements,
+    pub promotion: TemplatePromotion,
+    pub data_storage: String,
+    pub risk_notes: Vec<String>,
+    /// One entry per setup field the import produces. Both directions are
+    /// checked, so a field upstream adds cannot arrive unreviewed and a review
+    /// left behind by a removed field cannot sit unnoticed.
+    pub fields: BTreeMap<String, FieldReview>,
+    /// The upstream definition, normalized to JSON exactly as the import
+    /// report normalizes all of them. Kept verbatim so the mapping can be
+    /// reproduced and audited without the archive.
+    pub definition: String,
+    #[serde(default)]
+    pub config: Option<TemplateConfig>,
+    /// Tags this review runs in place of the ones the definition names.
+    #[serde(default)]
+    pub image_pins: Vec<ImagePin>,
+}
+
+impl ReviewedTemplate {
+    /// Whether this template may be offered to anyone.
+    ///
+    /// Passing a review is not the same as being worth installing. A template
+    /// can resolve cleanly, install, and still be one nobody should be handed
+    /// — an image whose registry stopped rebuilding it years ago, say. This is
+    /// the difference, and it is the project owner's decision to change.
+    pub fn offerable(&self) -> bool {
+        self.promotion.state == "approved"
+    }
+
+    /// The template this review permits, or why it does not permit one.
+    pub fn plan_template(&self) -> Result<PlanTemplate, String> {
+        let outcome = match self.origin.importer.as_str() {
+            "caprover" => {
+                if self.config.is_some() {
+                    return Err("CapRover review cannot carry an unused companion config".into());
+                }
+                crate::importers::caprover::import(&self.id, &self.definition)
+            }
+            "runtipi" => {
+                let config = self.config.as_ref().ok_or("Runtipi review requires its companion config")?;
+                let expected = format!("apps/{}/config.json", self.id);
+                if self.origin.path != format!("apps/{}/docker-compose.json", self.id)
+                    || config.path != expected
+                {
+                    return Err("Runtipi definition and config must name the reviewed app in the same pinned source".into());
+                }
+                let value: serde_json::Value = serde_json::from_str(&config.content)
+                    .map_err(|_| "Runtipi companion config is invalid JSON")?;
+                if !value.is_object() || value.get("id").and_then(serde_json::Value::as_str) != Some(&self.id) {
+                    return Err("Runtipi companion config must identify the reviewed app".into());
+                }
+                crate::importers::runtipi::import(&self.id, &self.definition, Some(&config.content))
+            }
+            other => return Err(format!("no importer named {other:?} to map this definition")),
+        }.map_err(|reason| format!("{}: {reason}", self.id))?;
+        let mut template = outcome.template.ok_or_else(|| {
+            let named: Vec<&str> = outcome
+                .limitations
+                .iter()
+                .map(|limit| limit.feature())
+                .collect();
+            format!(
+                "{}: the definition is no longer importable ({})",
+                self.id,
+                named.join(", ")
+            )
+        })?;
+
+        // Applied before the audit below, so what gets audited is what runs.
+        for pin in &self.image_pins {
+            pin.check()
+                .map_err(|reason| format!("{}: {reason}", self.id))?;
+            let mut replaced = 0usize;
+            for service in &mut template.plan.services {
+                if service.image == pin.definition {
+                    service.image = pin.replacement.clone();
+                    replaced += 1;
+                }
+            }
+            if replaced == 0 {
+                return Err(format!(
+                    "{}: image pin names {:?}, which this definition does not run",
+                    self.id, pin.definition
+                ));
+            }
+        }
+
+        for field in &mut template.fields {
+            let review = self.fields.get(&field.key).ok_or_else(|| {
+                format!(
+                    "{}: setup field {:?} has not been reviewed",
+                    self.id, field.key
+                )
+            })?;
+            field.label = review.label.clone();
+            field.sensitive = review.sensitive;
+        }
+        for key in self.fields.keys() {
+            if !template.fields.iter().any(|field| &field.key == key) {
+                return Err(format!(
+                    "{}: review names setup field {key:?}, which this definition no longer declares",
+                    self.id
+                ));
+            }
+        }
+        // Every image that would run has to have been looked at, and every
+        // image looked at has to still be one that runs.
+        for service in &template.plan.services {
+            if !self
+                .requirements
+                .images
+                .iter()
+                .any(|audit| audit.image == service.image)
+            {
+                return Err(format!(
+                    "{}: image {:?} has not been audited",
+                    self.id, service.image
+                ));
+            }
+        }
+        for audit in &self.requirements.images {
+            if !template
+                .plan
+                .services
+                .iter()
+                .any(|service| service.image == audit.image)
+            {
+                return Err(format!(
+                    "{}: audit names image {:?}, which this definition no longer runs",
+                    self.id, audit.image
+                ));
+            }
+        }
+
+        template
+            .validate()
+            .map_err(|reason| format!("{}: {reason}", self.id))?;
+        Ok(template)
+    }
+}
+
+const ACTUAL: &str = include_str!("actual.json");
+const ADMINER: &str = include_str!("adminer.json");
+const CODIMD: &str = include_str!("codimd.json");
+const FLATNOTES: &str = include_str!("flatnotes.json");
+const GOTIFY: &str = include_str!("gotify.json");
+const GRAFANA: &str = include_str!("grafana.json");
+const METABASE: &str = include_str!("metabase.json");
+const NODERED: &str = include_str!("nodered.json");
+const NTFY: &str = include_str!("ntfy.json");
+const OMBI: &str = include_str!("ombi.json");
+const PRIVATEBIN: &str = include_str!("privatebin.json");
+const VAULTWARDEN: &str = include_str!("vaultwarden.json");
+
+/// Every template a review has passed. Being here is not being offered.
+pub fn reviewed_templates() -> Vec<ReviewedTemplate> {
+    [
+        ACTUAL,
+        ADMINER,
+        CODIMD,
+        FLATNOTES,
+        GOTIFY,
+        GRAFANA,
+        METABASE,
+        NODERED,
+        NTFY,
+        OMBI,
+        PRIVATEBIN,
+        VAULTWARDEN,
+    ]
+    .into_iter()
+    .map(|source| serde_json::from_str(source).expect("bundled reviewed templates must parse"))
+    .collect()
+}
+
+pub fn reviewed_template(id: &str) -> Option<ReviewedTemplate> {
+    reviewed_templates()
+        .into_iter()
+        .find(|template| template.id == id)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn runtipi_review() -> ReviewedTemplate {
+        reviewed_template("privatebin").expect("privatebin is reviewed")
+    }
+
+    #[test]
+    fn runtipi_review_uses_the_existing_importer_and_requires_companion_identity() {
+        let reviewed = runtipi_review();
+        let plan = reviewed.plan_template().unwrap();
+        assert_eq!(plan.plan.services.len(), 1);
+        assert!(plan.fields.is_empty());
+        // One service, published, and nothing left for a person to answer.
+        assert!(plan.plan.published().is_some());
+        assert!(plan.secrets.is_empty());
+        let mut missing = reviewed.clone();
+        missing.config = None;
+        assert!(missing.plan_template().unwrap_err().contains("requires"));
+        let mut wrong = reviewed.clone();
+        wrong.config.as_mut().unwrap().path = "apps/other/config.json".into();
+        assert!(wrong.plan_template().is_err());
+        let mut wrong = reviewed.clone();
+        wrong.config.as_mut().unwrap().content = r#"{"id":"other"}"#.into();
+        assert!(wrong.plan_template().is_err());
+        let mut wrong = reviewed;
+        wrong.definition = r#"{"services":[{"name":"privatebin","image":"privatebin/nginx-fpm-alpine:2.0.6","isMain":true,"internalPort":8080,"privileged":true}]}"#.into();
+        assert!(wrong.plan_template().is_err());
+    }
+
+    #[test]
+    fn runtipi_review_rejects_unreviewed_images_and_fields() {
+        let mut reviewed = runtipi_review();
+        reviewed.requirements.images.clear();
+        assert!(reviewed.plan_template().unwrap_err().contains("audited"));
+        let mut reviewed = runtipi_review();
+        reviewed.config.as_mut().unwrap().content = r#"{"id":"privatebin","form_fields":[{"type":"text","env_variable":"TZ","label":"Zone","default":"UTC"}]}"#.into();
+        // A newly declared setup field must not silently inherit an old review.
+        reviewed.definition = reviewed.definition.replace(
+            "\"internalPort\": 8080",
+            "\"environment\": [{\"key\":\"TZ\",\"value\":\"${TZ}\"}], \"internalPort\": 8080",
+        );
+        assert!(reviewed.plan_template().is_err());
+    }
+
+    #[test]
+    fn every_reviewed_template_resolves_to_a_valid_plan() {
+        let templates = reviewed_templates();
+        assert!(!templates.is_empty(), "the allowlist is empty");
+        for reviewed in templates {
+            let template = reviewed
+                .plan_template()
+                .unwrap_or_else(|reason| panic!("{reason}"));
+            assert!(
+                !template.plan.services.is_empty(),
+                "{} deploys nothing",
+                reviewed.id
+            );
+            // A reviewed template has to render, not merely construct.
+            let compose = template.plan.to_compose().expect("plan should render");
+            assert!(!compose.contains("$$"), "{}: {compose}", reviewed.id);
+
+            // Everything a recipe must prove about itself.
+            assert_eq!(reviewed.schema_version, 1);
+            assert!(!reviewed.risk_notes.is_empty(), "{}", reviewed.id);
+            // A named proof that is not there is worse than none: it reads
+            // as verification nobody can check.
+            let proof =
+                std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join(&reviewed.lifecycle_proof);
+            assert!(
+                reviewed.lifecycle_proof.starts_with("docs/evidence/") && proof.is_file(),
+                "{} names a lifecycle proof that is not there: {}",
+                reviewed.id,
+                reviewed.lifecycle_proof
+            );
+            assert!(
+                reviewed.origin.revision.len() == 40
+                    && reviewed
+                        .origin
+                        .revision
+                        .bytes()
+                        .all(|b| b.is_ascii_hexdigit()),
+                "{} pins no upstream commit",
+                reviewed.id
+            );
+            assert!(
+                !reviewed.requirements.images.is_empty(),
+                "{} audits no image",
+                reviewed.id
+            );
+            for audit in &reviewed.requirements.images {
+                assert!(
+                    !audit.container_platforms.is_empty(),
+                    "{}: {} claims no platform",
+                    reviewed.id,
+                    audit.image
+                );
+                assert_eq!(
+                    audit.digests.keys().cloned().collect::<Vec<_>>(),
+                    audit.container_platforms,
+                    "{}: {} pins a different set of platforms than it claims",
+                    reviewed.id,
+                    audit.image
+                );
+                for digest in audit.digests.values() {
+                    assert!(digest.starts_with("sha256:"), "{}", reviewed.id);
+                }
+            }
+            assert!(
+                matches!(reviewed.promotion.state.as_str(), "approved" | "withheld"),
+                "{} records no promotion decision",
+                reviewed.id
+            );
+            assert!(
+                reviewed.promotion.reason.len() > 20,
+                "{} gives no reason for its promotion decision",
+                reviewed.id
+            );
+            for service in &template.plan.services {
+                let tag = service.image.rsplit_once(':').map(|(_, tag)| tag);
+                assert!(
+                    tag.is_some_and(|tag| !matches!(tag, "latest" | "stable" | "main")),
+                    "{} runs an unpinned image",
+                    reviewed.id
+                );
+            }
+        }
+    }
+
+    #[test]
+    fn a_review_decides_which_answers_are_credentials() {
+        let reviewed = reviewed_template("codimd").expect("codimd is reviewed");
+        let template = reviewed.plan_template().unwrap();
+        let review = template.setup_review().unwrap();
+
+        // The importer marks every field sensitive because upstream cannot
+        // say. Without a review this would be a masked box with its default
+        // withheld, which is the wrong way to ask for a time zone.
+        let zone = review
+            .fields
+            .iter()
+            .find(|field| field.key == "CAP_TIMEZONE")
+            .expect("codimd asks for a time zone");
+        assert_eq!(zone.control, "text");
+        assert!(!zone.sensitive);
+        assert_eq!(zone.default.as_deref(), Some("Europe/London"));
+        assert_eq!(zone.label, "Time zone");
+
+        // The generated credential is counted, never asked for or shown.
+        assert_eq!(review.generated_credential_count, 1);
+        assert!(!review.fields.iter().any(|field| field.key.contains("PASS")));
+    }
+
+    /// Every app this project offers to install, named here on purpose.
+    ///
+    /// This list started empty, which was the honest state of the project
+    /// before anything had been qualified. Emptiness was never the point,
+    /// though — the point is that approving an app is a decision somebody
+    /// makes, so it has to appear in a diff rather than arrive as a side
+    /// effect of a manifest edit or a passing test. Adding a second name here
+    /// costs exactly as much deliberation as the first one did.
+    const APPROVED: &[&str] = &[
+        "adminer",
+        "flatnotes",
+        "grafana",
+        "metabase",
+        "nodered",
+        "ntfy",
+        "privatebin",
+        "vaultwarden",
+    ];
+
+    #[test]
+    fn no_reviewed_template_is_offerable_without_an_explicit_approval() {
+        let mut offerable: Vec<String> = reviewed_templates()
+            .into_iter()
+            .filter(ReviewedTemplate::offerable)
+            .map(|template| template.id)
+            .collect();
+        // Compared as a set, so reordering the allowlist is not a failure but
+        // adding to it still is.
+        offerable.sort();
+        assert_eq!(
+            offerable, APPROVED,
+            "the approved templates changed without this list changing with them"
+        );
+    }
+
+    /// An approval is a claim that somebody checked this app, so the evidence
+    /// it rests on has to be there. A withheld template is held to the same
+    /// standard everywhere else; this is the part that only matters once an
+    /// app can actually reach a person.
+    #[test]
+    fn an_approved_template_carries_the_evidence_its_approval_claims() {
+        for id in APPROVED {
+            let reviewed = reviewed_template(id).expect("an approved template must exist");
+            assert!(reviewed.offerable(), "{id} is listed but not approved");
+            assert!(
+                reviewed.promotion.reason.len() > 20,
+                "{id} gives no reason for its approval"
+            );
+            assert!(
+                !reviewed.verified_at.is_empty(),
+                "{id} records no review date"
+            );
+            let proof =
+                std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join(&reviewed.lifecycle_proof);
+            assert!(
+                proof.is_file(),
+                "{id} names a lifecycle proof that is not there"
+            );
+            // It has to map, and to map to something installable.
+            let template = reviewed
+                .plan_template()
+                .expect("an approved template must map");
+            assert!(
+                template.plan.published().is_some(),
+                "{id} publishes no address to open"
+            );
+        }
+    }
+
+    /// The other direction of the same decision CodiMD's time zone shows.
+    ///
+    /// Runtipi marks a field sensitive only when upstream types it `password`.
+    /// flatnotes types its password as plain `text`, so without a review the
+    /// setup form would render the one field on that form that is genuinely a
+    /// credential as a visible box, with its value echoed back on screen. A
+    /// review is where somebody who read the app says otherwise.
+    #[test]
+    fn a_review_masks_a_credential_upstream_declared_as_plain_text() {
+        let reviewed = reviewed_template("flatnotes").expect("flatnotes is reviewed");
+        // Upstream really does declare it as text; if that ever changes this
+        // test stops being about anything and should be revisited.
+        assert!(reviewed
+            .config
+            .as_ref()
+            .expect("flatnotes carries its config")
+            .content
+            .contains(
+                "\"type\": \"text\",
+      \"label\": \"Flatnotes Password\""
+            ));
+
+        let review = reviewed
+            .plan_template()
+            .expect("flatnotes should map")
+            .setup_review()
+            .expect("flatnotes should project");
+
+        let password = review
+            .fields
+            .iter()
+            .find(|field| field.key == "FLATNOTES_PASSWORD")
+            .expect("flatnotes asks for a password");
+        assert_eq!(password.control, "password");
+        assert!(password.sensitive);
+        assert_eq!(password.label, "Password");
+        // A sensitive field's default is described, never sent.
+        assert_eq!(password.default, None);
+
+        // The two answers that are not credentials stay ordinary text, so a
+        // username is not asked for behind dots.
+        for key in ["FLATNOTES_USERNAME", "FLATNOTES_AUTH_TYPE"] {
+            let field = review
+                .fields
+                .iter()
+                .find(|field| field.key == key)
+                .unwrap_or_else(|| panic!("flatnotes asks for {key}"));
+            assert_eq!(field.control, "text", "{key}");
+            assert!(!field.sensitive, "{key}");
+        }
+
+        // Both generated credentials are counted and neither is ever asked
+        // for or shown.
+        assert_eq!(review.generated_credential_count, 2);
+        assert!(!review
+            .fields
+            .iter()
+            .any(|field| field.key.contains("SECRET") || field.key.contains("TOTP")));
+    }
+
+    /// The override exists so an app is not stuck on whatever tag an upstream
+    /// catalogue last bumped. It must stay an override of a *tag*, though —
+    /// everything below is a way it could become a second definition wearing
+    /// the first one's provenance.
+    #[test]
+    fn an_image_pin_may_move_a_tag_and_nothing_else() {
+        let reviewed = reviewed_template("nodered").expect("nodered is reviewed");
+        // The definition says 5.0.6; what runs is what the review pinned.
+        assert!(reviewed.definition.contains("nodered/node-red:5.0.6"));
+        let template = reviewed.plan_template().expect("nodered should map");
+        assert_eq!(template.plan.services[0].image, "nodered/node-red:5.0.7");
+
+        let refuse = |pin: ImagePin, expect: &str| {
+            let mut broken = reviewed.clone();
+            broken.image_pins = vec![pin];
+            let error = broken
+                .plan_template()
+                .expect_err("this pin should have been refused");
+            assert!(error.contains(expect), "{error}");
+        };
+        // A different image is not a pin.
+        refuse(
+            ImagePin {
+                definition: "nodered/node-red:5.0.6".into(),
+                replacement: "someone-else/node-red:5.0.7".into(),
+                reason: "a reason long enough to pass the length check".into(),
+            },
+            "not the image",
+        );
+        // A pin for something this definition does not run is a stale review.
+        refuse(
+            ImagePin {
+                definition: "nodered/node-red:4.0.0".into(),
+                replacement: "nodered/node-red:5.0.7".into(),
+                reason: "a reason long enough to pass the length check".into(),
+            },
+            "does not run",
+        );
+        // A decision with no stated reason is not a review.
+        refuse(
+            ImagePin {
+                definition: "nodered/node-red:5.0.6".into(),
+                replacement: "nodered/node-red:5.0.7".into(),
+                reason: "because".into(),
+            },
+            "no reason",
+        );
+        // An untagged replacement would float, which is what pinning prevents.
+        refuse(
+            ImagePin {
+                definition: "nodered/node-red:5.0.6".into(),
+                replacement: "nodered/node-red".into(),
+                reason: "a reason long enough to pass the length check".into(),
+            },
+            "names no tag",
+        );
+    }
+
+    /// The audit has to be about what runs, not about what the definition said
+    /// before the review moved it.
+    #[test]
+    fn an_image_pin_must_be_audited_at_the_tag_it_moves_to() {
+        let mut reviewed = reviewed_template("nodered").expect("nodered is reviewed");
+        assert_eq!(
+            reviewed.requirements.images[0].image,
+            "nodered/node-red:5.0.7"
+        );
+        // Auditing the tag the definition names, rather than the one that
+        // runs, is exactly the mistake this must not permit.
+        reviewed.requirements.images[0].image = "nodered/node-red:5.0.6".into();
+        let error = reviewed
+            .plan_template()
+            .expect_err("the audit must not drift");
+        assert!(error.contains("has not been audited"), "{error}");
+    }
+
+    #[test]
+    fn an_image_nobody_audited_stops_the_template() {
+        let mut reviewed = reviewed_template("codimd").unwrap();
+        reviewed.requirements.images.remove(0);
+        let error = reviewed.plan_template().unwrap_err();
+        assert!(error.contains("has not been audited"), "{error}");
+    }
+
+    #[test]
+    fn a_field_nobody_reviewed_stops_the_template_rather_than_shipping_masked() {
+        let mut reviewed = reviewed_template("codimd").unwrap();
+        reviewed.fields.remove("CAP_TIMEZONE");
+        let error = reviewed.plan_template().unwrap_err();
+        assert!(error.contains("has not been reviewed"), "{error}");
+
+        // And a review left behind by a field upstream removed is caught too,
+        // because it means the review was written against a different app.
+        let mut stale = reviewed_template("codimd").unwrap();
+        stale.fields.insert(
+            "CAP_GONE".into(),
+            FieldReview {
+                label: "Gone".into(),
+                sensitive: false,
+            },
+        );
+        let error = stale.plan_template().unwrap_err();
+        assert!(error.contains("no longer declares"), "{error}");
+    }
+}

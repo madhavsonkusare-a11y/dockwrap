@@ -1,23 +1,27 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use local_store::{
-    brand::{CLI_NAME, LEGACY_URL_SCHEME, PRODUCT_NAME, URL_SCHEME},
-    commands, platform, runtime, storage, windowing,
+    brand::PRODUCT_NAME,
+    commands,
+    error::{AppError, AppResult, ErrorCode},
+    platform, runtime, storage, windowing,
 };
+
+use tauri_plugin_deep_link::DeepLinkExt;
 
 mod cli;
 
 #[tauri::command]
-fn create_shortcut(window: tauri::WebviewWindow, id: String) -> Result<String, String> {
+fn create_shortcut(window: tauri::WebviewWindow, id: String) -> AppResult<String> {
     commands::require_launcher(&window)?;
     let app = storage::load_or_migrate_registry()
-        .map_err(|e| e.to_string())?
+        .map_err(AppError::from)?
         .apps
         .into_iter()
         .find(|app| app.id == id)
-        .ok_or("This app no longer exists.")?;
+        .ok_or_else(|| AppError::new(ErrorCode::NotFound, "This app no longer exists."))?;
     let bin = std::env::current_exe()
-        .map_err(|e| e.to_string())?
+        .map_err(AppError::from)?
         .to_string_lossy()
         .into_owned();
     platform::create_shortcut_for(
@@ -26,6 +30,7 @@ fn create_shortcut(window: tauri::WebviewWindow, id: String) -> Result<String, S
         &bin,
         app.icon_path.as_ref().and_then(|path| path.to_str()),
     )
+    .map_err(|e| AppError::new(ErrorCode::ShortcutFailed, e))
 }
 
 #[tauri::command]
@@ -33,50 +38,36 @@ async fn open_app(
     window: tauri::WebviewWindow,
     app_handle: tauri::AppHandle,
     id: String,
-) -> Result<(), String> {
+) -> AppResult<()> {
     commands::require_launcher(&window)?;
-    let app = storage::load_or_migrate_registry()
-        .map_err(|e| e.to_string())?
-        .apps
-        .into_iter()
-        .find(|app| app.id == id)
-        .ok_or("This app no longer exists.")?;
-    if app.is_managed() {
-        let pending = app.clone();
-        tauri::async_runtime::spawn_blocking(move || runtime::start(&pending))
-            .await
-            .map_err(|e| e.to_string())??;
-    }
-    windowing::build_window(
-        &app_handle,
-        &app.id,
-        &app.display_name,
-        &app.launch_url,
-        app.icon_path.as_ref().and_then(|path| path.to_str()),
+    local_store::operations::track(
+        &window,
+        &id,
+        local_store::operations::OperationKind::Open,
+        async {
+            let app = storage::load_or_migrate_registry()
+                .map_err(AppError::from)?
+                .apps
+                .into_iter()
+                .find(|app| app.id == id)
+                .ok_or_else(|| AppError::new(ErrorCode::NotFound, "This app no longer exists."))?;
+            if app.is_managed() {
+                let pending = app.clone();
+                tauri::async_runtime::spawn_blocking(move || runtime::start(&pending))
+                    .await
+                    .map_err(AppError::internal)??;
+            }
+            windowing::build_window(
+                &app_handle,
+                &app.id,
+                &app.display_name,
+                &app.launch_url,
+                app.icon_path.as_ref().and_then(|path| path.to_str()),
+            )
+            .map_err(|e| AppError::new(ErrorCode::WindowOpenFailed, e))
+        },
     )
-}
-
-fn parse_deep_link(input: &str) -> Option<(String, String)> {
-    let url = tauri::Url::parse(input).ok()?;
-    let scheme = url.scheme();
-    if scheme != URL_SCHEME && scheme != LEGACY_URL_SCHEME {
-        return None;
-    }
-    if url.host_str()? != "open"
-        || url.port().is_some()
-        || !url.username().is_empty()
-        || url.password().is_some()
-        || url.query().is_some()
-        || url.fragment().is_some()
-    {
-        return None;
-    }
-    let name_segment = url.path().strip_prefix('/')?;
-    if name_segment.is_empty() || name_segment.contains('/') {
-        return None;
-    }
-    let name = windowing::strict_percent_decode_path_segment(name_segment)?;
-    (!name.is_empty() && !name.contains('/')).then(|| (scheme.to_string(), name))
+    .await
 }
 
 fn main() {
@@ -84,70 +75,51 @@ fn main() {
     if args.get(1).is_some_and(|arg| arg == "open") {
         cli::ensure_console();
     }
-    // Primary and legacy protocol handlers are passed as a single argument by the OS.
-    if let Some(first) = args.get(1) {
-        if let Some((scheme, name)) =
-            parse_deep_link(first).or_else(|| native_open_request(&args[1..]))
-        {
-            // Boot the referenced app's stack, then open its window.
-            let apps = match storage::load_or_migrate_registry() {
-                Ok(registry) => registry.apps,
-                Err(error) => {
-                    eprintln!("Could not load apps: {error}");
-                    std::process::exit(1);
-                }
-            };
-            if let Some(appdef) = apps.iter().find(|a| {
-                a.id == name
-                    || ((scheme == LEGACY_URL_SCHEME || scheme == "cli")
-                        && a.display_name.eq_ignore_ascii_case(&name))
-            }) {
-                if appdef.is_managed() {
-                    if let Err(error) = runtime::start(appdef) {
-                        eprintln!("Could not start app: {error}");
-                        std::process::exit(1);
-                    }
-                }
-                let open_id = appdef.id.clone();
-                let open_name = appdef.display_name.clone();
-                let url = appdef.launch_url.clone();
-                let icon = appdef.icon_path.clone();
-                tauri::Builder::default()
-                    .setup(move |app| {
-                        windowing::build_window(
-                            app.handle(),
-                            &open_id,
-                            &open_name,
-                            &url,
-                            icon.as_ref().and_then(|path| path.to_str()),
-                        )
-                        .map_err(std::io::Error::other)?;
-                        Ok(())
-                    })
-                    .run(tauri::generate_context!())
-                    .expect("error while running Local Store");
-                return;
-            } else {
-                eprintln!("{scheme}://open/{name}: no such app");
-                std::process::exit(1);
-            }
+    let activation = match local_store::activation::request_from_args(&args[1..]) {
+        Ok(request) => request,
+        Err(error) => {
+            cli::ensure_console();
+            eprintln!("{error}");
+            std::process::exit(2);
         }
-    }
+    };
+    let initial_app = activation
+        .map(|request| {
+            let registry = storage::load_or_migrate_registry().map_err(AppError::from)?;
+            let app = request.resolve(&registry.apps)?.clone();
+            Ok::<_, AppError>(app)
+        })
+        .transpose()
+        .unwrap_or_else(|error| {
+            cli::ensure_console();
+            eprintln!("{error}");
+            std::process::exit(1);
+        });
 
     // If invoked with CLI subcommands (e.g. `local-store add ...`), run as CLI and exit.
-    if args.len() > 1 {
-        let first = args[1].as_str();
-        if first == "--version" || first == "-V" {
-            println!("{CLI_NAME} {}", env!("CARGO_PKG_VERSION"));
-            return;
-        }
-        std::process::exit(cli::run_cli());
+    if initial_app.is_none() && args.len() > 1 {
+        let code = cli::run_cli();
+        // `process::exit` runs no destructors and flushes no buffered
+        // writer. Without this the CLI's output is lost whenever stdout
+        // is a file or pipe handed over by a shell.
+        use std::io::Write;
+        let _ = std::io::stdout().flush();
+        let _ = std::io::stderr().flush();
+        std::process::exit(code);
     }
 
     tauri::Builder::default()
-        .setup(|app| {
-            // Register primary and one-release legacy protocol handlers (best-effort).
-            platform::register_protocol();
+        .manage(local_store::native::NativeState::default())
+        .plugin(tauri_plugin_single_instance::init(|app, args, _cwd| {
+            match local_store::native::secondary_request(&args) {
+                Ok(Some(request)) => local_store::native::dispatch(app, request),
+                Ok(None) if args.len() == 1 => local_store::native::focus_launcher(app),
+                Ok(None) => {}
+                Err(error) => local_store::native::report_failure(app, error),
+            }
+        }))
+        .plugin(tauri_plugin_deep_link::init())
+        .setup(move |app| {
             storage::load_or_migrate_registry().map_err(std::io::Error::other)?;
             let win = tauri::WebviewWindowBuilder::new(
                 app,
@@ -161,10 +133,39 @@ fn main() {
             .resizable(true)
             .build()?;
             let _ = win.set_focus();
+            let deep_handle = app.handle().clone();
+            app.deep_link().on_open_url(move |event| {
+                for url in event.urls() {
+                    match local_store::activation::parse_deep_link(url.as_str()) {
+                        Ok(request) => local_store::native::dispatch(&deep_handle, request),
+                        Err(error) => local_store::native::report_failure(&deep_handle, error),
+                    }
+                }
+            });
+            if let Err(error) = platform::register_protocol(app.handle()) {
+                local_store::native::report_failure(app.handle(), error);
+            }
+            if let Some(initial) = &initial_app {
+                local_store::native::dispatch(
+                    app.handle(),
+                    local_store::activation::OpenRequest {
+                        target: initial.id.clone(),
+                        allow_display_name: false,
+                    },
+                );
+            } else if let Some(urls) = app.deep_link().get_current()? {
+                for url in urls {
+                    match local_store::activation::parse_deep_link(url.as_str()) {
+                        Ok(request) => local_store::native::dispatch(app.handle(), request),
+                        Err(error) => local_store::native::report_failure(app.handle(), error),
+                    }
+                }
+            }
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
             commands::list_apps,
+            local_store::native::take_activation_errors,
             commands::add_app,
             open_app,
             create_shortcut,
@@ -172,8 +173,12 @@ fn main() {
             commands::search_catalog,
             commands::open_project,
             commands::doctor,
+            commands::inspect_recovery,
             commands::recipe_details,
             commands::install_app,
+            commands::cancel_app_setup,
+            commands::check_address,
+            commands::app_readiness,
             commands::start_app,
             commands::stop_app,
             commands::app_logs,
@@ -181,66 +186,4 @@ fn main() {
         ])
         .run(tauri::generate_context!())
         .expect("error while running Local Store");
-}
-
-fn native_open_request(args: &[String]) -> Option<(String, String)> {
-    match args {
-        [command, name] if command == "open" && !name.is_empty() && !name.starts_with('-') => {
-            Some(("cli".into(), name.clone()))
-        }
-        _ => None,
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn native_cli_open_is_dispatched_without_browser_flag() {
-        assert_eq!(
-            native_open_request(&["open".into(), "My notes".into()]),
-            Some(("cli".into(), "My notes".into()))
-        );
-        assert!(
-            native_open_request(&["open".into(), "memos".into(), "--browser".into()]).is_none()
-        );
-        assert!(native_open_request(&["open".into(), "--browser".into()]).is_none());
-    }
-
-    #[test]
-    fn parses_primary_deep_link_with_one_percent_decoded_name_segment() {
-        assert_eq!(
-            parse_deep_link("localstore://open/My%20App"),
-            Some(("localstore".to_string(), "My App".to_string()))
-        );
-    }
-
-    #[test]
-    fn parses_legacy_deep_link() {
-        assert_eq!(
-            parse_deep_link(&format!("{LEGACY_URL_SCHEME}://open/penpot")),
-            Some((LEGACY_URL_SCHEME.to_string(), "penpot".to_string()))
-        );
-    }
-
-    #[test]
-    fn rejects_malformed_deep_links() {
-        for input in [
-            "https://open/penpot",
-            "localstore://wrong/penpot",
-            "localstore://open/",
-            "localstore://open/penpot/extra",
-            "localstore://open/penpot%2Fextra",
-            "localstore://open/open/penpot",
-            "localstore://open/penpot?x=1",
-            "localstore://open/penpot#fragment",
-            "localstore://open/bad%ZZ",
-            "localstore://open/bad%",
-            "localstore://open/%E0%A4%A",
-            "localstore://open/%FF",
-        ] {
-            assert_eq!(parse_deep_link(input), None, "accepted {input}");
-        }
-    }
 }

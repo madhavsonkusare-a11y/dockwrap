@@ -24,7 +24,7 @@ See the [refined brand deck](branding/brand-deck.html) and
 - **Discover** searches the embedded project catalog in bounded pages. A project
   website is presented as a source link and is never treated as your instance.
   Browse **1,672 projects**, four interest collections, combined filters and
-  source provenance. **508 catalog icons** are bundled for offline use.
+  source provenance. **752 catalog icons** are bundled for offline use.
 - **Preview install** supports Memos, n8n, and Uptime Kuma with pinned images,
   a Docker/Compose preflight check, persistent local data, health verification,
   and rollback when setup fails.
@@ -58,6 +58,9 @@ Add your own connection through the launcher or CLI:
 
 ```bash
 local-store doctor
+local-store doctor --json
+local-store catalog --capability preview_install --json
+local-store catalog --collection media --limit 24
 local-store install memos
 local-store install n8n
 local-store install uptime-kuma
@@ -74,6 +77,9 @@ local-store remove penpot
 local-store uninstall memos
 local-store --version
 ```
+
+See [CLI search, paging and diagnostics](docs/cli.md) for filters, JSON fields
+and exit codes.
 
 Compatibility (one release): previous registry locations and launch links are imported/recognized.
 
@@ -114,6 +120,14 @@ Compatibility (one release): previous registry locations and launch links are im
 
 See the [current 33-task ledger](docs/upgrade-status.md),
 [catalog contribution guide](docs/catalog.md) and [phase record](docs/catalog-phase.md).
+
+## Security and privacy
+
+Local Store makes no network requests of its own beyond the addresses you
+configure: no account, no telemetry, no analytics, and the catalog is browsed
+entirely offline. [Security and privacy](docs/security-and-privacy.md) covers
+what is stored, the boundaries the app enforces, what it does **not** protect
+you from, and how to report a vulnerability.
 
 ## License
 

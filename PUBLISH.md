@@ -2,7 +2,84 @@
 
 The GitHub repository and release automation are already connected. A pushed
 version tag triggers CI builds for Windows, macOS, and Linux and publishes the
-installers to the matching GitHub Release.
+installers to the matching GitHub Release. Builds depend on both quality and
+the minimum-Rust job; a failed MSRV check blocks publication.
+
+## Build targets and integrity metadata
+
+| Runner | Rust target | Intended artifact architecture |
+| --- | --- | --- |
+| `windows-2022` | `x86_64-pc-windows-msvc` | Windows x64 |
+| `macos-15` | `aarch64-apple-darwin` | macOS Apple Silicon |
+| `ubuntu-24.04` | `x86_64-unknown-linux-gnu` | Linux x64 |
+
+Runner architectures follow [GitHub's runner image list](https://github.com/actions/runner-images#available-images).
+This matrix does not provide native Intel macOS, Windows ARM or Linux ARM
+installers. Tests and Tauri builds use the same explicit target. Tauri CLI is
+pinned to 2.11.4. Confirm all target jobs on GitHub before claiming coverage.
+
+`scripts/prepare-release.py` stages the platform installers and a standalone CLI
+named `local-store-<target>` (plus `.exe` on Windows). It refuses a missing CLI,
+missing installer, duplicate filenames, input paths outside the build root or
+nonempty staging directory. Debug symbols and `.d` files are not release assets.
+
+Each target also publishes `SHA256SUMS-<target>.txt` and `build-<target>.json`.
+The JSON records version, source commit, target, workflow URL and file hashes;
+the checksum list also covers the JSON. This is unsigned build metadata on its
+own: it says what was built, not who built it.
+
+The release workflow additionally attests every published file with
+`actions/attest-build-provenance`, signed by the workflow's own OIDC identity.
+Anyone can check an artifact against it:
+
+```
+gh attestation verify "Local Store_<version>_x64-setup.exe" --repo <owner>/<repo>
+```
+
+That proves which workflow, at which commit, produced the file. It is **not**
+code signing and **not** an updater signature: Windows will still warn that the
+publisher is unknown, and there is no update channel. Task 30 remains
+outstanding and needs owner-generated keys — see below.
+
+On Linux/macOS, download the matching checksum list and all its listed files
+into one directory, then run `sha256sum --check SHA256SUMS-<target>.txt` (or
+`shasum -a 256 --check ...` on macOS). On Windows, use `Get-FileHash -Algorithm
+SHA256` to compare a downloaded artifact with its listed digest.
+
+## Code signing and updates (task 30, deferred)
+
+**Deferred by the owner on 8 September 2026, to be done after full deployment.**
+Nothing below is set up yet, and nothing in the build references an updater.
+While that is true there is no update channel: a new version reaches people
+only if they download and reinstall it, and Windows will warn about an unknown
+publisher on every install. Both are worth stating in release notes.
+
+When you pick it up:
+
+This needs credentials nobody but the project owner can create, so it is
+written down rather than done. An agent must not generate these keys: whoever
+holds the private key is the release identity, and that has to be a person.
+
+**Updater signing key.** Generate once, and never commit the private half:
+
+```
+cargo tauri signer generate -w ~/.tauri/local-store.key
+```
+
+Then add the public half to `tauri.conf.json` under `plugins.updater.pubkey`,
+set `bundle.createUpdaterArtifacts` to `true`, and give the workflow
+`TAURI_SIGNING_PRIVATE_KEY` and `TAURI_SIGNING_PRIVATE_KEY_PASSWORD` as
+repository secrets. Until `pubkey` is set, the updater plugin must stay out of
+the build: a placeholder key would produce update artifacts nobody can verify,
+which is worse than having none.
+
+**Windows code signing** is separate and needs a certificate from a CA. Without
+it, SmartScreen warns on every install; build provenance does not remove that
+warning, because it answers a different question.
+
+**Before any of this ships**, the update endpoint has to exist and be served
+over HTTPS, and the update UI has to let somebody decline. An updater that
+cannot be refused is a worse defect than no updater.
 
 ## Before tagging
 
@@ -11,13 +88,12 @@ installers to the matching GitHub Release.
    ```bash
    git status --short
    ```
-3. Run the verification suite:
-   ```bash
-   cargo build
-   cargo test
-   cargo tauri build
-   ```
-4. Commit the release changes to `main`.
+3. Run the verification suite in [`docs/agent-handoff.md`](docs/agent-handoff.md)
+   and review the remaining gates in [`docs/upgrade-status.md`](docs/upgrade-status.md).
+   Installer/native/container evidence is separate from unit-test success.
+4. Commit the release changes to `main` when publication is authorized. The tag
+   must be exactly `v` followed by the configured product version; staging fails
+   if a version tag disagrees with `tauri.conf.json`.
 
 ## Publish and verify
 

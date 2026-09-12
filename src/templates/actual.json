@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "id": "actual",
+  "display_name": "Actual",
+  "catalog_name": "Actual",
+  "description": "Local-first personal finance tool based on zero-sum budgeting, supporting synchronization across devices, custom rules, manual transaction importing (from QIF, OFX, and QFX files), and optional automatic synchronization with many banks.",
+  "category": "Money, Budgeting & Management",
+  "license": "MIT",
+  "source_url": "https://github.com/actualbudget/actual",
+  "documentation_url": "https://actualbudget.org",
+  "verified_at": "2026-09-10",
+  "lifecycle_proof": "docs/evidence/actual-qualification.json",
+  "origin": {
+    "importer": "caprover",
+    "repository": "caprover/one-click-apps",
+    "revision": "7f1f329125dde0cb915f47c8b33293eca45f7d0e",
+    "path": "public/v4/apps/actual.yml",
+    "license": "Apache-2.0"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "actualbudget/actual-server:23.8.1-alpine",
+        "source_url": "https://hub.docker.com/v2/repositories/actualbudget/actual-server/tags/23.8.1-alpine",
+        "checked_at": "2023-08-07",
+        "last_updated": "2023-08-07",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm/v6",
+          "linux/arm/v7",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:7a1bf548f58a00d67c956e0e32ffdd8d4722119a019df49815ae86a23538c8a4",
+          "linux/arm/v6": "sha256:c8a70ec6a787d98b4822ce9033ab1de3c10fc1fbe09afe212ba82feea7301e16",
+          "linux/arm/v7": "sha256:04ea809af760a0c7e75987c19ff16284bf18056ed259d789c5812cd764fb4b16",
+          "linux/arm64": "sha256:0e4d1777e288b11ab364513659736f07991900b5f5e7624614e32f873386f5fa"
+        }
+      }
+    ]
+  },
+  "promotion": {
+    "state": "withheld",
+    "reason": "The pinned image was last rebuilt on 2023-08-07, while the project has released many times since. Three years of unpatched base-image changes. Revisit when the definition pins a current release."
+  },
+  "data_storage": "Local Store managed folder / actual",
+  "risk_notes": [
+    "Creates 1 Docker container and publishes one port on this computer's loopback interface only.",
+    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Your budget and account history live only in this app's folder on this computer. Nothing is sent anywhere, and nothing is backed up for you."
+  ],
+  "fields": {},
+  "definition": "{\"captainVersion\": 4, \"services\": {\"$$cap_appname\": {\"image\": \"actualbudget/actual-server:$$cap_version\", \"volumes\": [\"$$cap_appname-data:/data\"], \"caproverExtra\": {\"containerHttpPort\": \"5006\"}}}, \"caproverOneClickApp\": {\"variables\": [{\"id\": \"$$cap_version\", \"label\": \"Actual Version\", \"defaultValue\": \"23.8.1-alpine\", \"description\": \"Paste version from release notes https://actualbudget.org/blog/tags/release or check out their Docker page for the list of all valid tags https://hub.docker.com/r/actualbudget/actual-server/tags\", \"validRegex\": \"/^([^\\\\s^\\\\/])+$/\"}], \"instructions\": {\"start\": \"Actual Budget is a super fast and privacy-focused app for managing your finances. At its heart is the well proven and much loved Envelope Budgeting methodology.\\n More details: https://actualbudget.org/\", \"end\": \"Actual has been successfully deployed! Make sure to enable HTTPS or Actual won't work\"}, \"displayName\": \"Actual\", \"isOfficial\": false, \"description\": \"Actual Budget is a super fast and privacy-focused app for managing your finances. At its heart is the well proven and much loved Envelope Budgeting methodology.\", \"documentation\": \"See https://actualbudget.org/docs/\"}}"
+}

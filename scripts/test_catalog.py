@@ -1,5 +1,6 @@
 """Offline importer regression tests: identity, provenance and untrusted inputs."""
 import importlib.util
+import io
 import json
 import tempfile
 import unittest
@@ -88,6 +89,33 @@ class CatalogTests(unittest.TestCase):
                 icons.validate_svg(svg)
         with self.assertRaisesRegex(ValueError, 'Unapproved icon host'):
             icons.fetch('http://127.0.0.1/private', 100)
+
+    def test_png_icons_require_valid_bounded_static_images(self):
+        from PIL import Image
+        def png(size=(32, 32), **options):
+            output = io.BytesIO()
+            Image.new('RGBA', size, 'orange').save(output, format='PNG', **options)
+            return output.getvalue()
+        data = png()
+        icons.validate_icon(data, '.png')
+        for invalid in [b'<svg/>', data[:30], png((2049, 1)),
+                        b'\x89PNG\r\n\x1a\n' + bytes(icons.MAX_BYTES),
+                        png(save_all=True, append_images=[Image.new('RGBA', (32, 32), 'blue')])]:
+            with self.assertRaises((ValueError, OSError, SyntaxError)):
+                icons.validate_icon(invalid, '.png')
+        with self.assertRaises(ValueError):
+            icons.validate_icon(data, '.html')
+
+    def test_icon_matching_uses_reviewed_aliases_and_png_fallback(self):
+        paths = {'svg/actual-budget.svg', 'png/actual-budget.png',
+                 'svg/actual-budget-light.svg', 'png/dashy.png', 'svg/readwise-reader.svg'}
+        self.assertEqual(icons.homarr_candidates('actual', paths, {'actual':'actual-budget'}),
+                         ['svg/actual-budget-light.svg', 'svg/actual-budget.svg', 'png/actual-budget.png'])
+        self.assertEqual(icons.homarr_candidates('dashy', paths, {}), ['png/dashy.png'])
+        # The Python feed reader is not Readwise Reader, despite a shared word.
+        self.assertEqual(icons.homarr_candidates('reader', paths, {}), [])
+        self.assertEqual(icons.homarr_candidates('actual', paths, {'actual':'svg/actual-budget.svg'}),
+                         ['svg/actual-budget.svg'])
 
 
 if __name__ == '__main__':

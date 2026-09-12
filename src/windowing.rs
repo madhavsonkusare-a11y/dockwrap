@@ -6,6 +6,48 @@ use tauri::{Manager, WebviewUrl, WebviewWindowBuilder};
 /// Injected into every webview. Intercepts window.open + clicks on external
 /// links and rewrites the navigation to a localhost marker URL that Rust
 /// catches in `on_navigation`, then launches the OS default browser.
+/// The marker a bridged link navigates to, which Rust catches and turns into
+/// an OS browser launch. Port 65535 on loopback is never served by anything;
+/// the navigation is intercepted before it can be attempted.
+pub const EXTERNAL_BRIDGE_PREFIX: &str = "http://127.0.0.1:65535/.external?";
+
+/// What an app window is allowed to do with a navigation it asked for.
+///
+/// An app window shows somebody else's web application. It holds no IPC
+/// permissions — the capability grant names only the launcher — but it can
+/// still try to navigate itself somewhere, and where it may go is a decision
+/// worth making in one place that can be read and tested.
+#[derive(Debug, PartialEq, Eq)]
+pub enum Navigation {
+    /// Same origin as the app was opened at: this is the app, so let it move.
+    Allow,
+    /// Somewhere else on the web. It opens in the OS browser, where the person
+    /// can see the address bar, rather than inside a window titled after their
+    /// app.
+    OpenExternally(String),
+    /// Not a web page at all. `file:`, `javascript:` and every custom scheme a
+    /// page might reach for are refused outright rather than handed to the OS,
+    /// which would decide what to run.
+    Block,
+}
+
+/// Decide a navigation without performing it.
+///
+/// `origin` is the ASCII serialization of the origin the window was opened at.
+/// Kept free of Tauri state so the policy can be exercised directly.
+pub fn decide_navigation(url: &tauri::Url, origin: &str) -> Navigation {
+    if let Some(query) = url.as_str().strip_prefix(EXTERNAL_BRIDGE_PREFIX) {
+        return Navigation::OpenExternally(percent_decode_str(query));
+    }
+    if !matches!(url.scheme(), "http" | "https") {
+        return Navigation::Block;
+    }
+    if url.origin().ascii_serialization() != origin {
+        return Navigation::OpenExternally(url.as_str().to_owned());
+    }
+    Navigation::Allow
+}
+
 pub const LINK_BRIDGE_JS: &str = r#"
 (function(){
   if (window.__localStoreBridge) return;
@@ -84,9 +126,8 @@ pub fn strict_percent_decode_path_segment(s: &str) -> Option<String> {
 /// OS browser launcher. Accepts only absolute http(s) URLs of at most 2048
 /// bytes; anything else (file:, javascript:, data:, malformed or oversized
 /// payloads) is rejected. Returns the URL unchanged when valid.
-// TODO(Task 16): wire into on_navigation and the launcher path; until then this
-// is only exercised by tests.
-#[allow(dead_code)]
+/// Reached from `on_navigation`, `build_window` and the `open_project` command,
+/// so every URL that can leave the app passes through here.
 pub fn validated_external_url(url: &str) -> Result<String, String> {
     if url.len() > 2048 || url.chars().any(|c| c.is_whitespace() || c.is_control()) {
         return Err("Use a URL without spaces, up to 2048 bytes.".into());
@@ -106,6 +147,21 @@ pub fn validated_external_url(url: &str) -> Result<String, String> {
 /// Open a URL in the user's default browser via the runtime module.
 pub use crate::runtime::launch_browser;
 
+/// Tell the launcher that a link could not be opened.
+///
+/// The failure happens inside an app window, which owns none of our UI and
+/// must never be sent launcher payloads, so the report goes to the launcher.
+/// Delivery is best effort: a missing launcher must not crash the app window.
+pub fn report_browser_failure(app: &tauri::AppHandle, error: &crate::error::AppError) {
+    use tauri::Emitter;
+    let _ = app.emit_to(
+        tauri::EventTarget::webview_window("launcher"),
+        BROWSER_FAILURE_EVENT,
+        error,
+    );
+}
+pub const BROWSER_FAILURE_EVENT: &str = "local-store://browser-failure";
+
 pub fn build_window(
     app: &tauri::AppHandle,
     id: &str,
@@ -123,28 +179,24 @@ pub fn build_window(
         window.show().map_err(|e| e.to_string())?;
         return window.set_focus().map_err(|e| e.to_string());
     }
-    let origin = parsed.origin();
+    let origin = parsed.origin().ascii_serialization();
     let builder = WebviewWindowBuilder::new(app, &label, WebviewUrl::External(parsed))
         .title(name)
         .inner_size(1200.0, 800.0)
         .resizable(true)
         .initialization_script(LINK_BRIDGE_JS)
-        .on_navigation(move |url| {
-            if let Some(query) = url
-                .as_str()
-                .strip_prefix("http://127.0.0.1:65535/.external?")
-            {
-                launch_browser(&percent_decode_str(query));
-                return false;
+        .on_navigation({
+            let handle = app.clone();
+            move |url| match decide_navigation(url, &origin) {
+                Navigation::Allow => true,
+                Navigation::Block => false,
+                Navigation::OpenExternally(target) => {
+                    if let Err(error) = launch_browser(&target) {
+                        report_browser_failure(&handle, &error);
+                    }
+                    false
+                }
             }
-            if !matches!(url.scheme(), "http" | "https") {
-                return false;
-            }
-            if url.origin() != origin {
-                launch_browser(url.as_str());
-                return false;
-            }
-            true
         });
     let builder = if let Some(image) = icon.and_then(|p| tauri::image::Image::from_path(p).ok()) {
         builder.icon(image).map_err(|e| e.to_string())?
@@ -160,6 +212,83 @@ pub fn build_window(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    fn origin_of(url: &str) -> String {
+        url.parse::<tauri::Url>()
+            .unwrap()
+            .origin()
+            .ascii_serialization()
+    }
+    fn decide(url: &str, opened_at: &str) -> Navigation {
+        decide_navigation(&url.parse::<tauri::Url>().unwrap(), &origin_of(opened_at))
+    }
+
+    /// An app window is the app, and nothing else. It holds no IPC permission
+    /// — the capability grant names only the launcher — so this is the whole
+    /// of what it can still reach for on its own.
+    #[test]
+    fn an_app_window_may_move_within_its_own_app_and_nowhere_else() {
+        let app = "http://localhost:5230";
+        // Its own pages, including paths, queries and fragments.
+        for target in [
+            "http://localhost:5230",
+            "http://localhost:5230/notes",
+            "http://localhost:5230/notes?tag=a#top",
+        ] {
+            assert_eq!(decide(target, app), Navigation::Allow, "{target}");
+        }
+
+        // Another origin is somebody else's site. It opens where a person can
+        // see the address bar, not inside a window titled after their app.
+        for target in [
+            "https://example.com/",
+            "http://localhost:5231/",
+            "https://localhost:5230/",
+            "http://127.0.0.1:5230/",
+        ] {
+            assert_eq!(
+                decide(target, app),
+                Navigation::OpenExternally(target.to_owned()),
+                "{target}"
+            );
+        }
+    }
+
+    /// Anything that is not a web page is refused rather than handed to the
+    /// OS, which would otherwise decide what to run.
+    #[test]
+    fn a_navigation_that_is_not_a_web_page_is_refused_outright() {
+        let app = "http://localhost:5230";
+        for target in [
+            "file:///C:/Windows/System32/drivers/etc/hosts",
+            "javascript:alert(1)",
+            "data:text/html,<script>alert(1)</script>",
+            "ms-settings:privacy",
+            "vbscript:msgbox(1)",
+            "localstore://open/immich",
+            "smb://server/share",
+        ] {
+            assert_eq!(decide(target, app), Navigation::Block, "{target}");
+        }
+    }
+
+    /// The bridge is how a page asks for the browser. It carries a target, so
+    /// what it carries has to be checked before it is launched.
+    #[test]
+    fn the_external_bridge_hands_its_target_on_without_following_it() {
+        let app = "http://localhost:5230";
+        let bridged = format!("{EXTERNAL_BRIDGE_PREFIX}https%3A%2F%2Fexample.com%2Fa%3Fb%3D1");
+        assert_eq!(
+            decide(&bridged, app),
+            Navigation::OpenExternally("https://example.com/a?b=1".into())
+        );
+        // Whatever comes out is still put through the same URL validation the
+        // launcher uses before anything is launched.
+        assert!(validated_external_url("https://example.com/a?b=1").is_ok());
+        for hostile in ["javascript:alert(1)", "file:///etc/passwd"] {
+            assert!(validated_external_url(hostile).is_err(), "{hostile}");
+        }
+    }
 
     // ---- Characterization: percent_decode_str (current v0.4 behavior) ----
     //

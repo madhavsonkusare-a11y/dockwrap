@@ -1,0 +1,60 @@
+{
+  "app": "flatnotes",
+  "passed": true,
+  "scope": "reviewed mapping, transaction, managed storage and first use on one host and one architecture; not a promotion",
+  "promotion": "approved",
+  "source_revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+  "images": [
+    "dullage/flatnotes:v5.5.5"
+  ],
+  "image_ids": {
+    "dullage/flatnotes:v5.5.5": "sha256:ca4b40ee7491aabf6b52bbb20ab140145cb96981d4b3fe96ab1e797ac6cd93e5"
+  },
+  "first_use": "the typed password signs in through a real browser, a wrong one does not,                  and a note written through the app is still there afterwards",
+  "steps": [
+    {
+      "step": "pull dullage/flatnotes:v5.5.5",
+      "passed": true
+    },
+    {
+      "step": "installs with one action",
+      "passed": true
+    },
+    {
+      "step": "answers on its address",
+      "passed": true
+    },
+    {
+      "step": "is usable first install",
+      "passed": true
+    },
+    {
+      "step": "survives a restart",
+      "passed": true
+    },
+    {
+      "step": "is usable after restart",
+      "passed": true
+    },
+    {
+      "step": "reinstalls over data it kept",
+      "passed": true
+    },
+    {
+      "step": "keeps the credentials it generated",
+      "passed": true
+    },
+    {
+      "step": "is usable after a keep-data reinstall",
+      "passed": true
+    },
+    {
+      "step": "removes everything it created",
+      "passed": true
+    },
+    {
+      "step": "leaves other containers alone",
+      "passed": true
+    }
+  ]
+}

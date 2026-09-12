@@ -1,0 +1,60 @@
+{
+  "app": "gotify",
+  "passed": true,
+  "scope": "candidate mapping, transaction, managed storage and first use, on one host and one architecture",
+  "promotion": "not reviewed",
+  "source_revision": "7f1f329125dde0cb915f47c8b33293eca45f7d0e",
+  "images": [
+    "gotify/server:2.1.7"
+  ],
+  "image_ids": {
+    "gotify/server:2.1.7": "sha256:b58c3ed7195dd3ddc6e1322621e60888334b62bfac82435991a8507b60c6fc90"
+  },
+  "first_use": "it opens a page with a clear next step, and the same page after a restart and reinstall",
+  "steps": [
+    {
+      "step": "pull gotify/server:2.1.7",
+      "passed": true
+    },
+    {
+      "step": "installs with one action",
+      "passed": true
+    },
+    {
+      "step": "answers on its address",
+      "passed": true
+    },
+    {
+      "step": "is usable first install",
+      "passed": true
+    },
+    {
+      "step": "survives a restart",
+      "passed": true
+    },
+    {
+      "step": "is usable after restart",
+      "passed": true
+    },
+    {
+      "step": "reinstalls over data it kept",
+      "passed": true
+    },
+    {
+      "step": "generates no credentials, so there are none to lose",
+      "passed": true
+    },
+    {
+      "step": "is usable after a keep-data reinstall",
+      "passed": true
+    },
+    {
+      "step": "removes everything it created",
+      "passed": true
+    },
+    {
+      "step": "leaves other containers alone",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "app": "ombi",
+  "passed": true,
+  "scope": "candidate mapping with automatically supplied answers, transaction, managed storage and first use, on one host and one architecture",
+  "promotion": "not reviewed",
+  "source_revision": "7f1f329125dde0cb915f47c8b33293eca45f7d0e",
+  "images": [
+    "linuxserver/ombi:development-v4.0.1446-ls143"
+  ],
+  "image_ids": {
+    "linuxserver/ombi:development-v4.0.1446-ls143": "sha256:dcc11aaab98a3d7e29f3900605d86921166252d301721cb4c4078c57c9c56b1d"
+  },
+  "first_use": "it opens a page with a clear next step, and the same page after a restart and reinstall",
+  "steps": [
+    {
+      "step": "pull linuxserver/ombi:development-v4.0.1446-ls143",
+      "passed": true
+    },
+    {
+      "step": "installs with one action",
+      "passed": true
+    },
+    {
+      "step": "answers on its address",
+      "passed": true
+    },
+    {
+      "step": "is usable first install",
+      "passed": true
+    },
+    {
+      "step": "survives a restart",
+      "passed": true
+    },
+    {
+      "step": "is usable after restart",
+      "passed": true
+    },
+    {
+      "step": "reinstalls over data it kept",
+      "passed": true
+    },
+    {
+      "step": "generates no credentials, so there are none to lose",
+      "passed": true
+    },
+    {
+      "step": "is usable after a keep-data reinstall",
+      "passed": true
+    },
+    {
+      "step": "removes everything it created",
+      "passed": true
+    },
+    {
+      "step": "leaves other containers alone",
+      "passed": true
+    }
+  ]
+}

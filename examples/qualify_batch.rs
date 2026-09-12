@@ -1,0 +1,444 @@
+//! Run ranked candidates through the qualification harness, in bulk.
+//!
+//! Everything up to now has said what *could* be installed. This says what
+//! actually works, which is the only number the v1 goal depends on and the one
+//! nobody has. It installs each candidate for real, uses it, restarts it,
+//! reinstalls it over its own data, and removes it — then records what
+//! happened.
+//!
+//! **This is evidence gathering, not offering.** A candidate qualified here is
+//! not thereby installable by anybody: `offerings` still resolves only
+//! reviewed recipes and approved templates, and nothing in this example
+//! changes that. It exists so a promotion decision has something to read.
+//!
+//! Resumable, because a hundred apps is hours and something will interrupt it.
+//! Run again and it picks up where it stopped.
+//!
+//!     LOCAL_STORE_RUN_DOCKER_TEST=1 cargo run --release --example qualify_batch -- --limit 10
+use local_store::qualification::{qualify_template, Batch, Evidence, Resume, ScriptProbe, Subject};
+use local_store::setup::{FieldKind, PlanTemplate};
+use std::collections::BTreeMap;
+use std::path::{Path, PathBuf};
+
+fn root() -> PathBuf {
+    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+}
+
+/// One candidate worth running, read from the ranking.
+struct Candidate {
+    id: String,
+    source: String,
+    revision: String,
+    path: String,
+}
+
+fn ranked(limit: usize) -> Vec<Candidate> {
+    let ranking: serde_json::Value = serde_json::from_str(
+        &std::fs::read_to_string(root().join("catalog/candidate-ranking.json"))
+            .expect("run scripts/rank-candidates.py first"),
+    )
+    .expect("the ranking is JSON");
+    let queue: serde_json::Value = serde_json::from_str(
+        &std::fs::read_to_string(root().join("catalog/candidate-queue.json"))
+            .expect("run scripts/build-candidate-queue.py first"),
+    )
+    .expect("the queue is JSON");
+
+    // Provenance lives in the queue; reach and licence live in the ranking.
+    let mut provenance: BTreeMap<(String, String), (String, String)> = BTreeMap::new();
+    let mut required: BTreeMap<(String, String), u64> = BTreeMap::new();
+    for entry in queue["candidates"].as_array().unwrap_or(&Vec::new()) {
+        let key = (
+            entry["id"].as_str().unwrap_or_default().to_owned(),
+            entry["source"].as_str().unwrap_or_default().to_owned(),
+        );
+        provenance.insert(
+            key.clone(),
+            (
+                entry["provenance"]["revision"]
+                    .as_str()
+                    .unwrap_or_default()
+                    .to_owned(),
+                entry["provenance"]["path"]
+                    .as_str()
+                    .unwrap_or_default()
+                    .to_owned(),
+            ),
+        );
+        required.insert(key, entry["required_inputs"].as_u64().unwrap_or(0));
+    }
+
+    let mut chosen = Vec::new();
+    let mut seen = std::collections::BTreeSet::new();
+    for entry in ranking["candidates"].as_array().unwrap_or(&Vec::new()) {
+        if chosen.len() >= limit {
+            break;
+        }
+        if entry["open_source"].as_bool() != Some(true)
+            || !entry["importable"].as_bool().unwrap_or(false)
+        {
+            continue;
+        }
+        let key = (
+            entry["id"].as_str().unwrap_or_default().to_owned(),
+            entry["source"].as_str().unwrap_or_default().to_owned(),
+        );
+        // Apps that ask questions are no longer skipped: `auto_answers` fills
+        // them, which matters because almost every required answer is a folder
+        // and folders are most of what the popular apps need.
+        let _ = &required;
+        // One definition per app: two sources packaging the same thing is one
+        // question, and the higher-ranked one is already first.
+        if !seen.insert(key.0.clone()) {
+            continue;
+        }
+        let Some((revision, path)) = provenance.get(&key) else {
+            continue;
+        };
+        if revision.is_empty() || path.is_empty() {
+            continue;
+        }
+        chosen.push(Candidate {
+            id: key.0,
+            source: key.1,
+            revision: revision.clone(),
+            path: path.clone(),
+        });
+    }
+    chosen
+}
+
+/// The pinned definition and its companion config, extracted beside the
+/// archives by `scripts/extract-definitions.py`.
+fn definition(candidate: &Candidate) -> Option<(String, Option<String>)> {
+    let base = root()
+        .join(".cache/definitions")
+        .join(&candidate.revision)
+        .join(Path::new(&candidate.path).parent()?);
+    // The extractor normalises CapRover's YAML into JSON, which is what its
+    // importer reads.
+    let mut file = PathBuf::from(Path::new(&candidate.path).file_name()?);
+    if matches!(
+        file.extension().and_then(|e| e.to_str()),
+        Some("yml" | "yaml")
+    ) {
+        file.set_extension("json");
+    }
+    let definition = std::fs::read_to_string(base.join(file)).ok()?;
+    let config = std::fs::read_to_string(base.join("config.json")).ok();
+    Some((definition, config))
+}
+
+/// Whether this machine already has an image, so the batch can tell what it
+/// pulled from what it found.
+/// Free space on the drive this project lives on, in gigabytes.
+fn free_gigabytes() -> Option<u64> {
+    let free = fs4::available_space(root()).ok()?;
+    Some(free / (1024 * 1024 * 1024))
+}
+
+fn image_present(image: &str) -> bool {
+    std::process::Command::new("docker")
+        .args(["image", "inspect", image])
+        .output()
+        .map(|out| out.status.success())
+        .unwrap_or(false)
+}
+
+/// Image families that are infrastructure rather than something a person
+/// installs from a desktop store.
+///
+/// They rank high because everything pulls them, and they fail the standard
+/// for the right reason — a bare web server serves a placeholder, a database
+/// serves no page at all. Skipping them up front saves a run rather than
+/// changing a verdict; the standard would refuse them anyway.
+const NOT_AN_APP: &[&str] = &[
+    "library/nginx",
+    "library/httpd",
+    "library/mongo",
+    "library/postgres",
+    "library/mariadb",
+    "library/mysql",
+    "library/redis",
+    "library/memcached",
+    "library/traefik",
+    "library/haproxy",
+    "library/rabbitmq",
+    "library/influxdb",
+    "library/elasticsearch",
+];
+
+fn is_infrastructure(images: &[String]) -> bool {
+    images.iter().any(|image| {
+        let repository = image
+            .rsplit_once(':')
+            .map_or(image.as_str(), |(name, _)| name);
+        let repository = if repository.contains('/') {
+            repository.to_owned()
+        } else {
+            format!("library/{repository}")
+        };
+        NOT_AN_APP.iter().any(|known| repository == *known)
+    })
+}
+
+/// Answers a batch can supply for itself, so an app that asks a question is
+/// not simply skipped.
+///
+/// Thirty-six of the open-source importable candidates need an answer, and
+/// almost all of those answers are a folder — which is exactly what a person
+/// would pick. Supplying them here is what makes those apps testable at all.
+/// It proves the app installs, opens and keeps its data; it does not prove a
+/// person chose well, and the evidence says the answers were supplied
+/// automatically so nobody reads it as more than it is.
+fn auto_answers(template: &PlanTemplate, scratch: &Path) -> BTreeMap<String, String> {
+    let mut answers = BTreeMap::new();
+    for field in &template.fields {
+        if !field.required {
+            continue;
+        }
+        let key = field.key.to_ascii_uppercase();
+        let value = match &field.kind {
+            FieldKind::Folder { .. } => {
+                // A real, empty folder of its own, which is what a person
+                // pointing at their music would be doing.
+                let folder = scratch.join("shared").join(field.key.to_ascii_lowercase());
+                if std::fs::create_dir_all(&folder).is_err() {
+                    continue;
+                }
+                folder.to_string_lossy().into_owned()
+            }
+            FieldKind::Choice { options } => match options.first() {
+                Some(first) => first.clone(),
+                None => continue,
+            },
+            FieldKind::Boolean => "false".to_owned(),
+            FieldKind::Number { min, .. } => min.to_string(),
+            FieldKind::Text { min_len, max_len }
+            | FieldKind::Pattern {
+                min_len, max_len, ..
+            } => {
+                if let Some(default) = &field.default {
+                    default.clone()
+                } else if key.contains("EMAIL") {
+                    "probe@example.invalid".to_owned()
+                } else if key.contains("PASSWORD") || key.contains("SECRET") {
+                    // Long enough for the strictest rule seen upstream, and
+                    // thrown away with the isolated root it lives in.
+                    "Qualify-probe-9271-not-a-real-secret".to_owned()
+                } else if key.contains("USER") || key.contains("NAME") {
+                    "local-store-probe".to_owned()
+                } else {
+                    let filler = "qualification-probe";
+                    let clamped = filler.chars().take(*max_len).collect::<String>();
+                    if clamped.chars().count() < *min_len {
+                        format!("{clamped}{}", "x".repeat(min_len - clamped.chars().count()))
+                    } else {
+                        clamped
+                    }
+                }
+            }
+        };
+        answers.insert(field.key.clone(), value);
+    }
+    answers
+}
+
+/// Whether a failure was about this machine rather than about the app.
+///
+/// A pull that ran out of time on a slow link, or a port that was busy, says
+/// nothing about whether an app works. Counting those as app failures makes a
+/// slow afternoon look like a bad catalogue, so they are retried once and
+/// reported separately.
+fn is_environmental(evidence: &Evidence) -> bool {
+    let Some(failure) = evidence.failure() else {
+        return false;
+    };
+    if failure.step.starts_with("pull ") {
+        return true;
+    }
+    let detail = failure.detail.as_deref().unwrap_or("").to_ascii_lowercase();
+    [
+        "timed out",
+        "timeout",
+        "connection",
+        "network",
+        "already in use",
+        "no space",
+    ]
+    .iter()
+    .any(|sign| detail.contains(sign))
+}
+
+fn main() {
+    if std::env::var("LOCAL_STORE_RUN_DOCKER_TEST").as_deref() != Ok("1") {
+        eprintln!("This starts real containers. Set LOCAL_STORE_RUN_DOCKER_TEST=1 to run it.");
+        std::process::exit(2);
+    }
+    let args: Vec<String> = std::env::args().collect();
+    let limit = args
+        .iter()
+        .position(|arg| arg == "--limit")
+        .and_then(|at| args.get(at + 1))
+        .and_then(|value| value.parse().ok())
+        .unwrap_or(10usize);
+    let keep_images = args.iter().any(|arg| arg == "--keep-images");
+    let resume = if args.iter().any(|arg| arg == "--retry-failures") {
+        Resume::RetryFailures
+    } else {
+        Resume::SkipRecorded
+    };
+
+    let results = root().join(".cache/qualification");
+    let batch = Batch::open(&results).expect("a results directory");
+    let candidates = ranked(limit);
+    let ids: Vec<String> = candidates.iter().map(|c| c.id.clone()).collect();
+    let todo = batch.remaining(&ids, resume);
+    println!(
+        "{} candidate(s) selected, {} already recorded, {} to run",
+        ids.len(),
+        ids.len() - todo.len(),
+        todo.len()
+    );
+
+    let scratch = root().join(".cache");
+    let (mut passed, mut failed, mut skipped) = (0, 0, 0);
+    let mut environmental_failures = 0;
+    for candidate in &candidates {
+        if !todo.iter().any(|id| **id == candidate.id) {
+            continue;
+        }
+        let Some((text, config)) = definition(candidate) else {
+            println!("{}: no pinned definition on disk, skipping", candidate.id);
+            skipped += 1;
+            continue;
+        };
+        let outcome = match candidate.source.as_str() {
+            "runtipi" => {
+                local_store::importers::runtipi::import(&candidate.id, &text, config.as_deref())
+            }
+            "caprover" => local_store::importers::caprover::import(&candidate.id, &text),
+            other => {
+                println!("{}: no importer for {other}", candidate.id);
+                skipped += 1;
+                continue;
+            }
+        };
+        let Some(template) = outcome.ok().and_then(|outcome| outcome.template) else {
+            println!("{}: no longer importable, skipping", candidate.id);
+            skipped += 1;
+            continue;
+        };
+        // Qualifying a hundred apps means pulling a hundred images, which is
+        // tens of gigabytes on somebody's real machine. Anything this run
+        // pulls, it removes; anything that was already there is left exactly
+        // as it was found.
+        let images: Vec<String> = template
+            .plan
+            .services
+            .iter()
+            .map(|service| service.image.clone())
+            .collect();
+        if is_infrastructure(&images) {
+            println!(
+                "{}: infrastructure rather than an app, skipping",
+                candidate.id
+            );
+            skipped += 1;
+            continue;
+        }
+        let answers = auto_answers(&template, &scratch);
+        let ours: Vec<String> = images
+            .iter()
+            .filter(|image| !image_present(image))
+            .cloned()
+            .collect();
+
+        let about = Subject {
+            app: candidate.id.clone(),
+            kind: if answers.is_empty() {
+                "candidate mapping"
+            } else {
+                "candidate mapping with automatically supplied answers"
+            },
+            // Nothing here is promoted. Saying so in the evidence keeps a
+            // passing run from reading like an approval.
+            promotion: "not reviewed".to_owned(),
+            source_revision: candidate.revision.clone(),
+        };
+        println!("{}: running…", candidate.id);
+        // The App Store standard, applied to every app the same way: it has to
+        // open something a person could act on, and it has to still be the same
+        // page after a restart and a reinstall. Passing this makes an app
+        // *tested*; only an app-specific probe makes one *verified*.
+        let probe = ScriptProbe::new(
+            root().join("scripts/standard-probe.mjs"),
+            "it opens a page with a clear next step, and the same page after a restart and reinstall",
+        )
+        .with_args(vec![scratch
+            .join(format!("standard-{}.json", candidate.id))
+            .to_string_lossy()
+            .into_owned()]);
+        let mut attempt = qualify_template(&about, template.clone(), &answers, &probe, &scratch);
+        // One retry, and only for a failure that was about this machine.
+        if let Ok(evidence) = &attempt {
+            if is_environmental(evidence) {
+                println!(
+                    "  {} — retrying once",
+                    evidence.failure().map_or("", |s| &s.step)
+                );
+                attempt = qualify_template(&about, template, &answers, &probe, &scratch);
+            }
+        }
+        match attempt {
+            Ok(evidence) => {
+                let ok = evidence.passed;
+                let environmental = is_environmental(&evidence);
+                if let Err(error) = batch.record(&evidence) {
+                    println!("  could not record: {}", error.message);
+                }
+                if ok {
+                    passed += 1;
+                    println!("  passed");
+                } else if environmental {
+                    environmental_failures += 1;
+                    println!(
+                        "  could not finish on this machine: {:?}",
+                        evidence.failure().map(|step| &step.step)
+                    );
+                } else {
+                    failed += 1;
+                    println!(
+                        "  FAILED at {:?}: {:?}",
+                        evidence.failure().map(|step| &step.step),
+                        evidence.failure().and_then(|step| step.detail.as_deref())
+                    );
+                }
+            }
+            Err(error) => {
+                failed += 1;
+                println!("  could not run: {}", error.message);
+            }
+        }
+        // Keeping images makes a re-run fast, which matters while a batch is
+        // being iterated on; removing them keeps a hundred apps from filling
+        // the disk. Keep them when asked, but never past the point where the
+        // machine is in trouble — a batch that fills somebody's drive is worse
+        // than a slow one.
+        let low_on_space = free_gigabytes().is_some_and(|free| free < 20);
+        if !keep_images || low_on_space {
+            if low_on_space && keep_images {
+                println!("  low on disk, removing the images this run pulled");
+            }
+            for image in &ours {
+                let _ = std::process::Command::new("docker")
+                    .args(["image", "rm", "-f", image])
+                    .output();
+            }
+        }
+    }
+    println!(
+        "passed {passed}, failed {failed}, skipped {skipped}, \
+         could not finish here {environmental_failures}"
+    );
+}

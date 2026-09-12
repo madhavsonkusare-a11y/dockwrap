@@ -4,6 +4,7 @@
 # Tauri
 /src-tauri/target/
 /gen/
+/dist/
 
 # Node
 node_modules/

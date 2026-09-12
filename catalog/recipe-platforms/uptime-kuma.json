@@ -1,0 +1,58 @@
+{
+  "creator": 623063,
+  "id": 1279746075,
+  "images": [
+    {
+      "architecture": "amd64",
+      "features": "",
+      "variant": null,
+      "digest": "sha256:c332e5ac61496258fae91483c9d2b50557cfd8e1584d98844feb9145d292c4d3",
+      "os": "linux",
+      "os_features": "",
+      "os_version": null,
+      "size": 600672402,
+      "status": "active",
+      "last_pulled": "2026-09-07T09:11:19.894870571Z",
+      "last_pushed": "2026-08-22T09:22:50.643010874Z"
+    },
+    {
+      "architecture": "arm64",
+      "features": "",
+      "variant": null,
+      "digest": "sha256:aa95b94e2909c92ac4c02981655ff7417cef8c03dfb37017c94186e5e7994153",
+      "os": "linux",
+      "os_features": "",
+      "os_version": null,
+      "size": 601186280,
+      "status": "active",
+      "last_pulled": "2026-09-07T09:04:25.755969046Z",
+      "last_pushed": "2026-08-22T09:22:49.953795618Z"
+    },
+    {
+      "architecture": "arm",
+      "features": "",
+      "variant": "v7",
+      "digest": "sha256:8ab4bc298bab7b88045b74a083e96f1857a6928c621128d023ab875d81be1641",
+      "os": "linux",
+      "os_features": "",
+      "os_version": null,
+      "size": 566615202,
+      "status": "active",
+      "last_pulled": "2026-09-07T09:12:25.989678164Z",
+      "last_pushed": "2026-08-22T09:22:51.359130485Z"
+    }
+  ],
+  "last_updated": "2026-08-22T09:22:56.169813Z",
+  "last_updater": 623063,
+  "last_updater_username": "louislam",
+  "name": "2.5.3",
+  "repository": 14853679,
+  "full_size": 600672402,
+  "v2": true,
+  "tag_status": "active",
+  "tag_last_pulled": "2026-09-07T09:12:25.989678164Z",
+  "tag_last_pushed": "2026-08-22T09:22:56.169813Z",
+  "media_type": "application/vnd.oci.image.index.v1+json",
+  "content_type": "image",
+  "digest": "sha256:3e24e96c89efff0e3a4b0698cbdd36c15ad3022371db57166e5588853002ee5c"
+}

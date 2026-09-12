@@ -1,0 +1,29 @@
+{
+  "checks": [
+    "installer exits 0 from a machine with no prior install and no registered scheme",
+    "installed tree carries the binary, uninstaller and every bundled notice, licence and catalog resource",
+    "Start Menu shortcut is created and launches the launcher window",
+    "both localstore:// and dockwrap:// schemes register to the installed binary",
+    "cold-start protocol activation launches one process and opens the named app",
+    "a second activation on either scheme reuses the running process rather than starting another",
+    "a malformed deep link is refused with a message naming the expected form, exit code 2",
+    "packaged CLI reads the v2 registry migrated from the legacy dockwrap format",
+    "packaged build takes the cross-process registry lock",
+    "silent uninstall exits 0 and removes the install tree, the Start Menu shortcut and the Add/Remove entry",
+    "uninstall preserves the user's app registry under %APPDATA%, which is data rather than program files"
+  ],
+  "host": "Windows 11 Home Single Language 10.0.26200",
+  "install_location": "%LOCALAPPDATA%\\Local Store",
+  "install_mode": "per-user, silent (/S), default location",
+  "installer": "Local Store_0.5.0-1_x64-setup.exe",
+  "installer_sha256": "637a0428d4243810f7cef93812f804c189faa0970497fb38b1be94c360af3c6c",
+  "not_covered": [
+    "code signing and updater signatures (task 30)",
+    "macOS and Linux installers",
+    "navigation isolation of native app windows (task 16)",
+    "scheme removal on uninstall was not observed directly: this session's shell reads a virtualised HKCU (paths resolve under Packages\\Claude_*\\LocalCache), so the registry state after uninstall could not be trusted. The generated installer.nsi does delete both Software\\Classes keys in its Uninstall section (lines 806 and 810); that is read from the script, not observed running."
+  ],
+  "passed": true,
+  "ran_at": "2026-09-08",
+  "scope": "clean Windows installer, shortcuts, protocol activation and packaged migration; unsigned build"
+}

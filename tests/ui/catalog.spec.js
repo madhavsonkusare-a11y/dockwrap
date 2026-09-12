@@ -81,6 +81,40 @@ test('settings exposes diagnostics and handles failure', async ({page}) => {
   await expect(page.getByRole('button',{name:'Run again'})).toBeEnabled();
 });
 
+test('new SVG and PNG identities render in cards and details offline', async ({page}) => {
+  await page.route('https://**', route => route.abort());
+  for (const name of ['Ampache', 'Appsmith', 'Dashy']) {
+    await page.getByRole('searchbox',{name:'Search apps',exact:true}).fill(name);
+    const button = page.getByRole('button',{name:`View ${name} details`,exact:true});
+    const card = page.locator('.app-card').filter({has:button});
+    await expect(card.locator('.app-avatar img')).toHaveAttribute('src', /^assets\/catalog\/[a-z0-9-]+\.(svg|png)$/);
+    await expect.poll(() => card.locator('.app-avatar img').evaluate(image => image.complete && image.naturalWidth > 0)).toBe(true);
+    await button.click();
+    await expect.poll(() => page.locator('.detail-heading img').evaluate(image => image.complete && image.naturalWidth > 0)).toBe(true);
+    await page.getByRole('button',{name:'Back to collection',exact:true}).click();
+    await expect(page.locator('#detail-dialog')).not.toBeVisible();
+  }
+});
+
+test('all bundled catalog artwork decodes without remote requests', async ({page}) => {
+  test.setTimeout(60_000);
+  await page.route('https://**', route => route.abort());
+  const paths = [...new Set(productionCatalog.map(app => app.icon).filter(Boolean))];
+  const failures = await page.evaluate(async paths => {
+    const failures = [];
+    // Small batches avoid overwhelming the preview server or image decoder.
+    for (let offset = 0; offset < paths.length; offset += 24) {
+      await Promise.all(paths.slice(offset, offset + 24).map(async path => {
+        const image = new Image();
+        image.src = path;
+        try { await image.decode(); } catch { failures.push(path); }
+      }));
+    }
+    return failures;
+  }, paths);
+  expect(failures).toEqual([]);
+});
+
 test('full catalog visual surfaces', async ({page}) => {
   await expect(page.locator('.app-card')).toHaveCount(12);
   await expect(page).toHaveScreenshot('catalog-desktop.png', {animations:'disabled'});

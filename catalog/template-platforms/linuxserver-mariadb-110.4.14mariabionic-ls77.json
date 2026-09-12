@@ -1,0 +1,57 @@
+{
+  "creator": 936126,
+  "id": 113427299,
+  "images": [
+    {
+      "architecture": "amd64",
+      "features": "",
+      "variant": null,
+      "digest": "sha256:5137b266a0d9adcdbeaa76b8f8c8713542139739ab71a303a98f3f0adec3d6aa",
+      "os": "linux",
+      "os_features": "",
+      "os_version": null,
+      "size": 112652085,
+      "status": "active",
+      "last_pulled": "2026-09-08T14:50:35.162140583Z",
+      "last_pushed": "2020-08-15T14:22:36Z"
+    },
+    {
+      "architecture": "arm",
+      "features": "",
+      "variant": null,
+      "digest": "sha256:5c182ca8c61b1251ad09658a3e379f97abfb59fb4384eb16ccfe0b82c3eff821",
+      "os": "linux",
+      "os_features": "",
+      "os_version": null,
+      "size": 101403674,
+      "status": "active",
+      "last_pulled": "2026-09-08T14:50:36.523398715Z",
+      "last_pushed": "2020-08-15T14:18:14Z"
+    },
+    {
+      "architecture": "arm64",
+      "features": "",
+      "variant": "v8",
+      "digest": "sha256:c316e47688b1d54f4a709ccbd6587da168cfe15c17e1c93a1630914c1270be0d",
+      "os": "linux",
+      "os_features": "",
+      "os_version": null,
+      "size": 109674381,
+      "status": "active",
+      "last_pulled": "2026-09-08T14:50:37.987117995Z",
+      "last_pushed": "2020-08-15T14:19:36Z"
+    }
+  ],
+  "last_updated": "2020-08-15T14:22:56.241889Z",
+  "last_updater": 936126,
+  "last_updater_username": "linuxserverci",
+  "name": "110.4.14mariabionic-ls77",
+  "repository": 356920,
+  "full_size": 112652085,
+  "v2": true,
+  "tag_status": "active",
+  "tag_last_pulled": "2026-09-08T14:50:37.987117995Z",
+  "tag_last_pushed": "2020-08-15T14:22:56.241889Z",
+  "media_type": "application/vnd.docker.distribution.manifest.list.v2+json",
+  "content_type": "image"
+}

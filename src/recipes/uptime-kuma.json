@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 3,
   "id": "uptime-kuma",
   "display_name": "Uptime Kuma",
   "catalog_name": "Uptime Kuma",
@@ -13,7 +13,8 @@
   "verified_at": "2026-09-05",
   "launch_url": "http://localhost:3001",
   "health_url": "http://localhost:3001",
-  "port": 3001,
+  "host_port": 3001,
+  "container_port": 3001,
   "data_directories": [
     "data"
   ],
@@ -24,5 +25,20 @@
     "Stores the SQLite database and uploaded assets in the Local Store app directory.",
     "Monitoring private network services may reveal their addresses inside Uptime Kuma's database."
   ],
-  "compose": "services:\n  uptime-kuma:\n    image: louislam/uptime-kuma:2.5.3\n    container_name: local-store-uptime-kuma\n    restart: unless-stopped\n    ports:\n      - \"127.0.0.1:3001:3001\"\n    volumes:\n      - ./data:/app/data\n"
+  "compose": "services:\n  uptime-kuma:\n    image: louislam/uptime-kuma:2.5.3\n    container_name: local-store-uptime-kuma\n    restart: unless-stopped\n    ports:\n      - \"127.0.0.1:3001:3001\"\n    volumes:\n      - ./data:/app/data\n",
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm/v7",
+      "linux/arm64"
+    ],
+    "image_audit": {
+      "source_url": "https://hub.docker.com/v2/repositories/louislam/uptime-kuma/tags/2.5.3",
+      "checked_at": "2026-09-07",
+      "index_digest": "sha256:3e24e96c89efff0e3a4b0698cbdd36c15ad3022371db57166e5588853002ee5c"
+    }
+  }
 }

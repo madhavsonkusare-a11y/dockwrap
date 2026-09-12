@@ -2,18 +2,42 @@
 name = "local-store"
 version = "0.5.0-1"
 edition = "2021"
-rust-version = "1.77.2"
+rust-version = "1.88.0"
 license = "MIT"
 repository = "https://github.com/madhavsonkusare-a11y/local-store"
 readme = "README.md"
 description = "Native desktop windows and reviewed setup recipes for self-hosted web apps."
 
 [dependencies]
-tauri = { version = "2", features = ["devtools", "image-png"] }
+tauri = { version = "2", features = ["image-png"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 open = "5.4.3"
-windows-sys = { version = "0.61", features = ["Win32_System_Console"] }
+windows-sys = { version = "0.61", features = [
+    "Win32_Foundation",
+    "Win32_Security",
+    "Win32_System_Console",
+    "Win32_System_JobObjects",
+] }
+pico-args = { version = "=0.5.0", features = ["eq-separator"] }
+tauri-plugin-single-instance = { version = "=2.4.4", features = ["deep-link"] }
+tauri-plugin-deep-link = "=2.4.10"
+# Cross-process registry locking. Default feature is `sync` only, so no async
+# runtime is pulled in; its MSRV of 1.75 sits below ours.
+fs4 = "=1.1.0"
+# Operating-system CSPRNG for generated secrets: BCryptGenRandom on Windows,
+# getrandom(2) on Linux, arc4random on the BSDs. Already in the graph through
+# Tauri, MIT OR Apache-2.0, and its MSRV of 1.85 sits below ours. A generated
+# database password must come from the OS, never from a seeded PRNG.
+getrandom = "=0.4.3"
+# Already present through Tauri; bounded regex validation for imported fields.
+regex = "=1.13.1"
+
+# Process-group signalling for the bounded runtime process runner. `libc` is
+# already in the dependency graph through Tauri; its MSRV is far below the
+# declared minimum, so adopting it directly does not raise ours.
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
 
 [build-dependencies]
 serde = { version = "1", features = ["derive"] }

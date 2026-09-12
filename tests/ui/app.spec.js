@@ -56,7 +56,9 @@ test('connect validates, preserves input after error, and appears in My Apps', a
 
 test('My Apps handles open errors and confirms non-destructive removal', async ({page}) => {
  await page.getByRole('button',{name:/My Apps/}).click(); await page.getByRole('button',{name:/Open/}).click();
- expect(await page.evaluate(() => window.__calls.at(-1).command)).toBe('open_app');
+ // Readiness may finish after Open; assert the action itself, not IPC ordering.
+ expect(await page.evaluate(() => window.__calls.filter(call => call.command === 'open_app')))
+   .toEqual([{command:'open_app', args:{id:'studio-notes'}}]);
  await page.getByRole('button',{name:'Remove Studio notes'}).click();
  await expect(page.getByText('The server and its data stay untouched.')).toBeVisible(); await page.getByRole('button',{name:'Remove connection'}).click();
  await expect(page.getByRole('heading',{name:'Your apps belong here.'})).toBeVisible();
@@ -169,4 +171,22 @@ test('review and personal workspace visual surfaces', async ({page}) => {
  await page.getByRole('button',{name:'My Apps',exact:true}).click();
  await expect(page.getByRole('heading',{name:'Studio notes',exact:true})).toBeVisible();
  await expect(page).toHaveScreenshot('my-apps.png', {animations:'disabled'});
+});
+
+
+test('structured command failure stays readable and preserves connection input', async ({page}) => {
+ await page.evaluate(() => {
+   const original = window.__TAURI__.core.invoke;
+   window.__TAURI__.core.invoke = async (command, args) => {
+     if (command === 'add_app') throw {code: 'storage_io', message: 'Could not save your app. Check folder access.'};
+     return original(command, args);
+   };
+ });
+ await page.getByRole('button', {name:'Connect an app'}).first().click();
+ await page.getByLabel('App name').fill('Home photos');
+ await page.getByLabel('Instance address').fill('http://192.168.1.5:2283');
+ await page.getByRole('button', {name:/Add to My Apps/}).click();
+ await expect(page.getByRole('alert')).toContainText('Could not save your app. Check folder access.');
+ await expect(page.getByLabel('App name')).toHaveValue('Home photos');
+ await expect(page.getByRole('button', {name:/Add to My Apps/})).toBeEnabled();
 });

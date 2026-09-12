@@ -74,9 +74,10 @@ impl Catalog {
                 return Err(format!("Missing source provenance: {}", entry.id));
             }
             if let Some(icon) = &entry.icon {
-                let stem = icon
-                    .strip_prefix("assets/catalog/")
-                    .and_then(|name| name.strip_suffix(".svg"));
+                let stem = icon.strip_prefix("assets/catalog/").and_then(|name| {
+                    name.strip_suffix(".svg")
+                        .or_else(|| name.strip_suffix(".png"))
+                });
                 if !stem.is_some_and(|name| {
                     !name.is_empty()
                         && name
