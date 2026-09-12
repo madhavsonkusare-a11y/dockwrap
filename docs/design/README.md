@@ -121,23 +121,29 @@ Two toggles under the frame demo the failure paths: **Docker missing** and
 
 ### Backend changes it would need
 
-The prototype assumes three things the current backend does not do:
+Reconciled on September 12, 2026 against the shipped launcher.
 
-1. **Editable port before install.** The recipe port is currently pinned. The flow
-   lets the user change it on the Choose step and again from the `port_in_use`
-   error. This is the single highest-value addition — port conflict is the most
-   likely install failure.
-2. **A first-run flag.** Nothing currently records that setup has been completed.
-3. **Preflight on launch.** The wizard runs `doctor` on the welcome screen so a
-   passing system never costs the user a step. Today `doctor` is only reachable
-   from Settings.
+1. ~~**Editable port before install.**~~ **Already implemented.** `install_app` takes
+   a host port and `Recipe::with_host_port` applies it; `tests/ui/operations.spec.js`
+   covers choosing a port, the pinned default, and refusing an unusable one. The flow
+   here matches what ships.
+2. **A first-run flag.** Still missing. Nothing records that setup has been completed,
+   so First Run cannot open by itself.
+3. **Preflight on launch.** Still missing as a flow. `doctor` exists and is reachable
+   from Settings; running it on the welcome screen is a wiring change, not a new
+   command.
+
+The V2 design supersedes these mockups. Its full backend dependency list is
+`docs/design/v2/BACKEND-DEPENDENCIES.md`.
 
 ## Known gaps
 
 - **Not implemented.** No `src/` file was changed. These are mockups.
 - **Screenshot baselines will break.** `tests/ui/*-snapshots/` compares at
   1280×800, 800×600 and 400×860 with a 1% diff ratio. Adopting any of this means
-  regenerating every baseline in the same commit.
+  regenerating every baseline in the same commit. Under the approved V2 design the
+  800×600 and 400×860 baselines are retired: nothing below 1180px wide is designed
+  (`docs/design/v2/HANDOFF.md`).
 - **No user testing.** The style scoring is a weighted decision model applied
   consistently, not measurement. `ux-evaluation-toolkit.html` includes a
   three-test protocol (50 ms first impression, install-screen credibility, timed

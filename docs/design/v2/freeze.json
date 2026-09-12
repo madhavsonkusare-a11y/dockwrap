@@ -1,8 +1,8 @@
 {
   "note": "Local Store V2 design freeze. Change only through an approved design decision, then re-run scripts/check-v2-freeze.mjs --write.",
-  "status": "proposed",
-  "approvedBy": null,
-  "approvedOn": null,
+  "status": "approved",
+  "approvedBy": "Madhav Sonkusare",
+  "approvedOn": "2026-09-12",
   "recordedOn": "2026-09-11",
   "counts": {
     "tokens": 135,

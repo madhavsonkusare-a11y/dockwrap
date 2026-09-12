@@ -1,7 +1,7 @@
 # Local Store V2 backend dependencies and prototype annotations
 
 Updated: September 11, 2026  
-Status: **proposed**. It takes effect with the handoff approval.  
+Status: **approved** by Madhav Sonkusare on September 12, 2026.  
 Source of evidence: `CAPABILITY-MATRIX.md`, which lists every backend field, command,
 and event behind each claim. The status words are the same: **available** (a current
 command or model returns it), **derivable** (existing data plus a small typed
@@ -21,7 +21,7 @@ launcher exposes 16 commands: `list_apps`, `add_app`, `remove_app_cmd`,
 | --- | --- | --- | --- | --- |
 | Rail Docker status card | Ready, checking, unavailable; engine version | available | `doctor` (`DoctorReport.ready`, `docker`, `compose` checks) | Ship |
 | Rail counts | Discover total, My Apps count | available / derivable | `search_catalog` total, length of `list_apps` | Ship |
-| Search command (Ctrl K) | Search across apps, projects, settings | concept | No aggregation contract | **Omit** until a search contract exists. Catalog search on Discover and filtering in My Apps ship now |
+| Search command (Ctrl K) | Search across apps, projects, settings | concept | No aggregation contract | **Decided 2026-09-12: omit.** Catalog search on Discover and filtering in My Apps ship instead. Revisit if a search contract is built |
 | Overview status summary | Headline, prerequisites, counts by runtime and status | available / derivable | `list_apps`, `AppStatus`, `Readiness`, `doctor` | Ship the counts through a typed summary projection |
 | Overview Needs attention | Stopped, error, and unreachable apps; retained setups | available | `AppStatus`, `status_error`, `Readiness`, `inspect_recovery` | Ship |
 | Overview Recent activity | Session operations | derivable (session only) | `OperationEvent` stream | Ship as "This session". Durable history is a concept |
@@ -38,7 +38,7 @@ launcher exposes 16 commands: `list_apps`, `add_app`, `remove_app_cmd`,
 | Install review: restart policy, container name | Typed facts | derivable | Present only inside the Compose text | Needs a typed projection; until then, show them in the Compose disclosure only |
 | Install progress | Seven stages including rollback; cancel before the commit | available | `OperationEvent.stage`, `cancel_id` | Ship. No percentages or download sizes (concept) |
 | Install results | Success, failure matrix, rollback failed | available | Typed install errors | Ship. Retry stays withheld after a rollback failure |
-| Activity | Operation list, filters, expandable detail | concept (durable) / derivable (session) | `OperationEvent` is not persisted | Ship a session-only list labelled "This session". Durable history, duration, and metrics need a persistence contract |
+| Activity | Operation list, filters, expandable detail | concept (durable) / derivable (session) | `OperationEvent` is not persisted | **Decided 2026-09-12:** ship session-only, labelled "This session". Durable history, duration, and metrics come later and need a persistence contract |
 | Settings Docker check | Engine and Compose rows, re-run | available | `doctor` | Ship |
 | Settings catalog facts | Counts, snapshot, local icons | available | `CatalogPage` | Ship |
 | Settings Introduction card | Re-open the introduction | concept | No completion flag | Ship only with the First Run completion flag |
@@ -57,9 +57,10 @@ These are the only new backend requirements. Everything else ships on current co
 3. **Typed recipe projection.** Restart policy and container names as fields.
 4. **Overview summary projection.** Counts by runtime type, status, and readiness in
    one call, so Overview doesn't recompute them from rows.
-5. **Durable activity history** (optional for the first release). Persisted operation
-   events with start and end times. Without it, Activity ships session-only.
-6. **Search aggregation** (optional). Without it, the Ctrl K command is omitted.
+5. **Durable activity history** — deferred past the first release by the 2026-09-12
+   decision. Persisted operation events with start and end times. Until then, Activity
+   is session-only.
+6. **Search aggregation** — not being built. The Ctrl K command is omitted.
 
 ## Prototype annotations: remove every one (F-22)
 

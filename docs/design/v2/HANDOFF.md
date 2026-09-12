@@ -1,10 +1,8 @@
 # Local Store V2 implementation handoff
 
 Updated: September 12, 2026  
-Status: **Phase 16 — prepared, awaiting approval.** The design freeze, the screen
-inventory, the component specifications, the copy rules, the asset requirements, the
-implementation sequence, and the acceptance tests are written. Nothing is locked until
-the prototype and this handoff are approved.
+Status: **approved.** Madhav Sonkusare approved the prototype and this handoff on
+September 12, 2026. The freeze is locked, and implementation can start.
 
 This is the entry point for whoever implements V2 under `src/`. It assumes no memory of
 the design phases.
@@ -48,8 +46,7 @@ relevant document, followed by `--write` and a re-run of the phase suites. Produ
 copies `tokens.css` and `components.css` verbatim rather than re-deriving values, so the
 same check guards the shipped product.
 
-The freeze reports `status: "proposed"`. On approval, set `status`, `approvedBy`, and
-`approvedOn`.
+The freeze reports `status: "approved"`, with the approver and the date.
 
 ## Screens and navigation
 
@@ -190,15 +187,22 @@ at 1440×900, 1280×800, and 1280×640 at 1.5×.
 
 A and B are release blockers. So are E and H.
 
-## Open decisions
+## Decisions
 
-1. **Approve the prototype and this handoff.** Until then the freeze stays proposed.
-2. **The launcher window (V-16).** `src/main.rs` opens at 1180×760 with a minimum of
-   800×600. The prototype is verified at 1180×760, 1366×688, and 1280×640. Recommended:
-   open at 1280×800 clamped to the work area, with a minimum no smaller than the
-   smallest verified size.
-3. **Narrow layouts.** V2 has no layout below 1180px wide. Decision 2 decides whether
-   the 400×860 and 800×600 baselines are retired or V2 gains a narrow layout.
-4. **Land `feat/catalog-icons`** before or with V2, so every catalog entry has a logo.
-5. **Activity.** Ship session-only, or build durable history first.
-6. **The Ctrl K command.** Omit, or build the search aggregation contract.
+Settled on September 12, 2026 by Madhav Sonkusare.
+
+1. **The prototype and this handoff are approved.** The freeze is locked.
+2. **The launcher window.** Open at **1280×800**, clamped to the monitor's work area,
+   with `min_inner_size` **1180×640** — the smallest width and height verified. Apply it
+   in `src/main.rs` during Step 2; it is not a design-package change.
+3. **Narrow layouts.** V2 has no layout below 1180px wide, and none will be built. The
+   `discover-400x860` and `discover-800x600` baselines are retired rather than
+   re-recorded.
+4. **Activity ships session-only**, labelled "This session". Durable history comes
+   later and does not change the screen's design.
+5. **The Ctrl K command is omitted.** Catalog search and app filtering ship instead.
+   The prototype keeps it flagged as a concept.
+
+Still outstanding, and not a design decision: **land `feat/catalog-icons`** before or
+with V2, so every catalog entry has a logo. Without it, 924 of 1,676 entries fall back
+to a monogram.

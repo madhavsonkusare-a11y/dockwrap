@@ -1,6 +1,6 @@
 # Local Store V2 design tasks
 
-Status: **in progress — phases 1–15 complete; phase 16 prepared, awaiting approval**  
+Status: **complete — approved by Madhav Sonkusare on September 12, 2026**  
 Scope: complete the laptop-first V2 visual design, interactive prototype,
 evaluation, and implementation handoff. Production integration under `src/`
 starts only after this ledger is complete and approved.
@@ -27,16 +27,21 @@ V2 design is complete when:
 
 ## Phase 0 — Preserve context and establish constraints
 
-- [ ] Confirm laptop-only scope for V2; do not design mobile layouts.
-- [ ] Set the minimum supported design viewport to 1280×800.
-- [ ] Set the primary design viewport to 1440×900.
-- [ ] Record Windows as the current shipping platform.
-- [ ] Treat the existing Ember work as exploration, not a pixel-perfect mandate.
-- [ ] Keep all V2 work isolated under `docs/design/v2/` until approval.
-- [ ] Do not modify the production frontend under `src/` during the design phase.
-- [ ] Add a visible prototype label for data or features that do not yet exist.
-- [ ] Reconcile outdated statements in `docs/design/README.md`, including the
+- [x] Confirm laptop-only scope for V2; do not design mobile layouts.
+- [x] Set the minimum supported design viewport to 1280×800.
+  Verified at 1280×800 and 1440×900, and operable down to 1280×640 (Phase 15, V-16).
+- [x] Set the primary design viewport to 1440×900.
+- [x] Record Windows as the current shipping platform.
+- [x] Treat the existing Ember work as exploration, not a pixel-perfect mandate.
+- [x] Keep all V2 work isolated under `docs/design/v2/` until approval.
+  No file under `src/` was changed in any design phase.
+- [x] Do not modify the production frontend under `src/` during the design phase.
+- [x] Add a visible prototype label for data or features that do not yet exist.
+  Every one is listed with its production replacement in `BACKEND-DEPENDENCIES.md`.
+- [x] Reconcile outdated statements in `docs/design/README.md`, including the
   already-implemented editable port support.
+  Done 2026-09-12: editable port is implemented and tested; the first-run flag and
+  launch preflight remain open.
 
 ## Phase 1 — Product and backend capability inventory
 
@@ -292,15 +297,14 @@ Run `scripts/check-v2-visual.mjs`, `scripts/check-v2-visual-fixes.mjs`, and
 
 ## Phase 16 — Final design handoff
 
-- [ ] Freeze the approved V2 tokens.
-  Prepared: `docs/design/v2/freeze.json` records 135 tokens across three contexts and
-  five font files by SHA-256; `scripts/check-v2-freeze.mjs` fails on drift. The status
-  stays `proposed` until approval.
-- [ ] Freeze the approved navigation and screen inventory.
-  Prepared: 9 screens and 88 states in the same freeze; the inventory is in
-  `HANDOFF.md`.
-- [ ] Freeze component anatomy and interaction-state specifications.
-  Prepared: `COMPONENT-SPECS.md`.
+- [x] Freeze the approved V2 tokens.
+  `docs/design/v2/freeze.json` records 135 tokens across three contexts and five font
+  files by SHA-256; `scripts/check-v2-freeze.mjs` fails on drift. Locked on
+  2026-09-12.
+- [x] Freeze the approved navigation and screen inventory.
+  9 screens and 88 states in the same freeze; the inventory is in `HANDOFF.md`.
+- [x] Freeze component anatomy and interaction-state specifications.
+  `COMPONENT-SPECS.md`.
 - [x] Document copy rules, terminology, and machine-fact formatting.
   `COPY-RULES.md`. F-21 is resolved and applied to the prototype: the Overview, My
   Apps, Activity, and Settings eyebrows are gone; Discover, Install, and Recovery keep
@@ -320,25 +324,37 @@ Run `scripts/check-v2-visual.mjs`, `scripts/check-v2-visual-fixes.mjs`, and
   `HANDOFF.md`, mapped against `2d7782e`.
 - [x] Produce an implementation sequence that preserves working functionality.
   Eleven steps in `HANDOFF.md`, each with exit criteria.
-- [ ] Reconcile the launcher window with the design range (Phase 15 V-16).
-  `src/main.rs` opens at 1180×760 with a minimum of 800×600. The prototype is now
-  verified at 1180×760, 1366×688, and 1280×640 (focused-task commits pin below 760px
-  of height). Decide the default size (1280×800, clamped to the work area) and a
-  minimum no smaller than the smallest verified size. The production baselines at
-  400×860 and 800×600 depend on this decision.
+- [x] Reconcile the launcher window with the design range (Phase 15 V-16).
+  Decided 2026-09-12: open at 1280×800 clamped to the monitor's work area, with
+  `min_inner_size` 1180×640 — the smallest width and height verified. Implementation
+  applies it in `src/main.rs` at Step 2. The 400×860 and 800×600 production baselines
+  are retired.
 - [x] Identify which existing Playwright baselines will be replaced.
   Ten screenshot baselines, each with the step that re-records it. The 52 behaviour
   tests are ported, never dropped.
 - [x] Define production acceptance tests before implementation starts.
   Eleven tests (A–K) in `HANDOFF.md`, reusing the Phase 14 and 15 scripts.
-- [ ] Obtain explicit approval of the final prototype and handoff.
+- [x] Obtain explicit approval of the final prototype and handoff.
+  Approved by Madhav Sonkusare on 2026-09-12, together with four scope decisions:
+  the launcher opens at 1280×800 with a 1180×640 minimum; no layout below 1180px
+  wide, so the 400×860 and 800×600 baselines are retired; Activity ships
+  session-only; the Ctrl+K command is omitted.
 
 ## V2 design completion record
 
-- [ ] All phases above are complete or have explicitly approved exceptions.
-- [ ] Final prototype approved at 1280×800.
-- [ ] Final prototype approved at 1440×900.
-- [ ] Evaluation findings resolved or accepted.
-- [ ] Icon coverage and provenance plan approved.
-- [ ] Production implementation plan approved.
-- [ ] V2 design marked complete with completion date and approver.
+- [x] All phases above are complete or have explicitly approved exceptions.
+- [x] Final prototype approved at 1280×800.
+- [x] Final prototype approved at 1440×900.
+- [x] Evaluation findings resolved or accepted.
+  Phase 14: 26 findings, 23 resolved, 1 withdrawn, 2 carried into Phase 16 and
+  resolved there (F-21, F-22). Phase 15: 18 findings, all resolved.
+- [x] Icon coverage and provenance plan approved.
+  `ICON-PIPELINE.md` and `PRODUCTION-ASSETS.md`. Landing `feat/catalog-icons` is the
+  one outstanding action: without it, 924 of 1,676 catalog entries fall back to a
+  monogram.
+- [x] Production implementation plan approved.
+  `HANDOFF.md`: eleven steps with exit criteria, the baselines to replace, and
+  eleven acceptance tests.
+- [x] V2 design marked complete with completion date and approver.
+  **Completed 2026-09-12. Approver: Madhav Sonkusare.** The package is committed on
+  the `design/v2` branch.

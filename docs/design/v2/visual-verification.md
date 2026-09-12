@@ -1,9 +1,8 @@
 # Local Store V2 visual verification
 
 Updated: September 11, 2026  
-Status: **Phase 15 complete** — every hard check passes at 1440×900, 1280×800, and in the
-1280×640 short window. Approval of the visual set is pending. The launcher's window size
-is a Phase 16 implementation decision.  
+Status: **Phase 15 complete and approved** (Madhav Sonkusare, September 12, 2026) —
+every hard check passes at 1440×900, 1280×800, and in the 1280×640 short window.  
 Targets: `index.html`, `prototype.css`, `components.css`, `prototype.js`, `stress-fixtures.js`
 
 ## Result
@@ -104,7 +103,7 @@ Severity uses the Phase 14 scale (0 none … 4 blocks the task).
 | V-13 | 3 | Every app logo | `max-height: 100%` resolved against an auto grid track, so any logo taller than wide overflowed its frame and painted over the card copy. 137 of the 1,672 measurable catalog logos (8%) are taller than wide, and Paperless-ngx spilled 9px in the default fixtures. | `.app-icon` gets definite tracks (`grid-template: 100% / 100%`). The probe now reports any logo outside its frame. | Resolved |
 | V-14 | 2 | Discover, project drawer | In windows 760px tall or shorter, the drawer's commit ("Review install", "Save linked app") scrolled out of view. It passed at 1280×800; the real-window sweep found it. | The drawer's action row is sticky, with a divider, and is always visible. | Resolved |
 | V-15 | 1 | Discover cards, real catalog data | A project with no stated architecture rendered a dangling separator ("WTFPL ·"). | Empty facts are omitted. | Resolved |
-| V-16 | 3 | Launcher window vs design range | `src/main.rs` opens the launcher at 1180×760 with a minimum of 800×600, below the 1280×800 design minimum. Realistic maximised windows are smaller still: 1366×688 (1366×768 panel) and 1280×640 (1920×1080 at 150%, Windows' default for that panel). At those sizes seven focused-task commits fell below the fold (listed below). | In windows under 760px tall, the commit row of an Install or Recovery result and of First Run's narrow states becomes a footer pinned to the window bottom, with a divider; at the end of the scroll it settles back into the panel. The workspace gets matching scroll padding, so a field focused after a refused port lands clear of the footer. First Run's shell clips with `overflow: clip`, not `hidden`, so the footer can stick. 1280×640 is now a gated size. | Resolved in the prototype; the launcher's default and minimum size go to Phase 16 |
+| V-16 | 3 | Launcher window vs design range | `src/main.rs` opens the launcher at 1180×760 with a minimum of 800×600, below the 1280×800 design minimum. Realistic maximised windows are smaller still: 1366×688 (1366×768 panel) and 1280×640 (1920×1080 at 150%, Windows' default for that panel). At those sizes seven focused-task commits fell below the fold (listed below). | In windows under 760px tall, the commit row of an Install or Recovery result and of First Run's narrow states becomes a footer pinned to the window bottom, with a divider; at the end of the scroll it settles back into the panel. The workspace gets matching scroll padding, so a field focused after a refused port lands clear of the footer. First Run's shell clips with `overflow: clip`, not `hidden`, so the footer can stick. 1280×640 is now a gated size. | Resolved in the prototype. The launcher's own size was decided on 2026-09-12: open 1280×800 clamped to the work area, minimum 1180×640 |
 | V-17 | 2 | Every weight-600 heading | `InstrumentSans-SemiBold.woff2` and the Instrument Sans licence were missing. Commit ba16e0e on `feat/catalog-icons` had committed the then-untracked files, and a later branch switch removed them from this working tree. The browser synthesized bold from the Medium face, and 246 requests for the font returned 404 during this session. Earlier Phase 15 captures show the synthesized bold. | Both files restored from ba16e0e, SHA-256 matching the fonts README. All captures and the approval set were regenerated. | Resolved |
 | V-18 | 2 | Every app logo | The prototype loaded logos from `src/assets/catalog`, so it rendered correctly only on branches carrying the full icon set. On `main`, Memos and Actual Budget have no logo, and on the branch checked out during this phase, three stress logos returned 404. | `scripts/vendor-v2-prototype-logos.py` copies the 21 logos the prototype shows into `assets/logos/`, verifies each against the icon manifest's SHA-256, rewrites the fixture paths, and records provenance in `assets/logos/README.md`. The design package no longer reads from `src/`. | Resolved |
 
@@ -150,10 +149,10 @@ After the fix:
 | 1366×768 laptop, maximised | 1366×688 | 0 | 0 | 0 | 0 | 0 |
 | 1920×1080 laptop at 150%, maximised | 1280×640 @1.5× | 0 | 0 | 0 | 0 | 0 |
 
-**For Phase 16:** the prototype now works in every window above. What remains is the
-launcher itself. Open it at 1280×800, clamped to the monitor's work area. Set
-`min_inner_size` no smaller than the smallest verified size. Nothing below 1180 wide or
-640 tall has been verified.
+**Decided on September 12, 2026:** the launcher opens at 1280×800, clamped to the
+monitor's work area, with `min_inner_size` 1180×640 — the smallest width and height
+verified here. Implementation applies it in `src/main.rs`. Nothing below 1180 wide or
+640 tall is designed, so the production baselines at 400×860 and 800×600 are retired.
 
 ## Catalog density with real content
 

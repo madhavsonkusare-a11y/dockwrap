@@ -1,7 +1,7 @@
 # Local Store V2 copy rules
 
 Updated: September 11, 2026  
-Status: **proposed freeze**. It takes effect with the handoff approval.  
+Status: **frozen**. Approved by Madhav Sonkusare on September 12, 2026.  
 Scope: every word in the product UI, including labels, statuses, errors, and machine
 facts. The prototype's strings are the reference, except where a rule below corrects
 them.

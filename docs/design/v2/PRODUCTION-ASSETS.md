@@ -1,7 +1,7 @@
 # Local Store V2 production assets
 
 Updated: September 11, 2026  
-Status: **proposed**. It takes effect with the handoff approval.  
+Status: **approved** by Madhav Sonkusare on September 12, 2026.  
 Everything below ships inside the Tauri bundle. The product makes no network request
 for fonts, icons, or logos at run time.
 

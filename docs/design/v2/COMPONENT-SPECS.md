@@ -1,8 +1,8 @@
 # Local Store V2 component specifications
 
 Updated: September 11, 2026  
-Status: **proposed freeze**. This takes effect when the prototype and handoff are
-approved (see `HANDOFF.md`).  
+Status: **frozen**. Approved by Madhav Sonkusare on September 12, 2026. Changes need a
+recorded design decision (see `HANDOFF.md`).  
 Normative sources: `tokens.css` for values, `components.css` for primitives, and
 `prototype.css` for compositions. This document names every component, its parts, the
 tokens it consumes, and its states. The CSS is the pixel-level specification, and
