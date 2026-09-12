@@ -5,7 +5,7 @@ Docker Hub pull count of the app's own image, GitHub stars where the
 queue resolved a repository, and how many upstream catalogues list it.
 It orders what to look at first; it approves nothing.
 
-**Top 400: 203 importable today, 197 blocked.**
+**Top 150: 92 importable today, 58 blocked.**
 
 | # | App | Reach | Pulls | Stars | Licence | Importable | Blocked on |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -13,7 +13,7 @@ It orders what to look at first; it approves nothing.
 | 2 | nginx (runtipi) | 67.5 | 13,348,360,026 | 31,610 | BSD-2-Clause | yes |  |
 | 3 | outline (runtipi) | 66.54 | 13,348,360,026 | 40,512 | NOASSERTION | yes |  |
 | 4 | vaultwarden (runtipi) | 65.7 | 328,138,779 | 67,097 | AGPL-3.0 | yes |  |
-| 5 | gitea (runtipi) | 65.66 | 385,041,008 | 57,925 | MIT | no | addPorts |
+| 5 | gitea (runtipi) | 65.66 | 385,041,008 | 57,925 | MIT | yes |  |
 | 6 | nextcloud (runtipi) | 64.87 | 1,027,130,969 | 36,765 | AGPL-3.0 | no | user |
 | 7 | syncthing (runtipi) | 64.8 | 138,392,770 | 88,441 | MPL-2.0 | no | addPorts, stopGracePeriod |
 | 8 | wordpress (runtipi) | 64.34 | 1,488,429,454 | 21,405 | NOASSERTION | yes |  |
@@ -27,7 +27,7 @@ It orders what to look at first; it approves nothing.
 | 16 | uptime-kuma (caprover) | 62.33 | 180,863,543 | 91,198 | MIT | yes |  |
 | 17 | uptime-kuma (runtipi) | 62.33 | 180,863,543 | 91,198 | MIT | no | host path |
 | 18 | node-red (caprover) | 61.91 | 323,222,345 | 23,640 | Apache-2.0 | yes |  |
-| 19 | n8n-2 (runtipi) | 61.69 | 257,842,446 | 203,902 | NOASSERTION | no | healthCheck |
+| 19 | n8n-2 (runtipi) | 61.69 | 257,842,446 | 203,902 | NOASSERTION | yes |  |
 | 20 | pihole (runtipi) | 61.4 | 985,926,149 | 60,831 | NOASSERTION | no | addPorts, capAdd |
 | 21 | ollama-amd (runtipi) | 60.74 | 173,324,585 | 180,547 | MIT | no | devices |
 | 22 | ollama-cpu (runtipi) | 60.74 | 173,324,585 | 180,547 | MIT | yes |  |
@@ -51,7 +51,7 @@ It orders what to look at first; it approves nothing.
 | 40 | minecraft-server (runtipi) | 58.32 | 431,989,316 | 14,282 | Apache-2.0 | no | stdinOpen, tty |
 | 41 | ntfy (runtipi) | 58.11 | 22,922,531 | 34,124 | Apache-2.0 | yes |  |
 | 42 | nocodb (caprover) | 57.92 | 21,813,704 | 64,912 | NOASSERTION | yes |  |
-| 43 | nocodb (runtipi) | 57.92 | 21,813,704 | 64,912 | NOASSERTION | no | healthCheck |
+| 43 | nocodb (runtipi) | 57.92 | 21,813,704 | 64,912 | NOASSERTION | yes |  |
 | 44 | dozzle (runtipi) | 57.91 | 340,809,527 | 14,320 | MIT | no | host path |
 | 45 | excalidraw (runtipi) | 57.86 | 8,712,821 | 131,537 | MIT | no | plan policy |
 | 46 | firefly-iii (caprover) | 57.81 | 29,091,634 | 24,564 | AGPL-3.0 | yes |  |
@@ -60,9 +60,9 @@ It orders what to look at first; it approves nothing.
 | 49 | nodered (runtipi) | 57.41 | 323,222,345 | 23,640 | Apache-2.0 | yes |  |
 | 50 | filebrowser (runtipi) | 57.32 | 182,208,257 | 35,959 | Apache-2.0 | no | host path |
 | 51 | rsshub (runtipi) | 57.1 | 20,877,398 | 46,090 | AGPL-3.0 | no | ulimits |
-| 52 | eclipse-mosquitto (runtipi) | 57.08 | 681,314,268 | 11,187 | NOASSERTION | no | addPorts |
-| 53 | siyuan (runtipi) | 57.03 | 3,556,133 | 46,246 | AGPL-3.0 | yes |  |
-| 54 | grocy (caprover) | 56.94 | 58,031,865 | 9,476 | MIT | yes |  |
+| 52 | siyuan (runtipi) | 57.03 | 3,556,133 | 46,246 | AGPL-3.0 | yes |  |
+| 53 | grocy (caprover) | 56.94 | 58,031,865 | 9,476 | MIT | yes |  |
+| 54 | penpot (runtipi) | 56.81 | 5,399,653 | 59,822 | MPL-2.0 | no | plan policy |
 | 55 | appsmith (caprover) | 56.77 | 20,114,393 | 40,850 | Apache-2.0 | yes |  |
 | 56 | glance (runtipi) | 56.47 | 8,088,819 | 36,968 | AGPL-3.0 | yes |  |
 | 57 | notemark (runtipi) | 56.43 | 13,348,360,026 | 766 | AGPL-3.0 | yes |  |
@@ -74,341 +74,91 @@ It orders what to look at first; it approves nothing.
 | 63 | it-tools (runtipi) | 55.63 | 24,972,003 | 40,537 | GPL-3.0 | no | plan policy |
 | 64 | homer (runtipi) | 55.41 | 44,442,473 | 11,593 | Apache-2.0 | yes |  |
 | 65 | tautulli (caprover) | 55.41 | 213,529,291 | 6,579 | GPL-3.0 | yes |  |
-| 66 | penpot (runtipi) | 55.31 | 5,399,653 | 59,822 | MPL-2.0 | no | stopSignal |
-| 67 | monica (runtipi) | 55.05 | 13,608,967 | 25,263 | AGPL-3.0 | yes |  |
-| 68 | zigbee2mqtt (runtipi) | 54.87 | 125,828,944 | 15,621 | GPL-3.0 | no | devices |
-| 69 | joomla (caprover) | 54.82 | 87,288,815 | 5,133 | GPL-2.0 | yes |  |
-| 70 | lobe-chat (runtipi) | 54.72 | 6,099,311 | 82,363 | NOASSERTION | no | platform placeholder |
-| 71 | outline (caprover) | 54.7 | 14,642,702 | 40,512 | NOASSERTION | yes |  |
-| 72 | etherpad (caprover) | 54.61 | 15,530,227 | 18,543 | Apache-2.0 | yes |  |
-| 73 | invoice-ninja (runtipi) | 54.57 | 32,669,147 | 10,070 | NOASSERTION | no | field pattern, user |
-| 74 | kavita (runtipi) | 54.52 | 11,171,663 | 11,644 | GPL-3.0 | yes |  |
-| 75 | navidrome (runtipi) | 54.27 | 53,719,832 | 23,430 | GPL-3.0 | yes |  |
-| 76 | beszel (caprover) | 54.23 | 20,136,636 | 25,254 | MIT | yes |  |
-| 77 | transmission-vpn (runtipi) | 54.18 | 394,831,738 | 4,565 | GPL-3.0 | no | capAdd, devices, logging |
-| 78 | guacamole (runtipi) | 54.06 | 77,582,212 | 3,983 | Apache-2.0 | yes |  |
-| 79 | guacamole (caprover) | 54.06 | 77,582,212 | 3,983 | Apache-2.0 | yes |  |
-| 80 | kanboard (runtipi) | 53.96 | 23,588,312 | 9,858 | MIT | yes |  |
-| 81 | jellyseerr (runtipi) | 53.83 | 38,346,373 | 12,537 | MIT | yes |  |
-| 82 | filestash (caprover) | 53.71 | 12,435,907 | 14,650 | AGPL-3.0 | yes |  |
-| 83 | filestash (runtipi) | 53.71 | 12,435,907 | 14,650 | AGPL-3.0 | no | securityOpt |
-| 84 | activepieces (caprover) | 53.33 | 2,225,881 | 24,383 | NOASSERTION | yes |  |
-| 85 | dockge (runtipi) | 53.27 | 28,783,590 | 24,305 | MIT | no | host path, platform placeholder |
-| 86 | yourls (caprover) | 52.91 | 23,402,217 | 12,219 | MIT | yes |  |
-| 87 | grist (runtipi) | 52.77 | 4,014,972 | 11,750 | Apache-2.0 | yes |  |
+| 66 | monica (runtipi) | 55.05 | 13,608,967 | 25,263 | AGPL-3.0 | yes |  |
+| 67 | zigbee2mqtt (runtipi) | 54.87 | 125,828,944 | 15,621 | GPL-3.0 | no | devices |
+| 68 | joomla (caprover) | 54.82 | 87,288,815 | 5,133 | GPL-2.0 | yes |  |
+| 69 | lobe-chat (runtipi) | 54.72 | 6,099,311 | 82,363 | NOASSERTION | no | platform placeholder |
+| 70 | outline (caprover) | 54.7 | 14,642,702 | 40,512 | NOASSERTION | yes |  |
+| 71 | etherpad (caprover) | 54.61 | 15,530,227 | 18,543 | Apache-2.0 | yes |  |
+| 72 | invoice-ninja (runtipi) | 54.57 | 32,669,147 | 10,070 | NOASSERTION | no | field pattern, user |
+| 73 | kavita (runtipi) | 54.52 | 11,171,663 | 11,644 | GPL-3.0 | yes |  |
+| 74 | navidrome (runtipi) | 54.27 | 53,719,832 | 23,430 | GPL-3.0 | yes |  |
+| 75 | beszel (caprover) | 54.23 | 20,136,636 | 25,254 | MIT | yes |  |
+| 76 | transmission-vpn (runtipi) | 54.18 | 394,831,738 | 4,565 | GPL-3.0 | no | capAdd, devices, logging |
+| 77 | guacamole (runtipi) | 54.06 | 77,582,212 | 3,983 | Apache-2.0 | yes |  |
+| 78 | guacamole (caprover) | 54.06 | 77,582,212 | 3,983 | Apache-2.0 | yes |  |
+| 79 | kanboard (runtipi) | 53.96 | 23,588,312 | 9,858 | MIT | yes |  |
+| 80 | jellyseerr (runtipi) | 53.83 | 38,346,373 | 12,537 | MIT | yes |  |
+| 81 | filestash (caprover) | 53.71 | 12,435,907 | 14,650 | AGPL-3.0 | yes |  |
+| 82 | filestash (runtipi) | 53.71 | 12,435,907 | 14,650 | AGPL-3.0 | no | securityOpt |
+| 83 | activepieces (caprover) | 53.33 | 2,225,881 | 24,383 | NOASSERTION | yes |  |
+| 84 | dockge (runtipi) | 53.27 | 28,783,590 | 24,305 | MIT | no | host path, platform placeholder |
+| 85 | yourls (caprover) | 52.91 | 23,402,217 | 12,219 | MIT | yes |  |
+| 86 | grist (runtipi) | 52.77 | 4,014,972 | 11,750 | Apache-2.0 | yes |  |
+| 87 | vikunja (runtipi) | 52.73 | 10,532,758 | 5,340 | AGPL-3.0 | yes |  |
 | 88 | vikunja (caprover) | 52.73 | 10,532,758 | 5,340 | AGPL-3.0 | yes |  |
-| 89 | vikunja (runtipi) | 52.73 | 10,532,758 | 5,340 | AGPL-3.0 | no | healthCheck |
-| 90 | linkding (caprover) | 52.68 | 9,641,471 | 11,163 | MIT | yes |  |
-| 91 | halo (runtipi) | 52.59 | 1,880,625 | 39,706 | GPL-3.0 | no | host path |
-| 92 | flowise (runtipi) | 52.57 | 6,899,527 | 55,453 | NOASSERTION | yes |  |
-| 93 | windows (runtipi) | 52.55 | 3,027,673 | 53,213 | MIT | no | addPorts, capAdd, devices |
-| 94 | sftpgo (runtipi) | 52.35 | 38,922,171 | 12,498 | AGPL-3.0 | no | addPorts, healthCheck, internalPort |
-| 95 | budibase (caprover) | 52.12 | 2,187,215 | 28,267 | NOASSERTION | yes |  |
-| 96 | budibase (runtipi) | 52.12 | 2,187,215 | 28,267 | NOASSERTION | no | host path |
-| 97 | homebridge (runtipi) | 52.07 | 13,621,308 | 25,486 | Apache-2.0 | no | internalPort, logging, networkMode |
-| 98 | kimai (runtipi) | 52.05 | 7,795,020 | 4,968 | AGPL-3.0 | no | healthCheck |
-| 99 | transfer-sh (caprover) | 51.91 | 9,484,160 | 15,893 | MIT | yes |  |
-| 100 | wallos (runtipi) | 51.83 | 8,359,474 | 8,472 | GPL-3.0 | yes |  |
-| 101 | calcom (runtipi) | 51.66 | 4,849,163 | 48,338 | MIT | no | platform placeholder |
-| 102 | crowdsec (runtipi) | 51.66 | 21,188,244 | 14,807 | MIT | no | host path |
-| 103 | docuseal (caprover) | 51.23 | 2,230,188 | 18,490 | AGPL-3.0 | yes |  |
-| 104 | the-lounge (caprover) | 51.22 | 20,150,024 | 6,327 | MIT | yes |  |
-| 105 | whoogle (runtipi) | 51.05 | 20,314,974 | 11,577 | MIT | yes |  |
-| 106 | rss-bridge (caprover) | 50.94 | 10,674,098 | 9,231 | Unlicense | yes |  |
-| 107 | radicale (caprover) | 50.88 | 22,319,709 | 4,983 | GPL-3.0 | yes |  |
-| 108 | drawio (runtipi) | 50.85 | 28,616,549 | 8,035 | Apache-2.0 | no | stdinOpen, tty |
-| 109 | gotify (runtipi) | 50.72 | 850,941 | 15,867 | NOASSERTION | no | overrides |
-| 110 | thumbor (caprover) | 50.66 | 7,715,767 | 10,517 | MIT | yes |  |
-| 111 | watchyourlan (runtipi) | 50.57 | 4,639,841 | 7,616 | MIT | no | networkMode |
-| 112 | libretranslate (runtipi) | 50.5 | 9,614,030 | 16,340 | AGPL-3.0 | yes |  |
-| 113 | ghostfolio (runtipi) | 50.38 | 3,248,128 | 9,270 | AGPL-3.0 | yes |  |
-| 114 | slskd (runtipi) | 50.0 | 7,781,724 | 3,872 | AGPL-3.0 | no | host path |
-| 115 | docmost (runtipi) | 49.92 | 4,847,240 | 21,629 | AGPL-3.0 | yes |  |
-| 116 | nitter (runtipi) | 49.85 | 7,729,307 | 14,430 | AGPL-3.0 | no | plan policy |
-| 117 | baikal (caprover) | 49.77 | 8,287,115 | 3,298 | GPL-3.0 | yes |  |
-| 118 | smokeping (caprover) | 49.76 | 88,593,776 | 1,963 | GPL-2.0 | yes |  |
-| 119 | librephotos (runtipi) | 49.7 | 2,610,819 | 8,063 | MIT | no | healthCheck, platform placeholder |
-| 120 | semaphore (runtipi) | 49.67 | 7,163,328 | 14,124 | MIT | yes |  |
-| 121 | ddns-updater (runtipi) | 49.57 | 18,146,098 | 3,207 | MIT | yes |  |
-| 122 | gladys (runtipi) | 49.52 | 7,527,646 | 3,186 | Apache-2.0 | no | host path, internalPort, networkMode |
-| 123 | rallly (runtipi) | 49.29 | 1,482,485 | 5,251 | AGPL-3.0 | no | healthCheck |
-| 124 | zerotier (runtipi) | 49.09 | 4,030,934 | 17,089 | NOASSERTION | no | capAdd, devices, internalPort |
-| 125 | pingvin-share (runtipi) | 48.9 | 3,262,120 | 4,670 | BSD-2-Clause | yes |  |
-| 126 | scrypted (runtipi) | 48.9 | 13,654,959 | 5,901 | NOASSERTION | no | internalPort, logging, networkMode |
-| 127 | ctfd (runtipi) | 48.76 | 10,541,058 | 6,828 | Apache-2.0 | yes |  |
-| 128 | your-spotify (runtipi) | 48.64 | 2,881,263 | 4,572 | GPL-3.0 | no | addPorts, platform placeholder |
-| 129 | owncast (runtipi) | 48.61 | 891,864 | 11,519 | MIT | no | addPorts |
-| 130 | obsidian-livesync (runtipi) | 48.42 | 205,077,851 | 271 | — | yes |  |
-| 131 | silverbullet (runtipi) | 48.35 | 729,846 | 6,030 | MIT | yes |  |
-| 132 | octobot (runtipi) | 48.22 | 1,445,330 | 6,549 | GPL-3.0 | yes |  |
-| 133 | sshwifty (runtipi) | 48.02 | 3,262,379 | 3,119 | AGPL-3.0 | no | privileged |
-| 134 | tubearchivist (runtipi) | 47.75 | 4,507,853 | 8,436 | GPL-3.0 | no | plan policy |
-| 135 | whoami (runtipi) | 47.74 | 41,607,458 | 1,418 | Apache-2.0 | no | internalPort |
-| 136 | lychee (caprover) | 47.64 | 4,160,340 | 4,286 | MIT | yes |  |
-| 137 | pinchflat (runtipi) | 47.58 | 548,868 | 5,301 | AGPL-3.0 | yes |  |
-| 138 | limesurvey (caprover) | 47.44 | 1,869,719 | 3,716 | NOASSERTION | yes |  |
-| 139 | unmanic (runtipi) | 47.29 | 15,905,317 | 2,494 | GPL-3.0 | no | platform placeholder, privileged |
-| 140 | flatnotes (runtipi) | 47.17 | 1,919,295 | 3,218 | MIT | yes |  |
-| 141 | logto (runtipi) | 47.06 | 649,872 | 14,513 | MPL-2.0 | no | addPorts, extraLabels |
-| 142 | olivetin (runtipi) | 46.99 | 1,405,019 | 3,792 | AGPL-3.0 | no | plan policy |
-| 143 | inspircd (runtipi) | 46.74 | 4,445,786 | 1,346 | GPL-2.0 | yes |  |
-| 144 | akaunting (caprover) | 46.59 | 1,846,571 | 10,115 | NOASSERTION | yes |  |
-| 145 | dashdot (runtipi) | 46.53 | 6,641,173 | 3,536 | MIT | no | host path, privileged |
-| 146 | dolibarr (caprover) | 46.5 | 445,114 | 7,597 | GPL-3.0 | yes |  |
-| 147 | chevereto (caprover) | 46.46 | 13,163,721 | 989 | AGPL-3.0 | yes |  |
-| 148 | projectsend (caprover) | 46.27 | 4,907,379 | 2,004 | GPL-2.0 | yes |  |
-| 149 | kapowarr (runtipi) | 45.58 | 3,065,063 | 1,062 | GPL-3.0 | yes |  |
-| 150 | tooljet (runtipi) | 45.56 | 31,699 | 40,876 | AGPL-3.0 | no | stdinOpen, tty |
-| 151 | coral (caprover) | 45.2 | 2,650,082 | 1,998 | NOASSERTION | yes |  |
-| 152 | humhub (caprover) | 45.15 | 564,657 | 6,743 | NOASSERTION | yes |  |
-| 153 | openbooks (runtipi) | 45.13 | 4,802,254 | 2,401 | MIT | yes |  |
-| 154 | pydio (caprover) | 45.02 | 2,066,252 | 2,245 | AGPL-3.0 | yes |  |
-| 155 | picoshare (caprover) | 44.84 | 1,283,221 | 3,032 | NOASSERTION | yes |  |
-| 156 | mqttx (runtipi) | 44.76 | 1,537,126 | 5,049 | Apache-2.0 | yes |  |
-| 157 | firefly-iii-data-importer (runtipi) | 44.57 | 13,093,690 | 830 | AGPL-3.0 | yes |  |
-| 158 | tasks-md (runtipi) | 43.4 | 354,023 | 2,193 | MIT | yes |  |
-| 159 | peppermint (runtipi) | 43.27 | 491,310 | 3,163 | NOASSERTION | no | addPorts |
-| 160 | koillection (runtipi) | 43.21 | 604,154 | 1,310 | MIT | yes |  |
-| 161 | cloudflared (runtipi) | 43.08 | 2,133,073 | 449 | GPL-2.0 | no | networkMode, platform placeholder |
-| 162 | papermerge (caprover) | 42.85 | 3,578,827 | 532 | Apache-2.0 | yes |  |
-| 163 | databag (caprover) | 42.73 | 164,375 | 1,487 | Apache-2.0 | yes |  |
-| 164 | databag (runtipi) | 42.73 | 164,375 | 1,487 | Apache-2.0 | no | plan policy |
-| 165 | linkstack (runtipi) | 42.7 | 1,425,926 | 519 | AGPL-3.0 | no | plan policy |
-| 166 | mempool (runtipi) | 42.54 | 877,709 | 2,837 | NOASSERTION | no | host path, stopGracePeriod, user |
-| 167 | cockpit (caprover) | 42.31 | 728,333 | 745 | NOASSERTION | yes |  |
-| 168 | podfetch (runtipi) | 42.23 | 474,279 | 506 | Apache-2.0 | no | plan policy |
-| 169 | viewtube (runtipi) | 41.69 | 1,222,024 | 1,475 | AGPL-3.0 | yes |  |
-| 170 | hello-world (runtipi) | 41.29 | 11,538,706 | 202 | — | no | plan policy |
-| 171 | fireshare (runtipi) | 40.79 | 731,440 | 1,468 | GPL-3.0 | yes |  |
-| 172 | mixpost (runtipi) | 40.73 | 223,816 | 3,675 | MIT | no | healthCheck |
-| 173 | traefik-certs-dumper (runtipi) | 40.68 | 7,786,930 | 209 | Apache-2.0 | no | host path, internalPort |
-| 174 | electrs (runtipi) | 40.49 | 655,716 | 1,394 | MIT | no | addPorts, host path, internalPort |
-| 175 | jenkins (caprover) | 40.29 | 4,986,433,167 | — | — | yes |  |
-| 176 | dailytxt (runtipi) | 39.93 | 303,575 | 501 | MIT | yes |  |
-| 177 | mixpost-pro (runtipi) | 39.84 | 134,423 | 3,675 | MIT | no | healthCheck |
-| 178 | movary (runtipi) | 39.18 | 114,523 | 775 | MIT | no | user |
-| 179 | seedsync (runtipi) | 39.18 | 1,830,200 | 334 | Apache-2.0 | no | user |
-| 180 | wordpress-only (caprover) | 38.19 | 1,488,429,454 | — | — | yes |  |
-| 181 | lidarr-deemix (runtipi) | 37.83 | 473,449 | 530 | — | no | addPorts |
-| 182 | simplex-smp (runtipi) | 37.61 | 233,751 | 846 | AGPL-3.0 | yes |  |
-| 183 | invoiceplane (caprover) | 37.21 | 15,181 | 3,135 | NOASSERTION | yes |  |
-| 184 | bitcoind (runtipi) | 36.85 | 1,973,040 | 107 | MIT | no | addPorts, stopGracePeriod, user |
-| 185 | monerod (runtipi) | 36.33 | 752,710 | 183 | MIT | yes |  |
-| 186 | redmine (caprover) | 35.99 | 74,415,272 | — | GPL-2.0 | yes |  |
-| 187 | phpmyadmin (caprover) | 35.94 | 407,307,037 | — | — | yes |  |
-| 188 | ghost-only (caprover) | 35.82 | 379,714,187 | — | — | yes |  |
-| 189 | chatgpt-ui (runtipi) | 35.71 | 34,468 | 1,625 | MIT | no | addPorts, platform placeholder |
-| 190 | mind (runtipi) | 35.44 | 245,938 | 298 | GPL-3.0 | yes |  |
-| 191 | n8n-io (caprover) | 35.15 | 257,842,446 | — | — | yes |  |
-| 192 | n8n-io-sqlite (caprover) | 35.15 | 257,842,446 | — | — | yes |  |
-| 193 | verdaccio (caprover) | 34.92 | 226,087,667 | — | — | yes |  |
-| 194 | gandi-livedns (runtipi) | 34.86 | 2,876,530 | 31 | GPL-3.0 | no | internalPort |
-| 195 | nexus3 (caprover) | 34.72 | 201,810,395 | — | — | yes |  |
-| 196 | filebrowser (caprover) | 34.54 | 182,208,257 | — | — | yes |  |
-| 197 | browserless (caprover) | 34.48 | 175,750,991 | — | — | yes |  |
-| 198 | hammond (runtipi) | 33.97 | 226,596 | 161 | AGPL-3.0 | yes |  |
-| 199 | couchbase (caprover) | 33.32 | 90,345,968 | — | — | yes |  |
-| 200 | rethinkdb (caprover) | 33.06 | 77,420,548 | — | — | yes |  |
-| 201 | redmine-mysql (caprover) | 32.99 | 74,415,272 | — | — | yes |  |
-| 202 | immich (runtipi) | 32.78 | — | 113,726 | AGPL-3.0 | no | host path |
-| 203 | immich (caprover) | 32.78 | — | 113,726 | AGPL-3.0 | no | dockerfileLines, image, setup variable |
-| 204 | openspeedtest (caprover) | 32.5 | 56,195,898 | — | — | yes |  |
-| 205 | statping (caprover) | 32.35 | 51,456,818 | — | — | yes |  |
-| 206 | syncthing (caprover) | 32.23 | — | 88,441 | MPL-2.0 | no | ports |
-| 207 | postfix-relay (runtipi) | 32.15 | 655,815 | 29 | MIT | no | healthCheck |
-| 208 | qdrant (caprover) | 32.11 | 44,956,230 | — | — | yes |  |
-| 209 | planning-poker (runtipi) | 32.09 | 98,552 | 132 | MIT | yes |  |
-| 210 | arangodb (caprover) | 31.96 | 41,093,754 | — | — | yes |  |
-| 211 | open-webui (runtipi) | 31.9 | — | 151,511 | NOASSERTION | yes |  |
-| 212 | pgweb (caprover) | 31.78 | 37,224,227 | — | — | yes |  |
-| 213 | foundryvtt (caprover) | 31.43 | 30,408,933 | — | — | yes |  |
-| 214 | gitea (caprover) | 31.31 | — | 57,925 | MIT | no | environment, setup variable |
-| 215 | rstudio (caprover) | 31.31 | 28,413,600 | — | — | yes |  |
-| 216 | jellyfin (caprover) | 31.27 | — | 56,866 | GPL-2.0 | yes |  |
-| 217 | jellyfin (runtipi) | 31.27 | — | 56,866 | GPL-2.0 | yes |  |
-| 218 | rainloop (caprover) | 30.88 | 22,159,274 | — | — | yes |  |
-| 219 | stirling-pdf (caprover) | 30.81 | — | 91,633 | NOASSERTION | no | environment |
-| 220 | sourcegraph (caprover) | 30.66 | 19,513,938 | — | — | yes |  |
-| 221 | qbittorrent (runtipi) | 30.51 | — | 40,017 | NOASSERTION | no | addPorts, internalPort |
-| 222 | qbittorrent (caprover) | 30.51 | — | 40,015 | NOASSERTION | no | containerHttpPort, endpoint, ports |
-| 223 | code-server (runtipi) | 30.5 | — | 79,251 | MIT | no | host path |
-| 224 | mercure (caprover) | 30.23 | 15,194,888 | — | — | yes |  |
-| 225 | excalidraw (caprover) | 30.1 | — | 131,537 | MIT | no | endpoint, public domain |
-| 226 | pocketbase (caprover) | 29.93 | — | 61,003 | MIT | no | dockerfileLines, image |
-| 227 | ghost (caprover) | 29.71 | — | 55,250 | MIT | no | environment, setup variable |
-| 228 | changedetection (caprover) | 29.7 | 11,206,733 | — | — | yes |  |
-| 229 | odoo (caprover) | 29.67 | — | 54,261 | NOASSERTION | no | networks |
-| 230 | sinusbot (caprover) | 29.41 | 9,493,826 | — | — | yes |  |
-| 231 | baserow (caprover) | 29.03 | 3,208,323 | — | MIT | yes |  |
-| 232 | photoprism (caprover) | 29.02 | — | 40,175 | NOASSERTION | no | image, labels, setup variable |
-| 233 | nextcloud (caprover) | 28.83 | — | 36,765 | AGPL-3.0 | no | image, setup variable |
-| 234 | calibre-web (runtipi) | 28.79 | — | 18,149 | GPL-3.0 | yes |  |
-| 235 | cyberchef (caprover) | 28.77 | — | 35,799 | Apache-2.0 | yes |  |
-| 236 | cyberchef (runtipi) | 28.77 | — | 35,799 | Apache-2.0 | yes |  |
-| 237 | gotosocial (runtipi) | 28.71 | 1,125,914 | — | AGPL-3.0 | no | user |
-| 238 | ntfy (caprover) | 28.67 | — | 34,124 | Apache-2.0 | no | dockerfileLines, image |
-| 239 | flightlog (runtipi) | 28.53 | 36,539 | 56 | Apache-2.0 | yes |  |
-| 240 | sonarr (runtipi) | 28.44 | — | 15,418 | GPL-3.0 | yes |  |
-| 241 | sonarr (caprover) | 28.44 | — | 15,418 | GPL-3.0 | no | public domain |
-| 242 | transmission (runtipi) | 28.41 | — | 15,183 | NOASSERTION | no | addPorts |
-| 243 | transmission (caprover) | 28.41 | — | 15,183 | NOASSERTION | no | ports, public domain |
-| 244 | penpot (caprover) | 28.38 | — | 59,822 | MPL-2.0 | no | environment, setup variable |
-| 245 | meilisearch (caprover) | 28.36 | — | 59,242 | NOASSERTION | no | environment |
-| 246 | karakeep (caprover) | 28.31 | — | 28,932 | AGPL-3.0 | yes |  |
-| 247 | wiki-js (caprover) | 28.3 | — | 28,876 | AGPL-3.0 | no | endpoint |
-| 248 | appwrite (caprover) | 28.29 | — | 57,334 | BSD-3-Clause | no | dockerfileLines, host path, image |
-| 249 | radarr (runtipi) | 28.28 | — | 14,322 | GPL-3.0 | yes |  |
-| 250 | radarr (caprover) | 28.28 | — | 14,322 | GPL-3.0 | no | plan rule |
-| 251 | audiobookshelf (caprover) | 28.27 | — | 14,281 | GPL-3.0 | no | setup variable, volume |
-| 252 | archivebox (caprover) | 28.26 | — | 28,259 | MIT | no | dockerfileLines, image |
-| 253 | calcom (caprover) | 28.24 | 4,849,163 | — | — | yes |  |
-| 254 | call-only (caprover) | 28.24 | 4,849,163 | — | — | yes |  |
-| 255 | mdns-repeater (runtipi) | 28.16 | 260,637 | 9 | GPL-2.0 | no | internalPort, networkMode |
-| 256 | dashy (runtipi) | 28.11 | — | 26,411 | MIT | yes |  |
-| 257 | mastodon (runtipi) | 28.01 | — | 50,296 | AGPL-3.0 | no | extraLabels, platform placeholder, shmSize |
-| 258 | mastodon (caprover) | 28.01 | — | 50,296 | AGPL-3.0 | no | dockerfileLines, environment, image |
-| 259 | paperless-ngx (runtipi) | 27.76 | — | 44,970 | GPL-3.0 | no | platform placeholder |
-| 260 | paperless-ngx (caprover) | 27.76 | — | 44,970 | GPL-3.0 | no | environment, public domain, setup variable |
-| 261 | codimd (caprover) | 27.54 | 3,228,011 | — | — | yes |  |
-| 262 | posthog (caprover) | 27.5 | — | 39,727 | NOASSERTION | no | dockerfileLines, endpoint, environment |
-| 263 | linkwarden (runtipi) | 27.47 | — | 19,721 | AGPL-3.0 | yes |  |
-| 264 | linkwarden (caprover) | 27.47 | — | 19,721 | AGPL-3.0 | yes |  |
-| 265 | elasticsearch (caprover) | 27.46 | — | 77,899 | NOASSERTION | no | containerHttpPort, endpoint |
-| 266 | portainer (caprover) | 27.43 | — | 38,475 | Zlib | no | image, setup variable |
-| 267 | bookstack (runtipi) | 27.4 | — | 19,034 | MIT | no | plan policy |
-| 268 | request-baskets (caprover) | 27.36 | 2,909,265 | — | — | yes |  |
-| 269 | adguard-home (caprover) | 27.33 | — | 36,804 | GPL-3.0 | no | ports |
-| 270 | freshrss (runtipi) | 27.02 | — | 15,975 | AGPL-3.0 | yes |  |
-| 271 | freshrss (caprover) | 27.02 | — | 15,975 | AGPL-3.0 | no | environment, public domain, setup variable |
-| 272 | minio (runtipi) | 26.94 | — | 61,365 | AGPL-3.0 | no | addPorts, extraLabels |
-| 273 | minio (caprover) | 26.94 | — | 61,365 | AGPL-3.0 | no | dockerfileLines, image, setup variable |
-| 274 | onedev (runtipi) | 26.91 | — | 15,234 | MIT | no | addPorts, host path |
-| 275 | metube (runtipi) | 26.83 | — | 14,670 | AGPL-3.0 | no | plan policy |
-| 276 | romm (runtipi) | 26.52 | — | 12,706 | AGPL-3.0 | yes |  |
-| 277 | monica (caprover) | 26.51 | — | 25,263 | AGPL-3.0 | no | environment |
-| 278 | databasus (caprover) | 26.49 | 1,769,689 | — | — | yes |  |
-| 279 | moneroblock (runtipi) | 26.47 | 23,831 | 30 | BSD-3-Clause | yes |  |
-| 280 | invidious (runtipi) | 26.43 | — | 24,338 | AGPL-3.0 | no | capDrop, healthCheck, overrides |
-| 281 | invidious (caprover) | 26.43 | — | 24,338 | AGPL-3.0 | no | image, setup variable |
-| 282 | discourse (caprover) | 26.4 | — | 47,812 | GPL-2.0 | no | dockerfileLines, image |
-| 283 | listmonk (caprover) | 26.34 | — | 23,344 | AGPL-3.0 | no | dockerfileLines, image |
-| 284 | homeassistant-1 (runtipi) | 26.28 | — | 90,356 | Apache-2.0 | yes |  |
-| 285 | wekan (runtipi) | 26.12 | — | 21,074 | MIT | yes |  |
-| 286 | wekan (caprover) | 26.12 | — | 21,074 | MIT | no | public domain |
-| 287 | novu (caprover) | 26.01 | — | 39,963 | NOASSERTION | no | containerHttpPort, endpoint, public domain |
-| 288 | elkarbackup (caprover) | 25.95 | 1,292,700 | — | — | yes |  |
-| 289 | directus (caprover) | 25.89 | — | 37,843 | NOASSERTION | no | environment, setup variable |
-| 290 | grocy (runtipi) | 25.88 | — | 9,476 | MIT | yes |  |
-| 291 | heimdall (runtipi) | 25.85 | — | 9,315 | MIT | yes |  |
-| 292 | heimdall (caprover) | 25.85 | — | 9,315 | MIT | no | public domain |
-| 293 | chatwoot (caprover) | 25.82 | — | 36,647 | NOASSERTION | no | dockerfileLines, environment, image |
-| 294 | hasura (caprover) | 25.53 | — | 32,111 | Apache-2.0 | no | environment, setup variable |
-| 295 | seafile (caprover) | 25.41 | — | 15,230 | NOASSERTION | no | depends_on, environment, networks |
-| 296 | termix (caprover) | 25.39 | — | 15,076 | NOASSERTION | yes |  |
-| 297 | redash (caprover) | 25.3 | — | 28,784 | BSD-2-Clause | no | dockerfileLines, image |
-| 298 | komga (runtipi) | 25.12 | — | 6,655 | MIT | yes |  |
-| 299 | gotenberg (caprover) | 25.08 | — | 13,040 | MIT | no | dockerfileLines, image |
-| 300 | calibre (caprover) | 25.06 | — | 25,876 | GPL-3.0 | yes |  |
-| 301 | formbricks (caprover) | 25.06 | — | 12,924 | NOASSERTION | no | environment, image, setup variable |
-| 302 | wallabag (caprover) | 25.06 | — | 12,958 | MIT | no | environment |
-| 303 | authentik (caprover) | 25.03 | — | 25,418 | NOASSERTION | no | healthcheck, host path, user |
-| 304 | seerr (runtipi) | 24.99 | — | 12,537 | MIT | yes |  |
-| 305 | saleor (caprover) | 24.84 | — | 23,309 | BSD-3-Clause | no | dockerfileLines, endpoint, image |
-| 306 | leantime (caprover) | 24.81 | — | 11,559 | AGPL-3.0 | no | dockerfileLines, environment, image |
-| 307 | ohmyform (caprover) | 24.81 | 673,447 | — | — | yes |  |
-| 308 | owncast (caprover) | 24.81 | — | 11,519 | MIT | no | containerHttpPort, endpoint, ports |
-| 309 | lidarr (runtipi) | 24.76 | — | 5,638 | GPL-3.0 | yes |  |
-| 310 | matrix-conduit (runtipi) | 24.73 | 641,570 | — | — | no | extraLabels, field pattern, host path |
-| 311 | filezilla (caprover) | 24.7 | 632,192 | — | — | yes |  |
-| 312 | matomo (caprover) | 24.7 | — | 21,851 | GPL-3.0 | no | dockerfileLines, image |
-| 313 | prerender (caprover) | 24.68 | 625,278 | — | — | yes |  |
-| 314 | shlink (runtipi) | 24.61 | — | 5,277 | MIT | yes |  |
-| 315 | mautic (caprover) | 24.6 | — | 10,472 | NOASSERTION | no | caproverExtra property |
-| 316 | rallly (caprover) | 24.6 | — | 5,251 | AGPL-3.0 | no | environment, setup variable |
-| 317 | healthchecks (caprover) | 24.57 | — | 10,315 | BSD-3-Clause | no | environment, setup variable |
-| 318 | imagor-local (caprover) | 24.45 | 546,472 | — | — | yes |  |
-| 319 | spacedrive (runtipi) | 24.45 | — | 38,936 | NOASSERTION | yes |  |
-| 320 | umami-analytics (runtipi) | 24.44 | — | 38,716 | MIT | no | healthCheck |
-| 321 | miniflux (caprover) | 24.43 | — | 9,674 | Apache-2.0 | no | environment, setup variable |
-| 322 | trilium (runtipi) | 24.39 | — | 37,780 | AGPL-3.0 | yes |  |
-| 323 | dokuwiki (caprover) | 24.37 | — | 4,713 | GPL-2.0 | yes |  |
-| 324 | dokuwiki (runtipi) | 24.37 | — | 4,713 | GPL-2.0 | yes |  |
-| 325 | homarr (caprover) | 24.35 | — | 4,675 | Apache-2.0 | no | public domain |
-| 326 | ghostfolio (caprover) | 24.34 | — | 9,270 | AGPL-3.0 | no | public domain |
-| 327 | countly (caprover) | 24.32 | 507,694 | — | — | yes |  |
-| 328 | apprise (caprover) | 24.19 | — | 17,284 | BSD-2-Clause | no | volume |
-| 329 | changedetection (runtipi) | 24.14 | — | 33,785 | Apache-2.0 | yes |  |
-| 330 | homepage (runtipi) | 24.06 | — | 32,495 | GPL-3.0 | no | plan policy |
-| 331 | plex (runtipi) | 24.03 | — | 4,029 | ⊘ Proprietary | no | networkMode |
-| 332 | jackett (runtipi) | 24.02 | — | 16,016 | GPL-2.0 | no | plan policy |
-| 333 | peertube (caprover) | 23.93 | — | 15,310 | AGPL-3.0 | no | environment, setup variable |
-| 334 | librespeed (runtipi) | 23.9 | — | 15,153 | LGPL-3.0 | yes |  |
-| 335 | languagetool (caprover) | 23.88 | — | 14,998 | LGPL-2.1 | yes |  |
-| 336 | hedgedoc (runtipi) | 23.85 | — | 7,407 | AGPL-3.0 | yes |  |
-| 337 | hedgedoc (caprover) | 23.85 | — | 7,407 | AGPL-3.0 | no | image, setup variable |
-| 338 | lemmy (caprover) | 23.82 | — | 14,592 | AGPL-3.0 | no | command, endpoint, environment |
-| 339 | hoarder (runtipi) | 23.81 | — | 28,935 | AGPL-3.0 | yes |  |
-| 340 | wikijs (runtipi) | 23.8 | — | 28,876 | AGPL-3.0 | no | logging |
-| 341 | dozzle (caprover) | 23.78 | — | 14,320 | MIT | no | environment, host path |
-| 342 | prowlarr (runtipi) | 23.78 | — | 7,182 | GPL-3.0 | yes |  |
-| 343 | prowlarr (caprover) | 23.78 | — | 7,182 | GPL-3.0 | yes |  |
-| 344 | wg-easy-1 (runtipi) | 23.65 | — | 26,895 | AGPL-3.0 | no | addPorts, capAdd, sysctls |
-| 345 | planka (runtipi) | 23.49 | — | 12,533 | NOASSERTION | yes |  |
-| 346 | planka (caprover) | 23.49 | — | 12,533 | NOASSERTION | no | dockerfileLines, image |
-| 347 | passbolt (caprover) | 23.43 | — | 6,111 | AGPL-3.0 | no | image, setup variable |
-| 348 | weblate (caprover) | 23.41 | — | 6,060 | GPL-3.0 | no | environment, setup variable |
-| 349 | speedtest-tracker (runtipi) | 23.37 | — | 5,949 | MIT | no | healthCheck |
-| 350 | shiori (caprover) | 23.33 | — | 11,634 | MIT | yes |  |
-| 351 | pairdrop (runtipi) | 23.28 | — | 11,364 | GPL-3.0 | yes |  |
-| 352 | pairdrop (caprover) | 23.28 | — | 11,364 | GPL-3.0 | no | environment |
-| 353 | imgproxy (caprover) | 23.22 | — | 11,053 | Apache-2.0 | no | image, setup variable |
-| 354 | kutt (caprover) | 23.22 | — | 11,086 | MIT | no | containerHttpPort, endpoint |
-| 355 | lago (caprover) | 23.11 | — | 10,520 | AGPL-3.0 | no | dockerfileLines, image, public domain |
-| 356 | typebot (caprover) | 23.07 | — | 10,314 | NOASSERTION | no | endpoint, public domain |
-| 357 | overseerr (runtipi) | 22.99 | — | 4,981 | MIT | yes |  |
-| 358 | overseerr (caprover) | 22.99 | — | 4,981 | MIT | yes |  |
-| 359 | orangehrm (caprover) | 22.98 | 234,875 | — | — | yes |  |
-| 360 | proxypool (caprover) | 22.81 | 212,247 | — | — | yes |  |
-| 361 | fider (caprover) | 22.77 | — | 4,512 | AGPL-3.0 | no | environment |
-| 362 | teslamate (caprover) | 22.76 | — | 8,973 | AGPL-3.0 | no | dockerfileLines, endpoint, environment |
-| 363 | wakapi (caprover) | 22.73 | — | 4,427 | MIT | yes |  |
-| 364 | bitmagnet (runtipi) | 22.69 | — | 4,343 | MIT | no | addPorts, healthCheck |
-| 365 | tiddlywiki (caprover) | 22.68 | — | 8,646 | NOASSERTION | no | plan rule |
-| 366 | mumble (caprover) | 22.58 | — | 8,249 | NOASSERTION | no | endpoint, environment, ports |
-| 367 | grav (runtipi) | 22.47 | — | 15,663 | MIT | yes |  |
-| 368 | flaresolverr (runtipi) | 22.46 | — | 15,526 | MIT | yes |  |
-| 369 | flaresolverr (caprover) | 22.46 | — | 15,525 | MIT | yes |  |
-| 370 | pyload (caprover) | 22.44 | — | 3,866 | NOASSERTION | no | ports, public domain |
-| 371 | redlib (caprover) | 22.37 | — | 3,743 | AGPL-3.0 | yes |  |
-| 372 | mealie-1 (runtipi) | 22.1 | — | 13,182 | AGPL-3.0 | no | deploy |
-| 373 | tautulli (runtipi) | 22.09 | — | 6,579 | GPL-3.0 | yes |  |
-| 374 | flagsmith (caprover) | 22.08 | — | 6,542 | BSD-3-Clause | no | environment, setup variable |
-| 375 | photoview (caprover) | 22.07 | — | 6,528 | AGPL-3.0 | no | plan rule |
-| 376 | netbootxyz (runtipi) | 21.94 | — | 12,233 | Apache-2.0 | no | addPorts |
-| 377 | mongo-express (caprover) | 21.89 | — | 5,985 | MIT | no | environment, setup variable |
-| 378 | zammad (caprover) | 21.86 | — | 5,902 | AGPL-3.0 | no | dockerfileLines, environment, image |
-| 379 | esphome (runtipi) | 21.84 | — | 11,669 | NOASSERTION | no | plan policy |
-| 380 | cronicle (caprover) | 21.83 | — | 5,826 | NOASSERTION | no | environment, host path, logging |
-| 381 | mylar3 (runtipi) | 21.82 | — | 1,455 | GPL-3.0 | yes |  |
-| 382 | lubelogger (runtipi) | 21.75 | — | 2,813 | MIT | no | healthCheck |
-| 383 | eclipse-mosquitto (caprover) | 21.74 | — | 11,187 | NOASSERTION | no | endpoint, ports |
-| 384 | remark42 (caprover) | 21.74 | — | 5,606 | MIT | no | environment, public domain, setup variable |
-| 385 | spoolman (runtipi) | 21.74 | — | 2,798 | MIT | yes |  |
-| 386 | etesync (caprover) | 21.48 | 98,938 | — | — | yes |  |
-| 387 | mstream (runtipi) | 21.39 | — | 2,383 | GPL-3.0 | yes |  |
-| 388 | tandoor (runtipi) | 21.17 | — | 8,583 | NOASSERTION | no | healthCheck |
-| 389 | bazarr (caprover) | 21.15 | — | 4,265 | GPL-3.0 | no | public domain |
-| 390 | emulatorjs (runtipi) | 21.1 | — | 4,162 | GPL-3.0 | no | addPorts |
-| 391 | tinyauth (runtipi) | 21.08 | — | 8,228 | AGPL-3.0 | yes |  |
-| 392 | mariadb (caprover) | 21.07 | — | 8,193 | GPL-2.0 | no | dockerfileLines, image |
-| 393 | azuracast (caprover) | 21.02 | — | 4,026 | AGPL-3.0 | no | ports, public domain |
-| 394 | dagu (caprover) | 20.93 | — | 3,860 | GPL-3.0 | no | host path |
-| 395 | write-freely (runtipi) | 20.83 | 68,192 | — | — | no | addPorts |
-| 396 | homebox (runtipi) | 20.77 | — | 7,131 | AGPL-3.0 | no | user |
-| 397 | readarr (caprover) | 20.7 | — | 3,470 | GPL-3.0 | yes |  |
-| 398 | readarr (runtipi) | 20.7 | — | 3,470 | GPL-3.0 | yes |  |
-| 399 | linkace (caprover) | 20.61 | — | 3,331 | GPL-3.0 | no | dockerfileLines, environment, image |
-| 400 | sabnzbd (runtipi) | 20.45 | — | 3,095 | NOASSERTION | yes |  |
+| 89 | linkding (caprover) | 52.68 | 9,641,471 | 11,163 | MIT | yes |  |
+| 90 | halo (runtipi) | 52.59 | 1,880,625 | 39,706 | GPL-3.0 | no | host path |
+| 91 | flowise (runtipi) | 52.57 | 6,899,527 | 55,453 | NOASSERTION | yes |  |
+| 92 | windows (runtipi) | 52.55 | 3,027,673 | 53,213 | MIT | no | addPorts, capAdd, devices |
+| 93 | sftpgo (runtipi) | 52.35 | 38,922,171 | 12,498 | AGPL-3.0 | no | healthCheck, internalPort, user |
+| 94 | budibase (caprover) | 52.12 | 2,187,215 | 28,267 | NOASSERTION | yes |  |
+| 95 | budibase (runtipi) | 52.12 | 2,187,215 | 28,267 | NOASSERTION | no | host path |
+| 96 | homebridge (runtipi) | 52.07 | 13,621,308 | 25,486 | Apache-2.0 | no | internalPort, logging, networkMode |
+| 97 | kimai (runtipi) | 52.05 | 7,795,020 | 4,968 | AGPL-3.0 | no | plan policy |
+| 98 | transfer-sh (caprover) | 51.91 | 9,484,160 | 15,893 | MIT | yes |  |
+| 99 | wallos (runtipi) | 51.83 | 8,359,474 | 8,472 | GPL-3.0 | yes |  |
+| 100 | calcom (runtipi) | 51.66 | 4,849,163 | 48,338 | MIT | no | platform placeholder |
+| 101 | crowdsec (runtipi) | 51.66 | 21,188,244 | 14,807 | MIT | no | host path |
+| 102 | docuseal (caprover) | 51.23 | 2,230,188 | 18,490 | AGPL-3.0 | yes |  |
+| 103 | the-lounge (caprover) | 51.22 | 20,150,024 | 6,327 | MIT | yes |  |
+| 104 | whoogle (runtipi) | 51.05 | 20,314,974 | 11,577 | MIT | yes |  |
+| 105 | rss-bridge (caprover) | 50.94 | 10,674,098 | 9,231 | Unlicense | yes |  |
+| 106 | radicale (caprover) | 50.88 | 22,319,709 | 4,983 | GPL-3.0 | yes |  |
+| 107 | drawio (runtipi) | 50.85 | 28,616,549 | 8,035 | Apache-2.0 | no | stdinOpen, tty |
+| 108 | gotify (runtipi) | 50.72 | 850,941 | 15,867 | NOASSERTION | no | overrides |
+| 109 | thumbor (caprover) | 50.66 | 7,715,767 | 10,517 | MIT | yes |  |
+| 110 | watchyourlan (runtipi) | 50.57 | 4,639,841 | 7,616 | MIT | no | networkMode |
+| 111 | libretranslate (runtipi) | 50.5 | 9,614,030 | 16,340 | AGPL-3.0 | yes |  |
+| 112 | ghostfolio (runtipi) | 50.38 | 3,248,128 | 9,270 | AGPL-3.0 | yes |  |
+| 113 | slskd (runtipi) | 50.0 | 7,781,724 | 3,872 | AGPL-3.0 | no | host path |
+| 114 | docmost (runtipi) | 49.92 | 4,847,240 | 21,629 | AGPL-3.0 | yes |  |
+| 115 | nitter (runtipi) | 49.85 | 7,729,307 | 14,430 | AGPL-3.0 | no | plan policy |
+| 116 | baikal (caprover) | 49.77 | 8,287,115 | 3,298 | GPL-3.0 | yes |  |
+| 117 | smokeping (caprover) | 49.76 | 88,593,776 | 1,963 | GPL-2.0 | yes |  |
+| 118 | librephotos (runtipi) | 49.7 | 2,610,819 | 8,063 | MIT | no | platform placeholder |
+| 119 | semaphore (runtipi) | 49.67 | 7,163,328 | 14,124 | MIT | yes |  |
+| 120 | ddns-updater (runtipi) | 49.57 | 18,146,098 | 3,207 | MIT | yes |  |
+| 121 | gladys (runtipi) | 49.52 | 7,527,646 | 3,186 | Apache-2.0 | no | host path, internalPort, networkMode |
+| 122 | rallly (runtipi) | 49.29 | 1,482,485 | 5,251 | AGPL-3.0 | no | plan policy |
+| 123 | zerotier (runtipi) | 49.09 | 4,030,934 | 17,089 | NOASSERTION | no | capAdd, devices, internalPort |
+| 124 | pingvin-share (runtipi) | 48.9 | 3,262,120 | 4,670 | BSD-2-Clause | yes |  |
+| 125 | scrypted (runtipi) | 48.9 | 13,654,959 | 5,901 | NOASSERTION | no | internalPort, logging, networkMode |
+| 126 | ctfd (runtipi) | 48.76 | 10,541,058 | 6,828 | Apache-2.0 | yes |  |
+| 127 | your-spotify (runtipi) | 48.64 | 2,881,263 | 4,572 | GPL-3.0 | no | platform placeholder |
+| 128 | owncast (runtipi) | 48.61 | 891,864 | 11,519 | MIT | yes |  |
+| 129 | obsidian-livesync (runtipi) | 48.42 | 205,077,851 | 271 | — | yes |  |
+| 130 | silverbullet (runtipi) | 48.35 | 729,846 | 6,030 | MIT | yes |  |
+| 131 | octobot (runtipi) | 48.22 | 1,445,330 | 6,549 | GPL-3.0 | yes |  |
+| 132 | sshwifty (runtipi) | 48.02 | 3,262,379 | 3,119 | AGPL-3.0 | no | privileged |
+| 133 | tubearchivist (runtipi) | 47.75 | 4,507,853 | 8,436 | GPL-3.0 | no | plan policy |
+| 134 | whoami (runtipi) | 47.74 | 41,607,458 | 1,418 | Apache-2.0 | no | internalPort |
+| 135 | lychee (caprover) | 47.64 | 4,160,340 | 4,286 | MIT | yes |  |
+| 136 | pinchflat (runtipi) | 47.58 | 548,868 | 5,301 | AGPL-3.0 | yes |  |
+| 137 | limesurvey (caprover) | 47.44 | 1,869,719 | 3,716 | NOASSERTION | yes |  |
+| 138 | unmanic (runtipi) | 47.29 | 15,905,317 | 2,494 | GPL-3.0 | no | platform placeholder, privileged |
+| 139 | flatnotes (runtipi) | 47.17 | 1,919,295 | 3,218 | MIT | yes |  |
+| 140 | logto (runtipi) | 47.06 | 649,872 | 14,513 | MPL-2.0 | no | extraLabels |
+| 141 | olivetin (runtipi) | 46.99 | 1,405,019 | 3,792 | AGPL-3.0 | no | plan policy |
+| 142 | inspircd (runtipi) | 46.74 | 4,445,786 | 1,346 | GPL-2.0 | yes |  |
+| 143 | akaunting (caprover) | 46.59 | 1,846,571 | 10,115 | NOASSERTION | yes |  |
+| 144 | dashdot (runtipi) | 46.53 | 6,641,173 | 3,536 | MIT | no | host path, privileged |
+| 145 | dolibarr (caprover) | 46.5 | 445,114 | 7,597 | GPL-3.0 | yes |  |
+| 146 | chevereto (caprover) | 46.46 | 13,163,721 | 989 | AGPL-3.0 | yes |  |
+| 147 | projectsend (caprover) | 46.27 | 4,907,379 | 2,004 | GPL-2.0 | yes |  |
+| 148 | kapowarr (runtipi) | 45.58 | 3,065,063 | 1,062 | GPL-3.0 | yes |  |
+| 149 | tooljet (runtipi) | 45.56 | 31,699 | 40,876 | AGPL-3.0 | no | stdinOpen, tty |
+| 150 | eclipse-mosquitto (runtipi) | 45.35 | 799,408 | 11,187 | NOASSERTION | yes |  |
 
 ## What one capability would unlock, within this top list
 
@@ -416,27 +166,18 @@ Counting only apps whose *sole* remaining blocker is that feature.
 
 | Feature | Apps | Combined reach | Examples |
 | --- | --- | --- | --- |
-| plan policy | 17 | 733.4 | ghost, searxng, excalidraw, firefly-iii |
-| healthCheck | 13 | 532.9 | n8n-2, nocodb, owncloud, vikunja |
-| host path | 10 | 468.1 | uptime-kuma, dozzle, filebrowser, halo |
-| addPorts | 10 | 401.0 | gitea, eclipse-mosquitto, emqx, owncast |
-| user | 5 | 192.7 | nextcloud, movary, seedsync, gotosocial |
-| environment | 6 | 156.8 | stirling-pdf, meilisearch, monica, wallabag |
-| public domain | 6 | 150.2 | sonarr, wekan, heimdall, homarr |
-| platform placeholder | 3 | 134.1 | lobe-chat, calcom, paperless-ngx |
+| plan policy | 11 | 598.5 | ghost, searxng, excalidraw, firefly-iii |
+| host path | 7 | 383.9 | uptime-kuma, dozzle, filebrowser, halo |
+| platform placeholder | 4 | 204.7 | lobe-chat, calcom, librephotos, your-spotify |
 | devices | 2 | 115.6 | ollama-amd, zigbee2mqtt |
 | privileged | 2 | 107.4 | stirling-pdf, sshwifty |
-| deploy | 2 | 82.8 | ollama-nvidia, mealie-1 |
-| internalPort | 2 | 82.6 | whoami, gandi-livedns |
-| networkMode | 2 | 74.6 | watchyourlan, plex |
-| plan rule | 3 | 73.0 | radarr, tiddlywiki, photoview |
-| ports | 2 | 59.6 | syncthing, adguard-home |
+| user | 1 | 64.9 | nextcloud |
+| deploy | 1 | 60.7 | ollama-nvidia |
 | ulimits | 1 | 57.1 | rsshub |
-| stopSignal | 1 | 55.3 | penpot |
+| addPorts | 1 | 56.3 | emqx |
+| healthCheck | 1 | 55.8 | owncloud |
 | securityOpt | 1 | 53.7 | filestash |
 | overrides | 1 | 50.7 | gotify |
-| networks | 1 | 29.7 | odoo |
-| endpoint | 1 | 28.3 | wiki-js |
-| caproverExtra property | 1 | 24.6 | mautic |
-| volume | 1 | 24.2 | apprise |
-| logging | 1 | 23.8 | wikijs |
+| networkMode | 1 | 50.6 | watchyourlan |
+| internalPort | 1 | 47.7 | whoami |
+| extraLabels | 1 | 47.1 | logto |
