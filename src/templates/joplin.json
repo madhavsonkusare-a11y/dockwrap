@@ -8,7 +8,7 @@
   "license": "Joplin Server Personal Use License",
   "source_url": "https://github.com/laurent22/joplin",
   "documentation_url": "https://joplinapp.org/",
-  "verified_at": "2026-09-11",
+  "verified_at": "2026-09-12",
   "lifecycle_proof": "docs/evidence/joplin-qualification.json",
   "origin": {
     "importer": "runtipi",
@@ -67,8 +67,8 @@
     ]
   },
   "promotion": {
-    "state": "withheld",
-    "reason": "Pending since 2026-09-11: the owner allowed source-available apps, which lifts the licence reason it was withheld for. It qualified before its database was moved to PostgreSQL 14.24, so it needs a run as offered with that pin before it is approved."
+    "state": "approved",
+    "reason": "Approved by the owner. Qualified as offered on 2026-09-12: a real install of Joplin Server 3.7.1, with its database moved to PostgreSQL 14.24 proved it starts, opens to a first screen with a clear next step, survives a restart and a keep-data reinstall with its data and generated credentials intact, and removes everything it created. The definition comes from Runtipi's app store."
   },
   "data_storage": "Local Store managed folder / joplin",
   "risk_notes": [
@@ -76,7 +76,8 @@
     "Generates 1 credential of its own, keeps it beside the app's data, and reuses it if you reinstall.",
     "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
     "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
-    "Joplin Server is source-available, not open source: its server package is under the Joplin Server Personal Use License, which allows personal, non-commercial use only. The Joplin apps you sync with it are AGPL-3.0."
+    "Joplin Server is source-available, not open source: its server package is under the Joplin Server Personal Use License, which allows personal, non-commercial use only. The Joplin apps you sync with it are AGPL-3.0.",
+    "Signs in first as admin@localhost with the password admin; change both in its settings, then connect your Joplin apps to its address."
   ],
   "fields": {},
   "definition": "{\n  \"services\": [\n    {\n      \"name\": \"joplin\",\n      \"image\": \"joplin/server:3.7.1\",\n      \"isMain\": true,\n      \"internalPort\": 22300,\n      \"environment\": [\n        {\n          \"key\": \"APP_PORT\",\n          \"value\": \"22300\"\n        },\n        {\n          \"key\": \"APP_BASE_URL\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}/\"\n        },\n        {\n          \"key\": \"DB_CLIENT\",\n          \"value\": \"pg\"\n        },\n        {\n          \"key\": \"POSTGRES_PASSWORD\",\n          \"value\": \"${JOPLIN_DB_PASSWORD}\"\n        },\n        {\n          \"key\": \"POSTGRES_USER\",\n          \"value\": \"tipi\"\n        },\n        {\n          \"key\": \"POSTGRES_DATABASE\",\n          \"value\": \"joplin\"\n        },\n        {\n          \"key\": \"POSTGRES_PORT\",\n          \"value\": \"5432\"\n        },\n        {\n          \"key\": \"POSTGRES_HOST\",\n          \"value\": \"db-joplin\"\n        },\n        {\n          \"key\": \"MAX_TIME_DRIFT\",\n          \"value\": \"0\"\n        }\n      ],\n      \"dependsOn\": [\"db-joplin\"]\n    },\n    {\n      \"name\": \"db-joplin\",\n      \"image\": \"postgres:14.2\",\n      \"environment\": [\n        {\n          \"key\": \"POSTGRES_PASSWORD\",\n          \"value\": \"${JOPLIN_DB_PASSWORD}\"\n        },\n        {\n          \"key\": \"POSTGRES_USER\",\n          \"value\": \"tipi\"\n        },\n        {\n          \"key\": \"POSTGRES_DB\",\n          \"value\": \"joplin\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/postgres\",\n          \"containerPath\": \"/var/lib/postgresql/data\"\n        }\n      ]\n    }\n  ],\n  \"schemaVersion\": 2,\n  \"$schema\": \"https://schemas.runtipi.io/v2/dynamic-compose.json\"\n}\n",

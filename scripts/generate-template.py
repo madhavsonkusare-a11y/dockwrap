@@ -402,12 +402,19 @@ def catalog_entry(catalog, app):
     """
     wanted = app.replace("-", "").replace("_", "").replace(" ", "").casefold()
 
-    def names(entry):
-        return [entry["id"], entry.get("name", ""), *entry.get("aliases", [])]
+    def matches(value):
+        return value.replace("-", "").replace("_", "").replace(" ", "").casefold() == wanted
 
-    for entry in catalog["entries"]:
-        for name in names(entry):
-            if name.replace("-", "").replace("_", "").replace(" ", "").casefold() == wanted:
+    # An id first, then a display name, then an alias. Aliases collide: Open
+    # WebUI is an alias of "Ollama With Open Webui", whose entry was returned
+    # for `open-webui` — with that app's name, description and icon.
+    for pick in (
+        lambda entry: matches(entry["id"]),
+        lambda entry: matches(entry.get("name", "")),
+        lambda entry: any(matches(alias) for alias in entry.get("aliases", [])),
+    ):
+        for entry in catalog["entries"]:
+            if pick(entry):
                 return entry
     return None
 

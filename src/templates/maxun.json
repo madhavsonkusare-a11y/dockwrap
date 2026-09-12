@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "id": "maxun",
+  "display_name": "Maxun",
+  "catalog_name": "Maxun",
+  "description": "Turn websites into data: train a robot by pointing at a page, then run it on a schedule.",
+  "category": "Artificial Intelligence",
+  "license": "AGPL-3.0",
+  "source_url": "https://github.com/getmaxun/maxun",
+  "documentation_url": "https://github.com/getmaxun/maxun/blob/develop/docs/self-hosting-docker.md",
+  "verified_at": "2026-09-12",
+  "lifecycle_proof": "docs/evidence/maxun-qualification.json",
+  "origin": {
+    "importer": "runtipi",
+    "repository": "madhavsonkusare-a11y/local-store",
+    "revision": "70fcf4e509fbc473997995cf5c4ec29fac3ae378",
+    "path": "definitions/apps/maxun/docker-compose.json",
+    "license": "MIT"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "getmaxun/maxun-frontend:v0.0.58",
+        "source_url": "https://hub.docker.com/v2/repositories/getmaxun/maxun-frontend/tags/v0.0.58",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-08-25",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:7f98fedd72218b395e40f92fd35661b44f16e0a7d41861f8eb1cb98cf6028921",
+          "linux/arm64": "sha256:f3f5e80d4eb6195871e13cb8bf51fa50f77341d05a70e7a0f70de9219fed5fa3"
+        },
+        "index_digest": "sha256:baaa78fd027d35a63c3fd73b92f564ec26f2421704e1b2cba06be885d52a5c00"
+      },
+      {
+        "image": "getmaxun/maxun-backend:v0.0.62",
+        "source_url": "https://hub.docker.com/v2/repositories/getmaxun/maxun-backend/tags/v0.0.62",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-08-25",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:865f306e6c8572be966d5f443d545bd653829c777b1e8a5764f616aabace7998",
+          "linux/arm64": "sha256:bd45215edd1e4a8b9067e5996d77d821fd44145de4fd6374405beb7f9e7fc022"
+        },
+        "index_digest": "sha256:73f44ce1e4306f12aefe6052feb9dd53573887650746b32717dc324e6b4a38e7"
+      },
+      {
+        "image": "getmaxun/maxun-browser:v0.0.2",
+        "source_url": "https://hub.docker.com/v2/repositories/getmaxun/maxun-browser/tags/v0.0.2",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-06-24",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:748446bda2b83cd7af8ef716971b32ef8e427852802520f49335e01c74ca2355",
+          "linux/arm64": "sha256:ea74a4300019301d6f581aa602bc688d285b49a9b8ee31a669cce37f9e6fd2f8"
+        },
+        "index_digest": "sha256:8d78aff8d2d28d0fcefb9609c8326ccceb495149b4f79b6e178f5df2f0d24271"
+      },
+      {
+        "image": "postgres:17.11",
+        "source_url": "https://hub.docker.com/v2/repositories/library/postgres/tags/17.11",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-08-26",
+        "container_platforms": [
+          "linux/386",
+          "linux/amd64",
+          "linux/arm/v5",
+          "linux/arm/v7",
+          "linux/arm64/v8",
+          "linux/ppc64le",
+          "linux/riscv64",
+          "linux/s390x"
+        ],
+        "digests": {
+          "linux/386": "sha256:ae5062748cb3e52cfa8d73091e56a37f1b3f5cf9d971eb8333459c7206bd3ffd",
+          "linux/amd64": "sha256:d13db94ae661d517c5ed57c509a578d5ea64aae639871ba25294f4f42d83de28",
+          "linux/arm/v5": "sha256:b8ff75b6f471e58057711db066411939c3f6fe2548d3456e52035030dc818e00",
+          "linux/arm/v7": "sha256:e913f2840e19352528036c640e77a769d87d8ff10ef781501fe333be94c74d91",
+          "linux/arm64/v8": "sha256:413da4542e091471785b7f18f1a2258df134bc6506ab4e1e53725aa8bcfdb650",
+          "linux/ppc64le": "sha256:245c1026935018ef2ae09987d768ddcef8decc62fe0e8e16a41474c40f6fb376",
+          "linux/riscv64": "sha256:cbc6b27fc0a255576fd004f1334ea16f7b5b065c368e721d6fb9c8417e404570",
+          "linux/s390x": "sha256:942c2b42e40207f6628698df04136e0780101f9fa8128faf716a4fc704ab7359"
+        },
+        "index_digest": "sha256:67f41722b7a8cbdb868a44a4995c846eddfdc2973bccb291ce937dce88ad5675"
+      },
+      {
+        "image": "rustfs/rustfs:1.0.0-rc.6",
+        "source_url": "https://hub.docker.com/v2/repositories/rustfs/rustfs/tags/1.0.0-rc.6",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-09-11",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:8d8bfa61f3a20cdcf644562bb8c3a314ca03c66a9827f6056f741e787bf0c804",
+          "linux/arm64": "sha256:1427d98352c52b3b45308d2aec4c6e9028664cf2dbf1d1b28564b023774ed97d"
+        },
+        "index_digest": "sha256:97171b3d72cd47dc81000f92ea84de25608bfc35a94c965501afaeb5d99f6035"
+      }
+    ]
+  },
+  "promotion": {
+    "state": "approved",
+    "reason": "Approved by the owner. Qualified as offered on 2026-09-12: a real install of Maxun 0.0.62, upstream's current backend proved it starts, opens to a first screen with a clear next step, survives a restart and a keep-data reinstall with its data and generated credentials intact, and removes everything it created. Local Store wrote this definition from the project's own deployment instructions."
+  },
+  "data_storage": "Local Store managed folder / maxun",
+  "risk_notes": [
+    "Creates 5 Docker containers and publishes 3 ports on this computer's loopback interface only.",
+    "Its maxun-backend service answers on a second loopback address, which the app's own pages call directly. Local Store opens only the main one.",
+    "Its maxun-store service answers on a second loopback address, which the app's own pages call directly. Local Store opens only the main one.",
+    "Generates 6 credentials of its own, keeps them beside the app's data, and reuses them if you reinstall.",
+    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Written by Local Store from the project's own deployment instructions, not taken from an app store.",
+    "Asks you to create an account on first open.",
+    "Robots load the websites you point them at from this computer, in a headless Chromium that runs with its own sandbox off, as upstream configures it; the container is what contains the pages it loads.",
+    "Local Store runs that browser without the SYS_ADMIN capability and unconfined seccomp profile upstream's file asks for, which Chromium without its sandbox does not use.",
+    "Screenshots are kept in a bundled RustFS object store, which replaces MinIO now that MinIO no longer publishes images. Telemetry to Maxun's developers is off."
+  ],
+  "fields": {},
+  "definition": "{\n  \"schemaVersion\": 2,\n  \"$schema\": \"https://schemas.runtipi.io/v2/dynamic-compose.json\",\n  \"services\": [\n    {\n      \"name\": \"maxun\",\n      \"image\": \"getmaxun/maxun-frontend:v0.0.58\",\n      \"isMain\": true,\n      \"internalPort\": 5173,\n      \"environment\": [\n        {\n          \"key\": \"FRONTEND_PORT\",\n          \"value\": \"5173\"\n        },\n        {\n          \"key\": \"PUBLIC_URL\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}\"\n        },\n        {\n          \"key\": \"BACKEND_URL\",\n          \"value\": \"${LOCAL_STORE_URL_MAXUN_BACKEND}\"\n        },\n        {\n          \"key\": \"VITE_BACKEND_URL\",\n          \"value\": \"${LOCAL_STORE_URL_MAXUN_BACKEND}\"\n        }\n      ],\n      \"dependsOn\": {\n        \"maxun-backend\": {\n          \"condition\": \"service_healthy\"\n        }\n      }\n    },\n    {\n      \"name\": \"maxun-backend\",\n      \"image\": \"getmaxun/maxun-backend:v0.0.62\",\n      \"addPorts\": [\n        {\n          \"hostPort\": 8080,\n          \"containerPort\": 8080\n        }\n      ],\n      \"environment\": [\n        {\n          \"key\": \"NODE_ENV\",\n          \"value\": \"production\"\n        },\n        {\n          \"key\": \"JWT_SECRET\",\n          \"value\": \"${MAXUN_JWT_SECRET}\"\n        },\n        {\n          \"key\": \"SESSION_SECRET\",\n          \"value\": \"${MAXUN_SESSION_SECRET}\"\n        },\n        {\n          \"key\": \"ENCRYPTION_KEY\",\n          \"value\": \"${MAXUN_ENCRYPTION_KEY}\"\n        },\n        {\n          \"key\": \"DB_NAME\",\n          \"value\": \"maxun\"\n        },\n        {\n          \"key\": \"DB_USER\",\n          \"value\": \"postgres\"\n        },\n        {\n          \"key\": \"DB_PASSWORD\",\n          \"value\": \"${MAXUN_DB_PASSWORD}\"\n        },\n        {\n          \"key\": \"DB_HOST\",\n          \"value\": \"maxun-db\"\n        },\n        {\n          \"key\": \"DB_PORT\",\n          \"value\": \"5432\"\n        },\n        {\n          \"key\": \"MINIO_ENDPOINT\",\n          \"value\": \"maxun-store\"\n        },\n        {\n          \"key\": \"MINIO_PORT\",\n          \"value\": \"9000\"\n        },\n        {\n          \"key\": \"MINIO_ACCESS_KEY\",\n          \"value\": \"${MAXUN_STORE_ACCESS_KEY}\"\n        },\n        {\n          \"key\": \"MINIO_SECRET_KEY\",\n          \"value\": \"${MAXUN_STORE_SECRET_KEY}\"\n        },\n        {\n          \"key\": \"MINIO_PUBLIC_URL\",\n          \"value\": \"${LOCAL_STORE_URL_MAXUN_STORE}\"\n        },\n        {\n          \"key\": \"BACKEND_PORT\",\n          \"value\": \"8080\"\n        },\n        {\n          \"key\": \"FRONTEND_PORT\",\n          \"value\": \"5173\"\n        },\n        {\n          \"key\": \"BACKEND_URL\",\n          \"value\": \"${LOCAL_STORE_URL_MAXUN_BACKEND}\"\n        },\n        {\n          \"key\": \"VITE_BACKEND_URL\",\n          \"value\": \"${LOCAL_STORE_URL_MAXUN_BACKEND}\"\n        },\n        {\n          \"key\": \"PUBLIC_URL\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}\"\n        },\n        {\n          \"key\": \"VITE_PUBLIC_URL\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}\"\n        },\n        {\n          \"key\": \"MAXUN_TELEMETRY\",\n          \"value\": \"false\"\n        },\n        {\n          \"key\": \"BROWSER_WS_HOST\",\n          \"value\": \"maxun-browser\"\n        },\n        {\n          \"key\": \"BROWSER_WS_PORT\",\n          \"value\": \"3001\"\n        },\n        {\n          \"key\": \"BROWSER_HEALTH_PORT\",\n          \"value\": \"3002\"\n        },\n        {\n          \"key\": \"PLAYWRIGHT_BROWSERS_PATH\",\n          \"value\": \"/ms-playwright\"\n        },\n        {\n          \"key\": \"CI\",\n          \"value\": \"true\"\n        },\n        {\n          \"key\": \"CONTAINER\",\n          \"value\": \"true\"\n        },\n        {\n          \"key\": \"CHROMIUM_FLAGS\",\n          \"value\": \"--disable-gpu --no-sandbox --headless=new\"\n        }\n      ],\n      \"dependsOn\": {\n        \"maxun-db\": {\n          \"condition\": \"service_healthy\"\n        },\n        \"maxun-store\": {\n          \"condition\": \"service_healthy\"\n        },\n        \"maxun-browser\": {\n          \"condition\": \"service_healthy\"\n        }\n      },\n      \"healthCheck\": {\n        \"test\": [\n          \"CMD\",\n          \"node\",\n          \"-e\",\n          \"fetch('http://127.0.0.1:8080/').then(r=>process.exit(r.status<500?0:1)).catch(()=>process.exit(1))\"\n        ],\n        \"interval\": \"10s\",\n        \"timeout\": \"5s\",\n        \"retries\": 30,\n        \"startPeriod\": \"30s\"\n      }\n    },\n    {\n      \"name\": \"maxun-browser\",\n      \"image\": \"getmaxun/maxun-browser:v0.0.2\",\n      \"environment\": [\n        {\n          \"key\": \"NODE_ENV\",\n          \"value\": \"production\"\n        },\n        {\n          \"key\": \"BROWSER_WS_PORT\",\n          \"value\": \"3001\"\n        },\n        {\n          \"key\": \"BROWSER_HEALTH_PORT\",\n          \"value\": \"3002\"\n        },\n        {\n          \"key\": \"BROWSER_WS_HOST\",\n          \"value\": \"maxun-browser\"\n        },\n        {\n          \"key\": \"PLAYWRIGHT_BROWSERS_PATH\",\n          \"value\": \"/ms-playwright\"\n        }\n      ],\n      \"healthCheck\": {\n        \"test\": [\n          \"CMD\",\n          \"curl\",\n          \"-f\",\n          \"http://localhost:3002/health\"\n        ],\n        \"interval\": \"10s\",\n        \"timeout\": \"5s\",\n        \"retries\": 6,\n        \"startPeriod\": \"20s\"\n      }\n    },\n    {\n      \"name\": \"maxun-db\",\n      \"image\": \"postgres:17.11\",\n      \"stopSignal\": \"SIGINT\",\n      \"environment\": [\n        {\n          \"key\": \"POSTGRES_USER\",\n          \"value\": \"postgres\"\n        },\n        {\n          \"key\": \"POSTGRES_PASSWORD\",\n          \"value\": \"${MAXUN_DB_PASSWORD}\"\n        },\n        {\n          \"key\": \"POSTGRES_DB\",\n          \"value\": \"maxun\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/postgres\",\n          \"containerPath\": \"/var/lib/postgresql/data\"\n        }\n      ],\n      \"healthCheck\": {\n        \"test\": \"pg_isready -U postgres\",\n        \"interval\": \"5s\",\n        \"timeout\": \"5s\",\n        \"retries\": 10,\n        \"startPeriod\": \"60s\"\n      }\n    },\n    {\n      \"name\": \"maxun-store\",\n      \"image\": \"rustfs/rustfs:1.0.0-rc.6\",\n      \"addPorts\": [\n        {\n          \"hostPort\": 9000,\n          \"containerPort\": 9000\n        }\n      ],\n      \"environment\": [\n        {\n          \"key\": \"RUSTFS_ACCESS_KEY\",\n          \"value\": \"${MAXUN_STORE_ACCESS_KEY}\"\n        },\n        {\n          \"key\": \"RUSTFS_SECRET_KEY\",\n          \"value\": \"${MAXUN_STORE_SECRET_KEY}\"\n        },\n        {\n          \"key\": \"RUSTFS_CONSOLE_ENABLE\",\n          \"value\": \"false\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/store\",\n          \"containerPath\": \"/data\"\n        }\n      ],\n      \"healthCheck\": {\n        \"test\": \"wget -qO- http://localhost:9000/health >/dev/null 2>&1 || exit 1\",\n        \"interval\": \"5s\",\n        \"timeout\": \"3s\",\n        \"retries\": 30\n      }\n    }\n  ]\n}\n",
+  "config": {
+    "path": "definitions/apps/maxun/config.json",
+    "content": "{\n  \"id\": \"maxun\",\n  \"name\": \"Maxun\",\n  \"version\": \"0.0.62\",\n  \"source\": \"https://github.com/getmaxun/maxun\",\n  \"website\": \"https://www.maxun.dev\",\n  \"documentation\": \"https://github.com/getmaxun/maxun/blob/develop/docs/self-hosting-docker.md\",\n  \"short_desc\": \"Turn websites into data: train a robot by pointing at a page, then run it on a schedule.\",\n  \"categories\": [\n    \"Artificial Intelligence\"\n  ],\n  \"license\": \"AGPL-3.0\",\n  \"form_fields\": [\n    {\n      \"type\": \"random\",\n      \"label\": \"Database password\",\n      \"min\": 32,\n      \"max\": 32,\n      \"env_variable\": \"MAXUN_DB_PASSWORD\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Sign-in secret\",\n      \"min\": 64,\n      \"max\": 64,\n      \"env_variable\": \"MAXUN_JWT_SECRET\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Session secret\",\n      \"min\": 64,\n      \"max\": 64,\n      \"env_variable\": \"MAXUN_SESSION_SECRET\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Encryption key for stored passwords and proxies\",\n      \"min\": 64,\n      \"max\": 64,\n      \"encoding\": \"hex\",\n      \"env_variable\": \"MAXUN_ENCRYPTION_KEY\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Object store access key\",\n      \"min\": 20,\n      \"max\": 20,\n      \"env_variable\": \"MAXUN_STORE_ACCESS_KEY\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Object store secret key\",\n      \"min\": 40,\n      \"max\": 40,\n      \"env_variable\": \"MAXUN_STORE_SECRET_KEY\"\n    }\n  ]\n}\n"
+  }
+}

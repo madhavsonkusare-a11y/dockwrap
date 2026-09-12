@@ -1,0 +1,90 @@
+{
+  "app": "sim",
+  "passed": true,
+  "scope": "reviewed mapping, transaction, managed storage and first use, on one host and one architecture",
+  "promotion": "approved",
+  "source_revision": "b342856562a0db400698ccbfdfb43929a9dbe622",
+  "images": [
+    "ghcr.io/simstudioai/simstudio:v0.8.33",
+    "ghcr.io/simstudioai/realtime:v0.8.33",
+    "ghcr.io/simstudioai/migrations:v0.8.33",
+    "ghcr.io/simstudioai/cron:v0.8.33",
+    "pgvector/pgvector:0.8.6-pg17",
+    "redis:7.4.11-alpine"
+  ],
+  "image_ids": {
+    "ghcr.io/simstudioai/cron:v0.8.33": "sha256:b5ce1038971225cd082dce7e701a81af5d24bd712a75b7adca9d7f6f04134b49",
+    "ghcr.io/simstudioai/migrations:v0.8.33": "sha256:1abb5deb558ebef9cd051ee2547d96237a921a4fc7f54946ee629b8e5402e01f",
+    "ghcr.io/simstudioai/realtime:v0.8.33": "sha256:89a87e083ede6da494a19fa5292a3e37b1b877c5e65fde2d0bd099ff755bd489",
+    "ghcr.io/simstudioai/simstudio:v0.8.33": "sha256:28daaa1390f8a9bcf429855071fc68c4e93aa329e93be010be89f12350d1d27e",
+    "pgvector/pgvector:0.8.6-pg17": "sha256:cf134a767f474095eeba57e0117be8e568e011a63f33fbf252f14c9b760f8e6f",
+    "redis:7.4.11-alpine": "sha256:ff02b58f971e7d7d156a1267e283fcbbeee91773b6aa36c49dac28ecfe28eadf"
+  },
+  "first_use": "it opens a page with a clear next step, the same page after a restart and reinstall, and scripts/companion-probe.mjs passed",
+  "steps": [
+    {
+      "step": "pull ghcr.io/simstudioai/simstudio:v0.8.33",
+      "passed": true
+    },
+    {
+      "step": "pull ghcr.io/simstudioai/realtime:v0.8.33",
+      "passed": true
+    },
+    {
+      "step": "pull ghcr.io/simstudioai/migrations:v0.8.33",
+      "passed": true
+    },
+    {
+      "step": "pull ghcr.io/simstudioai/cron:v0.8.33",
+      "passed": true
+    },
+    {
+      "step": "pull pgvector/pgvector:0.8.6-pg17",
+      "passed": true
+    },
+    {
+      "step": "pull redis:7.4.11-alpine",
+      "passed": true
+    },
+    {
+      "step": "installs with one action",
+      "passed": true
+    },
+    {
+      "step": "answers on its address",
+      "passed": true
+    },
+    {
+      "step": "is usable first install",
+      "passed": true
+    },
+    {
+      "step": "survives a restart",
+      "passed": true
+    },
+    {
+      "step": "is usable after restart",
+      "passed": true
+    },
+    {
+      "step": "reinstalls over data it kept",
+      "passed": true
+    },
+    {
+      "step": "keeps the credentials it generated",
+      "passed": true
+    },
+    {
+      "step": "is usable after a keep-data reinstall",
+      "passed": true
+    },
+    {
+      "step": "removes everything it created",
+      "passed": true
+    },
+    {
+      "step": "leaves other containers alone",
+      "passed": true
+    }
+  ]
+}

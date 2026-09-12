@@ -8,7 +8,7 @@
   "license": "MIT",
   "source_url": "https://github.com/huginn/huginn",
   "documentation_url": "https://github.com/huginn/huginn/blob/master/doc/docker/install.md",
-  "verified_at": "",
+  "verified_at": "2026-09-12",
   "lifecycle_proof": "docs/evidence/huginn-qualification.json",
   "origin": {
     "importer": "runtipi",
@@ -59,8 +59,8 @@
     ]
   },
   "promotion": {
-    "state": "withheld",
-    "reason": "Pending since 2026-09-11: not yet proven as offered, because it ran from a binary built before its manifest moved it off MySQL 8, which cannot keep data on a Windows host folder. Qualification stopped when D: ran out of space; resume with qualify_batch --offered once it is compacted."
+    "state": "approved",
+    "reason": "Approved by the owner. Qualified as offered on 2026-09-12: a real install of Huginn v2026.09.09, upstream's current release proved it starts, opens to a first screen with a clear next step, survives a restart and a keep-data reinstall with its data and generated credentials intact, and removes everything it created. Local Store wrote this definition from the project's own deployment instructions."
   },
   "data_storage": "Local Store managed folder / huginn",
   "risk_notes": [
@@ -68,7 +68,10 @@
     "Generates 2 credentials of its own, keeps them beside the app's data, and reuses them if you reinstall.",
     "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
     "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
-    "Written by Local Store from the project's own deployment instructions, not taken from an app store."
+    "Written by Local Store from the project's own deployment instructions, not taken from an app store.",
+    "The account is the username and password you chose at setup.",
+    "Agents you create fetch web pages, send email and call web hooks on their schedules, from this computer.",
+    "Keeps its database in a MariaDB 11.4 beside it, in its folder: MySQL 8 cannot keep its data on a Windows folder."
   ],
   "fields": {
     "HUGINN_USERNAME": {

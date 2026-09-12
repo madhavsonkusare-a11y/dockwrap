@@ -190,6 +190,25 @@ pub fn search(
         })
         .collect();
     let total = entries.len();
+    // Matching is not finding. Every entry whose text contains the words is a
+    // match, in browse order, so searching "Sim" returned forty-eight apps
+    // that merely mention it and not the app named Sim. An exact name comes
+    // first, then a name that starts with what was typed; everything else
+    // keeps the order it had.
+    let mut entries = entries;
+    if !query.is_empty() {
+        entries.sort_by_key(|entry| {
+            let name = entry.name.to_lowercase();
+            let named = |value: &String| value.to_lowercase() == query;
+            if name == query || entry.aliases.iter().any(named) {
+                0
+            } else if name.starts_with(&query) {
+                1
+            } else {
+                2
+            }
+        });
+    }
     let entries = entries
         .into_iter()
         .skip(offset)

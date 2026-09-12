@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "id": "sim",
+  "display_name": "Sim",
+  "catalog_name": "Sim",
+  "description": "Build and run AI agent workflows on a visual canvas.",
+  "category": "Artificial Intelligence",
+  "license": "Apache-2.0",
+  "source_url": "https://github.com/simstudioai/sim",
+  "documentation_url": "https://docs.sim.ai/self-hosting/docker",
+  "verified_at": "2026-09-12",
+  "lifecycle_proof": "docs/evidence/sim-qualification.json",
+  "origin": {
+    "importer": "runtipi",
+    "repository": "madhavsonkusare-a11y/local-store",
+    "revision": "b342856562a0db400698ccbfdfb43929a9dbe622",
+    "path": "definitions/apps/sim/docker-compose.json",
+    "license": "MIT"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "ghcr.io/simstudioai/simstudio:v0.8.33",
+        "source_url": "https://ghcr.io/v2/simstudioai/simstudio/manifests/v0.8.33",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-09-11",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:f54ecfc02bf4b17a6528e273965bb507feba9cd2826cd1a2ef2c236940fcbc54",
+          "linux/arm64": "sha256:bf7f53caa9bd7780f386c74bf39e7e0836cb53863b3ed683a51dee58a8c795f6"
+        },
+        "index_digest": "sha256:28daaa1390f8a9bcf429855071fc68c4e93aa329e93be010be89f12350d1d27e"
+      },
+      {
+        "image": "ghcr.io/simstudioai/realtime:v0.8.33",
+        "source_url": "https://ghcr.io/v2/simstudioai/realtime/manifests/v0.8.33",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-09-11",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:8639dc1f5cfe28490608dcb7e6e8c6c23cbfce9688c33b49662862ea43ac6fc7",
+          "linux/arm64": "sha256:4fb3047be848adb239fbba401031add7ffd98df7999336a16624c34a428e49a4"
+        },
+        "index_digest": "sha256:89a87e083ede6da494a19fa5292a3e37b1b877c5e65fde2d0bd099ff755bd489"
+      },
+      {
+        "image": "ghcr.io/simstudioai/migrations:v0.8.33",
+        "source_url": "https://ghcr.io/v2/simstudioai/migrations/manifests/v0.8.33",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-09-11",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:73c2bd4d7552e6a8b578a2a07a38b12b462de0050c2b14ecb518368e948d19e4",
+          "linux/arm64": "sha256:19d0892f25c2ebcdb5f6a621d939a6eebda99eca29c4362171aef25769ba23c0"
+        },
+        "index_digest": "sha256:1abb5deb558ebef9cd051ee2547d96237a921a4fc7f54946ee629b8e5402e01f"
+      },
+      {
+        "image": "ghcr.io/simstudioai/cron:v0.8.33",
+        "source_url": "https://ghcr.io/v2/simstudioai/cron/manifests/v0.8.33",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-09-09",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:096887d81513b07a5237e3736a709843bda92750465ff85c0c691d138d10cf05",
+          "linux/arm64": "sha256:19841e158161ce0f6eca3c29f6c5f9c30a73a0c8b9460ca2e4ece443184fcf44"
+        },
+        "index_digest": "sha256:b5ce1038971225cd082dce7e701a81af5d24bd712a75b7adca9d7f6f04134b49"
+      },
+      {
+        "image": "pgvector/pgvector:0.8.6-pg17",
+        "source_url": "https://hub.docker.com/v2/repositories/pgvector/pgvector/tags/0.8.6-pg17",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-08-13",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:dca0d688bbb31d3f851502ffcb9c7791387b4fcc544ae434dab41761e5ece317",
+          "linux/arm64": "sha256:de5bb95ded567f98e342a29f188f8053b2e8d344cb9ccd52cbdfe15f720cfde7"
+        },
+        "index_digest": "sha256:cf134a767f474095eeba57e0117be8e568e011a63f33fbf252f14c9b760f8e6f"
+      },
+      {
+        "image": "redis:7.4.11-alpine",
+        "source_url": "https://hub.docker.com/v2/repositories/library/redis/tags/7.4.11-alpine",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-08-20",
+        "container_platforms": [
+          "linux/386",
+          "linux/amd64",
+          "linux/arm/v6",
+          "linux/arm/v7",
+          "linux/arm64/v8",
+          "linux/ppc64le",
+          "linux/riscv64",
+          "linux/s390x"
+        ],
+        "digests": {
+          "linux/386": "sha256:a4fd08853cdc01da535e7c3ede18084fca62b21a6ee06e38f0aba769f188d45b",
+          "linux/amd64": "sha256:1db42ccef14898aa29bae778452d567534b59c107129cbc1163fb552de184d3c",
+          "linux/arm/v6": "sha256:253cf5a8c5a0bb62b11c913b9b006963753f844ab040d39395e3b7d635db37d0",
+          "linux/arm/v7": "sha256:89beb43a975079ad216a6171d1696ce3aa2b348477228500f53c6fe99cc4f9df",
+          "linux/arm64/v8": "sha256:f8d15882ba108587477ce13c00ab0551933a84138427b7cc9abadfbe45ffd973",
+          "linux/ppc64le": "sha256:58a9ef466c2701c6e1c50d00abb394ed0a2298d6369aae2950b8fa3cba23973c",
+          "linux/riscv64": "sha256:60c3979aa5c24b4d147484b7717153e2f241b5073ec83500bdace86f0c8472d1",
+          "linux/s390x": "sha256:f176864eb58d72ec3bb461a2f395cd069a127586751013350753c0d2ccf6e119"
+        },
+        "index_digest": "sha256:ff02b58f971e7d7d156a1267e283fcbbeee91773b6aa36c49dac28ecfe28eadf"
+      }
+    ]
+  },
+  "promotion": {
+    "state": "approved",
+    "reason": "Approved by the owner. Qualified as offered on 2026-09-12: a real install of Sim 0.8.33, upstream's current release proved it starts, opens to a first screen with a clear next step, survives a restart and a keep-data reinstall with its data and generated credentials intact, and removes everything it created. Local Store wrote this definition from the project's own deployment instructions."
+  },
+  "data_storage": "Local Store managed folder / sim",
+  "risk_notes": [
+    "Creates 6 Docker containers and publishes 2 ports on this computer's loopback interface only.",
+    "Its sim-realtime service answers on a second loopback address, which the app's own pages call directly. Local Store opens only the main one.",
+    "Runs sim-migrations once each time it starts, and starts the app only if it succeeds.",
+    "Generates 5 credentials of its own, keeps them beside the app's data, and reuses them if you reinstall.",
+    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Written by Local Store from the project's own deployment instructions, not taken from an app store.",
+    "Asks you to create an account on first open; anyone who can reach the address can register one.",
+    "Workflows call the model providers and services you add keys for; the keys are stored encrypted with a key Local Store generated."
+  ],
+  "fields": {},
+  "definition": "{\n  \"schemaVersion\": 2,\n  \"$schema\": \"https://schemas.runtipi.io/v2/dynamic-compose.json\",\n  \"services\": [\n    {\n      \"name\": \"sim\",\n      \"image\": \"ghcr.io/simstudioai/simstudio:v0.8.33\",\n      \"isMain\": true,\n      \"internalPort\": 3000,\n      \"environment\": [\n        {\n          \"key\": \"NODE_ENV\",\n          \"value\": \"production\"\n        },\n        {\n          \"key\": \"DATABASE_URL\",\n          \"value\": \"postgresql://postgres:${SIM_DB_PASSWORD}@sim-db:5432/simstudio\"\n        },\n        {\n          \"key\": \"BETTER_AUTH_URL\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}\"\n        },\n        {\n          \"key\": \"NEXT_PUBLIC_APP_URL\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}\"\n        },\n        {\n          \"key\": \"BETTER_AUTH_SECRET\",\n          \"value\": \"${SIM_AUTH_SECRET}\"\n        },\n        {\n          \"key\": \"ENCRYPTION_KEY\",\n          \"value\": \"${SIM_ENCRYPTION_KEY}\"\n        },\n        {\n          \"key\": \"INTERNAL_API_SECRET\",\n          \"value\": \"${SIM_INTERNAL_SECRET}\"\n        },\n        {\n          \"key\": \"CRON_SECRET\",\n          \"value\": \"${SIM_CRON_SECRET}\"\n        },\n        {\n          \"key\": \"REDIS_URL\",\n          \"value\": \"redis://sim-redis:6379\"\n        },\n        {\n          \"key\": \"SOCKET_SERVER_URL\",\n          \"value\": \"http://sim-realtime:3002\"\n        },\n        {\n          \"key\": \"NEXT_PUBLIC_SOCKET_URL\",\n          \"value\": \"${LOCAL_STORE_URL_SIM_REALTIME}\"\n        }\n      ],\n      \"dependsOn\": {\n        \"sim-db\": {\n          \"condition\": \"service_healthy\"\n        },\n        \"sim-redis\": {\n          \"condition\": \"service_healthy\"\n        },\n        \"sim-migrations\": {\n          \"condition\": \"service_completed_successfully\"\n        },\n        \"sim-realtime\": {\n          \"condition\": \"service_healthy\"\n        }\n      }\n    },\n    {\n      \"name\": \"sim-realtime\",\n      \"image\": \"ghcr.io/simstudioai/realtime:v0.8.33\",\n      \"addPorts\": [\n        {\n          \"hostPort\": 3002,\n          \"containerPort\": 3002\n        }\n      ],\n      \"environment\": [\n        {\n          \"key\": \"NODE_ENV\",\n          \"value\": \"production\"\n        },\n        {\n          \"key\": \"DATABASE_URL\",\n          \"value\": \"postgresql://postgres:${SIM_DB_PASSWORD}@sim-db:5432/simstudio\"\n        },\n        {\n          \"key\": \"NEXT_PUBLIC_APP_URL\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}\"\n        },\n        {\n          \"key\": \"BETTER_AUTH_URL\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}\"\n        },\n        {\n          \"key\": \"BETTER_AUTH_SECRET\",\n          \"value\": \"${SIM_AUTH_SECRET}\"\n        },\n        {\n          \"key\": \"INTERNAL_API_SECRET\",\n          \"value\": \"${SIM_INTERNAL_SECRET}\"\n        },\n        {\n          \"key\": \"REDIS_URL\",\n          \"value\": \"redis://sim-redis:6379\"\n        }\n      ],\n      \"healthCheck\": {\n        \"test\": [\"CMD\", \"curl\", \"-fsS\", \"http://127.0.0.1:3002/health\"],\n        \"interval\": \"10s\",\n        \"timeout\": \"5s\",\n        \"retries\": 6,\n        \"startPeriod\": \"30s\"\n      },\n      \"dependsOn\": {\n        \"sim-db\": {\n          \"condition\": \"service_healthy\"\n        },\n        \"sim-redis\": {\n          \"condition\": \"service_healthy\"\n        },\n        \"sim-migrations\": {\n          \"condition\": \"service_completed_successfully\"\n        }\n      }\n    },\n    {\n      \"name\": \"sim-migrations\",\n      \"image\": \"ghcr.io/simstudioai/migrations:v0.8.33\",\n      \"command\": [\"bun\", \"run\", \"db:migrate\"],\n      \"environment\": [\n        {\n          \"key\": \"DATABASE_URL\",\n          \"value\": \"postgresql://postgres:${SIM_DB_PASSWORD}@sim-db:5432/simstudio\"\n        }\n      ],\n      \"dependsOn\": {\n        \"sim-db\": {\n          \"condition\": \"service_healthy\"\n        }\n      }\n    },\n    {\n      \"name\": \"sim-cron\",\n      \"image\": \"ghcr.io/simstudioai/cron:v0.8.33\",\n      \"environment\": [\n        {\n          \"key\": \"SIM_URL\",\n          \"value\": \"http://sim:3000\"\n        },\n        {\n          \"key\": \"CRON_SECRET\",\n          \"value\": \"${SIM_CRON_SECRET}\"\n        },\n        {\n          \"key\": \"TZ\",\n          \"value\": \"UTC\"\n        }\n      ],\n      \"dependsOn\": [\"sim\"]\n    },\n    {\n      \"name\": \"sim-db\",\n      \"image\": \"pgvector/pgvector:0.8.6-pg17\",\n      \"stopSignal\": \"SIGINT\",\n      \"environment\": [\n        {\n          \"key\": \"POSTGRES_USER\",\n          \"value\": \"postgres\"\n        },\n        {\n          \"key\": \"POSTGRES_PASSWORD\",\n          \"value\": \"${SIM_DB_PASSWORD}\"\n        },\n        {\n          \"key\": \"POSTGRES_DB\",\n          \"value\": \"simstudio\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/postgres\",\n          \"containerPath\": \"/var/lib/postgresql/data\"\n        }\n      ],\n      \"healthCheck\": {\n        \"test\": \"pg_isready -U postgres\",\n        \"interval\": \"5s\",\n        \"timeout\": \"5s\",\n        \"retries\": 10,\n        \"startPeriod\": \"60s\"\n      }\n    },\n    {\n      \"name\": \"sim-redis\",\n      \"image\": \"redis:7.4.11-alpine\",\n      \"healthCheck\": {\n        \"test\": [\"CMD\", \"redis-cli\", \"ping\"],\n        \"interval\": \"5s\",\n        \"timeout\": \"5s\",\n        \"retries\": 5\n      }\n    }\n  ]\n}\n",
+  "config": {
+    "path": "definitions/apps/sim/config.json",
+    "content": "{\n  \"id\": \"sim\",\n  \"name\": \"Sim\",\n  \"version\": \"0.8.33\",\n  \"source\": \"https://github.com/simstudioai/sim\",\n  \"website\": \"https://www.sim.ai\",\n  \"documentation\": \"https://docs.sim.ai/self-hosting/docker\",\n  \"short_desc\": \"Build and run AI agent workflows on a visual canvas.\",\n  \"categories\": [\n    \"Artificial Intelligence\"\n  ],\n  \"license\": \"Apache-2.0\",\n  \"form_fields\": [\n    {\n      \"type\": \"random\",\n      \"label\": \"Database password\",\n      \"min\": 32,\n      \"max\": 32,\n      \"env_variable\": \"SIM_DB_PASSWORD\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Sign-in secret\",\n      \"min\": 64,\n      \"max\": 64,\n      \"encoding\": \"hex\",\n      \"env_variable\": \"SIM_AUTH_SECRET\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Encryption key for stored credentials\",\n      \"min\": 64,\n      \"max\": 64,\n      \"encoding\": \"hex\",\n      \"env_variable\": \"SIM_ENCRYPTION_KEY\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Secret between Sim's services\",\n      \"min\": 64,\n      \"max\": 64,\n      \"encoding\": \"hex\",\n      \"env_variable\": \"SIM_INTERNAL_SECRET\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Secret for scheduled jobs\",\n      \"min\": 64,\n      \"max\": 64,\n      \"encoding\": \"hex\",\n      \"env_variable\": \"SIM_CRON_SECRET\"\n    }\n  ]\n}\n"
+  }
+}

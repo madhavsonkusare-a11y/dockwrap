@@ -48,7 +48,8 @@ REVIEWS = {
     "flowise": (
         ["Asks you to create its administrator account the first time you open it.",
          "Flows call model providers and other services with credentials you store in it; they are encrypted with a key Local Store generated.",
-         "Flowise is open core: features for its paid Enterprise edition stay locked."],
+         "Flowise is open core: features for its paid Enterprise edition stay locked.",
+         "Keeps its data in PostgreSQL beside it. Flowise 3.1.4 crashes on its own SQLite session store, which is why."],
         "Flowise 3.1.4, upstream's current release"),
     "sim": (
         ["Asks you to create an account on first open; anyone who can reach the address can register one.",
@@ -64,7 +65,7 @@ REVIEWS = {
         ["Asks you to create an account on first open; anyone who can reach the address can register one.",
          "Uses the model providers you add keys for; the keys are stored encrypted with a key Local Store generated.",
          "Files you upload go to a bundled RustFS object store, a 1.0 release candidate, on a second loopback address the page uploads to directly.",
-         "Its bucket is created by MinIO's mc client, whose last image is from September 2025; it talks only to the bundled store.",
+         "Its bucket is made by Local Store's start script with a signed S3 request, because MinIO has taken the mc client image upstream uses off Docker Hub.",
          "Source-available under the LobeHub Community License, which restricts commercial derivative works."],
         "LobeHub 2.2.17, upstream's current release"),
     "dify": (
@@ -77,7 +78,8 @@ REVIEWS = {
     "open-webui": (
         ["Asks you to create an account on first open; the first account is the administrator.",
          "Connects to an Ollama server at the address you give during setup, or to OpenAI with your key; other providers can be added in its settings.",
-         "Source-available under the Open WebUI License, BSD-3 with a clause that keeps its branding."],
+         "Source-available under the Open WebUI License, BSD-3 with a clause that keeps its branding.",
+         "Its first start downloads a search model, which took longer than the usual allowance here; it is given ten minutes."],
         "Open WebUI 0.11.3, upstream's current release"),
     "joplin": (
         ["Signs in first as admin@localhost with the password admin; change both in its settings, then connect your Joplin apps to its address."],
@@ -92,7 +94,10 @@ def apply(app, extra_note=""):
     proof = json.loads(Path(d["lifecycle_proof"]).read_text(encoding="utf-8"))
     assert proof["passed"], f"{app} proof did not pass"
     notes, what = REVIEWS[app]
-    d["risk_notes"] = [n for n in d["risk_notes"] if not n.startswith("REVIEW: ")] + notes
+    kept = [n for n in d["risk_notes"] if not n.startswith("REVIEW: ")]
+    # Re-applying a corrected note replaces the old one rather than adding to it.
+    every = {n for app_notes, _ in REVIEWS.values() for n in app_notes}
+    d["risk_notes"] = [n for n in kept if n not in every] + notes
     creds = any("credentials it generated" in s["step"] for s in proof["steps"])
     import datetime
     today = datetime.date.today().isoformat()

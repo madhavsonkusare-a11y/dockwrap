@@ -13208,10 +13208,10 @@
           "url": "https://github.com/coollabsio/coolify/blob/08f68016dd342fe944564f79969f4ceceddc88d6/templates/compose/dify.yaml"
         },
         {
-          "revision": "b342856562a0db400698ccbfdfb43929a9dbe622",
+          "revision": "cd180bc51b815f73ad64f541794fdbc5d3e65e73",
           "source": "local-store",
           "upstream_id": "definitions/apps/dify",
-          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/b342856562a0db400698ccbfdfb43929a9dbe622/definitions/apps/dify/config.json"
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/cd180bc51b815f73ad64f541794fdbc5d3e65e73/definitions/apps/dify/config.json"
         }
       ],
       "tags": [
@@ -20517,10 +20517,10 @@
           "url": "https://github.com/IceWhaleTech/CasaOS-AppStore/blob/2e8aec47d7d139363488372cb1fc6826010138fe/Apps/FlowiseAi/docker-compose.yml"
         },
         {
-          "revision": "cbdf7d33fb40bc9f5c69352b0b872d20b5c8153f",
+          "revision": "484d934c006b0e276c9949ce89a868fad3c9f257",
           "source": "local-store",
           "upstream_id": "definitions/apps/flowise",
-          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/cbdf7d33fb40bc9f5c69352b0b872d20b5c8153f/definitions/apps/flowise/config.json"
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/484d934c006b0e276c9949ce89a868fad3c9f257/definitions/apps/flowise/config.json"
         }
       ],
       "tags": [

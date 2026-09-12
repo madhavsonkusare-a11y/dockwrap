@@ -8,7 +8,7 @@
   "license": "MIT",
   "source_url": "https://github.com/ItzCrazyKns/Vane",
   "documentation_url": "https://github.com/ItzCrazyKns/Vane#installation",
-  "verified_at": "",
+  "verified_at": "2026-09-12",
   "lifecycle_proof": "docs/evidence/vane-qualification.json",
   "origin": {
     "importer": "runtipi",
@@ -40,15 +40,17 @@
     ]
   },
   "promotion": {
-    "state": "withheld",
-    "reason": "Pending since 2026-09-11: not yet proven as offered, because every run used an image layer truncated when this machine's D: drive filled; a clean pull has an intact entrypoint. Qualification stopped when D: ran out of space; resume with qualify_batch --offered once it is compacted."
+    "state": "approved",
+    "reason": "Approved by the owner. Qualified as offered on 2026-09-12: a real install of Vane 1.12.2 (formerly Perplexica), upstream's current release proved it starts, opens to a first screen with a clear next step, survives a restart and a keep-data reinstall with its data intact, and removes everything it created. Local Store wrote this definition from the project's own deployment instructions."
   },
   "data_storage": "Local Store managed folder / vane",
   "risk_notes": [
     "Creates 1 Docker container and publishes one port on this computer's loopback interface only.",
     "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
     "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
-    "Written by Local Store from the project's own deployment instructions, not taken from an app store."
+    "Written by Local Store from the project's own deployment instructions, not taken from an app store.",
+    "Asks on first open for a model provider and its key.",
+    "Every question goes to the model provider you choose, and its searches go through the bundled SearXNG, which queries public search engines from this computer."
   ],
   "fields": {},
   "definition": "{\n  \"schemaVersion\": 2,\n  \"$schema\": \"https://schemas.runtipi.io/v2/dynamic-compose.json\",\n  \"services\": [\n    {\n      \"name\": \"vane\",\n      \"image\": \"itzcrazykns1337/vane:full-v1.12.2\",\n      \"isMain\": true,\n      \"internalPort\": 3000,\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data\",\n          \"containerPath\": \"/home/vane/data\"\n        }\n      ]\n    }\n  ]\n}\n",

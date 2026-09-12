@@ -1,0 +1,140 @@
+{
+  "app": "dify",
+  "passed": true,
+  "scope": "reviewed mapping, transaction, managed storage and first use, on one host and one architecture",
+  "promotion": "approved",
+  "source_revision": "cd180bc51b815f73ad64f541794fdbc5d3e65e73",
+  "images": [
+    "nginx:1.31.5-alpine",
+    "langgenius/dify-api:1.17.1",
+    "langgenius/dify-api:1.17.1",
+    "langgenius/dify-api:1.17.1",
+    "langgenius/dify-api:1.17.1",
+    "langgenius/dify-web:1.17.1",
+    "pgvector/pgvector:0.8.6-pg15",
+    "redis:7.4.11-alpine",
+    "langgenius/dify-sandbox:0.2.15",
+    "ubuntu/squid:6.6-24.04_edge",
+    "langgenius/dify-plugin-daemon:0.6.10-local",
+    "langgenius/dify-agent-backend:1.17.1",
+    "langgenius/dify-agent-local-sandbox:1.17.1",
+    "ubuntu/squid:6.6-24.04_edge",
+    "busybox:1.37.0"
+  ],
+  "image_ids": {
+    "busybox:1.37.0": "sha256:9db7b59979c38555a39def84a31fb98b5296952f9e3afd4f6f11f05b07adfab0",
+    "langgenius/dify-agent-backend:1.17.1": "sha256:a30c039bbead65d7fd8baf8c53fc867373f515c5721e46070ce03ed04c5f1e32",
+    "langgenius/dify-agent-local-sandbox:1.17.1": "sha256:f4d404c9dcdf80bd72f65e84c3f2bbd1f3404fd4b363db837176da8aaf771b1d",
+    "langgenius/dify-api:1.17.1": "sha256:ceede5b903afaa20348f7ad80ebf847379dc56d886a99b9ec6a08913dacd7732",
+    "langgenius/dify-plugin-daemon:0.6.10-local": "sha256:34412a22d1e1d1a6c73727fef88cffbcdd9be7a21bf9ad3076b4bf5c1b88fd9b",
+    "langgenius/dify-sandbox:0.2.15": "sha256:750e1111426ef31a9217b81c98cccfb750f17b182af3221102e420afa9f0928e",
+    "langgenius/dify-web:1.17.1": "sha256:6353fe8e04481aaef873ef7317507bfa9ac862572118fd037563a71bff9f4d08",
+    "nginx:1.31.5-alpine": "sha256:72ba65eb42c10344912a84ff42408db7d34f2feb642204570ab8fc5ffd29f1d3",
+    "pgvector/pgvector:0.8.6-pg15": "sha256:a947c45cdc5906a1bc951f20a8709e321256343ee0f251e4ae00b5e7def4e6da",
+    "redis:7.4.11-alpine": "sha256:ff02b58f971e7d7d156a1267e283fcbbeee91773b6aa36c49dac28ecfe28eadf",
+    "ubuntu/squid:6.6-24.04_edge": "sha256:8a3baed477e2c282ab8aa5edad442f69873246964f225c5c2ae8364b6610963c"
+  },
+  "first_use": "it opens a page with a clear next step, and the same page after a restart and reinstall",
+  "steps": [
+    {
+      "step": "pull nginx:1.31.5-alpine",
+      "passed": true
+    },
+    {
+      "step": "pull langgenius/dify-api:1.17.1",
+      "passed": true
+    },
+    {
+      "step": "pull langgenius/dify-api:1.17.1",
+      "passed": true
+    },
+    {
+      "step": "pull langgenius/dify-api:1.17.1",
+      "passed": true
+    },
+    {
+      "step": "pull langgenius/dify-api:1.17.1",
+      "passed": true
+    },
+    {
+      "step": "pull langgenius/dify-web:1.17.1",
+      "passed": true
+    },
+    {
+      "step": "pull pgvector/pgvector:0.8.6-pg15",
+      "passed": true
+    },
+    {
+      "step": "pull redis:7.4.11-alpine",
+      "passed": true
+    },
+    {
+      "step": "pull langgenius/dify-sandbox:0.2.15",
+      "passed": true
+    },
+    {
+      "step": "pull ubuntu/squid:6.6-24.04_edge",
+      "passed": true
+    },
+    {
+      "step": "pull langgenius/dify-plugin-daemon:0.6.10-local",
+      "passed": true
+    },
+    {
+      "step": "pull langgenius/dify-agent-backend:1.17.1",
+      "passed": true
+    },
+    {
+      "step": "pull langgenius/dify-agent-local-sandbox:1.17.1",
+      "passed": true
+    },
+    {
+      "step": "pull ubuntu/squid:6.6-24.04_edge",
+      "passed": true
+    },
+    {
+      "step": "pull busybox:1.37.0",
+      "passed": true
+    },
+    {
+      "step": "installs with one action",
+      "passed": true
+    },
+    {
+      "step": "answers on its address",
+      "passed": true
+    },
+    {
+      "step": "is usable first install",
+      "passed": true
+    },
+    {
+      "step": "survives a restart",
+      "passed": true
+    },
+    {
+      "step": "is usable after restart",
+      "passed": true
+    },
+    {
+      "step": "reinstalls over data it kept",
+      "passed": true
+    },
+    {
+      "step": "keeps the credentials it generated",
+      "passed": true
+    },
+    {
+      "step": "is usable after a keep-data reinstall",
+      "passed": true
+    },
+    {
+      "step": "removes everything it created",
+      "passed": true
+    },
+    {
+      "step": "leaves other containers alone",
+      "passed": true
+    }
+  ]
+}

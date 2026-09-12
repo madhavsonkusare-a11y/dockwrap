@@ -1,31 +1,37 @@
 {
-  "app": "khoj",
+  "app": "lobehub",
   "passed": true,
   "scope": "reviewed mapping, transaction, managed storage and first use, on one host and one architecture",
   "promotion": "approved",
-  "source_revision": "a333806252ca303c76836a28d64085dec5f2c637",
+  "source_revision": "484d934c006b0e276c9949ce89a868fad3c9f257",
   "images": [
-    "ghcr.io/khoj-ai/khoj:1.42.10",
-    "pgvector/pgvector:0.8.6-pg15",
-    "searxng/searxng:2026.9.10-931fd9787"
+    "lobehub/lobehub:2.2.17",
+    "paradedb/paradedb:0.25.8-pg17",
+    "redis:7.4.11-alpine",
+    "rustfs/rustfs:1.0.0-rc.6"
   ],
   "image_ids": {
-    "ghcr.io/khoj-ai/khoj:1.42.10": "sha256:41aa881c957a035207c11da239dc436d0f8a0c6a72b372651c5a48e08127043a",
-    "pgvector/pgvector:0.8.6-pg15": "sha256:a947c45cdc5906a1bc951f20a8709e321256343ee0f251e4ae00b5e7def4e6da",
-    "searxng/searxng:2026.9.10-931fd9787": "sha256:2fb0fa85096fe6df5c3ab98ecb4d6e0ee2ef66b8fb96ce6fce0f75b51c4bd90a"
+    "lobehub/lobehub:2.2.17": "sha256:775dbfb06820e2d0f6ac24cbaaa6ee46c1e40ebce7b73fb2ce16c4d06e61a51e",
+    "paradedb/paradedb:0.25.8-pg17": "sha256:7a9e1e7f04d6d71285b55535eaa5dc58714f9cc67880c2e36b8a3182b7a28136",
+    "redis:7.4.11-alpine": "sha256:ff02b58f971e7d7d156a1267e283fcbbeee91773b6aa36c49dac28ecfe28eadf",
+    "rustfs/rustfs:1.0.0-rc.6": "sha256:97171b3d72cd47dc81000f92ea84de25608bfc35a94c965501afaeb5d99f6035"
   },
-  "first_use": "it opens a page with a clear next step, and the same page after a restart and reinstall",
+  "first_use": "it opens a page with a clear next step, the same page after a restart and reinstall, and scripts/lobehub-probe.mjs passed",
   "steps": [
     {
-      "step": "pull ghcr.io/khoj-ai/khoj:1.42.10",
+      "step": "pull lobehub/lobehub:2.2.17",
       "passed": true
     },
     {
-      "step": "pull pgvector/pgvector:0.8.6-pg15",
+      "step": "pull paradedb/paradedb:0.25.8-pg17",
       "passed": true
     },
     {
-      "step": "pull searxng/searxng:2026.9.10-931fd9787",
+      "step": "pull redis:7.4.11-alpine",
+      "passed": true
+    },
+    {
+      "step": "pull rustfs/rustfs:1.0.0-rc.6",
       "passed": true
     },
     {

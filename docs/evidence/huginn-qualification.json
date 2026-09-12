@@ -1,13 +1,17 @@
 {
   "app": "huginn",
-  "passed": false,
+  "passed": true,
   "scope": "reviewed mapping, transaction, managed storage and first use, on one host and one architecture",
   "promotion": "approved",
-  "source_revision": "924357fde8f7d4e414e5cae241b1e137f5f60038",
+  "source_revision": "d81999683947fb828a535300b3cdbf8f7ac6b589",
   "images": [
-    "ghcr.io/huginn/huginn:v2026.09.09"
+    "ghcr.io/huginn/huginn:v2026.09.09",
+    "mariadb:11.4.13"
   ],
-  "image_ids": {},
+  "image_ids": {
+    "ghcr.io/huginn/huginn:v2026.09.09": "sha256:0d31724e0ce578466d9f85057d26ad2c89635ee2adc0c940def96c5ab7bb2e9a",
+    "mariadb:11.4.13": "sha256:80494b9810694179889f7281ec44ca928241df577159c0356a1070e2e94616a1"
+  },
   "first_use": "it opens a page with a clear next step, and the same page after a restart and reinstall",
   "steps": [
     {
@@ -15,9 +19,48 @@
       "passed": true
     },
     {
+      "step": "pull mariadb:11.4.13",
+      "passed": true
+    },
+    {
       "step": "installs with one action",
-      "passed": false,
-      "detail": "Health check timed out for http://localhost:58178 Containers: local-store-huginn-qualify-29720-1789142000642617600-huginn   ghcr.io/huginn/huginn:v2026.09.09@sha256:0d31724e0ce578466d9f85057d26ad2c89635ee2adc0c940def96c5ab7bb2e9a   \"/scripts/init\"   huginn    3 minutes ago   Up 3 minutes   127.0.0.1:58178->3000/tcp. huginn last said: mysqld stdout | 2026-09-11T15:56:59.231839Z mysqld_safe Logging to '/var/log/mysql/error.log'. | mysqld stdout | | mysqld stdout | 2026-09-11T15:56:59.271738Z mysqld_safe Starting mysqld daemon with databases from /var/lib/mysql | mysqld stdout | | 2026-09-11 15:57:00,039 INFO success: mysqld entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)"
+      "passed": true
+    },
+    {
+      "step": "answers on its address",
+      "passed": true
+    },
+    {
+      "step": "is usable first install",
+      "passed": true
+    },
+    {
+      "step": "survives a restart",
+      "passed": true
+    },
+    {
+      "step": "is usable after restart",
+      "passed": true
+    },
+    {
+      "step": "reinstalls over data it kept",
+      "passed": true
+    },
+    {
+      "step": "keeps the credentials it generated",
+      "passed": true
+    },
+    {
+      "step": "is usable after a keep-data reinstall",
+      "passed": true
+    },
+    {
+      "step": "removes everything it created",
+      "passed": true
+    },
+    {
+      "step": "leaves other containers alone",
+      "passed": true
     }
   ]
 }

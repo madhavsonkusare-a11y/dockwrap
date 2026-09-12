@@ -8,7 +8,7 @@
   "license": "AGPL-3.0",
   "source_url": "https://github.com/SillyTavern/SillyTavern",
   "documentation_url": "https://docs.sillytavern.app/installation/docker/",
-  "verified_at": "",
+  "verified_at": "2026-09-12",
   "lifecycle_proof": "docs/evidence/sillytavern-qualification.json",
   "origin": {
     "importer": "runtipi",
@@ -40,15 +40,18 @@
     ]
   },
   "promotion": {
-    "state": "withheld",
-    "reason": "Pending since 2026-09-11: not yet proven as offered, because its first qualification ran with the whitelist turned off, which makes SillyTavern refuse to start; the definition now widens the whitelist to Docker's networks instead. Qualification stopped when D: ran out of space; resume with qualify_batch --offered once it is compacted."
+    "state": "approved",
+    "reason": "Approved by the owner. Qualified as offered on 2026-09-12: a real install of SillyTavern 1.18.0, upstream's current release proved it starts, opens to a first screen with a clear next step, survives a restart and a keep-data reinstall with its data intact, and removes everything it created. Local Store wrote this definition from the project's own deployment instructions."
   },
   "data_storage": "Local Store managed folder / sillytavern",
   "risk_notes": [
     "Creates 1 Docker container and publishes one port on this computer's loopback interface only.",
     "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
     "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
-    "Written by Local Store from the project's own deployment instructions, not taken from an app store."
+    "Written by Local Store from the project's own deployment instructions, not taken from an app store.",
+    "Talks to whichever AI service you connect it to — a local model or a provider's API — with keys it keeps in its data folder.",
+    "Open by default, with no login: anyone who can reach the address can use it. Its IP whitelist stays on, widened to Docker's own networks so the page reaches it through the port mapping.",
+    "Characters and extensions you import come from other people; extensions are code that runs in the app."
   ],
   "fields": {},
   "definition": "{\n  \"schemaVersion\": 2,\n  \"$schema\": \"https://schemas.runtipi.io/v2/dynamic-compose.json\",\n  \"services\": [\n    {\n      \"name\": \"sillytavern\",\n      \"image\": \"ghcr.io/sillytavern/sillytavern:1.18.0\",\n      \"isMain\": true,\n      \"internalPort\": 8000,\n      \"environment\": [\n        {\n          \"key\": \"NODE_ENV\",\n          \"value\": \"production\"\n        },\n        {\n          \"key\": \"FORCE_COLOR\",\n          \"value\": \"1\"\n        },\n        {\n          \"key\": \"SILLYTAVERN_WHITELIST\",\n          \"value\": \"[\\\"127.0.0.1\\\", \\\"::1\\\", \\\"172.16.0.0/12\\\", \\\"192.168.0.0/16\\\"]\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/config\",\n          \"containerPath\": \"/home/node/app/config\"\n        },\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/data\",\n          \"containerPath\": \"/home/node/app/data\"\n        },\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/plugins\",\n          \"containerPath\": \"/home/node/app/plugins\"\n        },\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/extensions\",\n          \"containerPath\": \"/home/node/app/public/scripts/extensions/third-party\"\n        }\n      ]\n    }\n  ]\n}\n",

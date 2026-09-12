@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "id": "flowise",
+  "display_name": "Flowise",
+  "catalog_name": "Flowise AI",
+  "description": "Build AI agents and chat flows by dragging nodes together.",
+  "category": "Artificial Intelligence",
+  "license": "Apache-2.0 (enterprise folder under a commercial licence)",
+  "source_url": "https://github.com/FlowiseAI/Flowise",
+  "documentation_url": "https://docs.flowiseai.com/getting-started#docker",
+  "verified_at": "2026-09-12",
+  "lifecycle_proof": "docs/evidence/flowise-qualification.json",
+  "origin": {
+    "importer": "runtipi",
+    "repository": "madhavsonkusare-a11y/local-store",
+    "revision": "484d934c006b0e276c9949ce89a868fad3c9f257",
+    "path": "definitions/apps/flowise/docker-compose.json",
+    "license": "MIT"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "flowiseai/flowise:3.1.4",
+        "source_url": "https://hub.docker.com/v2/repositories/flowiseai/flowise/tags/3.1.4",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-07-29",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:e4ac7d4f6a09a3be888e0a630ba666075dcbc0135d48195788f9b52f49f1eb3d",
+          "linux/arm64": "sha256:6062312e4cdae9d1c1902c0ed3c403d465dd7369f0ba1bc1ae30c3ac8d69fac1"
+        },
+        "index_digest": "sha256:3922767afb52a5777759fd8b28a3c9eee864daea96018a791f2429eae2a76571"
+      },
+      {
+        "image": "postgres:17.11",
+        "source_url": "https://hub.docker.com/v2/repositories/library/postgres/tags/17.11",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-08-26",
+        "container_platforms": [
+          "linux/386",
+          "linux/amd64",
+          "linux/arm/v5",
+          "linux/arm/v7",
+          "linux/arm64/v8",
+          "linux/ppc64le",
+          "linux/riscv64",
+          "linux/s390x"
+        ],
+        "digests": {
+          "linux/386": "sha256:ae5062748cb3e52cfa8d73091e56a37f1b3f5cf9d971eb8333459c7206bd3ffd",
+          "linux/amd64": "sha256:d13db94ae661d517c5ed57c509a578d5ea64aae639871ba25294f4f42d83de28",
+          "linux/arm/v5": "sha256:b8ff75b6f471e58057711db066411939c3f6fe2548d3456e52035030dc818e00",
+          "linux/arm/v7": "sha256:e913f2840e19352528036c640e77a769d87d8ff10ef781501fe333be94c74d91",
+          "linux/arm64/v8": "sha256:413da4542e091471785b7f18f1a2258df134bc6506ab4e1e53725aa8bcfdb650",
+          "linux/ppc64le": "sha256:245c1026935018ef2ae09987d768ddcef8decc62fe0e8e16a41474c40f6fb376",
+          "linux/riscv64": "sha256:cbc6b27fc0a255576fd004f1334ea16f7b5b065c368e721d6fb9c8417e404570",
+          "linux/s390x": "sha256:942c2b42e40207f6628698df04136e0780101f9fa8128faf716a4fc704ab7359"
+        },
+        "index_digest": "sha256:67f41722b7a8cbdb868a44a4995c846eddfdc2973bccb291ce937dce88ad5675"
+      }
+    ]
+  },
+  "promotion": {
+    "state": "approved",
+    "reason": "Approved by the owner. Qualified as offered on 2026-09-12: a real install of Flowise 3.1.4, upstream's current release proved it starts, opens to a first screen with a clear next step, survives a restart and a keep-data reinstall with its data and generated credentials intact, and removes everything it created. Local Store wrote this definition from the project's own deployment instructions."
+  },
+  "data_storage": "Local Store managed folder / flowise",
+  "risk_notes": [
+    "Creates 2 Docker containers and publishes one port on this computer's loopback interface only.",
+    "Generates 5 credentials of its own, keeps them beside the app's data, and reuses them if you reinstall.",
+    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Written by Local Store from the project's own deployment instructions, not taken from an app store.",
+    "Asks you to create its administrator account the first time you open it.",
+    "Flows call model providers and other services with credentials you store in it; they are encrypted with a key Local Store generated.",
+    "Flowise is open core: features for its paid Enterprise edition stay locked.",
+    "Keeps its data in PostgreSQL beside it. Flowise 3.1.4 crashes on its own SQLite session store, which is why."
+  ],
+  "fields": {},
+  "definition": "{\n  \"schemaVersion\": 2,\n  \"$schema\": \"https://schemas.runtipi.io/v2/dynamic-compose.json\",\n  \"services\": [\n    {\n      \"name\": \"flowise\",\n      \"image\": \"flowiseai/flowise:3.1.4\",\n      \"isMain\": true,\n      \"internalPort\": 3000,\n      \"environment\": [\n        {\n          \"key\": \"PORT\",\n          \"value\": \"3000\"\n        },\n        {\n          \"key\": \"SECRETKEY_PATH\",\n          \"value\": \"/home/node/.flowise\"\n        },\n        {\n          \"key\": \"LOG_PATH\",\n          \"value\": \"/home/node/.flowise/logs\"\n        },\n        {\n          \"key\": \"BLOB_STORAGE_PATH\",\n          \"value\": \"/home/node/.flowise/storage\"\n        },\n        {\n          \"key\": \"APP_URL\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}\"\n        },\n        {\n          \"key\": \"JWT_AUTH_TOKEN_SECRET\",\n          \"value\": \"${FLOWISE_JWT_SECRET}\"\n        },\n        {\n          \"key\": \"JWT_REFRESH_TOKEN_SECRET\",\n          \"value\": \"${FLOWISE_JWT_REFRESH_SECRET}\"\n        },\n        {\n          \"key\": \"EXPRESS_SESSION_SECRET\",\n          \"value\": \"${FLOWISE_SESSION_SECRET}\"\n        },\n        {\n          \"key\": \"TOKEN_HASH_SECRET\",\n          \"value\": \"${FLOWISE_TOKEN_HASH_SECRET}\"\n        },\n        {\n          \"key\": \"DISABLE_FLOWISE_TELEMETRY\",\n          \"value\": \"true\"\n        },\n        {\n          \"key\": \"DATABASE_TYPE\",\n          \"value\": \"postgres\"\n        },\n        {\n          \"key\": \"DATABASE_HOST\",\n          \"value\": \"flowise-db\"\n        },\n        {\n          \"key\": \"DATABASE_PORT\",\n          \"value\": \"5432\"\n        },\n        {\n          \"key\": \"DATABASE_NAME\",\n          \"value\": \"flowise\"\n        },\n        {\n          \"key\": \"DATABASE_USER\",\n          \"value\": \"postgres\"\n        },\n        {\n          \"key\": \"DATABASE_PASSWORD\",\n          \"value\": \"${FLOWISE_DB_PASSWORD}\"\n        },\n        {\n          \"key\": \"DATABASE_SSL\",\n          \"value\": \"false\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data\",\n          \"containerPath\": \"/home/node/.flowise\"\n        }\n      ],\n      \"dependsOn\": {\n        \"flowise-db\": {\n          \"condition\": \"service_healthy\"\n        }\n      }\n    },\n    {\n      \"name\": \"flowise-db\",\n      \"image\": \"postgres:17.11\",\n      \"stopSignal\": \"SIGINT\",\n      \"environment\": [\n        {\n          \"key\": \"POSTGRES_USER\",\n          \"value\": \"postgres\"\n        },\n        {\n          \"key\": \"POSTGRES_PASSWORD\",\n          \"value\": \"${FLOWISE_DB_PASSWORD}\"\n        },\n        {\n          \"key\": \"POSTGRES_DB\",\n          \"value\": \"flowise\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/postgres\",\n          \"containerPath\": \"/var/lib/postgresql/data\"\n        }\n      ],\n      \"healthCheck\": {\n        \"test\": \"pg_isready -U postgres\",\n        \"interval\": \"5s\",\n        \"timeout\": \"5s\",\n        \"retries\": 10,\n        \"startPeriod\": \"60s\"\n      }\n    }\n  ]\n}\n",
+  "config": {
+    "path": "definitions/apps/flowise/config.json",
+    "content": "{\n  \"id\": \"flowise\",\n  \"name\": \"Flowise\",\n  \"version\": \"3.1.4\",\n  \"source\": \"https://github.com/FlowiseAI/Flowise\",\n  \"website\": \"https://flowiseai.com\",\n  \"documentation\": \"https://docs.flowiseai.com/getting-started#docker\",\n  \"short_desc\": \"Build AI agents and chat flows by dragging nodes together.\",\n  \"categories\": [\n    \"Artificial Intelligence\"\n  ],\n  \"license\": \"Apache-2.0 (enterprise folder under a commercial licence)\",\n  \"form_fields\": [\n    {\n      \"type\": \"random\",\n      \"label\": \"Database password\",\n      \"min\": 32,\n      \"max\": 32,\n      \"env_variable\": \"FLOWISE_DB_PASSWORD\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Session token secret\",\n      \"min\": 48,\n      \"max\": 48,\n      \"env_variable\": \"FLOWISE_JWT_SECRET\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Refresh token secret\",\n      \"min\": 48,\n      \"max\": 48,\n      \"env_variable\": \"FLOWISE_JWT_REFRESH_SECRET\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Cookie session secret\",\n      \"min\": 48,\n      \"max\": 48,\n      \"env_variable\": \"FLOWISE_SESSION_SECRET\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Token hashing secret\",\n      \"min\": 48,\n      \"max\": 48,\n      \"env_variable\": \"FLOWISE_TOKEN_HASH_SECRET\"\n    }\n  ]\n}\n"
+  }
+}

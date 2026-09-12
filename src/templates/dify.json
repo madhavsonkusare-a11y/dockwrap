@@ -1,0 +1,340 @@
+{
+  "schema_version": 1,
+  "id": "dify",
+  "display_name": "Dify",
+  "catalog_name": "Dify.ai",
+  "description": "Build AI apps and agents visually: workflows, knowledge bases, tools and model providers in one place.",
+  "category": "Artificial Intelligence",
+  "license": "Dify Open Source License",
+  "source_url": "https://github.com/langgenius/dify",
+  "documentation_url": "https://docs.dify.ai/getting-started/install-self-hosted/docker-compose",
+  "verified_at": "2026-09-12",
+  "lifecycle_proof": "docs/evidence/dify-qualification.json",
+  "origin": {
+    "importer": "runtipi",
+    "repository": "madhavsonkusare-a11y/local-store",
+    "revision": "cd180bc51b815f73ad64f541794fdbc5d3e65e73",
+    "path": "definitions/apps/dify/docker-compose.json",
+    "license": "MIT"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "nginx:1.31.5-alpine",
+        "source_url": "https://hub.docker.com/v2/repositories/library/nginx/tags/1.31.5-alpine",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-09-03",
+        "container_platforms": [
+          "linux/386",
+          "linux/amd64",
+          "linux/arm/v6",
+          "linux/arm/v7",
+          "linux/arm64/v8",
+          "linux/ppc64le",
+          "linux/riscv64",
+          "linux/s390x"
+        ],
+        "digests": {
+          "linux/386": "sha256:af1ffb5b318f86b062b5e11330af1b831e40ff19933bffd520971df99a01cb2f",
+          "linux/amd64": "sha256:bd43d3d8fdbbe597c36fea489886796466a9ea5b662e8c50897d53e190c88a3d",
+          "linux/arm/v6": "sha256:2615a16e10f12ba09e117c2700335e51c2b2fe911326bf25d0b39e3a6a77eee7",
+          "linux/arm/v7": "sha256:86bc6e449bab16c5cf8ac4852734b2c296065cb4485ea50dfba3c8c30685d2c7",
+          "linux/arm64/v8": "sha256:ac1c5b25bb178c48d4f758b8a67021b45a5e6b056b8407364f060e162943f08b",
+          "linux/ppc64le": "sha256:45b304bb1ba4396dcf63e2a2aa13d7351d2d85ff683c92c3bae7509b983f6265",
+          "linux/riscv64": "sha256:6d10d98c1289d48231fc53235b4f75c4caf461e0bff662e692176c04d0049b0b",
+          "linux/s390x": "sha256:8a9a8203bd3ef3caef8e78a9ea1b0cb144e69fa74c237f2bfbccc8ed0a6c9338"
+        },
+        "index_digest": "sha256:72ba65eb42c10344912a84ff42408db7d34f2feb642204570ab8fc5ffd29f1d3"
+      },
+      {
+        "image": "langgenius/dify-api:1.17.1",
+        "source_url": "https://hub.docker.com/v2/repositories/langgenius/dify-api/tags/1.17.1",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-09-10",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:04f435a2e366c73f1ccefe9e7fbdaa2ac6440bdcde268d5d20f19c3ba7e7dcdb",
+          "linux/arm64": "sha256:53fb08964da7a19d9b9f230a3b2945b6de55dc7b2ec570418e467defa809d82f"
+        },
+        "index_digest": "sha256:ceede5b903afaa20348f7ad80ebf847379dc56d886a99b9ec6a08913dacd7732"
+      },
+      {
+        "image": "langgenius/dify-api:1.17.1",
+        "source_url": "https://hub.docker.com/v2/repositories/langgenius/dify-api/tags/1.17.1",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-09-10",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:04f435a2e366c73f1ccefe9e7fbdaa2ac6440bdcde268d5d20f19c3ba7e7dcdb",
+          "linux/arm64": "sha256:53fb08964da7a19d9b9f230a3b2945b6de55dc7b2ec570418e467defa809d82f"
+        },
+        "index_digest": "sha256:ceede5b903afaa20348f7ad80ebf847379dc56d886a99b9ec6a08913dacd7732"
+      },
+      {
+        "image": "langgenius/dify-api:1.17.1",
+        "source_url": "https://hub.docker.com/v2/repositories/langgenius/dify-api/tags/1.17.1",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-09-10",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:04f435a2e366c73f1ccefe9e7fbdaa2ac6440bdcde268d5d20f19c3ba7e7dcdb",
+          "linux/arm64": "sha256:53fb08964da7a19d9b9f230a3b2945b6de55dc7b2ec570418e467defa809d82f"
+        },
+        "index_digest": "sha256:ceede5b903afaa20348f7ad80ebf847379dc56d886a99b9ec6a08913dacd7732"
+      },
+      {
+        "image": "langgenius/dify-api:1.17.1",
+        "source_url": "https://hub.docker.com/v2/repositories/langgenius/dify-api/tags/1.17.1",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-09-10",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:04f435a2e366c73f1ccefe9e7fbdaa2ac6440bdcde268d5d20f19c3ba7e7dcdb",
+          "linux/arm64": "sha256:53fb08964da7a19d9b9f230a3b2945b6de55dc7b2ec570418e467defa809d82f"
+        },
+        "index_digest": "sha256:ceede5b903afaa20348f7ad80ebf847379dc56d886a99b9ec6a08913dacd7732"
+      },
+      {
+        "image": "langgenius/dify-web:1.17.1",
+        "source_url": "https://hub.docker.com/v2/repositories/langgenius/dify-web/tags/1.17.1",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-09-10",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:c4baeb297722671a23317b17d2af669f50b36f6239d1d976832a77b2057344e5",
+          "linux/arm64": "sha256:212e105a3cad6d9f63936f2302b2ea4acbf53c5148293ca9d4f1b8e6d7f54f21"
+        },
+        "index_digest": "sha256:6353fe8e04481aaef873ef7317507bfa9ac862572118fd037563a71bff9f4d08"
+      },
+      {
+        "image": "pgvector/pgvector:0.8.6-pg15",
+        "source_url": "https://hub.docker.com/v2/repositories/pgvector/pgvector/tags/0.8.6-pg15",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-08-13",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:a6579dded3ff4ed3d9565ae54ab253e2cb7ae24c5d1eb3bec8a89e73f038b68a",
+          "linux/arm64": "sha256:a1fe5f726d1d8ab2d34ebe11a3cfd7785a5d8f7f0b20ad9d6d4752491c138a3f"
+        },
+        "index_digest": "sha256:a947c45cdc5906a1bc951f20a8709e321256343ee0f251e4ae00b5e7def4e6da"
+      },
+      {
+        "image": "redis:7.4.11-alpine",
+        "source_url": "https://hub.docker.com/v2/repositories/library/redis/tags/7.4.11-alpine",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-08-20",
+        "container_platforms": [
+          "linux/386",
+          "linux/amd64",
+          "linux/arm/v6",
+          "linux/arm/v7",
+          "linux/arm64/v8",
+          "linux/ppc64le",
+          "linux/riscv64",
+          "linux/s390x"
+        ],
+        "digests": {
+          "linux/386": "sha256:a4fd08853cdc01da535e7c3ede18084fca62b21a6ee06e38f0aba769f188d45b",
+          "linux/amd64": "sha256:1db42ccef14898aa29bae778452d567534b59c107129cbc1163fb552de184d3c",
+          "linux/arm/v6": "sha256:253cf5a8c5a0bb62b11c913b9b006963753f844ab040d39395e3b7d635db37d0",
+          "linux/arm/v7": "sha256:89beb43a975079ad216a6171d1696ce3aa2b348477228500f53c6fe99cc4f9df",
+          "linux/arm64/v8": "sha256:f8d15882ba108587477ce13c00ab0551933a84138427b7cc9abadfbe45ffd973",
+          "linux/ppc64le": "sha256:58a9ef466c2701c6e1c50d00abb394ed0a2298d6369aae2950b8fa3cba23973c",
+          "linux/riscv64": "sha256:60c3979aa5c24b4d147484b7717153e2f241b5073ec83500bdace86f0c8472d1",
+          "linux/s390x": "sha256:f176864eb58d72ec3bb461a2f395cd069a127586751013350753c0d2ccf6e119"
+        },
+        "index_digest": "sha256:ff02b58f971e7d7d156a1267e283fcbbeee91773b6aa36c49dac28ecfe28eadf"
+      },
+      {
+        "image": "langgenius/dify-sandbox:0.2.15",
+        "source_url": "https://hub.docker.com/v2/repositories/langgenius/dify-sandbox/tags/0.2.15",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-04-27",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:942acde5b90350498f71c9f89fe1c0a578578c51521d6683783e073528b6a26a",
+          "linux/arm64": "sha256:f91494950b80bf9662ce1382254a752f3748ee66c43a7d1898aa9ee119b8e62a"
+        },
+        "index_digest": "sha256:750e1111426ef31a9217b81c98cccfb750f17b182af3221102e420afa9f0928e"
+      },
+      {
+        "image": "ubuntu/squid:6.6-24.04_edge",
+        "source_url": "https://hub.docker.com/v2/repositories/ubuntu/squid/tags/6.6-24.04_edge",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-05-07",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64/v8",
+          "linux/ppc64le",
+          "linux/s390x"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:94f844158e12b52f51b4ae996515e37e8fb3e8d85e1c86caba1a297376e4ec4f",
+          "linux/arm64/v8": "sha256:2580be07409d64c1b5bff32d218649771a53616b06ef102bc3005e81534beccf",
+          "linux/ppc64le": "sha256:e35a1fefce3be34c7b9c92b142d10279fa1c4c0579fa6ba573fc9e8766b21a43",
+          "linux/s390x": "sha256:bc6811e6b26566397dc96c7c2e4756208ca6bf34c5bf11d568f60e469ea7bdd0"
+        },
+        "index_digest": "sha256:8a3baed477e2c282ab8aa5edad442f69873246964f225c5c2ae8364b6610963c"
+      },
+      {
+        "image": "langgenius/dify-plugin-daemon:0.6.10-local",
+        "source_url": "https://hub.docker.com/v2/repositories/langgenius/dify-plugin-daemon/tags/0.6.10-local",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-08-07",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:0b8f1f1e766826352d868aaf8c9eeeee8e37a3a3b023044ed8ab0d145f853cdf",
+          "linux/arm64": "sha256:b9d28613f0b4593a6211049251a0d34c5edbb9c1001136a4b24c1e463fd7215c"
+        },
+        "index_digest": "sha256:34412a22d1e1d1a6c73727fef88cffbcdd9be7a21bf9ad3076b4bf5c1b88fd9b"
+      },
+      {
+        "image": "langgenius/dify-agent-backend:1.17.1",
+        "source_url": "https://hub.docker.com/v2/repositories/langgenius/dify-agent-backend/tags/1.17.1",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-09-10",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:d6f83ac95ed674974e66f0dddcf65b89d52d26a584f12aca2edd3560ce5eb184",
+          "linux/arm64": "sha256:f5e1c31efa153eae2f511d5e6b59996696a1ecf753defb987f7fcf525ede0355"
+        },
+        "index_digest": "sha256:a30c039bbead65d7fd8baf8c53fc867373f515c5721e46070ce03ed04c5f1e32"
+      },
+      {
+        "image": "langgenius/dify-agent-local-sandbox:1.17.1",
+        "source_url": "https://hub.docker.com/v2/repositories/langgenius/dify-agent-local-sandbox/tags/1.17.1",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-09-10",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:b9b52ce81ca7ec49c721909602f8549046c715a9d4cea9c6a843102c4684fa27",
+          "linux/arm64": "sha256:182ee2fa924f8ea4825499e02a4f14ea860213ff665fe5802cefd3a5a7f107a3"
+        },
+        "index_digest": "sha256:f4d404c9dcdf80bd72f65e84c3f2bbd1f3404fd4b363db837176da8aaf771b1d"
+      },
+      {
+        "image": "ubuntu/squid:6.6-24.04_edge",
+        "source_url": "https://hub.docker.com/v2/repositories/ubuntu/squid/tags/6.6-24.04_edge",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-05-07",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64/v8",
+          "linux/ppc64le",
+          "linux/s390x"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:94f844158e12b52f51b4ae996515e37e8fb3e8d85e1c86caba1a297376e4ec4f",
+          "linux/arm64/v8": "sha256:2580be07409d64c1b5bff32d218649771a53616b06ef102bc3005e81534beccf",
+          "linux/ppc64le": "sha256:e35a1fefce3be34c7b9c92b142d10279fa1c4c0579fa6ba573fc9e8766b21a43",
+          "linux/s390x": "sha256:bc6811e6b26566397dc96c7c2e4756208ca6bf34c5bf11d568f60e469ea7bdd0"
+        },
+        "index_digest": "sha256:8a3baed477e2c282ab8aa5edad442f69873246964f225c5c2ae8364b6610963c"
+      },
+      {
+        "image": "busybox:1.37.0",
+        "source_url": "https://hub.docker.com/v2/repositories/library/busybox/tags/1.37.0",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-07-31",
+        "container_platforms": [
+          "linux/386",
+          "linux/amd64",
+          "linux/arm/v5",
+          "linux/arm/v6",
+          "linux/arm/v7",
+          "linux/arm64/v8",
+          "linux/ppc64le",
+          "linux/riscv64",
+          "linux/s390x"
+        ],
+        "digests": {
+          "linux/386": "sha256:997af562a34229174bedf1251ca74617f6d94efaf47185b02729d18d2f029762",
+          "linux/amd64": "sha256:7a3ebe5bfd1a4a19797d20b0c0bb39d44393e9a03fd852c0865b0f540d868df0",
+          "linux/arm/v5": "sha256:5d2325ea84c2a87f0a2b458bdd0b00e0c92f943e43da3a0a67a8747d849afcf4",
+          "linux/arm/v6": "sha256:29492ed9f30d27b25a7359f6169dbca442558e6867307545f8fbdd3327b0c8f4",
+          "linux/arm/v7": "sha256:1b6e712c3df4b11a7225ab617d2eef0ee2b18cdcc447e5d5fe2942622db098f7",
+          "linux/arm64/v8": "sha256:f10e809bcf667d8e9f01d2baf82869049a495cd448cdfe1f4dee94078b960ae9",
+          "linux/ppc64le": "sha256:145d7e42c57a8cc8942c50f014a498891bad4aaa6b2b1e3849fd136e1486b334",
+          "linux/riscv64": "sha256:697002fed293bbdfef8be5c3a924067421105d682e0111971b6685da35e98961",
+          "linux/s390x": "sha256:fe469cb991ec2f7cd0e1cdb4a37de5292297c9875225ab23418cd37e15514868"
+        },
+        "index_digest": "sha256:9db7b59979c38555a39def84a31fb98b5296952f9e3afd4f6f11f05b07adfab0"
+      }
+    ]
+  },
+  "promotion": {
+    "state": "approved",
+    "reason": "Approved by the owner. Qualified as offered on 2026-09-12: a real install of Dify 1.17.1, upstream's current release proved it starts, opens to a first screen with a clear next step, survives a restart and a keep-data reinstall with its data and generated credentials intact, and removes everything it created. Local Store wrote this definition from the project's own deployment instructions."
+  },
+  "data_storage": "Local Store managed folder / dify",
+  "risk_notes": [
+    "Creates 15 Docker containers and publishes one port on this computer's loopback interface only.",
+    "Runs dify-init once each time it starts, and starts the app only if it succeeds.",
+    "Generates 8 credentials of its own, keeps them beside the app's data, and reuses them if you reinstall.",
+    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Written by Local Store from the project's own deployment instructions, not taken from an app store.",
+    "Asks you to set up an administrator account the first time you open it.",
+    "Code in your workflows runs in a sandbox that reaches only the internet, through a proxy that refuses this computer and its network; the agent sandbox is held the same way.",
+    "Plugins install from Dify's marketplace into its folder and run inside its plugin service.",
+    "Keeps vectors in its own PostgreSQL with pgvector rather than upstream's default Weaviate. Its Redis has no password, where upstream's has a publicly known default; only Dify's own containers can reach it.",
+    "Source-available under the Dify Open Source License, Apache 2.0 with conditions on multi-tenant use and on removing its branding."
+  ],
+  "fields": {},
+  "definition": "{\n  \"schemaVersion\": 2,\n  \"$schema\": \"https://schemas.runtipi.io/v2/dynamic-compose.json\",\n  \"networks\": {\n    \"dify-sandbox-net\": {\n      \"internal\": true\n    },\n    \"dify-agent-net\": {\n      \"internal\": true\n    },\n    \"dify-agent-proxy-net\": {\n      \"internal\": true\n    }\n  },\n  \"services\": [\n    {\n      \"name\": \"dify\",\n      \"image\": \"nginx:1.31.5-alpine\",\n      \"isMain\": true,\n      \"internalPort\": 80,\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/nginx/default.conf\",\n          \"containerPath\": \"/etc/nginx/conf.d/default.conf\",\n          \"readOnly\": true\n        }\n      ],\n      \"dependsOn\": [\n        \"dify-api\",\n        \"dify-web\"\n      ]\n    },\n    {\n      \"name\": \"dify-api\",\n      \"image\": \"langgenius/dify-api:1.17.1\",\n      \"environment\": [\n        {\n          \"key\": \"MODE\",\n          \"value\": \"api\"\n        },\n        {\n          \"key\": \"SECRET_KEY\",\n          \"value\": \"${DIFY_SECRET_KEY}\"\n        },\n        {\n          \"key\": \"DEPLOY_ENV\",\n          \"value\": \"PRODUCTION\"\n        },\n        {\n          \"key\": \"LOG_LEVEL\",\n          \"value\": \"INFO\"\n        },\n        {\n          \"key\": \"MIGRATION_ENABLED\",\n          \"value\": \"true\"\n        },\n        {\n          \"key\": \"FILES_URL\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}\"\n        },\n        {\n          \"key\": \"INTERNAL_FILES_URL\",\n          \"value\": \"http://dify-api:5001\"\n        },\n        {\n          \"key\": \"TRIGGER_URL\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}\"\n        },\n        {\n          \"key\": \"ENDPOINT_URL_TEMPLATE\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}/e/{hook_id}\"\n        },\n        {\n          \"key\": \"ENABLE_COLLABORATION_MODE\",\n          \"value\": \"true\"\n        },\n        {\n          \"key\": \"DB_TYPE\",\n          \"value\": \"postgresql\"\n        },\n        {\n          \"key\": \"DB_USERNAME\",\n          \"value\": \"postgres\"\n        },\n        {\n          \"key\": \"DB_PASSWORD\",\n          \"value\": \"${DIFY_DB_PASSWORD}\"\n        },\n        {\n          \"key\": \"DB_HOST\",\n          \"value\": \"dify-db\"\n        },\n        {\n          \"key\": \"DB_PORT\",\n          \"value\": \"5432\"\n        },\n        {\n          \"key\": \"DB_DATABASE\",\n          \"value\": \"dify\"\n        },\n        {\n          \"key\": \"REDIS_HOST\",\n          \"value\": \"dify-redis\"\n        },\n        {\n          \"key\": \"REDIS_PORT\",\n          \"value\": \"6379\"\n        },\n        {\n          \"key\": \"REDIS_DB\",\n          \"value\": \"0\"\n        },\n        {\n          \"key\": \"CELERY_BROKER_URL\",\n          \"value\": \"redis://dify-redis:6379/1\"\n        },\n        {\n          \"key\": \"CELERY_BACKEND\",\n          \"value\": \"redis\"\n        },\n        {\n          \"key\": \"STORAGE_TYPE\",\n          \"value\": \"opendal\"\n        },\n        {\n          \"key\": \"OPENDAL_SCHEME\",\n          \"value\": \"fs\"\n        },\n        {\n          \"key\": \"OPENDAL_FS_ROOT\",\n          \"value\": \"storage\"\n        },\n        {\n          \"key\": \"VECTOR_STORE\",\n          \"value\": \"pgvector\"\n        },\n        {\n          \"key\": \"PGVECTOR_HOST\",\n          \"value\": \"dify-db\"\n        },\n        {\n          \"key\": \"PGVECTOR_PORT\",\n          \"value\": \"5432\"\n        },\n        {\n          \"key\": \"PGVECTOR_USER\",\n          \"value\": \"postgres\"\n        },\n        {\n          \"key\": \"PGVECTOR_PASSWORD\",\n          \"value\": \"${DIFY_DB_PASSWORD}\"\n        },\n        {\n          \"key\": \"PGVECTOR_DATABASE\",\n          \"value\": \"dify\"\n        },\n        {\n          \"key\": \"CODE_EXECUTION_ENDPOINT\",\n          \"value\": \"http://dify-sandbox:8194\"\n        },\n        {\n          \"key\": \"CODE_EXECUTION_API_KEY\",\n          \"value\": \"${DIFY_SANDBOX_KEY}\"\n        },\n        {\n          \"key\": \"SSRF_PROXY_HTTP_URL\",\n          \"value\": \"http://dify-ssrf-proxy:3128\"\n        },\n        {\n          \"key\": \"SSRF_PROXY_HTTPS_URL\",\n          \"value\": \"http://dify-ssrf-proxy:3128\"\n        },\n        {\n          \"key\": \"PLUGIN_DAEMON_URL\",\n          \"value\": \"http://dify-plugin-daemon:5002\"\n        },\n        {\n          \"key\": \"PLUGIN_DAEMON_KEY\",\n          \"value\": \"${DIFY_PLUGIN_DAEMON_KEY}\"\n        },\n        {\n          \"key\": \"INNER_API_KEY_FOR_PLUGIN\",\n          \"value\": \"${DIFY_INNER_API_KEY}\"\n        },\n        {\n          \"key\": \"MARKETPLACE_ENABLED\",\n          \"value\": \"true\"\n        },\n        {\n          \"key\": \"MARKETPLACE_API_URL\",\n          \"value\": \"https://marketplace.dify.ai\"\n        },\n        {\n          \"key\": \"AGENT_BACKEND_BASE_URL\",\n          \"value\": \"http://dify-agent-backend:5050\"\n        },\n        {\n          \"key\": \"AGENT_BACKEND_API_TOKEN\",\n          \"value\": \"${DIFY_AGENT_API_TOKEN}\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/storage\",\n          \"containerPath\": \"/app/api/storage\"\n        }\n      ],\n      \"networks\": [\n        \"default\",\n        \"dify-sandbox-net\"\n      ],\n      \"healthCheck\": {\n        \"test\": [\n          \"CMD\",\n          \"curl\",\n          \"-f\",\n          \"http://localhost:5001/health\"\n        ],\n        \"interval\": \"30s\",\n        \"timeout\": \"5s\",\n        \"retries\": 3,\n        \"startPeriod\": \"30s\"\n      },\n      \"dependsOn\": {\n        \"dify-init\": {\n          \"condition\": \"service_completed_successfully\"\n        },\n        \"dify-db\": {\n          \"condition\": \"service_healthy\"\n        },\n        \"dify-redis\": {\n          \"condition\": \"service_healthy\"\n        },\n        \"dify-agent-backend\": {\n          \"condition\": \"service_started\"\n        }\n      }\n    },\n    {\n      \"name\": \"dify-api-websocket\",\n      \"image\": \"langgenius/dify-api:1.17.1\",\n      \"environment\": [\n        {\n          \"key\": \"MODE\",\n          \"value\": \"api\"\n        },\n        {\n          \"key\": \"SERVER_WORKER_AMOUNT\",\n          \"value\": \"1\"\n        },\n        {\n          \"key\": \"SERVER_WORKER_CLASS\",\n          \"value\": \"geventwebsocket.gunicorn.workers.GeventWebSocketWorker\"\n        },\n        {\n          \"key\": \"SERVER_WORKER_CONNECTIONS\",\n          \"value\": \"1000\"\n        },\n        {\n          \"key\": \"GUNICORN_TIMEOUT\",\n          \"value\": \"360\"\n        },\n        {\n          \"key\": \"SECRET_KEY\",\n          \"value\": \"${DIFY_SECRET_KEY}\"\n        },\n        {\n          \"key\": \"DEPLOY_ENV\",\n          \"value\": \"PRODUCTION\"\n        },\n        {\n          \"key\": \"LOG_LEVEL\",\n          \"value\": \"INFO\"\n        },\n        {\n          \"key\": \"FILES_URL\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}\"\n        },\n        {\n          \"key\": \"INTERNAL_FILES_URL\",\n          \"value\": \"http://dify-api:5001\"\n        },\n        {\n          \"key\": \"TRIGGER_URL\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}\"\n        },\n        {\n          \"key\": \"ENDPOINT_URL_TEMPLATE\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}/e/{hook_id}\"\n        },\n        {\n          \"key\": \"ENABLE_COLLABORATION_MODE\",\n          \"value\": \"true\"\n        },\n        {\n          \"key\": \"DB_TYPE\",\n          \"value\": \"postgresql\"\n        },\n        {\n          \"key\": \"DB_USERNAME\",\n          \"value\": \"postgres\"\n        },\n        {\n          \"key\": \"DB_PASSWORD\",\n          \"value\": \"${DIFY_DB_PASSWORD}\"\n        },\n        {\n          \"key\": \"DB_HOST\",\n          \"value\": \"dify-db\"\n        },\n        {\n          \"key\": \"DB_PORT\",\n          \"value\": \"5432\"\n        },\n        {\n          \"key\": \"DB_DATABASE\",\n          \"value\": \"dify\"\n        },\n        {\n          \"key\": \"REDIS_HOST\",\n          \"value\": \"dify-redis\"\n        },\n        {\n          \"key\": \"REDIS_PORT\",\n          \"value\": \"6379\"\n        },\n        {\n          \"key\": \"REDIS_DB\",\n          \"value\": \"0\"\n        },\n        {\n          \"key\": \"CELERY_BROKER_URL\",\n          \"value\": \"redis://dify-redis:6379/1\"\n        },\n        {\n          \"key\": \"CELERY_BACKEND\",\n          \"value\": \"redis\"\n        },\n        {\n          \"key\": \"STORAGE_TYPE\",\n          \"value\": \"opendal\"\n        },\n        {\n          \"key\": \"OPENDAL_SCHEME\",\n          \"value\": \"fs\"\n        },\n        {\n          \"key\": \"OPENDAL_FS_ROOT\",\n          \"value\": \"storage\"\n        },\n        {\n          \"key\": \"VECTOR_STORE\",\n          \"value\": \"pgvector\"\n        },\n        {\n          \"key\": \"PGVECTOR_HOST\",\n          \"value\": \"dify-db\"\n        },\n        {\n          \"key\": \"PGVECTOR_PORT\",\n          \"value\": \"5432\"\n        },\n        {\n          \"key\": \"PGVECTOR_USER\",\n          \"value\": \"postgres\"\n        },\n        {\n          \"key\": \"PGVECTOR_PASSWORD\",\n          \"value\": \"${DIFY_DB_PASSWORD}\"\n        },\n        {\n          \"key\": \"PGVECTOR_DATABASE\",\n          \"value\": \"dify\"\n        },\n        {\n          \"key\": \"CODE_EXECUTION_ENDPOINT\",\n          \"value\": \"http://dify-sandbox:8194\"\n        },\n        {\n          \"key\": \"CODE_EXECUTION_API_KEY\",\n          \"value\": \"${DIFY_SANDBOX_KEY}\"\n        },\n        {\n          \"key\": \"SSRF_PROXY_HTTP_URL\",\n          \"value\": \"http://dify-ssrf-proxy:3128\"\n        },\n        {\n          \"key\": \"SSRF_PROXY_HTTPS_URL\",\n          \"value\": \"http://dify-ssrf-proxy:3128\"\n        },\n        {\n          \"key\": \"PLUGIN_DAEMON_URL\",\n          \"value\": \"http://dify-plugin-daemon:5002\"\n        },\n        {\n          \"key\": \"PLUGIN_DAEMON_KEY\",\n          \"value\": \"${DIFY_PLUGIN_DAEMON_KEY}\"\n        },\n        {\n          \"key\": \"INNER_API_KEY_FOR_PLUGIN\",\n          \"value\": \"${DIFY_INNER_API_KEY}\"\n        },\n        {\n          \"key\": \"MARKETPLACE_ENABLED\",\n          \"value\": \"true\"\n        },\n        {\n          \"key\": \"MARKETPLACE_API_URL\",\n          \"value\": \"https://marketplace.dify.ai\"\n        },\n        {\n          \"key\": \"AGENT_BACKEND_BASE_URL\",\n          \"value\": \"http://dify-agent-backend:5050\"\n        },\n        {\n          \"key\": \"AGENT_BACKEND_API_TOKEN\",\n          \"value\": \"${DIFY_AGENT_API_TOKEN}\"\n        },\n        {\n          \"key\": \"MIGRATION_ENABLED\",\n          \"value\": \"false\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/storage\",\n          \"containerPath\": \"/app/api/storage\"\n        }\n      ],\n      \"networks\": [\n        \"default\",\n        \"dify-sandbox-net\"\n      ],\n      \"dependsOn\": {\n        \"dify-init\": {\n          \"condition\": \"service_completed_successfully\"\n        },\n        \"dify-db\": {\n          \"condition\": \"service_healthy\"\n        },\n        \"dify-redis\": {\n          \"condition\": \"service_healthy\"\n        }\n      }\n    },\n    {\n      \"name\": \"dify-worker\",\n      \"image\": \"langgenius/dify-api:1.17.1\",\n      \"environment\": [\n        {\n          \"key\": \"MODE\",\n          \"value\": \"worker\"\n        },\n        {\n          \"key\": \"SECRET_KEY\",\n          \"value\": \"${DIFY_SECRET_KEY}\"\n        },\n        {\n          \"key\": \"DEPLOY_ENV\",\n          \"value\": \"PRODUCTION\"\n        },\n        {\n          \"key\": \"LOG_LEVEL\",\n          \"value\": \"INFO\"\n        },\n        {\n          \"key\": \"FILES_URL\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}\"\n        },\n        {\n          \"key\": \"INTERNAL_FILES_URL\",\n          \"value\": \"http://dify-api:5001\"\n        },\n        {\n          \"key\": \"TRIGGER_URL\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}\"\n        },\n        {\n          \"key\": \"ENDPOINT_URL_TEMPLATE\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}/e/{hook_id}\"\n        },\n        {\n          \"key\": \"ENABLE_COLLABORATION_MODE\",\n          \"value\": \"true\"\n        },\n        {\n          \"key\": \"DB_TYPE\",\n          \"value\": \"postgresql\"\n        },\n        {\n          \"key\": \"DB_USERNAME\",\n          \"value\": \"postgres\"\n        },\n        {\n          \"key\": \"DB_PASSWORD\",\n          \"value\": \"${DIFY_DB_PASSWORD}\"\n        },\n        {\n          \"key\": \"DB_HOST\",\n          \"value\": \"dify-db\"\n        },\n        {\n          \"key\": \"DB_PORT\",\n          \"value\": \"5432\"\n        },\n        {\n          \"key\": \"DB_DATABASE\",\n          \"value\": \"dify\"\n        },\n        {\n          \"key\": \"REDIS_HOST\",\n          \"value\": \"dify-redis\"\n        },\n        {\n          \"key\": \"REDIS_PORT\",\n          \"value\": \"6379\"\n        },\n        {\n          \"key\": \"REDIS_DB\",\n          \"value\": \"0\"\n        },\n        {\n          \"key\": \"CELERY_BROKER_URL\",\n          \"value\": \"redis://dify-redis:6379/1\"\n        },\n        {\n          \"key\": \"CELERY_BACKEND\",\n          \"value\": \"redis\"\n        },\n        {\n          \"key\": \"STORAGE_TYPE\",\n          \"value\": \"opendal\"\n        },\n        {\n          \"key\": \"OPENDAL_SCHEME\",\n          \"value\": \"fs\"\n        },\n        {\n          \"key\": \"OPENDAL_FS_ROOT\",\n          \"value\": \"storage\"\n        },\n        {\n          \"key\": \"VECTOR_STORE\",\n          \"value\": \"pgvector\"\n        },\n        {\n          \"key\": \"PGVECTOR_HOST\",\n          \"value\": \"dify-db\"\n        },\n        {\n          \"key\": \"PGVECTOR_PORT\",\n          \"value\": \"5432\"\n        },\n        {\n          \"key\": \"PGVECTOR_USER\",\n          \"value\": \"postgres\"\n        },\n        {\n          \"key\": \"PGVECTOR_PASSWORD\",\n          \"value\": \"${DIFY_DB_PASSWORD}\"\n        },\n        {\n          \"key\": \"PGVECTOR_DATABASE\",\n          \"value\": \"dify\"\n        },\n        {\n          \"key\": \"CODE_EXECUTION_ENDPOINT\",\n          \"value\": \"http://dify-sandbox:8194\"\n        },\n        {\n          \"key\": \"CODE_EXECUTION_API_KEY\",\n          \"value\": \"${DIFY_SANDBOX_KEY}\"\n        },\n        {\n          \"key\": \"SSRF_PROXY_HTTP_URL\",\n          \"value\": \"http://dify-ssrf-proxy:3128\"\n        },\n        {\n          \"key\": \"SSRF_PROXY_HTTPS_URL\",\n          \"value\": \"http://dify-ssrf-proxy:3128\"\n        },\n        {\n          \"key\": \"PLUGIN_DAEMON_URL\",\n          \"value\": \"http://dify-plugin-daemon:5002\"\n        },\n        {\n          \"key\": \"PLUGIN_DAEMON_KEY\",\n          \"value\": \"${DIFY_PLUGIN_DAEMON_KEY}\"\n        },\n        {\n          \"key\": \"INNER_API_KEY_FOR_PLUGIN\",\n          \"value\": \"${DIFY_INNER_API_KEY}\"\n        },\n        {\n          \"key\": \"MARKETPLACE_ENABLED\",\n          \"value\": \"true\"\n        },\n        {\n          \"key\": \"MARKETPLACE_API_URL\",\n          \"value\": \"https://marketplace.dify.ai\"\n        },\n        {\n          \"key\": \"AGENT_BACKEND_BASE_URL\",\n          \"value\": \"http://dify-agent-backend:5050\"\n        },\n        {\n          \"key\": \"AGENT_BACKEND_API_TOKEN\",\n          \"value\": \"${DIFY_AGENT_API_TOKEN}\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/storage\",\n          \"containerPath\": \"/app/api/storage\"\n        }\n      ],\n      \"networks\": [\n        \"default\",\n        \"dify-sandbox-net\"\n      ],\n      \"dependsOn\": {\n        \"dify-init\": {\n          \"condition\": \"service_completed_successfully\"\n        },\n        \"dify-db\": {\n          \"condition\": \"service_healthy\"\n        },\n        \"dify-redis\": {\n          \"condition\": \"service_healthy\"\n        },\n        \"dify-agent-backend\": {\n          \"condition\": \"service_started\"\n        }\n      }\n    },\n    {\n      \"name\": \"dify-worker-beat\",\n      \"image\": \"langgenius/dify-api:1.17.1\",\n      \"environment\": [\n        {\n          \"key\": \"MODE\",\n          \"value\": \"beat\"\n        },\n        {\n          \"key\": \"SECRET_KEY\",\n          \"value\": \"${DIFY_SECRET_KEY}\"\n        },\n        {\n          \"key\": \"DEPLOY_ENV\",\n          \"value\": \"PRODUCTION\"\n        },\n        {\n          \"key\": \"LOG_LEVEL\",\n          \"value\": \"INFO\"\n        },\n        {\n          \"key\": \"FILES_URL\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}\"\n        },\n        {\n          \"key\": \"INTERNAL_FILES_URL\",\n          \"value\": \"http://dify-api:5001\"\n        },\n        {\n          \"key\": \"TRIGGER_URL\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}\"\n        },\n        {\n          \"key\": \"ENDPOINT_URL_TEMPLATE\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}/e/{hook_id}\"\n        },\n        {\n          \"key\": \"ENABLE_COLLABORATION_MODE\",\n          \"value\": \"true\"\n        },\n        {\n          \"key\": \"DB_TYPE\",\n          \"value\": \"postgresql\"\n        },\n        {\n          \"key\": \"DB_USERNAME\",\n          \"value\": \"postgres\"\n        },\n        {\n          \"key\": \"DB_PASSWORD\",\n          \"value\": \"${DIFY_DB_PASSWORD}\"\n        },\n        {\n          \"key\": \"DB_HOST\",\n          \"value\": \"dify-db\"\n        },\n        {\n          \"key\": \"DB_PORT\",\n          \"value\": \"5432\"\n        },\n        {\n          \"key\": \"DB_DATABASE\",\n          \"value\": \"dify\"\n        },\n        {\n          \"key\": \"REDIS_HOST\",\n          \"value\": \"dify-redis\"\n        },\n        {\n          \"key\": \"REDIS_PORT\",\n          \"value\": \"6379\"\n        },\n        {\n          \"key\": \"REDIS_DB\",\n          \"value\": \"0\"\n        },\n        {\n          \"key\": \"CELERY_BROKER_URL\",\n          \"value\": \"redis://dify-redis:6379/1\"\n        },\n        {\n          \"key\": \"CELERY_BACKEND\",\n          \"value\": \"redis\"\n        },\n        {\n          \"key\": \"STORAGE_TYPE\",\n          \"value\": \"opendal\"\n        },\n        {\n          \"key\": \"OPENDAL_SCHEME\",\n          \"value\": \"fs\"\n        },\n        {\n          \"key\": \"OPENDAL_FS_ROOT\",\n          \"value\": \"storage\"\n        },\n        {\n          \"key\": \"VECTOR_STORE\",\n          \"value\": \"pgvector\"\n        },\n        {\n          \"key\": \"PGVECTOR_HOST\",\n          \"value\": \"dify-db\"\n        },\n        {\n          \"key\": \"PGVECTOR_PORT\",\n          \"value\": \"5432\"\n        },\n        {\n          \"key\": \"PGVECTOR_USER\",\n          \"value\": \"postgres\"\n        },\n        {\n          \"key\": \"PGVECTOR_PASSWORD\",\n          \"value\": \"${DIFY_DB_PASSWORD}\"\n        },\n        {\n          \"key\": \"PGVECTOR_DATABASE\",\n          \"value\": \"dify\"\n        },\n        {\n          \"key\": \"CODE_EXECUTION_ENDPOINT\",\n          \"value\": \"http://dify-sandbox:8194\"\n        },\n        {\n          \"key\": \"CODE_EXECUTION_API_KEY\",\n          \"value\": \"${DIFY_SANDBOX_KEY}\"\n        },\n        {\n          \"key\": \"SSRF_PROXY_HTTP_URL\",\n          \"value\": \"http://dify-ssrf-proxy:3128\"\n        },\n        {\n          \"key\": \"SSRF_PROXY_HTTPS_URL\",\n          \"value\": \"http://dify-ssrf-proxy:3128\"\n        },\n        {\n          \"key\": \"PLUGIN_DAEMON_URL\",\n          \"value\": \"http://dify-plugin-daemon:5002\"\n        },\n        {\n          \"key\": \"PLUGIN_DAEMON_KEY\",\n          \"value\": \"${DIFY_PLUGIN_DAEMON_KEY}\"\n        },\n        {\n          \"key\": \"INNER_API_KEY_FOR_PLUGIN\",\n          \"value\": \"${DIFY_INNER_API_KEY}\"\n        },\n        {\n          \"key\": \"MARKETPLACE_ENABLED\",\n          \"value\": \"true\"\n        },\n        {\n          \"key\": \"MARKETPLACE_API_URL\",\n          \"value\": \"https://marketplace.dify.ai\"\n        },\n        {\n          \"key\": \"AGENT_BACKEND_BASE_URL\",\n          \"value\": \"http://dify-agent-backend:5050\"\n        },\n        {\n          \"key\": \"AGENT_BACKEND_API_TOKEN\",\n          \"value\": \"${DIFY_AGENT_API_TOKEN}\"\n        }\n      ],\n      \"networks\": [\n        \"default\",\n        \"dify-sandbox-net\"\n      ],\n      \"dependsOn\": {\n        \"dify-init\": {\n          \"condition\": \"service_completed_successfully\"\n        },\n        \"dify-db\": {\n          \"condition\": \"service_healthy\"\n        },\n        \"dify-redis\": {\n          \"condition\": \"service_healthy\"\n        }\n      }\n    },\n    {\n      \"name\": \"dify-web\",\n      \"image\": \"langgenius/dify-web:1.17.1\",\n      \"environment\": [\n        {\n          \"key\": \"CONSOLE_API_URL\",\n          \"value\": \"\"\n        },\n        {\n          \"key\": \"APP_API_URL\",\n          \"value\": \"\"\n        },\n        {\n          \"key\": \"SERVER_CONSOLE_API_URL\",\n          \"value\": \"http://dify-api:5001\"\n        },\n        {\n          \"key\": \"NEXT_PUBLIC_SOCKET_URL\",\n          \"value\": \"ws://${APP_DOMAIN}\"\n        },\n        {\n          \"key\": \"NEXT_TELEMETRY_DISABLED\",\n          \"value\": \"1\"\n        },\n        {\n          \"key\": \"MARKETPLACE_API_URL\",\n          \"value\": \"https://marketplace.dify.ai\"\n        },\n        {\n          \"key\": \"MARKETPLACE_URL\",\n          \"value\": \"https://marketplace.dify.ai\"\n        },\n        {\n          \"key\": \"NEXT_PUBLIC_ENABLE_AGENT_V2\",\n          \"value\": \"true\"\n        }\n      ]\n    },\n    {\n      \"name\": \"dify-db\",\n      \"image\": \"pgvector/pgvector:0.8.6-pg15\",\n      \"stopSignal\": \"SIGINT\",\n      \"command\": [\n        \"postgres\",\n        \"-c\",\n        \"max_connections=100\",\n        \"-c\",\n        \"shared_buffers=128MB\",\n        \"-c\",\n        \"work_mem=4MB\",\n        \"-c\",\n        \"maintenance_work_mem=64MB\",\n        \"-c\",\n        \"effective_cache_size=4096MB\"\n      ],\n      \"environment\": [\n        {\n          \"key\": \"POSTGRES_USER\",\n          \"value\": \"postgres\"\n        },\n        {\n          \"key\": \"POSTGRES_PASSWORD\",\n          \"value\": \"${DIFY_DB_PASSWORD}\"\n        },\n        {\n          \"key\": \"POSTGRES_DB\",\n          \"value\": \"dify\"\n        },\n        {\n          \"key\": \"PGDATA\",\n          \"value\": \"/var/lib/postgresql/data/pgdata\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/postgres\",\n          \"containerPath\": \"/var/lib/postgresql/data\"\n        }\n      ],\n      \"healthCheck\": {\n        \"test\": [\n          \"CMD\",\n          \"pg_isready\",\n          \"-U\",\n          \"postgres\",\n          \"-d\",\n          \"dify\"\n        ],\n        \"interval\": \"2s\",\n        \"timeout\": \"3s\",\n        \"retries\": 60,\n        \"startPeriod\": \"60s\"\n      }\n    },\n    {\n      \"name\": \"dify-redis\",\n      \"image\": \"redis:7.4.11-alpine\",\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/redis\",\n          \"containerPath\": \"/data\"\n        }\n      ],\n      \"healthCheck\": {\n        \"test\": [\n          \"CMD-SHELL\",\n          \"redis-cli ping | grep -q PONG\"\n        ],\n        \"interval\": \"5s\",\n        \"timeout\": \"3s\",\n        \"retries\": 10\n      }\n    },\n    {\n      \"name\": \"dify-sandbox\",\n      \"image\": \"langgenius/dify-sandbox:0.2.15\",\n      \"environment\": [\n        {\n          \"key\": \"API_KEY\",\n          \"value\": \"${DIFY_SANDBOX_KEY}\"\n        },\n        {\n          \"key\": \"GIN_MODE\",\n          \"value\": \"release\"\n        },\n        {\n          \"key\": \"WORKER_TIMEOUT\",\n          \"value\": \"15\"\n        },\n        {\n          \"key\": \"ENABLE_NETWORK\",\n          \"value\": \"true\"\n        },\n        {\n          \"key\": \"HTTP_PROXY\",\n          \"value\": \"http://dify-ssrf-proxy:3128\"\n        },\n        {\n          \"key\": \"HTTPS_PROXY\",\n          \"value\": \"http://dify-ssrf-proxy:3128\"\n        },\n        {\n          \"key\": \"SANDBOX_PORT\",\n          \"value\": \"8194\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/sandbox/dependencies\",\n          \"containerPath\": \"/dependencies\"\n        },\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/sandbox/conf\",\n          \"containerPath\": \"/conf\"\n        }\n      ],\n      \"networks\": [\n        \"dify-sandbox-net\"\n      ],\n      \"healthCheck\": {\n        \"test\": [\n          \"CMD\",\n          \"curl\",\n          \"-f\",\n          \"http://localhost:8194/health\"\n        ],\n        \"interval\": \"30s\",\n        \"timeout\": \"5s\",\n        \"retries\": 3\n      }\n    },\n    {\n      \"name\": \"dify-ssrf-proxy\",\n      \"image\": \"ubuntu/squid:6.6-24.04_edge\",\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/ssrf-proxy/squid.conf\",\n          \"containerPath\": \"/etc/squid/squid.conf\",\n          \"readOnly\": true\n        }\n      ],\n      \"networks\": [\n        \"default\",\n        \"dify-sandbox-net\"\n      ]\n    },\n    {\n      \"name\": \"dify-plugin-daemon\",\n      \"image\": \"langgenius/dify-plugin-daemon:0.6.10-local\",\n      \"environment\": [\n        {\n          \"key\": \"DB_TYPE\",\n          \"value\": \"postgresql\"\n        },\n        {\n          \"key\": \"DB_HOST\",\n          \"value\": \"dify-db\"\n        },\n        {\n          \"key\": \"DB_PORT\",\n          \"value\": \"5432\"\n        },\n        {\n          \"key\": \"DB_USERNAME\",\n          \"value\": \"postgres\"\n        },\n        {\n          \"key\": \"DB_PASSWORD\",\n          \"value\": \"${DIFY_DB_PASSWORD}\"\n        },\n        {\n          \"key\": \"DB_DATABASE\",\n          \"value\": \"dify_plugin\"\n        },\n        {\n          \"key\": \"DB_SSL_MODE\",\n          \"value\": \"disable\"\n        },\n        {\n          \"key\": \"REDIS_HOST\",\n          \"value\": \"dify-redis\"\n        },\n        {\n          \"key\": \"REDIS_PORT\",\n          \"value\": \"6379\"\n        },\n        {\n          \"key\": \"SERVER_PORT\",\n          \"value\": \"5002\"\n        },\n        {\n          \"key\": \"SERVER_KEY\",\n          \"value\": \"${DIFY_PLUGIN_DAEMON_KEY}\"\n        },\n        {\n          \"key\": \"MAX_PLUGIN_PACKAGE_SIZE\",\n          \"value\": \"52428800\"\n        },\n        {\n          \"key\": \"DIFY_INNER_API_URL\",\n          \"value\": \"http://dify-api:5001\"\n        },\n        {\n          \"key\": \"DIFY_INNER_API_KEY\",\n          \"value\": \"${DIFY_INNER_API_KEY}\"\n        },\n        {\n          \"key\": \"PLUGIN_REMOTE_INSTALLING_HOST\",\n          \"value\": \"0.0.0.0\"\n        },\n        {\n          \"key\": \"PLUGIN_REMOTE_INSTALLING_PORT\",\n          \"value\": \"5003\"\n        },\n        {\n          \"key\": \"PLUGIN_WORKING_PATH\",\n          \"value\": \"/app/storage/cwd\"\n        },\n        {\n          \"key\": \"FORCE_VERIFYING_SIGNATURE\",\n          \"value\": \"true\"\n        },\n        {\n          \"key\": \"PYTHON_ENV_INIT_TIMEOUT\",\n          \"value\": \"120\"\n        },\n        {\n          \"key\": \"PLUGIN_MAX_EXECUTION_TIMEOUT\",\n          \"value\": \"600\"\n        },\n        {\n          \"key\": \"PLUGIN_STORAGE_TYPE\",\n          \"value\": \"local\"\n        },\n        {\n          \"key\": \"PLUGIN_STORAGE_LOCAL_ROOT\",\n          \"value\": \"/app/storage\"\n        },\n        {\n          \"key\": \"PLUGIN_INSTALLED_PATH\",\n          \"value\": \"plugin\"\n        },\n        {\n          \"key\": \"PLUGIN_PACKAGE_CACHE_PATH\",\n          \"value\": \"plugin_packages\"\n        },\n        {\n          \"key\": \"PLUGIN_MEDIA_CACHE_PATH\",\n          \"value\": \"assets\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/plugin-daemon\",\n          \"containerPath\": \"/app/storage\"\n        }\n      ],\n      \"networks\": [\n        \"default\",\n        \"dify-sandbox-net\"\n      ],\n      \"dependsOn\": {\n        \"dify-db\": {\n          \"condition\": \"service_healthy\"\n        },\n        \"dify-redis\": {\n          \"condition\": \"service_healthy\"\n        }\n      }\n    },\n    {\n      \"name\": \"dify-agent-backend\",\n      \"image\": \"langgenius/dify-agent-backend:1.17.1\",\n      \"environment\": [\n        {\n          \"key\": \"DIFY_AGENT_REDIS_URL\",\n          \"value\": \"redis://dify-redis:6379/2\"\n        },\n        {\n          \"key\": \"DIFY_AGENT_PLUGIN_DAEMON_URL\",\n          \"value\": \"http://dify-plugin-daemon:5002\"\n        },\n        {\n          \"key\": \"DIFY_AGENT_PLUGIN_DAEMON_API_KEY\",\n          \"value\": \"${DIFY_PLUGIN_DAEMON_KEY}\"\n        },\n        {\n          \"key\": \"DIFY_AGENT_INNER_API_URL\",\n          \"value\": \"http://dify-api:5001\"\n        },\n        {\n          \"key\": \"DIFY_AGENT_INNER_API_KEY\",\n          \"value\": \"${DIFY_INNER_API_KEY}\"\n        },\n        {\n          \"key\": \"DIFY_AGENT_RUNTIME_BACKEND\",\n          \"value\": \"local\"\n        },\n        {\n          \"key\": \"DIFY_AGENT_LOCAL_SANDBOX_ENDPOINT\",\n          \"value\": \"http://dify-agent-sandbox:5004\"\n        },\n        {\n          \"key\": \"DIFY_AGENT_LOCAL_SANDBOX_AUTH_TOKEN\",\n          \"value\": \"${DIFY_AGENT_SANDBOX_TOKEN}\"\n        },\n        {\n          \"key\": \"DIFY_AGENT_STUB_API_BASE_URL\",\n          \"value\": \"http://dify-agent-backend:5050/agent-stub\"\n        },\n        {\n          \"key\": \"DIFY_AGENT_SANDBOX_FILES_BASE_URL\",\n          \"value\": \"http://dify-api:5001\"\n        },\n        {\n          \"key\": \"DIFY_AGENT_SERVER_SECRET_KEY\",\n          \"value\": \"${DIFY_AGENT_SERVER_SECRET}\"\n        },\n        {\n          \"key\": \"DIFY_AGENT_API_TOKEN\",\n          \"value\": \"${DIFY_AGENT_API_TOKEN}\"\n        }\n      ],\n      \"networks\": [\n        \"default\",\n        \"dify-agent-net\"\n      ],\n      \"dependsOn\": {\n        \"dify-redis\": {\n          \"condition\": \"service_healthy\"\n        },\n        \"dify-plugin-daemon\": {\n          \"condition\": \"service_started\"\n        }\n      }\n    },\n    {\n      \"name\": \"dify-agent-sandbox\",\n      \"image\": \"langgenius/dify-agent-local-sandbox:1.17.1\",\n      \"environment\": [\n        {\n          \"key\": \"SHELLCTL_AUTH_TOKEN\",\n          \"value\": \"${DIFY_AGENT_SANDBOX_TOKEN}\"\n        },\n        {\n          \"key\": \"SHELLCTL_ENABLE_PATH_ISOLATION\",\n          \"value\": \"true\"\n        },\n        {\n          \"key\": \"HTTP_PROXY\",\n          \"value\": \"http://dify-agent-proxy:3128\"\n        },\n        {\n          \"key\": \"HTTPS_PROXY\",\n          \"value\": \"http://dify-agent-proxy:3128\"\n        },\n        {\n          \"key\": \"NO_PROXY\",\n          \"value\": \"localhost,127.0.0.1\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/agent-sandbox/home\",\n          \"containerPath\": \"/home/dify\"\n        },\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/agent-sandbox/workspace\",\n          \"containerPath\": \"/workspace\"\n        }\n      ],\n      \"networks\": [\n        \"dify-agent-net\",\n        \"dify-agent-proxy-net\"\n      ],\n      \"healthCheck\": {\n        \"test\": [\n          \"CMD\",\n          \"curl\",\n          \"-f\",\n          \"http://localhost:5004/healthz\"\n        ],\n        \"interval\": \"30s\",\n        \"timeout\": \"5s\",\n        \"retries\": 3,\n        \"startPeriod\": \"10s\"\n      }\n    },\n    {\n      \"name\": \"dify-agent-proxy\",\n      \"image\": \"ubuntu/squid:6.6-24.04_edge\",\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/agent-proxy/squid.conf\",\n          \"containerPath\": \"/etc/squid/squid.conf\",\n          \"readOnly\": true\n        }\n      ],\n      \"networks\": [\n        \"default\",\n        \"dify-agent-proxy-net\"\n      ]\n    },\n    {\n      \"name\": \"dify-init\",\n      \"image\": \"busybox:1.37.0\",\n      \"command\": [\n        \"sh\",\n        \"-c\",\n        \"if [ -f /app/api/storage/.init_permissions ]; then exit 0; fi; chown -R 1001:1001 /app/api/storage && touch /app/api/storage/.init_permissions\"\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/storage\",\n          \"containerPath\": \"/app/api/storage\"\n        }\n      ]\n    }\n  ]\n}\n",
+  "config": {
+    "path": "definitions/apps/dify/config.json",
+    "content": "{\n  \"id\": \"dify\",\n  \"name\": \"Dify\",\n  \"version\": \"1.17.1\",\n  \"source\": \"https://github.com/langgenius/dify\",\n  \"website\": \"https://dify.ai\",\n  \"documentation\": \"https://docs.dify.ai/getting-started/install-self-hosted/docker-compose\",\n  \"short_desc\": \"Build AI apps and agents visually: workflows, knowledge bases, tools and model providers in one place.\",\n  \"categories\": [\n    \"Artificial Intelligence\"\n  ],\n  \"license\": \"Dify Open Source License\",\n  \"form_fields\": [\n    {\n      \"type\": \"random\",\n      \"label\": \"Signing key\",\n      \"min\": 42,\n      \"max\": 42,\n      \"env_variable\": \"DIFY_SECRET_KEY\",\n      \"encoding\": \"base64\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Database password\",\n      \"min\": 32,\n      \"max\": 32,\n      \"env_variable\": \"DIFY_DB_PASSWORD\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Code sandbox key\",\n      \"min\": 32,\n      \"max\": 32,\n      \"env_variable\": \"DIFY_SANDBOX_KEY\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Plugin service key\",\n      \"min\": 48,\n      \"max\": 48,\n      \"env_variable\": \"DIFY_PLUGIN_DAEMON_KEY\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Key plugins use to call Dify\",\n      \"min\": 48,\n      \"max\": 48,\n      \"env_variable\": \"DIFY_INNER_API_KEY\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Agent service token\",\n      \"min\": 48,\n      \"max\": 48,\n      \"env_variable\": \"DIFY_AGENT_API_TOKEN\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Agent token encryption secret\",\n      \"min\": 43,\n      \"max\": 43,\n      \"env_variable\": \"DIFY_AGENT_SERVER_SECRET\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Agent sandbox token\",\n      \"min\": 48,\n      \"max\": 48,\n      \"env_variable\": \"DIFY_AGENT_SANDBOX_TOKEN\"\n    }\n  ]\n}\n"
+  },
+  "seeds": [
+    {
+      "path": "data/agent-proxy/squid.conf",
+      "content": "# Local Store's outbound proxy for Dify's agent sandbox. The sandbox may call\n# back to exactly two things inside - the agent backend's stub API and Dify's\n# signed file URLs - and anything on the internet. Every other private\n# address is refused.\n\nhttp_port 3128\n\nacl private_destinations dst 0.0.0.0/8 10.0.0.0/8 100.64.0.0/10 127.0.0.0/8 169.254.0.0/16 172.16.0.0/12 192.168.0.0/16 224.0.0.0/4 240.0.0.0/4 ::/128 ::1/128 fc00::/7 fe80::/10\nacl agent_backend dstdomain dify-agent-backend\nacl dify_api dstdomain dify-api\nacl agent_stub urlpath_regex -i ^/agent-stub/\nacl signed_files urlpath_regex -i ^/files/\nacl SSL_ports port 443\nacl Safe_ports port 80 21 443 1025-65535\nacl CONNECT method CONNECT\n\nhttp_access deny !Safe_ports\nhttp_access deny CONNECT !SSL_ports\nhttp_access allow agent_backend agent_stub\nhttp_access allow dify_api signed_files\nhttp_access deny private_destinations\nhttp_access allow all\n\ncache deny all\ncoredump_dir /var/spool/squid\n"
+    },
+    {
+      "path": "data/nginx/default.conf",
+      "content": "# Local Store's front door for Dify: one address for its web app, its API,\n# its collaboration socket and plugin webhooks. Written for Local Store rather\n# than rendered from Dify's templates, because nothing here varies by install.\n\nserver {\n    listen 80;\n    server_name _;\n    # Docker's own resolver, so nginx starts before the services it names do.\n    resolver 127.0.0.11 valid=30s ipv6=off;\n    client_max_body_size 100M;\n    keepalive_timeout 65;\n\n    location ~ ^/(console/api|api|v1|openapi|files|mcp|triggers) {\n        set $api dify-api:5001;\n        proxy_pass http://$api;\n        proxy_http_version 1.1;\n        proxy_set_header Host $http_host;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto $scheme;\n        proxy_set_header Connection \"\";\n        proxy_buffering off;\n        proxy_read_timeout 3600s;\n        proxy_send_timeout 3600s;\n    }\n\n    location /socket.io/ {\n        set $socket dify-api-websocket:5001;\n        proxy_pass http://$socket;\n        proxy_http_version 1.1;\n        proxy_set_header Host $http_host;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto $scheme;\n        proxy_set_header Upgrade $http_upgrade;\n        proxy_set_header Connection \"upgrade\";\n        proxy_buffering off;\n        proxy_read_timeout 3600s;\n        proxy_send_timeout 3600s;\n    }\n\n    location /e/ {\n        set $plugins dify-plugin-daemon:5002;\n        proxy_pass http://$plugins;\n        proxy_http_version 1.1;\n        proxy_set_header Host $http_host;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto $scheme;\n        proxy_set_header Connection \"\";\n        proxy_set_header Dify-Hook-Url $scheme://$http_host$request_uri;\n        proxy_buffering off;\n        proxy_read_timeout 3600s;\n        proxy_send_timeout 3600s;\n    }\n\n    location / {\n        set $web dify-web:3000;\n        proxy_pass http://$web;\n        proxy_http_version 1.1;\n        proxy_set_header Host $http_host;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto $scheme;\n        proxy_set_header Connection \"\";\n        proxy_buffering off;\n        proxy_read_timeout 3600s;\n        proxy_send_timeout 3600s;\n    }\n}\n"
+    },
+    {
+      "path": "data/sandbox/conf/config.yaml",
+      "content": "# Local Store's settings for Dify's code sandbox. Its key, port and proxy\n# come from the environment Local Store gives it; these are the rest.\napp:\n  port: 8194\n  debug: false\nmax_workers: 4\nmax_requests: 50\nworker_timeout: 15\nenable_network: true\n"
+    },
+    {
+      "path": "data/ssrf-proxy/squid.conf",
+      "content": "# Local Store's outbound proxy for Dify. Its code sandbox has no other way\n# out, and its API, workers and plugins send user-configured requests through\n# here too. Anything on the internet is allowed; any private address - this\n# computer, its network, the other containers - is refused.\n\nhttp_port 3128\n\nacl localnet src 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16 fc00::/7 fe80::/10\nacl private_destinations dst 0.0.0.0/8 10.0.0.0/8 100.64.0.0/10 127.0.0.0/8 169.254.0.0/16 172.16.0.0/12 192.168.0.0/16 224.0.0.0/4 240.0.0.0/4 ::/128 ::1/128 fc00::/7 fe80::/10\nacl marketplace dstdomain .marketplace.dify.ai\nacl SSL_ports port 443\nacl Safe_ports port 80 21 443 1025-65535\nacl CONNECT method CONNECT\n\nhttp_access deny !Safe_ports\nhttp_access deny CONNECT !SSL_ports\nhttp_access deny private_destinations\nhttp_access allow marketplace\nhttp_access allow localnet\nhttp_access deny all\n\ncache deny all\ncoredump_dir /var/spool/squid\n"
+    }
+  ]
+}

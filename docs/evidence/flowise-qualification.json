@@ -1,19 +1,25 @@
 {
-  "app": "langflow",
+  "app": "flowise",
   "passed": true,
   "scope": "reviewed mapping, transaction, managed storage and first use, on one host and one architecture",
   "promotion": "approved",
-  "source_revision": "d81999683947fb828a535300b3cdbf8f7ac6b589",
+  "source_revision": "484d934c006b0e276c9949ce89a868fad3c9f257",
   "images": [
-    "langflowai/langflow:1.12.1"
+    "flowiseai/flowise:3.1.4",
+    "postgres:17.11"
   ],
   "image_ids": {
-    "langflowai/langflow:1.12.1": "sha256:3e3cac657435f292fb5da653e8eb05b330460a99f1420e169f29413ba9d11164"
+    "flowiseai/flowise:3.1.4": "sha256:3922767afb52a5777759fd8b28a3c9eee864daea96018a791f2429eae2a76571",
+    "postgres:17.11": "sha256:67f41722b7a8cbdb868a44a4995c846eddfdc2973bccb291ce937dce88ad5675"
   },
   "first_use": "it opens a page with a clear next step, and the same page after a restart and reinstall",
   "steps": [
     {
-      "step": "pull langflowai/langflow:1.12.1",
+      "step": "pull flowiseai/flowise:3.1.4",
+      "passed": true
+    },
+    {
+      "step": "pull postgres:17.11",
       "passed": true
     },
     {

@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "id": "lobehub",
+  "display_name": "LobeHub",
+  "catalog_name": "LobeHub",
+  "description": "A chat workspace for many AI models, with agents, a knowledge base and plugins.",
+  "category": "Artificial Intelligence",
+  "license": "LobeHub Community License",
+  "source_url": "https://github.com/lobehub/lobehub",
+  "documentation_url": "https://lobehub.com/docs/self-hosting/platform/docker-compose",
+  "verified_at": "2026-09-12",
+  "lifecycle_proof": "docs/evidence/lobehub-qualification.json",
+  "origin": {
+    "importer": "runtipi",
+    "repository": "madhavsonkusare-a11y/local-store",
+    "revision": "484d934c006b0e276c9949ce89a868fad3c9f257",
+    "path": "definitions/apps/lobehub/docker-compose.json",
+    "license": "MIT"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "lobehub/lobehub:2.2.17",
+        "source_url": "https://hub.docker.com/v2/repositories/lobehub/lobehub/tags/2.2.17",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-09-11",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:bf034f6d9abf3bf1366aea6bdbd0ed00c461b83d3fd48147dcb420a63684b96f",
+          "linux/arm64": "sha256:7fb3804c30c7e3429574a7f7cd5f1d0373defab785fcbb7d185237ea11ddb357"
+        },
+        "index_digest": "sha256:775dbfb06820e2d0f6ac24cbaaa6ee46c1e40ebce7b73fb2ce16c4d06e61a51e"
+      },
+      {
+        "image": "paradedb/paradedb:0.25.8-pg17",
+        "source_url": "https://hub.docker.com/v2/repositories/paradedb/paradedb/tags/0.25.8-pg17",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-09-11",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:b4dba732f650781a50894ba948335721f0b340f32580eca610b336f075080b02",
+          "linux/arm64": "sha256:73ac4cedb43741fdd29469a078b75ee8cfc836da61e39d97e4b2cf3aec552082"
+        },
+        "index_digest": "sha256:7a9e1e7f04d6d71285b55535eaa5dc58714f9cc67880c2e36b8a3182b7a28136"
+      },
+      {
+        "image": "redis:7.4.11-alpine",
+        "source_url": "https://hub.docker.com/v2/repositories/library/redis/tags/7.4.11-alpine",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-08-20",
+        "container_platforms": [
+          "linux/386",
+          "linux/amd64",
+          "linux/arm/v6",
+          "linux/arm/v7",
+          "linux/arm64/v8",
+          "linux/ppc64le",
+          "linux/riscv64",
+          "linux/s390x"
+        ],
+        "digests": {
+          "linux/386": "sha256:a4fd08853cdc01da535e7c3ede18084fca62b21a6ee06e38f0aba769f188d45b",
+          "linux/amd64": "sha256:1db42ccef14898aa29bae778452d567534b59c107129cbc1163fb552de184d3c",
+          "linux/arm/v6": "sha256:253cf5a8c5a0bb62b11c913b9b006963753f844ab040d39395e3b7d635db37d0",
+          "linux/arm/v7": "sha256:89beb43a975079ad216a6171d1696ce3aa2b348477228500f53c6fe99cc4f9df",
+          "linux/arm64/v8": "sha256:f8d15882ba108587477ce13c00ab0551933a84138427b7cc9abadfbe45ffd973",
+          "linux/ppc64le": "sha256:58a9ef466c2701c6e1c50d00abb394ed0a2298d6369aae2950b8fa3cba23973c",
+          "linux/riscv64": "sha256:60c3979aa5c24b4d147484b7717153e2f241b5073ec83500bdace86f0c8472d1",
+          "linux/s390x": "sha256:f176864eb58d72ec3bb461a2f395cd069a127586751013350753c0d2ccf6e119"
+        },
+        "index_digest": "sha256:ff02b58f971e7d7d156a1267e283fcbbeee91773b6aa36c49dac28ecfe28eadf"
+      },
+      {
+        "image": "rustfs/rustfs:1.0.0-rc.6",
+        "source_url": "https://hub.docker.com/v2/repositories/rustfs/rustfs/tags/1.0.0-rc.6",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-09-11",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:8d8bfa61f3a20cdcf644562bb8c3a314ca03c66a9827f6056f741e787bf0c804",
+          "linux/arm64": "sha256:1427d98352c52b3b45308d2aec4c6e9028664cf2dbf1d1b28564b023774ed97d"
+        },
+        "index_digest": "sha256:97171b3d72cd47dc81000f92ea84de25608bfc35a94c965501afaeb5d99f6035"
+      }
+    ]
+  },
+  "promotion": {
+    "state": "approved",
+    "reason": "Approved by the owner. Qualified as offered on 2026-09-12: a real install of LobeHub 2.2.17, upstream's current release proved it starts, opens to a first screen with a clear next step, survives a restart and a keep-data reinstall with its data and generated credentials intact, and removes everything it created. Local Store wrote this definition from the project's own deployment instructions."
+  },
+  "data_storage": "Local Store managed folder / lobehub",
+  "risk_notes": [
+    "Creates 4 Docker containers and publishes 2 ports on this computer's loopback interface only.",
+    "Its lobehub-store service answers on a second loopback address, which the app's own pages call directly. Local Store opens only the main one.",
+    "Generates 5 credentials of its own, keeps them beside the app's data, and reuses them if you reinstall.",
+    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Written by Local Store from the project's own deployment instructions, not taken from an app store.",
+    "Asks you to create an account on first open; anyone who can reach the address can register one.",
+    "Uses the model providers you add keys for; the keys are stored encrypted with a key Local Store generated.",
+    "Files you upload go to a bundled RustFS object store, a 1.0 release candidate, on a second loopback address the page uploads to directly.",
+    "Its bucket is made by Local Store's start script with a signed S3 request, because MinIO has taken the mc client image upstream uses off Docker Hub.",
+    "Source-available under the LobeHub Community License, which restricts commercial derivative works."
+  ],
+  "fields": {},
+  "definition": "{\n  \"schemaVersion\": 2,\n  \"$schema\": \"https://schemas.runtipi.io/v2/dynamic-compose.json\",\n  \"services\": [\n    {\n      \"name\": \"lobehub\",\n      \"image\": \"lobehub/lobehub:2.2.17\",\n      \"isMain\": true,\n      \"internalPort\": 3210,\n      \"command\": [\n        \"/opt/local-store/start.cjs\"\n      ],\n      \"environment\": [\n        {\n          \"key\": \"APP_URL\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}\"\n        },\n        {\n          \"key\": \"INTERNAL_APP_URL\",\n          \"value\": \"http://localhost:3210\"\n        },\n        {\n          \"key\": \"KEY_VAULTS_SECRET\",\n          \"value\": \"${LOBE_KEY_VAULTS_SECRET}\"\n        },\n        {\n          \"key\": \"AUTH_SECRET\",\n          \"value\": \"${LOBE_AUTH_SECRET}\"\n        },\n        {\n          \"key\": \"DATABASE_URL\",\n          \"value\": \"postgresql://postgres:${LOBE_DB_PASSWORD}@lobehub-db:5432/lobechat\"\n        },\n        {\n          \"key\": \"REDIS_URL\",\n          \"value\": \"redis://lobehub-redis:6379\"\n        },\n        {\n          \"key\": \"REDIS_PREFIX\",\n          \"value\": \"lobechat\"\n        },\n        {\n          \"key\": \"REDIS_TLS\",\n          \"value\": \"0\"\n        },\n        {\n          \"key\": \"S3_ENDPOINT\",\n          \"value\": \"${LOCAL_STORE_URL_LOBEHUB_STORE}\"\n        },\n        {\n          \"key\": \"S3_INTERNAL_ENDPOINT\",\n          \"value\": \"http://lobehub-store:9000\"\n        },\n        {\n          \"key\": \"S3_LOCAL_PORT\",\n          \"value\": \"${LOCAL_STORE_PORT_LOBEHUB_STORE}\"\n        },\n        {\n          \"key\": \"S3_BUCKET\",\n          \"value\": \"lobe\"\n        },\n        {\n          \"key\": \"S3_ENABLE_PATH_STYLE\",\n          \"value\": \"1\"\n        },\n        {\n          \"key\": \"S3_ACCESS_KEY\",\n          \"value\": \"${LOBE_STORE_ACCESS_KEY}\"\n        },\n        {\n          \"key\": \"S3_ACCESS_KEY_ID\",\n          \"value\": \"${LOBE_STORE_ACCESS_KEY}\"\n        },\n        {\n          \"key\": \"S3_SECRET_ACCESS_KEY\",\n          \"value\": \"${LOBE_STORE_SECRET_KEY}\"\n        },\n        {\n          \"key\": \"S3_SET_ACL\",\n          \"value\": \"0\"\n        },\n        {\n          \"key\": \"LLM_VISION_IMAGE_USE_BASE64\",\n          \"value\": \"1\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/local-store/start.cjs\",\n          \"containerPath\": \"/opt/local-store/start.cjs\",\n          \"readOnly\": true\n        },\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/keys\",\n          \"containerPath\": \"/keys\"\n        }\n      ],\n      \"dependsOn\": {\n        \"lobehub-db\": {\n          \"condition\": \"service_healthy\"\n        },\n        \"lobehub-redis\": {\n          \"condition\": \"service_healthy\"\n        },\n        \"lobehub-store\": {\n          \"condition\": \"service_healthy\"\n        }\n      }\n    },\n    {\n      \"name\": \"lobehub-db\",\n      \"image\": \"paradedb/paradedb:0.25.8-pg17\",\n      \"command\": [\n        \"postgres\",\n        \"-c\",\n        \"shared_preload_libraries=pg_search\"\n      ],\n      \"stopSignal\": \"SIGINT\",\n      \"environment\": [\n        {\n          \"key\": \"POSTGRES_DB\",\n          \"value\": \"lobechat\"\n        },\n        {\n          \"key\": \"POSTGRES_PASSWORD\",\n          \"value\": \"${LOBE_DB_PASSWORD}\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/postgres\",\n          \"containerPath\": \"/var/lib/postgresql/data\"\n        }\n      ],\n      \"healthCheck\": {\n        \"test\": \"pg_isready -U postgres\",\n        \"interval\": \"5s\",\n        \"timeout\": \"5s\",\n        \"retries\": 10,\n        \"startPeriod\": \"60s\"\n      }\n    },\n    {\n      \"name\": \"lobehub-redis\",\n      \"image\": \"redis:7.4.11-alpine\",\n      \"command\": [\n        \"redis-server\",\n        \"--save\",\n        \"60\",\n        \"1000\",\n        \"--appendonly\",\n        \"yes\"\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/redis\",\n          \"containerPath\": \"/data\"\n        }\n      ],\n      \"healthCheck\": {\n        \"test\": [\n          \"CMD\",\n          \"redis-cli\",\n          \"ping\"\n        ],\n        \"interval\": \"5s\",\n        \"timeout\": \"3s\",\n        \"retries\": 5\n      }\n    },\n    {\n      \"name\": \"lobehub-store\",\n      \"image\": \"rustfs/rustfs:1.0.0-rc.6\",\n      \"addPorts\": [\n        {\n          \"hostPort\": 9000,\n          \"containerPort\": 9000\n        }\n      ],\n      \"environment\": [\n        {\n          \"key\": \"RUSTFS_ACCESS_KEY\",\n          \"value\": \"${LOBE_STORE_ACCESS_KEY}\"\n        },\n        {\n          \"key\": \"RUSTFS_SECRET_KEY\",\n          \"value\": \"${LOBE_STORE_SECRET_KEY}\"\n        },\n        {\n          \"key\": \"RUSTFS_CONSOLE_ENABLE\",\n          \"value\": \"false\"\n        },\n        {\n          \"key\": \"RUSTFS_CORS_ALLOWED_ORIGINS\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/store\",\n          \"containerPath\": \"/data\"\n        }\n      ],\n      \"healthCheck\": {\n        \"test\": \"wget -qO- http://localhost:9000/health >/dev/null 2>&1 || exit 1\",\n        \"interval\": \"5s\",\n        \"timeout\": \"3s\",\n        \"retries\": 30\n      }\n    }\n  ]\n}\n",
+  "config": {
+    "path": "definitions/apps/lobehub/config.json",
+    "content": "{\n  \"id\": \"lobehub\",\n  \"name\": \"LobeHub\",\n  \"version\": \"2.2.17\",\n  \"source\": \"https://github.com/lobehub/lobehub\",\n  \"website\": \"https://lobehub.com\",\n  \"documentation\": \"https://lobehub.com/docs/self-hosting/platform/docker-compose\",\n  \"short_desc\": \"A chat workspace for many AI models, with agents, a knowledge base and plugins.\",\n  \"categories\": [\n    \"Artificial Intelligence\"\n  ],\n  \"license\": \"LobeHub Community License\",\n  \"form_fields\": [\n    {\n      \"type\": \"random\",\n      \"label\": \"Database password\",\n      \"min\": 32,\n      \"max\": 32,\n      \"env_variable\": \"LOBE_DB_PASSWORD\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Key vault secret\",\n      \"min\": 32,\n      \"max\": 32,\n      \"encoding\": \"base64\",\n      \"env_variable\": \"LOBE_KEY_VAULTS_SECRET\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Sign-in secret\",\n      \"min\": 32,\n      \"max\": 32,\n      \"encoding\": \"base64\",\n      \"env_variable\": \"LOBE_AUTH_SECRET\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Object store access key\",\n      \"min\": 20,\n      \"max\": 20,\n      \"env_variable\": \"LOBE_STORE_ACCESS_KEY\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Object store secret key\",\n      \"min\": 40,\n      \"max\": 40,\n      \"env_variable\": \"LOBE_STORE_SECRET_KEY\"\n    }\n  ]\n}\n"
+  },
+  "seeds": [
+    {
+      "path": "data/local-store/start.cjs",
+      "content": "// Local Store's start script for LobeHub. It does three things LobeHub's own\n// Compose setup leaves to a script run by hand, then starts LobeHub exactly\n// the way its image would.\n'use strict';\nconst crypto = require('node:crypto');\nconst fs = require('node:fs');\nconst net = require('node:net');\n\n// 1. A signing key of its own. LobeHub signs the calls its background jobs\n// make back to it with this; without one, file processing fails. Made once,\n// kept with the app's data, and reused on every start and reinstall.\nconst keyFile = '/keys/jwks.json';\nif (!fs.existsSync(keyFile)) {\n  const { privateKey } = crypto.generateKeyPairSync('rsa', { modulusLength: 2048 });\n  const jwk = {\n    ...privateKey.export({ format: 'jwk' }),\n    alg: 'RS256',\n    kid: crypto.randomBytes(8).toString('hex'),\n    use: 'sig',\n  };\n  fs.writeFileSync(keyFile, JSON.stringify({ keys: [jwk] }), { mode: 0o600 });\n}\nprocess.env.JWKS_KEY = fs.readFileSync(keyFile, 'utf8');\n\n// 2. The bucket LobeHub keeps uploads in. Upstream makes it with MinIO's `mc`\n// image, which MinIO no longer publishes, so it is made here with a signed S3\n// request instead — the same one `mc mb` sends.\nconst sha256 = (value) => crypto.createHash('sha256').update(value).digest('hex');\nconst hmac = (key, value) => crypto.createHmac('sha256', key).update(value).digest();\n\nasync function put(endpoint, path, body) {\n  const url = new URL(path, endpoint);\n  const now = new Date().toISOString().replace(/[:-]|\\.\\d{3}/g, '');\n  const day = now.slice(0, 8);\n  const region = process.env.S3_REGION || 'us-east-1';\n  const scope = `${day}/${region}/s3/aws4_request`;\n  const payload = sha256(body ?? '');\n  const headers = {\n    host: url.host,\n    'x-amz-content-sha256': payload,\n    'x-amz-date': now,\n  };\n  const signed = Object.keys(headers).sort();\n  const canonical = [\n    'PUT',\n    url.pathname,\n    url.search.slice(1),\n    signed.map((name) => `${name}:${headers[name]}\\n`).join(''),\n    signed.join(';'),\n    payload,\n  ].join('\\n');\n  const toSign = ['AWS4-HMAC-SHA256', now, scope, sha256(canonical)].join('\\n');\n  const secret = process.env.S3_SECRET_ACCESS_KEY;\n  let key = hmac(`AWS4${secret}`, day);\n  for (const part of [region, 's3', 'aws4_request']) key = hmac(key, part);\n  const signature = hmac(key, toSign).toString('hex');\n  headers.authorization =\n    `AWS4-HMAC-SHA256 Credential=${process.env.S3_ACCESS_KEY_ID}/${scope}, ` +\n    `SignedHeaders=${signed.join(';')}, Signature=${signature}`;\n  const response = await fetch(url, {\n    method: 'PUT',\n    headers,\n    body,\n    signal: AbortSignal.timeout(30000),\n  });\n  return { status: response.status, text: await response.text() };\n}\n\nasync function ensureBucket() {\n  const endpoint = process.env.S3_INTERNAL_ENDPOINT;\n  const bucket = process.env.S3_BUCKET || 'lobe';\n  const made = await put(endpoint, `/${bucket}`);\n  // 409 is the bucket already being there, which every start after the first\n  // one sees.\n  if (made.status >= 400 && made.status !== 409) {\n    throw new Error(`could not create the ${bucket} bucket: ${made.status} ${made.text.slice(0, 200)}`);\n  }\n  // Anything in the bucket is readable without a signature, which is what\n  // upstream's `mc anonymous set download` does: LobeHub links to uploads\n  // directly from the page.\n  const policy = JSON.stringify({\n    Version: '2012-10-17',\n    Statement: [\n      {\n        Effect: 'Allow',\n        Principal: { AWS: ['*'] },\n        Action: ['s3:GetObject'],\n        Resource: [`arn:aws:s3:::${bucket}/*`],\n      },\n    ],\n  });\n  const applied = await put(endpoint, `/${bucket}?policy=`, policy);\n  if (applied.status >= 400) {\n    console.error(`local-store: bucket policy refused (${applied.status}); uploads still work`);\n  }\n}\n\n// 3. The object store at the address the browser uses. LobeHub has one S3\n// address for both: the browser uploads to it, and the server reads files\n// back from it. Inside this container that address would be LobeHub itself,\n// so it is forwarded to the store.\nconst internal = new URL(process.env.S3_INTERNAL_ENDPOINT);\nconst port = Number(process.env.S3_LOCAL_PORT);\nif (port) {\n  net\n    .createServer((client) => {\n      const store = net.connect(Number(internal.port || 9000), internal.hostname);\n      client.pipe(store).pipe(client);\n      client.on('error', () => store.destroy());\n      store.on('error', () => client.destroy());\n    })\n    .listen(port, '127.0.0.1');\n}\n\n// 4. LobeHub, started as its image's own command would.\nensureBucket().then(\n  () => require('/app/startServer.js'),\n  (error) => {\n    console.error(`local-store: ${error.message}`);\n    process.exit(1);\n  },\n);\n"
+    }
+  ]
+}

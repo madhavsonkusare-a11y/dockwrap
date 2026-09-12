@@ -114,6 +114,17 @@ mod tests {
         assert!(search_catalog("", "", usize::MAX, 12).entries.is_empty());
     }
 
+    /// Matching is not finding. Dozens of apps mention "sim"; one is named it.
+    #[test]
+    fn the_app_named_by_a_search_comes_before_the_ones_that_mention_it() {
+        let page = search_catalog("Sim", "", 0, 48);
+        assert!(page.total > 1, "only one app matched, which proves nothing");
+        assert_eq!(page.entries[0].name, "Sim");
+        // Browsing is not searching: with no query the curated order stands.
+        let browsed = search_catalog("", "", 0, 48);
+        assert_eq!(browsed.entries[0].name, catalog()[0].name);
+    }
+
     #[test]
     fn only_reviewed_catalog_entries_advertise_preview_install() {
         let memos = search_catalog("Memos", "", 0, 48)

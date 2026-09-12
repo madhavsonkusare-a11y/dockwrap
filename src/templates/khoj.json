@@ -8,7 +8,7 @@
   "license": "AGPL-3.0",
   "source_url": "https://github.com/khoj-ai/khoj",
   "documentation_url": "https://docs.khoj.dev/get-started/setup",
-  "verified_at": "",
+  "verified_at": "2026-09-12",
   "lifecycle_proof": "docs/evidence/khoj-qualification.json",
   "origin": {
     "importer": "runtipi",
@@ -72,8 +72,8 @@
     ]
   },
   "promotion": {
-    "state": "withheld",
-    "reason": "Pending since 2026-09-11: not yet proven as offered, because its first start took 130 seconds when measured, and a slower model download overran the default 180; it now has a reviewed 600-second allowance. Qualification stopped when D: ran out of space; resume with qualify_batch --offered once it is compacted."
+    "state": "approved",
+    "reason": "Approved by the owner. Qualified as offered on 2026-09-12: a real install of Khoj 1.42.10, the version upstream's own latest tag installs proved it starts, opens to a first screen with a clear next step, survives a restart and a keep-data reinstall with its data and generated credentials intact, and removes everything it created. Local Store wrote this definition from the project's own deployment instructions."
   },
   "data_storage": "Local Store managed folder / khoj",
   "risk_notes": [
@@ -81,7 +81,10 @@
     "Generates 2 credentials of its own, keeps them beside the app's data, and reuses them if you reinstall.",
     "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
     "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
-    "Written by Local Store from the project's own deployment instructions, not taken from an app store."
+    "Written by Local Store from the project's own deployment instructions, not taken from an app store.",
+    "Runs in single-user anonymous mode: it opens straight to the chat, and anyone who can reach the address can use it. The admin email and password you set open its /server/admin page.",
+    "Sends questions to the model provider you configure and searches the web through a bundled SearXNG from this computer.",
+    "Its code sandbox (Terrarium) is published only as :latest, so it is left out and Khoj cannot run code. Khoj 1.42.10 is what upstream's own :latest installs; 2.0 is still in beta."
   ],
   "fields": {
     "KHOJ_ADMIN_EMAIL": {

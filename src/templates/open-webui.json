@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "id": "open-webui",
+  "display_name": "Open WebUI",
+  "catalog_name": "Open-WebUI",
+  "description": "User-friendly AI Interface, supports Ollama, OpenAI API.",
+  "category": "Generative Artificial Intelligence (GenAI)",
+  "license": "Open WebUI License (BSD-3-Clause with a branding clause)",
+  "source_url": "https://github.com/open-webui/open-webui",
+  "documentation_url": "https://docs.openwebui.com",
+  "verified_at": "2026-09-12",
+  "lifecycle_proof": "docs/evidence/open-webui-qualification.json",
+  "origin": {
+    "importer": "runtipi",
+    "repository": "runtipi/runtipi-appstore",
+    "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+    "path": "apps/open-webui/docker-compose.json",
+    "license": "GPL-3.0"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "ghcr.io/open-webui/open-webui:v0.11.3",
+        "source_url": "https://ghcr.io/v2/open-webui/open-webui/manifests/v0.11.3",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-09-04",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:9cd136effce6bb12a6a1988a35ab3b82cb40c48a6768fceeb17c83baf7cfac9c",
+          "linux/arm64": "sha256:2349f3f77196fbcc17814a25259c848430deaf72476909b8caacf6c4fcf9f106"
+        },
+        "index_digest": "sha256:41daa0cf2561a5d4c8d1ff31ee2a98d93ab4d3ac2605cac69366ff6a3374a933"
+      }
+    ]
+  },
+  "promotion": {
+    "state": "approved",
+    "reason": "Approved by the owner. Qualified as offered on 2026-09-12: a real install of Open WebUI 0.11.3, upstream's current release proved it starts, opens to a first screen with a clear next step, survives a restart and a keep-data reinstall with its data intact, and removes everything it created. The definition comes from Runtipi's app store."
+  },
+  "data_storage": "Local Store managed folder / open-webui",
+  "risk_notes": [
+    "Creates 1 Docker container and publishes one port on this computer's loopback interface only.",
+    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Asks you to create an account on first open; the first account is the administrator.",
+    "Connects to an Ollama server at the address you give during setup, or to OpenAI with your key; other providers can be added in its settings.",
+    "Source-available under the Open WebUI License, BSD-3 with a clause that keeps its branding.",
+    "Its first start downloads a search model, which took longer than the usual allowance here; it is given ten minutes."
+  ],
+  "fields": {
+    "OPENWEBUI_OLLAMA_URL": {
+      "label": "Ollama server address, if you run one (optional)",
+      "sensitive": false
+    },
+    "OPENWEBUI_OPENAI_KEY": {
+      "label": "OpenAI API key (optional)",
+      "sensitive": true
+    }
+  },
+  "definition": "{\n  \"services\": [\n    {\n      \"image\": \"ghcr.io/open-webui/open-webui:v0.11.3\",\n      \"name\": \"open-webui\",\n      \"internalPort\": 8080,\n      \"isMain\": true,\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data\",\n          \"containerPath\": \"/app/backend/data\"\n        }\n      ],\n      \"environment\": [\n        {\n          \"key\": \"OLLAMA_BASE_URL\",\n          \"value\": \"${OPENWEBUI_OLLAMA_URL}\"\n        },\n        {\n          \"key\": \"OPENAI_API_KEY\",\n          \"value\": \"${OPENWEBUI_OPENAI_KEY}\"\n        }\n      ]\n    }\n  ],\n  \"schemaVersion\": 2,\n  \"$schema\": \"https://schemas.runtipi.io/v2/dynamic-compose.json\"\n}\n",
+  "config": {
+    "path": "apps/open-webui/config.json",
+    "content": "{\n  \"$schema\": \"../app-info-schema.json\",\n  \"name\": \"Open WebUI\",\n  \"available\": true,\n  \"exposable\": true,\n  \"port\": 8536,\n  \"id\": \"open-webui\",\n  \"tipi_version\": 112,\n  \"version\": \"v0.11.3\",\n  \"categories\": [\"ai\"],\n  \"description\": \"Open WebUI is an extensible, feature-rich, and user-friendly self-hosted WebUI designed to operate entirely offline.\",\n  \"short_desc\": \"User-friendly WebUI for LLMs\",\n  \"author\": \"open-webui\",\n  \"source\": \"https://github.com/open-webui/open-webui\",\n  \"website\": \"https://openwebui.com/\",\n  \"form_fields\": [\n    {\n      \"type\": \"text\",\n      \"label\": \"Ollama Api Url\",\n      \"placeholder\": \"http://ollama-cpu:11434\",\n      \"required\": false,\n      \"env_variable\": \"OPENWEBUI_OLLAMA_URL\"\n    },\n    {\n      \"type\": \"password\",\n      \"label\": \"Openai Api Key\",\n      \"required\": false,\n      \"env_variable\": \"OPENWEBUI_OPENAI_KEY\"\n    }\n  ],\n  \"dynamic_config\": true,\n  \"supported_architectures\": [\"arm64\", \"amd64\"],\n  \"created_at\": 1691943801422,\n  \"updated_at\": 1788596689627,\n  \"min_tipi_version\": \"4.5.0\"\n}\n"
+  },
+  "first_start_seconds": 600
+}

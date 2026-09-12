@@ -363,8 +363,10 @@ const ANYTHINGLLM: &str = include_str!("anythingllm.json");
 const BESZEL: &str = include_str!("beszel.json");
 const BIG_AGI: &str = include_str!("big-agi.json");
 const CODIMD: &str = include_str!("codimd.json");
+const DIFY: &str = include_str!("dify.json");
 const FILESTASH: &str = include_str!("filestash.json");
 const FLATNOTES: &str = include_str!("flatnotes.json");
+const FLOWISE: &str = include_str!("flowise.json");
 const GHOST_DEV: &str = include_str!("ghost-dev.json");
 const GLANCE: &str = include_str!("glance.json");
 const GOTIFY: &str = include_str!("gotify.json");
@@ -379,16 +381,20 @@ const KHOJ: &str = include_str!("khoj.json");
 const KOTAEMON: &str = include_str!("kotaemon.json");
 const LANGFLOW: &str = include_str!("langflow.json");
 const LIBRECHAT: &str = include_str!("librechat.json");
+const LOBEHUB: &str = include_str!("lobehub.json");
+const MAXUN: &str = include_str!("maxun.json");
 const METABASE: &str = include_str!("metabase.json");
 const MONICA: &str = include_str!("monica.json");
 const NAVIDROME: &str = include_str!("navidrome.json");
 const NODERED: &str = include_str!("nodered.json");
 const NTFY: &str = include_str!("ntfy.json");
 const OMBI: &str = include_str!("ombi.json");
+const OPEN_WEBUI: &str = include_str!("open-webui.json");
 const PAPERCLIP: &str = include_str!("paperclip.json");
 const PENPOT: &str = include_str!("penpot.json");
 const PRIVATEBIN: &str = include_str!("privatebin.json");
 const SILLYTAVERN: &str = include_str!("sillytavern.json");
+const SIM: &str = include_str!("sim.json");
 const TAUTULLI: &str = include_str!("tautulli.json");
 const VANE: &str = include_str!("vane.json");
 const VAULTWARDEN: &str = include_str!("vaultwarden.json");
@@ -414,8 +420,10 @@ pub fn reviewed_templates() -> Vec<ReviewedTemplate> {
         BESZEL,
         BIG_AGI,
         CODIMD,
+        DIFY,
         FILESTASH,
         FLATNOTES,
+        FLOWISE,
         GHOST_DEV,
         GLANCE,
         GOTIFY,
@@ -430,16 +438,20 @@ pub fn reviewed_templates() -> Vec<ReviewedTemplate> {
         KOTAEMON,
         LANGFLOW,
         LIBRECHAT,
+        LOBEHUB,
+        MAXUN,
         METABASE,
         MONICA,
         NAVIDROME,
         NODERED,
         NTFY,
         OMBI,
+        OPEN_WEBUI,
         PAPERCLIP,
         PENPOT,
         PRIVATEBIN,
         SILLYTAVERN,
+        SIM,
         TAUTULLI,
         VANE,
         VAULTWARDEN,
@@ -625,23 +637,35 @@ mod tests {
         "anythingllm",
         "beszel",
         "big-agi",
+        "dify",
         "flatnotes",
+        "flowise",
         "glance",
         "grafana",
         "grocy",
         "homer",
+        "huginn",
+        "joplin",
         "kanboard",
+        "khoj",
         "kotaemon",
+        "langflow",
         "librechat",
+        "lobehub",
+        "maxun",
         "metabase",
         "monica",
         "navidrome",
         "nodered",
         "ntfy",
+        "open-webui",
         "paperclip",
         "penpot",
         "privatebin",
+        "sillytavern",
+        "sim",
         "tautulli",
+        "vane",
         "vaultwarden",
         "wallos",
         "whoogle",
