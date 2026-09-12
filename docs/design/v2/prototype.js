@@ -72,7 +72,7 @@ function header(actions = "", overrides = {}) {
   const meta = screens[prototype.screen];
   return `<header class="screen-header">
     <div class="screen-title">
-      <p class="eyebrow">${escapeHtml(overrides.eyebrow || meta.eyebrow)}</p>
+      ${(overrides.eyebrow || meta.eyebrow) ? `<p class="eyebrow">${escapeHtml(overrides.eyebrow || meta.eyebrow)}</p>` : ""}
       <h1 tabindex="-1">${escapeHtml(overrides.label || meta.label)}</h1>
       <p>${escapeHtml(overrides.description || meta.description)}</p>
     </div>

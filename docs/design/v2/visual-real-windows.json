@@ -30,7 +30,7 @@
       "overlap": 0,
       "obscured": 0,
       "dialogs": 0,
-      "commitBelowFold": 3
+      "commitBelowFold": 0
     },
     "found": {
       "overflow": [],
@@ -38,11 +38,7 @@
       "overlap": [],
       "obscured": [],
       "dialogs": [],
-      "commitBelowFold": [
-        "install:failure: Review new port (top 724)",
-        "install:fail-port_in_use: Review new port (top 724)",
-        "first-run:welcome-missing: Check again (top 707)"
-      ]
+      "commitBelowFold": []
     }
   },
   {
@@ -55,7 +51,7 @@
       "overlap": 0,
       "obscured": 0,
       "dialogs": 0,
-      "commitBelowFold": 7
+      "commitBelowFold": 0
     },
     "found": {
       "overflow": [],
@@ -63,15 +59,7 @@
       "overlap": [],
       "obscured": [],
       "dialogs": [],
-      "commitBelowFold": [
-        "install:failure: Review new port (top 724)",
-        "install:fail-port_in_use: Review new port (top 724)",
-        "recovery:success-keep: Return to Settings (top 640)",
-        "recovery:success-delete: Return to Settings (top 640)",
-        "recovery:mismatch: Scan again (top 682)",
-        "recovery:scan-failure: Scan again (top 682)",
-        "first-run:welcome-missing: Check again (top 645)"
-      ]
+      "commitBelowFold": []
     }
   }
 ]

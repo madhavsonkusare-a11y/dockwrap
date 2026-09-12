@@ -199,7 +199,7 @@ body { min-width: 1180px; overflow: hidden; }
 .catalog-error > code { margin-top: var(--v2-space-5); color: var(--v2-text-tertiary); font: var(--v2-type-mono)/1 var(--v2-font-mono); }
 
 .discover-scrim { position: fixed; z-index: 79; inset: 0; background: var(--v2-surface-scrim); opacity: 1; transition: opacity var(--v2-duration-panel) var(--v2-ease-out); }
-.project-drawer { position: fixed; z-index: 80; top: 0; right: 0; width: 480px; height: 100vh; overflow: auto; padding: var(--v2-space-6); border-left: 1px solid var(--v2-border-strong); background: var(--v2-surface-raised); box-shadow: var(--v2-shadow-dialog); opacity: 1; transform: translateX(0); transition: opacity var(--v2-duration-panel) var(--v2-ease-out), transform var(--v2-duration-panel) var(--v2-ease-drawer); }
+.project-drawer { position: fixed; z-index: 80; top: 0; right: 0; width: var(--v2-drawer-width); height: 100vh; overflow: auto; padding: var(--v2-space-6); border-left: 1px solid var(--v2-border-strong); background: var(--v2-surface-raised); box-shadow: var(--v2-shadow-dialog); opacity: 1; transform: translateX(0); transition: opacity var(--v2-duration-panel) var(--v2-ease-out), transform var(--v2-duration-panel) var(--v2-ease-drawer); }
 .discover-scrim.is-closing { opacity: 0; pointer-events: none; }
 .project-drawer.is-closing { opacity: 0; transform: translateX(100%); pointer-events: none; }
 .drawer-top { display: flex; align-items: center; justify-content: space-between; gap: var(--v2-space-4); margin-bottom: var(--v2-space-8); }
@@ -329,7 +329,7 @@ body { min-width: 1180px; overflow: hidden; }
 .manage-card .button.danger { color: var(--v2-text-primary); }
 
 .app-dialog-scrim { position: fixed; z-index: 70; inset: 0; background: var(--v2-surface-scrim); opacity: 1; transition: opacity var(--v2-duration-panel) var(--v2-ease-out); }
-.app-dialog { position: fixed; z-index: 71; top: 50%; left: 50%; width: min(500px, calc(100vw - 64px)); padding: var(--v2-space-8); border: 1px solid var(--v2-border-strong); border-radius: var(--v2-radius-lg); background: var(--v2-surface-raised); box-shadow: var(--v2-shadow-dialog); opacity: 1; transform: translate(-50%, -50%) scale(1); transform-origin: center; transition: opacity var(--v2-duration-panel) var(--v2-ease-out), transform var(--v2-duration-panel) var(--v2-ease-out); }
+.app-dialog { position: fixed; z-index: 71; top: 50%; left: 50%; width: min(var(--v2-dialog-width), calc(100vw - 64px)); padding: var(--v2-space-8); border: 1px solid var(--v2-border-strong); border-radius: var(--v2-radius-lg); background: var(--v2-surface-raised); box-shadow: var(--v2-shadow-dialog); opacity: 1; transform: translate(-50%, -50%) scale(1); transform-origin: center; transition: opacity var(--v2-duration-panel) var(--v2-ease-out), transform var(--v2-duration-panel) var(--v2-ease-out); }
 .app-dialog-scrim.is-closing { opacity: 0; pointer-events: none; }
 .app-dialog.is-closing { opacity: 0; transform: translate(-50%, -50%) scale(.96); pointer-events: none; }
 .app-dialog.irreversible { border-color: var(--v2-border-danger); }

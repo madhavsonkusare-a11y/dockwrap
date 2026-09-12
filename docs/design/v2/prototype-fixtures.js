@@ -213,7 +213,7 @@ export const fixtures = Object.freeze({
       { operation_id: "op-103", app_id: "memos", time: "Today · 09:38", group: "Today", app: "Memos", kind: "Install", state: "Succeeded", detail: "Recipe 0.30.0 installed and registered.", stage: "saving_app", error: null },
       { operation_id: "op-102", app_id: "actual-budget", time: "Yesterday · 16:17", group: "Yesterday", app: "Actual Budget", kind: "Open", state: "Failed", detail: "The linked address could not be reached.", stage: null, error: "browser_open_failed" },
       { operation_id: "op-101", app_id: "uptime-kuma", time: "Yesterday · 11:28", group: "Yesterday", app: "Uptime Kuma", kind: "Stop", state: "Succeeded", detail: "Compose project stopped cleanly.", stage: null, error: null },
-      { operation_id: "op-100", app_id: "linkding", time: "Sep 06 · 10:04", group: "Earlier", app: "Linkding", kind: "Start", state: "Failed", detail: "Compose reported an unhealthy container.", stage: null, error: "process_failed" },
+      { operation_id: "op-100", app_id: "linkding", time: "Sep 6 · 10:04", group: "Earlier", app: "Linkding", kind: "Start", state: "Failed", detail: "Compose reported an unhealthy container.", stage: null, error: "process_failed" },
     ],
     recoveryCleanupNotice: "Recovery cleanup is implemented in the Rust library but is not exposed as a launcher command. These controls specify the required UI and re-verification behavior without mutating files.",
   },
@@ -222,11 +222,11 @@ export const fixtures = Object.freeze({
 export const conditions = Object.freeze(["default", "loading", "empty", "busy", "success", "failure"]);
 
 export const screens = Object.freeze({
-  overview: { label: "Overview", eyebrow: "Workspace health", description: "What changed, what is running, and what needs your attention." },
+  overview: { label: "Overview", eyebrow: "", description: "What changed, what is running, and what needs your attention." },
   discover: { label: "Discover", eyebrow: "Offline catalog", description: "Explore self-hosted projects, reviewed installs, and apps you can connect." },
-  "my-apps": { label: "My Apps", eyebrow: "Your workspace", description: "Open, inspect, and manage every app saved in Local Store." },
-  activity: { label: "Activity", eyebrow: "Operations over time", description: "Every install, start, stop and failure, newest first." },
-  settings: { label: "Settings", eyebrow: "System & support", description: "Docker diagnostics, recovery, catalog facts and product information." },
+  "my-apps": { label: "My Apps", eyebrow: "", description: "Open, inspect, and manage every app saved in Local Store." },
+  activity: { label: "Activity", eyebrow: "", description: "Every install, start, stop and failure, newest first." },
+  settings: { label: "Settings", eyebrow: "", description: "Docker diagnostics, recovery, catalog facts and product information." },
   install: { label: "Install", eyebrow: "Focused task · Memos", description: "Review exactly what Local Store will create before anything runs." },
   recovery: { label: "Review recovery", eyebrow: "Focused task · retained setup", description: "Verify ownership and consequences before clearing interrupted setup files." },
   "first-run": { label: "First Run", eyebrow: "Introduction", description: "Choose the most useful way to begin without blocking alternate routes." },

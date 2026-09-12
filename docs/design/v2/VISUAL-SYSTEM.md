@@ -13,7 +13,10 @@ an ember orange identifies the product and primary commitment, and a mono layer
 distinguishes facts asserted by the machine from prose written by the product.
 
 The system is dark-only and laptop-first. It is designed for 1280×800 as the
-minimum working canvas and 1440×900 as the primary canvas.
+minimum working canvas and 1440×900 as the primary canvas. It stays operable in
+shorter windows down to 1280×640, which is a maximised 1920×1080 laptop at 150%:
+below 760px of height, a focused task's commit row pins to the bottom of the window
+(Phase 15, V-16).
 
 ## Color
 
@@ -154,9 +157,9 @@ scaling without shrinking type.
 | Block page padding | 36px | 36px |
 | Content maximum | 1220px | Available canvas width |
 | My Apps list | 340px | 340px — app names stay whole at the 13px floor |
-| Preferred detail pane | 520px | 480px |
-| Catalog drawer | 440px | 410px |
-| Small dialog | 480px | 480px maximum, constrained by viewport |
+| App detail pane | Fills the width beside the list | Fills the width beside the list |
+| Catalog drawer | 480px (`--v2-drawer-width`) | 480px |
+| Small dialog | 500px (`--v2-dialog-width`) | 500px maximum, constrained by viewport |
 | Install task maximum | 1080px | Available canvas width |
 
 Spacing uses a four-pixel base: 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, and 64px.

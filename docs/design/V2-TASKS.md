@@ -1,6 +1,6 @@
 # Local Store V2 design tasks
 
-Status: **in progress — phases 1–15 complete**  
+Status: **in progress — phases 1–15 complete; phase 16 prepared, awaiting approval**  
 Scope: complete the laptop-first V2 visual design, interactive prototype,
 evaluation, and implementation handoff. Production integration under `src/`
 starts only after this ledger is complete and approved.
@@ -280,10 +280,12 @@ findings: 23 resolved, 1 withdrawn, 2 cosmetic deferred to Phase 16 below. Run
 
 Phase 15 outcome: 88 states × 2 viewports captured byte-deterministically, plus the
 same matrix with worst-case real content, 4 display-scaling panels, and 57
-interaction-state checks. Every hard check passes (overflow, unreadable truncation,
+interaction-state checks, and every state in a 1280×640 short window (a maximised
+1920×1080 laptop at 150%). Every hard check passes (overflow, unreadable truncation,
 glyph clipping, overlap and logo spill, covered primaries, unfit dialogs,
-determinism, states). 16 findings: 15 resolved, and V-16, the launcher window size
-versus the design range, carried into Phase 16 below. Record:
+determinism, states, focused commits on screen at 1280×640). 18 findings, all
+resolved in the prototype. The launcher's own window size (V-16) is carried into
+Phase 16 below. Visual approval is pending. Record:
 `docs/design/v2/visual-verification.md`. Approval set: `docs/design/v2/screenshots/phase15/`.
 Run `scripts/check-v2-visual.mjs`, `scripts/check-v2-visual-fixes.mjs`, and
 `scripts/check-v2-real-windows.mjs`.
@@ -291,27 +293,44 @@ Run `scripts/check-v2-visual.mjs`, `scripts/check-v2-visual-fixes.mjs`, and
 ## Phase 16 — Final design handoff
 
 - [ ] Freeze the approved V2 tokens.
+  Prepared: `docs/design/v2/freeze.json` records 135 tokens across three contexts and
+  five font files by SHA-256; `scripts/check-v2-freeze.mjs` fails on drift. The status
+  stays `proposed` until approval.
 - [ ] Freeze the approved navigation and screen inventory.
+  Prepared: 9 screens and 88 states in the same freeze; the inventory is in
+  `HANDOFF.md`.
 - [ ] Freeze component anatomy and interaction-state specifications.
-- [ ] Document copy rules, terminology, and machine-fact formatting.
-  Includes deferred F-21: keep screen eyebrows only where they carry state.
-  Includes Phase 15: give the catalog's "See project" licence placeholder a product
-  phrase (for example "Licence not stated"); it reads as a fact but isn't one.
-- [ ] Document real versus future backend dependencies per component.
-  Includes deferred F-22: list every prototype annotation (truth labels, the
-  search "Concept" tag, backend-work banners) so implementation removes all of them.
-- [ ] Document icon import and attribution requirements.
-  Includes Phase 15: prefer a square symbol variant for wordmark-only logos wider
-  than 3:1 (Appsmith, Neon, Martin), which are legible but small at 44px.
-- [ ] Document production asset requirements, including bundled fonts and logo files.
-- [ ] Map prototype components to current `src/index.html`, CSS, and JS modules.
-- [ ] Produce an implementation sequence that preserves working functionality.
+  Prepared: `COMPONENT-SPECS.md`.
+- [x] Document copy rules, terminology, and machine-fact formatting.
+  `COPY-RULES.md`. F-21 is resolved and applied to the prototype: the Overview, My
+  Apps, Activity, and Settings eyebrows are gone; Discover, Install, and Recovery keep
+  theirs because they carry a fact or a subject. The "See project" licence placeholder
+  becomes "Licence not stated" in production.
+- [x] Document real versus future backend dependencies per component.
+  `BACKEND-DEPENDENCIES.md`, with the six backend contracts V2 needs. F-22 is
+  resolved: every prototype annotation is listed with its production replacement, and
+  acceptance test H fails on any that ship.
+- [x] Document icon import and attribution requirements.
+  `PRODUCTION-ASSETS.md`, including the six logos at 3:1 or wider that should prefer a
+  square symbol variant where upstream publishes one.
+- [x] Document production asset requirements, including bundled fonts and logo files.
+  `PRODUCTION-ASSETS.md`: five WOFF2 files by SHA-256, both OFL texts, the brand-mark
+  export map, the 15-icon sprite, and the catalog logo pipeline.
+- [x] Map prototype components to current `src/index.html`, CSS, and JS modules.
+  `HANDOFF.md`, mapped against `2d7782e`.
+- [x] Produce an implementation sequence that preserves working functionality.
+  Eleven steps in `HANDOFF.md`, each with exit criteria.
 - [ ] Reconcile the launcher window with the design range (Phase 15 V-16).
-  `src/main.rs` opens at 1180×760 with a minimum of 800×600, and a maximised
-  1920×1080 laptop at 150% gives 1280×640. Decide the default and minimum size, and
-  pin focused-task commits in a sticky footer below 760px of height.
-- [ ] Identify which existing Playwright baselines will be replaced.
-- [ ] Define production acceptance tests before implementation starts.
+  `src/main.rs` opens at 1180×760 with a minimum of 800×600. The prototype is now
+  verified at 1180×760, 1366×688, and 1280×640 (focused-task commits pin below 760px
+  of height). Decide the default size (1280×800, clamped to the work area) and a
+  minimum no smaller than the smallest verified size. The production baselines at
+  400×860 and 800×600 depend on this decision.
+- [x] Identify which existing Playwright baselines will be replaced.
+  Ten screenshot baselines, each with the step that re-records it. The 52 behaviour
+  tests are ported, never dropped.
+- [x] Define production acceptance tests before implementation starts.
+  Eleven tests (A–K) in `HANDOFF.md`, reusing the Phase 14 and 15 scripts.
 - [ ] Obtain explicit approval of the final prototype and handoff.
 
 ## V2 design completion record

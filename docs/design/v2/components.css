@@ -230,6 +230,12 @@ kbd { font: 500 var(--v2-type-mono-label)/1 var(--v2-font-mono); letter-spacing:
   .text-button:hover { color: var(--v2-action-primary-hover); }
 }
 
+/* Pressed colour follows hover in the cascade so it wins while the pointer is down.
+   Dark text on the pressed ember measures 4.61:1. */
+.button:active, .icon-button:active { background-color: var(--v2-surface-active); }
+.button.primary:active { background: var(--v2-action-primary-pressed); border-color: var(--v2-action-primary-pressed); }
+.button.danger:active { background: var(--v2-surface-danger-soft); }
+
 @media (prefers-reduced-motion: reduce) {
   .button, .icon-button, .text-button, .segmented-button, .toast { transition-property: color, background-color, border-color, opacity; }
   .condition-banner { transition-property: opacity; }

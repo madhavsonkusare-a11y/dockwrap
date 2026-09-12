@@ -60,14 +60,13 @@
   --v2-neutral-400: #998b80;
   --v2-neutral-300: #c3b8ae;
   --v2-neutral-100: #f7f1e9;
-  --v2-neutral-050: #fff7ef;
+  --v2-neutral-050: #fff7ef;   /* base of every translucent border and wash */
 
   --v2-ember-700: #6e2708;
   --v2-ember-600: #db5710;
   --v2-ember-500: #f26419;
   --v2-ember-400: #ff7a2b;
   --v2-ember-300: #ff9b5c;
-  --v2-ember-200: #f5b77a;
 
   /* Ember material: the approved grain surface, darkest to brightest */
   --v2-material-ember-1: #2d0d08;
@@ -204,9 +203,8 @@
   --v2-page-pad-block: 36px;
   --v2-content-max: 1220px;
   --v2-list-width: 340px;
-  --v2-detail-width: 520px;
-  --v2-drawer-width: 440px;
-  --v2-dialog-width: 480px;
+  --v2-drawer-width: 480px;
+  --v2-dialog-width: 500px;
   --v2-install-max: 1080px;
 
   /* Elevation */
@@ -220,7 +218,6 @@
   --v2-duration-fast: 160ms;
   --v2-duration-panel: 220ms;
   --v2-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
-  --v2-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --v2-ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
@@ -228,8 +225,6 @@
   :root {
     --v2-rail-width: 200px;
     --v2-list-width: 340px;   /* app names stay whole at the 13px floor */
-    --v2-detail-width: 480px;
-    --v2-drawer-width: 410px;
   }
 }
 

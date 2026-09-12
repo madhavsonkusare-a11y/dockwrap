@@ -11,7 +11,7 @@ Follow-on: Phase 15 laptop visual verification is recorded in `visual-verificati
 | --- | --- | --- | --- |
 | States × viewports | 3 × 2 | 88 × 2 = 176 renders | 176 renders |
 | axe, WCAG 2.0/2.1/2.2 A+AA | 0 | 8 | **0** |
-| Focus indicator ≥3:1, real keyboard walk, no modal escape | not run | 18 reported, all false positives; 1 real modal escape | **0** across 2,560 focus stops |
+| Focus indicator ≥3:1, real keyboard walk, no modal escape | not run | 18 reported, all false positives; 1 real modal escape | **0** across 2,558 focus stops |
 | Input boundary ≥3:1 (WCAG 1.4.11) | not run | 102 | **0** |
 | Dark-mode legibility (13px, or an 11px letter-spaced label) | 147 nodes on 3 screens | 2,296 nodes per viewport | **0** |
 | Token drift outside documented exceptions | 18 (partial scan) | 50 | **0** |
@@ -29,6 +29,9 @@ node scripts/check-v2-evaluation-fixes.mjs            # behavioural proof of eac
 
 The five earlier phase suites (`check-v2-prototype`, `-first-run`, `-motion`,
 `-secondary-surfaces`, `-grain-telemetry`) still pass after every correction.
+
+The focus-stop count was 2,560 when Phase 14 closed. Phase 15's no-results fix (V-10)
+hides the pagination footer when nothing matches, removing two controls from the walk.
 
 ## Completed in the bounded first pass
 

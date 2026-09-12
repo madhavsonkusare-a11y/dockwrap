@@ -1,8 +1,9 @@
 # Local Store V2 visual verification
 
 Updated: September 11, 2026  
-Status: **Phase 15 complete** — every hard check passes at 1280×800 and 1440×900; one
-window-size decision handed to Phase 16 (V-16)  
+Status: **Phase 15 complete** — every hard check passes at 1440×900, 1280×800, and in the
+1280×640 short window. Approval of the visual set is pending. The launcher's window size
+is a Phase 16 implementation decision.  
 Targets: `index.html`, `prototype.css`, `components.css`, `prototype.js`, `stress-fixtures.js`
 
 ## Result
@@ -19,21 +20,29 @@ Targets: `index.html`, `prototype.css`, `components.css`, `prototype.js`, `stres
 | Dialogs, drawers, popovers that don't fit or hide a commit | same, plus 1280×640 | V-12, V-14 | **0** |
 | Interaction states distinct from rest | 12 controls × rest/hover/active/focus, 5 selections, disabled, 3 busy = 57 | V-09 | **0** |
 | Display scaling | 13 key screens at 1280×800 @1.25×/1.5×, plus 4 real laptop panels | none new | **0 new** |
+| Short window | 88 states at 1280×640 and 1.5× (a maximised 1920×1080 laptop at 150%); every probe check plus a focused task's commit on screen | V-14, V-16 | **0** |
 | Human review of every 1280×800 capture | 88 captures, the stress catalog scrolled to its end | V-10, V-13, V-15 | resolved |
-| Real window sizes (report only) | 88 states × 3 sizes below the design minimum | V-14, V-16 | V-16 open for Phase 16 |
+| Asset integrity | server log of every request the prototype makes | V-17, V-18 | **0 missing files** |
+| Real window sizes (report only) | 88 states × 3 window sizes | V-14, V-16 | resolved in the prototype |
 
 Probe and harness errors were corrected before any result was recorded (see
 *Probe corrections*); no count above includes a known false positive.
+
+The recorded run is of the prototype as it stands after Phase 16's freeze work: the
+F-21 eyebrow rule applied to Overview, My Apps, Activity, and Settings; the documented
+pressed-state colours wired up; and the drawer and dialog widths moved onto their
+tokens. Every capture and the approval set were regenerated on that prototype.
 
 **How to run it.** Serve the repository root with
 `python -m http.server 8765 --bind 127.0.0.1`, then:
 
 ```bash
-node scripts/check-v2-visual.mjs              # hard checks + every capture, ~16 minutes
+node scripts/check-v2-visual.mjs              # hard checks + every capture, ~20 minutes
 node scripts/check-v2-visual.mjs --quick      # every sixth state, for iteration
 node scripts/check-v2-visual-fixes.mjs        # behavioural proof of each V- correction
 node scripts/check-v2-real-windows.mjs        # report: launcher default and maximised laptop windows
 python scripts/build-v2-contact-sheet.py      # contact sheet + curated approval JPEGs
+python scripts/vendor-v2-prototype-logos.py   # copy the prototype's logos beside it (V-18)
 ```
 
 The Phase 14 gates (`check-v2-evaluation-gates.mjs`, `check-v2-evaluation-fixes.mjs`)
@@ -92,10 +101,12 @@ Severity uses the Phase 14 scale (0 none … 4 blocks the task).
 | V-10 | 2 | Discover, no results | Zero matches still showed "Showing 6 of 1,672 · Page 1" and "Load next 24", and the copy said "restore the catalog fixtures". | Pagination hides at zero; a narrowed list reads "Showing N matching projects"; product copy ("…to browse all 1,672 projects"). | Resolved |
 | V-11 | 2 | Rail Docker card, Overview calm state, Settings checks | Status and recovery guidance truncated: "Prior result retained", "No repair started", "Start Docker Desktop, then run the check again." | Guidance wraps. An instruction the user must follow is never truncated. | Resolved |
 | V-12 | 2 | Discover, More filters | The popover ended 53px below the window at 1440×900 and 166px below at 1280×800, with the warnings toggle and Clear off screen. | Opening the popover scrolls the workspace only as far as needed (`block: "nearest"`, 24px margin, instant under reduced motion). Focus still lands on the first field. | Resolved |
-| V-13 | 3 | Every app logo | `max-height: 100%` resolved against an auto grid track, so any logo taller than wide overflowed its frame and painted over the card copy. 137 of the 1,671 catalog logos (8%) are taller than wide, and Paperless-ngx spilled 9px in the default fixtures. | `.app-icon` gets definite tracks (`grid-template: 100% / 100%`). The probe now reports any logo outside its frame. | Resolved |
+| V-13 | 3 | Every app logo | `max-height: 100%` resolved against an auto grid track, so any logo taller than wide overflowed its frame and painted over the card copy. 137 of the 1,672 measurable catalog logos (8%) are taller than wide, and Paperless-ngx spilled 9px in the default fixtures. | `.app-icon` gets definite tracks (`grid-template: 100% / 100%`). The probe now reports any logo outside its frame. | Resolved |
 | V-14 | 2 | Discover, project drawer | In windows 760px tall or shorter, the drawer's commit ("Review install", "Save linked app") scrolled out of view. It passed at 1280×800; the real-window sweep found it. | The drawer's action row is sticky, with a divider, and is always visible. | Resolved |
 | V-15 | 1 | Discover cards, real catalog data | A project with no stated architecture rendered a dangling separator ("WTFPL ·"). | Empty facts are omitted. | Resolved |
-| V-16 | 3 | Launcher window vs design range | `src/main.rs` opens the launcher at 1180×760 with a minimum of 800×600, below the 1280×800 design minimum. Realistic maximised windows are smaller still: 1366×688 (1366×768 panel) and 1280×640 (1920×1080 at 150%, Windows' default for that panel). At those sizes, focused-task commits fall below the fold (list below). There is no overflow, truncation, overlap, or unfit dialog at any of the three sizes. | Phase 16 decision. The recommended fix is in the next section. | **Open → Phase 16** |
+| V-16 | 3 | Launcher window vs design range | `src/main.rs` opens the launcher at 1180×760 with a minimum of 800×600, below the 1280×800 design minimum. Realistic maximised windows are smaller still: 1366×688 (1366×768 panel) and 1280×640 (1920×1080 at 150%, Windows' default for that panel). At those sizes seven focused-task commits fell below the fold (listed below). | In windows under 760px tall, the commit row of an Install or Recovery result and of First Run's narrow states becomes a footer pinned to the window bottom, with a divider; at the end of the scroll it settles back into the panel. The workspace gets matching scroll padding, so a field focused after a refused port lands clear of the footer. First Run's shell clips with `overflow: clip`, not `hidden`, so the footer can stick. 1280×640 is now a gated size. | Resolved in the prototype; the launcher's default and minimum size go to Phase 16 |
+| V-17 | 2 | Every weight-600 heading | `InstrumentSans-SemiBold.woff2` and the Instrument Sans licence were missing. Commit ba16e0e on `feat/catalog-icons` had committed the then-untracked files, and a later branch switch removed them from this working tree. The browser synthesized bold from the Medium face, and 246 requests for the font returned 404 during this session. Earlier Phase 15 captures show the synthesized bold. | Both files restored from ba16e0e, SHA-256 matching the fonts README. All captures and the approval set were regenerated. | Resolved |
+| V-18 | 2 | Every app logo | The prototype loaded logos from `src/assets/catalog`, so it rendered correctly only on branches carrying the full icon set. On `main`, Memos and Actual Budget have no logo, and on the branch checked out during this phase, three stress logos returned 404. | `scripts/vendor-v2-prototype-logos.py` copies the 21 logos the prototype shows into `assets/logos/`, verifies each against the icon manifest's SHA-256, rewrites the fixture paths, and records provenance in `assets/logos/README.md`. The design package no longer reads from `src/`. | Resolved |
 
 ### Probe corrections
 
@@ -122,30 +133,27 @@ These were probe or harness errors, fixed before any number above was recorded.
 
 ## Real window sizes (V-16)
 
-`scripts/check-v2-real-windows.mjs` → `visual-real-windows.json`. These sizes are
-outside the approved range, so this is a report, not a gate.
+`scripts/check-v2-real-windows.mjs` → `visual-real-windows.json`. This is a report;
+1280×640 is also gated in `check-v2-visual.mjs`.
 
-| Window | CSS viewport | Overflow | Unreadable truncation | Overlap | Unfit dialogs | Focused-task commit below the fold |
+Before the fix, seven focused-task commits were off screen at 1280×640. They were
+Install failure "Review new port" (starting at 724px), Recovery success "Return to
+Settings" (640px, keep and delete), Recovery mismatch and scan failure "Scan again"
+(682px), and First Run missing Docker "Check again" (645px). At 1366×688, the two
+Install failure states and First Run missing Docker were off screen.
+
+After the fix:
+
+| Window | CSS viewport | Overflow | Unreadable truncation | Overlap | Unfit dialogs | Focused-task commit off screen |
 | --- | --- | --- | --- | --- | --- | --- |
 | Launcher default (`inner_size(1180, 760)`) | 1180×760 | 0 | 0 | 0 | 0 | 0 |
-| 1366×768 laptop, maximised | 1366×688 | 0 | 0 | 0 | 0 | 3 |
-| 1920×1080 laptop at 150%, maximised | 1280×640 @1.5× | 0 | 0 | 0 | 0 | 7 |
+| 1366×768 laptop, maximised | 1366×688 | 0 | 0 | 0 | 0 | 0 |
+| 1920×1080 laptop at 150%, maximised | 1280×640 @1.5× | 0 | 0 | 0 | 0 | 0 |
 
-Commits below the fold at 1280×640: Install failure "Review new port" (starts at 724px),
-Recovery success "Return to Settings" (640px, keep and delete), Recovery mismatch and
-scan failure "Scan again" (682px), First Run missing Docker "Check again" (645px). At
-1366×688, the two Install failure states (generic and port conflict) and First Run
-missing Docker. Each can still be
-reached by scrolling, but on a focused task the commit belongs on screen.
-
-**Recommendation for Phase 16:**
-
-1. Open the launcher at 1280×800, clamped to the monitor's work area, and set
-   `min_inner_size` to at least 1024×640.
-2. Apply the V-14 pattern to focused tasks (Install, Recovery, First Run): below 760px
-   of height, the commit row becomes a sticky footer. That covers a maximised
-   1920×1080 laptop at Windows' default 150% without redesigning the screens.
-3. Add 1280×640 to the verified range once the footer lands.
+**For Phase 16:** the prototype now works in every window above. What remains is the
+launcher itself. Open it at 1280×800, clamped to the monitor's work area. Set
+`min_inner_size` no smaller than the smallest verified size. Nothing below 1180 wide or
+640 tall has been verified.
 
 ## Catalog density with real content
 
@@ -154,8 +162,10 @@ reached by scrolling, but on a focused task the commit belongs on screen.
   the card grid holds three columns at 1280 and 1440.
 - **Names and categories** ellipsize on one line with a `title`. "Calibre Web Automated
   Book Downloader" is the worst case.
-- **Logos.** 1,531 of 1,671 (92%) are near-square (0.8–1.25:1), 23 are 2:1 or wider, and
-  8 are 0.6:1 or narrower. After V-13, every aspect ratio sits inside its 44px frame.
+- **Logos.** These figures come from the full icon set committed on `feat/catalog-icons`
+  (33ddb0f: 1,673 entries, all with a logo). 1,532 of 1,672 measurable logos (92%) are
+  near-square (0.8–1.25:1), 23 are 2:1 or wider, 8 are 0.6:1 or narrower, and 137 are
+  taller than wide. After V-13, every aspect ratio sits inside its 44px frame.
   Wordmark-only logos wider than 3:1 (Appsmith, Neon, Martin) stay legible but small at
   44px. The icon pipeline should prefer a square symbol variant where upstream
   publishes one (Phase 16, icon import requirements).
@@ -196,10 +206,13 @@ port-conflict commit starts at 724px. It's covered by V-16.
 - `visual-manifest.json` has SHA-256 hashes for the 176 normal captures.
 - `visual-report.json` has every finding and review item from the last full run.
 - `visual-real-windows.json` has the V-16 report.
+- `assets/logos/` holds the 21 logos the prototype shows, with provenance (V-18).
+- Branch `design/v2` holds a committed snapshot of the whole design package, so a
+  branch switch in the shared working tree can't remove it. It is not pushed.
 - `.cache/v2-visual/` holds the full-resolution PNGs. It's gitignored and regenerated
-  by the script (about 75 MB).
+  by the script (about 92 MB).
 - `visual-contact-sheet.html` links every capture from the cache, so run the capture
   script first.
-- `screenshots/phase15/` holds the curated approval set: 161 JPEGs, 2.4 MB. That's every
-  1280×800 state, the stress highlights, the 150% scaling cases, and the
-  interaction-state crops.
+- `screenshots/phase15/` holds the curated approval set: 169 JPEGs, 2.5 MB. That's every
+  1280×800 state, the stress highlights, the short-window states, the 150% scaling
+  cases, and the interaction-state crops.
