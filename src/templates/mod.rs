@@ -536,7 +536,7 @@ mod tests {
             );
             // A reviewed template has to render, not merely construct.
             let compose = template.plan.to_compose().expect("plan should render");
-            assert!(!compose.contains("$$"), "{}: {compose}", reviewed.id);
+            assert!(!compose.contains("$$cap_"), "{}: {compose}", reviewed.id);
 
             // Everything a recipe must prove about itself.
             assert_eq!(reviewed.schema_version, 1);

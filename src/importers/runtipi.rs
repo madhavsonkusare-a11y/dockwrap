@@ -54,6 +54,13 @@ fn container_path_is_system(target: &str) -> bool {
     if cleaned.is_empty() || cleaned == "/" {
         return true;
     }
+    // Where an image keeps its own application, and so where an app's data
+    // legitimately lives: Immich's photo library is `/usr/src/app/upload`.
+    // The rule is about a person's folder replacing the software that is
+    // about to run, which this is not.
+    if cleaned == "/usr/src" || cleaned.starts_with("/usr/src/") {
+        return false;
+    }
     const SYSTEM: &[&str] = &[
         "/etc", "/usr", "/bin", "/sbin", "/lib", "/lib64", "/boot", "/dev", "/proc", "/sys",
         "/run", "/var/run",
@@ -453,10 +460,6 @@ pub fn import(id: &str, definition: &str, config: Option<&str>) -> Result<Import
         let mut companion = None;
         if let Some(value) = service.get("addPorts") {
             match companion_port(value) {
-                Ok(_) if is_main => limitations.push(not_modelled(
-                    "addPorts",
-                    format!("{name} is the main service; a second address belongs to another one"),
-                )),
                 Ok(port) => companion = Some(port),
                 Err(reason) => {
                     limitations.push(not_modelled("addPorts", format!("{name} {reason}")))

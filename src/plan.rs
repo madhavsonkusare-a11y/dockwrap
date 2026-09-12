@@ -396,10 +396,15 @@ impl DeploymentPlan {
         }
         let mut hosts = vec![published[0].host];
         for (service, port) in &companions {
-            if service.published.is_some() {
+            // A service may answer on both: Gitea serves git over SSH on a
+            // second address beside the pages it publishes.
+            if service
+                .published
+                .is_some_and(|main| main.container == port.container)
+            {
                 return Err(format!(
-                    "service {:?} publishes both the main address and a second one",
-                    service.name
+                    "service {:?} publishes container port {} twice",
+                    service.name, port.container
                 ));
             }
             if port.host < 1024 || port.container == 0 {
@@ -1400,15 +1405,22 @@ NEWLINE",
         });
         assert!(clash.validate().unwrap_err().contains("published twice"));
 
-        let mut doubled = with_companion();
-        doubled.services[1].companion = Some(PublishedPort {
+        // A service may answer on both, as Gitea does over SSH beside the
+        // pages it publishes — but never twice on one container port.
+        let mut both = with_companion();
+        both.services[1].companion = Some(PublishedPort {
             host: 9000,
-            container: 9000,
+            container: 22,
         });
-        assert!(doubled
-            .validate()
-            .unwrap_err()
-            .contains("both the main address"));
+        both.validate()
+            .expect("a main address and a second one may share a service");
+
+        let mut twice = with_companion();
+        twice.services[1].companion = Some(PublishedPort {
+            host: 9000,
+            container: 8080,
+        });
+        assert!(twice.validate().unwrap_err().contains("twice"));
 
         let mut privileged = with_companion();
         privileged.services[0].companion = Some(PublishedPort {
