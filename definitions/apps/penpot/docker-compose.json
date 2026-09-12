@@ -1,0 +1,193 @@
+{
+  "schemaVersion": 2,
+  "$schema": "https://schemas.runtipi.io/v2/dynamic-compose.json",
+  "services": [
+    {
+      "name": "penpot",
+      "image": "penpotapp/frontend:2.17.2",
+      "isMain": true,
+      "internalPort": 8080,
+      "environment": [
+        {
+          "key": "PENPOT_FLAGS",
+          "value": "enable-registration enable-login-with-password disable-email-verification disable-secure-session-cookies enable-mcp"
+        },
+        {
+          "key": "PENPOT_PUBLIC_URI",
+          "value": "${APP_PROTOCOL:-http}://${APP_DOMAIN}"
+        },
+        {
+          "key": "PENPOT_HTTP_SERVER_MAX_BODY_SIZE",
+          "value": "367001600"
+        },
+        {
+          "key": "PENPOT_HTTP_SERVER_MAX_MULTIPART_BODY_SIZE",
+          "value": "367001600"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/assets",
+          "containerPath": "/opt/data/assets"
+        }
+      ],
+      "dependsOn": [
+        "penpot-backend",
+        "penpot-exporter",
+        "penpot-mcp"
+      ]
+    },
+    {
+      "name": "penpot-backend",
+      "image": "penpotapp/backend:2.17.2",
+      "environment": [
+        {
+          "key": "PENPOT_FLAGS",
+          "value": "enable-registration enable-login-with-password disable-email-verification disable-secure-session-cookies enable-mcp"
+        },
+        {
+          "key": "PENPOT_PUBLIC_URI",
+          "value": "${APP_PROTOCOL:-http}://${APP_DOMAIN}"
+        },
+        {
+          "key": "PENPOT_SECRET_KEY",
+          "value": "${PENPOT_SECRET_KEY}"
+        },
+        {
+          "key": "PENPOT_DATABASE_URI",
+          "value": "postgresql://penpot-postgres/penpot"
+        },
+        {
+          "key": "PENPOT_DATABASE_USERNAME",
+          "value": "penpot"
+        },
+        {
+          "key": "PENPOT_DATABASE_PASSWORD",
+          "value": "${PENPOT_DB_PASSWORD}"
+        },
+        {
+          "key": "PENPOT_REDIS_URI",
+          "value": "redis://penpot-valkey/0"
+        },
+        {
+          "key": "PENPOT_OBJECTS_STORAGE_BACKEND",
+          "value": "fs"
+        },
+        {
+          "key": "PENPOT_OBJECTS_STORAGE_FS_DIRECTORY",
+          "value": "/opt/data/assets"
+        },
+        {
+          "key": "PENPOT_TELEMETRY_ENABLED",
+          "value": "false"
+        },
+        {
+          "key": "PENPOT_HTTP_SERVER_MAX_BODY_SIZE",
+          "value": "367001600"
+        },
+        {
+          "key": "PENPOT_HTTP_SERVER_MAX_MULTIPART_BODY_SIZE",
+          "value": "367001600"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/assets",
+          "containerPath": "/opt/data/assets"
+        }
+      ],
+      "dependsOn": {
+        "penpot-postgres": {
+          "condition": "service_healthy"
+        },
+        "penpot-valkey": {
+          "condition": "service_healthy"
+        }
+      }
+    },
+    {
+      "name": "penpot-exporter",
+      "image": "penpotapp/exporter:2.17.2",
+      "environment": [
+        {
+          "key": "PENPOT_SECRET_KEY",
+          "value": "${PENPOT_SECRET_KEY}"
+        },
+        {
+          "key": "PENPOT_PUBLIC_URI",
+          "value": "${APP_PROTOCOL:-http}://${APP_DOMAIN}"
+        },
+        {
+          "key": "PENPOT_INTERNAL_URI",
+          "value": "http://penpot:8080"
+        },
+        {
+          "key": "PENPOT_REDIS_URI",
+          "value": "redis://penpot-valkey/0"
+        }
+      ],
+      "dependsOn": {
+        "penpot-valkey": {
+          "condition": "service_healthy"
+        }
+      }
+    },
+    {
+      "name": "penpot-mcp",
+      "image": "penpotapp/mcp:2.17.2"
+    },
+    {
+      "name": "penpot-postgres",
+      "image": "postgres:15.19",
+      "stopSignal": "SIGINT",
+      "healthCheck": {
+        "test": "pg_isready -U penpot",
+        "interval": "2s",
+        "timeout": "10s",
+        "retries": 10,
+        "startPeriod": "60s"
+      },
+      "environment": [
+        {
+          "key": "POSTGRES_INITDB_ARGS",
+          "value": "--data-checksums"
+        },
+        {
+          "key": "POSTGRES_DB",
+          "value": "penpot"
+        },
+        {
+          "key": "POSTGRES_USER",
+          "value": "penpot"
+        },
+        {
+          "key": "POSTGRES_PASSWORD",
+          "value": "${PENPOT_DB_PASSWORD}"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/postgres",
+          "containerPath": "/var/lib/postgresql/data"
+        }
+      ]
+    },
+    {
+      "name": "penpot-valkey",
+      "image": "valkey/valkey:8.1.10",
+      "healthCheck": {
+        "test": "valkey-cli ping | grep PONG",
+        "interval": "1s",
+        "timeout": "3s",
+        "retries": 5,
+        "startPeriod": "3s"
+      },
+      "environment": [
+        {
+          "key": "VALKEY_EXTRA_FLAGS",
+          "value": "--maxmemory 128mb --maxmemory-policy volatile-lfu"
+        }
+      ]
+    }
+  ]
+}

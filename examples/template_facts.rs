@@ -96,6 +96,29 @@ fn main() {
         })
         .collect();
 
+    // Data can also live in a named volume, which is neither the managed
+    // folder nor something a person chose, and has to be described as such.
+    let volumes: Vec<&str> = template
+        .plan
+        .services
+        .iter()
+        .flat_map(|service| &service.mounts)
+        .filter_map(|mount| match mount {
+            local_store::plan::PlanMount::Volume { name, .. } => Some(name.as_str()),
+            _ => None,
+        })
+        .collect();
+
+    let (seeds, binary_seeds) = if source == "runtipi" {
+        local_store::importers::runtipi::read_seeds(
+            std::path::Path::new(&path)
+                .parent()
+                .unwrap_or(std::path::Path::new(".")),
+        )
+    } else {
+        (Vec::new(), Vec::new())
+    };
+
     let facts = serde_json::json!({
         "id": id,
         "source": source,
@@ -107,6 +130,9 @@ fn main() {
         "fields": fields,
         "managed_directories": managed,
         "shared_folders": shared,
+        "named_volumes": volumes,
+        "seed_files": seeds.iter().map(|seed| seed.path.as_str()).collect::<Vec<_>>(),
+        "binary_seeds": binary_seeds,
         "limitations": outcome
             .limitations
             .iter()

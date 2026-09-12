@@ -100,6 +100,32 @@ impl ScriptProbe {
     }
 }
 
+/// The line a failed probe actually said, out of everything it printed.
+///
+/// Node prints an uncaught error's message near the top, then the stack, then
+/// its own version last — so the tail of stderr, which is what was kept, is
+/// the one part that says nothing. WordPress's first failure was recorded as
+/// "Node.js v24.14.0 } name: 'Error'".
+fn probe_failure(stderr: &str) -> String {
+    let thrown = stderr.lines().map(str::trim).find(|line| {
+        line.split_once(": ").is_some_and(|(kind, _)| {
+            kind.ends_with("Error") && kind.chars().all(|c| c.is_ascii_alphanumeric())
+        })
+    });
+    if let Some(line) = thrown {
+        return line.to_owned();
+    }
+    let mut tail: Vec<&str> = stderr
+        .lines()
+        .map(str::trim)
+        .filter(|line| !line.is_empty() && !line.starts_with("Node.js v"))
+        .rev()
+        .take(4)
+        .collect();
+    tail.reverse();
+    tail.join(" ")
+}
+
 impl FirstUse for ScriptProbe {
     fn describes(&self) -> &str {
         &self.describes
@@ -133,15 +159,7 @@ impl FirstUse for ScriptProbe {
             Ok(())
         } else {
             // Whatever a probe prints could contain an answer somebody typed.
-            Err(crate::runtime::redact(
-                &output
-                    .stderr
-                    .lines()
-                    .rev()
-                    .take(4)
-                    .collect::<Vec<_>>()
-                    .join(" "),
-            ))
+            Err(crate::runtime::redact(&probe_failure(&output.stderr)))
         }
     }
 }
@@ -505,6 +523,37 @@ pub struct Subject {
 }
 
 /// Qualify a template that has already been built.
+/// The machine-wide qualification slot, held until dropped.
+struct QualificationSlot(std::fs::File);
+
+impl Drop for QualificationSlot {
+    fn drop(&mut self) {
+        let _ = fs4::FileExt::unlock(&self.0);
+    }
+}
+
+/// One qualification at a time on this machine, across processes.
+///
+/// The bystander check notes every container that is not this run's and fails
+/// if any of them disappear. A second harness running at the same time makes
+/// and removes containers of its own, so each run's check blames the other:
+/// Grafana failed "leaves other containers alone" because a concurrent batch
+/// had just cleaned up after Joplin. Runs in one process are already
+/// sequential — the configuration root is process-global — and this extends
+/// the rule to every process. A second run waits its turn rather than failing.
+fn take_qualification_slot(scratch: &Path) -> AppResult<QualificationSlot> {
+    std::fs::create_dir_all(scratch).map_err(AppError::from)?;
+    let file = std::fs::OpenOptions::new()
+        .read(true)
+        .write(true)
+        .create(true)
+        .truncate(false)
+        .open(scratch.join("qualification.lock"))
+        .map_err(AppError::from)?;
+    fs4::FileExt::lock(&file).map_err(AppError::from)?;
+    Ok(QualificationSlot(file))
+}
+
 pub fn qualify_template(
     about: &Subject,
     template: PlanTemplate,
@@ -513,6 +562,9 @@ pub fn qualify_template(
     scratch: &Path,
 ) -> AppResult<Evidence> {
     let app = about.app.as_str();
+    // Taken first so it is released last, after every container this run
+    // made is gone.
+    let _slot = take_qualification_slot(scratch)?;
     let runner = crate::runtime::SystemProcessRunner;
     let probe = crate::runtime::HttpHealthProbe;
     let health = Duration::from_secs(120);
@@ -722,6 +774,11 @@ pub enum Resume {
     /// Try the failures again, keeping the passes. For when the failures were
     /// about the machine rather than the app.
     RetryFailures,
+    /// Run everything asked for, recorded or not. For when the question has
+    /// changed rather than the answer — proving a different packaging of an
+    /// app already qualified, where the existing pass is about a definition
+    /// that is no longer the one under consideration.
+    RunAnyway,
 }
 
 /// A directory of qualification results that a run can be resumed from.
@@ -777,6 +834,7 @@ impl Batch {
                 (None, _) => true,
                 (Some(_), Resume::SkipRecorded) => false,
                 (Some(evidence), Resume::RetryFailures) => !evidence.passed,
+                (Some(_), Resume::RunAnyway) => true,
             })
             .collect()
     }
@@ -1108,9 +1166,55 @@ ccc",
         let retry = batch.remaining(&apps, Resume::RetryFailures);
         assert_eq!(retry, vec![&"two".to_owned(), &"three".to_owned()]);
 
+        // And a new question about an app reruns even its pass: the pass was
+        // about a different definition.
+        let anyway = batch.remaining(&apps, Resume::RunAnyway);
+        assert_eq!(anyway.len(), 3);
+
         let all = batch.results();
         assert_eq!(all.len(), 2);
         assert_eq!(all[0].app, "one");
+        std::fs::remove_dir_all(&dir).ok();
+    }
+
+    #[test]
+    fn a_failed_probe_is_recorded_by_what_it_threw() {
+        let node = concat!(
+            "file:///probe.mjs:43\n",
+            "    throw new Error(`the address answered ${status}`);\n",
+            "          ^\n",
+            "\n",
+            "Error: the address answered 500\n",
+            "    at file:///probe.mjs:43:11\n",
+            "\n",
+            "Node.js v24.14.0\n",
+        );
+        assert_eq!(probe_failure(node), "Error: the address answered 500");
+        // Something that threw nothing recognisable still reads forwards.
+        assert_eq!(probe_failure("one\ntwo\nNode.js v24\n"), "one two");
+    }
+
+    /// Two harnesses at once each blame the other for removing containers,
+    /// so the slot has to keep a second one out while the first holds it.
+    #[test]
+    fn a_second_qualification_waits_for_the_first() {
+        let dir = std::env::temp_dir().join(format!("local-store-slot-{}", std::process::id()));
+        let held = take_qualification_slot(&dir).expect("the first run takes the slot");
+        let second = std::fs::OpenOptions::new()
+            .read(true)
+            .write(true)
+            .open(dir.join("qualification.lock"))
+            .unwrap();
+        assert!(
+            fs4::FileExt::try_lock(&second).is_err(),
+            "a second run got the slot while the first held it"
+        );
+        drop(held);
+        assert!(
+            fs4::FileExt::try_lock(&second).is_ok(),
+            "the slot was not released when the first run finished"
+        );
+        let _ = fs4::FileExt::unlock(&second);
         std::fs::remove_dir_all(&dir).ok();
     }
 

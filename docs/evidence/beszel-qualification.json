@@ -1,0 +1,60 @@
+{
+  "app": "beszel",
+  "passed": true,
+  "scope": "candidate mapping, transaction, managed storage and first use, on one host and one architecture",
+  "promotion": "not reviewed",
+  "source_revision": "7f1f329125dde0cb915f47c8b33293eca45f7d0e",
+  "images": [
+    "henrygd/beszel:0.18.6"
+  ],
+  "image_ids": {
+    "henrygd/beszel:0.18.6": "sha256:3135185161e072a5058f7c05b247345072bd9f3e23a4a9cd8c879880b085bc41"
+  },
+  "first_use": "it opens a page with a clear next step, and the same page after a restart and reinstall",
+  "steps": [
+    {
+      "step": "pull henrygd/beszel:0.18.6",
+      "passed": true
+    },
+    {
+      "step": "installs with one action",
+      "passed": true
+    },
+    {
+      "step": "answers on its address",
+      "passed": true
+    },
+    {
+      "step": "is usable first install",
+      "passed": true
+    },
+    {
+      "step": "survives a restart",
+      "passed": true
+    },
+    {
+      "step": "is usable after restart",
+      "passed": true
+    },
+    {
+      "step": "reinstalls over data it kept",
+      "passed": true
+    },
+    {
+      "step": "generates no credentials, so there are none to lose",
+      "passed": true
+    },
+    {
+      "step": "is usable after a keep-data reinstall",
+      "passed": true
+    },
+    {
+      "step": "removes everything it created",
+      "passed": true
+    },
+    {
+      "step": "leaves other containers alone",
+      "passed": true
+    }
+  ]
+}

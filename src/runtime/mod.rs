@@ -192,6 +192,14 @@ impl HealthProbe for HttpHealthProbe {
         };
         let _ = stream.set_read_timeout(Some(Duration::from_secs(2)));
         let _ = stream.set_write_timeout(Some(Duration::from_secs(2)));
+        // The port belongs in Host whenever it is not the scheme's default;
+        // that is what every browser sends. Joplin routes on the whole Host
+        // and answered `Host: localhost` with 404 — so an app that was up and
+        // serving `/login` never passed its health check.
+        let authority = match parsed.port() {
+            Some(port) => format!("{host}:{port}"),
+            None => host.to_owned(),
+        };
         let target = if parsed.path().is_empty() {
             "/"
         } else {
@@ -199,7 +207,7 @@ impl HealthProbe for HttpHealthProbe {
         };
         if write!(
             stream,
-            "GET {target} HTTP/1.0\r\nHost: {host}\r\nConnection: close\r\n\r\n"
+            "GET {target} HTTP/1.0\r\nHost: {authority}\r\nConnection: close\r\n\r\n"
         )
         .is_err()
         {
@@ -345,6 +353,23 @@ fn checked_run_cancellable(
         ))
     }
 }
+/// The end of a long message, which is where a failing tool says why.
+///
+/// Compose prints a progress line per network and container and the error
+/// last. Keeping the first thousand characters kept the progress: Notemark's
+/// failed start was recorded as eleven lines of "Creating", "Created",
+/// "Starting" and none of the reason.
+fn last_chars(text: &str, limit: usize) -> String {
+    let count = text.chars().count();
+    if count <= limit {
+        return text.to_owned();
+    }
+    let start = text
+        .char_indices()
+        .nth(count - limit)
+        .map_or(0, |(index, _)| index);
+    format!("…{}", &text[start..])
+}
 fn concise_error(output: &ProcessOutput) -> String {
     let value = if output.stderr.trim().is_empty() {
         output.stdout.trim()
@@ -356,10 +381,7 @@ fn concise_error(output: &ProcessOutput) -> String {
     let mut detail: String = if value.is_empty() {
         "the command returned an error".into()
     } else {
-        redact_diagnostic(value, output.truncated)
-            .chars()
-            .take(1000)
-            .collect()
+        last_chars(&redact_diagnostic(value, output.truncated), 1000)
     };
     if output.truncated {
         detail.push_str("\n(output was truncated)");
@@ -607,6 +629,9 @@ pub struct InstallSource {
     /// Written beside the Compose file, and permitted to already exist when a
     /// preserved directory is reused. Generated secrets travel this way.
     pub extra_files: Vec<(String, String)>,
+    /// Starting files inside `data/`, written only where nothing exists yet:
+    /// a keep-data reinstall must not put back a config file somebody edited.
+    pub seed_files: Vec<(String, String)>,
 }
 
 impl Recipe {
@@ -623,6 +648,7 @@ impl Recipe {
             compose: self.compose.clone(),
             data_directories: self.data_directories.clone(),
             extra_files: Vec::new(),
+            seed_files: Vec::new(),
         })
     }
 }
@@ -738,6 +764,11 @@ pub fn install_template_with(
             .map(str::to_owned)
             .collect(),
         extra_files,
+        seed_files: template
+            .seeds
+            .iter()
+            .map(|seed| (seed.path.clone(), seed.content.clone()))
+            .collect(),
     };
     install_source_with(context, &source, root, now)
 }
@@ -824,7 +855,7 @@ pub fn install_source_with(
     fs::create_dir_all(&project_dir).map_err(AppError::from)?;
     let compose_file = project_dir.join("compose.yaml");
     let previous_compose = fs::read(&compose_file).ok();
-    let install = (|| {
+    let install: AppResult<InstalledApp> = (|| {
         // Atomic: Docker must never read a half-written Compose file.
         storage::write_file_atomically(&compose_file, source.compose.as_bytes())
             .map_err(AppError::from)?;
@@ -832,7 +863,31 @@ pub fn install_source_with(
             storage::write_file_atomically(&project_dir.join(name), contents.as_bytes())
                 .map_err(AppError::from)?;
         }
+        for (path, contents) in &source.seed_files {
+            // Checked again here, not only when the template was validated:
+            // this is the line that actually writes to disk.
+            if !crate::setup::is_confined_seed_path(path) {
+                return Err(AppError::new(
+                    ErrorCode::UnsafePath,
+                    format!("seed file {path:?} is not inside the app's data folder"),
+                ));
+            }
+            let target = project_dir.join(path);
+            if target.exists() {
+                continue;
+            }
+            if let Some(parent) = target.parent() {
+                fs::create_dir_all(parent).map_err(AppError::from)?;
+            }
+            storage::write_file_atomically(&target, contents.as_bytes()).map_err(AppError::from)?;
+        }
         for directory in &source.data_directories {
+            // A mount of a seeded file is a file, not a folder to create:
+            // making a directory there is exactly how an nginx config came to
+            // be an empty folder and the proxy refused to start.
+            if source.seed_files.iter().any(|(path, _)| path == directory) {
+                continue;
+            }
             fs::create_dir_all(project_dir.join(directory)).map_err(AppError::from)?;
         }
         let app = InstalledApp {
@@ -869,7 +924,8 @@ pub fn install_source_with(
         )?;
         Ok(app)
     })();
-    if let Err(original) = &install {
+    if let Err(failure) = &install {
+        let original = failure.clone();
         context.report(InstallStage::RollingBack);
         let fallback = InstalledApp {
             id: source.id.clone(),
@@ -885,6 +941,20 @@ pub fn install_source_with(
             created_at_unix: now,
             updated_at_unix: now,
         };
+        // Every other failure says what went wrong: Compose reports a bad
+        // file, a pull reports a missing image. A timeout reports only that
+        // time passed, and the reason is inside containers the cleanup below
+        // is about to remove — so that is the one worth asking about.
+        let last_words = (original.code == ErrorCode::TimedOut)
+            .then(|| last_words(runner, &fallback))
+            .flatten();
+        // Attached before cleanup runs, because a cleanup that fails returns
+        // early — and a failed cleanup is exactly when somebody needs to know
+        // what the containers were doing.
+        let original = match last_words {
+            Some(said) => AppError::new(original.code, format!("{original} {said}")),
+            None => original,
+        };
         // Keep the Compose file and data if Docker cleanup fails: they may
         // still be needed by running containers and for manual recovery.
         // `checked_run` deliberately uses a fresh token: a cancelled install
@@ -895,7 +965,7 @@ pub fn install_source_with(
             &compose_command(&fallback, &["down"], LIFECYCLE_TIMEOUT)?,
             "Install cleanup",
         )
-        .map_err(|cleanup| AppError::rollback(original, cleanup))?;
+        .map_err(|cleanup| AppError::rollback(&original, cleanup))?;
         let cleanup = if created_project {
             fs::remove_dir_all(&project_dir).map_err(AppError::from)
         } else if let Some(previous) = previous_compose {
@@ -907,9 +977,98 @@ pub fn install_source_with(
                 Err(error) => Err(AppError::from(error)),
             }
         };
-        cleanup.map_err(|cleanup| AppError::rollback(original, cleanup))?;
+        cleanup.map_err(|cleanup| AppError::rollback(&original, cleanup))?;
+        return Err(original);
     }
     install
+}
+
+/// What the containers said before a failed install removed them.
+///
+/// Compose keeps the two halves of the answer apart: `ps` knows which service
+/// stopped and how, and the log holds the reason it gives. Neither survives
+/// the cleanup, so both are read while they still exist. Best effort by
+/// design — a diagnosis that fails must not replace the failure it explains.
+fn last_words(runner: &dyn ProcessRunner, app: &InstalledApp) -> Option<String> {
+    let mut parts = Vec::new();
+    if let Ok(command) = compose_command(app, &["ps", "--all"], DIAGNOSTIC_TIMEOUT) {
+        if let Ok(output) = runner.run(&command) {
+            let states: Vec<&str> = output
+                .stdout
+                .lines()
+                .skip(1) // the header
+                .map(str::trim)
+                .filter(|line| !line.is_empty())
+                .collect();
+            if !states.is_empty() {
+                parts.push(format!("Containers: {}.", states.join("; ")));
+            }
+        }
+    }
+    if let Ok(logs) = logs_with(runner, app) {
+        // Per container, not overall: Compose interleaves every service's
+        // output, and a chatty database drowned out Nextcloud's own last words
+        // entirely.
+        let mut by_service: Vec<(String, Vec<&str>)> = Vec::new();
+        for line in logs.lines().map(str::trim).filter(|line| !line.is_empty()) {
+            // `name | text`, or `name |` alone for a blank line — Postgres
+            // prints several, and they are not the service's last words.
+            let (service, said) = match line.split_once(" | ") {
+                Some((prefix, rest)) => (prefix.trim().to_owned(), rest.trim()),
+                None => match line.strip_suffix(" |").or_else(|| line.strip_suffix('|')) {
+                    Some(prefix) => (prefix.trim().to_owned(), ""),
+                    None => (String::new(), line),
+                },
+            };
+            if said.is_empty() {
+                continue;
+            }
+            match by_service.iter_mut().find(|(name, _)| *name == service) {
+                Some((_, lines)) => lines.push(said),
+                None => by_service.push((service, vec![said])),
+            }
+        }
+        // The app's own service first — it is almost always the shortest
+        // name (`nextcloud-mini` before `nextcloud-mini-db`) — so a cap never
+        // cuts the lines that matter most.
+        by_service.sort_by_key(|(service, _)| service.len());
+        for (service, lines) in &by_service {
+            let tail: Vec<String> = lines[lines.len().saturating_sub(5)..]
+                .iter()
+                .map(|line| match line.char_indices().nth(200) {
+                    Some((cut, _)) => format!("{}…", &line[..cut]),
+                    None => (*line).to_owned(),
+                })
+                .collect();
+            // Container names are `<project>-<service>`; the service is the
+            // part a person recognises.
+            let name = match &app.runtime {
+                RuntimeSpec::Compose { project_name, .. } => service
+                    .strip_prefix(project_name.as_str())
+                    .map(|rest| rest.trim_start_matches('-'))
+                    .filter(|rest| !rest.is_empty())
+                    .unwrap_or(service),
+                _ => service,
+            };
+            parts.push(format!("{name} last said: {}", tail.join(" | ")));
+        }
+    }
+    if parts.is_empty() {
+        return None;
+    }
+    let mut said = parts.join(" ");
+    // Room for a few lines from each container, short enough that the
+    // failure it explains is still the first thing read.
+    if said.chars().count() > 2000 {
+        let cut = said
+            .char_indices()
+            .nth(2000)
+            .map(|(index, _)| index)
+            .unwrap_or(said.len());
+        said.truncate(cut);
+        said.push('…');
+    }
+    Some(said)
 }
 /// An install whose containers are up and healthy but which is not yet in the
 /// registry.
@@ -1277,6 +1436,72 @@ mod tests {
             updated_at_unix: 1,
         }
     }
+    #[test]
+    fn a_long_failure_keeps_the_reason_at_its_end() {
+        let progress = "Container app Creating\n".repeat(80);
+        let output = ProcessOutput {
+            success: false,
+            stdout: String::new(),
+            stderr: format!("{progress}Error response from daemon: port is already allocated"),
+            truncated: false,
+        };
+        let detail = concise_error(&output);
+        assert!(detail.ends_with("port is already allocated"), "{detail}");
+        assert!(
+            detail.starts_with('…'),
+            "a cut message should say it was cut"
+        );
+        assert!(detail.chars().count() <= 1001);
+    }
+
+    /// A timeout is the one failure that explains nothing by itself, and the
+    /// containers holding the explanation are removed moments later. Five
+    /// candidates in a row failed with nothing but "Health check timed out",
+    /// which is why this exists.
+    #[test]
+    fn a_timed_out_install_says_what_the_containers_said() {
+        let root =
+            std::env::temp_dir().join(format!("local-store-lastwords-{}", std::process::id()));
+        let _ = fs::remove_dir_all(&root);
+        fs::create_dir_all(&root).unwrap();
+        let runner = FakeRunner {
+            outputs: Mutex::new(VecDeque::from([
+                Ok(ProcessOutput {
+                    success: true,
+                    stdout: "NAME       STATUS\nglance-1   Exited (1)\n".into(),
+                    stderr: String::new(),
+                    truncated: false,
+                }),
+                Ok(ProcessOutput {
+                    success: true,
+                    stdout: String::new(),
+                    stderr: "glance-1 | failed to read config: no such file\n".into(),
+                    truncated: false,
+                }),
+            ])),
+            calls: Mutex::new(Vec::new()),
+        };
+        let said = last_words(&runner, &managed(&root)).expect("both halves answered");
+        assert!(said.contains("Exited (1)"), "no container state: {said}");
+        assert!(said.contains("no such file"), "no log line: {said}");
+        let _ = fs::remove_dir_all(&root);
+    }
+
+    /// Best effort means best effort: a diagnosis that cannot be gathered must
+    /// leave the failure it was meant to explain exactly as it was.
+    #[test]
+    fn a_diagnosis_that_cannot_be_gathered_reports_nothing() {
+        let root = std::env::temp_dir().join(format!("local-store-nowords-{}", std::process::id()));
+        let _ = fs::remove_dir_all(&root);
+        fs::create_dir_all(&root).unwrap();
+        let runner = FakeRunner {
+            outputs: Mutex::new(VecDeque::new()),
+            calls: Mutex::new(Vec::new()),
+        };
+        assert_eq!(last_words(&runner, &managed(&root)), None);
+        let _ = fs::remove_dir_all(&root);
+    }
+
     #[test]
     fn an_unsafe_link_is_refused_before_any_browser_is_launched() {
         // Every rejection here is decided by validation alone, so no browser is
@@ -1832,6 +2057,7 @@ mod tests {
             .into(),
             data_directories: vec!["data/.ollama".into()],
             extra_files: Vec::new(),
+            seed_files: Vec::new(),
         };
         let runner = FakeRunner::passing(6);
         let installed = install_source_with(
@@ -1878,11 +2104,13 @@ mod tests {
         use crate::plan::{PlanService, PublishedPort};
         use crate::setup::{FieldKind, SecretSpec, SetupField};
         PlanTemplate {
+            seeds: Vec::new(),
             plan: crate::plan::DeploymentPlan {
                 id: "memos".into(),
                 services: vec![PlanService {
                     name: "memos".into(),
                     image: "example/app:1.0.0".into(),
+                    digest: None,
                     environment: vec![
                         ("DB_PASSWORD".into(), "${DB_PASSWORD}".into()),
                         ("SITE".into(), "${SITE_NAME}".into()),
@@ -1958,6 +2186,71 @@ mod tests {
         );
         assert!(project.join("data").is_dir());
         fs::remove_dir_all(&root).unwrap();
+    }
+
+    /// Notemark mounts `data/proxy/nginx.conf`, a file Runtipi ships beside
+    /// the definition. Without it Docker made an empty directory there and the
+    /// proxy refused to start.
+    #[test]
+    fn seed_files_are_written_once_and_a_mounted_seed_stays_a_file() {
+        let root = scratch_root("plan-seeds");
+        let mut template = sample_template();
+        template.plan.services[0]
+            .mounts
+            .push(crate::plan::PlanMount::directory(
+                "data/proxy/nginx.conf",
+                "/etc/nginx/conf.d/default.conf",
+            ));
+        template.seeds = vec![crate::setup::SeedFile {
+            path: "data/proxy/nginx.conf".into(),
+            content: "server { listen 80; }\n".into(),
+        }];
+        let install = |runner: &FakeRunner| {
+            install_template_with(
+                &context(runner, &Ready(true), &Ports(true), &CancelToken::new()),
+                &template,
+                "Memos",
+                &answers_for("My notes"),
+                &root,
+                7,
+            )
+        };
+        let app = install(&FakeRunner::passing(4)).expect("install with a seed");
+        let seeded = root.join("memos/data/proxy/nginx.conf");
+        assert!(seeded.is_file(), "the seed was not written as a file");
+        assert_eq!(
+            fs::read_to_string(&seeded).unwrap(),
+            "server { listen 80; }\n"
+        );
+
+        // Somebody edits it; a keep-data reinstall must not put the original back.
+        fs::write(&seeded, "server { listen 8080; }\n").unwrap();
+        uninstall_with(&FakeRunner::passing(1), &app, false).unwrap();
+        install(&FakeRunner::passing(4)).expect("reinstall over kept data");
+        assert_eq!(
+            fs::read_to_string(&seeded).unwrap(),
+            "server { listen 8080; }\n",
+            "a reinstall overwrote a seed file somebody had edited"
+        );
+        fs::remove_dir_all(&root).unwrap();
+    }
+
+    #[test]
+    fn a_seed_outside_the_data_folder_is_refused() {
+        let mut template = sample_template();
+        for path in [
+            "compose.yaml",
+            "data/../compose.yaml",
+            "/etc/passwd",
+            "data/",
+            "data/a b",
+        ] {
+            template.seeds = vec![crate::setup::SeedFile {
+                path: path.into(),
+                content: String::new(),
+            }];
+            assert!(template.validate().is_err(), "seed {path:?} was accepted");
+        }
     }
 
     #[test]

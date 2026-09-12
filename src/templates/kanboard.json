@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "id": "kanboard",
+  "display_name": "Kanboard",
+  "catalog_name": "Kanboard",
+  "description": "Simple visual task board.",
+  "category": "Task Management & To-do Lists",
+  "license": "MIT",
+  "source_url": "https://github.com/kanboard/kanboard",
+  "documentation_url": "https://kanboard.org/",
+  "verified_at": "2026-09-10",
+  "lifecycle_proof": "docs/evidence/kanboard-qualification.json",
+  "origin": {
+    "importer": "runtipi",
+    "repository": "runtipi/runtipi-appstore",
+    "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+    "path": "apps/kanboard/docker-compose.json",
+    "license": "GPL-3.0"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "kanboard/kanboard:v1.2.54",
+        "source_url": "https://hub.docker.com/v2/repositories/kanboard/kanboard/tags/v1.2.54",
+        "checked_at": "2026-09-10",
+        "last_updated": "2026-08-29",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm/v6",
+          "linux/arm/v7",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:d615d97b5025ab4b8a15772391f0b910d9f2a0c623ec3becde44de8405432b7e",
+          "linux/arm/v6": "sha256:520d4d83db42f21f2a39d62c6bf7a661570f9da8240541d787fdc1d30202ea43",
+          "linux/arm/v7": "sha256:c90b00b57bc2dffea0386ddcf80177214c7c8469e3fffff430dcbe140b442537",
+          "linux/arm64": "sha256:660c8667a0a77842df55c914a7cf8ec183f8e6d065b9af2587c51a9fe5201ce9"
+        },
+        "index_digest": "sha256:8df6c4339134b6c196da9a262daa42ab8ce395f528a48d4a3dd7038c296f34c1"
+      }
+    ]
+  },
+  "promotion": {
+    "state": "approved",
+    "reason": "Qualified on 2026-09-10 and approved by the owner. A real install proved it starts, opens to a usable screen, survives a restart and a keep-data reinstall with its data intact, and removes everything it created. v1.2.54 is the current release — the same version upstream published on 2026-08-29 — and the image was rebuilt that day. It ships a default admin password, which the risk notes say plainly rather than hiding."
+  },
+  "data_storage": "Local Store managed folder / kanboard",
+  "risk_notes": [
+    "Creates 1 Docker container and publishes one port on this computer's loopback interface only.",
+    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Turning on the plugin installer lets Kanboard download and run plugin code from the internet on your computer. Leave it off unless you want that.",
+    "Kanboard starts with one account, username admin and password admin, and does not force a change. Anyone who can reach the address is an administrator until you change it, so change it the first time you sign in."
+  ],
+  "fields": {
+    "PLUGIN_INSTALLER": {
+      "label": "Let Kanboard install plugins",
+      "sensitive": false
+    }
+  },
+  "definition": "{\n  \"services\": [\n    {\n      \"name\": \"kanboard\",\n      \"image\": \"kanboard/kanboard:v1.2.54\",\n      \"isMain\": true,\n      \"internalPort\": 80,\n      \"environment\": [\n        {\n          \"key\": \"PLUGIN_INSTALLER\",\n          \"value\": \"${PLUGIN_INSTALLER}\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/kanboard_data\",\n          \"containerPath\": \"/var/www/app/data\"\n        },\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/kanboard_plugins\",\n          \"containerPath\": \"/var/www/app/plugins\"\n        }\n      ]\n    }\n  ],\n  \"schemaVersion\": 2,\n  \"$schema\": \"https://schemas.runtipi.io/v2/dynamic-compose.json\"\n}\n",
+  "config": {
+    "path": "apps/kanboard/config.json",
+    "content": "{\n  \"name\": \"Kanboard\",\n  \"available\": true,\n  \"exposable\": true,\n  \"dynamic_config\": true,\n  \"port\": 8010,\n  \"id\": \"kanboard\",\n  \"description\": \"Kanboard is a free and open source Kanban project management software.\",\n  \"tipi_version\": 34,\n  \"version\": \"v1.2.54\",\n  \"categories\": [\"development\"],\n  \"short_desc\": \"Open Source Kanban Board\",\n  \"author\": \"Frédéric Guillot\",\n  \"source\": \"https://github.com/kanboard/kanboard\",\n  \"website\": \"https://kanboard.org/\",\n  \"form_fields\": [\n    {\n      \"type\": \"boolean\",\n      \"label\": \"Enable Plugin Installer\",\n      \"required\": false,\n      \"env_variable\": \"PLUGIN_INSTALLER\"\n    }\n  ],\n  \"supported_architectures\": [\"arm64\", \"amd64\"],\n  \"created_at\": 1691943801422,\n  \"updated_at\": 1788596780066,\n  \"$schema\": \"../app-info-schema.json\",\n  \"min_tipi_version\": \"4.5.0\"\n}\n"
+  }
+}

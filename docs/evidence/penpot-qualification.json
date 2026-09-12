@@ -1,0 +1,90 @@
+{
+  "app": "penpot",
+  "passed": true,
+  "scope": "reviewed mapping, transaction, managed storage and first use, on one host and one architecture",
+  "promotion": "approved",
+  "source_revision": "bdefcf58950f1a44a65348fe62ffa2ca883f538c",
+  "images": [
+    "penpotapp/frontend:2.17.2",
+    "penpotapp/backend:2.17.2",
+    "penpotapp/exporter:2.17.2",
+    "penpotapp/mcp:2.17.2",
+    "postgres:15.19",
+    "valkey/valkey:8.1.10"
+  ],
+  "image_ids": {
+    "penpotapp/backend:2.17.2": "sha256:770b55f6e51bfcee49152b30858ca6a47143256de8d43953a50b952b5c60bb55",
+    "penpotapp/exporter:2.17.2": "sha256:72a8061e88069b9baf0767bc11fbf3310d2527bb5964ca084cf8c844d84306c8",
+    "penpotapp/frontend:2.17.2": "sha256:94fa2864d8fc0cd62245af95c03cca89306a7fd23c206a98a3e9dc9a376ea27e",
+    "penpotapp/mcp:2.17.2": "sha256:84f3f07ead11745ad95c2c1db90d33d00c550cff76844791ca4389d307f1be37",
+    "postgres:15.19": "sha256:9b1d34adbce1dd07ee6e94b4a2cf698884b89bd44a6c9c12f5da8f3acbfe4957",
+    "valkey/valkey:8.1.10": "sha256:3fbd2e3e4b6e85e046c1e7c215e8f79087bc0357789184305806664e320996f3"
+  },
+  "first_use": "it opens a page with a clear next step, the same page after a restart and reinstall, and scripts/penpot-probe.mjs passed",
+  "steps": [
+    {
+      "step": "pull penpotapp/frontend:2.17.2",
+      "passed": true
+    },
+    {
+      "step": "pull penpotapp/backend:2.17.2",
+      "passed": true
+    },
+    {
+      "step": "pull penpotapp/exporter:2.17.2",
+      "passed": true
+    },
+    {
+      "step": "pull penpotapp/mcp:2.17.2",
+      "passed": true
+    },
+    {
+      "step": "pull postgres:15.19",
+      "passed": true
+    },
+    {
+      "step": "pull valkey/valkey:8.1.10",
+      "passed": true
+    },
+    {
+      "step": "installs with one action",
+      "passed": true
+    },
+    {
+      "step": "answers on its address",
+      "passed": true
+    },
+    {
+      "step": "is usable first install",
+      "passed": true
+    },
+    {
+      "step": "survives a restart",
+      "passed": true
+    },
+    {
+      "step": "is usable after restart",
+      "passed": true
+    },
+    {
+      "step": "reinstalls over data it kept",
+      "passed": true
+    },
+    {
+      "step": "keeps the credentials it generated",
+      "passed": true
+    },
+    {
+      "step": "is usable after a keep-data reinstall",
+      "passed": true
+    },
+    {
+      "step": "removes everything it created",
+      "passed": true
+    },
+    {
+      "step": "leaves other containers alone",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "id": "beszel",
+  "display_name": "Beszel",
+  "catalog_name": "Beszel",
+  "description": "Lightweight server monitoring hub with historical data, Docker stats and alerts.",
+  "category": "Utilities",
+  "license": "MIT",
+  "source_url": "https://github.com/henrygd/beszel",
+  "documentation_url": "https://beszel.dev",
+  "verified_at": "2026-09-10",
+  "lifecycle_proof": "docs/evidence/beszel-qualification.json",
+  "origin": {
+    "importer": "caprover",
+    "repository": "caprover/one-click-apps",
+    "revision": "7f1f329125dde0cb915f47c8b33293eca45f7d0e",
+    "path": "public/v4/apps/beszel.yml",
+    "license": "Apache-2.0"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "henrygd/beszel:0.18.6",
+        "source_url": "https://hub.docker.com/v2/repositories/henrygd/beszel/tags/0.18.6",
+        "checked_at": "2026-09-10",
+        "last_updated": "2026-03-29",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm/v7",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:4c162a441bee6d50d80a716a72eece78a77fe4dc1e0c65700ed9f555b365200d",
+          "linux/arm/v7": "sha256:3772089fefaa19312bbeb238837abf94d7b9e75d0f520997f2a05a14ba8575e7",
+          "linux/arm64": "sha256:82b28b0c7fe700b9e1a3a15c1a3630be8207649cbec85b33b4e1a39f8c1b853b"
+        },
+        "index_digest": "sha256:3135185161e072a5058f7c05b247345072bd9f3e23a4a9cd8c879880b085bc41"
+      }
+    ]
+  },
+  "promotion": {
+    "state": "approved",
+    "reason": "Qualified on 2026-09-10 and approved by the owner. A real install proved it starts, opens to a usable screen, survives a restart and a keep-data reinstall with its data intact, and removes everything it created. 0.18.6 was built 2026-03-29; upstream released 0.19.0 on 2026-09-03, so this is one minor version behind and worth revisiting when the definition moves. One container, its own embedded database, and no access to anything outside its managed folder."
+  },
+  "data_storage": "A Docker volume Local Store manages for beszel",
+  "risk_notes": [
+    "Creates 1 Docker container and publishes one port on this computer's loopback interface only.",
+    "Keeps its data in a Docker volume that Local Store manages for it. A keep-data uninstall leaves the volume; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "This is the Beszel hub, not the agent. On its own it shows an empty dashboard and asks you to create an administrator account; it only has anything to display once you install the Beszel agent on the machines you want to watch."
+  ],
+  "fields": {},
+  "definition": "{\"captainVersion\": 4, \"services\": {\"$$cap_appname\": {\"image\": \"henrygd/beszel:$$cap_beszel_version\", \"restart\": \"unless-stopped\", \"volumes\": [\"$$cap_appname-data:/beszel_data\"], \"caproverExtra\": {\"containerHttpPort\": \"8090\"}}}, \"caproverOneClickApp\": {\"variables\": [{\"id\": \"$$cap_beszel_version\", \"label\": \"Beszel Version\", \"defaultValue\": \"0.18.6\", \"description\": \"Check out their Docker page for the valid tags https://hub.docker.com/r/henrygd/beszel/tags\"}], \"instructions\": {\"start\": \"Beszel is a lightweight server monitoring hub with historical data, Docker stats, and alerts.\\n\\nFeatures\\n\\n\\u25c9 Lightweight and fast monitoring dashboard\\n\\u25c9 Docker container stats tracking\\n\\u25c9 Historical data with customizable retention\\n\\u25c9 Alerts via email, webhook, and more\\n\\u25c9 Multi-server monitoring with agents\\n\\u25c9 Built on PocketBase\\n\\nNote: This deploys the Beszel Hub only. You will need to install the Beszel Agent separately on each server you want to monitor. See https://beszel.dev/guide/agent-installation for details.\", \"end\": \"Beszel Hub is deployed! \\ud83c\\udf89\\n\\nYour service is available at http://$$cap_appname.$$cap_root_domain\\n\\nNext steps:\\n1. Open the URL above and create your admin account.\\n2. Install the Beszel Agent on servers you want to monitor. See https://beszel.dev/guide/agent-installation\"}, \"displayName\": \"Beszel\", \"isOfficial\": true, \"description\": \"Lightweight server monitoring hub with historical data, Docker stats, and alerts.\", \"documentation\": \"https://beszel.dev\"}}"
+}

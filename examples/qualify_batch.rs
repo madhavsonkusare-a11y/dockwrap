@@ -15,6 +15,11 @@
 //! Run again and it picks up where it stopped.
 //!
 //!     LOCAL_STORE_RUN_DOCKER_TEST=1 cargo run --release --example qualify_batch -- --limit 10
+//!
+//! `--only app,app` runs named candidates and re-runs them even if a
+//! result exists; `--source runtipi` picks which packaging of them to prove.
+//! `--offered --only app` proves an app as it is offered, image pins and all;
+//! `--probe scripts/app-probe.mjs` adds that app's own check.
 use local_store::qualification::{qualify_template, Batch, Evidence, Resume, ScriptProbe, Subject};
 use local_store::setup::{FieldKind, PlanTemplate};
 use std::collections::BTreeMap;
@@ -32,7 +37,7 @@ struct Candidate {
     path: String,
 }
 
-fn ranked(limit: usize) -> Vec<Candidate> {
+fn ranked(limit: usize, only: &[String], source: Option<&str>) -> Vec<Candidate> {
     let ranking: serde_json::Value = serde_json::from_str(
         &std::fs::read_to_string(root().join("catalog/candidate-ranking.json"))
             .expect("run scripts/rank-candidates.py first"),
@@ -87,8 +92,18 @@ fn ranked(limit: usize) -> Vec<Candidate> {
         // them, which matters because almost every required answer is a folder
         // and folders are most of what the popular apps need.
         let _ = &required;
-        // One definition per app: two sources packaging the same thing is one
-        // question, and the higher-ranked one is already first.
+        if !only.is_empty() && !only.contains(&key.0) {
+            continue;
+        }
+        // Rank orders apps, not the definitions of one app, and the
+        // higher-ranked source is not always the better-maintained package:
+        // CapRover's grocy pinned an image from 2020 where Runtipi's was four
+        // days old. `--source` is how a run says which packaging to prove.
+        if source.is_some_and(|wanted| wanted != key.1) {
+            continue;
+        }
+        // Otherwise one definition per app: two sources packaging the same
+        // thing is one question, and the higher-ranked one is already first.
         if !seen.insert(key.0.clone()) {
             continue;
         }
@@ -168,18 +183,26 @@ const NOT_AN_APP: &[&str] = &[
     "library/elasticsearch",
 ];
 
+/// Whether a definition is *only* infrastructure.
+///
+/// This asked whether *any* image was infrastructure, which skipped every app
+/// that ships its own database: WordPress, Nextcloud, Joplin, Monica and
+/// Guacamole were all passed over as "not an app" because of a Postgres or
+/// MariaDB sidecar. An app is judged by what it is, not by what it stores its
+/// data in — the same mistake the ranking once made with pull counts.
 fn is_infrastructure(images: &[String]) -> bool {
-    images.iter().any(|image| {
-        let repository = image
-            .rsplit_once(':')
-            .map_or(image.as_str(), |(name, _)| name);
-        let repository = if repository.contains('/') {
-            repository.to_owned()
-        } else {
-            format!("library/{repository}")
-        };
-        NOT_AN_APP.iter().any(|known| repository == *known)
-    })
+    !images.is_empty()
+        && images.iter().all(|image| {
+            let repository = image
+                .rsplit_once(':')
+                .map_or(image.as_str(), |(name, _)| name);
+            let repository = if repository.contains('/') {
+                repository.to_owned()
+            } else {
+                format!("library/{repository}")
+            };
+            NOT_AN_APP.iter().any(|known| repository == *known)
+        })
 }
 
 /// Answers a batch can supply for itself, so an app that asks a question is
@@ -258,6 +281,18 @@ fn is_environmental(evidence: &Evidence) -> bool {
         return true;
     }
     let detail = failure.detail.as_deref().unwrap_or("").to_ascii_lowercase();
+    // A timed-out install now carries what its containers said, and that can
+    // settle the question: an app that logged requests answered with 5xx, or
+    // a container that exited, is the app failing — not the machine. Monica
+    // answered every request with 500 for three minutes and was retried as
+    // though Docker had been slow.
+    let app_refused = detail.contains("exited (")
+        || ["http/1.0\" 5", "http/1.1\" 5"]
+            .iter()
+            .any(|sign| detail.contains(sign));
+    if app_refused {
+        return false;
+    }
     [
         "timed out",
         "timeout",
@@ -268,6 +303,83 @@ fn is_environmental(evidence: &Evidence) -> bool {
     ]
     .iter()
     .any(|sign| detail.contains(sign))
+}
+
+/// Prove apps exactly as they are offered, rather than as an importer maps them.
+///
+/// A candidate run proves the raw mapping. An offered app can differ from that
+/// — an image pin moves it to a patched release — and the proof has to be
+/// about what somebody would actually install. This runs the reviewed mapping
+/// through the same harness and writes the result where the review names it.
+/// It is also how an offered app is re-verified before a release.
+fn run_offered(only: &[String], batch: &Batch, app_probe: Option<&str>) {
+    if only.is_empty() {
+        eprintln!("--offered needs --only app,app: it re-proves named apps, not a ranking");
+        std::process::exit(2);
+    }
+    let scratch = root().join(".cache");
+    for app in only {
+        let Some(offering) = local_store::offerings::offering(app) else {
+            println!("{app}: not offered, so there is nothing to prove as offered");
+            continue;
+        };
+        let template = match offering.plan_template(None) {
+            Ok(template) => template,
+            Err(error) => {
+                println!(
+                    "{app}: its reviewed mapping does not resolve: {}",
+                    error.message
+                );
+                continue;
+            }
+        };
+        let answers = auto_answers(&template, &scratch);
+        // An app's own probe checks what only that app does — Penpot's MCP
+        // server, say — on top of the standard. It is named on the command
+        // line rather than found by file name, because probes do not all
+        // take the same arguments.
+        let (script, describes) = match app_probe {
+            Some(script) => (
+                root().join(script),
+                format!(
+                    "it opens a page with a clear next step, the same page after a restart and reinstall, and {script} passed"
+                ),
+            ),
+            None => (
+                root().join("scripts/standard-probe.mjs"),
+                "it opens a page with a clear next step, and the same page after a restart and reinstall"
+                    .to_owned(),
+            ),
+        };
+        let probe = ScriptProbe::new(script, describes).with_args(vec![scratch
+            .join(format!("standard-{app}.json"))
+            .to_string_lossy()
+            .into_owned()]);
+        println!("{app}: running as offered…");
+        match local_store::qualification::qualify(app, &answers, &probe, &scratch) {
+            Ok(evidence) => {
+                if let Err(error) = batch.record(&evidence) {
+                    println!("  could not record: {}", error.message);
+                }
+                let proof = root()
+                    .join("docs/evidence")
+                    .join(format!("{app}-qualification.json"));
+                if let Err(error) = std::fs::write(&proof, evidence.to_json() + "\n") {
+                    println!("  could not write {}: {error}", proof.display());
+                }
+                if evidence.passed {
+                    println!("  passed");
+                } else {
+                    println!(
+                        "  FAILED at {:?}: {:?}",
+                        evidence.failure().map(|step| &step.step),
+                        evidence.failure().and_then(|step| step.detail.as_deref())
+                    );
+                }
+            }
+            Err(error) => println!("  could not run: {}", error.message),
+        }
+    }
 }
 
 fn main() {
@@ -283,7 +395,24 @@ fn main() {
         .and_then(|value| value.parse().ok())
         .unwrap_or(10usize);
     let keep_images = args.iter().any(|arg| arg == "--keep-images");
-    let resume = if args.iter().any(|arg| arg == "--retry-failures") {
+    // Naming apps is how a re-run proves one packaging against another, so it
+    // implies retrying whatever was already recorded about them.
+    let only: Vec<String> = args
+        .iter()
+        .position(|arg| arg == "--only")
+        .and_then(|at| args.get(at + 1))
+        .map(|value| value.split(',').map(|id| id.trim().to_owned()).collect())
+        .unwrap_or_default();
+    let source = args
+        .iter()
+        .position(|arg| arg == "--source")
+        .and_then(|at| args.get(at + 1))
+        .map(String::as_str);
+    let resume = if !only.is_empty() {
+        // Naming apps is asking a new question about them, so an old answer
+        // does not settle it.
+        Resume::RunAnyway
+    } else if args.iter().any(|arg| arg == "--retry-failures") {
         Resume::RetryFailures
     } else {
         Resume::SkipRecorded
@@ -291,7 +420,34 @@ fn main() {
 
     let results = root().join(".cache/qualification");
     let batch = Batch::open(&results).expect("a results directory");
-    let candidates = ranked(limit);
+    if args.iter().any(|arg| arg == "--offered") {
+        let app_probe = args
+            .iter()
+            .position(|arg| arg == "--probe")
+            .and_then(|at| args.get(at + 1))
+            .map(String::as_str);
+        run_offered(&only, &batch, app_probe);
+        return;
+    }
+    let candidates = ranked(
+        if only.is_empty() { limit } else { only.len() },
+        &only,
+        source,
+    );
+    if !only.is_empty() && candidates.len() < only.len() {
+        let found: Vec<&str> = candidates.iter().map(|c| c.id.as_str()).collect();
+        for id in &only {
+            if !found.contains(&id.as_str()) {
+                println!(
+                    "{id}: no importable candidate{}",
+                    match source {
+                        Some(name) => format!(" from {name}"),
+                        None => String::new(),
+                    }
+                );
+            }
+        }
+    }
     let ids: Vec<String> = candidates.iter().map(|c| c.id.clone()).collect();
     let todo = batch.remaining(&ids, resume);
     println!(
@@ -324,11 +480,24 @@ fn main() {
                 continue;
             }
         };
-        let Some(template) = outcome.ok().and_then(|outcome| outcome.template) else {
+        let Some(mut template) = outcome.ok().and_then(|outcome| outcome.template) else {
             println!("{}: no longer importable, skipping", candidate.id);
             skipped += 1;
             continue;
         };
+        // What Runtipi would have copied into the data folder, it gets here
+        // too; a definition mounting one of these is broken without it.
+        if candidate.source == "runtipi" {
+            let folder = root()
+                .join(".cache/definitions")
+                .join(&candidate.revision)
+                .join(Path::new(&candidate.path).parent().unwrap_or(Path::new("")));
+            let (seeds, binary) = local_store::importers::runtipi::read_seeds(&folder);
+            if !binary.is_empty() {
+                println!("  {}: cannot carry binary seed(s) {binary:?}", candidate.id);
+            }
+            template.seeds = seeds;
+        }
         // Qualifying a hundred apps means pulling a hundred images, which is
         // tens of gigabytes on somebody's real machine. Anything this run
         // pulls, it removes; anything that was already there is left exactly

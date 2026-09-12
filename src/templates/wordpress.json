@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "id": "wordpress",
+  "display_name": "WordPress",
+  "catalog_name": "WordPress",
+  "description": "World's most-used blogging and CMS engine.",
+  "category": "Content Management Systems (CMS)",
+  "license": "GPL-2.0-or-later",
+  "source_url": "https://github.com/WordPress/WordPress",
+  "documentation_url": "https://wordpress.org/",
+  "verified_at": "2026-09-11",
+  "lifecycle_proof": "docs/evidence/wordpress-qualification.json",
+  "origin": {
+    "importer": "runtipi",
+    "repository": "runtipi/runtipi-appstore",
+    "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+    "path": "apps/wordpress/docker-compose.json",
+    "license": "GPL-3.0"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "wordpress:7.1.0",
+        "source_url": "https://hub.docker.com/v2/repositories/library/wordpress/tags/7.1.0",
+        "checked_at": "2026-09-10",
+        "last_updated": "2026-08-29",
+        "container_platforms": [
+          "linux/386",
+          "linux/amd64",
+          "linux/arm/v5",
+          "linux/arm/v7",
+          "linux/arm64/v8",
+          "linux/ppc64le",
+          "linux/riscv64",
+          "linux/s390x"
+        ],
+        "digests": {
+          "linux/386": "sha256:41cb967f4e2aa242659647819ae35506f3827be04a5a4fbe739f9cdad63f6032",
+          "linux/amd64": "sha256:49801e46d08eb27ea68ed62e205bb35b1bb2dc962251bf2292a7d374f9637cee",
+          "linux/arm/v5": "sha256:9a587ea9893c22e9d3de760e6dfeb1562302920bc351a77cce3e76dc51007cdf",
+          "linux/arm/v7": "sha256:fb8d5bb31adda926c0f75950921c37451da1ba401d9045c38d48710eed6e9568",
+          "linux/arm64/v8": "sha256:ab6fc9ad816c305305905694238e5566a39e8d1c56719741e359605a89f15bf6",
+          "linux/ppc64le": "sha256:ca79e5e5b39c0244708652d2e0d5a94c9a0f84bbec160c88dc18be3ed7a9dcca",
+          "linux/riscv64": "sha256:3a9e6f0b70f12b7d338c1b5b6b8f05d959aa2c489ae7d48a8cc09186ee467b59",
+          "linux/s390x": "sha256:738e9a1eb18cdda578785a4e5c4ece33ea8ed26648899ca8709b02ae1ab21f45"
+        },
+        "index_digest": "sha256:5a93c470ae8220fddf71f6ebe3bc94e615ddc2ae4d9810f795b830fb11c41a17"
+      },
+      {
+        "image": "mariadb:11.4.13",
+        "source_url": "https://hub.docker.com/v2/repositories/library/mariadb/tags/11.4.13",
+        "checked_at": "2026-09-10",
+        "last_updated": "2026-09-09",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64/v8",
+          "linux/ppc64le",
+          "linux/s390x"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:ebf0b3e4493368caed4ed6dea8e9a8be0f52bf9844aa185b3e56b72a83838fb6",
+          "linux/arm64/v8": "sha256:eebec83fe506646139690097318f650e0cb294f7436123b8d4c5866f2bd46d03",
+          "linux/ppc64le": "sha256:de0335a810948bd567867f1986e28674c9cb6a01ee6c21d4eaffd43f22895a09",
+          "linux/s390x": "sha256:93e2a78e5d8a37d419ca86883d68f624e3c2dcec1dbc815eea9d9d4c460c13d4"
+        },
+        "index_digest": "sha256:80494b9810694179889f7281ec44ca928241df577159c0356a1070e2e94616a1"
+      }
+    ]
+  },
+  "promotion": {
+    "state": "approved",
+    "reason": "Approved by the owner on 2026-09-10 after qualifying as offered: a real install of WordPress 7.1.0 — upstream's current release — with its MariaDB pinned from an end-of-life 11.1 to the 11.4 long-term line proved it starts, opens to its installer, survives a restart and a keep-data reinstall with its data and generated database credentials intact, and removes everything it created. Two containers; the database is not published and is reachable only by WordPress. The first as-offered run failed at first use and its error was lost — the probe kept only the tail of Node's output — which is why probe failures are now recorded by what they threw. The second run passed every step. Worth watching for a slow first page on the 11.4 database."
+  },
+  "data_storage": "Local Store managed folder / wordpress",
+  "risk_notes": [
+    "Creates 2 Docker containers and publishes one port on this computer's loopback interface only.",
+    "Generates 2 credentials of its own, keeps them beside the app's data, and reuses them if you reinstall.",
+    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Opens to WordPress's own installer, which asks you to name the site and create the administrator account. Themes and plugins you add later are code that runs on your computer, so install them from sources you trust."
+  ],
+  "fields": {},
+  "definition": "{\n  \"services\": [\n    {\n      \"name\": \"wordpress\",\n      \"image\": \"wordpress:7.1.0\",\n      \"isMain\": true,\n      \"internalPort\": 80,\n      \"environment\": [\n        {\n          \"key\": \"WORDPRESS_DB_HOST\",\n          \"value\": \"wordpress-db\"\n        },\n        {\n          \"key\": \"WORDPRESS_DB_NAME\",\n          \"value\": \"wordpress\"\n        },\n        {\n          \"key\": \"WORDPRESS_DB_USER\",\n          \"value\": \"tipi\"\n        },\n        {\n          \"key\": \"WORDPRESS_DB_PASSWORD\",\n          \"value\": \"${DB_PASSWORD}\"\n        }\n      ],\n      \"dependsOn\": [\"wordpress-db\"],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/wordpress\",\n          \"containerPath\": \"/var/www/html\"\n        }\n      ]\n    },\n    {\n      \"name\": \"wordpress-db\",\n      \"image\": \"mariadb:11.1.3\",\n      \"environment\": [\n        {\n          \"key\": \"MYSQL_ROOT_PASSWORD\",\n          \"value\": \"${DB_ROOT_PASSWORD}\"\n        },\n        {\n          \"key\": \"MYSQL_DATABASE\",\n          \"value\": \"wordpress\"\n        },\n        {\n          \"key\": \"MYSQL_USER\",\n          \"value\": \"tipi\"\n        },\n        {\n          \"key\": \"MYSQL_PASSWORD\",\n          \"value\": \"${DB_PASSWORD}\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/mariadb\",\n          \"containerPath\": \"/var/lib/mysql\"\n        }\n      ]\n    }\n  ],\n  \"schemaVersion\": 2,\n  \"$schema\": \"https://schemas.runtipi.io/v2/dynamic-compose.json\"\n}\n",
+  "config": {
+    "path": "apps/wordpress/config.json",
+    "content": "{\n  \"name\": \"WordPress\",\n  \"available\": true,\n  \"port\": 8213,\n  \"exposable\": true,\n  \"dynamic_config\": true,\n  \"id\": \"wordpress\",\n  \"description\": \"WordPress is a popular content management system for creating websites and blogs.\",\n  \"tipi_version\": 34,\n  \"version\": \"7.1.0\",\n  \"categories\": [\"social\"],\n  \"short_desc\": \"Popular CMS for websites and blogs\",\n  \"author\": \"WordPress.org\",\n  \"source\": \"https://github.com/WordPress/WordPress\",\n  \"website\": \"https://wordpress.org\",\n  \"form_fields\": [\n    {\n      \"type\": \"random\",\n      \"label\": \"Database Password\",\n      \"min\": 32,\n      \"env_variable\": \"DB_PASSWORD\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Database Root Password\",\n      \"min\": 32,\n      \"env_variable\": \"DB_ROOT_PASSWORD\"\n    }\n  ],\n  \"supported_architectures\": [\"amd64\", \"arm64\"],\n  \"created_at\": 1691943801422,\n  \"updated_at\": 1787374932827,\n  \"$schema\": \"../app-info-schema.json\",\n  \"min_tipi_version\": \"4.5.0\"\n}\n"
+  },
+  "image_pins": [
+    {
+      "definition": "mariadb:11.1.3",
+      "replacement": "mariadb:11.4.13",
+      "reason": "The Runtipi definition runs its database on MariaDB 11.1.3, built 2024-02-09. 11.1 was a short-term release and reached end of life in August 2024, so it has had no security fixes for two years. 11.4 is MariaDB's current long-term release, supported until 2029, and 11.4.13 is its latest patch. WordPress supports any MariaDB from 10.6, a fresh install has no data to migrate, and the audit below covers 11.4.13 because that is what runs."
+    }
+  ]
+}

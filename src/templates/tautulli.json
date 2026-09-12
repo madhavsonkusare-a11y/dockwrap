@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "id": "tautulli",
+  "display_name": "Tautulli",
+  "catalog_name": "Tautulli",
+  "description": "Monitoring and tracking tool for Plex Media Server.",
+  "category": "Media",
+  "license": "GPL-3.0",
+  "source_url": "https://github.com/Tautulli/Tautulli",
+  "documentation_url": "https://tautulli.com",
+  "verified_at": "2026-09-10",
+  "lifecycle_proof": "docs/evidence/tautulli-qualification.json",
+  "origin": {
+    "importer": "runtipi",
+    "repository": "runtipi/runtipi-appstore",
+    "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+    "path": "apps/tautulli/docker-compose.json",
+    "license": "GPL-3.0"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "lscr.io/linuxserver/tautulli:2.18.1",
+        "source_url": "https://lscr.io/v2/linuxserver/tautulli/manifests/2.18.1",
+        "checked_at": "2026-09-10",
+        "last_updated": "2026-09-04",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:b649c2413c22c7a33d900714d0e505415c36124508a73a3d62cedead9cf00560",
+          "linux/arm64": "sha256:47868fa91ebdce3a6c8da67a7141baee2398f8e4f8f0b11b239f5cc4aacaf39a"
+        },
+        "index_digest": "sha256:5ce8c5f82f9153e72ad4a24a1605f5a90bfee4bbe8e75bd05fcf91b410330b63"
+      }
+    ]
+  },
+  "promotion": {
+    "state": "approved",
+    "reason": "Qualified on 2026-09-10 and approved by the owner. A real install proved it starts, opens to a usable screen, survives a restart and a keep-data reinstall with its data intact, and removes everything it created. 2.18.1 is upstream's current release, published 2026-08-27, and this image was rebuilt 2026-09-04 for amd64 and arm64. Re-run against Runtipi's definition after CapRover's turned out to pin 2.7.5 from 2021."
+  },
+  "data_storage": "Local Store managed folder / tautulli",
+  "risk_notes": [
+    "Creates 1 Docker container and publishes one port on this computer's loopback interface only.",
+    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Watches a Plex Media Server you already run, and does nothing useful without one. It opens to a setup wizard that asks for that server, and has no sign-in of its own until you turn one on in that wizard."
+  ],
+  "fields": {
+    "TZ": {
+      "label": "Time zone (for example, Asia/Kolkata)",
+      "sensitive": false
+    }
+  },
+  "definition": "{\n  \"services\": [\n    {\n      \"name\": \"tautulli\",\n      \"image\": \"lscr.io/linuxserver/tautulli:2.18.1\",\n      \"isMain\": true,\n      \"internalPort\": 8181,\n      \"environment\": [\n        {\n          \"key\": \"PUID\",\n          \"value\": \"1000\"\n        },\n        {\n          \"key\": \"PGID\",\n          \"value\": \"1000\"\n        },\n        {\n          \"key\": \"TZ\",\n          \"value\": \"${TZ}\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/config\",\n          \"containerPath\": \"/config\"\n        }\n      ]\n    }\n  ],\n  \"schemaVersion\": 2,\n  \"$schema\": \"https://schemas.runtipi.io/v2/dynamic-compose.json\"\n}\n",
+  "config": {
+    "path": "apps/tautulli/config.json",
+    "content": "{\n  \"$schema\": \"../app-info-schema.json\",\n  \"name\": \"Tautulli\",\n  \"available\": true,\n  \"exposable\": true,\n  \"dynamic_config\": true,\n  \"port\": 8181,\n  \"id\": \"tautulli\",\n  \"tipi_version\": 38,\n  \"version\": \"2.18.1\",\n  \"categories\": [\"media\", \"utilities\"],\n  \"description\": \"Tautulli is a 3rd party application that you can run alongside your Plex Media Server to monitor activity and track various statistics. Most importantly, these statistics include what has been watched, who watched it, when and where they watched it, and how it was watched. The only thing missing is \\\"why they watched it\\\", but who am I to question your 42 plays of Frozen. All statistics are presented in a nice and clean interface with many tables and graphs, which makes it easy to brag about your server to everyone else.\",\n  \"short_desc\": \"Monitoring and tracking tool for Plex Media Server.\",\n  \"author\": \"JonnyWong16\",\n  \"source\": \"https://github.com/Tautulli/Tautulli\",\n  \"form_fields\": [],\n  \"supported_architectures\": [\"arm64\", \"amd64\"],\n  \"created_at\": 1691943801422,\n  \"updated_at\": 1788596820082,\n  \"min_tipi_version\": \"4.5.0\"\n}\n"
+  }
+}

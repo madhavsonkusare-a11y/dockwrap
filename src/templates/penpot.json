@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "id": "penpot",
+  "display_name": "Penpot",
+  "catalog_name": "penpot",
+  "description": "Web-based design and prototyping platform meant for cross-domain teams.",
+  "category": "Design",
+  "license": "MPL-2.0",
+  "source_url": "https://github.com/penpot/penpot",
+  "documentation_url": "https://help.penpot.app/technical-guide/getting-started/docker/",
+  "verified_at": "2026-09-11",
+  "lifecycle_proof": "docs/evidence/penpot-qualification.json",
+  "origin": {
+    "importer": "runtipi",
+    "repository": "madhavsonkusare-a11y/local-store",
+    "revision": "bdefcf58950f1a44a65348fe62ffa2ca883f538c",
+    "path": "definitions/apps/penpot/docker-compose.json",
+    "license": "MIT"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "penpotapp/frontend:2.17.2",
+        "source_url": "https://hub.docker.com/v2/repositories/penpotapp/frontend/tags/2.17.2",
+        "checked_at": "2026-09-11",
+        "last_updated": "2026-08-27",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:e918474562933cdb0d9afe229d94d9205438bc330c23acdbfa266a91ecb751b6",
+          "linux/arm64": "sha256:8679469919ad19933c86b8b611ee0f1df31ad3858b7850901bf8358078fabb32"
+        },
+        "index_digest": "sha256:94fa2864d8fc0cd62245af95c03cca89306a7fd23c206a98a3e9dc9a376ea27e"
+      },
+      {
+        "image": "penpotapp/backend:2.17.2",
+        "source_url": "https://hub.docker.com/v2/repositories/penpotapp/backend/tags/2.17.2",
+        "checked_at": "2026-09-11",
+        "last_updated": "2026-08-27",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:08155249797d5e8b54e33e8581b45c6e5043be95742174c918dc17b633e09cc3",
+          "linux/arm64": "sha256:e4d296876d1d583de6f6ae2a98eabb50be60fb58a56f597951875137084c42d6"
+        },
+        "index_digest": "sha256:770b55f6e51bfcee49152b30858ca6a47143256de8d43953a50b952b5c60bb55"
+      },
+      {
+        "image": "penpotapp/exporter:2.17.2",
+        "source_url": "https://hub.docker.com/v2/repositories/penpotapp/exporter/tags/2.17.2",
+        "checked_at": "2026-09-11",
+        "last_updated": "2026-08-27",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:a72bdd4f95328f85f63ad6418b26419ebcc93be5f6d4f2b241b87c8a05402eef",
+          "linux/arm64": "sha256:cfb934d24e43dda4ea9ddf335498ecdcefc681f616a41926a11ac465fcae0ff0"
+        },
+        "index_digest": "sha256:72a8061e88069b9baf0767bc11fbf3310d2527bb5964ca084cf8c844d84306c8"
+      },
+      {
+        "image": "penpotapp/mcp:2.17.2",
+        "source_url": "https://hub.docker.com/v2/repositories/penpotapp/mcp/tags/2.17.2",
+        "checked_at": "2026-09-11",
+        "last_updated": "2026-08-27",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:7319ccce537aade598f119710ca49b01d6c953d00607d69c3a707cc99fa8534b",
+          "linux/arm64": "sha256:f14ad339d572f85394a59b48f60387bbb1fa8069bd35783229727e16e4d41ac2"
+        },
+        "index_digest": "sha256:84f3f07ead11745ad95c2c1db90d33d00c550cff76844791ca4389d307f1be37"
+      },
+      {
+        "image": "postgres:15.19",
+        "source_url": "https://hub.docker.com/v2/repositories/library/postgres/tags/15.19",
+        "checked_at": "2026-09-11",
+        "last_updated": "2026-08-28",
+        "container_platforms": [
+          "linux/386",
+          "linux/amd64",
+          "linux/arm/v5",
+          "linux/arm/v7",
+          "linux/arm64/v8",
+          "linux/ppc64le",
+          "linux/riscv64",
+          "linux/s390x"
+        ],
+        "digests": {
+          "linux/386": "sha256:fd21f211f9bf005362ba8e3bd0a26017773f81ce3b59afc0c552779f55ce0c99",
+          "linux/amd64": "sha256:c9d304da25223a60a3b3c5ec77b599c59f4a6088950ee612fdb5115d713d100d",
+          "linux/arm/v5": "sha256:de9697724a6f10dc5bc0d3bfb00ea3d5171d5eb24656ec03e87907a938b826c9",
+          "linux/arm/v7": "sha256:b1c4173466c7a319e5e01377b7c72e659feb9de2d411d15077befc38009cd1b1",
+          "linux/arm64/v8": "sha256:0b90daad6708473be4845619f4663bd8898ce926e62cab8a6da796a278eb28f8",
+          "linux/ppc64le": "sha256:a4d48f3ccb8bf7e7737f5fa87859b77a6c1e95c8be43d99862a8f02d316e5ca3",
+          "linux/riscv64": "sha256:1ca8a56769f89edc933e6e065bd539d6a4743e49fc63a8b03dbe4917ab2ac272",
+          "linux/s390x": "sha256:2041e6b56111e6117936952c357e5ac6c567c754b1cfba0e0e8e4f0816a2c52b"
+        },
+        "index_digest": "sha256:9b1d34adbce1dd07ee6e94b4a2cf698884b89bd44a6c9c12f5da8f3acbfe4957"
+      },
+      {
+        "image": "valkey/valkey:8.1.10",
+        "source_url": "https://hub.docker.com/v2/repositories/valkey/valkey/tags/8.1.10",
+        "checked_at": "2026-09-11",
+        "last_updated": "2026-09-07",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm/v7",
+          "linux/arm64",
+          "linux/ppc64le"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:f740fb12fb9dec890f4785ebd04ba184ab9bc556cc33063a01726a9180cc697c",
+          "linux/arm/v7": "sha256:289968a83f2f13a06f75bf58299eeffe30aea110d451e09517076a5fb346ef7d",
+          "linux/arm64": "sha256:bf810d180193bb7809af15379f844fe3d585c9e623ad6f43b22c302a5dd8cea2",
+          "linux/ppc64le": "sha256:bd3276c3d87ec6c4f340d1424fd1545fcd4aeb7a2c1c2a41a4c99f393c3e0c0b"
+        },
+        "index_digest": "sha256:3fbd2e3e4b6e85e046c1e7c215e8f79087bc0357789184305806664e320996f3"
+      }
+    ]
+  },
+  "promotion": {
+    "state": "approved",
+    "reason": "Approved by the owner. Qualified as offered on 2026-09-11: a real install of Penpot 2.17.2 — upstream's current release — proved all six containers start, it opens to a first screen with a clear next step, survives a restart and a keep-data reinstall with its data and generated credentials intact, and removes everything it created. In each of those phases an MCP client opened a session at the app's own /mcp/stream and listed Penpot's tools (scripts/penpot-probe.mjs). Local Store wrote this definition from Penpot's official Compose file because Runtipi's runs :latest images with its exporter pointed at the wrong port. An earlier run failed with the database marked unhealthy: a first start on a host folder took 19 seconds against a 12-second health window, so the start period was lengthened."
+  },
+  "data_storage": "Local Store managed folder / penpot",
+  "risk_notes": [
+    "Creates 6 Docker containers and publishes one port on this computer's loopback interface only.",
+    "Generates 2 credentials of its own, keeps them beside the app's data, and reuses them if you reinstall.",
+    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Anyone who can reach the address can create an account, and there is no mail server, so nothing is ever emailed: a forgotten password cannot be reset from the app. The first account you create is yours; keep its password somewhere safe.",
+    "Its exporter runs a headless browser to render exports. A running Penpot's six containers together used about 1.2 GB of memory when measured.",
+    "Includes Penpot's MCP server, so an AI agent can read and change your designs through this app's own address at /mcp/stream — for example `claude mcp add penpot -t http <address>/mcp/stream`. It only reaches designs you open with Penpot's MCP plugin, and anything that can reach the address can reach it.",
+    "Written by Local Store from Penpot's official Compose file, not taken from an app store."
+  ],
+  "fields": {},
+  "definition": "{\n  \"schemaVersion\": 2,\n  \"$schema\": \"https://schemas.runtipi.io/v2/dynamic-compose.json\",\n  \"services\": [\n    {\n      \"name\": \"penpot\",\n      \"image\": \"penpotapp/frontend:2.17.2\",\n      \"isMain\": true,\n      \"internalPort\": 8080,\n      \"environment\": [\n        {\n          \"key\": \"PENPOT_FLAGS\",\n          \"value\": \"enable-registration enable-login-with-password disable-email-verification disable-secure-session-cookies enable-mcp\"\n        },\n        {\n          \"key\": \"PENPOT_PUBLIC_URI\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}\"\n        },\n        {\n          \"key\": \"PENPOT_HTTP_SERVER_MAX_BODY_SIZE\",\n          \"value\": \"367001600\"\n        },\n        {\n          \"key\": \"PENPOT_HTTP_SERVER_MAX_MULTIPART_BODY_SIZE\",\n          \"value\": \"367001600\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/assets\",\n          \"containerPath\": \"/opt/data/assets\"\n        }\n      ],\n      \"dependsOn\": [\n        \"penpot-backend\",\n        \"penpot-exporter\",\n        \"penpot-mcp\"\n      ]\n    },\n    {\n      \"name\": \"penpot-backend\",\n      \"image\": \"penpotapp/backend:2.17.2\",\n      \"environment\": [\n        {\n          \"key\": \"PENPOT_FLAGS\",\n          \"value\": \"enable-registration enable-login-with-password disable-email-verification disable-secure-session-cookies enable-mcp\"\n        },\n        {\n          \"key\": \"PENPOT_PUBLIC_URI\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}\"\n        },\n        {\n          \"key\": \"PENPOT_SECRET_KEY\",\n          \"value\": \"${PENPOT_SECRET_KEY}\"\n        },\n        {\n          \"key\": \"PENPOT_DATABASE_URI\",\n          \"value\": \"postgresql://penpot-postgres/penpot\"\n        },\n        {\n          \"key\": \"PENPOT_DATABASE_USERNAME\",\n          \"value\": \"penpot\"\n        },\n        {\n          \"key\": \"PENPOT_DATABASE_PASSWORD\",\n          \"value\": \"${PENPOT_DB_PASSWORD}\"\n        },\n        {\n          \"key\": \"PENPOT_REDIS_URI\",\n          \"value\": \"redis://penpot-valkey/0\"\n        },\n        {\n          \"key\": \"PENPOT_OBJECTS_STORAGE_BACKEND\",\n          \"value\": \"fs\"\n        },\n        {\n          \"key\": \"PENPOT_OBJECTS_STORAGE_FS_DIRECTORY\",\n          \"value\": \"/opt/data/assets\"\n        },\n        {\n          \"key\": \"PENPOT_TELEMETRY_ENABLED\",\n          \"value\": \"false\"\n        },\n        {\n          \"key\": \"PENPOT_HTTP_SERVER_MAX_BODY_SIZE\",\n          \"value\": \"367001600\"\n        },\n        {\n          \"key\": \"PENPOT_HTTP_SERVER_MAX_MULTIPART_BODY_SIZE\",\n          \"value\": \"367001600\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/assets\",\n          \"containerPath\": \"/opt/data/assets\"\n        }\n      ],\n      \"dependsOn\": {\n        \"penpot-postgres\": {\n          \"condition\": \"service_healthy\"\n        },\n        \"penpot-valkey\": {\n          \"condition\": \"service_healthy\"\n        }\n      }\n    },\n    {\n      \"name\": \"penpot-exporter\",\n      \"image\": \"penpotapp/exporter:2.17.2\",\n      \"environment\": [\n        {\n          \"key\": \"PENPOT_SECRET_KEY\",\n          \"value\": \"${PENPOT_SECRET_KEY}\"\n        },\n        {\n          \"key\": \"PENPOT_PUBLIC_URI\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}\"\n        },\n        {\n          \"key\": \"PENPOT_INTERNAL_URI\",\n          \"value\": \"http://penpot:8080\"\n        },\n        {\n          \"key\": \"PENPOT_REDIS_URI\",\n          \"value\": \"redis://penpot-valkey/0\"\n        }\n      ],\n      \"dependsOn\": {\n        \"penpot-valkey\": {\n          \"condition\": \"service_healthy\"\n        }\n      }\n    },\n    {\n      \"name\": \"penpot-mcp\",\n      \"image\": \"penpotapp/mcp:2.17.2\"\n    },\n    {\n      \"name\": \"penpot-postgres\",\n      \"image\": \"postgres:15.19\",\n      \"stopSignal\": \"SIGINT\",\n      \"healthCheck\": {\n        \"test\": \"pg_isready -U penpot\",\n        \"interval\": \"2s\",\n        \"timeout\": \"10s\",\n        \"retries\": 10,\n        \"startPeriod\": \"60s\"\n      },\n      \"environment\": [\n        {\n          \"key\": \"POSTGRES_INITDB_ARGS\",\n          \"value\": \"--data-checksums\"\n        },\n        {\n          \"key\": \"POSTGRES_DB\",\n          \"value\": \"penpot\"\n        },\n        {\n          \"key\": \"POSTGRES_USER\",\n          \"value\": \"penpot\"\n        },\n        {\n          \"key\": \"POSTGRES_PASSWORD\",\n          \"value\": \"${PENPOT_DB_PASSWORD}\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/postgres\",\n          \"containerPath\": \"/var/lib/postgresql/data\"\n        }\n      ]\n    },\n    {\n      \"name\": \"penpot-valkey\",\n      \"image\": \"valkey/valkey:8.1.10\",\n      \"healthCheck\": {\n        \"test\": \"valkey-cli ping | grep PONG\",\n        \"interval\": \"1s\",\n        \"timeout\": \"3s\",\n        \"retries\": 5,\n        \"startPeriod\": \"3s\"\n      },\n      \"environment\": [\n        {\n          \"key\": \"VALKEY_EXTRA_FLAGS\",\n          \"value\": \"--maxmemory 128mb --maxmemory-policy volatile-lfu\"\n        }\n      ]\n    }\n  ]\n}\n",
+  "config": {
+    "path": "definitions/apps/penpot/config.json",
+    "content": "{\n  \"id\": \"penpot\",\n  \"name\": \"Penpot\",\n  \"version\": \"2.17.2\",\n  \"source\": \"https://github.com/penpot/penpot\",\n  \"note\": \"Authored by Local Store from Penpot's official docker-compose.yaml, not taken from Runtipi's store.\",\n  \"short_desc\": \"Web-based design and prototyping platform meant for cross-domain teams.\",\n  \"categories\": [\n    \"Design\"\n  ],\n  \"website\": \"https://penpot.app/\",\n  \"license\": \"MPL-2.0\",\n  \"form_fields\": [\n    {\n      \"type\": \"random\",\n      \"label\": \"Session signing key\",\n      \"min\": 64,\n      \"max\": 64,\n      \"env_variable\": \"PENPOT_SECRET_KEY\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Database password\",\n      \"min\": 32,\n      \"max\": 32,\n      \"env_variable\": \"PENPOT_DB_PASSWORD\"\n    }\n  ]\n}\n"
+  }
+}

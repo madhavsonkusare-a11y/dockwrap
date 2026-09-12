@@ -24,8 +24,13 @@ means they start from the facts rather than from an empty file.
 
 import argparse
 import datetime
+import hashlib
 import json
+import re
 import subprocess
+import time
+import urllib.error
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -33,27 +38,206 @@ ROOT = Path(__file__).resolve().parents[1]
 REVIEW = "REVIEW: "
 
 
+USER_AGENT = {"User-Agent": "Local-Store-template"}
+# Every manifest shape a registry might answer with. Omitting the OCI ones gets
+# a v1 manifest back from registries that still keep one, which lists no
+# platforms at all.
+MANIFEST_TYPES = ", ".join(
+    (
+        "application/vnd.oci.image.index.v1+json",
+        "application/vnd.oci.image.manifest.v1+json",
+        "application/vnd.docker.distribution.manifest.list.v2+json",
+        "application/vnd.docker.distribution.manifest.v2+json",
+    )
+)
+
+
+def opened(request, attempts=5):
+    """urlopen, waiting out a registry that says it is being asked too often.
+
+    ghcr.io answers a burst of anonymous requests with 429 and a Retry-After.
+    Treating that as a refusal fails a manifest over nothing; the registry has
+    said exactly how long to wait.
+    """
+    for attempt in range(attempts):
+        try:
+            return urllib.request.urlopen(request, timeout=30)
+        except urllib.error.HTTPError as error:
+            if error.code != 429 or attempt == attempts - 1:
+                raise
+            wait = error.headers.get("Retry-After", "")
+            delay = int(wait) if wait.isdigit() else 2 ** (attempt + 2)
+            time.sleep(min(delay, 120))
+
+
 def fetch(url):
-    request = urllib.request.Request(url, headers={"User-Agent": "Local-Store-template"})
-    with urllib.request.urlopen(request, timeout=30) as response:
+    request = urllib.request.Request(url, headers=USER_AGENT)
+    with opened(request) as response:
         return json.loads(response.read(2 * 1024 * 1024))
 
 
+def split_image(image):
+    """(registry host or None, repository, tag) for one image reference."""
+    name, _, tag = image.rpartition(":")
+    if not name:  # no tag at all; the guard test refuses those anyway
+        name, tag = image, "latest"
+    head, slash, rest = name.partition("/")
+    if slash and ("." in head or ":" in head or head == "localhost"):
+        return head, rest, tag
+    return None, (name if slash else f"library/{name}"), tag
+
+
+def registry_get(host, path, accept=None):
+    """One authenticated GET against a registry, answering its own challenge.
+
+    Registries disagree about where tokens come from — Docker Hub, ghcr.io and
+    quay.io all use different URLs, and lscr.io hands its callers to ghcr.io.
+    Asking unauthenticated first and reading `WWW-Authenticate` is how the
+    protocol says to find out, and it means a registry nobody anticipated works
+    without a special case here.
+    """
+    url = f"https://{host}{path}"
+    headers = dict(USER_AGENT)
+    if accept:
+        headers["Accept"] = accept
+    try:
+        with opened(urllib.request.Request(url, headers=headers)) as response:
+            return response.read(8 * 1024 * 1024)
+    except urllib.error.HTTPError as refusal:
+        if refusal.code != 401:
+            raise
+        challenge = refusal.headers.get("WWW-Authenticate") or ""
+    if not challenge.lower().startswith("bearer "):
+        raise SystemExit(f"{host}: asks for {challenge.split(' ')[0]}, which needs a login")
+    fields = dict(re.findall(r'(\w+)="([^"]*)"', challenge))
+    realm = fields.pop("realm", None)
+    if not realm:
+        raise SystemExit(f"{host}: sent an authentication challenge naming no token endpoint")
+    query = urllib.parse.urlencode(fields)
+    grant = fetch(f"{realm}?{query}" if query else realm)
+    token = grant.get("token") or grant.get("access_token")
+    if not token:
+        raise SystemExit(f"{host}: its token endpoint returned no token")
+    headers["Authorization"] = f"Bearer {token}"
+    with opened(urllib.request.Request(url, headers=headers)) as response:
+        return response.read(8 * 1024 * 1024)
+
+
+def registry_digest(host, repository, reference):
+    """The digest a registry serves for a tag or digest, asked with HEAD.
+
+    Docker Hub counts a manifest GET as a pull against an anonymous limit of a
+    few per hour, and a long batch spends it; a HEAD is free and carries the
+    same Docker-Content-Digest header. Returns None when the reference does not
+    exist.
+    """
+    url = f"https://{host}/v2/{repository}/manifests/{reference}"
+    headers = {**USER_AGENT, "Accept": MANIFEST_TYPES}
+    for attempt in range(2):
+        try:
+            with opened(urllib.request.Request(url, headers=headers, method="HEAD")) as response:
+                return response.headers.get("Docker-Content-Digest")
+        except urllib.error.HTTPError as refusal:
+            if refusal.code == 404:
+                return None
+            if refusal.code != 401 or attempt:
+                raise
+            challenge = refusal.headers.get("WWW-Authenticate") or ""
+        fields = dict(re.findall(r'(\w+)="([^"]*)"', challenge))
+        realm = fields.pop("realm", None)
+        if not realm:
+            raise SystemExit(f"{host}: sent an authentication challenge naming no token endpoint")
+        grant = fetch(f"{realm}?{urllib.parse.urlencode(fields)}")
+        headers["Authorization"] = f"Bearer {grant.get('token') or grant.get('access_token')}"
+    return None
+
+
+def index_digest(image):
+    """The manifest-list digest a tag points at now — what an install pins."""
+    host, repository, tag = split_image(image)
+    return registry_digest(host or "registry-1.docker.io", repository, tag)
+
+
+def registry_audit(host, repository, tag, image):
+    """The same audit for any registry that speaks the distribution API.
+
+    Docker Hub's own API reports when a tag was last *pushed*. Other registries
+    publish no such field, so this reads the build date out of the image's own
+    config — which is what "last rebuilt" actually means, and is the number a
+    promotion decision turns on.
+    """
+    body = registry_get(host, f"/v2/{repository}/manifests/{tag}", MANIFEST_TYPES)
+    manifest = json.loads(body)
+    platforms = {}
+    if "manifests" in manifest:
+        for entry in manifest["manifests"]:
+            platform = entry.get("platform") or {}
+            # Attestations and signatures ride alongside the real images and
+            # describe no platform. Counting them would claim architectures the
+            # app cannot run on.
+            if platform.get("os") in (None, "unknown"):
+                continue
+            if platform.get("architecture") in (None, "unknown"):
+                continue
+            key = "/".join(
+                part
+                for part in (platform["os"], platform["architecture"], platform.get("variant"))
+                if part
+            )
+            platforms[key] = entry["digest"]
+        if not platforms:
+            raise SystemExit(f"{image}: the registry lists no platforms for this tag")
+        # Every architecture of a tag is built together, so one config carries
+        # the build date for all of them.
+        first = next((key for key in sorted(platforms) if key.endswith("amd64")), None)
+        child = json.loads(
+            registry_get(
+                host,
+                f"/v2/{repository}/manifests/{platforms[first or sorted(platforms)[0]]}",
+                MANIFEST_TYPES,
+            )
+        )
+    else:
+        # A single-platform image is its own manifest and names no platform, so
+        # the only honest answer comes from its config rather than a default.
+        child = manifest
+
+    config = json.loads(registry_get(host, f"/v2/{repository}/blobs/{child['config']['digest']}"))
+    if not platforms:
+        if not config.get("os") or not config.get("architecture"):
+            raise SystemExit(f"{image}: names no platform anywhere, so portability is unknown")
+        key = "/".join(
+            part
+            for part in (config["os"], config["architecture"], config.get("variant"))
+            if part
+        )
+        # A content digest is the hash of the manifest that was served, so
+        # there is no need to ask the registry what it calls this tag.
+        platforms[key] = "sha256:" + hashlib.sha256(body).hexdigest()
+
+    created = (config.get("created") or "")[:10]
+    if not created:
+        raise SystemExit(f"{image}: its config records no build date, so staleness cannot be shown")
+    return {
+        "image": image,
+        "source_url": f"https://{host}/v2/{repository}/manifests/{tag}",
+        "checked_at": datetime.date.today().isoformat(),
+        "last_updated": created,
+        "container_platforms": sorted(platforms),
+        "digests": dict(sorted(platforms.items())),
+    }
+
+
 def hub_repository(image):
-    name = image.rsplit(":", 1)[0]
-    if any(name.startswith(host) for host in ("ghcr.io/", "lscr.io/", "quay.io/", "gcr.io/")):
-        return None
-    return name if "/" in name else f"library/{name}"
+    host, repository, _ = split_image(image)
+    return None if host else repository
 
 
 def image_audit(image):
     """Digests and rebuild date for one image, from the registry itself."""
-    repository = hub_repository(image)
-    if not repository:
-        raise SystemExit(
-            f"{image}: not on Docker Hub, and the platform gate cannot audit other registries yet"
-        )
-    tag = image.rsplit(":", 1)[1]
+    host, repository, tag = split_image(image)
+    if host:
+        return registry_audit(host, repository, tag, image)
     url = f"https://hub.docker.com/v2/repositories/{repository}/tags/{tag}"
     data = fetch(url)
     platforms = {}
@@ -69,7 +253,7 @@ def image_audit(image):
     return {
         "image": image,
         "source_url": url,
-        "checked_at": data["last_updated"][:10],
+        "checked_at": datetime.date.today().isoformat(),
         "last_updated": data["last_updated"][:10],
         "container_platforms": sorted(platforms),
         "digests": dict(sorted(platforms.items())),
@@ -109,6 +293,19 @@ def facts_for(candidate):
     return json.loads(done.stdout)
 
 
+def data_storage(facts, app):
+    """Where this app's data actually lives, in the words the review shows."""
+    if facts["managed_directories"]:
+        where = f"Local Store managed folder / {app}"
+    elif facts.get("named_volumes"):
+        where = f"A Docker volume Local Store manages for {app}"
+    else:
+        where = "None: it keeps no data of its own"
+    if facts["shared_folders"]:
+        where += ", plus a folder you choose"
+    return where
+
+
 def risk_notes(facts, catalog):
     notes = []
     services = facts["services"]
@@ -128,10 +325,23 @@ def risk_notes(facts, catalog):
             f"{'them' if count != 1 else 'it'} beside the app's data, and reuses "
             f"{'them' if count != 1 else 'it'} if you reinstall."
         )
-    notes.append(
-        "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting "
-        "data removes it permanently."
-    )
+    # Said from what the plan mounts, not assumed: Adminer and Whoogle keep
+    # nothing, and Beszel keeps its data in a named volume, yet all three were
+    # once described as keeping it in the managed folder.
+    if facts["managed_directories"]:
+        notes.append(
+            "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; "
+            "deleting data removes it permanently."
+        )
+    elif facts.get("named_volumes"):
+        notes.append(
+            "Keeps its data in a Docker volume that Local Store manages for it. A keep-data "
+            "uninstall leaves the volume; deleting data removes it permanently."
+        )
+    else:
+        notes.append(
+            "Keeps no data of its own, so there is nothing for an uninstall to keep or delete."
+        )
     notes.append(
         "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified."
     )
@@ -142,28 +352,49 @@ def risk_notes(facts, catalog):
     return notes
 
 
+def upstream_release(source_url):
+    """Upstream's latest release, when the project publishes them on GitHub.
+
+    Every promotion so far has turned on one question — is this the release
+    upstream is on? — and it was being answered by hand each time. This only
+    reports it; deciding what a gap means stays with the reviewer.
+    """
+    match = re.match(r"https://github\.com/([^/]+/[^/#?]+)", source_url or "")
+    if not match:
+        return None
+    repository = match.group(1).removesuffix(".git")
+    try:
+        release = fetch(f"https://api.github.com/repos/{repository}/releases/latest")
+    except urllib.error.HTTPError:
+        return None
+    return release.get("tag_name"), (release.get("published_at") or "")[:10]
+
+
+def catalog_entry(catalog, app):
+    """The catalog entry this app is, by whichever name the catalog knows it.
+
+    Upstream ids and catalog ids are written by different people: the catalog
+    calls Navidrome `navidrome-music-server`, Runtipi calls it `navidrome`.
+    Matching only on the id left a generated manifest with no description,
+    category or project link — all of which the catalog already had.
+    """
+    wanted = app.replace("-", "").replace("_", "").replace(" ", "").casefold()
+
+    def names(entry):
+        return [entry["id"], entry.get("name", ""), *entry.get("aliases", [])]
+
+    for entry in catalog["entries"]:
+        for name in names(entry):
+            if name.replace("-", "").replace("_", "").replace(" ", "").casefold() == wanted:
+                return entry
+    return None
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("app")
     parser.add_argument("--source", help="runtipi or caprover, when an app is in both")
     args = parser.parse_args()
-
-    queue = json.loads((ROOT / "catalog" / "candidate-queue.json").read_text(encoding="utf-8"))
-    matches = [
-        candidate
-        for candidate in queue["candidates"]
-        if candidate["id"] == args.app
-        and candidate["importable"]
-        and (args.source is None or candidate["source"] == args.source)
-    ]
-    if not matches:
-        raise SystemExit(f"no importable candidate named {args.app}")
-    if len({candidate["source"] for candidate in matches}) > 1:
-        raise SystemExit(
-            f"{args.app} is in more than one source; choose with --source "
-            + ", ".join(sorted({candidate['source'] for candidate in matches}))
-        )
-    candidate = matches[0]
 
     # A manifest for an app nobody has run is a manifest that cannot be
     # completed: the platform gate requires a lifecycle proof, and there is
@@ -183,10 +414,39 @@ def main():
             "Fix that before writing a manifest for it."
         )
 
+    queue = json.loads((ROOT / "catalog" / "candidate-queue.json").read_text(encoding="utf-8"))
+    matches = [
+        candidate
+        for candidate in queue["candidates"]
+        if candidate["id"] == args.app
+        and candidate["importable"]
+        and (args.source is None or candidate["source"] == args.source)
+    ]
+    if not matches:
+        raise SystemExit(f"no importable candidate named {args.app}")
+    # An app carried by two sources has two different definitions, and only one
+    # of them was run. Picking the other would produce a manifest whose proof is
+    # about something else, so let the run decide and only ask when it cannot.
+    proven = result.get("source_revision")
+    if proven and len(matches) > 1:
+        matches = [c for c in matches if c["provenance"]["revision"] == proven] or matches
+    if len({candidate["source"] for candidate in matches}) > 1:
+        raise SystemExit(
+            f"{args.app} is in more than one source; choose with --source "
+            + ", ".join(sorted({candidate['source'] for candidate in matches}))
+        )
+    candidate = matches[0]
+    if proven and candidate["provenance"]["revision"] != proven:
+        raise SystemExit(
+            f"{args.app} was qualified from revision {proven[:10]} but this candidate comes from "
+            f"{candidate['provenance']['revision'][:10]}. Re-run qualification against the source "
+            "you want to ship, so the manifest and its proof describe the same definition."
+        )
+
     facts = facts_for(candidate)
 
     catalog = json.loads((ROOT / "src" / "generated" / "catalog.json").read_text(encoding="utf-8"))
-    entry = next((e for e in catalog["entries"] if e["id"] == args.app), None)
+    entry = catalog_entry(catalog, args.app)
     ranking = json.loads(
         (ROOT / "catalog" / "candidate-ranking.json").read_text(encoding="utf-8")
     )
@@ -225,15 +485,17 @@ def main():
             "docker_engine_os": "linux",
             "compose_major": 2,
             "local_storage_required": True,
-            "images": [image_audit(image) for image in facts["images"]],
+            "images": [
+            {**image_audit(image), "index_digest": index_digest(image)}
+            for image in facts["images"]
+        ],
         },
         "promotion": {
             "state": "withheld",
             "reason": REVIEW
             + "nobody has decided whether to offer this app. Record the decision and why.",
         },
-        "data_storage": f"Local Store managed folder / {args.app}"
-        + (", plus a folder you choose" if facts["shared_folders"] else ""),
+        "data_storage": data_storage(facts, args.app),
         "risk_notes": risk_notes(facts, entry),
         # The importer's guess, marked as a guess. A review says which of these
         # answers is genuinely a credential; upstream cannot.
@@ -246,6 +508,19 @@ def main():
         },
         "definition": definition,
     }
+    # What Runtipi copies into the data folder travels with the definition,
+    # verbatim, so the review covers it. template_facts already refused to
+    # continue quietly if any of it was binary.
+    if facts.get("binary_seeds"):
+        raise SystemExit(
+            f"{args.app} ships binary seed files {facts['binary_seeds']}, which a manifest cannot carry"
+        )
+    seeds = []
+    for relative in facts.get("seed_files", []):
+        seed = definition_path.parent / relative
+        seeds.append({"path": relative, "content": seed.read_text(encoding="utf-8")})
+    if seeds:
+        manifest["seeds"] = seeds
     if candidate["source"] == "runtipi" and config_path.is_file():
         manifest["config"] = {
             "path": str(Path(provenance["path"]).parent / "config.json").replace("\\", "/"),
@@ -276,6 +551,16 @@ def main():
         )
     else:
         print(f"  images last rebuilt {oldest}, which is current enough to consider offering")
+    latest = upstream_release(manifest["source_url"])
+    if latest:
+        tag, published = latest
+        pinned = [image["image"].rsplit(":", 1)[-1] for image in manifest["requirements"]["images"]]
+        bare = tag.lstrip("vV")
+        same = any(pin.lstrip("vV").split("-")[0] == bare for pin in pinned)
+        print(
+            f"  upstream's latest release is {tag}, published {published}: "
+            + ("the definition pins it" if same else f"the definition pins {', '.join(pinned)}")
+        )
     print("then: record a lifecycle proof, set verified_at, and decide promotion")
 
 

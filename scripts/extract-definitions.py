@@ -26,6 +26,7 @@ def main():
             wanted.setdefault(revision, set()).add(path)
 
     written = 0
+    seeds = 0
     for revision, paths in wanted.items():
         archives = sorted(ARCHIVES.glob(f"*{revision}*.zip"))
         if not archives:
@@ -50,11 +51,21 @@ def main():
                     target.write_bytes(raw)
                     written += 1
                     # A companion config sits beside the definition.
-                    companion = name.rsplit("/", 1)[0] + "/config.json"
+                    folder = name.rsplit("/", 1)[0]
+                    companion = folder + "/config.json"
                     if companion in names:
                         (target.parent / "config.json").write_bytes(archive.read(companion))
+                    # And so do the files Runtipi copies into the app's data
+                    # folder on install — an nginx config, a starter settings
+                    # file. A definition that mounts one is broken without it.
+                    for seed in names:
+                        if seed.startswith(folder + "/data/") and not seed.endswith("/"):
+                            out = target.parent / seed[len(folder) + 1:]
+                            out.parent.mkdir(parents=True, exist_ok=True)
+                            out.write_bytes(archive.read(seed))
+                            seeds += 1
                     break
-    print(f"extracted {written} definition(s) to {OUT.relative_to(ROOT)}")
+    print(f"extracted {written} definition(s) and {seeds} seed file(s) to {OUT.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":

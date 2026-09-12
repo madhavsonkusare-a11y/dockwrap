@@ -16,6 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 MODULE = ROOT / "src" / "templates" / "mod.rs"
 INCLUDE = re.compile(r'^const [A-Z0-9_]+: &str = include_str!\("[^"]+\.json"\);$')
+OPENS = re.compile(r"^    \[$")
 ARRAY = re.compile(r"^    \[[A-Z0-9_, ]+\]$")
 
 
@@ -32,9 +33,25 @@ def main():
     includes = [index for index, line in enumerate(lines) if INCLUDE.match(line)]
     if not includes:
         raise SystemExit("could not find the include block in src/templates/mod.rs")
-    arrays = [index for index, line in enumerate(lines) if ARRAY.match(line)]
-    if not arrays:
+    def array_span():
+        """The list of constants, whether rustfmt has broken it over lines."""
+        for index, line in enumerate(lines):
+            if ARRAY.match(line):
+                return index, index
+            if OPENS.match(line):
+                close = next(
+                    (
+                        later
+                        for later in range(index + 1, len(lines))
+                        if lines[later].rstrip() == "    ]"
+                    ),
+                    None,
+                )
+                if close is not None:
+                    return index, close
         raise SystemExit("could not find the template array in src/templates/mod.rs")
+
+    array_span()
 
     # Replace the whole contiguous include block in one go, rather than editing
     # line by line — doing that left duplicate constants behind.
@@ -43,8 +60,11 @@ def main():
                    for name in manifests]
     lines[first : last + 1] = replacement
 
-    arrays = [index for index, line in enumerate(lines) if ARRAY.match(line)]
-    lines[arrays[0]] = "    [" + ", ".join(constant(name) for name in manifests) + "]"
+    opens, closes = array_span()
+    # One name per line, which is how rustfmt leaves a list this long anyway.
+    lines[opens : closes + 1] = (
+        ["    ["] + [f"        {constant(name)}," for name in manifests] + ["    ]"]
+    )
 
     MODULE.write_text("\n".join(lines) + "\n", encoding="utf-8")
     print(f"listed {len(manifests)} manifest(s): {', '.join(manifests)}")

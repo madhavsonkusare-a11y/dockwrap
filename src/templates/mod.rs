@@ -54,9 +54,14 @@ pub struct TemplateImageAudit {
     /// itself, but it is the fact a promotion decision turns on most often.
     pub last_updated: String,
     pub container_platforms: Vec<String>,
-    /// Per-architecture digests. These registries publish no index digest for
-    /// a tag, so pinning each architecture is what can actually be verified.
+    /// Per-architecture digests, as the registry lists them for the tag.
     pub digests: BTreeMap<String, String>,
+    /// The manifest list those architectures belong to. Installing by this
+    /// pins every architecture at once and leaves Docker to pick the one the
+    /// engine runs, so a tag pushed again later cannot change what installs.
+    /// Required for anything offered.
+    #[serde(default)]
+    pub index_digest: Option<String>,
 }
 
 #[derive(Debug, Clone, Deserialize, PartialEq)]
@@ -173,6 +178,18 @@ pub struct ReviewedTemplate {
     /// Tags this review runs in place of the ones the definition names.
     #[serde(default)]
     pub image_pins: Vec<ImagePin>,
+    /// The files the definition's source copies into the app's data folder,
+    /// carried verbatim like the definition itself so a review covers them.
+    #[serde(default)]
+    pub seeds: Vec<TemplateSeed>,
+}
+
+#[derive(Debug, Clone, Deserialize, PartialEq)]
+#[serde(deny_unknown_fields)]
+pub struct TemplateSeed {
+    /// Relative to the app's folder, inside `data/`.
+    pub path: String,
+    pub content: String,
 }
 
 impl ReviewedTemplate {
@@ -197,10 +214,14 @@ impl ReviewedTemplate {
             }
             "runtipi" => {
                 let config = self.config.as_ref().ok_or("Runtipi review requires its companion config")?;
-                let expected = format!("apps/{}/config.json", self.id);
-                if self.origin.path != format!("apps/{}/docker-compose.json", self.id)
-                    || config.path != expected
-                {
+                // Runtipi's store keeps an app at `apps/<id>/`; Local Store's
+                // own definitions, written in the same format, keep it at
+                // `definitions/apps/<id>/`. Either way the definition and its
+                // config sit together and name this app.
+                let definition = format!("apps/{}/docker-compose.json", self.id);
+                let root = self.origin.path.strip_suffix(&definition);
+                let expected = format!("{}apps/{}/config.json", root.unwrap_or_default(), self.id);
+                if !matches!(root, Some("" | FIRST_PARTY_ROOT)) || config.path != expected {
                     return Err("Runtipi definition and config must name the reviewed app in the same pinned source".into());
                 }
                 let value: serde_json::Value = serde_json::from_str(&config.content)
@@ -291,6 +312,26 @@ impl ReviewedTemplate {
             }
         }
 
+        template.seeds = self
+            .seeds
+            .iter()
+            .map(|seed| crate::setup::SeedFile {
+                path: seed.path.clone(),
+                content: seed.content.clone(),
+            })
+            .collect();
+
+        // Install by digest, not by tag: the tag is what was audited, the
+        // digest is what stops it meaning something else tomorrow.
+        for service in &mut template.plan.services {
+            service.digest = self
+                .requirements
+                .images
+                .iter()
+                .find(|audit| audit.image == service.image)
+                .and_then(|audit| audit.index_digest.clone());
+        }
+
         template
             .validate()
             .map_err(|reason| format!("{}: {reason}", self.id))?;
@@ -298,34 +339,78 @@ impl ReviewedTemplate {
     }
 }
 
+const ACTIVEPIECES: &str = include_str!("activepieces.json");
 const ACTUAL: &str = include_str!("actual.json");
 const ADMINER: &str = include_str!("adminer.json");
+const BESZEL: &str = include_str!("beszel.json");
 const CODIMD: &str = include_str!("codimd.json");
+const FILESTASH: &str = include_str!("filestash.json");
 const FLATNOTES: &str = include_str!("flatnotes.json");
+const GHOST_DEV: &str = include_str!("ghost-dev.json");
+const GLANCE: &str = include_str!("glance.json");
 const GOTIFY: &str = include_str!("gotify.json");
 const GRAFANA: &str = include_str!("grafana.json");
+const GROCY: &str = include_str!("grocy.json");
+const HOMER: &str = include_str!("homer.json");
+const JELLYSEERR: &str = include_str!("jellyseerr.json");
+const JOPLIN: &str = include_str!("joplin.json");
+const KANBOARD: &str = include_str!("kanboard.json");
 const METABASE: &str = include_str!("metabase.json");
+const MONICA: &str = include_str!("monica.json");
+const NAVIDROME: &str = include_str!("navidrome.json");
 const NODERED: &str = include_str!("nodered.json");
 const NTFY: &str = include_str!("ntfy.json");
 const OMBI: &str = include_str!("ombi.json");
+const PAPERCLIP: &str = include_str!("paperclip.json");
+const PENPOT: &str = include_str!("penpot.json");
 const PRIVATEBIN: &str = include_str!("privatebin.json");
+const TAUTULLI: &str = include_str!("tautulli.json");
 const VAULTWARDEN: &str = include_str!("vaultwarden.json");
+const WALLOS: &str = include_str!("wallos.json");
+const WHOOGLE: &str = include_str!("whoogle.json");
+const WORDPRESS: &str = include_str!("wordpress.json");
+
+/// Where Local Store keeps definitions it wrote itself, in Runtipi's format.
+///
+/// For an app no store packages well — Paperclip is in none, and Runtipi's
+/// Penpot runs `:latest` with an exporter pointed at the wrong port. A
+/// definition here is reviewed exactly like an imported one; the difference
+/// is only who is answerable for it.
+pub const FIRST_PARTY_ROOT: &str = "definitions/";
 
 /// Every template a review has passed. Being here is not being offered.
 pub fn reviewed_templates() -> Vec<ReviewedTemplate> {
     [
+        ACTIVEPIECES,
         ACTUAL,
         ADMINER,
+        BESZEL,
         CODIMD,
+        FILESTASH,
         FLATNOTES,
+        GHOST_DEV,
+        GLANCE,
         GOTIFY,
         GRAFANA,
+        GROCY,
+        HOMER,
+        JELLYSEERR,
+        JOPLIN,
+        KANBOARD,
         METABASE,
+        MONICA,
+        NAVIDROME,
         NODERED,
         NTFY,
         OMBI,
+        PAPERCLIP,
+        PENPOT,
         PRIVATEBIN,
+        TAUTULLI,
         VAULTWARDEN,
+        WALLOS,
+        WHOOGLE,
+        WORDPRESS,
     ]
     .into_iter()
     .map(|source| serde_json::from_str(source).expect("bundled reviewed templates must parse"))
@@ -502,13 +587,26 @@ mod tests {
     /// costs exactly as much deliberation as the first one did.
     const APPROVED: &[&str] = &[
         "adminer",
+        "beszel",
         "flatnotes",
+        "glance",
         "grafana",
+        "grocy",
+        "homer",
+        "kanboard",
         "metabase",
+        "monica",
+        "navidrome",
         "nodered",
         "ntfy",
+        "paperclip",
+        "penpot",
         "privatebin",
+        "tautulli",
         "vaultwarden",
+        "wallos",
+        "whoogle",
+        "wordpress",
     ];
 
     #[test]
@@ -531,6 +629,67 @@ mod tests {
     /// it rests on has to be there. A withheld template is held to the same
     /// standard everywhere else; this is the part that only matters once an
     /// app can actually reach a person.
+    /// A definition Local Store wrote has no upstream to compare against, so
+    /// the file in this repository is the source of truth, and the manifest
+    /// has to carry it byte for byte — not an edited copy.
+    #[test]
+    fn a_first_party_definition_is_the_file_in_the_tree() {
+        let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"));
+        for reviewed in reviewed_templates() {
+            if !reviewed.origin.path.starts_with(FIRST_PARTY_ROOT) {
+                continue;
+            }
+            let on_disk =
+                std::fs::read_to_string(root.join(&reviewed.origin.path)).unwrap_or_else(|_| {
+                    panic!(
+                        "{}: {} is not in the tree",
+                        reviewed.id, reviewed.origin.path
+                    )
+                });
+            assert_eq!(
+                on_disk.replace("\r\n", "\n"),
+                reviewed.definition.replace("\r\n", "\n"),
+                "{}: the manifest carries a different definition than {}",
+                reviewed.id,
+                reviewed.origin.path
+            );
+            let folder = root.join(&reviewed.origin.path);
+            let (on_disk, binary) = crate::importers::runtipi::read_seeds(folder.parent().unwrap());
+            assert!(
+                binary.is_empty(),
+                "{}: binary seeds {binary:?}",
+                reviewed.id
+            );
+            let carried: Vec<(String, String)> = reviewed
+                .seeds
+                .iter()
+                .map(|seed| (seed.path.clone(), seed.content.replace("\r\n", "\n")))
+                .collect();
+            let expected: Vec<(String, String)> = on_disk
+                .into_iter()
+                .map(|seed| (seed.path, seed.content.replace("\r\n", "\n")))
+                .collect();
+            assert_eq!(
+                carried, expected,
+                "{}: seed files differ from the tree",
+                reviewed.id
+            );
+            let config = reviewed
+                .config
+                .as_ref()
+                .expect("a first-party definition has its config");
+            let on_disk = std::fs::read_to_string(root.join(&config.path))
+                .unwrap_or_else(|_| panic!("{}: {} is not in the tree", reviewed.id, config.path));
+            assert_eq!(
+                on_disk.replace("\r\n", "\n"),
+                config.content.replace("\r\n", "\n"),
+                "{}: the manifest carries a different config than {}",
+                reviewed.id,
+                config.path
+            );
+        }
+    }
+
     #[test]
     fn an_approved_template_carries_the_evidence_its_approval_claims() {
         for id in APPROVED {
@@ -557,6 +716,58 @@ mod tests {
             assert!(
                 template.plan.published().is_some(),
                 "{id} publishes no address to open"
+            );
+            // And the proof has to be about what runs. An image pin changes
+            // the images without changing the file the review points at, so
+            // a proof of the old image would otherwise keep vouching for the
+            // new one.
+            let evidence: serde_json::Value =
+                serde_json::from_str(&std::fs::read_to_string(&proof).unwrap())
+                    .unwrap_or_else(|_| panic!("{id}'s proof is not JSON"));
+            let mut proven: Vec<String> = evidence["images"]
+                .as_array()
+                .unwrap_or_else(|| panic!("{id}'s proof records no images"))
+                .iter()
+                .filter_map(|image| image.as_str().map(str::to_owned))
+                .collect();
+            let mut runs: Vec<String> = template
+                .plan
+                .services
+                .iter()
+                .map(|service| service.image.clone())
+                .collect();
+            proven.sort();
+            runs.sort();
+            assert_eq!(
+                proven, runs,
+                "{id}'s proof is about different images than it runs; qualify it as offered"
+            );
+            assert_eq!(
+                evidence["passed"].as_bool(),
+                Some(true),
+                "{id} is approved on a proof that did not pass"
+            );
+            // What installs is pinned by digest, for every image it runs.
+            for service in &template.plan.services {
+                assert!(
+                    service.digest.is_some(),
+                    "{id}: {} would install by tag; record its audited index digest",
+                    service.image
+                );
+            }
+            // A check that passes trivially must not be quoted as though it
+            // had tested something. Four approvals said their generated
+            // credentials survived a reinstall for apps that generate none.
+            let generates_none = evidence["steps"].as_array().is_some_and(|steps| {
+                steps.iter().any(|step| {
+                    step["step"]
+                        .as_str()
+                        .is_some_and(|name| name.starts_with("generates no credentials"))
+                })
+            });
+            assert!(
+                !(generates_none && reviewed.promotion.reason.contains("credentials intact")),
+                "{id}'s approval claims credentials survived, but its proof says it generates none"
             );
         }
     }

@@ -77,6 +77,7 @@ fn n8n_plan_preserves_its_encryption_key_and_volume_across_reinstall() {
         .environment
         .push(("N8N_ENCRYPTION_KEY".into(), "${ENCRYPTION_KEY}".into()));
     let template = PlanTemplate {
+        seeds: Vec::new(),
         plan,
         fields: Vec::new(),
         secrets: vec![SecretSpec {

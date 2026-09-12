@@ -1,5 +1,151 @@
 # Local Store: agent handoff
 
+## Owner decisions, September 11 — read before resuming
+
+Work is **paused at 24 offered apps** until PRs #3, #4 and #5 are reviewed.
+When it resumes:
+
+- **Nextcloud:** write Local Store's own definition that keeps Nextcloud's
+  program files (`/var/www/html`) in a Docker named volume, and only the
+  person's files in the managed folder. Its first start on a Windows host
+  folder took 18.5 minutes because the image copies its whole source there.
+  Runtipi's format has no named volumes, so this needs a small plan/importer
+  change or a CapRover-format first-party definition. Re-qualify as offered.
+- **Umbrel gallery icons (8):** keep them, with the `NOASSERTION` notice.
+- **Second published port:** not now. Build it when a candidate actually needs
+  one, designed around that app. (Penpot's MCP did not: its frontend proxies it.)
+- **Shrimply** (soirihiroka/shrimply): skipped by the owner. It is a native GTK/Qt
+  video editor — macOS zip and Linux Flatpak only, no web UI, no Windows build, no
+  server image (its Dockerfile only compiles the desktop binaries) — so it cannot
+  run the way Local Store runs apps.
+- Not chosen for now: retrying the older failures (SiYuan, Appsmith, Joomla,
+  Mongo Express — candidates for the Host-header and seed fixes), pushing
+  toward 30, and rewriting Notemark's definition.
+
+## September 11 (evening) — the known failures, run down
+
+**24 apps offered.** Monica and Glance join; Joplin is withheld.
+
+| App | Cause | Outcome |
+| --- | --- | --- |
+| Joplin | Local Store's health probe omitted the port from `Host`; Joplin routes on it and answered 404 | probe fixed; Joplin passes, but is **withheld** — Joplin Server is under a non-commercial personal-use licence |
+| Monica | MariaDB 10.6.11 segfaults on this WSL2 kernel (exit 139) after setup | pinned to 10.6.28 (same line); **offered** |
+| Glance | Runtipi's starter `glance.yml` was never copied in | seed-file support; **offered** |
+| Notemark | same missing-seed bug, then Runtipi's definition is stale: nginx expects the frontend on 8000, frontend 0.19.3 listens on 8080, backend crash-loops | seed fixed; rest needs a rewritten definition — left |
+| Nextcloud | first start copies its whole source onto the host folder: measured 18.5 min here | open — needs a design decision |
+
+New capabilities: **seed files** (Runtipi's `data/` folder, text only, written
+only where absent — 41 candidates ship them), Penpot's **MCP server** (proxied by
+Penpot's own frontend at `/mcp/stream`, proven by `scripts/penpot-probe.mjs`),
+and `--probe` for app-specific checks in offered runs. A timeout's diagnosis now
+lists each container's last lines, the app's own first.
+
+## September 11 (later) — Penpot and Paperclip, from Local Store's own definitions
+
+**22 apps are offered.** The two new ones are the first written by Local
+Store rather than imported: `definitions/apps/<id>/` holds a definition in
+Runtipi's format, mapped by the same importer and reviewed the same way. A
+guard requires the manifest to embed the file in the tree byte for byte, and
+the catalogue pipeline reads these definitions as a fifth source.
+
+- **Penpot 2.17.2**, from Penpot's official Compose file: five containers,
+  health-gated start, generated session key and database password. Runtipi's
+  definition was unusable — `:latest` images and an exporter pointed at port 80
+  while the frontend listens on 8080. The first run failed because Postgres took
+  19 s to initialise on a host folder against a 12 s health window; the start
+  period is now 60 s. Penpot's MCP server is left out (one published port per app).
+- **Paperclip 2026.831.1**, from its quickstart Compose using the published
+  ghcr.io image: one container, embedded Postgres, generated session secret,
+  optional masked Anthropic/OpenAI key fields.
+- Plans can carry `stop_signal`; Postgres needs SIGINT to stop cleanly.
+
+Every install is also pinned by digest now (see below); both new apps' digests
+match the images their proofs ran.
+
+Open: Paperclip has no cached icon (the store shows its letter fallback) —
+icons come from one pinned dashboard-icons revision in `catalog/icons.json`,
+which has uncommitted work from an earlier session in this working tree.
+
+## September 11 — twenty apps offered, and four proofs that said too much
+
+**Twenty apps are installable**, as `local-store recipes` lists them: three
+reviewed recipes (memos, n8n, uptime-kuma) and seventeen approved templates —
+adminer, beszel, flatnotes, grafana, grocy, homer, kanboard, metabase,
+navidrome, nodered, ntfy, privatebin, tautulli, vaultwarden, wallos, whoogle,
+wordpress. Every one has a proof in `docs/evidence/` of the exact images it
+runs. Each opens in its own Tauri window like every offering.
+
+### What was wrong with what was already offered
+
+- **Grafana was offered on a proof of a different build.** Its evidence was
+  CapRover's `grafana/grafana:7.4.3` from 2021; the template installs Runtipi's
+  `grafana-oss:13.0.2`. The approval guard only checked that the proof file
+  existed. It now requires the proof's images to equal what the template runs,
+  and the proof to have passed. Grafana was re-proven as offered and passes.
+- **Four approvals quoted a check that tested nothing.** Adminer, Metabase,
+  ntfy and Vaultwarden said their generated credentials survived a reinstall;
+  their proofs say they generate none. Corrected, and the guard refuses it.
+- **Three storage descriptions were false.** Adminer and Whoogle keep no data;
+  Beszel keeps it in a named volume. The generator now describes storage from
+  what the plan mounts.
+
+### What unlocked more candidates
+
+- **Any registry, not just Docker Hub** — the audit answers the registry's own
+  `WWW-Authenticate` challenge and reads the build date from the image config.
+  89 images on ghcr.io, lscr.io, quay.io and gcr.io became auditable; Grocy and
+  Tautulli are the first offered apps from lscr.io.
+- **Apps that bring a database are apps.** The batch skipped any definition
+  containing an infrastructure image, which excluded fifty candidates including
+  WordPress, Nextcloud, Joplin and Monica. It now skips only definitions made
+  *entirely* of infrastructure.
+- **Choosing the packaging.** CapRover's Grocy and Tautulli pin 2020 and 2021
+  images; Runtipi's pin this week's releases. `--only app --source runtipi`
+  proves a chosen definition, and the generator reads the source from the proof.
+
+### New tooling
+
+- `qualify_batch --offered --only app,app` proves apps **as offered** — image
+  pins included — and writes the proof where the review names it. Use it after
+  any pin, and to re-verify before a release.
+- `--only` reruns named apps whatever is recorded (`Resume::RunAnyway`);
+  `--source` picks the packaging.
+- The generator prints upstream's latest release beside the image date.
+- One qualification at a time per machine (a lock file); two at once made each
+  other's bystander checks fail.
+
+### Diagnosis that now works
+
+A timed-out install records the container states and log tail before rollback
+removes them; a failed probe records the error it threw; a long command failure
+keeps its end, where the reason is. Joplin, Monica and Notemark fail legibly
+now — Joplin runs but never answers its address, Monica answers every request
+with 500, Notemark's nginx proxy fails to start.
+
+### Withheld, with reasons recorded
+
+ghost-dev (runs `NODE_ENV=development`), jellyseerr (2.7.3 vs upstream 3.4.1),
+activepieces (0.12.2 from 2023 vs 0.90.4), filestash (a 2020 commit-hash image),
+plus the earlier actual, codimd, gotify and ombi.
+
+### Open
+
+- ~~Digests not enforced at install~~ — **done**: every offered image installs
+  as `image:tag@sha256:<index>`. Each pinned digest was checked against the image
+  its proof actually ran (local image ID equal to the proof's), and Compose was
+  shown to resolve such a reference offline to that exact image.
+- `adminer:4` is a floating major tag; the unpinned-image guard only refuses
+  `latest`, `stable` and `main`.
+- Qualification leaves its isolation directory behind (a task chip exists).
+- The Docker VM has 7.7 GB and the owner's other stacks hold about 4 GB; heavy
+  apps (Nextcloud) time out under that load. Stop them during a long batch.
+- Batch state is resumable: `.cache/qualification/`. Continue with
+  `LOCAL_STORE_RUN_DOCKER_TEST=1 cargo run --release --example qualify_batch --
+  --limit 120 --source runtipi`.
+
+Validation: 301 Rust tests pass (10 Docker-gated ignored), strict Clippy, fmt.
+No qualification container, network, volume or directory left behind.
+
 ## September 10 — the standard, and what it refuses
 
 `scripts/standard-probe.mjs` is the app-agnostic first-use check (plan step

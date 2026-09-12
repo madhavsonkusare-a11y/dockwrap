@@ -106,12 +106,110 @@ the same thing more quietly for apps on ghcr.io, which publishes no pull count
 at all. A pull count now counts only when the image is identifiably the app's
 own: **borrowing a database's popularity is worse than having no number.**
 
+The same mistake came back in a different place. The batch skipped any
+definition that *contained* an infrastructure image, so every app shipping its
+own Postgres or MariaDB — WordPress, Nextcloud, Joplin, Monica, Guacamole, fifty
+in all — was passed over as "not an app". The rule now asks whether *every*
+image is infrastructure. **An app is what it is, not what it stores its data
+in.**
+
 Also: `NOASSERTION` from GitHub means "no licence file detected", not "not open
 source". Reading it as a refusal excluded WordPress and qBittorrent, both GPL.
 
 And a cache keyed on the wrong field never refills: stars and licence came from
 one call, but the skip was keyed on stars, so every project cached before
 licences were collected kept a null licence permanently.
+
+## Rank orders apps, not the definitions of one app
+
+When two sources package the same app, the batch ran whichever ranked higher.
+For Grocy and Tautulli that was CapRover, whose definitions pin images from
+2020 and 2021; Runtipi's pinned the releases upstream published that week. Both
+qualified either way — the old images work — and both would have been withheld
+for their age.
+
+A qualification result proves one definition. Choose the packaging before
+proving it (`--only app --source runtipi`), and make anything that consumes the
+proof check it is about the same definition: the template generator now reads
+the source from the result and refuses a mismatch.
+
+## A proof has to be about what runs
+
+Grafana was approved and offered on a proof of `grafana/grafana:7.4.3` —
+CapRover's definition, from 2021 — while the template installs Runtipi's
+`grafana-oss:13.0.2`. The app people would have installed had never been run.
+The guard only checked that the proof file *existed*.
+
+It now requires the proof's images to equal the images the approved template
+runs, and the proof to have passed. An image pin changes what runs without
+changing which file the review points at, so after a pin the app has to be
+qualified again *as offered* — `qualify_batch --offered --only app` runs the
+reviewed mapping, pins and all.
+
+## Two harnesses at once make each other's proofs worthless
+
+The bystander check fails if any container that is not the run's own
+disappears. A batch and a second run started side by side each saw the other's
+cleanup as a stranger's containers being removed. Qualification now takes a
+machine-wide lock; a second run waits for its turn.
+
+## A timeout carries no reason, and the reason is about to be deleted
+
+Five candidates in a row failed with "Health check timed out" and nothing else.
+Every other install failure explains itself; a timeout only reports that time
+passed. The explanation is in the containers' state and logs — and a failed
+install rolls back, removing exactly those containers.
+
+A timed-out install now reads `ps` and the log tail *before* cleaning up and
+carries them in the error. That helps a person whose install failed as much as
+it helps a batch.
+
+## Registries say how to authenticate; ask them
+
+The image audit refused anything not on Docker Hub, which blocked 89 images.
+Docker Hub, ghcr.io and quay.io each put their token endpoint somewhere
+different, and lscr.io hands callers to ghcr.io. Rather than special-casing
+each, request unauthenticated, read the `WWW-Authenticate` challenge, and fetch
+the token it names. Read the build date from the image config — `created` — not
+a push date, because "last rebuilt" is what a promotion decision turns on.
+
+And a registry answering 429 has said how long to wait. Waiting is not failing.
+
+Docker Hub counts a manifest **GET** as a pull against an anonymous limit of a
+few per hour, and a day of batch runs spends it. A **HEAD** returns the same
+`Docker-Content-Digest` and is not counted, so resolve digests with HEAD; and
+prefer `docker pull`, which uses the engine's login and its larger allowance,
+over anonymous requests when an image has to be fetched.
+
+## Upstream's timings assume upstream's storage
+
+Penpot's official Compose gives Postgres about twelve seconds to pass its
+health check. That suits a Docker volume. Local Store keeps data in a folder on
+the host, where the same first start took nineteen seconds, and the install
+failed with the database "unhealthy". A long start period costs nothing when
+the start is fast — the first success ends it — so give one.
+
+## A health check has to ask the way a browser does
+
+The health probe sent `Host: localhost` for `http://localhost:<port>`. HTTP
+wants the port there, every browser sends it, and Joplin routes on the whole
+Host — so it answered 404 to the probe while serving `/login` to everyone else,
+and was rolled back as unhealthy for weeks. Reproducing by hand, with the exact
+request the probe makes, found it in one step.
+
+## A definition is more than its Compose file
+
+Runtipi ships starting files beside some definitions and copies them into the
+app's data folder on install. Taking only the definition left Notemark's proxy
+mounting a file that was not there — Docker made a directory, nginx refused to
+start — and Glance with no `glance.yml`. Forty-one candidates ship such files.
+
+## "No licence detected" still has to be read
+
+`NOASSERTION` does not mean closed, which is why it is not a refusal — but it
+does not mean open either. Joplin's repository is AGPL, except `packages/server`,
+which is under a non-commercial personal-use licence; the server is what we
+would ship. Check the licence of the part you run.
 
 ## Prove a test can fail
 
@@ -126,6 +224,39 @@ The review mechanism records "no" as readily as "yes". CodiMD is withheld
 because its images were last rebuilt in 2020; Planka because it is proprietary,
 pins a release a year old, runs its database with `trust` authentication, and
 uses a floating tag. Writing that down is more useful than a longer catalogue.
+
+## Qualifying apps in bulk costs system-drive space permanently
+
+Docker Desktop on Windows keeps its images in a virtual disk under
+`%LOCALAPPDATA%`, on C:. That file **only grows**. Deleting images frees space
+*inside* it and returns nothing to the drive, and compacting it needs
+Administrator rights.
+
+A batch that pulls a hundred images therefore consumes tens of gigabytes of the
+system drive whatever it cleans up afterwards. On this machine it took C: from
+6 GB to 331 MB, at which point Docker could no longer create its own sockets and
+crashed on every start with "The file cannot be accessed by the system" — an
+error that looks nothing like "the disk is full".
+
+Two things that follow:
+
+- **Check free space before a long batch, not after.** An option added to make
+  re-runs fast (`--keep-images`) is the same option that fills a drive.
+- **Move Docker's disk off the system drive.** Stop Docker, `wsl --shutdown`,
+  move `%LOCALAPPDATA%\Docker\wsl\disk` to another drive, and junction the old
+  path to the new one:
+
+      New-Item -ItemType Junction -Path "$env:LOCALAPPDATA\Docker\wsl\disk" -Target "D:\DockerData\disk"
+
+  No elevation, no data loss, and every image and container survives. That
+  turned 0.3 GB free into 47 GB here.
+
+Recovering a Docker Desktop that will not start, in order: quit it and
+`com.docker.backend`, remove or rename `%LOCALAPPDATA%\Docker\run` and
+`%LOCALAPPDATA%\docker-secrets-engine` (their socket files become undeletable
+when the disk fills), `wsl --shutdown`, then start Docker Desktop and let *it*
+boot the VM — starting the distro by hand leaves the data disk unmounted and
+every API call returns 500.
 
 ## What the batch is for
 

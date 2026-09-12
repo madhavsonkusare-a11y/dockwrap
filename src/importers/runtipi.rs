@@ -136,7 +136,6 @@ const NOT_MODELLED_KEYS: &[(&str, &str)] = &[
     ("tty", "allocates a TTY"),
     ("stdinOpen", "keeps stdin open"),
     ("stopGracePeriod", "sets a stop grace period"),
-    ("stopSignal", "sets a stop signal"),
     ("shmSize", "sets shared memory size"),
     ("workingDir", "sets a working directory"),
     ("ulimits", "sets resource limits"),
@@ -279,6 +278,44 @@ fn read_form_fields(config: &str) -> Result<DeclaredInputs, String> {
 /// `id` is the app-store directory name. Errors are reserved for a definition
 /// that cannot be read at all; anything readable produces an outcome, because
 /// a described limitation is more useful than a dropped app.
+/// The files Runtipi copies into an app's data folder on install, read from
+/// the `data/` folder beside its definition.
+///
+/// Returned with the paths of any that could not be carried: seeds travel as
+/// text inside a reviewed manifest, so a binary file — Calibre's starter
+/// `metadata.db` — is reported rather than silently dropped.
+pub fn read_seeds(app_folder: &std::path::Path) -> (Vec<crate::setup::SeedFile>, Vec<String>) {
+    let mut seeds = Vec::new();
+    let mut skipped = Vec::new();
+    let mut pending = vec![app_folder.join("data")];
+    while let Some(folder) = pending.pop() {
+        let Ok(entries) = std::fs::read_dir(&folder) else {
+            continue;
+        };
+        for entry in entries.flatten() {
+            let path = entry.path();
+            if path.is_dir() {
+                pending.push(path);
+                continue;
+            }
+            let Ok(relative) = path.strip_prefix(app_folder) else {
+                continue;
+            };
+            let relative = relative.to_string_lossy().replace('\\', "/");
+            match std::fs::read(&path).map(String::from_utf8) {
+                Ok(Ok(content)) => seeds.push(crate::setup::SeedFile {
+                    path: relative,
+                    content,
+                }),
+                _ => skipped.push(relative),
+            }
+        }
+    }
+    seeds.sort_by(|a, b| a.path.cmp(&b.path));
+    skipped.sort();
+    (seeds, skipped)
+}
+
 pub fn import(id: &str, definition: &str, config: Option<&str>) -> Result<ImportOutcome, String> {
     let root: Value = serde_json::from_str(definition)
         .map_err(|error| format!("{id}: definition is not valid JSON: {error}"))?;
@@ -536,10 +573,20 @@ pub fn import(id: &str, definition: &str, config: Option<&str>) -> Result<Import
                 )),
             }
         }
+        if let Some(value) = service.get("stopSignal") {
+            match value.as_str() {
+                Some(signal) => overrides.stop_signal = Some(signal.to_owned()),
+                None => limitations.push(not_modelled(
+                    "stopSignal",
+                    format!("{name} declares a stop signal this importer cannot read"),
+                )),
+            }
+        }
 
         planned.push(PlanService {
             name,
             image,
+            digest: None,
             environment,
             published,
             mounts,
@@ -619,6 +666,7 @@ pub fn import(id: &str, definition: &str, config: Option<&str>) -> Result<Import
     // partially understood definition would look installable and would not be.
     let template = if limitations.is_empty() {
         let candidate = PlanTemplate {
+            seeds: Vec::new(),
             plan: DeploymentPlan {
                 id: id.to_owned(),
                 services: planned,
@@ -885,6 +933,25 @@ mod tests {
         assert_eq!(port.host, 8080);
         // It has to render, not merely construct.
         assert!(plan.to_compose().unwrap().contains("127.0.0.1:8080:8080"));
+    }
+
+    /// Postgres shuts down cleanly only on SIGINT. Penpot's definition says
+    /// so, and refusing it cost Penpot its import.
+    #[test]
+    fn a_stop_signal_is_carried_through_and_a_bad_one_refused() {
+        let definition = r#"{"services": [{"name": "db", "image": "postgres:15.14",
+            "isMain": true, "internalPort": 5432, "stopSignal": "SIGINT"}]}"#;
+        let outcome = import("db", definition, None).unwrap();
+        assert!(outcome.limitations.is_empty(), "{:?}", outcome.limitations);
+        let compose = outcome.plan().expect("a plan").to_compose().unwrap();
+        assert!(compose.contains("stop_signal: SIGINT"), "{compose}");
+
+        let hostile = definition.replace("SIGINT", "SIGINT\\n    privileged: true");
+        let outcome = import("db", &hostile, None).unwrap();
+        assert!(
+            outcome.plan().is_none_or(|plan| plan.to_compose().is_err()),
+            "a stop signal carried something else into the file"
+        );
     }
 
     #[test]

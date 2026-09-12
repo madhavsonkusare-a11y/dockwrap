@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "id": "filestash",
+  "display_name": "Filestash",
+  "catalog_name": "Filestash",
+  "description": "Web file manager that lets you manage your data anywhere it is located: FTP, SFTP, WebDAV, Git, S3, Minio, Dropbox, or Google Drive.",
+  "category": "File Transfer - Web-based File Managers",
+  "license": "AGPL-3.0",
+  "source_url": "https://github.com/mickael-kerjean/filestash",
+  "documentation_url": "https://www.filestash.app/",
+  "verified_at": "2026-09-10",
+  "lifecycle_proof": "docs/evidence/filestash-qualification.json",
+  "origin": {
+    "importer": "caprover",
+    "repository": "caprover/one-click-apps",
+    "revision": "7f1f329125dde0cb915f47c8b33293eca45f7d0e",
+    "path": "public/v4/apps/filestash.yml",
+    "license": "Apache-2.0"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "machines/filestash:b7b45f2",
+        "source_url": "https://hub.docker.com/v2/repositories/machines/filestash/tags/b7b45f2",
+        "checked_at": "2026-09-10",
+        "last_updated": "2020-03-11",
+        "container_platforms": [
+          "linux/amd64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:5dcd3a81ea7185753d76c6d7de5b07e6ab829cf36475e64f09375ecf2b8a1022"
+        }
+      }
+    ]
+  },
+  "promotion": {
+    "state": "withheld",
+    "reason": "Withheld on 2026-09-10 although it qualified. The only importable definition is CapRover's, which pins an image tagged with a commit hash, b7b45f2, last built 2020-03-11. There is no release it corresponds to and six years of fixes it does not have."
+  },
+  "data_storage": "Local Store managed folder / filestash",
+  "risk_notes": [
+    "Creates 1 Docker container and publishes one port on this computer's loopback interface only.",
+    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Connects to storage you point it at — FTP, SFTP, S3, WebDAV and others — using credentials you type into it."
+  ],
+  "fields": {},
+  "definition": "{\"captainVersion\": 4, \"services\": {\"$$cap_appname\": {\"image\": \"machines/filestash:$$cap_filestash_version\", \"volumes\": [\"$$cap_appname-app-data-state:/app/data/state\"], \"restart\": \"always\", \"caproverExtra\": {\"containerHttpPort\": \"8334\"}}}, \"caproverOneClickApp\": {\"variables\": [{\"id\": \"$$cap_filestash_version\", \"label\": \"Filestash Version\", \"defaultValue\": \"b7b45f2\", \"description\": \"Check out their Docker page for the valid tags https://hub.docker.com/r/machines/filestash/tags\"}], \"instructions\": {\"start\": \"Filestash is a modern web client for SFTP, S3, FTP, WebDAV, Git, Minio, LDAP, CalDAV, CardDAV, Mysql, Backblaze...\", \"end\": \"Filestash is deployed and available as srv-captain--$$cap_appname-db:8334 to other apps.\"}, \"displayName\": \"Filestash\", \"description\": \"A modern web client for SFTP, S3, FTP, WebDAV, Git, Minio, LDAP, CalDAV, CardDAV, Mysql, Backblaze...\", \"documentation\": \"Filestash https://www.filestash.app\"}}"
+}

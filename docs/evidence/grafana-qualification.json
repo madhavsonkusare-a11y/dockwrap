@@ -1,19 +1,19 @@
 {
   "app": "grafana",
   "passed": true,
-  "scope": "candidate mapping, transaction, managed storage and first use, on one host and one architecture",
-  "promotion": "not reviewed",
-  "source_revision": "7f1f329125dde0cb915f47c8b33293eca45f7d0e",
+  "scope": "reviewed mapping, transaction, managed storage and first use, on one host and one architecture",
+  "promotion": "approved",
+  "source_revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
   "images": [
-    "grafana/grafana:7.4.3"
+    "grafana/grafana-oss:13.0.2"
   ],
   "image_ids": {
-    "grafana/grafana:7.4.3": "sha256:16dc29783ec7d4a23fa19207507586344c6797023604347eb3e8ea5ae431e181"
+    "grafana/grafana-oss:13.0.2": "sha256:5dad0df181cb644a14e13617b913b261a54f7d4fd4510721dba420929f35bea2"
   },
   "first_use": "it opens a page with a clear next step, and the same page after a restart and reinstall",
   "steps": [
     {
-      "step": "pull grafana/grafana:7.4.3",
+      "step": "pull grafana/grafana-oss:13.0.2",
       "passed": true
     },
     {

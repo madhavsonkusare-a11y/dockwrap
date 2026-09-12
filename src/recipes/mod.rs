@@ -178,7 +178,12 @@ impl Recipe {
             || self.image.ends_with(":latest")
             || self.image.ends_with(":stable")
             || self.image.ends_with(":main")
-            || !self.compose.contains(&format!("image: {}", self.image))
+            // By digest, not just by tag: the audited manifest list is what
+            // installs, so a tag pushed again cannot change it.
+            || !self.compose.contains(&format!(
+                "image: {}@{}",
+                self.image, self.requirements.image_audit.index_digest
+            ))
             || !self.compose.contains(&format!(
                 "\"127.0.0.1:{}:{}\"",
                 self.host_port, self.container_port
