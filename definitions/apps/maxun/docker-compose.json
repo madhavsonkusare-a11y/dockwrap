@@ -25,7 +25,11 @@
           "value": "${LOCAL_STORE_URL_MAXUN_BACKEND}"
         }
       ],
-      "dependsOn": ["maxun-backend"]
+      "dependsOn": {
+        "maxun-backend": {
+          "condition": "service_healthy"
+        }
+      }
     },
     {
       "name": "maxun-backend",
@@ -160,6 +164,18 @@
         "maxun-browser": {
           "condition": "service_healthy"
         }
+      },
+      "healthCheck": {
+        "test": [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:8080/').then(r=>process.exit(r.status<500?0:1)).catch(()=>process.exit(1))"
+        ],
+        "interval": "10s",
+        "timeout": "5s",
+        "retries": 30,
+        "startPeriod": "30s"
       }
     },
     {
@@ -188,7 +204,12 @@
         }
       ],
       "healthCheck": {
-        "test": ["CMD", "curl", "-f", "http://localhost:3002/health"],
+        "test": [
+          "CMD",
+          "curl",
+          "-f",
+          "http://localhost:3002/health"
+        ],
         "interval": "10s",
         "timeout": "5s",
         "retries": 6,
