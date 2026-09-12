@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "langgenius/dify-plugin-daemon:0.6.10-local",
+    "source_url": "https://hub.docker.com/v2/repositories/langgenius/dify-plugin-daemon/tags/0.6.10-local",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-08-07",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:0b8f1f1e766826352d868aaf8c9eeeee8e37a3a3b023044ed8ab0d145f853cdf",
+      "linux/arm64": "sha256:b9d28613f0b4593a6211049251a0d34c5edbb9c1001136a4b24c1e463fd7215c"
+    }
+  }
+}

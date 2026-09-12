@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "ghcr.io/simstudioai/migrations:v0.8.33",
+    "source_url": "https://ghcr.io/v2/simstudioai/migrations/manifests/v0.8.33",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-09-11",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:73c2bd4d7552e6a8b578a2a07a38b12b462de0050c2b14ecb518368e948d19e4",
+      "linux/arm64": "sha256:19d0892f25c2ebcdb5f6a621d939a6eebda99eca29c4362171aef25769ba23c0"
+    }
+  }
+}

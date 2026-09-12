@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "penpotapp/backend:2.17.2",
+    "source_url": "https://hub.docker.com/v2/repositories/penpotapp/backend/tags/2.17.2",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-08-27",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:08155249797d5e8b54e33e8581b45c6e5043be95742174c918dc17b633e09cc3",
+      "linux/arm64": "sha256:e4d296876d1d583de6f6ae2a98eabb50be60fb58a56f597951875137084c42d6"
+    }
+  }
+}

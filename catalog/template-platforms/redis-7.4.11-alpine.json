@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "redis:7.4.11-alpine",
+    "source_url": "https://hub.docker.com/v2/repositories/library/redis/tags/7.4.11-alpine",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-08-20",
+    "container_platforms": [
+      "linux/386",
+      "linux/amd64",
+      "linux/arm/v6",
+      "linux/arm/v7",
+      "linux/arm64/v8",
+      "linux/ppc64le",
+      "linux/riscv64",
+      "linux/s390x"
+    ],
+    "digests": {
+      "linux/386": "sha256:a4fd08853cdc01da535e7c3ede18084fca62b21a6ee06e38f0aba769f188d45b",
+      "linux/amd64": "sha256:1db42ccef14898aa29bae778452d567534b59c107129cbc1163fb552de184d3c",
+      "linux/arm/v6": "sha256:253cf5a8c5a0bb62b11c913b9b006963753f844ab040d39395e3b7d635db37d0",
+      "linux/arm/v7": "sha256:89beb43a975079ad216a6171d1696ce3aa2b348477228500f53c6fe99cc4f9df",
+      "linux/arm64/v8": "sha256:f8d15882ba108587477ce13c00ab0551933a84138427b7cc9abadfbe45ffd973",
+      "linux/ppc64le": "sha256:58a9ef466c2701c6e1c50d00abb394ed0a2298d6369aae2950b8fa3cba23973c",
+      "linux/riscv64": "sha256:60c3979aa5c24b4d147484b7717153e2f241b5073ec83500bdace86f0c8472d1",
+      "linux/s390x": "sha256:f176864eb58d72ec3bb461a2f395cd069a127586751013350753c0d2ccf6e119"
+    }
+  }
+}

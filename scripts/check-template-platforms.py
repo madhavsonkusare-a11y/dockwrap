@@ -5,19 +5,36 @@ Neither holds for a multi-service template built from an imported definition:
 there are several images, and these repositories publish a digest per
 architecture rather than one for the tag. This checks what is actually there.
 
-Offline by default. `--refresh` fetches only public Docker Hub tag metadata,
+Offline by default. `--refresh` fetches public registry metadata,
 never image layers, and needs no Docker daemon. Refreshing the cache does not
 approve a change: a digest that moves still fails the check afterwards, which
 is the point.
 """
 import argparse
+import importlib.util
 import json
 from pathlib import Path
-import urllib.request
 
 ROOT = Path(__file__).resolve().parents[1]
 TEMPLATES = ROOT / "src" / "templates"
 CACHE = ROOT / "catalog" / "template-platforms"
+
+
+def fetch_metadata(audit):
+    # Reuse the importer generator's Docker Hub and OCI authentication support.
+    spec = importlib.util.spec_from_file_location(
+        "template_generator", Path(__file__).with_name("generate-template.py")
+    )
+    generator = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(generator)
+    image = audit["image"]
+    host, repository, _ = generator.split_image(image)
+    if host and audit.get("index_digest"):
+        digest = audit["index_digest"]
+        metadata = generator.registry_audit(host, repository, digest, image)
+        return {"schema_version": 1, "reference": digest, "audit": metadata}
+    metadata = generator.image_audit(image)
+    return {"schema_version": 1, "audit": metadata}
 
 
 def cache_name(image):
@@ -43,6 +60,17 @@ def published(metadata):
 
 
 def validate(template_id, audit, metadata):
+    if metadata.get("schema_version") == 1:
+        recorded = metadata["audit"]
+        expected = dict(audit)
+        if "reference" in metadata:
+            if metadata["reference"] != audit.get("index_digest"):
+                raise ValueError(f"{template_id}: cached reference differs from the install pin")
+            expected["source_url"] = audit["source_url"].rsplit("/", 1)[0] + "/" + metadata["reference"]
+        for key in ("image", "source_url", "last_updated", "container_platforms", "digests"):
+            if expected[key] != recorded[key]:
+                raise ValueError(f"{template_id}: {audit['image']}: registry {key} differs; review required")
+        return
     tag = audit["image"].rsplit(":", 1)[1]
     actual = published(metadata)
     for valid, detail in [
@@ -68,6 +96,7 @@ def validate(template_id, audit, metadata):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--refresh", action="store_true")
+    parser.add_argument("--refresh-missing", action="store_true")
     args = parser.parse_args()
 
     manifests = sorted(TEMPLATES.glob("*.json"))
@@ -77,18 +106,11 @@ def main():
         template = json.loads(path.read_text(encoding="utf-8"))
         for audit in template["requirements"]["images"]:
             cache = CACHE / cache_name(audit["image"])
-            if args.refresh:
-                request = urllib.request.Request(
-                    audit["source_url"],
-                    headers={"User-Agent": "Local-Store-recipe-audit"},
-                )
-                with urllib.request.urlopen(request, timeout=30) as response:
-                    raw = response.read(1024 * 1024 + 1)
-                if len(raw) > 1024 * 1024:
-                    raise SystemExit(f"{audit['image']}: tag metadata exceeds 1 MiB")
+            if args.refresh or (args.refresh_missing and not cache.exists()):
+                metadata = fetch_metadata(audit)
                 CACHE.mkdir(parents=True, exist_ok=True)
                 cache.write_text(
-                    json.dumps(json.loads(raw), indent=2) + "\n", encoding="utf-8"
+                    json.dumps(metadata, indent=2) + "\n", encoding="utf-8"
                 )
             if not cache.exists():
                 raise SystemExit(

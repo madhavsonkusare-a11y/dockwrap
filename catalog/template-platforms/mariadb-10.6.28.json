@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "mariadb:10.6.28",
+    "source_url": "https://hub.docker.com/v2/repositories/library/mariadb/tags/10.6.28",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-09-09",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64/v8",
+      "linux/ppc64le",
+      "linux/s390x"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:6ece356f49e4f21982dda731f70a54b2f9de9141887298e000e00100ecf79e39",
+      "linux/arm64/v8": "sha256:d2ecb8c6f9dc0b53ac48867586a969e5d18c27d92fa58a73d1ca1d7488b011a6",
+      "linux/ppc64le": "sha256:4987b91689f456f3bb512c4eb38576b12c347c0c9e46a0637c90c3bf25800838",
+      "linux/s390x": "sha256:f8dee2d7387cf4e8e5b8ecae2da6767d7ccc076e799db450d544ef01ece45508"
+    }
+  }
+}

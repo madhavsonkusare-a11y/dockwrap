@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "getmaxun/maxun-browser:v0.0.2",
+    "source_url": "https://hub.docker.com/v2/repositories/getmaxun/maxun-browser/tags/v0.0.2",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-06-24",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:748446bda2b83cd7af8ef716971b32ef8e427852802520f49335e01c74ca2355",
+      "linux/arm64": "sha256:ea74a4300019301d6f581aa602bc688d285b49a9b8ee31a669cce37f9e6fd2f8"
+    }
+  }
+}

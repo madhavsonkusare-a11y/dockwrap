@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "rustfs/rustfs:1.0.0-rc.6",
+    "source_url": "https://hub.docker.com/v2/repositories/rustfs/rustfs/tags/1.0.0-rc.6",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-09-11",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:8d8bfa61f3a20cdcf644562bb8c3a314ca03c66a9827f6056f741e787bf0c804",
+      "linux/arm64": "sha256:1427d98352c52b3b45308d2aec4c6e9028664cf2dbf1d1b28564b023774ed97d"
+    }
+  }
+}

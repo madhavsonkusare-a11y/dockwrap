@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "wordpress:7.1.0",
+    "source_url": "https://hub.docker.com/v2/repositories/library/wordpress/tags/7.1.0",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-08-29",
+    "container_platforms": [
+      "linux/386",
+      "linux/amd64",
+      "linux/arm/v5",
+      "linux/arm/v7",
+      "linux/arm64/v8",
+      "linux/ppc64le",
+      "linux/riscv64",
+      "linux/s390x"
+    ],
+    "digests": {
+      "linux/386": "sha256:41cb967f4e2aa242659647819ae35506f3827be04a5a4fbe739f9cdad63f6032",
+      "linux/amd64": "sha256:49801e46d08eb27ea68ed62e205bb35b1bb2dc962251bf2292a7d374f9637cee",
+      "linux/arm/v5": "sha256:9a587ea9893c22e9d3de760e6dfeb1562302920bc351a77cce3e76dc51007cdf",
+      "linux/arm/v7": "sha256:fb8d5bb31adda926c0f75950921c37451da1ba401d9045c38d48710eed6e9568",
+      "linux/arm64/v8": "sha256:ab6fc9ad816c305305905694238e5566a39e8d1c56719741e359605a89f15bf6",
+      "linux/ppc64le": "sha256:ca79e5e5b39c0244708652d2e0d5a94c9a0f84bbec160c88dc18be3ed7a9dcca",
+      "linux/riscv64": "sha256:3a9e6f0b70f12b7d338c1b5b6b8f05d959aa2c489ae7d48a8cc09186ee467b59",
+      "linux/s390x": "sha256:738e9a1eb18cdda578785a4e5c4ece33ea8ed26648899ca8709b02ae1ab21f45"
+    }
+  }
+}

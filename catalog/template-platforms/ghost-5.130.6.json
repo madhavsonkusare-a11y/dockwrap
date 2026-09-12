@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "ghost:5.130.6",
+    "source_url": "https://hub.docker.com/v2/repositories/library/ghost/tags/5.130.6",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-02-03",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm/v7",
+      "linux/arm64/v8",
+      "linux/s390x"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:db4c990b507f9063e9e1428ea59867bf39f5ebad42246eb1b17cf00ed8b4ac0b",
+      "linux/arm/v7": "sha256:412a891307603ff60265ff535ca07935cd21449bc3a84f19de4a8d39fb5efe40",
+      "linux/arm64/v8": "sha256:2f84ae2826bd5b8c1d62628a9ae141b8daec3ed8196d59ffb35346caa05798d2",
+      "linux/s390x": "sha256:c8144f93af0dd291877d9de1c84a2fa04cc34bb0f9b106ae8d2bdd03e050d7e7"
+    }
+  }
+}

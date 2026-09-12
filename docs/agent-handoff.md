@@ -1,5 +1,27 @@
 # Local Store: agent handoff
 
+## Repository consolidation — September 12
+
+The owner requested all open PRs merged into main and obsolete branches removed.
+The backend, offerings, icon and approved V2 design histories are consolidated.
+The README now reflects 52 offerings and 1,678 catalog entries with local icons.
+V2 remains an approved design package; merging it does not implement the new UI.
+
+The previously deferred template CI blocker is fixed: the checker reuses
+`generate-template.py` for OCI registries and has committed public registry
+evidence for every reviewed image. Tautulli's tag was rebuilt September 11;
+its original approved digest was fetched and verified without changing its pin.
+`--refresh-missing` fills absent evidence; `--refresh` refreshes evidence and
+still refuses mismatches. OCI images with install pins are checked by digest.
+Five entries added after the icon snapshot now have existing-generator monograms.
+CI now checks stacked PRs regardless of their target branch.
+
+Validation: 254 backend unit tests, 21 JavaScript unit tests, catalog validation,
+complete offline icon coverage and registry-evidence regression tests passed.
+Real Docker app qualifications were not repeated for this consolidation.
+Continue with the qualification roadmap below, keeping the V2 implementation
+separate from app proof work.
+
 ## Plans waiting to be picked up
 
 - **Qualification roadmap:** [docs/qualification-roadmap.md](qualification-roadmap.md) —

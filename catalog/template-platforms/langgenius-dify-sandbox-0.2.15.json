@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "langgenius/dify-sandbox:0.2.15",
+    "source_url": "https://hub.docker.com/v2/repositories/langgenius/dify-sandbox/tags/0.2.15",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-04-27",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:942acde5b90350498f71c9f89fe1c0a578578c51521d6683783e073528b6a26a",
+      "linux/arm64": "sha256:f91494950b80bf9662ce1382254a752f3748ee66c43a7d1898aa9ee119b8e62a"
+    }
+  }
+}

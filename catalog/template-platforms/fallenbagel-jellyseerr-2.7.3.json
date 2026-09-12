@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "fallenbagel/jellyseerr:2.7.3",
+    "source_url": "https://hub.docker.com/v2/repositories/fallenbagel/jellyseerr/tags/2.7.3",
+    "checked_at": "2026-09-12",
+    "last_updated": "2025-08-14",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:499fbe958fa4a0c93172a231c14898986556bb28bd5cd569a0f41dbf887b04d7",
+      "linux/arm64": "sha256:5d79101f54301b1483e5a97130424a8bb281d290a9b8168c59015744e6c0114d"
+    }
+  }
+}

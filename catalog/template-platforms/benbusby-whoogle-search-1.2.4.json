@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "benbusby/whoogle-search:1.2.4",
+    "source_url": "https://hub.docker.com/v2/repositories/benbusby/whoogle-search/tags/1.2.4",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-04-15",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:5a74b26493da7d57bb952918740ce70f40d8c18b83325e01a6f2a3fedfe2490c",
+      "linux/arm64": "sha256:765e787cd3c5ebfe2e4c244546ac573d8b656d57e945309327a7325f5ea63ac1"
+    }
+  }
+}

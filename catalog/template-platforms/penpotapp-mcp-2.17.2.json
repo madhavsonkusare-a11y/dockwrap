@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "penpotapp/mcp:2.17.2",
+    "source_url": "https://hub.docker.com/v2/repositories/penpotapp/mcp/tags/2.17.2",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-08-27",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:7319ccce537aade598f119710ca49b01d6c953d00607d69c3a707cc99fa8534b",
+      "linux/arm64": "sha256:f14ad339d572f85394a59b48f60387bbb1fa8069bd35783229727e16e4d41ac2"
+    }
+  }
+}

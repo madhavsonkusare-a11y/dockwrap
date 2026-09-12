@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "langflowai/langflow:1.12.1",
+    "source_url": "https://hub.docker.com/v2/repositories/langflowai/langflow/tags/1.12.1",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-09-08",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:ebb38ea83b144e6421cbb5fa0c0499721e17f6b7407df76a16c41247b0d1ed57",
+      "linux/arm64": "sha256:3aa35597b28f70f814afee37b2026c8da4bdd51ac3d174fbd44435ac06b89cec"
+    }
+  }
+}

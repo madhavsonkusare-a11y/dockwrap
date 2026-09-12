@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "valkey/valkey:8.1.10",
+    "source_url": "https://hub.docker.com/v2/repositories/valkey/valkey/tags/8.1.10",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-09-07",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm/v7",
+      "linux/arm64",
+      "linux/ppc64le"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:f740fb12fb9dec890f4785ebd04ba184ab9bc556cc33063a01726a9180cc697c",
+      "linux/arm/v7": "sha256:289968a83f2f13a06f75bf58299eeffe30aea110d451e09517076a5fb346ef7d",
+      "linux/arm64": "sha256:bf810d180193bb7809af15379f844fe3d585c9e623ad6f43b22c302a5dd8cea2",
+      "linux/ppc64le": "sha256:bd3276c3d87ec6c4f340d1424fd1545fcd4aeb7a2c1c2a41a4c99f393c3e0c0b"
+    }
+  }
+}

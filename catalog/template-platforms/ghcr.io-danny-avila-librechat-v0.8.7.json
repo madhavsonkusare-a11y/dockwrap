@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "ghcr.io/danny-avila/librechat:v0.8.7",
+    "source_url": "https://ghcr.io/v2/danny-avila/librechat/manifests/v0.8.7",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-06-24",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:a950bb5fe847ae3b00797bf02d0b26bcd4c12f27240ebad6fa9eedafefc59d52",
+      "linux/arm64": "sha256:2f9aee2c87131b4dab5189f3cde0ca38fa0c2875f1609124aa1cad5e2a3d89c9"
+    }
+  }
+}

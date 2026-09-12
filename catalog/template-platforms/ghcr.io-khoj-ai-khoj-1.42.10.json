@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "ghcr.io/khoj-ai/khoj:1.42.10",
+    "source_url": "https://ghcr.io/v2/khoj-ai/khoj/manifests/1.42.10",
+    "checked_at": "2026-09-12",
+    "last_updated": "2025-07-15",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:291137d53db702c36ef396afd399109eee2cb605c0818a0ce6d3d1eefa653c1b",
+      "linux/arm64": "sha256:f1f1b1ee3eaeefde7efbe16f8a17d63673b3fb51c6b3d71580dfd40bc4e12078"
+    }
+  }
+}

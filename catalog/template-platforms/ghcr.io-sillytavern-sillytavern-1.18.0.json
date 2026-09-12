@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "ghcr.io/sillytavern/sillytavern:1.18.0",
+    "source_url": "https://ghcr.io/v2/sillytavern/sillytavern/manifests/1.18.0",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-05-03",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:4358edc734b20f77dabd3d262738cbadd246975e3c346cd1ef91894a6f883dc1",
+      "linux/arm64": "sha256:9ce71c3bff843597debf8a1911d6d7587adefb019a37e74572400c0741d2cdec"
+    }
+  }
+}

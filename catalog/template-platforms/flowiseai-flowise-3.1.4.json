@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "flowiseai/flowise:3.1.4",
+    "source_url": "https://hub.docker.com/v2/repositories/flowiseai/flowise/tags/3.1.4",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-07-29",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:e4ac7d4f6a09a3be888e0a630ba666075dcbc0135d48195788f9b52f49f1eb3d",
+      "linux/arm64": "sha256:6062312e4cdae9d1c1902c0ed3c403d465dd7369f0ba1bc1ae30c3ac8d69fac1"
+    }
+  }
+}

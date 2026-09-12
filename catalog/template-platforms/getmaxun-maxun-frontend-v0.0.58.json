@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "getmaxun/maxun-frontend:v0.0.58",
+    "source_url": "https://hub.docker.com/v2/repositories/getmaxun/maxun-frontend/tags/v0.0.58",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-08-25",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:7f98fedd72218b395e40f92fd35661b44f16e0a7d41861f8eb1cb98cf6028921",
+      "linux/arm64": "sha256:f3f5e80d4eb6195871e13cb8bf51fa50f77341d05a70e7a0f70de9219fed5fa3"
+    }
+  }
+}

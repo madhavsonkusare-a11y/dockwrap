@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "searxng/searxng:2026.9.10-931fd9787",
+    "source_url": "https://hub.docker.com/v2/repositories/searxng/searxng/tags/2026.9.10-931fd9787",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-09-10",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm/v7",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:ccc7c2a0687695b0a86ccfaf8b08ad694a25148404de69169890e95ef3522401",
+      "linux/arm/v7": "sha256:1a7e125b4d83ee740100abe56dca70bd1f7be96ba72980f1a849caf4437aab8d",
+      "linux/arm64": "sha256:595e7525f1c407f22f5e76f5eb1c521454010735529427915ab1f7174a51af5b"
+    }
+  }
+}

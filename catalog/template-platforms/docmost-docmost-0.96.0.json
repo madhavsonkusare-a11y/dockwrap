@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "docmost/docmost:0.96.0",
+    "source_url": "https://hub.docker.com/v2/repositories/docmost/docmost/tags/0.96.0",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-09-08",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:17946a58951d8fd31a1b12db03f0d9fff362432c0778e5e19b4c78909b0000d4",
+      "linux/arm64": "sha256:6ed7e3727ef6535818178ecf5c37fc4ada44d8c6d81ac326df0860c1d2a933c2"
+    }
+  }
+}

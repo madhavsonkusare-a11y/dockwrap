@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "reference": "sha256:fa32d116cf20cad52cbc3fad9a63b46e7fa02299d8f967168eb453d49c476b4a",
+  "audit": {
+    "image": "ghcr.io/umami-software/umami:3.3.1",
+    "source_url": "https://ghcr.io/v2/umami-software/umami/manifests/sha256:fa32d116cf20cad52cbc3fad9a63b46e7fa02299d8f967168eb453d49c476b4a",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-08-20",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:55235a1b811ddc64dec4c017a74034c8fb2395a7dc8b5215b59f3aff4a5ccbf8",
+      "linux/arm64": "sha256:a1af44521dd779aad7d2c32cee1a92c407c95d56703fb5d79b19eeeaea6aec3b"
+    }
+  }
+}

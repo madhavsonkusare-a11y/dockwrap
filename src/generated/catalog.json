@@ -5307,7 +5307,7 @@
       "archived": false,
       "category": "Artificial Intelligence",
       "description": "A chat interface for many AI models at once, with personas, voice and multi-model replies.",
-      "icon": null,
+      "icon": "assets/catalog/big-agi.svg",
       "id": "big-agi",
       "licenses": [
         "MIT"
@@ -31742,7 +31742,7 @@
       "archived": false,
       "category": "Artificial Intelligence",
       "description": "Chat with your documents: a clean RAG interface for any model.",
-      "icon": null,
+      "icon": "assets/catalog/kotaemon.svg",
       "id": "kotaemon",
       "licenses": [
         "Apache-2.0"
@@ -36634,7 +36634,7 @@
       "archived": false,
       "category": "Artificial Intelligence",
       "description": "Turn websites into data: train a robot by pointing at a page, then run it on a schedule.",
-      "icon": null,
+      "icon": "assets/catalog/maxun.svg",
       "id": "maxun",
       "licenses": [
         "AGPL-3.0"
@@ -57503,7 +57503,7 @@
       "archived": false,
       "category": "Artificial Intelligence",
       "description": "A front end for chatting and roleplaying with AI models and characters.",
-      "icon": null,
+      "icon": "assets/catalog/sillytavern.svg",
       "id": "sillytavern",
       "licenses": [
         "AGPL-3.0"
@@ -57641,7 +57641,7 @@
       "archived": false,
       "category": "Artificial Intelligence",
       "description": "Build and run AI agent workflows on a visual canvas.",
-      "icon": null,
+      "icon": "assets/catalog/sim.svg",
       "id": "sim",
       "licenses": [
         "Apache-2.0"

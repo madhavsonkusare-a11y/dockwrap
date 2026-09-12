@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "ghcr.io/simstudioai/cron:v0.8.33",
+    "source_url": "https://ghcr.io/v2/simstudioai/cron/manifests/v0.8.33",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-09-09",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:096887d81513b07a5237e3736a709843bda92750465ff85c0c691d138d10cf05",
+      "linux/arm64": "sha256:19841e158161ce0f6eca3c29f6c5f9c30a73a0c8b9460ca2e4ece443184fcf44"
+    }
+  }
+}

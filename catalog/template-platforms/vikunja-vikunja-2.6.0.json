@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "vikunja/vikunja:2.6.0",
+    "source_url": "https://hub.docker.com/v2/repositories/vikunja/vikunja/tags/2.6.0",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-08-31",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm/v6",
+      "linux/arm/v7",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:b63e4d5d300dbd63003c045afa1ebb98a16ff2a527ef09550cc8df2db57706e2",
+      "linux/arm/v6": "sha256:7f87a4ac361cc224e94ec1cf20c6212c11129399ba90dda011c72eb6eb1e563d",
+      "linux/arm/v7": "sha256:7bb982a3417e1d51da899693f58079e9df977d2652491b013047dfa68ef1ce0a",
+      "linux/arm64": "sha256:898a94fb9de9ccaa8028870e34f926c70fcdab6ff44e60557f68651e036b8fb1"
+    }
+  }
+}

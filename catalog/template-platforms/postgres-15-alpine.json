@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "postgres:15-alpine",
+    "source_url": "https://hub.docker.com/v2/repositories/library/postgres/tags/15-alpine",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-08-16",
+    "container_platforms": [
+      "linux/386",
+      "linux/amd64",
+      "linux/arm/v6",
+      "linux/arm/v7",
+      "linux/arm64/v8",
+      "linux/ppc64le",
+      "linux/riscv64",
+      "linux/s390x"
+    ],
+    "digests": {
+      "linux/386": "sha256:84f43042200e6feb307f42deb4cba37512f04c6398cf03b9fa5ba7ad03ab01b4",
+      "linux/amd64": "sha256:a2c20749c564b4eb73a77bfda626f8a3cde1bbfae020fb97c616a00cdc1a2181",
+      "linux/arm/v6": "sha256:d7541417d199c37cf8ac6b4b696c5f148c2a39a0444f4d3e657354f5814334c5",
+      "linux/arm/v7": "sha256:8f484cb5a94aa42f516954edfa7c66dbbc303573527cc87c9d4bd780c94e239c",
+      "linux/arm64/v8": "sha256:8f1f9748236a87718c0e2a46ea1bad4f6caa52c7f5612ed57d0cf9d2fc314468",
+      "linux/ppc64le": "sha256:e8aa69687f46a659adfcda8116e0ffdb1b38b88d4ecbc901f887e40b9b2bc818",
+      "linux/riscv64": "sha256:0928df51bf21ed88373c9fa7293c97ce82736c8e3faa6963f61d204f6471a4b5",
+      "linux/s390x": "sha256:820f6a15ff5d4cda5cf8c0470fdea88bbb97115d75e3a3f9d43fd86e379b3848"
+    }
+  }
+}

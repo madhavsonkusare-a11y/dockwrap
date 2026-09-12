@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "deluan/navidrome:0.63.2",
+    "source_url": "https://hub.docker.com/v2/repositories/deluan/navidrome/tags/0.63.2",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-07-11",
+    "container_platforms": [
+      "linux/386",
+      "linux/amd64",
+      "linux/arm/v6",
+      "linux/arm/v7",
+      "linux/arm64",
+      "linux/riscv64"
+    ],
+    "digests": {
+      "linux/386": "sha256:f8697c6324a6dfbdb0d0e68a41c2bd7ba43256820a59316d4d62180921b29940",
+      "linux/amd64": "sha256:38246ebb80d6f7e2724eecab4acafa7b14ec66ae800b2454aa6da4c19f80a9ce",
+      "linux/arm/v6": "sha256:38650dab50748056dec80d0b86071423b8a6b896e39abb04a069addeeff860ff",
+      "linux/arm/v7": "sha256:f7c41e629f79a3099936acc00126c8ff42fab6cfa45ba596d385e89a7e4110c5",
+      "linux/arm64": "sha256:83813e88d8b5dec7d559135ae7707c84ee3f913066c822d212f258706e565ece",
+      "linux/riscv64": "sha256:8b168f38e29b423880cc4f088167a26c1669c6845987bf2cac0d4614d40657f6"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "machines/filestash:b7b45f2",
+    "source_url": "https://hub.docker.com/v2/repositories/machines/filestash/tags/b7b45f2",
+    "checked_at": "2026-09-12",
+    "last_updated": "2020-03-11",
+    "container_platforms": [
+      "linux/amd64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:5dcd3a81ea7185753d76c6d7de5b07e6ab829cf36475e64f09375ecf2b8a1022"
+    }
+  }
+}

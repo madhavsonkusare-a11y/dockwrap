@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "langgenius/dify-web:1.17.1",
+    "source_url": "https://hub.docker.com/v2/repositories/langgenius/dify-web/tags/1.17.1",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-09-10",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:c4baeb297722671a23317b17d2af669f50b36f6239d1d976832a77b2057344e5",
+      "linux/arm64": "sha256:212e105a3cad6d9f63936f2302b2ea4acbf53c5148293ca9d4f1b8e6d7f54f21"
+    }
+  }
+}

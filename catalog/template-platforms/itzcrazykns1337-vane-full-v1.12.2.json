@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "itzcrazykns1337/vane:full-v1.12.2",
+    "source_url": "https://hub.docker.com/v2/repositories/itzcrazykns1337/vane/tags/full-v1.12.2",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-04-10",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:11fad047ffb236dde04272ea8beaa1fa64a7e7c059a5ed5df98049bbd15661c8",
+      "linux/arm64": "sha256:db1957c6eb3375106edc2952cc5cd164ff7abd97aed3f93481713109ef725d75"
+    }
+  }
+}

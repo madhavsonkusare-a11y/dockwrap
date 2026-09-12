@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "postgres:15.19",
+    "source_url": "https://hub.docker.com/v2/repositories/library/postgres/tags/15.19",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-08-28",
+    "container_platforms": [
+      "linux/386",
+      "linux/amd64",
+      "linux/arm/v5",
+      "linux/arm/v7",
+      "linux/arm64/v8",
+      "linux/ppc64le",
+      "linux/riscv64",
+      "linux/s390x"
+    ],
+    "digests": {
+      "linux/386": "sha256:fd21f211f9bf005362ba8e3bd0a26017773f81ce3b59afc0c552779f55ce0c99",
+      "linux/amd64": "sha256:c9d304da25223a60a3b3c5ec77b599c59f4a6088950ee612fdb5115d713d100d",
+      "linux/arm/v5": "sha256:de9697724a6f10dc5bc0d3bfb00ea3d5171d5eb24656ec03e87907a938b826c9",
+      "linux/arm/v7": "sha256:b1c4173466c7a319e5e01377b7c72e659feb9de2d411d15077befc38009cd1b1",
+      "linux/arm64/v8": "sha256:0b90daad6708473be4845619f4663bd8898ce926e62cab8a6da796a278eb28f8",
+      "linux/ppc64le": "sha256:a4d48f3ccb8bf7e7737f5fa87859b77a6c1e95c8be43d99862a8f02d316e5ca3",
+      "linux/riscv64": "sha256:1ca8a56769f89edc933e6e065bd539d6a4743e49fc63a8b03dbe4917ab2ac272",
+      "linux/s390x": "sha256:2041e6b56111e6117936952c357e5ac6c567c754b1cfba0e0e8e4f0816a2c52b"
+    }
+  }
+}

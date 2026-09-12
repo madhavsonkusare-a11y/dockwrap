@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "henrygd/beszel:0.18.6",
+    "source_url": "https://hub.docker.com/v2/repositories/henrygd/beszel/tags/0.18.6",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-03-29",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm/v7",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:4c162a441bee6d50d80a716a72eece78a77fe4dc1e0c65700ed9f555b365200d",
+      "linux/arm/v7": "sha256:3772089fefaa19312bbeb238837abf94d7b9e75d0f520997f2a05a14ba8575e7",
+      "linux/arm64": "sha256:82b28b0c7fe700b9e1a3a15c1a3630be8207649cbec85b33b4e1a39f8c1b853b"
+    }
+  }
+}

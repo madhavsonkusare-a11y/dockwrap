@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "dgtlmoon/changedetection.io:0.60.4",
+    "source_url": "https://hub.docker.com/v2/repositories/dgtlmoon/changedetection.io/tags/0.60.4",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-09-10",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm/v7",
+      "linux/arm/v8",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:e61f10fbbc635af1d396721bb9179464a38dd6f749b4cfc92a52e94057370a8e",
+      "linux/arm/v7": "sha256:6aaedcadd28800c30b25d3cb089eff8f146da512426a7dd6766bdc1a2fc5a867",
+      "linux/arm/v8": "sha256:dbb81aa2d20ce3bc4e19dd6e58e10ba0aabb6bb9dcd8d3bb51d15d3c6e7e7da2",
+      "linux/arm64": "sha256:3df9408c73977b13180a64aaee646376ed88a62f374e09e0e6b7a01ca37be60b"
+    }
+  }
+}

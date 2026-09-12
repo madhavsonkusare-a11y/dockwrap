@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "redis:6.2",
+    "source_url": "https://hub.docker.com/v2/repositories/library/redis/tags/6.2",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-08-25",
+    "container_platforms": [
+      "linux/386",
+      "linux/amd64",
+      "linux/arm/v7",
+      "linux/arm64/v8",
+      "linux/ppc64le"
+    ],
+    "digests": {
+      "linux/386": "sha256:1c4819c85d8b66956838e8c2e515bddff8a6213956c5922809d1a5551a5f6603",
+      "linux/amd64": "sha256:aff3b153843c610a804a18e66fee1cfb1b961c3cb447416df05bc54a3e66c234",
+      "linux/arm/v7": "sha256:608bdbd6fdea5af6b8c851bcfb5ac59140fc30c0800f6d01166b07e5aa40a503",
+      "linux/arm64/v8": "sha256:162a6717230928c0ea997db9ac81ec32997c783c928dd7fcffc3dc433c22da8c",
+      "linux/ppc64le": "sha256:739a61fe5d02741b97e563b97893808bcee61bdb27774844edf5416565d3cb90"
+    }
+  }
+}

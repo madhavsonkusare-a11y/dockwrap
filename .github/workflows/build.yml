@@ -5,7 +5,7 @@ on:
     branches: [main]
     tags: ["v*"]
   pull_request:
-    branches: [main]
+    # Stacked PRs need checks before their base branch reaches main too.
 
 permissions:
   contents: read
@@ -38,6 +38,7 @@ jobs:
         run: |
           python scripts/test_catalog.py
           python scripts/test_recipe_platforms.py
+          python scripts/test_template_platforms.py
           python scripts/check-recipe-platforms.py
           python scripts/check-template-platforms.py
           python scripts/test_release.py
