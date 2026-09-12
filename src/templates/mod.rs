@@ -156,6 +156,11 @@ pub struct ReviewedTemplate {
     pub source_url: String,
     pub documentation_url: String,
     pub verified_at: String,
+    /// The version of the app itself, when its own definition names one.
+    /// Dify's front door is an nginx, so the tag on the image a plan
+    /// publishes is nginx's version, not Dify's.
+    #[serde(default)]
+    pub version: Option<String>,
     /// The recorded run that proves this template installs and survives a
     /// reinstall. A template without one has not been verified, whatever else
     /// it declares.

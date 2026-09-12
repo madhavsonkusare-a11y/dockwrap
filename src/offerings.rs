@@ -192,14 +192,18 @@ impl Offering {
                 let (service, port) = mapped.plan.published().ok_or_else(|| {
                     AppError::invalid(format!("{} publishes no address to open.", template.id))
                 })?;
-                // The version an imported app reports is the tag it is pinned
-                // to. There is no separate version field to disagree with it,
-                // and the allowlist already refuses an unpinned tag.
-                let version = service
-                    .image
-                    .rsplit_once(':')
-                    .map(|(_, tag)| tag.to_owned())
-                    .unwrap_or_default();
+                // The version a reviewed definition names, and otherwise the
+                // tag the published image is pinned to. They agree for an app
+                // that is one service; for Dify, whose front door is an
+                // nginx, the tag is nginx's version and the definition's is
+                // Dify's.
+                let version = template.version.clone().unwrap_or_else(|| {
+                    service
+                        .image
+                        .rsplit_once(':')
+                        .map(|(_, tag)| tag.to_owned())
+                        .unwrap_or_default()
+                });
                 Ok(OfferingSummary {
                     id: template.id.clone(),
                     display_name: template.display_name.clone(),
@@ -295,9 +299,17 @@ mod tests {
             assert_eq!(summary.image, service.image);
             assert_eq!(summary.container_port, port.container);
 
-            // A pinned tag is what the version claim rests on.
+            // A pinned tag is what the version claim rests on, unless the
+            // reviewed definition names the app's own version.
             assert!(!summary.version.is_empty());
-            assert!(service.image.ends_with(&format!(":{}", summary.version)));
+            let named = matches!(offering, Offering::Template(template)
+                if template.version.as_deref() == Some(summary.version.as_str()));
+            assert!(
+                named || service.image.ends_with(&format!(":{}", summary.version)),
+                "{}: version {} is neither reviewed nor the image's tag",
+                summary.id,
+                summary.version
+            );
         }
     }
 

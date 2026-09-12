@@ -9,6 +9,7 @@
   "source_url": "https://github.com/binwiederhier/ntfy",
   "documentation_url": "https://ntfy.sh/",
   "verified_at": "2026-09-10",
+  "version": "v2.28.0",
   "lifecycle_proof": "docs/evidence/ntfy-qualification.json",
   "origin": {
     "importer": "runtipi",

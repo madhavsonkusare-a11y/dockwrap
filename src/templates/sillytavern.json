@@ -9,6 +9,7 @@
   "source_url": "https://github.com/SillyTavern/SillyTavern",
   "documentation_url": "https://docs.sillytavern.app/installation/docker/",
   "verified_at": "2026-09-12",
+  "version": "1.18.0",
   "lifecycle_proof": "docs/evidence/sillytavern-qualification.json",
   "origin": {
     "importer": "runtipi",

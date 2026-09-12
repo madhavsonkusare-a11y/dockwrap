@@ -9,6 +9,7 @@
   "source_url": "https://github.com/monicahq/monica",
   "documentation_url": "https://github.com/monicahq/docker",
   "verified_at": "2026-09-11",
+  "version": "4.1.2",
   "lifecycle_proof": "docs/evidence/monica-qualification.json",
   "origin": {
     "importer": "runtipi",

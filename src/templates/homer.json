@@ -9,6 +9,7 @@
   "source_url": "https://github.com/bastienwirtz/homer",
   "documentation_url": "https://github.com/bastienwirtz/homer",
   "verified_at": "2026-09-10",
+  "version": "v26.08.3",
   "lifecycle_proof": "docs/evidence/homer-qualification.json",
   "origin": {
     "importer": "runtipi",

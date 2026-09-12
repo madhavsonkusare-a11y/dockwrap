@@ -9,6 +9,7 @@
   "source_url": "https://github.com/Tautulli/Tautulli",
   "documentation_url": "https://tautulli.com",
   "verified_at": "2026-09-10",
+  "version": "2.18.1",
   "lifecycle_proof": "docs/evidence/tautulli-qualification.json",
   "origin": {
     "importer": "runtipi",

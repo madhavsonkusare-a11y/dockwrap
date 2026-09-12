@@ -9,6 +9,7 @@
   "source_url": "https://github.com/Mintplex-Labs/anything-llm",
   "documentation_url": "https://docs.anythingllm.com/installation-docker/local-docker",
   "verified_at": "2026-09-11",
+  "version": "1.16.1",
   "lifecycle_proof": "docs/evidence/anythingllm-qualification.json",
   "origin": {
     "importer": "runtipi",

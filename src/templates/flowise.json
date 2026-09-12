@@ -9,6 +9,7 @@
   "source_url": "https://github.com/FlowiseAI/Flowise",
   "documentation_url": "https://docs.flowiseai.com/getting-started#docker",
   "verified_at": "2026-09-12",
+  "version": "3.1.4",
   "lifecycle_proof": "docs/evidence/flowise-qualification.json",
   "origin": {
     "importer": "runtipi",

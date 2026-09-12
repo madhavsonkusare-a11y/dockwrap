@@ -9,6 +9,7 @@
   "source_url": "https://github.com/open-webui/open-webui",
   "documentation_url": "https://docs.openwebui.com",
   "verified_at": "2026-09-12",
+  "version": "v0.11.3",
   "lifecycle_proof": "docs/evidence/open-webui-qualification.json",
   "origin": {
     "importer": "runtipi",

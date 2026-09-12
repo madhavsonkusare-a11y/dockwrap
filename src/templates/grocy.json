@@ -9,6 +9,7 @@
   "source_url": "https://github.com/grocy/grocy",
   "documentation_url": "https://grocy.info/",
   "verified_at": "2026-09-10",
+  "version": "4.7.1",
   "lifecycle_proof": "docs/evidence/grocy-qualification.json",
   "origin": {
     "importer": "runtipi",

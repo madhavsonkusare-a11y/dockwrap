@@ -9,6 +9,7 @@
   "source_url": "https://github.com/Fallenbagel/jellyseerr",
   "documentation_url": "https://seerr.dev/",
   "verified_at": "2026-09-10",
+  "version": "2.7.3",
   "lifecycle_proof": "docs/evidence/jellyseerr-qualification.json",
   "origin": {
     "importer": "runtipi",

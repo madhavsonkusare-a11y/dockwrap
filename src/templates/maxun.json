@@ -9,6 +9,7 @@
   "source_url": "https://github.com/getmaxun/maxun",
   "documentation_url": "https://github.com/getmaxun/maxun/blob/develop/docs/self-hosting-docker.md",
   "verified_at": "2026-09-12",
+  "version": "0.0.62",
   "lifecycle_proof": "docs/evidence/maxun-qualification.json",
   "origin": {
     "importer": "runtipi",

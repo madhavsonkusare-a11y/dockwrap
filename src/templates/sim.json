@@ -9,6 +9,7 @@
   "source_url": "https://github.com/simstudioai/sim",
   "documentation_url": "https://docs.sim.ai/self-hosting/docker",
   "verified_at": "2026-09-12",
+  "version": "0.8.33",
   "lifecycle_proof": "docs/evidence/sim-qualification.json",
   "origin": {
     "importer": "runtipi",

@@ -9,6 +9,7 @@
   "source_url": "https://github.com/langflow-ai/langflow",
   "documentation_url": "https://docs.langflow.org/deployment-docker",
   "verified_at": "2026-09-12",
+  "version": "1.12.1",
   "lifecycle_proof": "docs/evidence/langflow-qualification.json",
   "origin": {
     "importer": "runtipi",

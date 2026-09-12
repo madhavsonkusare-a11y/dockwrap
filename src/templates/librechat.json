@@ -9,6 +9,7 @@
   "source_url": "https://github.com/danny-avila/LibreChat",
   "documentation_url": "https://www.librechat.ai/docs/local/docker",
   "verified_at": "2026-09-11",
+  "version": "0.8.7",
   "lifecycle_proof": "docs/evidence/librechat-qualification.json",
   "origin": {
     "importer": "runtipi",

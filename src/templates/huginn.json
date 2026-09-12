@@ -9,6 +9,7 @@
   "source_url": "https://github.com/huginn/huginn",
   "documentation_url": "https://github.com/huginn/huginn/blob/master/doc/docker/install.md",
   "verified_at": "2026-09-12",
+  "version": "2026.09.09",
   "lifecycle_proof": "docs/evidence/huginn-qualification.json",
   "origin": {
     "importer": "runtipi",

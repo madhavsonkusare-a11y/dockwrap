@@ -9,6 +9,7 @@
   "source_url": "https://github.com/langgenius/dify",
   "documentation_url": "https://docs.dify.ai/getting-started/install-self-hosted/docker-compose",
   "verified_at": "2026-09-12",
+  "version": "1.17.1",
   "lifecycle_proof": "docs/evidence/dify-qualification.json",
   "origin": {
     "importer": "runtipi",
