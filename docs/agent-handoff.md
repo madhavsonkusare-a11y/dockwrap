@@ -1,5 +1,18 @@
 # Local Store: agent handoff
 
+## Plans waiting to be picked up
+
+- **Qualification roadmap:** [docs/qualification-roadmap.md](qualification-roadmap.md) —
+  how to get from "opens a page" to "proven end to end", in the order worth
+  doing it. Start with the container-health assertion and the cost
+  measurements; both may demote an already-approved app, which is the point,
+  not a bug to work around. Nothing there should land while apps are mid-proof.
+- **Running without Docker Desktop:** [docs/bundled-container-engine.md](bundled-container-engine.md) —
+  bundle the engine (moby) in a WSL distro Local Store manages, behind a
+  `ContainerEngine` seam, and prove the swap by re-running the offered suite.
+  Settle the Docker Desktop licence question first: it decides whether this is
+  polish or a blocker for distributing Local Store at all.
+
 ## Fifty apps, September 12 — in progress, read before resuming
 
 The owner asked for ten more apps to reach fifty, chosen for **diversity**:
