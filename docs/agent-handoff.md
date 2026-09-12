@@ -14,11 +14,15 @@ its original approved digest was fetched and verified without changing its pin.
 `--refresh-missing` fills absent evidence; `--refresh` refreshes evidence and
 still refuses mismatches. OCI images with install pins are checked by digest.
 Five entries added after the icon snapshot now have existing-generator monograms.
-CI now checks stacked PRs regardless of their target branch.
+CI now checks stacked PRs regardless of their target branch. Its catalog job
+fetches full history so first-party definition provenance stays reproducible.
 
-Validation: 254 backend unit tests, 21 JavaScript unit tests, catalog validation,
+Validation: the full default Rust suite and strict Clippy, 21 JavaScript unit tests, catalog validation,
 complete offline icon coverage and registry-evidence regression tests passed.
 Real Docker app qualifications were not repeated for this consolidation.
+Local documents were saved in the named Git stash
+`pre-consolidation-local-documents-2026-09-12`. The local-only Claude cleanup
+commit is preserved by `archive/claude-cleanup-2026-09-12`; it is not merged.
 Continue with the qualification roadmap below, keeping the V2 implementation
 separate from app proof work.
 

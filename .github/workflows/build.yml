@@ -17,6 +17,10 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v5
+        with:
+          # First-party catalog provenance uses the commit that last changed
+          # each definition; a shallow checkout reports the merge commit.
+          fetch-depth: 0
       - name: Install Tauri Linux dependencies
         run: |
           sudo apt-get update
