@@ -1,0 +1,43 @@
+{
+  "id": "ghostfolio",
+  "name": "Ghostfolio",
+  "version": "3.69.0",
+  "source": "https://github.com/ghostfolio/ghostfolio",
+  "website": "https://ghostfol.io",
+  "documentation": "https://github.com/ghostfolio/ghostfolio#run-with-docker-compose",
+  "short_desc": "Track your investments and net worth across accounts in one place.",
+  "categories": [
+    "Money, Budgeting & Management"
+  ],
+  "license": "AGPL-3.0",
+  "form_fields": [
+    {
+      "type": "random",
+      "label": "Token salt",
+      "min": 48,
+      "max": 48,
+      "env_variable": "GHOSTFOLIO_ACCESS_TOKEN_SALT"
+    },
+    {
+      "type": "random",
+      "label": "Sign-in secret",
+      "min": 48,
+      "max": 48,
+      "env_variable": "GHOSTFOLIO_JWT_SECRET_KEY"
+    },
+    {
+      "type": "random",
+      "label": "Database password",
+      "min": 32,
+      "max": 32,
+      "env_variable": "GHOSTFOLIO_DB_PASSWORD"
+    },
+    {
+      "type": "random",
+      "label": "Cache password",
+      "min": 32,
+      "max": 32,
+      "env_variable": "GHOSTFOLIO_REDIS_PASSWORD"
+    }
+  ]
+}

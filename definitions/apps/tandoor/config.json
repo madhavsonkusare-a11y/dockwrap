@@ -1,0 +1,29 @@
+{
+  "id": "tandoor",
+  "name": "Tandoor Recipes",
+  "version": "2.6.15",
+  "source": "https://github.com/TandoorRecipes/recipes",
+  "website": "https://tandoor.dev",
+  "documentation": "https://docs.tandoor.dev/install/docker/",
+  "short_desc": "Keep your recipes, plan meals and build shopping lists.",
+  "categories": [
+    "Recipe Management"
+  ],
+  "license": "AGPL-3.0",
+  "form_fields": [
+    {
+      "type": "random",
+      "label": "Signing key",
+      "min": 50,
+      "max": 50,
+      "env_variable": "TANDOOR_SECRET_KEY"
+    },
+    {
+      "type": "random",
+      "label": "Database password",
+      "min": 32,
+      "max": 32,
+      "env_variable": "TANDOOR_DB_PASSWORD"
+    }
+  ]
+}

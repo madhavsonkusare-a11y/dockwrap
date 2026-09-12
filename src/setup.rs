@@ -702,6 +702,29 @@ impl PlanTemplate {
                 }
             }
         }
+        // Only environment values are filled. A placeholder in a command line
+        // is never replaced: Ghostfolio's Redis asked for
+        // `--requirepass ${GHOSTFOLIO_REDIS_PASSWORD}` and started with an
+        // empty password argument, which killed it.
+        for service in &self.plan.services {
+            for args in [&service.overrides.command, &service.overrides.entrypoint]
+                .into_iter()
+                .flatten()
+            {
+                let parts = match args {
+                    crate::plan::PlanArgs::Shell(line) => vec![line.clone()],
+                    crate::plan::PlanArgs::Exec(parts) => parts.clone(),
+                };
+                for part in parts {
+                    if let Some(found) = placeholders(&part).first() {
+                        return Err(format!(
+                            "a command for {:?} expects {:?}, which is only filled in environment values",
+                            service.name, found.key
+                        ));
+                    }
+                }
+            }
+        }
         let companions: Vec<String> = self
             .plan
             .companions()
@@ -985,6 +1008,31 @@ mod tests {
     /// pinned CapRover catalogue, translated the way the importer translates
     /// it. The proof claims all of these accept any value we generate, so the
     /// claim is checked against a great many values we actually generate.
+    /// Ghostfolio's Redis asked for `--requirepass ${PASSWORD}` and got an
+    /// empty argument, because only environment values are filled.
+    #[test]
+    fn a_placeholder_in_a_command_is_refused_rather_than_left_empty() {
+        let mut template = template();
+        template.plan.services[0].overrides.command = Some(crate::plan::PlanArgs::Exec(vec![
+            "redis-server".into(),
+            "--requirepass".into(),
+            "${DB_PASSWORD}".into(),
+        ]));
+        let error = template.validate().unwrap_err();
+        assert!(
+            error.contains("DB_PASSWORD") && error.contains("command"),
+            "{error}"
+        );
+
+        // A value the container's own shell expands is not a placeholder.
+        template.plan.services[0].overrides.command = Some(crate::plan::PlanArgs::Shell(
+            "sh -c 'exec redis-server --requirepass \"$$REDIS_PASSWORD\"'".into(),
+        ));
+        template
+            .validate()
+            .expect("an escaped dollar is not a placeholder");
+    }
+
     #[test]
     fn a_proven_rule_accepts_every_value_the_generator_can_produce() {
         let proven: [(&str, usize); 8] = [

@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 2,
+  "$schema": "https://schemas.runtipi.io/v2/dynamic-compose.json",
+  "services": [
+    {
+      "name": "tandoor",
+      "image": "ghcr.io/tandoorrecipes/recipes:2.6.15",
+      "isMain": true,
+      "internalPort": 80,
+      "environment": [
+        {
+          "key": "SECRET_KEY",
+          "value": "${TANDOOR_SECRET_KEY}"
+        },
+        {
+          "key": "ALLOWED_HOSTS",
+          "value": "localhost,127.0.0.1"
+        },
+        {
+          "key": "CSRF_TRUSTED_ORIGINS",
+          "value": "${APP_PROTOCOL:-http}://${APP_DOMAIN}"
+        },
+        {
+          "key": "DB_ENGINE",
+          "value": "django.db.backends.postgresql"
+        },
+        {
+          "key": "GUNICORN_MEDIA",
+          "value": "1"
+        },
+        {
+          "key": "POSTGRES_HOST",
+          "value": "tandoor-db"
+        },
+        {
+          "key": "POSTGRES_PORT",
+          "value": "5432"
+        },
+        {
+          "key": "POSTGRES_USER",
+          "value": "tandoor"
+        },
+        {
+          "key": "POSTGRES_PASSWORD",
+          "value": "${TANDOOR_DB_PASSWORD}"
+        },
+        {
+          "key": "POSTGRES_DB",
+          "value": "tandoor"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/staticfiles",
+          "containerPath": "/opt/recipes/staticfiles"
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data/mediafiles",
+          "containerPath": "/opt/recipes/mediafiles"
+        }
+      ],
+      "healthCheck": {
+        "test": "wget --no-verbose --tries=1 --spider http://localhost:80/accounts/login/",
+        "interval": "10s",
+        "timeout": "5s",
+        "retries": 10,
+        "startPeriod": "60s"
+      },
+      "dependsOn": {
+        "tandoor-db": {
+          "condition": "service_healthy"
+        }
+      }
+    },
+    {
+      "name": "tandoor-db",
+      "image": "postgres:17.11",
+      "stopSignal": "SIGINT",
+      "environment": [
+        {
+          "key": "POSTGRES_USER",
+          "value": "tandoor"
+        },
+        {
+          "key": "POSTGRES_PASSWORD",
+          "value": "${TANDOOR_DB_PASSWORD}"
+        },
+        {
+          "key": "POSTGRES_DB",
+          "value": "tandoor"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/postgres",
+          "containerPath": "/var/lib/postgresql/data"
+        }
+      ],
+      "healthCheck": {
+        "test": "pg_isready -U tandoor -d tandoor",
+        "interval": "5s",
+        "timeout": "5s",
+        "retries": 10,
+        "startPeriod": "60s"
+      }
+    }
+  ]
+}

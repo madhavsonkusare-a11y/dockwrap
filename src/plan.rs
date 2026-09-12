@@ -591,21 +591,26 @@ impl DeploymentPlan {
             } else {
                 out.push_str("    restart: unless-stopped\n");
             }
-            if let Some(port) = service.published {
+            // One `ports:` for both, because a service may answer on its own
+            // address and a second one: Gitea serves git over SSH beside its
+            // pages, and two `ports:` keys are a Compose parse error.
+            if service.published.is_some() || service.companion.is_some() {
                 out.push_str("    ports:\n");
-                out.push_str(&format!(
-                    "      - \"127.0.0.1:{}:{}\"\n",
-                    port.host, port.container
-                ));
-            }
-            // The long form, so the main address stays the only short-form
-            // line and `published_host_port` can never pick up a second one.
-            if let Some(port) = service.companion {
-                out.push_str("    ports:\n");
-                out.push_str(&format!(
-                    "      - target: {}\n        published: \"{}\"\n        host_ip: 127.0.0.1\n",
-                    port.container, port.host
-                ));
+                if let Some(port) = service.published {
+                    out.push_str(&format!(
+                        "      - \"127.0.0.1:{}:{}\"\n",
+                        port.host, port.container
+                    ));
+                }
+                // The long form, so the main address stays the only
+                // short-form line and `published_host_port` can never pick up
+                // a second one.
+                if let Some(port) = service.companion {
+                    out.push_str(&format!(
+                        "      - target: {}\n        published: \"{}\"\n        host_ip: 127.0.0.1\n",
+                        port.container, port.host
+                    ));
+                }
             }
             if !service.environment.is_empty() {
                 out.push_str("    environment:\n");
@@ -1414,6 +1419,13 @@ NEWLINE",
         });
         both.validate()
             .expect("a main address and a second one may share a service");
+        // Two `ports:` keys on one service is a Compose parse error, which is
+        // how Gitea first failed.
+        let rendered = both.to_compose().expect("both addresses should render");
+        let web = rendered.split("\n  web:\n").nth(1).unwrap();
+        let web = web.split("\n  db:\n").next().unwrap();
+        assert_eq!(web.matches("ports:").count(), 1, "{rendered}");
+        assert!(web.contains("- target: 22\n"), "{rendered}");
 
         let mut twice = with_companion();
         twice.services[1].companion = Some(PublishedPort {
