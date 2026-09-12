@@ -1,5 +1,91 @@
 # Local Store: agent handoff
 
+## Fifty apps, September 12 — in progress, read before resuming
+
+The owner asked for ten more apps to reach fifty, chosen for **diversity**:
+the store was fifteen-of-forty AI. They picked thirteen from the categories
+with nothing in them: Jellyfin (media), Immich (photos), Calibre-Web
+(e-books), PairDrop (file transfer), Trilium (notes), Docmost (team wiki),
+Vikunja (tasks), Tandoor (recipes), Ghostfolio (investments), Wekan (kanban),
+changedetection.io (web monitoring), Umami (analytics) and Gitea (code
+hosting). Thirteen for a target of ten, so failures still clear fifty.
+
+**State when this was written:** all thirteen passed a first qualification
+except Calibre-Web (see below); twelve are in their offered runs. Expect
+**52 offerings** when they finish.
+
+### Four rules that were refusing apps for the wrong reason
+
+Each was found by an app failing, and each unlocked others:
+
+- **A health check may expand a variable inside its own container.** `$$NAME`
+  is Compose's escape for a literal dollar, so the container's shell expands
+  it from the environment the plan gives it — `pg_isready -U $$POSTGRES_USER`.
+  A single `$` stays refused, and so does CapRover's `$$cap_name`, which is an
+  unfilled placeholder rather than an expansion. This alone was refusing
+  Vikunja, Tandoor, Umami, NocoDB and Speedtest Tracker. The template guard
+  now refuses `$$cap_` rather than any `$$`.
+- **An app's own files under `/usr/src` are not the container's system.**
+  Immich keeps its photo library at `/usr/src/app/upload`, and the rule that
+  stops a person's folder being mounted over `/etc` or `/usr` was refusing it.
+- **A service may answer on a second address beside the one it publishes.**
+  Gitea serves git over SSH that way. Both addresses render under **one**
+  `ports:` key — two keys is a Compose parse error, which is how Gitea first
+  failed.
+- **A placeholder in a command line is never filled**, because only
+  environment values are. Ghostfolio's Redis asked for
+  `--requirepass ${GHOSTFOLIO_REDIS_PASSWORD}`, started with an empty password
+  argument and died. A template that does this is now refused rather than
+  installed broken.
+
+### What the app-store definitions got wrong
+
+- **Stale pins.** CapRover pins Jellyfin 10.10.1 (two major versions behind)
+  and changedetection 0.40.2; Runtipi pins Wekan twenty-three releases behind.
+  Each is bumped to upstream's current release with `image_pins`, which the
+  offered run proves. **Check the version gap on every imported app**:
+  `generate-template.py` prints it.
+- **Tandoor** sets no allowed hosts, so Django refused every request as an
+  invalid Host header. Local Store's own definition allows localhost and
+  trusts its own address for form posts.
+- **Ghostfolio** is the command-placeholder case above; its own definition
+  passes the Redis password through the environment.
+- **Calibre-Web cannot be a template as it stands**: its definition ships a
+  binary Calibre `metadata.db` as a seed, and a manifest carries text only.
+  Either drop it, swap it for Komga or Kavita (both import cleanly and scan a
+  folder instead), or add binary seeds to manifests. **Owner decision
+  needed.**
+
+### Measuring what is importable
+
+`catalog/candidate-queue.json` and `catalog/candidate-ranking.json` are
+**generated, and go stale as the importer gains capabilities** — they were
+still reporting `addPorts` and `healthCheck` as blockers after both worked.
+Rebuild with `scripts/build-candidate-queue.py`, then
+`scripts/rank-candidates.py`, before choosing candidates.
+
+Rebuilding needs the `runtipi` entry in `catalog/import-audit-sources.json`,
+which was missing: the codeload ZIP's checksum differs from the one in
+`sources.lock.json`, so it is recorded separately after being downloaded again
+and matched. That was verified on September 12 (sha256
+`8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec`).
+
+The ranking merges an app across sources and may pick the blocked one, which
+is why Gitea, Immich and Tandoor read as "no importable candidate". Name the
+source: `qualify_batch --only <app> --source runtipi`. The same applies to
+`generate-template.py`, which refuses a manifest whose proof came from the
+other source.
+
+### Qualification practice
+
+- **Never run two qualifications at once.** Vikunja and Tandoor both reported
+  "could not finish on this machine" while two batches overlapped, and Vikunja
+  passed alone. Contention looks like a machine failure, not an app failure.
+- **Capture container logs while the run is going.** Cleanup removes the
+  containers, and a timeout's diagnosis carries only the last few lines.
+  `scripts/` has no tool for this; the session used a small watcher that polls
+  `docker ps` and copies `docker logs` out.
+
 ## AI apps, September 12 — done, and what is left
 
 The owner asked for the most-starred AI and agent projects on GitHub and chose
