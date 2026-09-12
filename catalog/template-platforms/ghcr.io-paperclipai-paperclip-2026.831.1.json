@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "ghcr.io/paperclipai/paperclip:2026.831.1",
+    "source_url": "https://ghcr.io/v2/paperclipai/paperclip/manifests/2026.831.1",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-09-02",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:04b98fbe39e83462f7974d11a6d26a37cd21634bc110bf0a9683e6d6dadb72e5",
+      "linux/arm64": "sha256:7d82f0f4d844f17756634eb4a25fdfe02437a4e2dcfcca21ab5977844f102851"
+    }
+  }
+}

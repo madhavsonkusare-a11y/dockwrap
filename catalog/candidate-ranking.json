@@ -96,12 +96,10 @@
    "pulls": 385041008,
    "stars": 57925,
    "catalogues": 5,
-   "importable": false,
-   "blockers": [
-    "addPorts"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
    "images": [
     "gitea/gitea:1.27.3",
     "postgres:14"
@@ -396,12 +394,10 @@
    "pulls": 257842446,
    "stars": 203902,
    "catalogues": 1,
-   "importable": false,
-   "blockers": [
-    "healthCheck"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
    "images": [
     "n8nio/n8n:2.38.3",
     "postgres:18"
@@ -906,12 +902,10 @@
    "pulls": 21813704,
    "stars": 64912,
    "catalogues": 3,
-   "importable": false,
-   "blockers": [
-    "healthCheck"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 3,
+   "required_inputs": 0,
    "images": [
     "nocodb/nocodb:2026.08.2",
     "postgres:16",
@@ -1090,28 +1084,6 @@
    ]
   },
   {
-   "id": "eclipse-mosquitto",
-   "source": "runtipi",
-   "reach": 57.08,
-   "open_source": null,
-   "licenses": [
-    "NOASSERTION"
-   ],
-   "pulls": 681314268,
-   "stars": 11187,
-   "catalogues": 1,
-   "importable": false,
-   "blockers": [
-    "addPorts"
-   ],
-   "services": null,
-   "required_inputs": null,
-   "images": [
-    "cedalo/management-center:2",
-    "eclipse-mosquitto:2.0.22"
-   ]
-  },
-  {
    "id": "siyuan",
    "source": "runtipi",
    "reach": 57.03,
@@ -1149,6 +1121,32 @@
    "required_inputs": 0,
    "images": [
     "linuxserver/grocy:v2.7.1-ls58"
+   ]
+  },
+  {
+   "id": "penpot",
+   "source": "runtipi",
+   "reach": 56.81,
+   "open_source": true,
+   "licenses": [
+    "MPL-2.0",
+    "MPL-2.0"
+   ],
+   "pulls": 5399653,
+   "stars": 59822,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "plan policy"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": [
+    "penpotapp/backend:latest",
+    "penpotapp/exporter:latest",
+    "penpotapp/frontend:latest",
+    "postgres:14",
+    "redis:7"
    ]
   },
   {
@@ -1375,32 +1373,6 @@
    "required_inputs": 0,
    "images": [
     "tautulli/tautulli:v2.7.5"
-   ]
-  },
-  {
-   "id": "penpot",
-   "source": "runtipi",
-   "reach": 55.31,
-   "open_source": true,
-   "licenses": [
-    "MPL-2.0",
-    "MPL-2.0"
-   ],
-   "pulls": 5399653,
-   "stars": 59822,
-   "catalogues": 3,
-   "importable": false,
-   "blockers": [
-    "stopSignal"
-   ],
-   "services": null,
-   "required_inputs": null,
-   "images": [
-    "penpotapp/backend:latest",
-    "penpotapp/exporter:latest",
-    "penpotapp/frontend:latest",
-    "postgres:14",
-    "redis:7"
    ]
   },
   {
@@ -1848,6 +1820,29 @@
   },
   {
    "id": "vikunja",
+   "source": "runtipi",
+   "reach": 52.73,
+   "open_source": true,
+   "licenses": [
+    "AGPL-3.0",
+    "AGPL-3.0",
+    "AGPL-3.0/GPL-3.0",
+    "GPL-3.0"
+   ],
+   "pulls": 10532758,
+   "stars": 5340,
+   "catalogues": 4,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
+   "images": [
+    "vikunja/vikunja:2.6.0",
+    "postgres:14"
+   ]
+  },
+  {
+   "id": "vikunja",
    "source": "caprover",
    "reach": 52.73,
    "open_source": true,
@@ -1867,31 +1862,6 @@
    "images": [
     "vikunja/vikunja:2.3",
     "postgres:18"
-   ]
-  },
-  {
-   "id": "vikunja",
-   "source": "runtipi",
-   "reach": 52.73,
-   "open_source": true,
-   "licenses": [
-    "AGPL-3.0",
-    "AGPL-3.0",
-    "AGPL-3.0/GPL-3.0",
-    "GPL-3.0"
-   ],
-   "pulls": 10532758,
-   "stars": 5340,
-   "catalogues": 4,
-   "importable": false,
-   "blockers": [
-    "healthCheck"
-   ],
-   "services": null,
-   "required_inputs": null,
-   "images": [
-    "postgres:14",
-    "vikunja/vikunja:2.6.0"
    ]
   },
   {
@@ -1994,7 +1964,6 @@
    "catalogues": 1,
    "importable": false,
    "blockers": [
-    "addPorts",
     "healthCheck",
     "internalPort",
     "user"
@@ -2086,7 +2055,7 @@
    "catalogues": 4,
    "importable": false,
    "blockers": [
-    "healthCheck"
+    "plan policy"
    ],
    "services": null,
    "required_inputs": null,
@@ -2526,7 +2495,6 @@
    "catalogues": 3,
    "importable": false,
    "blockers": [
-    "healthCheck",
     "platform placeholder"
    ],
    "services": null,
@@ -2618,7 +2586,7 @@
    "catalogues": 4,
    "importable": false,
    "blockers": [
-    "healthCheck"
+    "plan policy"
    ],
    "services": null,
    "required_inputs": null,
@@ -2729,7 +2697,6 @@
    "catalogues": 3,
    "importable": false,
    "blockers": [
-    "addPorts",
     "platform placeholder"
    ],
    "services": null,
@@ -2752,12 +2719,10 @@
    "pulls": 891864,
    "stars": 11519,
    "catalogues": 3,
-   "importable": false,
-   "blockers": [
-    "addPorts"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
    "images": [
     "owncast/owncast:0.3.0"
    ]
@@ -3002,7 +2967,6 @@
    "catalogues": 2,
    "importable": false,
    "blockers": [
-    "addPorts",
     "extraLabels"
    ],
    "services": null,
@@ -3204,6 +3168,26 @@
    ]
   },
   {
+   "id": "eclipse-mosquitto",
+   "source": "runtipi",
+   "reach": 45.35,
+   "open_source": null,
+   "licenses": [
+    "NOASSERTION"
+   ],
+   "pulls": 799408,
+   "stars": 11187,
+   "catalogues": 1,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 2,
+   "images": [
+    "eclipse-mosquitto:2.0.22",
+    "cedalo/management-center:2"
+   ]
+  },
+  {
    "id": "coral",
    "source": "caprover",
    "reach": 45.2,
@@ -3377,7 +3361,7 @@
    "catalogues": 2,
    "importable": false,
    "blockers": [
-    "addPorts"
+    "plan policy"
    ],
    "services": null,
    "required_inputs": null,
@@ -3652,7 +3636,7 @@
    "catalogues": 1,
    "importable": false,
    "blockers": [
-    "healthCheck"
+    "plan policy"
    ],
    "services": null,
    "required_inputs": null,
@@ -3697,7 +3681,6 @@
    "catalogues": 1,
    "importable": false,
    "blockers": [
-    "addPorts",
     "host path",
     "internalPort",
     "main service",
@@ -3762,7 +3745,7 @@
    "catalogues": 1,
    "importable": false,
    "blockers": [
-    "healthCheck"
+    "plan policy"
    ],
    "services": null,
    "required_inputs": null,
@@ -3842,12 +3825,10 @@
    "pulls": 473449,
    "stars": 530,
    "catalogues": 1,
-   "importable": false,
-   "blockers": [
-    "addPorts"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 4,
    "images": [
     "youegraillot/lidarr-on-steroids:1.5.2"
    ]
@@ -4001,7 +3982,6 @@
    "catalogues": 1,
    "importable": false,
    "blockers": [
-    "addPorts",
     "platform placeholder"
    ],
    "services": null,
@@ -4239,17 +4219,15 @@
    "pulls": null,
    "stars": 113726,
    "catalogues": 5,
-   "importable": false,
-   "blockers": [
-    "host path"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 4,
+   "required_inputs": 1,
    "images": [
-    "ghcr.io/immich-app/immich-machine-learning:v3.1.0",
     "ghcr.io/immich-app/immich-server:v3.1.0",
-    "ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0",
-    "redis:6.2"
+    "ghcr.io/immich-app/immich-machine-learning:v3.1.0",
+    "redis:6.2",
+    "ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0"
    ]
   },
   {
@@ -4716,6 +4694,27 @@
    "images": []
   },
   {
+   "id": "penpot",
+   "source": "caprover",
+   "reach": 29.88,
+   "open_source": true,
+   "licenses": [
+    "MPL-2.0",
+    "MPL-2.0"
+   ],
+   "pulls": null,
+   "stars": 59822,
+   "catalogues": 4,
+   "importable": false,
+   "blockers": [
+    "environment",
+    "setup variable"
+   ],
+   "services": null,
+   "required_inputs": null,
+   "images": []
+  },
+  {
    "id": "ghost",
    "source": "caprover",
    "reach": 29.71,
@@ -5055,27 +5054,6 @@
    "blockers": [
     "ports",
     "public domain"
-   ],
-   "services": null,
-   "required_inputs": null,
-   "images": []
-  },
-  {
-   "id": "penpot",
-   "source": "caprover",
-   "reach": 28.38,
-   "open_source": true,
-   "licenses": [
-    "MPL-2.0",
-    "MPL-2.0"
-   ],
-   "pulls": null,
-   "stars": 59822,
-   "catalogues": 3,
-   "importable": false,
-   "blockers": [
-    "environment",
-    "setup variable"
    ],
    "services": null,
    "required_inputs": null,
@@ -5664,7 +5642,6 @@
    "catalogues": 2,
    "importable": false,
    "blockers": [
-    "addPorts",
     "extraLabels"
    ],
    "services": null,
@@ -5708,7 +5685,6 @@
    "catalogues": 4,
    "importable": false,
    "blockers": [
-    "addPorts",
     "host path"
    ],
    "services": null,
@@ -5832,7 +5808,6 @@
    "importable": false,
    "blockers": [
     "capDrop",
-    "healthCheck",
     "overrides",
     "securityOpt"
    ],
@@ -6662,12 +6637,10 @@
    "pulls": null,
    "stars": 38716,
    "catalogues": 1,
-   "importable": false,
-   "blockers": [
-    "healthCheck"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
    "images": [
     "ghcr.io/umami-software/umami:3.3.1",
     "postgres:15-alpine"
@@ -7259,7 +7232,7 @@
    "catalogues": 3,
    "importable": false,
    "blockers": [
-    "healthCheck"
+    "plan policy"
    ],
    "services": null,
    "required_inputs": null,
@@ -7565,8 +7538,7 @@
    "catalogues": 3,
    "importable": false,
    "blockers": [
-    "addPorts",
-    "healthCheck"
+    "addPorts"
    ],
    "services": null,
    "required_inputs": null,
@@ -7937,12 +7909,10 @@
    "pulls": null,
    "stars": 2813,
    "catalogues": 3,
-   "importable": false,
-   "blockers": [
-    "healthCheck"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
    "images": [
     "ghcr.io/hargata/lubelogger:v1.7.2",
     "postgres:16.4-alpine"
@@ -8058,12 +8028,10 @@
    "pulls": null,
    "stars": 8583,
    "catalogues": 1,
-   "importable": false,
-   "blockers": [
-    "healthCheck"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
    "images": [
     "ghcr.io/tandoorrecipes/recipes:2.6.13",
     "postgres:15-alpine"
@@ -8099,12 +8067,10 @@
    "pulls": null,
    "stars": 4162,
    "catalogues": 2,
-   "importable": false,
-   "blockers": [
-    "addPorts"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
    "images": [
     "lscr.io/linuxserver/emulatorjs:1.9.2"
    ]
@@ -8198,12 +8164,10 @@
    "pulls": 68192,
    "stars": null,
    "catalogues": 1,
-   "importable": false,
-   "blockers": [
-    "addPorts"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
    "images": [
     "nephatrine/write-freely:0.16"
    ]
@@ -8547,7 +8511,6 @@
     "depends_on",
     "endpoint",
     "environment",
-    "healthcheck",
     "ports"
    ],
    "services": null,
@@ -9455,12 +9418,10 @@
    "pulls": null,
    "stars": null,
    "catalogues": 3,
-   "importable": false,
-   "blockers": [
-    "addPorts"
-   ],
-   "services": null,
-   "required_inputs": null,
+   "importable": true,
+   "blockers": [],
+   "services": 2,
+   "required_inputs": 0,
    "images": [
     "codeberg.org/forgejo/forgejo:16.0.3",
     "postgres:14"
@@ -9499,7 +9460,6 @@
    "catalogues": 3,
    "importable": false,
    "blockers": [
-    "addPorts",
     "internalPort",
     "privileged"
    ],
@@ -9550,6 +9510,25 @@
   },
   {
    "id": "resilio-sync",
+   "source": "runtipi",
+   "reach": 3.0,
+   "open_source": false,
+   "licenses": [
+    "\u2298 Proprietary"
+   ],
+   "pulls": null,
+   "stars": null,
+   "catalogues": 2,
+   "importable": true,
+   "blockers": [],
+   "services": 1,
+   "required_inputs": 0,
+   "images": [
+    "lscr.io/linuxserver/resilio-sync:3.1.2"
+   ]
+  },
+  {
+   "id": "resilio-sync",
    "source": "caprover",
    "reach": 3.0,
    "open_source": false,
@@ -9566,27 +9545,6 @@
    "services": null,
    "required_inputs": null,
    "images": []
-  },
-  {
-   "id": "resilio-sync",
-   "source": "runtipi",
-   "reach": 3.0,
-   "open_source": false,
-   "licenses": [
-    "\u2298 Proprietary"
-   ],
-   "pulls": null,
-   "stars": null,
-   "catalogues": 2,
-   "importable": false,
-   "blockers": [
-    "addPorts"
-   ],
-   "services": null,
-   "required_inputs": null,
-   "images": [
-    "lscr.io/linuxserver/resilio-sync:3.1.2"
-   ]
   },
   {
    "id": "Home-Assistant",

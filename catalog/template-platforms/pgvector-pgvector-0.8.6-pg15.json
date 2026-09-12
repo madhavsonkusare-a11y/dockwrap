@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "pgvector/pgvector:0.8.6-pg15",
+    "source_url": "https://hub.docker.com/v2/repositories/pgvector/pgvector/tags/0.8.6-pg15",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-08-13",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:a6579dded3ff4ed3d9565ae54ab253e2cb7ae24c5d1eb3bec8a89e73f038b68a",
+      "linux/arm64": "sha256:a1fe5f726d1d8ab2d34ebe11a3cfd7785a5d8f7f0b20ad9d6d4752491c138a3f"
+    }
+  }
+}

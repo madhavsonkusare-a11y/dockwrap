@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "gitea/gitea:1.27.3",
+    "source_url": "https://hub.docker.com/v2/repositories/gitea/gitea/tags/1.27.3",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-08-29",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64",
+      "linux/riscv64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:d584940b7143982682ac4541509dd628506c2b568221e6af41e5a2ead1de4fe7",
+      "linux/arm64": "sha256:9b107dff838b4518f720aae53033fc712019a1680267ea45944b858a71b487b5",
+      "linux/riscv64": "sha256:1e05d08d8666af0d495f42694079a7385540b8678678527d3a9888b328b318fc"
+    }
+  }
+}

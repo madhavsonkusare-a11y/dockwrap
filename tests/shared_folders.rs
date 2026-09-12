@@ -24,6 +24,7 @@ fn scratch(name: &str) -> PathBuf {
 
 fn template() -> PlanTemplate {
     PlanTemplate {
+        first_start: None,
         seeds: Vec::new(),
         plan: DeploymentPlan {
             id: "gallery".into(),
@@ -32,6 +33,8 @@ fn template() -> PlanTemplate {
                 image: "example/gallery:1.0".into(),
                 digest: None,
                 environment: Vec::new(),
+                companion: None,
+                networks: Vec::new(),
                 published: Some(PublishedPort {
                     host: 8080,
                     container: 80,
@@ -48,6 +51,7 @@ fn template() -> PlanTemplate {
                 overrides: Default::default(),
             }],
             named_volumes: Vec::new(),
+            internal_networks: Vec::new(),
         },
         fields: vec![SetupField {
             key: "PHOTOS".into(),

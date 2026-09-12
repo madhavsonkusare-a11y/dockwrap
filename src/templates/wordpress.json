@@ -9,6 +9,7 @@
   "source_url": "https://github.com/WordPress/WordPress",
   "documentation_url": "https://wordpress.org/",
   "verified_at": "2026-09-11",
+  "version": "7.1.0",
   "lifecycle_proof": "docs/evidence/wordpress-qualification.json",
   "origin": {
     "importer": "runtipi",

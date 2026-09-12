@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "glanceapp/glance:v0.8.6",
+    "source_url": "https://hub.docker.com/v2/repositories/glanceapp/glance/tags/v0.8.6",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-09-03",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm/v7",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:e71f219c5894dde27644daea2fc77984e20bcab0e54a71f8f845a3ed5a5f06f6",
+      "linux/arm/v7": "sha256:efdc71d647a7407ad6a5e6d73787a62a3080a766d50d6a804fecaf4dab8bd9e4",
+      "linux/arm64": "sha256:b47e4c9ff27d6fc2703747db7921e4fa2b2464dbcf279d7b897f71484db41f81"
+    }
+  }
+}

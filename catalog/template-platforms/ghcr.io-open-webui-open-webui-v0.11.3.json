@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "ghcr.io/open-webui/open-webui:v0.11.3",
+    "source_url": "https://ghcr.io/v2/open-webui/open-webui/manifests/v0.11.3",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-09-04",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:9cd136effce6bb12a6a1988a35ab3b82cb40c48a6768fceeb17c83baf7cfac9c",
+      "linux/arm64": "sha256:2349f3f77196fbcc17814a25259c848430deaf72476909b8caacf6c4fcf9f106"
+    }
+  }
+}

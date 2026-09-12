@@ -1,0 +1,58 @@
+{
+  "id": "maxun",
+  "name": "Maxun",
+  "version": "0.0.62",
+  "source": "https://github.com/getmaxun/maxun",
+  "website": "https://www.maxun.dev",
+  "documentation": "https://github.com/getmaxun/maxun/blob/develop/docs/self-hosting-docker.md",
+  "short_desc": "Turn websites into data: train a robot by pointing at a page, then run it on a schedule.",
+  "categories": [
+    "Artificial Intelligence"
+  ],
+  "license": "AGPL-3.0",
+  "form_fields": [
+    {
+      "type": "random",
+      "label": "Database password",
+      "min": 32,
+      "max": 32,
+      "env_variable": "MAXUN_DB_PASSWORD"
+    },
+    {
+      "type": "random",
+      "label": "Sign-in secret",
+      "min": 64,
+      "max": 64,
+      "env_variable": "MAXUN_JWT_SECRET"
+    },
+    {
+      "type": "random",
+      "label": "Session secret",
+      "min": 64,
+      "max": 64,
+      "env_variable": "MAXUN_SESSION_SECRET"
+    },
+    {
+      "type": "random",
+      "label": "Encryption key for stored passwords and proxies",
+      "min": 64,
+      "max": 64,
+      "encoding": "hex",
+      "env_variable": "MAXUN_ENCRYPTION_KEY"
+    },
+    {
+      "type": "random",
+      "label": "Object store access key",
+      "min": 20,
+      "max": 20,
+      "env_variable": "MAXUN_STORE_ACCESS_KEY"
+    },
+    {
+      "type": "random",
+      "label": "Object store secret key",
+      "min": 40,
+      "max": 40,
+      "env_variable": "MAXUN_STORE_SECRET_KEY"
+    }
+  ]
+}

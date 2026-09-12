@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "ghcr.io/linuxserver/jellyfin:12.0ubu2604-ls48",
+    "source_url": "https://ghcr.io/v2/linuxserver/jellyfin/manifests/12.0ubu2604-ls48",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-09-08",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:4579600fea6bc9a89054e3e79dc6c13d7f3c8f9a7f4b5942051b9cdc252875d5",
+      "linux/arm64": "sha256:d7ab5db2294f23ee5e441f3dbefe5240c5884129647eb34bd0b9b62c203dea33"
+    }
+  }
+}

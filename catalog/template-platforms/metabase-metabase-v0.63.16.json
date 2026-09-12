@@ -12,7 +12,7 @@
       "os_version": null,
       "size": 780528590,
       "status": "active",
-      "last_pulled": "2026-09-11T18:35:54.83734329Z",
+      "last_pulled": "2026-09-10T14:18:40.207471598Z",
       "last_pushed": "2026-09-01T13:18:58.139717469Z"
     },
     {
@@ -25,7 +25,7 @@
       "os_version": null,
       "size": 780149423,
       "status": "active",
-      "last_pulled": "2026-09-11T15:24:29.731130331Z",
+      "last_pulled": "2026-09-10T14:25:01.58126283Z",
       "last_pushed": "2026-09-01T13:18:58.617915375Z"
     }
   ],
@@ -37,7 +37,7 @@
   "full_size": 780528590,
   "v2": true,
   "tag_status": "active",
-  "tag_last_pulled": "2026-09-11T18:35:54.83734329Z",
+  "tag_last_pulled": "2026-09-10T14:25:01.58126283Z",
   "tag_last_pushed": "2026-09-01T13:18:59.624805Z",
   "media_type": "application/vnd.oci.image.index.v1+json",
   "content_type": "image",

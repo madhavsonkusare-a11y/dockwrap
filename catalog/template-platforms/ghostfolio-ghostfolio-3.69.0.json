@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "ghostfolio/ghostfolio:3.69.0",
+    "source_url": "https://hub.docker.com/v2/repositories/ghostfolio/ghostfolio/tags/3.69.0",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-09-07",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm/v7",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:50482e49aa41619c1cb897cc7611855ece481f92fca7c8e1da60a698fd5a032b",
+      "linux/arm/v7": "sha256:ce069e2b68df996e23142a74c273aa00a7d2221151b3fc6ef7a84eccf5c51766",
+      "linux/arm64": "sha256:3b06895cd548f65b29a848dc334f562b9bf682dea5a3ee6cfd45f215b46da6bd"
+    }
+  }
+}

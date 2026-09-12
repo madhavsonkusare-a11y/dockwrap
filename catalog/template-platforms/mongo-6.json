@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "mongo:6",
+    "source_url": "https://hub.docker.com/v2/repositories/library/mongo/tags/6",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-05-15",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64/v8",
+      "windows/amd64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:268eb517abcb8a1bb4cf5f290ec2ac37185e78bfb62e7111576bbb3d8b092456",
+      "linux/arm64/v8": "sha256:3ed30e2875f51747c16be3807301f5595ea44a29ab339be3668c3eecd115cd89",
+      "windows/amd64": "sha256:5e7aec8c1b9e7c884f8e11fdfb12a5dcffa9db25b503c1a1eda3d67838b2e00c"
+    }
+  }
+}

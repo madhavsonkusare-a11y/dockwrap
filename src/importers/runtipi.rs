@@ -54,6 +54,13 @@ fn container_path_is_system(target: &str) -> bool {
     if cleaned.is_empty() || cleaned == "/" {
         return true;
     }
+    // Where an image keeps its own application, and so where an app's data
+    // legitimately lives: Immich's photo library is `/usr/src/app/upload`.
+    // The rule is about a person's folder replacing the software that is
+    // about to run, which this is not.
+    if cleaned == "/usr/src" || cleaned.starts_with("/usr/src/") {
+        return false;
+    }
     const SYSTEM: &[&str] = &[
         "/etc", "/usr", "/bin", "/sbin", "/lib", "/lib64", "/boot", "/dev", "/proc", "/sys",
         "/run", "/var/run",
@@ -129,7 +136,6 @@ const REFUSED_KEYS: &[(&str, &str)] = &[
 /// not things to refuse.
 const NOT_MODELLED_KEYS: &[(&str, &str)] = &[
     ("user", "runs as a specific user"),
-    ("addPorts", "publishes additional ports"),
     ("extraLabels", "sets container labels"),
     ("logging", "configures a logging driver"),
     ("deploy", "sets deployment resources"),
@@ -210,10 +216,25 @@ fn read_form_fields(config: &str) -> Result<DeclaredInputs, String> {
         if kind_name == "random" {
             let length = max.or(min).unwrap_or(32);
             let length = usize::try_from(length).unwrap_or(32).clamp(16, 256);
+            // Runtipi reads `min` as bytes for base64 and as characters for
+            // hex. Without an encoding the value stays alphanumeric, which is
+            // what every approved app was proven with.
+            let format = match entry.get("encoding").and_then(Value::as_str) {
+                None => crate::setup::SecretFormat::Alphanumeric,
+                Some("hex") => crate::setup::SecretFormat::Hex,
+                Some("base64") => crate::setup::SecretFormat::Base64,
+                Some(other) => {
+                    limitations.push(not_modelled(
+                        "secret encoding",
+                        format!("{key} asks for a {other} value"),
+                    ));
+                    continue;
+                }
+            };
             secrets.push(SecretSpec {
                 key,
                 length,
-                format: crate::setup::SecretFormat::Alphanumeric,
+                format,
             });
             continue;
         }
@@ -334,6 +355,29 @@ pub fn import(id: &str, definition: &str, config: Option<&str>) -> Result<Import
     let (mut fields, secrets) = (declared.fields, declared.secrets);
     limitations.extend(declared.limitations);
 
+    // Compose's shape, but only the kind of network that takes something away:
+    // one with no route out.
+    let mut internal_networks = Vec::new();
+    if let Some(value) = root.get("networks") {
+        match value.as_object() {
+            Some(declared) => {
+                for (network, options) in declared {
+                    if options == &serde_json::json!({"internal": true}) {
+                        internal_networks.push(network.clone());
+                    } else {
+                        limitations.push(not_modelled(
+                            "networks",
+                            format!("{network} is not declared as an internal network"),
+                        ));
+                    }
+                }
+            }
+            None => limitations.push(not_modelled(
+                "networks",
+                "declares networks this importer cannot read",
+            )),
+        }
+    }
     if root.get("overrides").is_some() {
         limitations.push(not_modelled(
             "overrides",
@@ -408,6 +452,38 @@ pub fn import(id: &str, definition: &str, config: Option<&str>) -> Result<Import
                 None
             }
             (false, _) => None,
+        };
+
+        // Runtipi's extra ports, which Local Store publishes on loopback as a
+        // second address the app's own pages call: Sim's realtime socket,
+        // Maxun's backend. One per service, TCP only, never the main one.
+        let mut companion = None;
+        if let Some(value) = service.get("addPorts") {
+            match companion_port(value) {
+                Ok(port) => companion = Some(port),
+                Err(reason) => {
+                    limitations.push(not_modelled("addPorts", format!("{name} {reason}")))
+                }
+            }
+        }
+
+        let networks = match service.get("networks") {
+            None => Vec::new(),
+            Some(value) => match value.as_array().and_then(|values| {
+                values
+                    .iter()
+                    .map(|value| value.as_str().map(str::to_owned))
+                    .collect::<Option<Vec<_>>>()
+            }) {
+                Some(names) => names,
+                None => {
+                    limitations.push(not_modelled(
+                        "networks",
+                        format!("{name} lists networks this importer cannot read"),
+                    ));
+                    Vec::new()
+                }
+            },
         };
 
         let mut environment = Vec::new();
@@ -513,19 +589,21 @@ pub fn import(id: &str, definition: &str, config: Option<&str>) -> Result<Import
             }
         }
 
-        let (depends_on, healthy_dependencies) = super::dependencies(service.get("dependsOn"))
-            .unwrap_or_else(|reason| {
+        let declared_dependencies =
+            super::dependencies(service.get("dependsOn")).unwrap_or_else(|reason| {
                 limitations.push(not_modelled(
                     "dependsOn condition",
                     format!("{name}: {reason}"),
                 ));
                 Default::default()
             });
+        let depends_on = declared_dependencies.names;
 
         // Carried through rather than dropped, for the same reason as every
         // other upstream constraint: leaving it out changes what starts.
         let mut overrides = PlanOverrides {
-            healthy_dependencies,
+            healthy_dependencies: declared_dependencies.healthy,
+            completed_dependencies: declared_dependencies.completed,
             ..Default::default()
         };
         if let Some(value) = service.get("healthCheck") {
@@ -588,6 +666,8 @@ pub fn import(id: &str, definition: &str, config: Option<&str>) -> Result<Import
             image,
             digest: None,
             environment,
+            companion,
+            networks,
             published,
             mounts,
             depends_on,
@@ -629,11 +709,21 @@ pub fn import(id: &str, definition: &str, config: Option<&str>) -> Result<Import
             sensitive: false,
         });
     }
+    let companion_services: Vec<String> = planned
+        .iter()
+        .filter(|service| service.companion.is_some())
+        .map(|service| service.name.clone())
+        .collect();
     for service in &mut planned {
         for (key, value) in &mut service.environment {
             *value = fill_platform_values(value, &platform);
             for placeholder in placeholder_keys(value) {
                 let declared = setup::is_platform_key(&placeholder)
+                    || setup::companion_service(&placeholder).is_some_and(|wanted| {
+                        companion_services
+                            .iter()
+                            .any(|name| setup::companion_suffix(name) == wanted)
+                    })
                     || fields.iter().any(|field| field.key == placeholder)
                     || secrets.iter().any(|secret| secret.key == placeholder);
                 if !declared {
@@ -666,11 +756,13 @@ pub fn import(id: &str, definition: &str, config: Option<&str>) -> Result<Import
     // partially understood definition would look installable and would not be.
     let template = if limitations.is_empty() {
         let candidate = PlanTemplate {
+            first_start: None,
             seeds: Vec::new(),
             plan: DeploymentPlan {
                 id: id.to_owned(),
                 services: planned,
                 named_volumes: Vec::new(),
+                internal_networks,
             },
             // Only keep what the definition actually uses; Runtipi declares
             // fields for optional features an app may never reference. A
@@ -711,6 +803,52 @@ pub fn import(id: &str, definition: &str, config: Option<&str>) -> Result<Import
         id: id.to_owned(),
         template,
         limitations,
+    })
+}
+
+/// Read one service's `addPorts` as a second loopback address.
+fn companion_port(value: &Value) -> Result<PublishedPort, String> {
+    let entries = value
+        .as_array()
+        .ok_or("declares addPorts that are not a list")?;
+    let [entry] = entries.as_slice() else {
+        return Err(format!(
+            "declares {} extra ports; one is supported",
+            entries.len()
+        ));
+    };
+    let object = entry
+        .as_object()
+        .ok_or("declares an extra port that is not an object")?;
+    for key in object.keys() {
+        if !matches!(key.as_str(), "hostPort" | "containerPort" | "tcp") {
+            return Err(format!("sets {key} on an extra port"));
+        }
+    }
+    if object
+        .get("tcp")
+        .is_some_and(|tcp| tcp != &Value::Bool(true))
+    {
+        return Err("publishes an extra port that is not TCP".into());
+    }
+    let port = |key: &str| {
+        object
+            .get(key)
+            .and_then(Value::as_u64)
+            .and_then(|port| u16::try_from(port).ok())
+            .filter(|port| *port > 0)
+            .ok_or(format!("declares no usable {key}"))
+    };
+    let (host, container) = (port("hostPort")?, port("containerPort")?);
+    Ok(PublishedPort {
+        // A privileged host port is a preference the installer cannot take;
+        // the same offset as the main port keeps it recognisable.
+        host: if host < 1024 {
+            preferred_host_port(host)
+        } else {
+            host
+        },
+        container,
     })
 }
 
@@ -954,6 +1092,32 @@ mod tests {
         );
     }
 
+    /// Plausible's TOTP key is 32 bytes of base64; an alphanumeric string of
+    /// the same length decodes to 24 bytes and Plausible will not start.
+    #[test]
+    fn a_declared_secret_encoding_is_honoured() {
+        let definition = r#"{"services": [{"name": "app", "image": "example/app:1.0", "isMain": true,
+            "internalPort": 8000, "environment": [{"key": "A", "value": "${A}"}, {"key": "B", "value": "${B}"},
+            {"key": "C", "value": "${C}"}]}]}"#;
+        let config = r#"{"id": "app", "form_fields": [
+            {"type": "random", "min": 32, "encoding": "base64", "env_variable": "A"},
+            {"type": "random", "min": 64, "encoding": "hex", "env_variable": "B"},
+            {"type": "random", "min": 32, "env_variable": "C"}]}"#;
+        let outcome = import("app", definition, Some(config)).unwrap();
+        let template = outcome.template.expect("importable");
+        let format = |key: &str| {
+            template
+                .secrets
+                .iter()
+                .find(|s| s.key == key)
+                .unwrap()
+                .format
+        };
+        assert_eq!(format("A"), crate::setup::SecretFormat::Base64);
+        assert_eq!(format("B"), crate::setup::SecretFormat::Hex);
+        assert_eq!(format("C"), crate::setup::SecretFormat::Alphanumeric);
+    }
+
     #[test]
     fn a_read_only_mount_is_carried_through_rather_than_blocking_the_import() {
         let definition = r#"{
@@ -1108,15 +1272,21 @@ mod tests {
                 .as_deref(),
             Some("10s")
         );
-        for replacement in ["service_completed_successfully", "unknown"] {
-            let blocked = import(
-                "conditional",
-                &definition.replace("service_healthy", replacement),
-                None,
-            )
-            .unwrap();
-            assert!(blocked.template.is_none());
-        }
+        // Waiting for a service to finish makes it a one-shot job.
+        let job = import(
+            "conditional",
+            &definition.replace("service_healthy", "service_completed_successfully"),
+            None,
+        )
+        .unwrap();
+        assert!(job.plan().unwrap().is_job("db"));
+        let blocked = import(
+            "conditional",
+            &definition.replace("service_healthy", "unknown"),
+            None,
+        )
+        .unwrap();
+        assert!(blocked.template.is_none());
         let cyclic = definition.replace(
             "\"healthCheck\":",
             "\"dependsOn\":[\"web\"], \"healthCheck\":",
@@ -1183,6 +1353,108 @@ mod tests {
         let compose = plan.to_compose().unwrap();
         assert!(!compose.contains("${"), "{compose}");
         assert!(compose.contains("http://localhost:8080"), "{compose}");
+    }
+
+    /// Sim's shape: a migration that must finish before the app starts, and
+    /// a realtime server the browser reaches on a second address.
+    const WITH_JOB_AND_COMPANION: &str = r#"{
+      "services": [
+        {"name": "app", "image": "example/app:1.0", "isMain": true, "internalPort": 3000,
+         "environment": [
+           {"key": "SOCKET_URL", "value": "${LOCAL_STORE_URL_REALTIME}"},
+           {"key": "APP_URL", "value": "${LOCAL_STORE_URL}"}],
+         "dependsOn": {"migrate": {"condition": "service_completed_successfully"},
+                       "realtime": {"condition": "service_started"}}},
+        {"name": "realtime", "image": "example/realtime:1.0",
+         "addPorts": [{"hostPort": 3002, "containerPort": 3002}],
+         "environment": [{"key": "PORT", "value": "${LOCAL_STORE_PORT_REALTIME}"}]},
+        {"name": "migrate", "image": "example/migrate:1.0"}
+      ]
+    }"#;
+
+    #[test]
+    fn a_job_and_a_second_address_import_and_resolve_to_their_ports() {
+        let outcome = import("app", WITH_JOB_AND_COMPANION, None).unwrap();
+        assert!(outcome.is_importable(), "{:?}", outcome.limitations);
+        let template = outcome.template.expect("a template");
+        assert!(template.plan.is_job("migrate"));
+        assert_eq!(
+            template.plan.companions()[0].1,
+            PublishedPort {
+                host: 3002,
+                container: 3002
+            }
+        );
+
+        let mut filled = template.clone();
+        filled.plan.set_companion_host("realtime", 43002);
+        crate::setup::fill_platform_values(&mut filled.plan, 8080);
+        let plan = filled.resolve(&BTreeMap::new(), &BTreeMap::new()).unwrap();
+        let compose = plan.to_compose().unwrap();
+        assert!(!compose.contains("${"), "{compose}");
+        assert!(
+            compose.contains("SOCKET_URL: \"http://localhost:43002\""),
+            "{compose}"
+        );
+        assert!(compose.contains("PORT: \"43002\""), "{compose}");
+        assert!(compose.contains("condition: service_completed_successfully"));
+    }
+
+    #[test]
+    fn a_second_address_that_cannot_be_honoured_is_reported() {
+        let refused = |ports: &str| {
+            let definition = WITH_JOB_AND_COMPANION
+                .replace(r#"[{"hostPort": 3002, "containerPort": 3002}]"#, ports);
+            let outcome = import("app", &definition, None).unwrap();
+            assert!(!outcome.is_importable(), "{ports} was accepted");
+            assert!(
+                outcome
+                    .limitations
+                    .iter()
+                    .any(|limit| limit.feature() == "addPorts"),
+                "{ports}: {:?}",
+                outcome.limitations
+            );
+        };
+        refused(r#"[{"hostPort": 53, "containerPort": 53, "udp": true}]"#);
+        refused(r#"[{"hostPort": 53, "containerPort": 53, "tcp": false}]"#);
+        refused(
+            r#"[{"hostPort": 3002, "containerPort": 3002}, {"hostPort": 3003, "containerPort": 3003}]"#,
+        );
+        refused(r#"[{"hostPort": 3002, "containerPort": 3002, "interface": "0.0.0.0"}]"#);
+        refused(r#"[{"containerPort": 3002}]"#);
+
+        // A placeholder for a second address nobody publishes is never filled.
+        let orphan = WITH_JOB_AND_COMPANION.replace("URL_REALTIME", "URL_OTHER");
+        let outcome = import("app", &orphan, None).unwrap();
+        assert!(outcome
+            .limitations
+            .iter()
+            .any(|limit| limit.feature() == "platform placeholder"));
+    }
+
+    #[test]
+    fn an_internal_network_is_carried_and_any_other_kind_is_reported() {
+        let definition = r#"{
+          "networks": {"isolated": {"internal": true}},
+          "services": [
+            {"name": "app", "image": "example/app:1.0", "isMain": true, "internalPort": 3000,
+             "networks": ["default", "isolated"]},
+            {"name": "sandbox", "image": "example/sandbox:1.0", "networks": ["isolated"]}
+          ]
+        }"#;
+        let outcome = import("app", definition, None).unwrap();
+        assert!(outcome.is_importable(), "{:?}", outcome.limitations);
+        let plan = outcome.plan().unwrap();
+        assert_eq!(plan.internal_networks, vec!["isolated".to_owned()]);
+        assert_eq!(plan.services[1].networks, vec!["isolated".to_owned()]);
+
+        let routed = definition.replace(r#"{"internal": true}"#, r#"{"driver": "bridge"}"#);
+        let outcome = import("app", &routed, None).unwrap();
+        assert!(outcome
+            .limitations
+            .iter()
+            .any(|limit| limit.feature() == "networks"));
     }
 
     #[test]

@@ -9,6 +9,7 @@
   "source_url": "https://github.com/dani-garcia/vaultwarden",
   "documentation_url": "https://github.com/dani-garcia/vaultwarden",
   "verified_at": "2026-09-10",
+  "version": "1.37.2",
   "lifecycle_proof": "docs/evidence/vaultwarden-qualification.json",
   "origin": {
     "importer": "runtipi",

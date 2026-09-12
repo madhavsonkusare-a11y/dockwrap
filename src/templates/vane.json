@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "id": "vane",
+  "display_name": "Vane",
+  "catalog_name": "Vane",
+  "description": "An AI answer engine that searches the web and cites its sources; formerly Perplexica.",
+  "category": "Artificial Intelligence",
+  "license": "MIT",
+  "source_url": "https://github.com/ItzCrazyKns/Vane",
+  "documentation_url": "https://github.com/ItzCrazyKns/Vane#installation",
+  "verified_at": "2026-09-12",
+  "version": "1.12.2",
+  "lifecycle_proof": "docs/evidence/vane-qualification.json",
+  "origin": {
+    "importer": "runtipi",
+    "repository": "madhavsonkusare-a11y/local-store",
+    "revision": "924357fde8f7d4e414e5cae241b1e137f5f60038",
+    "path": "definitions/apps/vane/docker-compose.json",
+    "license": "MIT"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "itzcrazykns1337/vane:full-v1.12.2",
+        "source_url": "https://hub.docker.com/v2/repositories/itzcrazykns1337/vane/tags/full-v1.12.2",
+        "checked_at": "2026-09-11",
+        "last_updated": "2026-04-10",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:11fad047ffb236dde04272ea8beaa1fa64a7e7c059a5ed5df98049bbd15661c8",
+          "linux/arm64": "sha256:db1957c6eb3375106edc2952cc5cd164ff7abd97aed3f93481713109ef725d75"
+        },
+        "index_digest": "sha256:61f2bbf3386ff3df08911fb3de0e1893b04702a4d49ef13fbadbda937b47ab7c"
+      }
+    ]
+  },
+  "promotion": {
+    "state": "approved",
+    "reason": "Approved by the owner. Qualified as offered on 2026-09-12: a real install of Vane 1.12.2 (formerly Perplexica), upstream's current release proved it starts, opens to a first screen with a clear next step, survives a restart and a keep-data reinstall with its data intact, and removes everything it created. Local Store wrote this definition from the project's own deployment instructions."
+  },
+  "data_storage": "Local Store managed folder / vane",
+  "risk_notes": [
+    "Creates 1 Docker container and publishes one port on this computer's loopback interface only.",
+    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Written by Local Store from the project's own deployment instructions, not taken from an app store.",
+    "Asks on first open for a model provider and its key.",
+    "Every question goes to the model provider you choose, and its searches go through the bundled SearXNG, which queries public search engines from this computer."
+  ],
+  "fields": {},
+  "definition": "{\n  \"schemaVersion\": 2,\n  \"$schema\": \"https://schemas.runtipi.io/v2/dynamic-compose.json\",\n  \"services\": [\n    {\n      \"name\": \"vane\",\n      \"image\": \"itzcrazykns1337/vane:full-v1.12.2\",\n      \"isMain\": true,\n      \"internalPort\": 3000,\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data\",\n          \"containerPath\": \"/home/vane/data\"\n        }\n      ]\n    }\n  ]\n}\n",
+  "config": {
+    "path": "definitions/apps/vane/config.json",
+    "content": "{\n  \"id\": \"vane\",\n  \"name\": \"Vane\",\n  \"version\": \"1.12.2\",\n  \"source\": \"https://github.com/ItzCrazyKns/Vane\",\n  \"website\": \"https://github.com/ItzCrazyKns/Vane\",\n  \"documentation\": \"https://github.com/ItzCrazyKns/Vane#installation\",\n  \"short_desc\": \"An AI answer engine that searches the web and cites its sources; formerly Perplexica.\",\n  \"categories\": [\n    \"Artificial Intelligence\"\n  ],\n  \"license\": \"MIT\",\n  \"form_fields\": []\n}\n"
+  }
+}

@@ -701,19 +701,22 @@ pub fn import(id: &str, definition: &str) -> Result<ImportOutcome, String> {
             });
         }
 
-        let (dependencies, health_names) = super::dependencies(service.get("depends_on"))
-            .unwrap_or_else(|reason| {
-                limitations.push(not_modelled("depends_on", format!("{name}: {reason}")));
-                Default::default()
-            });
+        let declared = super::dependencies(service.get("depends_on")).unwrap_or_else(|reason| {
+            limitations.push(not_modelled("depends_on", format!("{name}: {reason}")));
+            Default::default()
+        });
         let mut depends_on = Vec::new();
         let mut healthy_dependencies = BTreeSet::new();
-        for dependency in dependencies {
+        let mut completed_dependencies = BTreeSet::new();
+        for dependency in declared.names {
             match names.get(&dependency) {
                 Some(mapped) => {
                     depends_on.push(mapped.clone());
-                    if health_names.contains(&dependency) {
+                    if declared.healthy.contains(&dependency) {
                         healthy_dependencies.insert(mapped.clone());
+                    }
+                    if declared.completed.contains(&dependency) {
+                        completed_dependencies.insert(mapped.clone());
                     }
                 }
                 None => limitations.push(refused(
@@ -727,6 +730,7 @@ pub fn import(id: &str, definition: &str) -> Result<ImportOutcome, String> {
         // definition that replaces the image's command means it.
         let mut overrides = PlanOverrides {
             healthy_dependencies,
+            completed_dependencies,
             ..Default::default()
         };
         if let Some(value) = service.get("healthcheck") {
@@ -800,6 +804,8 @@ pub fn import(id: &str, definition: &str) -> Result<ImportOutcome, String> {
                 image,
                 digest: None,
                 environment,
+                companion: None,
+                networks: Vec::new(),
                 published: None,
                 mounts,
                 depends_on,
@@ -835,6 +841,8 @@ pub fn import(id: &str, definition: &str) -> Result<ImportOutcome, String> {
             image,
             digest: None,
             environment,
+            companion: None,
+            networks: Vec::new(),
             published: None,
             mounts,
             depends_on,
@@ -878,6 +886,7 @@ pub fn import(id: &str, definition: &str) -> Result<ImportOutcome, String> {
         id: id.to_owned(),
         services: plan_services,
         named_volumes,
+        internal_networks: Vec::new(),
     };
 
     // Only what something actually reads survives. A version variable spent
@@ -904,6 +913,7 @@ pub fn import(id: &str, definition: &str) -> Result<ImportOutcome, String> {
         .collect();
 
     let template = PlanTemplate {
+        first_start: None,
         seeds: Vec::new(),
         plan,
         fields,

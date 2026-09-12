@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "ghcr.io/simstudioai/simstudio:v0.8.33",
+    "source_url": "https://ghcr.io/v2/simstudioai/simstudio/manifests/v0.8.33",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-09-11",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:f54ecfc02bf4b17a6528e273965bb507feba9cd2826cd1a2ef2c236940fcbc54",
+      "linux/arm64": "sha256:bf7f53caa9bd7780f386c74bf39e7e0836cb53863b3ed683a51dee58a8c795f6"
+    }
+  }
+}

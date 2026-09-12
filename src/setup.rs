@@ -99,19 +99,53 @@ pub struct SecretSpec {
 pub enum SecretFormat {
     Alphanumeric,
     Hex,
+    /// `length` random *bytes*, base64-encoded with padding — Runtipi's
+    /// `encoding: base64`. An AES-256 key is 32 bytes, which is 44 characters
+    /// here; 32 alphanumeric characters decode to 24 bytes and the app refuses
+    /// the key.
+    Base64,
 }
 
 impl SecretSpec {
     pub fn generate(&self) -> Result<String, String> {
         generate_secret_with_format(self.length, self.format)
     }
+    /// How many characters a generated value has.
+    pub fn output_len(&self) -> usize {
+        match self.format {
+            SecretFormat::Base64 => 4 * self.length.div_ceil(3),
+            _ => self.length,
+        }
+    }
     fn accepts(&self, value: &str) -> bool {
-        value.len() == self.length
+        value.len() == self.output_len()
             && value.bytes().all(|byte| match self.format {
                 SecretFormat::Alphanumeric => byte.is_ascii_alphanumeric(),
                 SecretFormat::Hex => byte.is_ascii_digit() || (b'a'..=b'f').contains(&byte),
+                SecretFormat::Base64 => {
+                    byte.is_ascii_alphanumeric() || matches!(byte, b'+' | b'/' | b'=')
+                }
             })
     }
+}
+
+/// Standard base64 with padding, for the few bytes a secret needs.
+fn base64_encode(bytes: &[u8]) -> String {
+    const TABLE: &[u8; 64] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    let mut out = String::with_capacity(4 * bytes.len().div_ceil(3));
+    for chunk in bytes.chunks(3) {
+        let n = (u32::from(chunk[0]) << 16)
+            | (u32::from(*chunk.get(1).unwrap_or(&0)) << 8)
+            | u32::from(*chunk.get(2).unwrap_or(&0));
+        for (index, shift) in [18, 12, 6, 0].into_iter().enumerate() {
+            if index <= chunk.len() {
+                out.push(TABLE[((n >> shift) & 63) as usize] as char);
+            } else {
+                out.push('=');
+            }
+        }
+    }
+    out
 }
 
 /// Placeholders the installer fills, rather than the person installing.
@@ -132,17 +166,52 @@ pub fn is_platform_key(key: &str) -> bool {
     PLATFORM_KEYS.contains(&key)
 }
 
+/// A service's second address, as its URL and as its bare port. The suffix
+/// is the service name in capitals: `realtime` becomes
+/// `LOCAL_STORE_URL_REALTIME`.
+const COMPANION_URL: &str = "LOCAL_STORE_URL_";
+const COMPANION_PORT: &str = "LOCAL_STORE_PORT_";
+
+/// The service suffix a second-address placeholder names, if it is one.
+pub fn companion_service(key: &str) -> Option<&str> {
+    key.strip_prefix(COMPANION_URL)
+        .or_else(|| key.strip_prefix(COMPANION_PORT))
+        .filter(|suffix| !suffix.is_empty())
+}
+
+/// How a service name appears in its second-address placeholders.
+pub fn companion_suffix(service: &str) -> String {
+    service.to_ascii_uppercase().replace('-', "_")
+}
+
+/// Whether a declared field or secret would collide with what the installer
+/// supplies.
+fn is_reserved_key(key: &str) -> bool {
+    PLATFORM_KEYS.contains(&key) || companion_service(key).is_some()
+}
+
 /// Replace the platform placeholders now that the address is known.
 ///
 /// Called once, during installation, after the host port has been chosen and
 /// before any answer is resolved, so nothing downstream ever sees one of these.
+///
+/// A second address is filled from the plan itself, so its port has to be
+/// settled on the plan before this runs, the same as the main one.
 pub fn fill_platform_values(plan: &mut crate::plan::DeploymentPlan, host_port: u16) {
     let authority = format!("localhost:{host_port}");
-    let values = [
-        (PLATFORM_URL, format!("http://{authority}")),
-        (PLATFORM_HOST, authority),
-        (PLATFORM_PORT, host_port.to_string()),
+    let mut values = vec![
+        (PLATFORM_URL.to_owned(), format!("http://{authority}")),
+        (PLATFORM_HOST.to_owned(), authority),
+        (PLATFORM_PORT.to_owned(), host_port.to_string()),
     ];
+    for (service, port) in plan.companions() {
+        let suffix = companion_suffix(&service.name);
+        values.push((
+            format!("{COMPANION_URL}{suffix}"),
+            format!("http://localhost:{}", port.host),
+        ));
+        values.push((format!("{COMPANION_PORT}{suffix}"), port.host.to_string()));
+    }
     for service in &mut plan.services {
         for (_, value) in &mut service.environment {
             for (key, filled) in &values {
@@ -167,6 +236,10 @@ pub struct PlanTemplate {
     /// on install; without them a mount of `data/proxy/nginx.conf` becomes an
     /// empty directory and the app fails to start.
     pub seeds: Vec<SeedFile>,
+    /// How long the first start may take, when a review found an app needs
+    /// longer than the default. Khoj downloads its embedding models before
+    /// it answers — 130 seconds when measured, and more on a slower line.
+    pub first_start: Option<std::time::Duration>,
 }
 
 /// One file written into an app's data folder before it first starts.
@@ -301,6 +374,9 @@ fn alphabet(format: SecretFormat) -> &'static [u8] {
     match format {
         SecretFormat::Alphanumeric => SECRET_ALPHABET,
         SecretFormat::Hex => b"0123456789abcdef",
+        SecretFormat::Base64 => {
+            b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
+        }
     }
 }
 
@@ -459,7 +535,7 @@ impl SecretSpec {
         if class_accepts_all(atom, alphabet(self.format)) != Some(true) {
             return false;
         }
-        if self.length < low {
+        if self.output_len() < low {
             return false;
         }
         // Only a rule anchored at both ends has to consume the whole value;
@@ -467,7 +543,7 @@ impl SecretSpec {
         // every character is already known to satisfy the class.
         if anchored_start && anchored_end {
             if let Some(high) = high {
-                if self.length > high {
+                if self.output_len() > high {
                     return false;
                 }
             }
@@ -480,11 +556,18 @@ pub fn generate_secret_with_format(length: usize, format: SecretFormat) -> Resul
     if !(16..=256).contains(&length) {
         return Err("secret length must be between 16 and 256 characters".into());
     }
+    if format == SecretFormat::Base64 {
+        let mut bytes = vec![0_u8; length];
+        getrandom::fill(&mut bytes)
+            .map_err(|error| format!("could not read the system random source: {error}"))?;
+        return Ok(base64_encode(&bytes));
+    }
     let mut secret = String::with_capacity(length);
     let alphabet = alphabet(format);
     let limit = match format {
         SecretFormat::Alphanumeric => UNBIASED_LIMIT as u16,
         SecretFormat::Hex => 256,
+        SecretFormat::Base64 => unreachable!("base64 secrets return above"),
     };
     let mut buffer = [0_u8; 64];
     while secret.len() < length {
@@ -547,7 +630,7 @@ impl PlanTemplate {
                     field.key
                 ));
             }
-            if PLATFORM_KEYS.contains(&field.key.as_str()) {
+            if is_reserved_key(&field.key) {
                 return Err(format!(
                     "setup field key {:?} is reserved for the installer",
                     field.key
@@ -576,7 +659,7 @@ impl PlanTemplate {
             if !is_key(&secret.key) {
                 return Err(format!("secret key {:?} is not NAME_LIKE_THIS", secret.key));
             }
-            if PLATFORM_KEYS.contains(&secret.key.as_str()) {
+            if is_reserved_key(&secret.key) {
                 return Err(format!(
                     "secret key {:?} is reserved for the installer",
                     secret.key
@@ -619,12 +702,52 @@ impl PlanTemplate {
                 }
             }
         }
+        // Only environment values are filled. A placeholder in a command line
+        // is never replaced: Ghostfolio's Redis asked for
+        // `--requirepass ${GHOSTFOLIO_REDIS_PASSWORD}` and started with an
+        // empty password argument, which killed it.
+        for service in &self.plan.services {
+            for args in [&service.overrides.command, &service.overrides.entrypoint]
+                .into_iter()
+                .flatten()
+            {
+                let parts = match args {
+                    crate::plan::PlanArgs::Shell(line) => vec![line.clone()],
+                    crate::plan::PlanArgs::Exec(parts) => parts.clone(),
+                };
+                for part in parts {
+                    if let Some(found) = placeholders(&part).first() {
+                        return Err(format!(
+                            "a command for {:?} expects {:?}, which is only filled in environment values",
+                            service.name, found.key
+                        ));
+                    }
+                }
+            }
+        }
+        let companions: Vec<String> = self
+            .plan
+            .companions()
+            .iter()
+            .map(|(service, _)| companion_suffix(&service.name))
+            .collect();
         for (_, value) in self.environment() {
             for placeholder in placeholders(value) {
                 if PLATFORM_KEYS.contains(&placeholder.key) {
                     // Supplied by the installer, so it needs no declaration
                     // here and nobody is ever asked for it.
                     continue;
+                }
+                if let Some(wanted) = companion_service(placeholder.key) {
+                    // Supplied too, but only for a service that has one: a
+                    // placeholder naming any other would never be filled.
+                    if companions.iter().any(|suffix| suffix == wanted) {
+                        continue;
+                    }
+                    return Err(format!(
+                        "placeholder {:?} names a second address no service publishes",
+                        placeholder.key
+                    ));
                 }
                 match declared.iter().position(|key| *key == placeholder.key) {
                     Some(index) => used[index] = true,
@@ -823,6 +946,54 @@ fn is_key(value: &str) -> bool {
 
 #[cfg(test)]
 mod tests {
+    /// RFC 4648's own examples, and a key of the size Plausible and BookStack
+    /// ask for: 32 random bytes, which is 44 characters with padding.
+    #[test]
+    fn second_address_placeholders_are_the_installers_to_fill() {
+        assert_eq!(
+            companion_service("LOCAL_STORE_URL_REALTIME"),
+            Some("REALTIME")
+        );
+        assert_eq!(
+            companion_service("LOCAL_STORE_PORT_OBJECT_STORE"),
+            Some("OBJECT_STORE")
+        );
+        assert_eq!(companion_service("LOCAL_STORE_URL"), None);
+        assert_eq!(companion_service("LOCAL_STORE_URL_"), None);
+        assert_eq!(companion_suffix("object-store"), "OBJECT_STORE");
+        assert!(is_reserved_key("LOCAL_STORE_URL_REALTIME"));
+        assert!(!is_reserved_key("REALTIME_URL"));
+    }
+
+    #[test]
+    fn base64_secrets_are_random_bytes_encoded_as_runtipi_does() {
+        for (bytes, encoded) in [
+            ("", ""),
+            ("f", "Zg=="),
+            ("fo", "Zm8="),
+            ("foo", "Zm9v"),
+            ("foobar", "Zm9vYmFy"),
+        ] {
+            assert_eq!(super::base64_encode(bytes.as_bytes()), encoded);
+        }
+        let spec = SecretSpec {
+            key: "KEY".into(),
+            length: 32,
+            format: SecretFormat::Base64,
+        };
+        let value = spec.generate().unwrap();
+        assert_eq!(value.len(), 44, "{value}");
+        assert!(
+            value.ends_with('='),
+            "32 bytes need one padding character: {value}"
+        );
+        assert!(spec.accepts(&value));
+        assert!(
+            !spec.accepts(&"a".repeat(32)),
+            "an alphanumeric key of the old shape was accepted"
+        );
+    }
+
     use super::*;
 
     fn hex(length: usize) -> SecretSpec {
@@ -837,6 +1008,31 @@ mod tests {
     /// pinned CapRover catalogue, translated the way the importer translates
     /// it. The proof claims all of these accept any value we generate, so the
     /// claim is checked against a great many values we actually generate.
+    /// Ghostfolio's Redis asked for `--requirepass ${PASSWORD}` and got an
+    /// empty argument, because only environment values are filled.
+    #[test]
+    fn a_placeholder_in_a_command_is_refused_rather_than_left_empty() {
+        let mut template = template();
+        template.plan.services[0].overrides.command = Some(crate::plan::PlanArgs::Exec(vec![
+            "redis-server".into(),
+            "--requirepass".into(),
+            "${DB_PASSWORD}".into(),
+        ]));
+        let error = template.validate().unwrap_err();
+        assert!(
+            error.contains("DB_PASSWORD") && error.contains("command"),
+            "{error}"
+        );
+
+        // A value the container's own shell expands is not a placeholder.
+        template.plan.services[0].overrides.command = Some(crate::plan::PlanArgs::Shell(
+            "sh -c 'exec redis-server --requirepass \"$$REDIS_PASSWORD\"'".into(),
+        ));
+        template
+            .validate()
+            .expect("an escaped dollar is not a placeholder");
+    }
+
     #[test]
     fn a_proven_rule_accepts_every_value_the_generator_can_produce() {
         let proven: [(&str, usize); 8] = [
@@ -913,6 +1109,7 @@ mod tests {
 
     fn template() -> PlanTemplate {
         PlanTemplate {
+            first_start: None,
             seeds: Vec::new(),
             plan: DeploymentPlan {
                 id: "example".into(),
@@ -925,6 +1122,8 @@ mod tests {
                         ("DB_PASSWORD".into(), "${DB_PASSWORD}".into()),
                         ("SITE_URL".into(), "http://localhost:${PORT:-8080}".into()),
                     ],
+                    companion: None,
+                    networks: Vec::new(),
                     published: Some(PublishedPort {
                         host: 8080,
                         container: 8080,
@@ -934,6 +1133,7 @@ mod tests {
                     overrides: crate::plan::PlanOverrides::default(),
                 }],
                 named_volumes: Vec::new(),
+                internal_networks: Vec::new(),
             },
             fields: vec![
                 SetupField {

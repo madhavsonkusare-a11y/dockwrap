@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "ghcr.io/cinnamon/kotaemon:main-lite",
+    "source_url": "https://ghcr.io/v2/cinnamon/kotaemon/manifests/main-lite",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-05-31",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:81de41b082007df14a788327cb0306f5f08f7ea4f1d8948d4083d7bbd66b6921",
+      "linux/arm64": "sha256:f93687d81623d3faa5310c8db42d7738c678bcfdc53df9a7b7b00c513cc2138a"
+    }
+  }
+}

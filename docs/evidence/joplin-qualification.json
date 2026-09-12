@@ -1,16 +1,16 @@
 {
   "app": "joplin",
   "passed": true,
-  "scope": "candidate mapping, transaction, managed storage and first use, on one host and one architecture",
-  "promotion": "not reviewed",
+  "scope": "reviewed mapping, transaction, managed storage and first use, on one host and one architecture",
+  "promotion": "approved",
   "source_revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
   "images": [
     "joplin/server:3.7.1",
-    "postgres:14.2"
+    "postgres:14.24"
   ],
   "image_ids": {
     "joplin/server:3.7.1": "sha256:0877bfba41a943017c42c58e90db9d8d548bfe699b5e410248b5b879371734f9",
-    "postgres:14.2": "sha256:2c954f8c5d03da58f8b82645b783b56c1135df17e650b186b296fa1bb71f9cfd"
+    "postgres:14.24": "sha256:156f0b253fd61366d5fc2107ad45955027d5612f695a8436ce20167f3fa79bff"
   },
   "first_use": "it opens a page with a clear next step, and the same page after a restart and reinstall",
   "steps": [
@@ -19,7 +19,7 @@
       "passed": true
     },
     {
-      "step": "pull postgres:14.2",
+      "step": "pull postgres:14.24",
       "passed": true
     },
     {

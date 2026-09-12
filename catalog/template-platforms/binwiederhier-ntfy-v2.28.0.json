@@ -12,7 +12,7 @@
       "os_version": null,
       "size": 35875484,
       "status": "active",
-      "last_pulled": "2026-09-11T18:36:49.69996157Z",
+      "last_pulled": "2026-09-10T14:32:36.34110079Z",
       "last_pushed": "2026-08-27T20:26:35.302989721Z"
     },
     {
@@ -25,7 +25,7 @@
       "os_version": null,
       "size": 34663942,
       "status": "active",
-      "last_pulled": "2026-09-11T18:30:28.829005066Z",
+      "last_pulled": "2026-09-10T14:37:06.254945866Z",
       "last_pushed": "2026-08-27T20:26:26.708677795Z"
     },
     {
@@ -38,7 +38,7 @@
       "os_version": null,
       "size": 34136539,
       "status": "active",
-      "last_pulled": "2026-09-11T18:33:59.366533Z",
+      "last_pulled": "2026-09-10T14:35:27.955154893Z",
       "last_pushed": "2026-08-27T20:26:09.544175636Z"
     },
     {
@@ -51,7 +51,7 @@
       "os_version": null,
       "size": 34445276,
       "status": "active",
-      "last_pulled": "2026-09-11T18:33:57.596785369Z",
+      "last_pulled": "2026-09-10T14:35:27.780413109Z",
       "last_pushed": "2026-08-27T20:26:18.184224133Z"
     }
   ],
@@ -63,7 +63,7 @@
   "full_size": 35875484,
   "v2": true,
   "tag_status": "active",
-  "tag_last_pulled": "2026-09-11T18:36:49.69996157Z",
+  "tag_last_pulled": "2026-09-10T14:37:06.254945866Z",
   "tag_last_pushed": "2026-08-27T20:26:47.310709Z",
   "media_type": "application/vnd.docker.distribution.manifest.list.v2+json",
   "content_type": "image",

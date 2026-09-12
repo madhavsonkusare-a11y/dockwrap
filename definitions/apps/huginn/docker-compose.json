@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 2,
+  "$schema": "https://schemas.runtipi.io/v2/dynamic-compose.json",
+  "services": [
+    {
+      "name": "huginn",
+      "image": "ghcr.io/huginn/huginn:v2026.09.09",
+      "isMain": true,
+      "internalPort": 3000,
+      "environment": [
+        {
+          "key": "APP_SECRET_TOKEN",
+          "value": "${HUGINN_SECRET_TOKEN}"
+        },
+        {
+          "key": "DOMAIN",
+          "value": "${APP_DOMAIN}"
+        },
+        {
+          "key": "SEED_USERNAME",
+          "value": "${HUGINN_USERNAME}"
+        },
+        {
+          "key": "SEED_PASSWORD",
+          "value": "${HUGINN_PASSWORD}"
+        },
+        {
+          "key": "SEED_EMAIL",
+          "value": "${HUGINN_EMAIL}"
+        },
+        {
+          "key": "DATABASE_ADAPTER",
+          "value": "mysql2"
+        },
+        {
+          "key": "DATABASE_HOST",
+          "value": "huginn-db"
+        },
+        {
+          "key": "DATABASE_PORT",
+          "value": "3306"
+        },
+        {
+          "key": "DATABASE_NAME",
+          "value": "huginn"
+        },
+        {
+          "key": "DATABASE_USERNAME",
+          "value": "huginn"
+        },
+        {
+          "key": "DATABASE_PASSWORD",
+          "value": "${HUGINN_DB_PASSWORD}"
+        },
+        {
+          "key": "DATABASE_ENCODING",
+          "value": "utf8mb4"
+        }
+      ],
+      "dependsOn": {
+        "huginn-db": {
+          "condition": "service_healthy"
+        }
+      }
+    },
+    {
+      "name": "huginn-db",
+      "image": "mariadb:11.4.13",
+      "healthCheck": {
+        "test": "healthcheck.sh --connect --innodb_initialized",
+        "interval": "5s",
+        "timeout": "10s",
+        "retries": 10,
+        "startPeriod": "60s"
+      },
+      "environment": [
+        {
+          "key": "MARIADB_DATABASE",
+          "value": "huginn"
+        },
+        {
+          "key": "MARIADB_USER",
+          "value": "huginn"
+        },
+        {
+          "key": "MARIADB_PASSWORD",
+          "value": "${HUGINN_DB_PASSWORD}"
+        },
+        {
+          "key": "MARIADB_RANDOM_ROOT_PASSWORD",
+          "value": "true"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/mariadb",
+          "containerPath": "/var/lib/mysql"
+        }
+      ]
+    }
+  ]
+}

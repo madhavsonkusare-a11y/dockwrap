@@ -123,6 +123,7 @@ impl Drop for ProjectCleanup {
 /// Compose at all.
 fn template(id: &str, host_port: u16) -> PlanTemplate {
     PlanTemplate {
+        first_start: None,
         seeds: Vec::new(),
         plan: DeploymentPlan {
             id: id.to_owned(),
@@ -132,6 +133,8 @@ fn template(id: &str, host_port: u16) -> PlanTemplate {
                     image: WEB_IMAGE.into(),
                     digest: None,
                     environment: vec![("ADMINER_DEFAULT_SERVER".into(), "db".into())],
+                    companion: None,
+                    networks: Vec::new(),
                     published: Some(PublishedPort {
                         host: host_port,
                         container: 8080,
@@ -149,6 +152,8 @@ fn template(id: &str, host_port: u16) -> PlanTemplate {
                         ("POSTGRES_DB".into(), "${DB_NAME}".into()),
                         ("POSTGRES_PASSWORD".into(), "${DB_PASSWORD}".into()),
                     ],
+                    companion: None,
+                    networks: Vec::new(),
                     published: None,
                     mounts: vec![PlanMount::Volume {
                         name: "db-data".into(),
@@ -160,6 +165,7 @@ fn template(id: &str, host_port: u16) -> PlanTemplate {
                 },
             ],
             named_volumes: vec!["db-data".into()],
+            internal_networks: Vec::new(),
         },
         fields: vec![SetupField {
             key: "DB_NAME".into(),

@@ -23,13 +23,14 @@ See the [refined brand deck](branding/brand-deck.html) and
 
 - **Discover** searches the embedded project catalog in bounded pages. A project
   website is presented as a source link and is never treated as your instance.
-  Browse **1,672 projects**, four interest collections, combined filters and
-  source provenance. **752 catalog icons** are bundled for offline use.
-- **Preview install** supports Memos, n8n, and Uptime Kuma with pinned images,
+  Browse **1,678 catalog entries**, four interest collections, combined filters and
+  source provenance. Every entry has a bundled icon, including monogram fallbacks.
+- **Install** supports **52 offerings** (three recipes and 49 reviewed templates) with digest-pinned images,
   a Docker/Compose preflight check, persistent local data, health verification,
   and rollback when setup fails.
-  These three recipes have configuration checks; full real-container lifecycle
-  verification is still pending.
+  Qualification evidence is recorded in `docs/evidence/`. Application-specific
+  end-to-end use is not proven for every offering; see the
+  [qualification roadmap](docs/qualification-roadmap.md).
 - **Connect an app** saves its name and reachable HTTP(S) address. Local Store
   does not seed an example or imply that catalog projects are already installed.
 - **My Apps** opens connections and starts, stops, inspects, or uninstalls apps

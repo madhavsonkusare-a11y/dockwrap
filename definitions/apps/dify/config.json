@@ -1,0 +1,72 @@
+{
+  "id": "dify",
+  "name": "Dify",
+  "version": "1.17.1",
+  "source": "https://github.com/langgenius/dify",
+  "website": "https://dify.ai",
+  "documentation": "https://docs.dify.ai/getting-started/install-self-hosted/docker-compose",
+  "short_desc": "Build AI apps and agents visually: workflows, knowledge bases, tools and model providers in one place.",
+  "categories": [
+    "Artificial Intelligence"
+  ],
+  "license": "Dify Open Source License",
+  "form_fields": [
+    {
+      "type": "random",
+      "label": "Signing key",
+      "min": 42,
+      "max": 42,
+      "env_variable": "DIFY_SECRET_KEY",
+      "encoding": "base64"
+    },
+    {
+      "type": "random",
+      "label": "Database password",
+      "min": 32,
+      "max": 32,
+      "env_variable": "DIFY_DB_PASSWORD"
+    },
+    {
+      "type": "random",
+      "label": "Code sandbox key",
+      "min": 32,
+      "max": 32,
+      "env_variable": "DIFY_SANDBOX_KEY"
+    },
+    {
+      "type": "random",
+      "label": "Plugin service key",
+      "min": 48,
+      "max": 48,
+      "env_variable": "DIFY_PLUGIN_DAEMON_KEY"
+    },
+    {
+      "type": "random",
+      "label": "Key plugins use to call Dify",
+      "min": 48,
+      "max": 48,
+      "env_variable": "DIFY_INNER_API_KEY"
+    },
+    {
+      "type": "random",
+      "label": "Agent service token",
+      "min": 48,
+      "max": 48,
+      "env_variable": "DIFY_AGENT_API_TOKEN"
+    },
+    {
+      "type": "random",
+      "label": "Agent token encryption secret",
+      "min": 43,
+      "max": 43,
+      "env_variable": "DIFY_AGENT_SERVER_SECRET"
+    },
+    {
+      "type": "random",
+      "label": "Agent sandbox token",
+      "min": 48,
+      "max": 48,
+      "env_variable": "DIFY_AGENT_SANDBOX_TOKEN"
+    }
+  ]
+}

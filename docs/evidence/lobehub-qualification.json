@@ -1,0 +1,78 @@
+{
+  "app": "lobehub",
+  "passed": true,
+  "scope": "reviewed mapping, transaction, managed storage and first use, on one host and one architecture",
+  "promotion": "approved",
+  "source_revision": "484d934c006b0e276c9949ce89a868fad3c9f257",
+  "images": [
+    "lobehub/lobehub:2.2.17",
+    "paradedb/paradedb:0.25.8-pg17",
+    "redis:7.4.11-alpine",
+    "rustfs/rustfs:1.0.0-rc.6"
+  ],
+  "image_ids": {
+    "lobehub/lobehub:2.2.17": "sha256:775dbfb06820e2d0f6ac24cbaaa6ee46c1e40ebce7b73fb2ce16c4d06e61a51e",
+    "paradedb/paradedb:0.25.8-pg17": "sha256:7a9e1e7f04d6d71285b55535eaa5dc58714f9cc67880c2e36b8a3182b7a28136",
+    "redis:7.4.11-alpine": "sha256:ff02b58f971e7d7d156a1267e283fcbbeee91773b6aa36c49dac28ecfe28eadf",
+    "rustfs/rustfs:1.0.0-rc.6": "sha256:97171b3d72cd47dc81000f92ea84de25608bfc35a94c965501afaeb5d99f6035"
+  },
+  "first_use": "it opens a page with a clear next step, the same page after a restart and reinstall, and scripts/lobehub-probe.mjs passed",
+  "steps": [
+    {
+      "step": "pull lobehub/lobehub:2.2.17",
+      "passed": true
+    },
+    {
+      "step": "pull paradedb/paradedb:0.25.8-pg17",
+      "passed": true
+    },
+    {
+      "step": "pull redis:7.4.11-alpine",
+      "passed": true
+    },
+    {
+      "step": "pull rustfs/rustfs:1.0.0-rc.6",
+      "passed": true
+    },
+    {
+      "step": "installs with one action",
+      "passed": true
+    },
+    {
+      "step": "answers on its address",
+      "passed": true
+    },
+    {
+      "step": "is usable first install",
+      "passed": true
+    },
+    {
+      "step": "survives a restart",
+      "passed": true
+    },
+    {
+      "step": "is usable after restart",
+      "passed": true
+    },
+    {
+      "step": "reinstalls over data it kept",
+      "passed": true
+    },
+    {
+      "step": "keeps the credentials it generated",
+      "passed": true
+    },
+    {
+      "step": "is usable after a keep-data reinstall",
+      "passed": true
+    },
+    {
+      "step": "removes everything it created",
+      "passed": true
+    },
+    {
+      "step": "leaves other containers alone",
+      "passed": true
+    }
+  ]
+}

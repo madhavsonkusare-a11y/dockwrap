@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "id": "langflow",
+  "display_name": "Langflow",
+  "catalog_name": "Langflow",
+  "description": "Build and run AI agents and workflows visually, with any model and tool.",
+  "category": "Artificial Intelligence",
+  "license": "MIT",
+  "source_url": "https://github.com/langflow-ai/langflow",
+  "documentation_url": "https://docs.langflow.org/deployment-docker",
+  "verified_at": "2026-09-12",
+  "version": "1.12.1",
+  "lifecycle_proof": "docs/evidence/langflow-qualification.json",
+  "origin": {
+    "importer": "runtipi",
+    "repository": "madhavsonkusare-a11y/local-store",
+    "revision": "d81999683947fb828a535300b3cdbf8f7ac6b589",
+    "path": "definitions/apps/langflow/docker-compose.json",
+    "license": "MIT"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "langflowai/langflow:1.12.1",
+        "source_url": "https://hub.docker.com/v2/repositories/langflowai/langflow/tags/1.12.1",
+        "checked_at": "2026-09-11",
+        "last_updated": "2026-09-08",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:ebb38ea83b144e6421cbb5fa0c0499721e17f6b7407df76a16c41247b0d1ed57",
+          "linux/arm64": "sha256:3aa35597b28f70f814afee37b2026c8da4bdd51ac3d174fbd44435ac06b89cec"
+        },
+        "index_digest": "sha256:3e3cac657435f292fb5da653e8eb05b330460a99f1420e169f29413ba9d11164"
+      }
+    ]
+  },
+  "promotion": {
+    "state": "approved",
+    "reason": "Approved by the owner. Qualified as offered on 2026-09-12: a real install of Langflow 1.12.1, upstream's current release proved it starts, opens to a first screen with a clear next step, survives a restart and a keep-data reinstall with its data and generated credentials intact, and removes everything it created. Local Store wrote this definition from the project's own deployment instructions."
+  },
+  "data_storage": "Local Store managed folder / langflow",
+  "risk_notes": [
+    "Creates 1 Docker container and publishes one port on this computer's loopback interface only.",
+    "Generates 1 credential of its own, keeps it beside the app's data, and reuses it if you reinstall.",
+    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Written by Local Store from the project's own deployment instructions, not taken from an app store.",
+    "Opens without a login, in Langflow's automatic single-user mode: anyone who can reach the address can edit and run your flows.",
+    "Flows can run Python code and call external services with keys you store in it; stored keys are encrypted with a key Local Store generated for this install."
+  ],
+  "fields": {
+    "LANGFLOW_USERNAME": {
+      "label": "Username",
+      "sensitive": false
+    },
+    "LANGFLOW_PASSWORD": {
+      "label": "Password",
+      "sensitive": true
+    }
+  },
+  "definition": "{\n  \"schemaVersion\": 2,\n  \"$schema\": \"https://schemas.runtipi.io/v2/dynamic-compose.json\",\n  \"services\": [\n    {\n      \"name\": \"langflow\",\n      \"image\": \"langflowai/langflow:1.12.1\",\n      \"isMain\": true,\n      \"internalPort\": 7860,\n      \"environment\": [\n        {\n          \"key\": \"LANGFLOW_CONFIG_DIR\",\n          \"value\": \"/app/langflow\"\n        },\n        {\n          \"key\": \"LANGFLOW_SECRET_KEY\",\n          \"value\": \"${LANGFLOW_SECRET_KEY}\"\n        },\n        {\n          \"key\": \"DO_NOT_TRACK\",\n          \"value\": \"true\"\n        },\n        {\n          \"key\": \"LANGFLOW_SUPERUSER\",\n          \"value\": \"${LANGFLOW_USERNAME}\"\n        },\n        {\n          \"key\": \"LANGFLOW_SUPERUSER_PASSWORD\",\n          \"value\": \"${LANGFLOW_PASSWORD}\"\n        },\n        {\n          \"key\": \"LANGFLOW_AUTO_LOGIN\",\n          \"value\": \"false\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data\",\n          \"containerPath\": \"/app/langflow\"\n        }\n      ]\n    }\n  ]\n}\n",
+  "config": {
+    "path": "definitions/apps/langflow/config.json",
+    "content": "{\n  \"id\": \"langflow\",\n  \"name\": \"Langflow\",\n  \"version\": \"1.12.1\",\n  \"source\": \"https://github.com/langflow-ai/langflow\",\n  \"website\": \"https://www.langflow.org\",\n  \"documentation\": \"https://docs.langflow.org/deployment-docker\",\n  \"short_desc\": \"Build and run AI agents and workflows visually, with any model and tool.\",\n  \"categories\": [\n    \"Artificial Intelligence\"\n  ],\n  \"license\": \"MIT\",\n  \"form_fields\": [\n    {\n      \"type\": \"text\",\n      \"label\": \"Username\",\n      \"min\": 3,\n      \"max\": 40,\n      \"required\": true,\n      \"default\": \"langflow\",\n      \"env_variable\": \"LANGFLOW_USERNAME\"\n    },\n    {\n      \"type\": \"password\",\n      \"label\": \"Password\",\n      \"min\": 8,\n      \"max\": 80,\n      \"required\": true,\n      \"env_variable\": \"LANGFLOW_PASSWORD\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Encryption key for stored credentials\",\n      \"min\": 48,\n      \"max\": 48,\n      \"env_variable\": \"LANGFLOW_SECRET_KEY\"\n    }\n  ]\n}\n"
+  }
+}

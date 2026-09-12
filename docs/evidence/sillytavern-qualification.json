@@ -1,0 +1,60 @@
+{
+  "app": "sillytavern",
+  "passed": true,
+  "scope": "reviewed mapping, transaction, managed storage and first use, on one host and one architecture",
+  "promotion": "approved",
+  "source_revision": "9b4dc39c8919443b3e8640ea8d934464ceaa165d",
+  "images": [
+    "ghcr.io/sillytavern/sillytavern:1.18.0"
+  ],
+  "image_ids": {
+    "ghcr.io/sillytavern/sillytavern:1.18.0": "sha256:7b30a1698b605d01dbd01a20459600c035f0d2c866912b69d7eee98065dcedd3"
+  },
+  "first_use": "it opens a page with a clear next step, and the same page after a restart and reinstall",
+  "steps": [
+    {
+      "step": "pull ghcr.io/sillytavern/sillytavern:1.18.0",
+      "passed": true
+    },
+    {
+      "step": "installs with one action",
+      "passed": true
+    },
+    {
+      "step": "answers on its address",
+      "passed": true
+    },
+    {
+      "step": "is usable first install",
+      "passed": true
+    },
+    {
+      "step": "survives a restart",
+      "passed": true
+    },
+    {
+      "step": "is usable after restart",
+      "passed": true
+    },
+    {
+      "step": "reinstalls over data it kept",
+      "passed": true
+    },
+    {
+      "step": "generates no credentials, so there are none to lose",
+      "passed": true
+    },
+    {
+      "step": "is usable after a keep-data reinstall",
+      "passed": true
+    },
+    {
+      "step": "removes everything it created",
+      "passed": true
+    },
+    {
+      "step": "leaves other containers alone",
+      "passed": true
+    }
+  ]
+}

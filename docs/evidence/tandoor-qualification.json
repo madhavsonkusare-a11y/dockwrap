@@ -1,0 +1,66 @@
+{
+  "app": "tandoor",
+  "passed": true,
+  "scope": "reviewed mapping, transaction, managed storage and first use, on one host and one architecture",
+  "promotion": "approved",
+  "source_revision": "55bad5a64628cea01142ca3af245a9d38425695a",
+  "images": [
+    "ghcr.io/tandoorrecipes/recipes:2.6.15",
+    "postgres:17.11"
+  ],
+  "image_ids": {
+    "ghcr.io/tandoorrecipes/recipes:2.6.15": "sha256:2e759dd1478a2ed119ee474e28522079fb1cfa50b3fd25cba89f6b9a67abad72",
+    "postgres:17.11": "sha256:67f41722b7a8cbdb868a44a4995c846eddfdc2973bccb291ce937dce88ad5675"
+  },
+  "first_use": "it opens a page with a clear next step, and the same page after a restart and reinstall",
+  "steps": [
+    {
+      "step": "pull ghcr.io/tandoorrecipes/recipes:2.6.15",
+      "passed": true
+    },
+    {
+      "step": "pull postgres:17.11",
+      "passed": true
+    },
+    {
+      "step": "installs with one action",
+      "passed": true
+    },
+    {
+      "step": "answers on its address",
+      "passed": true
+    },
+    {
+      "step": "is usable first install",
+      "passed": true
+    },
+    {
+      "step": "survives a restart",
+      "passed": true
+    },
+    {
+      "step": "is usable after restart",
+      "passed": true
+    },
+    {
+      "step": "reinstalls over data it kept",
+      "passed": true
+    },
+    {
+      "step": "keeps the credentials it generated",
+      "passed": true
+    },
+    {
+      "step": "is usable after a keep-data reinstall",
+      "passed": true
+    },
+    {
+      "step": "removes everything it created",
+      "passed": true
+    },
+    {
+      "step": "leaves other containers alone",
+      "passed": true
+    }
+  ]
+}

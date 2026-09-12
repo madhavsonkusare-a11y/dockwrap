@@ -1,9 +1,185 @@
 # Local Store: agent handoff
 
+## Repository consolidation — September 12
+
+The owner requested all open PRs merged into main and obsolete branches removed.
+The backend, offerings, icon and approved V2 design histories are consolidated.
+The README now reflects 52 offerings and 1,678 catalog entries with local icons.
+V2 remains an approved design package; merging it does not implement the new UI.
+
+The previously deferred template CI blocker is fixed: the checker reuses
+`generate-template.py` for OCI registries and has committed public registry
+evidence for every reviewed image. Tautulli's tag was rebuilt September 11;
+its original approved digest was fetched and verified without changing its pin.
+`--refresh-missing` fills absent evidence; `--refresh` refreshes evidence and
+still refuses mismatches. OCI images with install pins are checked by digest.
+Five entries added after the icon snapshot now have existing-generator monograms.
+CI now checks stacked PRs regardless of their target branch. Its catalog job
+fetches full history so first-party definition provenance stays reproducible.
+
+Validation: the full default Rust suite and strict Clippy, 21 JavaScript unit tests, catalog validation,
+complete offline icon coverage and registry-evidence regression tests passed.
+Real Docker app qualifications were not repeated for this consolidation.
+Local documents were saved in the named Git stash
+`pre-consolidation-local-documents-2026-09-12`. The local-only Claude cleanup
+commit is preserved by `archive/claude-cleanup-2026-09-12`; it is not merged.
+Continue with the qualification roadmap below, keeping the V2 implementation
+separate from app proof work.
+
+## Plans waiting to be picked up
+
+- **Qualification roadmap:** [docs/qualification-roadmap.md](qualification-roadmap.md) —
+  how to get from "opens a page" to "proven end to end", in the order worth
+  doing it. Start with the container-health assertion and the cost
+  measurements; both may demote an already-approved app, which is the point,
+  not a bug to work around. Nothing there should land while apps are mid-proof.
+- **Running without Docker Desktop:** [docs/bundled-container-engine.md](bundled-container-engine.md) —
+  bundle the engine (moby) in a WSL distro Local Store manages, behind a
+  `ContainerEngine` seam, and prove the swap by re-running the offered suite.
+  Settle the Docker Desktop licence question first: it decides whether this is
+  polish or a blocker for distributing Local Store at all.
+
+## Fifty apps, September 12 — in progress, read before resuming
+
+The owner asked for ten more apps to reach fifty, chosen for **diversity**:
+the store was fifteen-of-forty AI. They picked thirteen from the categories
+with nothing in them: Jellyfin (media), Immich (photos), Calibre-Web
+(e-books), PairDrop (file transfer), Trilium (notes), Docmost (team wiki),
+Vikunja (tasks), Tandoor (recipes), Ghostfolio (investments), Wekan (kanban),
+changedetection.io (web monitoring), Umami (analytics) and Gitea (code
+hosting). Thirteen for a target of ten, so failures still clear fifty.
+
+**State when this was written:** all thirteen passed a first qualification
+except Calibre-Web (see below); twelve are in their offered runs. Expect
+**52 offerings** when they finish.
+
+### Four rules that were refusing apps for the wrong reason
+
+Each was found by an app failing, and each unlocked others:
+
+- **A health check may expand a variable inside its own container.** `$$NAME`
+  is Compose's escape for a literal dollar, so the container's shell expands
+  it from the environment the plan gives it — `pg_isready -U $$POSTGRES_USER`.
+  A single `$` stays refused, and so does CapRover's `$$cap_name`, which is an
+  unfilled placeholder rather than an expansion. This alone was refusing
+  Vikunja, Tandoor, Umami, NocoDB and Speedtest Tracker. The template guard
+  now refuses `$$cap_` rather than any `$$`.
+- **An app's own files under `/usr/src` are not the container's system.**
+  Immich keeps its photo library at `/usr/src/app/upload`, and the rule that
+  stops a person's folder being mounted over `/etc` or `/usr` was refusing it.
+- **A service may answer on a second address beside the one it publishes.**
+  Gitea serves git over SSH that way. Both addresses render under **one**
+  `ports:` key — two keys is a Compose parse error, which is how Gitea first
+  failed.
+- **A placeholder in a command line is never filled**, because only
+  environment values are. Ghostfolio's Redis asked for
+  `--requirepass ${GHOSTFOLIO_REDIS_PASSWORD}`, started with an empty password
+  argument and died. A template that does this is now refused rather than
+  installed broken.
+
+### What the app-store definitions got wrong
+
+- **Stale pins.** CapRover pins Jellyfin 10.10.1 (two major versions behind)
+  and changedetection 0.40.2; Runtipi pins Wekan twenty-three releases behind.
+  Each is bumped to upstream's current release with `image_pins`, which the
+  offered run proves. **Check the version gap on every imported app**:
+  `generate-template.py` prints it.
+- **Tandoor** sets no allowed hosts, so Django refused every request as an
+  invalid Host header. Local Store's own definition allows localhost and
+  trusts its own address for form posts.
+- **Ghostfolio** is the command-placeholder case above; its own definition
+  passes the Redis password through the environment.
+- **Calibre-Web cannot be a template as it stands**: its definition ships a
+  binary Calibre `metadata.db` as a seed, and a manifest carries text only.
+  Either drop it, swap it for Komga or Kavita (both import cleanly and scan a
+  folder instead), or add binary seeds to manifests. **Owner decision
+  needed.**
+
+### Measuring what is importable
+
+`catalog/candidate-queue.json` and `catalog/candidate-ranking.json` are
+**generated, and go stale as the importer gains capabilities** — they were
+still reporting `addPorts` and `healthCheck` as blockers after both worked.
+Rebuild with `scripts/build-candidate-queue.py`, then
+`scripts/rank-candidates.py`, before choosing candidates.
+
+Rebuilding needs the `runtipi` entry in `catalog/import-audit-sources.json`,
+which was missing: the codeload ZIP's checksum differs from the one in
+`sources.lock.json`, so it is recorded separately after being downloaded again
+and matched. That was verified on September 12 (sha256
+`8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec`).
+
+The ranking merges an app across sources and may pick the blocked one, which
+is why Gitea, Immich and Tandoor read as "no importable candidate". Name the
+source: `qualify_batch --only <app> --source runtipi`. The same applies to
+`generate-template.py`, which refuses a manifest whose proof came from the
+other source.
+
+### Qualification practice
+
+- **Never run two qualifications at once.** Vikunja and Tandoor both reported
+  "could not finish on this machine" while two batches overlapped, and Vikunja
+  passed alone. Contention looks like a machine failure, not an app failure.
+- **Capture container logs while the run is going.** Cleanup removes the
+  containers, and a timeout's diagnosis carries only the last few lines.
+  `scripts/` has no tool for this; the session used a small watcher that polls
+  `docker ps` and copies `docker logs` out.
+
+## AI apps, September 12 — done, and what is left
+
+The owner asked for the most-starred AI and agent projects on GitHub and chose
+twelve, then allowed **source-available apps** (n8n stays; Open WebUI, Dify,
+LobeHub and Joplin were added under that policy), chose to **build support for
+both Sim and Maxun**, and chose to **keep Kotaemon** despite its 15.9 GB image.
+
+**40 offerings** (3 recipes, 37 templates) on branch `feat/ai-apps` (PR #6).
+All twelve are proven as offered, every image pinned by the digest its proof
+ran: SillyTavern 1.18.0, Langflow 1.12.1, Huginn v2026.09.09, Vane 1.12.2,
+Khoj 1.42.10, Joplin Server 3.7.1 (PostgreSQL 14.24), Flowise 3.1.4
+(PostgreSQL), Open WebUI 0.11.3, Sim 0.8.33, Maxun 0.0.62, LobeHub 2.2.17 and
+Dify 1.17.1.
+
+Plan capabilities these needed, all tested: **one-shot jobs**, **second
+loopback addresses** (`LOCAL_STORE_URL_<SERVICE>` / `LOCAL_STORE_PORT_<SERVICE>`,
+at most two, kept on reinstall) and **internal networks**. Placeholders are
+filled in environment values only, never in commands, and the guard test
+refuses `$$` in rendered Compose — so a definition passes values to a command
+through the environment.
+
+What the runs changed, beyond the apps themselves:
+
+- `scripts/companion-probe.mjs` checks every second address answers, and
+  `scripts/lobehub-probe.mjs` also checks LobeHub's S3 address from inside its
+  own container. The second-address check is what caught Maxun; the standard
+  probe passed it.
+- Catalogue search puts an app named by the query first. "Sim" returned
+  forty-eight apps that merely mention it.
+- `generate-template.py` matches a catalogue entry by id before alias. Open
+  WebUI had taken another app's name, description and icon.
+- A manifest carries the version its definition names, because Dify's front
+  door is an nginx and the store reported nginx's tag as Dify's version.
+
+Not done, and worth knowing:
+
+- **Kotaemon, Monica, Glance and the earlier apps** were not re-run; only the
+  twelve above were.
+- **Docker's disk** was compacted from 94 GB to 29.5 GB on September 12 after
+  `fstrim` inside its VM. Unused images were then removed with the owner's
+  agreement, which is why a later `check-proven-pins.py` run reported
+  MISMATCH for Dify: the check needs the images locally, **and by tag** — an
+  image pulled by digest alone is not found under its tag.
+- **PR #5 (icons)** needs its catalogue icons regenerated once the new
+  catalogue entries (SillyTavern, Big-AGI, Kotaemon, Flowise, Sim, Maxun)
+  reach its base.
+- **The template platform check** will fail when PRs #4–#6 reach `main`: 40
+  images have no cached tag metadata and 10 are on GHCR or lscr, which the
+  checker cannot read. The owner chose to fix it then, not now. PR #3 was
+  fixed the same way on September 12 (`fbdf910`).
+
 ## Owner decisions, September 11 — read before resuming
 
-Work is **paused at 24 offered apps** until PRs #3, #4 and #5 are reviewed.
-When it resumes:
+These still stand. (Work was paused at 24 offered apps; the owner then asked
+for the AI apps above.)
 
 - **Nextcloud:** write Local Store's own definition that keeps Nextcloud's
   program files (`/var/www/html`) in a Docker named volume, and only the
@@ -12,8 +188,9 @@ When it resumes:
   Runtipi's format has no named volumes, so this needs a small plan/importer
   change or a CapRover-format first-party definition. Re-qualify as offered.
 - **Umbrel gallery icons (8):** keep them, with the `NOASSERTION` notice.
-- **Second published port:** not now. Build it when a candidate actually needs
-  one, designed around that app. (Penpot's MCP did not: its frontend proxies it.)
+- **Second published port:** built on September 12, for Sim and Maxun, as
+  second loopback addresses (see above). Penpot's MCP still needs none: its
+  frontend proxies it.
 - **Shrimply** (soirihiroka/shrimply): skipped by the owner. It is a native GTK/Qt
   video editor — macOS zip and Linux Flatpak only, no web UI, no Windows build, no
   server image (its Dockerfile only compiles the desktop binaries) — so it cannot

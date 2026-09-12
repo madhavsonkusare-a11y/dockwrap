@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 2,
+  "$schema": "https://schemas.runtipi.io/v2/dynamic-compose.json",
+  "services": [
+    {
+      "name": "sillytavern",
+      "image": "ghcr.io/sillytavern/sillytavern:1.18.0",
+      "isMain": true,
+      "internalPort": 8000,
+      "environment": [
+        {
+          "key": "NODE_ENV",
+          "value": "production"
+        },
+        {
+          "key": "FORCE_COLOR",
+          "value": "1"
+        },
+        {
+          "key": "SILLYTAVERN_WHITELIST",
+          "value": "[\"127.0.0.1\", \"::1\", \"172.16.0.0/12\", \"192.168.0.0/16\"]"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/config",
+          "containerPath": "/home/node/app/config"
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data/data",
+          "containerPath": "/home/node/app/data"
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data/plugins",
+          "containerPath": "/home/node/app/plugins"
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data/extensions",
+          "containerPath": "/home/node/app/public/scripts/extensions/third-party"
+        }
+      ]
+    }
+  ]
+}

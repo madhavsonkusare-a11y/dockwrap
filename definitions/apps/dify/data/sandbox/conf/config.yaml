@@ -1,0 +1,9 @@
+# Local Store's settings for Dify's code sandbox. Its key, port and proxy
+# come from the environment Local Store gives it; these are the rest.
+app:
+  port: 8194
+  debug: false
+max_workers: 4
+max_requests: 50
+worker_timeout: 15
+enable_network: true

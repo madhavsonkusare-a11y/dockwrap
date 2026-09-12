@@ -1,6 +1,6 @@
 {
   "archived": 0,
-  "cached_icons": 1673,
+  "cached_icons": 1678,
   "excluded": [
     {
       "path": "Apps/Filedrop/docker-compose.yml",
@@ -1688,7 +1688,8 @@
         "awesome-selfhosted",
         "casaos",
         "coolify",
-        "legacy"
+        "legacy",
+        "local-store"
       ]
     },
     {
@@ -3485,7 +3486,8 @@
       "sources": [
         "awesome-selfhosted",
         "casaos",
-        "coolify"
+        "coolify",
+        "local-store"
       ]
     },
     {
@@ -5316,7 +5318,8 @@
       "sources": [
         "awesome-selfhosted",
         "runtipi",
-        "legacy"
+        "legacy",
+        "local-store"
       ]
     },
     {
@@ -6131,7 +6134,8 @@
       ],
       "sources": [
         "awesome-selfhosted",
-        "legacy"
+        "legacy",
+        "local-store"
       ]
     },
     {
@@ -6818,7 +6822,8 @@
       ],
       "sources": [
         "awesome-selfhosted",
-        "legacy"
+        "legacy",
+        "local-store"
       ]
     },
     {
@@ -7185,7 +7190,8 @@
         "awesome-selfhosted",
         "casaos",
         "coolify",
-        "legacy"
+        "legacy",
+        "local-store"
       ]
     },
     {
@@ -7510,6 +7516,16 @@
       "sources": [
         "awesome-selfhosted",
         "legacy"
+      ]
+    },
+    {
+      "id": "lobehub",
+      "names": [
+        "LobeHub"
+      ],
+      "sources": [
+        "awesome-selfhosted",
+        "local-store"
       ]
     },
     {
@@ -12650,7 +12666,8 @@
       ],
       "sources": [
         "awesome-selfhosted",
-        "runtipi"
+        "runtipi",
+        "local-store"
       ]
     },
     {
@@ -13472,7 +13489,8 @@
       ],
       "sources": [
         "awesome-selfhosted",
-        "legacy"
+        "legacy",
+        "local-store"
       ]
     },
     {
@@ -14613,7 +14631,8 @@
       ],
       "sources": [
         "runtipi",
-        "casaos"
+        "casaos",
+        "local-store"
       ]
     },
     {
@@ -15023,7 +15042,8 @@
       ],
       "sources": [
         "casaos",
-        "coolify"
+        "coolify",
+        "local-store"
       ]
     },
     {
@@ -15291,6 +15311,6 @@
     "coolify": 367,
     "runtipi": 270
   },
-  "total": 1673,
-  "tracked": 1665
+  "total": 1678,
+  "tracked": 1670
 }

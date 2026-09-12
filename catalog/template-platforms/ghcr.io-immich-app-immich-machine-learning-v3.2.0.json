@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "ghcr.io/immich-app/immich-machine-learning:v3.2.0",
+    "source_url": "https://ghcr.io/v2/immich-app/immich-machine-learning/manifests/v3.2.0",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-09-10",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:30b81e0c6f68d80d6a8e6d0a8dddd7780e78d0c89e44d7701d9a4212ae8d90ca",
+      "linux/arm64": "sha256:babc004af4e724d1b2a6a870d1246ad9cdf76560c95e5b09e9f487982c79c40e"
+    }
+  }
+}

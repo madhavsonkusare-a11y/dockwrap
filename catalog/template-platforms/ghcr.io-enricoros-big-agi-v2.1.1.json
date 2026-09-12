@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "ghcr.io/enricoros/big-agi:v2.1.1",
+    "source_url": "https://ghcr.io/v2/enricoros/big-agi/manifests/v2.1.1",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-08-27",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:c24d91708292139e3ecf6242e8c496341b456ab25b77861eea3bba17c198cae5",
+      "linux/arm64": "sha256:9b0638434609f37a983a8de2c8771c66927957391c04ca9ab2e4082f294688f3"
+    }
+  }
+}

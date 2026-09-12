@@ -114,6 +114,17 @@ mod tests {
         assert!(search_catalog("", "", usize::MAX, 12).entries.is_empty());
     }
 
+    /// Matching is not finding. Dozens of apps mention "sim"; one is named it.
+    #[test]
+    fn the_app_named_by_a_search_comes_before_the_ones_that_mention_it() {
+        let page = search_catalog("Sim", "", 0, 48);
+        assert!(page.total > 1, "only one app matched, which proves nothing");
+        assert_eq!(page.entries[0].name, "Sim");
+        // Browsing is not searching: with no query the curated order stands.
+        let browsed = search_catalog("", "", 0, 48);
+        assert_eq!(browsed.entries[0].name, catalog()[0].name);
+    }
+
     #[test]
     fn only_reviewed_catalog_entries_advertise_preview_install() {
         let memos = search_catalog("Memos", "", 0, 48)
@@ -138,13 +149,15 @@ mod tests {
                 .unwrap_or_else(|| panic!("searching {name:?} does not find the app it names"));
             assert_eq!(entry.capability, "preview_install");
         }
-        assert!(search_catalog("Immich", "", 0, 48)
+        // The other half: an entry nobody has approved advertises no install.
+        // Derived rather than named, because the app that used to stand here —
+        // Immich — was approved, and the test then failed for being right.
+        let unapproved = search_catalog("", "", 0, 48)
             .entries
             .into_iter()
-            .find(|entry| entry.name == "Immich")
-            .unwrap()
-            .recipe_id
-            .is_none());
+            .find(|entry| entry.recipe_id.is_none())
+            .expect("the catalogue is larger than the allowlist");
+        assert_ne!(unapproved.capability, "preview_install");
     }
 
     #[test]

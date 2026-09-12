@@ -9,6 +9,7 @@
   "source_url": "https://github.com/node-red/node-red",
   "documentation_url": "https://nodered.org/docs/getting-started/docker",
   "verified_at": "2026-09-10",
+  "version": "5.0.6",
   "lifecycle_proof": "docs/evidence/nodered-qualification.json",
   "origin": {
     "importer": "runtipi",

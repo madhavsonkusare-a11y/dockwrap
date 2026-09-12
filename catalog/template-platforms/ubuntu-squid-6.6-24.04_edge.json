@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "ubuntu/squid:6.6-24.04_edge",
+    "source_url": "https://hub.docker.com/v2/repositories/ubuntu/squid/tags/6.6-24.04_edge",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-05-07",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64/v8",
+      "linux/ppc64le",
+      "linux/s390x"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:94f844158e12b52f51b4ae996515e37e8fb3e8d85e1c86caba1a297376e4ec4f",
+      "linux/arm64/v8": "sha256:2580be07409d64c1b5bff32d218649771a53616b06ef102bc3005e81534beccf",
+      "linux/ppc64le": "sha256:e35a1fefce3be34c7b9c92b142d10279fa1c4c0579fa6ba573fc9e8766b21a43",
+      "linux/s390x": "sha256:bc6811e6b26566397dc96c7c2e4756208ca6bf34c5bf11d568f60e469ea7bdd0"
+    }
+  }
+}

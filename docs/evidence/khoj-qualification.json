@@ -1,0 +1,72 @@
+{
+  "app": "khoj",
+  "passed": true,
+  "scope": "reviewed mapping, transaction, managed storage and first use, on one host and one architecture",
+  "promotion": "approved",
+  "source_revision": "a333806252ca303c76836a28d64085dec5f2c637",
+  "images": [
+    "ghcr.io/khoj-ai/khoj:1.42.10",
+    "pgvector/pgvector:0.8.6-pg15",
+    "searxng/searxng:2026.9.10-931fd9787"
+  ],
+  "image_ids": {
+    "ghcr.io/khoj-ai/khoj:1.42.10": "sha256:41aa881c957a035207c11da239dc436d0f8a0c6a72b372651c5a48e08127043a",
+    "pgvector/pgvector:0.8.6-pg15": "sha256:a947c45cdc5906a1bc951f20a8709e321256343ee0f251e4ae00b5e7def4e6da",
+    "searxng/searxng:2026.9.10-931fd9787": "sha256:2fb0fa85096fe6df5c3ab98ecb4d6e0ee2ef66b8fb96ce6fce0f75b51c4bd90a"
+  },
+  "first_use": "it opens a page with a clear next step, and the same page after a restart and reinstall",
+  "steps": [
+    {
+      "step": "pull ghcr.io/khoj-ai/khoj:1.42.10",
+      "passed": true
+    },
+    {
+      "step": "pull pgvector/pgvector:0.8.6-pg15",
+      "passed": true
+    },
+    {
+      "step": "pull searxng/searxng:2026.9.10-931fd9787",
+      "passed": true
+    },
+    {
+      "step": "installs with one action",
+      "passed": true
+    },
+    {
+      "step": "answers on its address",
+      "passed": true
+    },
+    {
+      "step": "is usable first install",
+      "passed": true
+    },
+    {
+      "step": "survives a restart",
+      "passed": true
+    },
+    {
+      "step": "is usable after restart",
+      "passed": true
+    },
+    {
+      "step": "reinstalls over data it kept",
+      "passed": true
+    },
+    {
+      "step": "keeps the credentials it generated",
+      "passed": true
+    },
+    {
+      "step": "is usable after a keep-data reinstall",
+      "passed": true
+    },
+    {
+      "step": "removes everything it created",
+      "passed": true
+    },
+    {
+      "step": "leaves other containers alone",
+      "passed": true
+    }
+  ]
+}

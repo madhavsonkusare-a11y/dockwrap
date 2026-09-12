@@ -1,0 +1,14 @@
+{
+  "id": "big-agi",
+  "name": "Big-AGI",
+  "version": "2.1.1",
+  "source": "https://github.com/enricoros/big-AGI",
+  "website": "https://big-agi.com",
+  "documentation": "https://github.com/enricoros/big-AGI/blob/main/docs/deploy-docker.md",
+  "short_desc": "A chat interface for many AI models at once, with personas, voice and multi-model replies.",
+  "categories": [
+    "Artificial Intelligence"
+  ],
+  "license": "MIT",
+  "form_fields": []
+}

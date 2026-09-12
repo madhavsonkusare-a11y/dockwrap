@@ -1,0 +1,14 @@
+{
+  "_why": "Every value here is deliberate and explained in evaluation.md under 'Token drift'. Anything else raw fails the gate.",
+  "radius": [
+    "50%"
+  ],
+  "fontSize": [],
+  "color": [],
+  "spacing": [
+    "1px",
+    "2px",
+    "3px",
+    "54px"
+  ]
+}

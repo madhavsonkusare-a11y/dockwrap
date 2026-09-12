@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "id": "khoj",
+  "display_name": "Khoj",
+  "catalog_name": "Khoj",
+  "description": "An AI second brain: ask questions of your notes, documents and the web, with any model.",
+  "category": "Artificial Intelligence",
+  "license": "AGPL-3.0",
+  "source_url": "https://github.com/khoj-ai/khoj",
+  "documentation_url": "https://docs.khoj.dev/get-started/setup",
+  "verified_at": "2026-09-12",
+  "version": "1.42.10",
+  "lifecycle_proof": "docs/evidence/khoj-qualification.json",
+  "origin": {
+    "importer": "runtipi",
+    "repository": "madhavsonkusare-a11y/local-store",
+    "revision": "a333806252ca303c76836a28d64085dec5f2c637",
+    "path": "definitions/apps/khoj/docker-compose.json",
+    "license": "MIT"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "ghcr.io/khoj-ai/khoj:1.42.10",
+        "source_url": "https://ghcr.io/v2/khoj-ai/khoj/manifests/1.42.10",
+        "checked_at": "2026-09-11",
+        "last_updated": "2025-07-15",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:291137d53db702c36ef396afd399109eee2cb605c0818a0ce6d3d1eefa653c1b",
+          "linux/arm64": "sha256:f1f1b1ee3eaeefde7efbe16f8a17d63673b3fb51c6b3d71580dfd40bc4e12078"
+        },
+        "index_digest": "sha256:41aa881c957a035207c11da239dc436d0f8a0c6a72b372651c5a48e08127043a"
+      },
+      {
+        "image": "pgvector/pgvector:0.8.6-pg15",
+        "source_url": "https://hub.docker.com/v2/repositories/pgvector/pgvector/tags/0.8.6-pg15",
+        "checked_at": "2026-09-11",
+        "last_updated": "2026-08-13",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:a6579dded3ff4ed3d9565ae54ab253e2cb7ae24c5d1eb3bec8a89e73f038b68a",
+          "linux/arm64": "sha256:a1fe5f726d1d8ab2d34ebe11a3cfd7785a5d8f7f0b20ad9d6d4752491c138a3f"
+        },
+        "index_digest": "sha256:a947c45cdc5906a1bc951f20a8709e321256343ee0f251e4ae00b5e7def4e6da"
+      },
+      {
+        "image": "searxng/searxng:2026.9.10-931fd9787",
+        "source_url": "https://hub.docker.com/v2/repositories/searxng/searxng/tags/2026.9.10-931fd9787",
+        "checked_at": "2026-09-11",
+        "last_updated": "2026-09-10",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm/v7",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:ccc7c2a0687695b0a86ccfaf8b08ad694a25148404de69169890e95ef3522401",
+          "linux/arm/v7": "sha256:1a7e125b4d83ee740100abe56dca70bd1f7be96ba72980f1a849caf4437aab8d",
+          "linux/arm64": "sha256:595e7525f1c407f22f5e76f5eb1c521454010735529427915ab1f7174a51af5b"
+        },
+        "index_digest": "sha256:2fb0fa85096fe6df5c3ab98ecb4d6e0ee2ef66b8fb96ce6fce0f75b51c4bd90a"
+      }
+    ]
+  },
+  "promotion": {
+    "state": "approved",
+    "reason": "Approved by the owner. Qualified as offered on 2026-09-12: a real install of Khoj 1.42.10, the version upstream's own latest tag installs proved it starts, opens to a first screen with a clear next step, survives a restart and a keep-data reinstall with its data and generated credentials intact, and removes everything it created. Local Store wrote this definition from the project's own deployment instructions."
+  },
+  "data_storage": "Local Store managed folder / khoj",
+  "risk_notes": [
+    "Creates 3 Docker containers and publishes one port on this computer's loopback interface only.",
+    "Generates 2 credentials of its own, keeps them beside the app's data, and reuses them if you reinstall.",
+    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Written by Local Store from the project's own deployment instructions, not taken from an app store.",
+    "Runs in single-user anonymous mode: it opens straight to the chat, and anyone who can reach the address can use it. The admin email and password you set open its /server/admin page.",
+    "Sends questions to the model provider you configure and searches the web through a bundled SearXNG from this computer.",
+    "Its code sandbox (Terrarium) is published only as :latest, so it is left out and Khoj cannot run code. Khoj 1.42.10 is what upstream's own :latest installs; 2.0 is still in beta."
+  ],
+  "fields": {
+    "KHOJ_ADMIN_EMAIL": {
+      "label": "Admin email",
+      "sensitive": false
+    },
+    "KHOJ_ADMIN_PASSWORD": {
+      "label": "Admin password",
+      "sensitive": true
+    }
+  },
+  "definition": "{\n  \"schemaVersion\": 2,\n  \"$schema\": \"https://schemas.runtipi.io/v2/dynamic-compose.json\",\n  \"services\": [\n    {\n      \"name\": \"khoj\",\n      \"image\": \"ghcr.io/khoj-ai/khoj:1.42.10\",\n      \"isMain\": true,\n      \"internalPort\": 42110,\n      \"command\": [\n        \"--host=0.0.0.0\",\n        \"--port=42110\",\n        \"--anonymous-mode\",\n        \"--non-interactive\"\n      ],\n      \"environment\": [\n        {\n          \"key\": \"POSTGRES_DB\",\n          \"value\": \"khoj\"\n        },\n        {\n          \"key\": \"POSTGRES_USER\",\n          \"value\": \"khoj\"\n        },\n        {\n          \"key\": \"POSTGRES_PASSWORD\",\n          \"value\": \"${KHOJ_DB_PASSWORD}\"\n        },\n        {\n          \"key\": \"POSTGRES_HOST\",\n          \"value\": \"khoj-database\"\n        },\n        {\n          \"key\": \"POSTGRES_PORT\",\n          \"value\": \"5432\"\n        },\n        {\n          \"key\": \"KHOJ_DJANGO_SECRET_KEY\",\n          \"value\": \"${KHOJ_SECRET_KEY}\"\n        },\n        {\n          \"key\": \"KHOJ_DEBUG\",\n          \"value\": \"False\"\n        },\n        {\n          \"key\": \"KHOJ_ADMIN_EMAIL\",\n          \"value\": \"${KHOJ_ADMIN_EMAIL}\"\n        },\n        {\n          \"key\": \"KHOJ_ADMIN_PASSWORD\",\n          \"value\": \"${KHOJ_ADMIN_PASSWORD}\"\n        },\n        {\n          \"key\": \"KHOJ_SEARXNG_URL\",\n          \"value\": \"http://khoj-search:8080\"\n        },\n        {\n          \"key\": \"KHOJ_TELEMETRY_DISABLE\",\n          \"value\": \"True\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/config\",\n          \"containerPath\": \"/root/.khoj\"\n        },\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/models\",\n          \"containerPath\": \"/root/.cache/huggingface\"\n        }\n      ],\n      \"dependsOn\": {\n        \"khoj-database\": {\n          \"condition\": \"service_healthy\"\n        },\n        \"khoj-search\": {\n          \"condition\": \"service_started\"\n        }\n      }\n    },\n    {\n      \"name\": \"khoj-database\",\n      \"image\": \"pgvector/pgvector:0.8.6-pg15\",\n      \"stopSignal\": \"SIGINT\",\n      \"healthCheck\": {\n        \"test\": \"pg_isready -U khoj\",\n        \"interval\": \"5s\",\n        \"timeout\": \"10s\",\n        \"retries\": 10,\n        \"startPeriod\": \"60s\"\n      },\n      \"environment\": [\n        {\n          \"key\": \"POSTGRES_DB\",\n          \"value\": \"khoj\"\n        },\n        {\n          \"key\": \"POSTGRES_USER\",\n          \"value\": \"khoj\"\n        },\n        {\n          \"key\": \"POSTGRES_PASSWORD\",\n          \"value\": \"${KHOJ_DB_PASSWORD}\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/database\",\n          \"containerPath\": \"/var/lib/postgresql/data\"\n        }\n      ]\n    },\n    {\n      \"name\": \"khoj-search\",\n      \"image\": \"searxng/searxng:2026.9.10-931fd9787\",\n      \"environment\": [\n        {\n          \"key\": \"SEARXNG_BASE_URL\",\n          \"value\": \"http://khoj-search:8080/\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/searxng\",\n          \"containerPath\": \"/etc/searxng\"\n        }\n      ]\n    }\n  ]\n}\n",
+  "config": {
+    "path": "definitions/apps/khoj/config.json",
+    "content": "{\n  \"id\": \"khoj\",\n  \"name\": \"Khoj\",\n  \"version\": \"1.42.10\",\n  \"source\": \"https://github.com/khoj-ai/khoj\",\n  \"website\": \"https://khoj.dev\",\n  \"documentation\": \"https://docs.khoj.dev/get-started/setup\",\n  \"short_desc\": \"An AI second brain: ask questions of your notes, documents and the web, with any model.\",\n  \"categories\": [\n    \"Artificial Intelligence\"\n  ],\n  \"license\": \"AGPL-3.0\",\n  \"form_fields\": [\n    {\n      \"type\": \"email\",\n      \"label\": \"Admin email\",\n      \"required\": true,\n      \"env_variable\": \"KHOJ_ADMIN_EMAIL\"\n    },\n    {\n      \"type\": \"password\",\n      \"label\": \"Admin password\",\n      \"min\": 8,\n      \"max\": 80,\n      \"required\": true,\n      \"env_variable\": \"KHOJ_ADMIN_PASSWORD\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Database password\",\n      \"min\": 32,\n      \"max\": 32,\n      \"env_variable\": \"KHOJ_DB_PASSWORD\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Signing key\",\n      \"min\": 50,\n      \"max\": 50,\n      \"env_variable\": \"KHOJ_SECRET_KEY\"\n    }\n  ]\n}\n"
+  },
+  "first_start_seconds": 600
+}

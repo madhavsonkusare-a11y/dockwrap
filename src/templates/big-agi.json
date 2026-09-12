@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "id": "big-agi",
+  "display_name": "Big-AGI",
+  "catalog_name": "Big-AGI",
+  "description": "A chat interface for many AI models at once, with personas, voice and multi-model replies.",
+  "category": "Artificial Intelligence",
+  "license": "MIT",
+  "source_url": "https://github.com/enricoros/big-AGI",
+  "documentation_url": "https://github.com/enricoros/big-AGI/blob/main/docs/deploy-docker.md",
+  "verified_at": "2026-09-11",
+  "version": "2.1.1",
+  "lifecycle_proof": "docs/evidence/big-agi-qualification.json",
+  "origin": {
+    "importer": "runtipi",
+    "repository": "madhavsonkusare-a11y/local-store",
+    "revision": "924357fde8f7d4e414e5cae241b1e137f5f60038",
+    "path": "definitions/apps/big-agi/docker-compose.json",
+    "license": "MIT"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "ghcr.io/enricoros/big-agi:v2.1.1",
+        "source_url": "https://ghcr.io/v2/enricoros/big-agi/manifests/v2.1.1",
+        "checked_at": "2026-09-11",
+        "last_updated": "2026-08-27",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:c24d91708292139e3ecf6242e8c496341b456ab25b77861eea3bba17c198cae5",
+          "linux/arm64": "sha256:9b0638434609f37a983a8de2c8771c66927957391c04ca9ab2e4082f294688f3"
+        },
+        "index_digest": "sha256:ff56c91f4ea70de94eb4e538fb53077cbebade7274eaab3f0afaec53e99fa0a5"
+      }
+    ]
+  },
+  "promotion": {
+    "state": "approved",
+    "reason": "Approved by the owner. Qualified as offered on 2026-09-11: a real install of Big-AGI 2.1.1, upstream's current release proved it starts, opens to a first screen with a clear next step, survives a restart and a keep-data reinstall with its data intact, and removes everything it created. Local Store wrote this definition from the project's own deployment instructions."
+  },
+  "data_storage": "None: it keeps no data of its own",
+  "risk_notes": [
+    "Creates 1 Docker container and publishes one port on this computer's loopback interface only.",
+    "Keeps no data of its own, so there is nothing for an uninstall to keep or delete.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Written by Local Store from the project's own deployment instructions, not taken from an app store.",
+    "Keeps nothing on the server: chats and API keys live in this app window's own storage on this computer, not in its folder. Deleting the app's data does not remove them, and they are tied to its address.",
+    "Sends what you type to the model providers whose keys you enter."
+  ],
+  "fields": {},
+  "definition": "{\n  \"schemaVersion\": 2,\n  \"$schema\": \"https://schemas.runtipi.io/v2/dynamic-compose.json\",\n  \"services\": [\n    {\n      \"name\": \"big-agi\",\n      \"image\": \"ghcr.io/enricoros/big-agi:v2.1.1\",\n      \"isMain\": true,\n      \"internalPort\": 3000\n    }\n  ]\n}\n",
+  "config": {
+    "path": "definitions/apps/big-agi/config.json",
+    "content": "{\n  \"id\": \"big-agi\",\n  \"name\": \"Big-AGI\",\n  \"version\": \"2.1.1\",\n  \"source\": \"https://github.com/enricoros/big-AGI\",\n  \"website\": \"https://big-agi.com\",\n  \"documentation\": \"https://github.com/enricoros/big-AGI/blob/main/docs/deploy-docker.md\",\n  \"short_desc\": \"A chat interface for many AI models at once, with personas, voice and multi-model replies.\",\n  \"categories\": [\n    \"Artificial Intelligence\"\n  ],\n  \"license\": \"MIT\",\n  \"form_fields\": []\n}\n"
+  }
+}

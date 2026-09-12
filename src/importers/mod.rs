@@ -115,14 +115,14 @@ pub(crate) fn plan_args(value: &serde_json::Value) -> Option<crate::plan::PlanAr
     }
 }
 
-/// Preserve startup versus health ordering; refuse completion jobs and optional
-/// dependencies until their lifecycle semantics are implemented.
-pub(crate) fn dependencies(
-    value: Option<&serde_json::Value>,
-) -> Result<(Vec<String>, std::collections::BTreeSet<String>), String> {
+/// Preserve startup, health and completion ordering; refuse optional
+/// dependencies until their lifecycle semantics are implemented. Waiting for a
+/// service to complete is what makes it a one-shot job.
+pub(crate) fn dependencies(value: Option<&serde_json::Value>) -> Result<Dependencies, String> {
     use serde_json::Value;
     let mut names = Vec::new();
     let mut healthy = std::collections::BTreeSet::new();
+    let mut completed = std::collections::BTreeSet::new();
     match value {
         None => {}
         Some(Value::Array(values)) => {
@@ -149,6 +149,9 @@ pub(crate) fn dependencies(
                     Some(Value::String(s)) if s == "service_healthy" => {
                         healthy.insert(name.clone());
                     }
+                    Some(Value::String(s)) if s == "service_completed_successfully" => {
+                        completed.insert(name.clone());
+                    }
                     _ => return Err("Unsupported dependency condition".into()),
                 }
                 names.push(name.clone());
@@ -160,5 +163,19 @@ pub(crate) fn dependencies(
     if unique.len() != names.len() {
         return Err("Duplicate dependency".into());
     }
-    Ok((names, healthy))
+    Ok(Dependencies {
+        names,
+        healthy,
+        completed,
+    })
+}
+
+/// What a service waits for, and how.
+#[derive(Debug, Default)]
+pub(crate) struct Dependencies {
+    pub names: Vec<String>,
+    /// Must pass a health check first.
+    pub healthy: std::collections::BTreeSet<String>,
+    /// Must run to completion first: one-shot jobs.
+    pub completed: std::collections::BTreeSet<String>,
 }

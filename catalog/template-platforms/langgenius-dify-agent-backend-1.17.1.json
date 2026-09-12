@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "langgenius/dify-agent-backend:1.17.1",
+    "source_url": "https://hub.docker.com/v2/repositories/langgenius/dify-agent-backend/tags/1.17.1",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-09-10",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:d6f83ac95ed674974e66f0dddcf65b89d52d26a584f12aca2edd3560ce5eb184",
+      "linux/arm64": "sha256:f5e1c31efa153eae2f511d5e6b59996696a1ecf753defb987f7fcf525ede0355"
+    }
+  }
+}

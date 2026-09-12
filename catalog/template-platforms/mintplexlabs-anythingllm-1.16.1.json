@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "mintplexlabs/anythingllm:1.16.1",
+    "source_url": "https://hub.docker.com/v2/repositories/mintplexlabs/anythingllm/tags/1.16.1",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-08-27",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:b7b570b8bfc0bd2a64097439524a38542784eea03522db9d30256f5e711f52fc",
+      "linux/arm64": "sha256:e08b510ca44e43605d50dc86241275f36bb92d56e41a99122017d33b75b13aab"
+    }
+  }
+}

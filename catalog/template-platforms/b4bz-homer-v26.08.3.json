@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "b4bz/homer:v26.08.3",
+    "source_url": "https://hub.docker.com/v2/repositories/b4bz/homer/tags/v26.08.3",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-08-30",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm/v6",
+      "linux/arm/v7",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:ab3b670cd53a6174794a7006fcbcf25ca0e35355d989268b56590722225b2732",
+      "linux/arm/v6": "sha256:a0e7e764f0e3725f2f6a8e86dfc2d29fed52977e9c9397640d626028aabd28e3",
+      "linux/arm/v7": "sha256:6d6d2aa6b3621987e75548e1f97ed77375fa31210d5843825dc1ee53081cea21",
+      "linux/arm64": "sha256:6661f76eb6f5b08d0964697759c552f8f098e092c73439b1ff59006027a092e9"
+    }
+  }
+}

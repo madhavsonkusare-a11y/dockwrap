@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "reference": "sha256:cc6a15edd7ac3df9bb98ad39dd40af8ffda6c1c0bfafe37c26137ddcbecdb7e5",
+  "audit": {
+    "image": "ghcr.io/triliumnext/trilium:v0.105.0",
+    "source_url": "https://ghcr.io/v2/triliumnext/trilium/manifests/sha256:cc6a15edd7ac3df9bb98ad39dd40af8ffda6c1c0bfafe37c26137ddcbecdb7e5",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-08-19",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm/v7",
+      "linux/arm/v8",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:1d8492b82e461f9d8cba1acab2bf89d0182821318a1fc1277656e688a6fb4ee4",
+      "linux/arm/v7": "sha256:7ee73b9a5d36dd436e118899c2acfa5ff64c9bc5558175e7b6cbd6832e808a7b",
+      "linux/arm/v8": "sha256:2cd3104224f2ab785b98ee9701428fafb5a7f1370f2484f005cb691846779490",
+      "linux/arm64": "sha256:621b7323fcccf7a58c18a6234a86d932138c93066efa8c9ad1003e1a97782ea0"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "joplin/server:3.7.1",
+    "source_url": "https://hub.docker.com/v2/repositories/joplin/server/tags/3.7.1",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-05-18",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:b9666df06e7e2db20aeb961d2aca19e20664b985ead96995ecd32f9d720f002c",
+      "linux/arm64": "sha256:632f77f024ce53357c3ee8b33de0f102cc62cd6e7d3928cc4860b6875f4d3cea"
+    }
+  }
+}

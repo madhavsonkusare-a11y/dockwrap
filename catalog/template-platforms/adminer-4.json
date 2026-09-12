@@ -12,7 +12,7 @@
       "os_version": null,
       "size": 46652868,
       "status": "active",
-      "last_pulled": "2026-09-11T18:27:41.097132422Z",
+      "last_pulled": "2026-09-10T14:34:14.79195554Z",
       "last_pushed": "2026-07-31T02:48:30.628456479Z"
     },
     {
@@ -25,7 +25,7 @@
       "os_version": null,
       "size": 47911385,
       "status": "active",
-      "last_pulled": "2026-09-11T18:09:11.726662389Z",
+      "last_pulled": "2026-09-10T12:02:02.839412026Z",
       "last_pushed": "2026-07-31T05:48:14.166103787Z"
     },
     {
@@ -38,7 +38,7 @@
       "os_version": null,
       "size": 46743156,
       "status": "active",
-      "last_pulled": "2026-09-11T18:09:11.77151296Z",
+      "last_pulled": "2026-09-10T12:02:00.515055606Z",
       "last_pushed": "2026-07-31T02:48:34.390891024Z"
     },
     {
@@ -51,7 +51,7 @@
       "os_version": null,
       "size": 46327621,
       "status": "active",
-      "last_pulled": "2026-09-11T18:09:11.853397328Z",
+      "last_pulled": "2026-09-10T12:02:07.312443821Z",
       "last_pushed": "2026-07-31T02:48:35.266783053Z"
     },
     {
@@ -64,7 +64,7 @@
       "os_version": null,
       "size": 42441050,
       "status": "active",
-      "last_pulled": "2026-09-11T18:09:11.604174314Z",
+      "last_pulled": "2026-09-10T12:01:55.898384004Z",
       "last_pushed": "2026-07-31T02:48:32.573881083Z"
     },
     {
@@ -77,7 +77,7 @@
       "os_version": null,
       "size": 46365847,
       "status": "active",
-      "last_pulled": "2026-09-11T18:31:25.092006927Z",
+      "last_pulled": "2026-09-10T14:42:43.5699896Z",
       "last_pushed": "2026-07-31T02:48:33.504889553Z"
     },
     {
@@ -90,7 +90,7 @@
       "os_version": null,
       "size": 43934578,
       "status": "active",
-      "last_pulled": "2026-09-11T18:09:11.473608201Z",
+      "last_pulled": "2026-09-10T12:01:52.035659746Z",
       "last_pushed": "2026-07-31T02:48:31.673109126Z"
     },
     {
@@ -103,7 +103,7 @@
       "os_version": null,
       "size": 45897324,
       "status": "active",
-      "last_pulled": "2026-09-11T18:09:11.835381581Z",
+      "last_pulled": "2026-09-10T12:02:05.129632295Z",
       "last_pushed": "2026-08-02T11:48:14.537872905Z"
     },
     {
@@ -116,7 +116,7 @@
       "os_version": null,
       "size": 35281,
       "status": "active",
-      "last_pulled": "2026-09-11T18:09:11.750708145Z",
+      "last_pulled": "2026-09-10T12:02:03.948570439Z",
       "last_pushed": "2026-07-31T05:48:14.760850246Z"
     },
     {
@@ -129,7 +129,7 @@
       "os_version": null,
       "size": 35281,
       "status": "active",
-      "last_pulled": "2026-09-11T18:09:11.850289253Z",
+      "last_pulled": "2026-09-10T12:02:06.222142154Z",
       "last_pushed": "2026-08-02T11:48:14.950021416Z"
     },
     {
@@ -142,7 +142,7 @@
       "os_version": null,
       "size": 35350,
       "status": "active",
-      "last_pulled": "2026-09-11T18:09:11.514194379Z",
+      "last_pulled": "2026-09-10T12:01:53.473634343Z",
       "last_pushed": "2026-07-31T02:48:32.076730195Z"
     },
     {
@@ -155,7 +155,7 @@
       "os_version": null,
       "size": 35231,
       "status": "active",
-      "last_pulled": "2026-09-11T18:09:11.915208951Z",
+      "last_pulled": "2026-09-10T12:02:08.429165093Z",
       "last_pushed": "2026-07-31T02:48:35.797692886Z"
     },
     {
@@ -168,7 +168,7 @@
       "os_version": null,
       "size": 35350,
       "status": "active",
-      "last_pulled": "2026-09-11T18:09:11.589751358Z",
+      "last_pulled": "2026-09-10T12:01:57.154925016Z",
       "last_pushed": "2026-07-31T02:48:32.936183573Z"
     },
     {
@@ -181,7 +181,7 @@
       "os_version": null,
       "size": 35380,
       "status": "active",
-      "last_pulled": "2026-09-11T18:31:25.815996276Z",
+      "last_pulled": "2026-09-10T14:24:23.443350763Z",
       "last_pushed": "2026-07-31T02:48:33.900233629Z"
     },
     {
@@ -194,7 +194,7 @@
       "os_version": null,
       "size": 35193,
       "status": "active",
-      "last_pulled": "2026-09-11T18:09:11.710891064Z",
+      "last_pulled": "2026-09-10T12:02:01.728701014Z",
       "last_pushed": "2026-07-31T02:48:34.761264346Z"
     },
     {
@@ -207,7 +207,7 @@
       "os_version": null,
       "size": 35228,
       "status": "active",
-      "last_pulled": "2026-09-11T18:09:11.463550427Z",
+      "last_pulled": "2026-09-10T14:26:41.037236236Z",
       "last_pushed": "2026-07-31T02:48:31.202528305Z"
     }
   ],
@@ -219,7 +219,7 @@
   "full_size": 46652868,
   "v2": true,
   "tag_status": "active",
-  "tag_last_pulled": "2026-09-11T18:31:25.815996276Z",
+  "tag_last_pulled": "2026-09-10T14:42:43.5699896Z",
   "tag_last_pushed": "2026-08-02T11:48:15.965715Z",
   "media_type": "application/vnd.oci.image.index.v1+json",
   "content_type": "image",

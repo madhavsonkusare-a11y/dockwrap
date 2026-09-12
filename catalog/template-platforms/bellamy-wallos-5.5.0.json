@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "bellamy/wallos:5.5.0",
+    "source_url": "https://hub.docker.com/v2/repositories/bellamy/wallos/tags/5.5.0",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-09-01",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm/v7",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:748793798693a14c9eb443ace51dba4911c0bf76d5f3575dc30cb0e5559a9102",
+      "linux/arm/v7": "sha256:0329c240f6c4e2ef30ef56a4cba236d2dee85c69e3bc073ef057891736f898a7",
+      "linux/arm64": "sha256:bb2d40e312c3832af54d45181e01ac04c8c7731ea86bd1378fb8160db9ae0870"
+    }
+  }
+}

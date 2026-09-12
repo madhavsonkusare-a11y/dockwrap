@@ -1,0 +1,66 @@
+{
+  "app": "huginn",
+  "passed": true,
+  "scope": "reviewed mapping, transaction, managed storage and first use, on one host and one architecture",
+  "promotion": "approved",
+  "source_revision": "d81999683947fb828a535300b3cdbf8f7ac6b589",
+  "images": [
+    "ghcr.io/huginn/huginn:v2026.09.09",
+    "mariadb:11.4.13"
+  ],
+  "image_ids": {
+    "ghcr.io/huginn/huginn:v2026.09.09": "sha256:0d31724e0ce578466d9f85057d26ad2c89635ee2adc0c940def96c5ab7bb2e9a",
+    "mariadb:11.4.13": "sha256:80494b9810694179889f7281ec44ca928241df577159c0356a1070e2e94616a1"
+  },
+  "first_use": "it opens a page with a clear next step, and the same page after a restart and reinstall",
+  "steps": [
+    {
+      "step": "pull ghcr.io/huginn/huginn:v2026.09.09",
+      "passed": true
+    },
+    {
+      "step": "pull mariadb:11.4.13",
+      "passed": true
+    },
+    {
+      "step": "installs with one action",
+      "passed": true
+    },
+    {
+      "step": "answers on its address",
+      "passed": true
+    },
+    {
+      "step": "is usable first install",
+      "passed": true
+    },
+    {
+      "step": "survives a restart",
+      "passed": true
+    },
+    {
+      "step": "is usable after restart",
+      "passed": true
+    },
+    {
+      "step": "reinstalls over data it kept",
+      "passed": true
+    },
+    {
+      "step": "keeps the credentials it generated",
+      "passed": true
+    },
+    {
+      "step": "is usable after a keep-data reinstall",
+      "passed": true
+    },
+    {
+      "step": "removes everything it created",
+      "passed": true
+    },
+    {
+      "step": "leaves other containers alone",
+      "passed": true
+    }
+  ]
+}

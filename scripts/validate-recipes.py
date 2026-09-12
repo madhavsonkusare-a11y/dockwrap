@@ -8,6 +8,7 @@ resolves the mapping here so the two are checked against each other.
 """
 import json
 import pathlib
+import re
 import subprocess
 import tempfile
 from urllib.parse import urlsplit
@@ -54,51 +55,62 @@ def published_port(config, name):
     return int(port["published"]), int(port["target"])
 
 
-with tempfile.TemporaryDirectory(prefix="local-store-recipes-") as directory:
-    target = pathlib.Path(directory)
-    for path in recipes:
-        recipe = json.loads(path.read_text(encoding="utf-8"))
-        name = recipe["id"]
+def validate_images(recipe, config):
+    digest = recipe["requirements"]["image_audit"]["index_digest"]
+    if not re.fullmatch(r"sha256:[0-9a-f]{64}", digest):
+        raise ValueError(f"{recipe['id']}: invalid reviewed image digest")
+    expected = f"{recipe['image']}@{digest}"
+    images = sorted(service["image"] for service in config["services"].values())
+    if images != [expected]:
+        raise ValueError(f"{recipe['id']}: expected reviewed image {expected!r}, got {images}")
 
-        if recipe["schema_version"] != SCHEMA_VERSION:
-            raise SystemExit(
-                f"{name}: schema_version {recipe['schema_version']},"
-                f" expected {SCHEMA_VERSION}"
-            )
 
-        config = resolved_config(recipe["compose"], target, name)
-        host_port, container_port = published_port(config, name)
+def main():
+    with tempfile.TemporaryDirectory(prefix="local-store-recipes-") as directory:
+        target = pathlib.Path(directory)
+        for path in recipes:
+            recipe = json.loads(path.read_text(encoding="utf-8"))
+            name = recipe["id"]
 
-        if host_port != recipe["host_port"]:
-            raise SystemExit(
-                f"{name}: manifest publishes {recipe['host_port']}"
-                f" but Compose publishes {host_port}"
-            )
-        if container_port != recipe["container_port"]:
-            raise SystemExit(
-                f"{name}: manifest container port {recipe['container_port']}"
-                f" but Compose targets {container_port}"
-            )
-
-        # The launcher opens and probes these; they must be the published port,
-        # never the port inside the container.
-        for field in ("launch_url", "health_url"):
-            address = urlsplit(recipe[field])
-            if (address.scheme != "http" or address.hostname not in ("localhost", "127.0.0.1", "::1")
-                    or address.port != host_port or address.username or address.password or address.fragment):
+            if recipe["schema_version"] != SCHEMA_VERSION:
                 raise SystemExit(
-                    f"{name}: {field} {recipe[field]!r} does not use"
-                    f" the published port {host_port}"
+                    f"{name}: schema_version {recipe['schema_version']},"
+                    f" expected {SCHEMA_VERSION}"
                 )
 
-        images = sorted(
-            definition["image"] for definition in config["services"].values()
-        )
-        if images != [recipe["image"]]:
-            raise SystemExit(
-                f"{name}: manifest image {recipe['image']!r}"
-                f" does not match Compose images {images}"
-            )
+            config = resolved_config(recipe["compose"], target, name)
+            host_port, container_port = published_port(config, name)
 
-        mapping = f"{host_port}->{container_port}"
-        print(f"validated {name} ({recipe['image']}) publishing {mapping}")
+            if host_port != recipe["host_port"]:
+                raise SystemExit(
+                    f"{name}: manifest publishes {recipe['host_port']}"
+                    f" but Compose publishes {host_port}"
+                )
+            if container_port != recipe["container_port"]:
+                raise SystemExit(
+                    f"{name}: manifest container port {recipe['container_port']}"
+                    f" but Compose targets {container_port}"
+                )
+
+            # The launcher opens and probes these; they must be the published port,
+            # never the port inside the container.
+            for field in ("launch_url", "health_url"):
+                address = urlsplit(recipe[field])
+                if (address.scheme != "http" or address.hostname not in ("localhost", "127.0.0.1", "::1")
+                        or address.port != host_port or address.username or address.password or address.fragment):
+                    raise SystemExit(
+                        f"{name}: {field} {recipe[field]!r} does not use"
+                        f" the published port {host_port}"
+                    )
+
+            try:
+                validate_images(recipe, config)
+            except ValueError as error:
+                raise SystemExit(str(error)) from error
+
+            mapping = f"{host_port}->{container_port}"
+            print(f"validated {name} ({recipe['image']}) publishing {mapping}")
+
+
+if __name__ == "__main__":
+    main()

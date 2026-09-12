@@ -1,0 +1,72 @@
+{
+  "app": "ghostfolio",
+  "passed": true,
+  "scope": "reviewed mapping, transaction, managed storage and first use, on one host and one architecture",
+  "promotion": "approved",
+  "source_revision": "55bad5a64628cea01142ca3af245a9d38425695a",
+  "images": [
+    "ghostfolio/ghostfolio:3.69.0",
+    "postgres:17.11",
+    "redis:7.4.11-alpine"
+  ],
+  "image_ids": {
+    "ghostfolio/ghostfolio:3.69.0": "sha256:66d56cb912901ff25afe82c593d080704b3658a24ee9692a7fe242a11c818d19",
+    "postgres:17.11": "sha256:67f41722b7a8cbdb868a44a4995c846eddfdc2973bccb291ce937dce88ad5675",
+    "redis:7.4.11-alpine": "sha256:ff02b58f971e7d7d156a1267e283fcbbeee91773b6aa36c49dac28ecfe28eadf"
+  },
+  "first_use": "it opens a page with a clear next step, and the same page after a restart and reinstall",
+  "steps": [
+    {
+      "step": "pull ghostfolio/ghostfolio:3.69.0",
+      "passed": true
+    },
+    {
+      "step": "pull postgres:17.11",
+      "passed": true
+    },
+    {
+      "step": "pull redis:7.4.11-alpine",
+      "passed": true
+    },
+    {
+      "step": "installs with one action",
+      "passed": true
+    },
+    {
+      "step": "answers on its address",
+      "passed": true
+    },
+    {
+      "step": "is usable first install",
+      "passed": true
+    },
+    {
+      "step": "survives a restart",
+      "passed": true
+    },
+    {
+      "step": "is usable after restart",
+      "passed": true
+    },
+    {
+      "step": "reinstalls over data it kept",
+      "passed": true
+    },
+    {
+      "step": "keeps the credentials it generated",
+      "passed": true
+    },
+    {
+      "step": "is usable after a keep-data reinstall",
+      "passed": true
+    },
+    {
+      "step": "removes everything it created",
+      "passed": true
+    },
+    {
+      "step": "leaves other containers alone",
+      "passed": true
+    }
+  ]
+}

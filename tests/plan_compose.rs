@@ -34,6 +34,8 @@ fn web_and_database() -> DeploymentPlan {
                     ("DATABASE_PORT".into(), "5432".into()),
                     ("DEBUG".into(), "false".into()),
                 ],
+                companion: None,
+                networks: Vec::new(),
                 published: Some(PublishedPort {
                     host: 8080,
                     container: 8080,
@@ -47,6 +49,8 @@ fn web_and_database() -> DeploymentPlan {
                 image: "example/postgres:16.2".into(),
                 digest: None,
                 environment: vec![("POSTGRES_DB".into(), "app".into())],
+                companion: None,
+                networks: Vec::new(),
                 published: None,
                 mounts: vec![PlanMount::Volume {
                     name: "db-data".into(),
@@ -58,6 +62,7 @@ fn web_and_database() -> DeploymentPlan {
             },
         ],
         named_volumes: vec!["db-data".into()],
+        internal_networks: Vec::new(),
     }
 }
 

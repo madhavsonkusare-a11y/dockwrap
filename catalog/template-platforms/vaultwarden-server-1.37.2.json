@@ -12,7 +12,7 @@
       "os_version": null,
       "size": 87431558,
       "status": "active",
-      "last_pulled": "2026-09-11T18:30:56.374132942Z",
+      "last_pulled": "2026-09-10T14:29:02.944914036Z",
       "last_pushed": "2026-08-22T12:20:32.468012023Z"
     },
     {
@@ -25,7 +25,7 @@
       "os_version": null,
       "size": 87324451,
       "status": "active",
-      "last_pulled": "2026-09-11T18:35:49.699141353Z",
+      "last_pulled": "2026-09-10T14:25:03.302997448Z",
       "last_pushed": "2026-08-22T12:18:34.63754789Z"
     },
     {
@@ -38,7 +38,7 @@
       "os_version": null,
       "size": 83100701,
       "status": "active",
-      "last_pulled": "2026-09-11T18:27:03.532257835Z",
+      "last_pulled": "2026-09-10T14:32:26.181292528Z",
       "last_pushed": "2026-08-22T12:20:18.354629777Z"
     },
     {
@@ -51,7 +51,7 @@
       "os_version": null,
       "size": 85296265,
       "status": "active",
-      "last_pulled": "2026-09-11T18:26:57.669220866Z",
+      "last_pulled": "2026-09-10T14:26:58.413333397Z",
       "last_pushed": "2026-08-22T12:20:35.210472408Z"
     }
   ],
@@ -63,7 +63,7 @@
   "full_size": 87431558,
   "v2": true,
   "tag_status": "active",
-  "tag_last_pulled": "2026-09-11T18:35:49.699141353Z",
+  "tag_last_pulled": "2026-09-10T14:32:26.181292528Z",
   "tag_last_pushed": "2026-08-22T12:21:20.450909Z",
   "media_type": "application/vnd.oci.image.index.v1+json",
   "content_type": "image",

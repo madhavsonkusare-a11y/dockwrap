@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "kanboard/kanboard:v1.2.54",
+    "source_url": "https://hub.docker.com/v2/repositories/kanboard/kanboard/tags/v1.2.54",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-08-29",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm/v6",
+      "linux/arm/v7",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:d615d97b5025ab4b8a15772391f0b910d9f2a0c623ec3becde44de8405432b7e",
+      "linux/arm/v6": "sha256:520d4d83db42f21f2a39d62c6bf7a661570f9da8240541d787fdc1d30202ea43",
+      "linux/arm/v7": "sha256:c90b00b57bc2dffea0386ddcf80177214c7c8469e3fffff430dcbe140b442537",
+      "linux/arm64": "sha256:660c8667a0a77842df55c914a7cf8ec183f8e6d065b9af2587c51a9fe5201ce9"
+    }
+  }
+}

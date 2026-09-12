@@ -9,6 +9,7 @@
   "source_url": "https://github.com/kanboard/kanboard",
   "documentation_url": "https://kanboard.org/",
   "verified_at": "2026-09-10",
+  "version": "v1.2.54",
   "lifecycle_proof": "docs/evidence/kanboard-qualification.json",
   "origin": {
     "importer": "runtipi",

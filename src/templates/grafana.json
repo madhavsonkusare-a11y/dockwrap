@@ -9,6 +9,7 @@
   "source_url": "https://github.com/grafana/grafana",
   "documentation_url": "https://grafana.com/",
   "verified_at": "2026-09-11",
+  "version": "13.0.2",
   "lifecycle_proof": "docs/evidence/grafana-qualification.json",
   "origin": {
     "importer": "runtipi",

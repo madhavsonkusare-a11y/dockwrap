@@ -1,0 +1,50 @@
+{
+  "id": "flowise",
+  "name": "Flowise",
+  "version": "3.1.4",
+  "source": "https://github.com/FlowiseAI/Flowise",
+  "website": "https://flowiseai.com",
+  "documentation": "https://docs.flowiseai.com/getting-started#docker",
+  "short_desc": "Build AI agents and chat flows by dragging nodes together.",
+  "categories": [
+    "Artificial Intelligence"
+  ],
+  "license": "Apache-2.0 (enterprise folder under a commercial licence)",
+  "form_fields": [
+    {
+      "type": "random",
+      "label": "Database password",
+      "min": 32,
+      "max": 32,
+      "env_variable": "FLOWISE_DB_PASSWORD"
+    },
+    {
+      "type": "random",
+      "label": "Session token secret",
+      "min": 48,
+      "max": 48,
+      "env_variable": "FLOWISE_JWT_SECRET"
+    },
+    {
+      "type": "random",
+      "label": "Refresh token secret",
+      "min": 48,
+      "max": 48,
+      "env_variable": "FLOWISE_JWT_REFRESH_SECRET"
+    },
+    {
+      "type": "random",
+      "label": "Cookie session secret",
+      "min": 48,
+      "max": 48,
+      "env_variable": "FLOWISE_SESSION_SECRET"
+    },
+    {
+      "type": "random",
+      "label": "Token hashing secret",
+      "min": 48,
+      "max": 48,
+      "env_variable": "FLOWISE_TOKEN_HASH_SECRET"
+    }
+  ]
+}

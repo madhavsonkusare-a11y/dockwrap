@@ -9,6 +9,7 @@
   "source_url": "https://github.com/ellite/wallos",
   "documentation_url": "https://wallosapp.com",
   "verified_at": "2026-09-10",
+  "version": "5.5.0",
   "lifecycle_proof": "docs/evidence/wallos-qualification.json",
   "origin": {
     "importer": "runtipi",

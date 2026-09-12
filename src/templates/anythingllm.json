@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "id": "anythingllm",
+  "display_name": "AnythingLLM",
+  "catalog_name": "AnythingLLM",
+  "description": "Chat with your documents and run AI agents privately, using any model.",
+  "category": "Artificial Intelligence",
+  "license": "MIT",
+  "source_url": "https://github.com/Mintplex-Labs/anything-llm",
+  "documentation_url": "https://docs.anythingllm.com/installation-docker/local-docker",
+  "verified_at": "2026-09-11",
+  "version": "1.16.1",
+  "lifecycle_proof": "docs/evidence/anythingllm-qualification.json",
+  "origin": {
+    "importer": "runtipi",
+    "repository": "madhavsonkusare-a11y/local-store",
+    "revision": "924357fde8f7d4e414e5cae241b1e137f5f60038",
+    "path": "definitions/apps/anythingllm/docker-compose.json",
+    "license": "MIT"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "mintplexlabs/anythingllm:1.16.1",
+        "source_url": "https://hub.docker.com/v2/repositories/mintplexlabs/anythingllm/tags/1.16.1",
+        "checked_at": "2026-09-11",
+        "last_updated": "2026-08-27",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:b7b570b8bfc0bd2a64097439524a38542784eea03522db9d30256f5e711f52fc",
+          "linux/arm64": "sha256:e08b510ca44e43605d50dc86241275f36bb92d56e41a99122017d33b75b13aab"
+        },
+        "index_digest": "sha256:05617e7bece7fd6eddc4f5b4176cd87fff74d7da88d988a6109b95481cce122c"
+      }
+    ]
+  },
+  "promotion": {
+    "state": "approved",
+    "reason": "Approved by the owner. Qualified as offered on 2026-09-11: a real install of AnythingLLM 1.16.1, upstream's current release proved it starts, opens to a first screen with a clear next step, survives a restart and a keep-data reinstall with its data and generated credentials intact, and removes everything it created. Local Store wrote this definition from the project's own deployment instructions."
+  },
+  "data_storage": "Local Store managed folder / anythingllm",
+  "risk_notes": [
+    "Creates 1 Docker container and publishes one port on this computer's loopback interface only.",
+    "Generates 1 credential of its own, keeps it beside the app's data, and reuses it if you reinstall.",
+    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Written by Local Store from the project's own deployment instructions, not taken from an app store.",
+    "Asks on first open which model to use — a local one through Ollama, or a provider's API key, which it keeps in its data folder.",
+    "Single-user and open by default: anyone who can reach the address can use it until you turn on password protection in its settings.",
+    "Local Store does not grant the SYS_ADMIN capability upstream suggests for the browser AnythingLLM uses to read websites as documents; if adding a website fails, that is why."
+  ],
+  "fields": {},
+  "definition": "{\n  \"schemaVersion\": 2,\n  \"$schema\": \"https://schemas.runtipi.io/v2/dynamic-compose.json\",\n  \"services\": [\n    {\n      \"name\": \"anythingllm\",\n      \"image\": \"mintplexlabs/anythingllm:1.16.1\",\n      \"isMain\": true,\n      \"internalPort\": 3001,\n      \"environment\": [\n        {\n          \"key\": \"STORAGE_DIR\",\n          \"value\": \"/app/server/storage\"\n        },\n        {\n          \"key\": \"JWT_SECRET\",\n          \"value\": \"${ANYTHINGLLM_JWT_SECRET}\"\n        },\n        {\n          \"key\": \"DISABLE_TELEMETRY\",\n          \"value\": \"true\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/storage\",\n          \"containerPath\": \"/app/server/storage\"\n        },\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/.env\",\n          \"containerPath\": \"/app/server/.env\"\n        }\n      ]\n    }\n  ]\n}\n",
+  "config": {
+    "path": "definitions/apps/anythingllm/config.json",
+    "content": "{\n  \"id\": \"anythingllm\",\n  \"name\": \"AnythingLLM\",\n  \"version\": \"1.16.1\",\n  \"source\": \"https://github.com/Mintplex-Labs/anything-llm\",\n  \"website\": \"https://anythingllm.com\",\n  \"documentation\": \"https://docs.anythingllm.com/installation-docker/local-docker\",\n  \"short_desc\": \"Chat with your documents and run AI agents privately, using any model.\",\n  \"categories\": [\n    \"Artificial Intelligence\"\n  ],\n  \"license\": \"MIT\",\n  \"form_fields\": [\n    {\n      \"type\": \"random\",\n      \"label\": \"Session signing secret\",\n      \"min\": 48,\n      \"max\": 48,\n      \"env_variable\": \"ANYTHINGLLM_JWT_SECRET\"\n    }\n  ]\n}\n"
+  },
+  "seeds": [
+    {
+      "path": "data/.env",
+      "content": ""
+    }
+  ]
+}

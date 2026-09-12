@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "ghcr.io/tandoorrecipes/recipes:2.6.15",
+    "source_url": "https://ghcr.io/v2/tandoorrecipes/recipes/manifests/2.6.15",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-09-07",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:187871639d9ca05cfb17c248d432518cd51d1bc57afbdada744f7e2857c3127c",
+      "linux/arm64": "sha256:9aac7d7c8cc71dab1bb9c5d9202cb0e2b758d6578a4418d64d097e5bba7fed31"
+    }
+  }
+}

@@ -9,8 +9,8 @@ and no app becomes a reviewed recipe by appearing in this table.
 | Result | Apps |
 | --- | --- |
 | Definitions read | 250 |
-| Fully expressible as a plan today | 113 |
-| Blocked by at least one limitation | 137 |
+| Fully expressible as a plan today | 114 |
+| Blocked by at least one limitation | 136 |
 
 A blocked app is not a rejected app. Every row below is a named gap, and
 the ones marked *not modelled* or *needs input* are the work queue for the
@@ -20,9 +20,9 @@ remaining phase 2 features.
 
 | Category | Feature | Apps | Examples |
 | --- | --- | --- | --- |
-| not modelled | `addPorts` | 31 | bitcoind, bitmagnet, chatgpt-ui |
+| not modelled | `addPorts` | 28 | bitcoind, bitmagnet, crafty |
 | refused | `host path` | 27 | budibase, code-server, cross-seed |
-| refused | `plan policy` | 23 | bookstack, chatpad, codex-docs |
+| refused | `plan policy` | 24 | bookstack, chatpad, codex-docs |
 | not modelled | `internalPort` | 19 | cloudflare-ddns, cross-seed, electrs |
 | not modelled | `healthCheck` | 17 | bitmagnet, invidious, kimai |
 | not modelled | `user` | 14 | bitcoind, cross-seed, electrs |
@@ -44,7 +44,6 @@ remaining phase 2 features.
 | not modelled | `main service` | 2 | duckdns, electrs |
 | refused | `pid` | 2 | glances, netdata |
 | not modelled | `shmSize` | 1 | mastodon |
-| not modelled | `stopSignal` | 1 | penpot |
 | not modelled | `ulimits` | 1 | rsshub |
 | not modelled | `workingDir` | 1 | photoprism |
 | refused | `capDrop` | 1 | invidious |
@@ -68,6 +67,7 @@ need an upstream change or a different source, not more of this importer.
 | ddns-updater | 1 | 8000 | 0 | 0 |
 | docmost | 3 | 3000 | 0 | 2 |
 | dokuwiki | 1 | 8080 | 1 | 0 |
+| eclipse-mosquitto | 2 | 8088 | 3 | 0 |
 | email-oauth2-proxy | 1 | 8080 | 0 | 0 |
 | emby | 1 | 8096 | 2 | 0 |
 | firefly-iii-data-importer | 1 | 8080 | 4 | 0 |

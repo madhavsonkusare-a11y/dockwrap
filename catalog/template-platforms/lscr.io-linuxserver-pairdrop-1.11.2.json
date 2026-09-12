@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "lscr.io/linuxserver/pairdrop:1.11.2",
+    "source_url": "https://lscr.io/v2/linuxserver/pairdrop/manifests/1.11.2",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-08-01",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:ab104ed76aae9b4e57e2b1b0a8304c0836c9ca34ba95f8959a228e8dc248f3ea",
+      "linux/arm64": "sha256:562c48f55e68416f04a71abdeb1e719ed07966584722a34f1aa2b317e4c11871"
+    }
+  }
+}

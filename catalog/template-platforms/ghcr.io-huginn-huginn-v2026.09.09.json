@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "ghcr.io/huginn/huginn:v2026.09.09",
+    "source_url": "https://ghcr.io/v2/huginn/huginn/manifests/v2026.09.09",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-09-08",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:f696da2301fbdecd6d254886516ad95b78585858c7501903aa20016ea9364ff2",
+      "linux/arm64": "sha256:31badd57e165a4a80db3fc51b441f6ea6d1fb0e0d3fb179bbddfa4748dccd209"
+    }
+  }
+}

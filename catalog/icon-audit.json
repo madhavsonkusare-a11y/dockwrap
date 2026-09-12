@@ -1,5 +1,5 @@
 {
-  "catalog_entries": 1673,
+  "catalog_entries": 1678,
   "coverage_percent": 100.0,
   "duplicate_upstream_groups": [
     {
@@ -69,10 +69,10 @@
   "extra": [],
   "format_counts": {
     "png": 166,
-    "svg": 1507
+    "svg": 1512
   },
   "missing": [],
-  "resolved_icons": 1673,
+  "resolved_icons": 1678,
   "reviewed_alias_matches": [
     {
       "id": "actual",
@@ -361,7 +361,7 @@
   "source_counts": {
     "coolify": 81,
     "homarr-dashboard-icons": 669,
-    "local-store-monogram": 914,
+    "local-store-monogram": 919,
     "paperclip": 1,
     "umbrel-apps-gallery": 8
   },

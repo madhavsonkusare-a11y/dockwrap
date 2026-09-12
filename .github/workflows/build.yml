@@ -5,7 +5,7 @@ on:
     branches: [main]
     tags: ["v*"]
   pull_request:
-    branches: [main]
+    # Stacked PRs need checks before their base branch reaches main too.
 
 permissions:
   contents: read
@@ -17,6 +17,10 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v5
+        with:
+          # First-party catalog provenance uses the commit that last changed
+          # each definition; a shallow checkout reports the merge commit.
+          fetch-depth: 0
       - name: Install Tauri Linux dependencies
         run: |
           sudo apt-get update
@@ -38,6 +42,8 @@ jobs:
         run: |
           python scripts/test_catalog.py
           python scripts/test_recipe_platforms.py
+          python scripts/test_validate_recipes.py
+          python scripts/test_template_platforms.py
           python scripts/check-recipe-platforms.py
           python scripts/check-template-platforms.py
           python scripts/test_release.py

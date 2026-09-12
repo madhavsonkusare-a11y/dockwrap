@@ -1,0 +1,14 @@
+{
+  "id": "sillytavern",
+  "name": "SillyTavern",
+  "version": "1.18.0",
+  "source": "https://github.com/SillyTavern/SillyTavern",
+  "website": "https://sillytavern.app",
+  "documentation": "https://docs.sillytavern.app/installation/docker/",
+  "short_desc": "A front end for chatting and roleplaying with AI models and characters.",
+  "categories": [
+    "Artificial Intelligence"
+  ],
+  "license": "AGPL-3.0",
+  "form_fields": []
+}

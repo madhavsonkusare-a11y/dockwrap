@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0",
+    "source_url": "https://ghcr.io/v2/immich-app/postgres/manifests/14-vectorchord0.3.0-pgvectors0.2.0",
+    "checked_at": "2026-09-12",
+    "last_updated": "2025-10-07",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:49423013b51ad309f0a42a8179cdeff504faa14d32dbd57749d65e143ca6f23a",
+      "linux/arm64": "sha256:ef900bbbf968d712d586f197b2f12d966247030cf44b012e1ec7e3d75ae5d317"
+    }
+  }
+}

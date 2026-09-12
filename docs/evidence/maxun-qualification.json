@@ -1,0 +1,84 @@
+{
+  "app": "maxun",
+  "passed": true,
+  "scope": "reviewed mapping, transaction, managed storage and first use, on one host and one architecture",
+  "promotion": "approved",
+  "source_revision": "70fcf4e509fbc473997995cf5c4ec29fac3ae378",
+  "images": [
+    "getmaxun/maxun-frontend:v0.0.58",
+    "getmaxun/maxun-backend:v0.0.62",
+    "getmaxun/maxun-browser:v0.0.2",
+    "postgres:17.11",
+    "rustfs/rustfs:1.0.0-rc.6"
+  ],
+  "image_ids": {
+    "getmaxun/maxun-backend:v0.0.62": "sha256:73f44ce1e4306f12aefe6052feb9dd53573887650746b32717dc324e6b4a38e7",
+    "getmaxun/maxun-browser:v0.0.2": "sha256:8d78aff8d2d28d0fcefb9609c8326ccceb495149b4f79b6e178f5df2f0d24271",
+    "getmaxun/maxun-frontend:v0.0.58": "sha256:baaa78fd027d35a63c3fd73b92f564ec26f2421704e1b2cba06be885d52a5c00",
+    "postgres:17.11": "sha256:67f41722b7a8cbdb868a44a4995c846eddfdc2973bccb291ce937dce88ad5675",
+    "rustfs/rustfs:1.0.0-rc.6": "sha256:97171b3d72cd47dc81000f92ea84de25608bfc35a94c965501afaeb5d99f6035"
+  },
+  "first_use": "it opens a page with a clear next step, the same page after a restart and reinstall, and scripts/companion-probe.mjs passed",
+  "steps": [
+    {
+      "step": "pull getmaxun/maxun-frontend:v0.0.58",
+      "passed": true
+    },
+    {
+      "step": "pull getmaxun/maxun-backend:v0.0.62",
+      "passed": true
+    },
+    {
+      "step": "pull getmaxun/maxun-browser:v0.0.2",
+      "passed": true
+    },
+    {
+      "step": "pull postgres:17.11",
+      "passed": true
+    },
+    {
+      "step": "pull rustfs/rustfs:1.0.0-rc.6",
+      "passed": true
+    },
+    {
+      "step": "installs with one action",
+      "passed": true
+    },
+    {
+      "step": "answers on its address",
+      "passed": true
+    },
+    {
+      "step": "is usable first install",
+      "passed": true
+    },
+    {
+      "step": "survives a restart",
+      "passed": true
+    },
+    {
+      "step": "is usable after restart",
+      "passed": true
+    },
+    {
+      "step": "reinstalls over data it kept",
+      "passed": true
+    },
+    {
+      "step": "keeps the credentials it generated",
+      "passed": true
+    },
+    {
+      "step": "is usable after a keep-data reinstall",
+      "passed": true
+    },
+    {
+      "step": "removes everything it created",
+      "passed": true
+    },
+    {
+      "step": "leaves other containers alone",
+      "passed": true
+    }
+  ]
+}

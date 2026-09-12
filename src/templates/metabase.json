@@ -9,6 +9,7 @@
   "source_url": "https://github.com/metabase/metabase",
   "documentation_url": "https://metabase.com/",
   "verified_at": "2026-09-10",
+  "version": "v0.63.16",
   "lifecycle_proof": "docs/evidence/metabase-qualification.json",
   "origin": {
     "importer": "runtipi",

@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "ghcr.io/simstudioai/realtime:v0.8.33",
+    "source_url": "https://ghcr.io/v2/simstudioai/realtime/manifests/v0.8.33",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-09-11",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:8639dc1f5cfe28490608dcb7e6e8c6c23cbfce9688c33b49662862ea43ac6fc7",
+      "linux/arm64": "sha256:4fb3047be848adb239fbba401031add7ffd98df7999336a16624c34a428e49a4"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "index.docker.io/activepieces/activepieces:0.12.2",
+    "source_url": "https://index.docker.io/v2/activepieces/activepieces/manifests/0.12.2",
+    "checked_at": "2026-09-12",
+    "last_updated": "2023-11-01",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:702de1258b51a2883d72af61f58092e3667f93bfe1ec7788fde2ce394746c9e3",
+      "linux/arm64": "sha256:c9faeb97bad5cab0bcaa58fba19ee00ce4c0fb08ceda8b5dcef06af1752b705c"
+    }
+  }
+}

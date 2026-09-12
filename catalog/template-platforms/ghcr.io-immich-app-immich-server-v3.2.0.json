@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "ghcr.io/immich-app/immich-server:v3.2.0",
+    "source_url": "https://ghcr.io/v2/immich-app/immich-server/manifests/v3.2.0",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-09-10",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:949bbf9ff32543539f471bc275437e6d1a1a4fee43c55bb9e4c06b946909bf1c",
+      "linux/arm64": "sha256:f3434155522178f6afeb30cbe298181844e4973c1e08871557120b31eaba960b"
+    }
+  }
+}

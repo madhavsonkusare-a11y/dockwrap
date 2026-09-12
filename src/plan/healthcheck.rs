@@ -50,7 +50,8 @@ mod tests {
             json!({"test":["CMD-SHELL","exit", "0"]}),
             json!({"test":["NONE", "private"]}),
             json!({"test":"echo $PRIVATE"}),
-            json!({"test":"echo $$PRIVATE"}),
+            json!({"test":"echo ${PRIVATE}"}),
+            json!({"test":"echo $$cap_private"}),
             json!({"test":"echo\nprivate"}),
             json!({"test":["CMD", 3]}),
             json!({"interval":"-1s"}),
@@ -63,6 +64,12 @@ mod tests {
             let error = PlanHealthcheck::from_compose(&input).unwrap_err();
             assert!(!error.contains("PRIVATE") && !error.contains("private"));
         }
+        // What `$$` is actually for: the container's own shell expands it,
+        // from the environment the plan gives it. Vikunja and Tandoor check
+        // their databases with `pg_isready -U $$POSTGRES_USER`.
+        let escaped = json!({"test": "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"});
+        PlanHealthcheck::from_compose(&escaped)
+            .expect("an escaped dollar is a container-side expansion");
     }
 }
 
@@ -143,10 +150,25 @@ impl PlanHealthcheck {
             }
             _ => vec![],
         };
-        // Setup currently resolves environment only. Refuse expressions here
-        // rather than freezing a secret or confusing Compose/container expansion.
-        if parts.iter().any(|p| p.contains('$')) {
-            return Err("Healthcheck variable expansion is not modelled".into());
+        // `$$NAME` is Compose's escape for a literal dollar: the container's
+        // own shell expands it, from the environment this plan gives it, which
+        // is how `pg_isready -U $$POSTGRES_USER` is meant to work. A single
+        // `$` is Compose's own interpolation or a setup placeholder — neither
+        // is filled here, so both stay refused.
+        for part in &parts {
+            // CapRover's own variables are written `$$cap_name` and are
+            // resolved before this: one that survives is an unfilled
+            // placeholder, often a password, not a shell expansion.
+            if part.contains("$$cap_") {
+                return Err("Healthcheck variable expansion is not modelled".into());
+            }
+            let mut rest = *part;
+            while let Some(at) = rest.find('$') {
+                match rest[at..].strip_prefix("$$") {
+                    Some(after) => rest = after,
+                    None => return Err("Healthcheck variable expansion is not modelled".into()),
+                }
+            }
         }
         let duration =
             regex::Regex::new(r"^(?:[0-9]{1,6}(?:\.[0-9]{1,6})?(?:ns|us|ms|s|m|h)){1,8}$").unwrap();

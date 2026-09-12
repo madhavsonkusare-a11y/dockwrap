@@ -26,6 +26,7 @@ import argparse
 import datetime
 import hashlib
 import json
+import os
 import re
 import subprocess
 import time
@@ -270,7 +271,12 @@ def facts_for(candidate):
         raise SystemExit(f"{path} is missing; run scripts/extract-definitions.py first")
     # Prefer the built binary. Going through `cargo run` takes the build lock,
     # which fights a batch running in another window and fails to link.
+    # Builds may live off this drive (CARGO_TARGET_DIR), so Docker's disk and
+    # cargo's output do not fill the same one.
+    target = Path(os.environ.get("CARGO_TARGET_DIR") or ROOT / "target")
     built = [
+        target / "release" / "examples" / "template_facts.exe",
+        target / "debug" / "examples" / "template_facts.exe",
         ROOT / "target" / "release" / "examples" / "template_facts.exe",
         ROOT / "target" / "debug" / "examples" / "template_facts.exe",
         ROOT / "target" / "release" / "examples" / "template_facts",
@@ -309,10 +315,26 @@ def data_storage(facts, app):
 def risk_notes(facts, catalog):
     notes = []
     services = facts["services"]
+    ports = 1 + len(facts.get("companion_ports", []))
+    counted = "one port" if ports == 1 else f"{ports} ports"
     notes.append(
-        f"Creates {services} Docker container{'s' if services != 1 else ''} and publishes one "
-        "port on this computer's loopback interface only."
+        f"Creates {services} Docker container{'s' if services != 1 else ''} and publishes "
+        f"{counted} on this computer's loopback interface only."
     )
+    # Said, because nobody would guess it: the app's own pages call these
+    # directly, so they are addresses on this computer like the main one.
+    for companion in facts.get("companion_ports", []):
+        notes.append(
+            f"Its {companion['service']} service answers on a second loopback address, which "
+            "the app's own pages call directly. Local Store opens only the main one."
+        )
+    jobs = facts.get("jobs", [])
+    if jobs:
+        named = ", ".join(jobs)
+        notes.append(
+            f"Runs {named} once each time it starts, and starts the app only if "
+            f"{'it succeeds' if len(jobs) == 1 else 'they succeed'}."
+        )
     if facts["shared_folders"]:
         notes.append(
             "Reads and writes a folder on this computer that you choose during setup. Nothing "
@@ -380,12 +402,19 @@ def catalog_entry(catalog, app):
     """
     wanted = app.replace("-", "").replace("_", "").replace(" ", "").casefold()
 
-    def names(entry):
-        return [entry["id"], entry.get("name", ""), *entry.get("aliases", [])]
+    def matches(value):
+        return value.replace("-", "").replace("_", "").replace(" ", "").casefold() == wanted
 
-    for entry in catalog["entries"]:
-        for name in names(entry):
-            if name.replace("-", "").replace("_", "").replace(" ", "").casefold() == wanted:
+    # An id first, then a display name, then an alias. Aliases collide: Open
+    # WebUI is an alias of "Ollama With Open Webui", whose entry was returned
+    # for `open-webui` — with that app's name, description and icon.
+    for pick in (
+        lambda entry: matches(entry["id"]),
+        lambda entry: matches(entry.get("name", "")),
+        lambda entry: any(matches(alias) for alias in entry.get("aliases", [])),
+    ):
+        for entry in catalog["entries"]:
+            if pick(entry):
                 return entry
     return None
 

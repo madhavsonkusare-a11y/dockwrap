@@ -1,5 +1,10 @@
 # One-click catalog and GitHub installation roadmap
 
+September 9 backend continuation: use the
+[app-coverage execution plan](backend-app-coverage-plan.md) for the next batches.
+It incorporates the current code, measured importer blockers and a pinned Umbrel
+architecture review. This document retains the original product direction.
+
 Product direction agreed September 7, 2026: make catalog apps usable with one
 click, expand installable coverage, and support installing a project from its
 GitHub URL. This extends the original 33-task reliability plan; completing that

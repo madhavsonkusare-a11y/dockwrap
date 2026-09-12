@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "busybox:1.37.0",
+    "source_url": "https://hub.docker.com/v2/repositories/library/busybox/tags/1.37.0",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-07-31",
+    "container_platforms": [
+      "linux/386",
+      "linux/amd64",
+      "linux/arm/v5",
+      "linux/arm/v6",
+      "linux/arm/v7",
+      "linux/arm64/v8",
+      "linux/ppc64le",
+      "linux/riscv64",
+      "linux/s390x"
+    ],
+    "digests": {
+      "linux/386": "sha256:997af562a34229174bedf1251ca74617f6d94efaf47185b02729d18d2f029762",
+      "linux/amd64": "sha256:7a3ebe5bfd1a4a19797d20b0c0bb39d44393e9a03fd852c0865b0f540d868df0",
+      "linux/arm/v5": "sha256:5d2325ea84c2a87f0a2b458bdd0b00e0c92f943e43da3a0a67a8747d849afcf4",
+      "linux/arm/v6": "sha256:29492ed9f30d27b25a7359f6169dbca442558e6867307545f8fbdd3327b0c8f4",
+      "linux/arm/v7": "sha256:1b6e712c3df4b11a7225ab617d2eef0ee2b18cdcc447e5d5fe2942622db098f7",
+      "linux/arm64/v8": "sha256:f10e809bcf667d8e9f01d2baf82869049a495cd448cdfe1f4dee94078b960ae9",
+      "linux/ppc64le": "sha256:145d7e42c57a8cc8942c50f014a498891bad4aaa6b2b1e3849fd136e1486b334",
+      "linux/riscv64": "sha256:697002fed293bbdfef8be5c3a924067421105d682e0111971b6685da35e98961",
+      "linux/s390x": "sha256:fe469cb991ec2f7cd0e1cdb4a37de5292297c9875225ab23418cd37e15514868"
+    }
+  }
+}

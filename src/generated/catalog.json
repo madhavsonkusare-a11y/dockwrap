@@ -2798,6 +2798,12 @@
           "source": "legacy",
           "upstream_id": "AnythingLLM",
           "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/52a36e45fbd403c1c1348f200105d9e31be2bc3c/src/catalog_full.json"
+        },
+        {
+          "revision": "924357fde8f7d4e414e5cae241b1e137f5f60038",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/anythingllm",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/924357fde8f7d4e414e5cae241b1e137f5f60038/definitions/apps/anythingllm/config.json"
         }
       ],
       "tags": [
@@ -2813,6 +2819,7 @@
         " rag",
         " team",
         "AI",
+        "Artificial Intelligence",
         "Generative Artificial Intelligence (GenAI)",
         "ai",
         "lowcode"
@@ -5291,6 +5298,39 @@
       "warning": false,
       "web_ui": false,
       "website_url": "https://github.com/knrdl/bicimon"
+    },
+    {
+      "aliases": [
+        "Big-AGI"
+      ],
+      "architectures": [],
+      "archived": false,
+      "category": "Artificial Intelligence",
+      "description": "A chat interface for many AI models at once, with personas, voice and multi-model replies.",
+      "icon": "assets/catalog/big-agi.svg",
+      "id": "big-agi",
+      "licenses": [
+        "MIT"
+      ],
+      "maintenance": "tracked",
+      "name": "Big-AGI",
+      "platforms": [],
+      "source_url": "https://github.com/enricoros/big-AGI",
+      "sources": [
+        {
+          "revision": "924357fde8f7d4e414e5cae241b1e137f5f60038",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/big-agi",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/924357fde8f7d4e414e5cae241b1e137f5f60038/definitions/apps/big-agi/config.json"
+        }
+      ],
+      "tags": [
+        "Artificial Intelligence"
+      ],
+      "updated_at": null,
+      "warning": false,
+      "web_ui": true,
+      "website_url": "https://big-agi.com"
     },
     {
       "aliases": [
@@ -13139,7 +13179,8 @@
       "id": "dify-ai",
       "licenses": [
         "Apache-2.0",
-        "Commons-Clause"
+        "Commons-Clause",
+        "Dify Open Source License"
       ],
       "maintenance": "tracked",
       "name": "Dify.ai",
@@ -13165,6 +13206,12 @@
           "source": "coolify",
           "upstream_id": "templates/compose/dify.yaml",
           "url": "https://github.com/coollabsio/coolify/blob/08f68016dd342fe944564f79969f4ceceddc88d6/templates/compose/dify.yaml"
+        },
+        {
+          "revision": "cd180bc51b815f73ad64f541794fdbc5d3e65e73",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/dify",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/cd180bc51b815f73ad64f541794fdbc5d3e65e73/definitions/apps/dify/config.json"
         }
       ],
       "tags": [
@@ -13180,6 +13227,7 @@
         " redis",
         " weaviate",
         "AI",
+        "Artificial Intelligence",
         "Software Development - Low Code",
         "ai"
       ],
@@ -20448,7 +20496,9 @@
       "description": "Build LLM Apps Easily",
       "icon": "assets/catalog/flowise-ai.svg",
       "id": "flowise-ai",
-      "licenses": [],
+      "licenses": [
+        "Apache-2.0 (enterprise folder under a commercial licence)"
+      ],
       "maintenance": "tracked",
       "name": "Flowise AI",
       "platforms": [],
@@ -20465,10 +20515,17 @@
           "source": "casaos",
           "upstream_id": "Apps/FlowiseAi/docker-compose.yml",
           "url": "https://github.com/IceWhaleTech/CasaOS-AppStore/blob/2e8aec47d7d139363488372cb1fc6826010138fe/Apps/FlowiseAi/docker-compose.yml"
+        },
+        {
+          "revision": "484d934c006b0e276c9949ce89a868fad3c9f257",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/flowise",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/484d934c006b0e276c9949ce89a868fad3c9f257/definitions/apps/flowise/config.json"
         }
       ],
       "tags": [
         "AI",
+        "Artificial Intelligence",
         "ai",
         "automation"
       ],
@@ -22987,6 +23044,12 @@
           "source": "legacy",
           "upstream_id": "Ghostfolio",
           "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/52a36e45fbd403c1c1348f200105d9e31be2bc3c/src/catalog_full.json"
+        },
+        {
+          "revision": "55bad5a64628cea01142ca3af245a9d38425695a",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/ghostfolio",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/55bad5a64628cea01142ca3af245a9d38425695a/definitions/apps/ghostfolio/config.json"
         }
       ],
       "tags": [
@@ -27410,6 +27473,12 @@
           "source": "legacy",
           "upstream_id": "Huginn",
           "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/52a36e45fbd403c1c1348f200105d9e31be2bc3c/src/catalog_full.json"
+        },
+        {
+          "revision": "d81999683947fb828a535300b3cdbf8f7ac6b589",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/huginn",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/d81999683947fb828a535300b3cdbf8f7ac6b589/definitions/apps/huginn/config.json"
         }
       ],
       "tags": [
@@ -27417,7 +27486,7 @@
       ],
       "updated_at": "2026-08-29",
       "warning": false,
-      "web_ui": false,
+      "web_ui": true,
       "website_url": "https://github.com/huginn/huginn"
     },
     {
@@ -30981,14 +31050,21 @@
           "source": "legacy",
           "upstream_id": "Khoj",
           "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/52a36e45fbd403c1c1348f200105d9e31be2bc3c/src/catalog_full.json"
+        },
+        {
+          "revision": "a333806252ca303c76836a28d64085dec5f2c637",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/khoj",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/a333806252ca303c76836a28d64085dec5f2c637/definitions/apps/khoj/config.json"
         }
       ],
       "tags": [
+        "Artificial Intelligence",
         "Generative Artificial Intelligence (GenAI)"
       ],
       "updated_at": "2026-08-02",
       "warning": false,
-      "web_ui": false,
+      "web_ui": true,
       "website_url": "https://khoj.dev/"
     },
     {
@@ -31660,6 +31736,39 @@
     },
     {
       "aliases": [
+        "Kotaemon"
+      ],
+      "architectures": [],
+      "archived": false,
+      "category": "Artificial Intelligence",
+      "description": "Chat with your documents: a clean RAG interface for any model.",
+      "icon": "assets/catalog/kotaemon.svg",
+      "id": "kotaemon",
+      "licenses": [
+        "Apache-2.0"
+      ],
+      "maintenance": "tracked",
+      "name": "Kotaemon",
+      "platforms": [],
+      "source_url": "https://github.com/Cinnamon/kotaemon",
+      "sources": [
+        {
+          "revision": "316719f140747704a483cd2cf4ca8b77e71f37e2",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/kotaemon",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/316719f140747704a483cd2cf4ca8b77e71f37e2/definitions/apps/kotaemon/config.json"
+        }
+      ],
+      "tags": [
+        "Artificial Intelligence"
+      ],
+      "updated_at": null,
+      "warning": false,
+      "web_ui": true,
+      "website_url": "https://cinnamon.github.io/kotaemon/"
+    },
+    {
+      "aliases": [
         "Krayin"
       ],
       "architectures": [],
@@ -32056,7 +32165,9 @@
       "description": "Open-source UI for building and debugging multi-agent and RAG applications",
       "icon": "assets/catalog/langflow.png",
       "id": "langflow",
-      "licenses": [],
+      "licenses": [
+        "MIT"
+      ],
       "maintenance": "tracked",
       "name": "Langflow",
       "platforms": [],
@@ -32073,6 +32184,12 @@
           "source": "coolify",
           "upstream_id": "templates/compose/langflow.yaml",
           "url": "https://github.com/coollabsio/coolify/blob/08f68016dd342fe944564f79969f4ceceddc88d6/templates/compose/langflow.yaml"
+        },
+        {
+          "revision": "d81999683947fb828a535300b3cdbf8f7ac6b589",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/langflow",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/d81999683947fb828a535300b3cdbf8f7ac6b589/definitions/apps/langflow/config.json"
         }
       ],
       "tags": [
@@ -32085,6 +32202,7 @@
         " openai",
         " workflow",
         "AI",
+        "Artificial Intelligence",
         "ai",
         "langflow"
       ],
@@ -32766,10 +32884,17 @@
           "source": "legacy",
           "upstream_id": "LibreChat",
           "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/52a36e45fbd403c1c1348f200105d9e31be2bc3c/src/catalog_full.json"
+        },
+        {
+          "revision": "a333806252ca303c76836a28d64085dec5f2c637",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/librechat",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/a333806252ca303c76836a28d64085dec5f2c637/definitions/apps/librechat/config.json"
         }
       ],
       "tags": [
         "AI",
+        "Artificial Intelligence",
         "Generative Artificial Intelligence (GenAI)",
         "ai",
         "anthropic",
@@ -34437,6 +34562,7 @@
       "icon": "assets/catalog/lobehub.svg",
       "id": "lobehub",
       "licenses": [
+        "LobeHub Community License",
         "⊘ Proprietary"
       ],
       "maintenance": "tracked",
@@ -34452,14 +34578,21 @@
           "source": "awesome-selfhosted",
           "upstream_id": "software/lobehub.yml",
           "url": "https://github.com/awesome-selfhosted/awesome-selfhosted-data/blob/31f409963ffccc17159ccc07646f38e41b8b0361/software/lobehub.yml"
+        },
+        {
+          "revision": "b342856562a0db400698ccbfdfb43929a9dbe622",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/lobehub",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/b342856562a0db400698ccbfdfb43929a9dbe622/definitions/apps/lobehub/config.json"
         }
       ],
       "tags": [
+        "Artificial Intelligence",
         "Generative Artificial Intelligence (GenAI)"
       ],
       "updated_at": "2026-09-04",
       "warning": false,
-      "web_ui": false,
+      "web_ui": true,
       "website_url": "https://www.lobehub.com"
     },
     {
@@ -36492,6 +36625,39 @@
       "warning": false,
       "web_ui": true,
       "website_url": "https://www.mautic.org/"
+    },
+    {
+      "aliases": [
+        "Maxun"
+      ],
+      "architectures": [],
+      "archived": false,
+      "category": "Artificial Intelligence",
+      "description": "Turn websites into data: train a robot by pointing at a page, then run it on a schedule.",
+      "icon": "assets/catalog/maxun.svg",
+      "id": "maxun",
+      "licenses": [
+        "AGPL-3.0"
+      ],
+      "maintenance": "tracked",
+      "name": "Maxun",
+      "platforms": [],
+      "source_url": "https://github.com/getmaxun/maxun",
+      "sources": [
+        {
+          "revision": "b342856562a0db400698ccbfdfb43929a9dbe622",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/maxun",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/b342856562a0db400698ccbfdfb43929a9dbe622/definitions/apps/maxun/config.json"
+        }
+      ],
+      "tags": [
+        "Artificial Intelligence"
+      ],
+      "updated_at": null,
+      "warning": false,
+      "web_ui": true,
+      "website_url": "https://www.maxun.dev"
     },
     {
       "aliases": [
@@ -57331,6 +57497,39 @@
     },
     {
       "aliases": [
+        "SillyTavern"
+      ],
+      "architectures": [],
+      "archived": false,
+      "category": "Artificial Intelligence",
+      "description": "A front end for chatting and roleplaying with AI models and characters.",
+      "icon": "assets/catalog/sillytavern.svg",
+      "id": "sillytavern",
+      "licenses": [
+        "AGPL-3.0"
+      ],
+      "maintenance": "tracked",
+      "name": "SillyTavern",
+      "platforms": [],
+      "source_url": "https://github.com/SillyTavern/SillyTavern",
+      "sources": [
+        {
+          "revision": "924357fde8f7d4e414e5cae241b1e137f5f60038",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/sillytavern",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/924357fde8f7d4e414e5cae241b1e137f5f60038/definitions/apps/sillytavern/config.json"
+        }
+      ],
+      "tags": [
+        "Artificial Intelligence"
+      ],
+      "updated_at": null,
+      "warning": false,
+      "web_ui": true,
+      "website_url": "https://sillytavern.app"
+    },
+    {
+      "aliases": [
         "SilverBullet",
         "Silverbullet"
       ],
@@ -57433,6 +57632,39 @@
       "warning": false,
       "web_ui": false,
       "website_url": "https://www.silverstripe.org"
+    },
+    {
+      "aliases": [
+        "Sim"
+      ],
+      "architectures": [],
+      "archived": false,
+      "category": "Artificial Intelligence",
+      "description": "Build and run AI agent workflows on a visual canvas.",
+      "icon": "assets/catalog/sim.svg",
+      "id": "sim",
+      "licenses": [
+        "Apache-2.0"
+      ],
+      "maintenance": "tracked",
+      "name": "Sim",
+      "platforms": [],
+      "source_url": "https://github.com/simstudioai/sim",
+      "sources": [
+        {
+          "revision": "b342856562a0db400698ccbfdfb43929a9dbe622",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/sim",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/b342856562a0db400698ccbfdfb43929a9dbe622/definitions/apps/sim/config.json"
+        }
+      ],
+      "tags": [
+        "Artificial Intelligence"
+      ],
+      "updated_at": null,
+      "warning": false,
+      "web_ui": true,
+      "website_url": "https://www.sim.ai"
     },
     {
       "aliases": [
@@ -62398,6 +62630,7 @@
       "icon": "assets/catalog/tandoor-recipes.svg",
       "id": "tandoor-recipes",
       "licenses": [
+        "AGPL-3.0",
         "Commons-Clause",
         "MIT"
       ],
@@ -62421,6 +62654,12 @@
           "source": "runtipi",
           "upstream_id": "apps/tandoor/config.json",
           "url": "https://github.com/runtipi/runtipi-appstore/blob/3c878baaf22361a515abc9fc648d0e4821c6d593/apps/tandoor/config.json"
+        },
+        {
+          "revision": "55bad5a64628cea01142ca3af245a9d38425695a",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/tandoor",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/55bad5a64628cea01142ca3af245a9d38425695a/definitions/apps/tandoor/config.json"
         }
       ],
       "tags": [
@@ -66885,14 +67124,21 @@
           "source": "legacy",
           "upstream_id": "Vane",
           "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/52a36e45fbd403c1c1348f200105d9e31be2bc3c/src/catalog_full.json"
+        },
+        {
+          "revision": "924357fde8f7d4e414e5cae241b1e137f5f60038",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/vane",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/924357fde8f7d4e414e5cae241b1e137f5f60038/definitions/apps/vane/config.json"
         }
       ],
       "tags": [
+        "Artificial Intelligence",
         "Generative Artificial Intelligence (GenAI)"
       ],
       "updated_at": "2026-09-01",
       "warning": false,
-      "web_ui": false,
+      "web_ui": true,
       "website_url": "https://github.com/ItzCrazyKns/Vane"
     },
     {

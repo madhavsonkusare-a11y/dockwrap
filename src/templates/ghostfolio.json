@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "id": "ghostfolio",
+  "display_name": "Ghostfolio",
+  "catalog_name": "Ghostfolio",
+  "description": "Track your investments and net worth across accounts in one place.",
+  "category": "Money, Budgeting & Management",
+  "license": "AGPL-3.0",
+  "source_url": "https://github.com/ghostfolio/ghostfolio",
+  "documentation_url": "https://github.com/ghostfolio/ghostfolio#run-with-docker-compose",
+  "verified_at": "2026-09-12",
+  "lifecycle_proof": "docs/evidence/ghostfolio-qualification.json",
+  "origin": {
+    "importer": "runtipi",
+    "repository": "madhavsonkusare-a11y/local-store",
+    "revision": "55bad5a64628cea01142ca3af245a9d38425695a",
+    "path": "definitions/apps/ghostfolio/docker-compose.json",
+    "license": "MIT"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "ghostfolio/ghostfolio:3.69.0",
+        "source_url": "https://hub.docker.com/v2/repositories/ghostfolio/ghostfolio/tags/3.69.0",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-09-07",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm/v7",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:50482e49aa41619c1cb897cc7611855ece481f92fca7c8e1da60a698fd5a032b",
+          "linux/arm/v7": "sha256:ce069e2b68df996e23142a74c273aa00a7d2221151b3fc6ef7a84eccf5c51766",
+          "linux/arm64": "sha256:3b06895cd548f65b29a848dc334f562b9bf682dea5a3ee6cfd45f215b46da6bd"
+        },
+        "index_digest": "sha256:66d56cb912901ff25afe82c593d080704b3658a24ee9692a7fe242a11c818d19"
+      },
+      {
+        "image": "postgres:17.11",
+        "source_url": "https://hub.docker.com/v2/repositories/library/postgres/tags/17.11",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-08-26",
+        "container_platforms": [
+          "linux/386",
+          "linux/amd64",
+          "linux/arm/v5",
+          "linux/arm/v7",
+          "linux/arm64/v8",
+          "linux/ppc64le",
+          "linux/riscv64",
+          "linux/s390x"
+        ],
+        "digests": {
+          "linux/386": "sha256:ae5062748cb3e52cfa8d73091e56a37f1b3f5cf9d971eb8333459c7206bd3ffd",
+          "linux/amd64": "sha256:d13db94ae661d517c5ed57c509a578d5ea64aae639871ba25294f4f42d83de28",
+          "linux/arm/v5": "sha256:b8ff75b6f471e58057711db066411939c3f6fe2548d3456e52035030dc818e00",
+          "linux/arm/v7": "sha256:e913f2840e19352528036c640e77a769d87d8ff10ef781501fe333be94c74d91",
+          "linux/arm64/v8": "sha256:413da4542e091471785b7f18f1a2258df134bc6506ab4e1e53725aa8bcfdb650",
+          "linux/ppc64le": "sha256:245c1026935018ef2ae09987d768ddcef8decc62fe0e8e16a41474c40f6fb376",
+          "linux/riscv64": "sha256:cbc6b27fc0a255576fd004f1334ea16f7b5b065c368e721d6fb9c8417e404570",
+          "linux/s390x": "sha256:942c2b42e40207f6628698df04136e0780101f9fa8128faf716a4fc704ab7359"
+        },
+        "index_digest": "sha256:67f41722b7a8cbdb868a44a4995c846eddfdc2973bccb291ce937dce88ad5675"
+      },
+      {
+        "image": "redis:7.4.11-alpine",
+        "source_url": "https://hub.docker.com/v2/repositories/library/redis/tags/7.4.11-alpine",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-08-20",
+        "container_platforms": [
+          "linux/386",
+          "linux/amd64",
+          "linux/arm/v6",
+          "linux/arm/v7",
+          "linux/arm64/v8",
+          "linux/ppc64le",
+          "linux/riscv64",
+          "linux/s390x"
+        ],
+        "digests": {
+          "linux/386": "sha256:a4fd08853cdc01da535e7c3ede18084fca62b21a6ee06e38f0aba769f188d45b",
+          "linux/amd64": "sha256:1db42ccef14898aa29bae778452d567534b59c107129cbc1163fb552de184d3c",
+          "linux/arm/v6": "sha256:253cf5a8c5a0bb62b11c913b9b006963753f844ab040d39395e3b7d635db37d0",
+          "linux/arm/v7": "sha256:89beb43a975079ad216a6171d1696ce3aa2b348477228500f53c6fe99cc4f9df",
+          "linux/arm64/v8": "sha256:f8d15882ba108587477ce13c00ab0551933a84138427b7cc9abadfbe45ffd973",
+          "linux/ppc64le": "sha256:58a9ef466c2701c6e1c50d00abb394ed0a2298d6369aae2950b8fa3cba23973c",
+          "linux/riscv64": "sha256:60c3979aa5c24b4d147484b7717153e2f241b5073ec83500bdace86f0c8472d1",
+          "linux/s390x": "sha256:f176864eb58d72ec3bb461a2f395cd069a127586751013350753c0d2ccf6e119"
+        },
+        "index_digest": "sha256:ff02b58f971e7d7d156a1267e283fcbbeee91773b6aa36c49dac28ecfe28eadf"
+      }
+    ]
+  },
+  "promotion": {
+    "state": "approved",
+    "reason": "Approved by the owner. Qualified as offered on 2026-09-12: a real install of Ghostfolio 3.69.0, upstream's current release proved it starts, opens to a first screen with a clear next step, survives a restart and a keep-data reinstall with its data and generated credentials intact, and removes everything it created. Local Store wrote this definition from the project's own deployment instructions."
+  },
+  "data_storage": "Local Store managed folder / ghostfolio",
+  "risk_notes": [
+    "Creates 3 Docker containers and publishes one port on this computer's loopback interface only.",
+    "Generates 4 credentials of its own, keeps them beside the app's data, and reuses them if you reinstall.",
+    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Written by Local Store from the project's own deployment instructions, not taken from an app store.",
+    "Creates your account from a security token rather than a password: save the token it shows, because it is the only way back in.",
+    "Fetches prices and market data from the providers you configure, from this computer.",
+    "Holdings and transactions live in PostgreSQL beside it."
+  ],
+  "fields": {},
+  "definition": "{\n  \"schemaVersion\": 2,\n  \"$schema\": \"https://schemas.runtipi.io/v2/dynamic-compose.json\",\n  \"services\": [\n    {\n      \"name\": \"ghostfolio\",\n      \"image\": \"ghostfolio/ghostfolio:3.69.0\",\n      \"isMain\": true,\n      \"internalPort\": 3333,\n      \"environment\": [\n        {\n          \"key\": \"NODE_ENV\",\n          \"value\": \"production\"\n        },\n        {\n          \"key\": \"HOST\",\n          \"value\": \"0.0.0.0\"\n        },\n        {\n          \"key\": \"PORT\",\n          \"value\": \"3333\"\n        },\n        {\n          \"key\": \"ACCESS_TOKEN_SALT\",\n          \"value\": \"${GHOSTFOLIO_ACCESS_TOKEN_SALT}\"\n        },\n        {\n          \"key\": \"JWT_SECRET_KEY\",\n          \"value\": \"${GHOSTFOLIO_JWT_SECRET_KEY}\"\n        },\n        {\n          \"key\": \"DATABASE_URL\",\n          \"value\": \"postgresql://ghostfolio:${GHOSTFOLIO_DB_PASSWORD}@ghostfolio-db:5432/ghostfolio\"\n        },\n        {\n          \"key\": \"POSTGRES_DB\",\n          \"value\": \"ghostfolio\"\n        },\n        {\n          \"key\": \"POSTGRES_USER\",\n          \"value\": \"ghostfolio\"\n        },\n        {\n          \"key\": \"POSTGRES_PASSWORD\",\n          \"value\": \"${GHOSTFOLIO_DB_PASSWORD}\"\n        },\n        {\n          \"key\": \"REDIS_HOST\",\n          \"value\": \"ghostfolio-redis\"\n        },\n        {\n          \"key\": \"REDIS_PORT\",\n          \"value\": \"6379\"\n        },\n        {\n          \"key\": \"REDIS_PASSWORD\",\n          \"value\": \"${GHOSTFOLIO_REDIS_PASSWORD}\"\n        }\n      ],\n      \"dependsOn\": {\n        \"ghostfolio-db\": {\n          \"condition\": \"service_healthy\"\n        },\n        \"ghostfolio-redis\": {\n          \"condition\": \"service_healthy\"\n        }\n      }\n    },\n    {\n      \"name\": \"ghostfolio-db\",\n      \"image\": \"postgres:17.11\",\n      \"stopSignal\": \"SIGINT\",\n      \"environment\": [\n        {\n          \"key\": \"POSTGRES_DB\",\n          \"value\": \"ghostfolio\"\n        },\n        {\n          \"key\": \"POSTGRES_USER\",\n          \"value\": \"ghostfolio\"\n        },\n        {\n          \"key\": \"POSTGRES_PASSWORD\",\n          \"value\": \"${GHOSTFOLIO_DB_PASSWORD}\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/postgres\",\n          \"containerPath\": \"/var/lib/postgresql/data\"\n        }\n      ],\n      \"healthCheck\": {\n        \"test\": \"pg_isready -U ghostfolio -d ghostfolio\",\n        \"interval\": \"5s\",\n        \"timeout\": \"5s\",\n        \"retries\": 10,\n        \"startPeriod\": \"60s\"\n      }\n    },\n    {\n      \"name\": \"ghostfolio-redis\",\n      \"image\": \"redis:7.4.11-alpine\",\n      \"command\": [\n        \"sh\",\n        \"-c\",\n        \"exec redis-server --requirepass \\\"$$REDISCLI_AUTH\\\"\"\n      ],\n      \"environment\": [\n        {\n          \"key\": \"REDISCLI_AUTH\",\n          \"value\": \"${GHOSTFOLIO_REDIS_PASSWORD}\"\n        }\n      ],\n      \"healthCheck\": {\n        \"test\": [\"CMD-SHELL\", \"redis-cli ping | grep -q PONG\"],\n        \"interval\": \"5s\",\n        \"timeout\": \"3s\",\n        \"retries\": 10,\n        \"startPeriod\": \"20s\"\n      }\n    }\n  ]\n}\n",
+  "config": {
+    "path": "definitions/apps/ghostfolio/config.json",
+    "content": "{\n  \"id\": \"ghostfolio\",\n  \"name\": \"Ghostfolio\",\n  \"version\": \"3.69.0\",\n  \"source\": \"https://github.com/ghostfolio/ghostfolio\",\n  \"website\": \"https://ghostfol.io\",\n  \"documentation\": \"https://github.com/ghostfolio/ghostfolio#run-with-docker-compose\",\n  \"short_desc\": \"Track your investments and net worth across accounts in one place.\",\n  \"categories\": [\n    \"Money, Budgeting & Management\"\n  ],\n  \"license\": \"AGPL-3.0\",\n  \"form_fields\": [\n    {\n      \"type\": \"random\",\n      \"label\": \"Token salt\",\n      \"min\": 48,\n      \"max\": 48,\n      \"env_variable\": \"GHOSTFOLIO_ACCESS_TOKEN_SALT\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Sign-in secret\",\n      \"min\": 48,\n      \"max\": 48,\n      \"env_variable\": \"GHOSTFOLIO_JWT_SECRET_KEY\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Database password\",\n      \"min\": 32,\n      \"max\": 32,\n      \"env_variable\": \"GHOSTFOLIO_DB_PASSWORD\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Cache password\",\n      \"min\": 32,\n      \"max\": 32,\n      \"env_variable\": \"GHOSTFOLIO_REDIS_PASSWORD\"\n    }\n  ]\n}\n"
+  }
+}

@@ -156,6 +156,11 @@ pub struct ReviewedTemplate {
     pub source_url: String,
     pub documentation_url: String,
     pub verified_at: String,
+    /// The version of the app itself, when its own definition names one.
+    /// Dify's front door is an nginx, so the tag on the image a plan
+    /// publishes is nginx's version, not Dify's.
+    #[serde(default)]
+    pub version: Option<String>,
     /// The recorded run that proves this template installs and survives a
     /// reinstall. A template without one has not been verified, whatever else
     /// it declares.
@@ -182,7 +187,14 @@ pub struct ReviewedTemplate {
     /// carried verbatim like the definition itself so a review covers them.
     #[serde(default)]
     pub seeds: Vec<TemplateSeed>,
+    /// Seconds the first start may take, for an app a review measured as
+    /// slower than the default. Bounded so a broken app still fails in time.
+    #[serde(default)]
+    pub first_start_seconds: Option<u64>,
 }
+
+/// The longest first start a review may allow: fifteen minutes.
+pub const MAX_FIRST_START_SECONDS: u64 = 900;
 
 #[derive(Debug, Clone, Deserialize, PartialEq)]
 #[serde(deny_unknown_fields)]
@@ -312,6 +324,16 @@ impl ReviewedTemplate {
             }
         }
 
+        if let Some(seconds) = self.first_start_seconds {
+            let default = crate::runtime::FIRST_START_TIMEOUT.as_secs();
+            if seconds <= default || seconds > MAX_FIRST_START_SECONDS {
+                return Err(format!(
+                    "{}: a first start of {seconds}s must be longer than the {default}s default and at most {MAX_FIRST_START_SECONDS}s",
+                    self.id
+                ));
+            }
+            template.first_start = Some(std::time::Duration::from_secs(seconds));
+        }
         template.seeds = self
             .seeds
             .iter()
@@ -342,31 +364,58 @@ impl ReviewedTemplate {
 const ACTIVEPIECES: &str = include_str!("activepieces.json");
 const ACTUAL: &str = include_str!("actual.json");
 const ADMINER: &str = include_str!("adminer.json");
+const ANYTHINGLLM: &str = include_str!("anythingllm.json");
 const BESZEL: &str = include_str!("beszel.json");
+const BIG_AGI: &str = include_str!("big-agi.json");
+const CHANGEDETECTION: &str = include_str!("changedetection.json");
 const CODIMD: &str = include_str!("codimd.json");
+const DIFY: &str = include_str!("dify.json");
+const DOCMOST: &str = include_str!("docmost.json");
 const FILESTASH: &str = include_str!("filestash.json");
 const FLATNOTES: &str = include_str!("flatnotes.json");
+const FLOWISE: &str = include_str!("flowise.json");
 const GHOST_DEV: &str = include_str!("ghost-dev.json");
+const GHOSTFOLIO: &str = include_str!("ghostfolio.json");
+const GITEA: &str = include_str!("gitea.json");
 const GLANCE: &str = include_str!("glance.json");
 const GOTIFY: &str = include_str!("gotify.json");
 const GRAFANA: &str = include_str!("grafana.json");
 const GROCY: &str = include_str!("grocy.json");
 const HOMER: &str = include_str!("homer.json");
+const HUGINN: &str = include_str!("huginn.json");
+const IMMICH: &str = include_str!("immich.json");
+const JELLYFIN: &str = include_str!("jellyfin.json");
 const JELLYSEERR: &str = include_str!("jellyseerr.json");
 const JOPLIN: &str = include_str!("joplin.json");
 const KANBOARD: &str = include_str!("kanboard.json");
+const KHOJ: &str = include_str!("khoj.json");
+const KOTAEMON: &str = include_str!("kotaemon.json");
+const LANGFLOW: &str = include_str!("langflow.json");
+const LIBRECHAT: &str = include_str!("librechat.json");
+const LOBEHUB: &str = include_str!("lobehub.json");
+const MAXUN: &str = include_str!("maxun.json");
 const METABASE: &str = include_str!("metabase.json");
 const MONICA: &str = include_str!("monica.json");
 const NAVIDROME: &str = include_str!("navidrome.json");
 const NODERED: &str = include_str!("nodered.json");
 const NTFY: &str = include_str!("ntfy.json");
 const OMBI: &str = include_str!("ombi.json");
+const OPEN_WEBUI: &str = include_str!("open-webui.json");
+const PAIRDROP: &str = include_str!("pairdrop.json");
 const PAPERCLIP: &str = include_str!("paperclip.json");
 const PENPOT: &str = include_str!("penpot.json");
 const PRIVATEBIN: &str = include_str!("privatebin.json");
+const SILLYTAVERN: &str = include_str!("sillytavern.json");
+const SIM: &str = include_str!("sim.json");
+const TANDOOR: &str = include_str!("tandoor.json");
 const TAUTULLI: &str = include_str!("tautulli.json");
+const TRILIUM: &str = include_str!("trilium.json");
+const UMAMI_ANALYTICS: &str = include_str!("umami-analytics.json");
+const VANE: &str = include_str!("vane.json");
 const VAULTWARDEN: &str = include_str!("vaultwarden.json");
+const VIKUNJA: &str = include_str!("vikunja.json");
 const WALLOS: &str = include_str!("wallos.json");
+const WEKAN: &str = include_str!("wekan.json");
 const WHOOGLE: &str = include_str!("whoogle.json");
 const WORDPRESS: &str = include_str!("wordpress.json");
 
@@ -384,31 +433,58 @@ pub fn reviewed_templates() -> Vec<ReviewedTemplate> {
         ACTIVEPIECES,
         ACTUAL,
         ADMINER,
+        ANYTHINGLLM,
         BESZEL,
+        BIG_AGI,
+        CHANGEDETECTION,
         CODIMD,
+        DIFY,
+        DOCMOST,
         FILESTASH,
         FLATNOTES,
+        FLOWISE,
         GHOST_DEV,
+        GHOSTFOLIO,
+        GITEA,
         GLANCE,
         GOTIFY,
         GRAFANA,
         GROCY,
         HOMER,
+        HUGINN,
+        IMMICH,
+        JELLYFIN,
         JELLYSEERR,
         JOPLIN,
         KANBOARD,
+        KHOJ,
+        KOTAEMON,
+        LANGFLOW,
+        LIBRECHAT,
+        LOBEHUB,
+        MAXUN,
         METABASE,
         MONICA,
         NAVIDROME,
         NODERED,
         NTFY,
         OMBI,
+        OPEN_WEBUI,
+        PAIRDROP,
         PAPERCLIP,
         PENPOT,
         PRIVATEBIN,
+        SILLYTAVERN,
+        SIM,
+        TANDOOR,
         TAUTULLI,
+        TRILIUM,
+        UMAMI_ANALYTICS,
+        VANE,
         VAULTWARDEN,
+        VIKUNJA,
         WALLOS,
+        WEKAN,
         WHOOGLE,
         WORDPRESS,
     ]
@@ -484,7 +560,7 @@ mod tests {
             );
             // A reviewed template has to render, not merely construct.
             let compose = template.plan.to_compose().expect("plan should render");
-            assert!(!compose.contains("$$"), "{}: {compose}", reviewed.id);
+            assert!(!compose.contains("$$cap_"), "{}: {compose}", reviewed.id);
 
             // Everything a recipe must prove about itself.
             assert_eq!(reviewed.schema_version, 1);
@@ -587,24 +663,52 @@ mod tests {
     /// costs exactly as much deliberation as the first one did.
     const APPROVED: &[&str] = &[
         "adminer",
+        "anythingllm",
         "beszel",
+        "big-agi",
+        "changedetection",
+        "dify",
+        "docmost",
         "flatnotes",
+        "flowise",
+        "ghostfolio",
+        "gitea",
         "glance",
         "grafana",
         "grocy",
         "homer",
+        "huginn",
+        "immich",
+        "jellyfin",
+        "joplin",
         "kanboard",
+        "khoj",
+        "kotaemon",
+        "langflow",
+        "librechat",
+        "lobehub",
+        "maxun",
         "metabase",
         "monica",
         "navidrome",
         "nodered",
         "ntfy",
+        "open-webui",
+        "pairdrop",
         "paperclip",
         "penpot",
         "privatebin",
+        "sillytavern",
+        "sim",
+        "tandoor",
         "tautulli",
+        "trilium",
+        "umami-analytics",
+        "vane",
         "vaultwarden",
+        "vikunja",
         "wallos",
+        "wekan",
         "whoogle",
         "wordpress",
     ];
@@ -688,6 +792,27 @@ mod tests {
                 config.path
             );
         }
+    }
+
+    /// A review may give a slow app longer to start, but not forever and
+    /// not less than everyone already gets.
+    #[test]
+    fn a_first_start_allowance_is_bounded_and_reaches_the_plan() {
+        let mut reviewed = reviewed_template("khoj").expect("khoj is reviewed");
+        for refused in [
+            60,
+            crate::runtime::FIRST_START_TIMEOUT.as_secs(),
+            MAX_FIRST_START_SECONDS + 1,
+        ] {
+            reviewed.first_start_seconds = Some(refused);
+            assert!(reviewed.plan_template().is_err(), "{refused}s was accepted");
+        }
+        reviewed.first_start_seconds = Some(600);
+        let template = reviewed.plan_template().expect("600s is within bounds");
+        assert_eq!(
+            template.first_start,
+            Some(std::time::Duration::from_secs(600))
+        );
     }
 
     #[test]

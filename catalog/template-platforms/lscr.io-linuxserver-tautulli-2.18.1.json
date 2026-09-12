@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "reference": "sha256:5ce8c5f82f9153e72ad4a24a1605f5a90bfee4bbe8e75bd05fcf91b410330b63",
+  "audit": {
+    "image": "lscr.io/linuxserver/tautulli:2.18.1",
+    "source_url": "https://lscr.io/v2/linuxserver/tautulli/manifests/sha256:5ce8c5f82f9153e72ad4a24a1605f5a90bfee4bbe8e75bd05fcf91b410330b63",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-09-04",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:b649c2413c22c7a33d900714d0e505415c36124508a73a3d62cedead9cf00560",
+      "linux/arm64": "sha256:47868fa91ebdce3a6c8da67a7141baee2398f8e4f8f0b11b239f5cc4aacaf39a"
+    }
+  }
+}

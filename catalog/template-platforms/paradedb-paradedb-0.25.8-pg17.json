@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "paradedb/paradedb:0.25.8-pg17",
+    "source_url": "https://hub.docker.com/v2/repositories/paradedb/paradedb/tags/0.25.8-pg17",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-09-11",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:b4dba732f650781a50894ba948335721f0b340f32580eca610b336f075080b02",
+      "linux/arm64": "sha256:73ac4cedb43741fdd29469a078b75ee8cfc836da61e39d97e4b2cf3aec552082"
+    }
+  }
+}

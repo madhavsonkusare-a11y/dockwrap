@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "audit": {
+    "image": "getmeili/meilisearch:v1.35.1",
+    "source_url": "https://hub.docker.com/v2/repositories/getmeili/meilisearch/tags/v1.35.1",
+    "checked_at": "2026-09-12",
+    "last_updated": "2026-02-16",
+    "container_platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ],
+    "digests": {
+      "linux/amd64": "sha256:f8d986130128f830e4439f31add56033d74a34bb8942b50b93ff9630289d761c",
+      "linux/arm64": "sha256:d6491dcad0494a321fed1932a133c1fd4eb2d1bb07067376e30b61c7fe0d62f9"
+    }
+  }
+}
