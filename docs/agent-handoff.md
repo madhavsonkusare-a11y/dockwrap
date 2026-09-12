@@ -1,93 +1,55 @@
 # Local Store: agent handoff
 
-## AI apps, September 12 — read before resuming
+## AI apps, September 12 — done, and what is left
 
 The owner asked for the most-starred AI and agent projects on GitHub and chose
-twelve: AnythingLLM, LibreChat, SillyTavern, Big-AGI, Langflow, Sim, Huginn,
-Flowise, Khoj, Kotaemon, Vane (formerly Perplexica) and Maxun. The owner then:
+twelve, then allowed **source-available apps** (n8n stays; Open WebUI, Dify,
+LobeHub and Joplin were added under that policy), chose to **build support for
+both Sim and Maxun**, and chose to **keep Kotaemon** despite its 15.9 GB image.
 
-- allowed **source-available apps**: n8n stays, and **Open WebUI, Dify,
-  LobeHub and Joplin** were chosen to add. `qualify_batch` still skips
-  entries that are not open source unless they are named with `--only`;
-- chose to **build support for both Sim and Maxun** — one-shot jobs and a
-  second browser-facing port — accepting Maxun's privileges in its notes if
-  needed (they turned out not to be: see below);
-- chose to **keep Kotaemon offered** despite its 15.9 GB image;
-- chose to **compact Docker's disk themselves** after Local Store trimmed it.
+**40 offerings** (3 recipes, 37 templates) on branch `feat/ai-apps` (PR #6).
+All twelve are proven as offered, every image pinned by the digest its proof
+ran: SillyTavern 1.18.0, Langflow 1.12.1, Huginn v2026.09.09, Vane 1.12.2,
+Khoj 1.42.10, Joplin Server 3.7.1 (PostgreSQL 14.24), Flowise 3.1.4
+(PostgreSQL), Open WebUI 0.11.3, Sim 0.8.33, Maxun 0.0.62, LobeHub 2.2.17 and
+Dify 1.17.1.
 
-**28 offerings** (3 recipes, 25 templates), on branch `feat/ai-apps` (PR #6),
-stacked on `feat/twenty-offered-apps`.
+Plan capabilities these needed, all tested: **one-shot jobs**, **second
+loopback addresses** (`LOCAL_STORE_URL_<SERVICE>` / `LOCAL_STORE_PORT_<SERVICE>`,
+at most two, kept on reinstall) and **internal networks**. Placeholders are
+filled in environment values only, never in commands, and the guard test
+refuses `$$` in rendered Compose — so a definition passes values to a command
+through the environment.
 
-| App | State |
-| --- | --- |
-| AnythingLLM 1.16.1 | offered |
-| Big-AGI 2.1.1 | offered |
-| LibreChat 0.8.7, MongoDB 8.0.30, Meilisearch 1.35.1 | offered |
-| Kotaemon 0.12.0 | offered; its image is 15.9 GB |
-| SillyTavern 1.18.0 | pending: its whitelist refused Docker's port mapping; now widened to Docker's networks |
-| Langflow 1.12.1 | pending: superuser login added; the last run proved a stale binary |
-| Huginn v2026.09.09 | pending: moved off MySQL 8 to MariaDB 11.4.13; the last run proved a stale binary |
-| Vane 1.12.2 | pending: every run used an image layer truncated when D: filled |
-| Khoj 1.42.10 | pending: reviewed 600-second first-start allowance |
-| Joplin Server 3.7.1 | pending: database moved from PostgreSQL 14.2 (2022) to 14.24; needs an offered run with the pin |
-| Flowise 3.1.4 | definition committed; manifest generated when qualification resumes |
-| Sim 0.8.33 | definition committed: migration as a one-shot job, realtime server on a second address |
-| Maxun 0.0.62 | definition committed: backend and RustFS store on second addresses; browser without SYS_ADMIN or unconfined seccomp (Chromium already runs with --no-sandbox) |
-| LobeHub 2.2.17 | definition committed: start script makes its JWKS signing key once and forwards the S3 address inside the container; bucket made by a one-shot job |
-| Dify 1.17.1 | definition committed: 15 services, sandboxes on internal networks, Local Store's own nginx and Squid configs, pgvector instead of Weaviate |
-| Open WebUI 0.11.3 | Runtipi definition, importable; needs a candidate run, then `generate-template.py` |
+What the runs changed, beyond the apps themselves:
 
-New plan capabilities, all tested: **one-shot jobs** (a service something
-waits for with `service_completed_successfully`), **second loopback
-addresses** (Runtipi's `addPorts`, at most two, filled through
-`LOCAL_STORE_URL_<SERVICE>` / `LOCAL_STORE_PORT_<SERVICE>`, kept on reinstall),
-and **internal networks** (Compose's `internal: true`; a service that
-publishes must stay on `default`). Placeholders are filled in environment
-values only, never in commands; the guard test refuses `$$` in rendered
-Compose, so definitions pass values to commands through the environment.
+- `scripts/companion-probe.mjs` checks every second address answers, and
+  `scripts/lobehub-probe.mjs` also checks LobeHub's S3 address from inside its
+  own container. The second-address check is what caught Maxun; the standard
+  probe passed it.
+- Catalogue search puts an app named by the query first. "Sim" returned
+  forty-eight apps that merely mention it.
+- `generate-template.py` matches a catalogue entry by id before alias. Open
+  WebUI had taken another app's name, description and icon.
+- A manifest carries the version its definition names, because Dify's front
+  door is an nginx and the store reported nginx's tag as Dify's version.
 
-A manifest must name a proof that exists, so the manifests for Flowise, Sim,
-Maxun, LobeHub and Dify are generated only when they are qualified.
+Not done, and worth knowing:
 
-**Blocker: D: is full** (about 2 GB free). Docker's virtual disk
-`D:/DockerData/disk/docker_data.vhdx` is about 88 GB while Docker uses 26 GB
-inside it. Local Store ran `fstrim` inside Docker's VM on September 11; the
-owner compacts the file as Administrator (quit Docker Desktop, `wsl
---shutdown`, then diskpart: `select vdisk file="D:\DockerData\disk\docker_data.vhdx"`,
-`attach vdisk readonly`, `compact vdisk`, `detach vdisk`). Pull nothing until
-then. Never use Docker Desktop's "Reset to factory defaults": it wipes the
-owner's app data.
-
-To resume, once the file is smaller:
-
-1. Export `CARGO_TARGET_DIR=C:/Users/madha/.cache/local-store-target` for
-   every cargo command; builds are kept off D:. Rebuild the **release**
-   `template_facts` too — `generate-*.py` prefers it and a stale one refuses
-   the new features.
-2. `python scripts/generate-first-party.py flowise sim maxun lobehub dify`,
-   register them, and approve provisionally (state `approved`, not committed).
-3. Rebuild the batch example after regenerating any manifest; an offered run
-   refuses a compiled manifest that differs from the file on disk.
-4. With a D: free-space guard running, qualify as offered, a few at a time
-   (Dify is about 7 GB unpacked, Maxun about 2 GB):
-   `cargo run --example qualify_batch -- --offered --only sillytavern,langflow,huginn,vane,khoj,joplin`
-   then `flowise,sim,maxun,lobehub,dify`. Open WebUI: a candidate run
-   (`--only open-webui`, not offered), `generate-template.py open-webui`,
-   then offered.
-5. For each app that passes: `python scripts/check-proven-pins.py <app>`,
-   `python scripts/review_ai.py <app>`, add it to `APPROVED`, then run the
-   full validation (tests, Clippy, catalogue and icon checks). Check each
-   app's notes against what the run showed (who can register, first screen).
-
-PR #5 (icons) needs its catalogue icons regenerated once the new catalogue
-entries (SillyTavern, Big-AGI, Kotaemon, Flowise, Sim, Maxun) reach its base.
-
-**Known CI gap, owner decision: fix when each PR reaches `main`.** CI runs
-only on PRs into `main`, so #4–#6 have not been checked. When each is
-retargeted, `check-template-platforms.py` will fail: 40 images have no cached
-tag metadata (`--refresh` fetches it), and 10 are on GHCR or lscr, whose
-`source_url` the checker cannot read — it knows only Docker Hub's tag API.
-PR #3 was fixed on September 12 the same way (`fbdf910`).
+- **Kotaemon, Monica, Glance and the earlier apps** were not re-run; only the
+  twelve above were.
+- **Docker's disk** was compacted from 94 GB to 29.5 GB on September 12 after
+  `fstrim` inside its VM. Unused images were then removed with the owner's
+  agreement, which is why a later `check-proven-pins.py` run reported
+  MISMATCH for Dify: the check needs the images locally, **and by tag** — an
+  image pulled by digest alone is not found under its tag.
+- **PR #5 (icons)** needs its catalogue icons regenerated once the new
+  catalogue entries (SillyTavern, Big-AGI, Kotaemon, Flowise, Sim, Maxun)
+  reach its base.
+- **The template platform check** will fail when PRs #4–#6 reach `main`: 40
+  images have no cached tag metadata and 10 are on GHCR or lscr, which the
+  checker cannot read. The owner chose to fix it then, not now. PR #3 was
+  fixed the same way on September 12 (`fbdf910`).
 
 ## Owner decisions, September 11 — read before resuming
 

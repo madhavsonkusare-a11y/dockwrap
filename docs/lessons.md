@@ -211,6 +211,36 @@ does not mean open either. Joplin's repository is AGPL, except `packages/server`
 which is under a non-commercial personal-use licence; the server is what we
 would ship. Check the licence of the part you run.
 
+## A probe that only opens the first page proves only the first page
+
+Maxun's frontend is static files: it answered immediately while its backend
+was still starting, and the standard check passed an app whose every action
+would have failed. The check that caught it asks each of an app's other
+published ports to answer. Anything an app's own pages call is worth probing;
+"it opened" is not the same as "it works".
+
+## An upstream image can simply go away
+
+LobeHub's bucket was made by MinIO's `mc`, whose tags the registry API still
+listed while `docker pull` answered "repository does not exist": MinIO has
+stopped publishing it. The bucket is now made by a signed S3 request from
+LobeHub's own start script — no extra image, nothing to disappear. MinIO's
+server images stopped in September 2025 too, which is why two apps here use
+RustFS.
+
+## Pulling by digest does not restore a tag
+
+After the images an app was proven with were removed, re-pulling
+`image:tag@sha256:...` brought the data back but left nothing named
+`image:tag`, so the pin check found no local image and called every one of
+Dify's fifteen a mismatch. Pull the tag as well before checking pins.
+
+## An app's version is not always its image's tag
+
+Dify's front door is an nginx, and the store reported `1.31.5-alpine` as
+Dify's version because it read the tag of the image the plan publishes. Where
+a reviewed definition names the app's own version, that is the one to show.
+
 ## A full disk corrupts images silently
 
 D: filled while qualification pulled large AI images, and Docker went down.
