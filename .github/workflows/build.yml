@@ -42,6 +42,7 @@ jobs:
         run: |
           python scripts/test_catalog.py
           python scripts/test_recipe_platforms.py
+          python scripts/test_validate_recipes.py
           python scripts/test_template_platforms.py
           python scripts/check-recipe-platforms.py
           python scripts/check-template-platforms.py
