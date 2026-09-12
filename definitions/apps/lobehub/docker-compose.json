@@ -48,6 +48,10 @@
           "value": "${LOCAL_STORE_URL_LOBEHUB_STORE}"
         },
         {
+          "key": "S3_INTERNAL_ENDPOINT",
+          "value": "http://lobehub-store:9000"
+        },
+        {
           "key": "S3_LOCAL_PORT",
           "value": "${LOCAL_STORE_PORT_LOBEHUB_STORE}"
         },
@@ -100,9 +104,6 @@
         },
         "lobehub-store": {
           "condition": "service_healthy"
-        },
-        "lobehub-store-init": {
-          "condition": "service_completed_successfully"
         }
       }
     },
@@ -205,28 +206,6 @@
         "interval": "5s",
         "timeout": "3s",
         "retries": 30
-      }
-    },
-    {
-      "name": "lobehub-store-init",
-      "image": "minio/mc:RELEASE.2025-08-13T08-35-41Z",
-      "entrypoint": [
-        "/bin/sh"
-      ],
-      "command": [
-        "-c",
-        "mc mb --ignore-existing store/lobe && mc anonymous set download store/lobe"
-      ],
-      "environment": [
-        {
-          "key": "MC_HOST_store",
-          "value": "http://${LOBE_STORE_ACCESS_KEY}:${LOBE_STORE_SECRET_KEY}@lobehub-store:9000"
-        }
-      ],
-      "dependsOn": {
-        "lobehub-store": {
-          "condition": "service_healthy"
-        }
       }
     }
   ]

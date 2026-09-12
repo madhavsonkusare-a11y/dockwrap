@@ -13,10 +13,6 @@
           "value": "3000"
         },
         {
-          "key": "DATABASE_PATH",
-          "value": "/home/node/.flowise"
-        },
-        {
           "key": "SECRETKEY_PATH",
           "value": "/home/node/.flowise"
         },
@@ -51,6 +47,34 @@
         {
           "key": "DISABLE_FLOWISE_TELEMETRY",
           "value": "true"
+        },
+        {
+          "key": "DATABASE_TYPE",
+          "value": "postgres"
+        },
+        {
+          "key": "DATABASE_HOST",
+          "value": "flowise-db"
+        },
+        {
+          "key": "DATABASE_PORT",
+          "value": "5432"
+        },
+        {
+          "key": "DATABASE_NAME",
+          "value": "flowise"
+        },
+        {
+          "key": "DATABASE_USER",
+          "value": "postgres"
+        },
+        {
+          "key": "DATABASE_PASSWORD",
+          "value": "${FLOWISE_DB_PASSWORD}"
+        },
+        {
+          "key": "DATABASE_SSL",
+          "value": "false"
         }
       ],
       "volumes": [
@@ -58,7 +82,44 @@
           "hostPath": "${APP_DATA_DIR}/data",
           "containerPath": "/home/node/.flowise"
         }
-      ]
+      ],
+      "dependsOn": {
+        "flowise-db": {
+          "condition": "service_healthy"
+        }
+      }
+    },
+    {
+      "name": "flowise-db",
+      "image": "postgres:17.11",
+      "stopSignal": "SIGINT",
+      "environment": [
+        {
+          "key": "POSTGRES_USER",
+          "value": "postgres"
+        },
+        {
+          "key": "POSTGRES_PASSWORD",
+          "value": "${FLOWISE_DB_PASSWORD}"
+        },
+        {
+          "key": "POSTGRES_DB",
+          "value": "flowise"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/postgres",
+          "containerPath": "/var/lib/postgresql/data"
+        }
+      ],
+      "healthCheck": {
+        "test": "pg_isready -U postgres",
+        "interval": "5s",
+        "timeout": "5s",
+        "retries": 10,
+        "startPeriod": "60s"
+      }
     }
   ]
 }
