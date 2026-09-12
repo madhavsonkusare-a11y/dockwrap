@@ -1,6 +1,6 @@
 # Reviewed recipe requirements
 
-The three install previews use schema 3. Each manifest declares a Linux Docker
+The three original reviewed recipes use schema 3. Each manifest declares a Linux Docker
 engine, Compose v2, local persistent storage and the platforms published for its
 pinned container image. These describe **container compatibility**, not tested
 Windows/macOS/Linux installers or completed lifecycle verification. The launcher
@@ -35,8 +35,8 @@ Refresh requests are limited to tag metadata, with a 30-second timeout and
 1 MiB response cap. They require network access but no Docker daemon. Refresh
 updates the cache, then compares it to the existing declaration: it does not
 silently approve changed upstream images. Review the diff before changing the
-manifest's digest, platforms or review date. These recorded digests are audit
-evidence; Compose still uses the existing version tags rather than digest pins.
+manifest's digest, platforms or review date. Compose installs the exact reviewed `image:tag@sha256:...` reference.
+The validator rejects missing, changed or mismatched digest pins.
 
 The Rust schema rejects missing requirements, old schemas, unknown fields,
 unsupported/duplicate platforms and malformed audit evidence. Address checks
@@ -50,5 +50,6 @@ managed `data/` directories; n8n uses its named Docker volume. Arbitrary externa
 data locations remain unsupported by Local Store's deletion ownership guard.
 Upstream [Memos deployment instructions](https://usememos.com/docs/deploy/docker-compose)
 describe persistent storage; [Uptime Kuma's versioned instructions](https://github.com/louislam/uptime-kuma/blob/2.5.3/README.md#-how-to-install)
-explicitly exclude NFS. This batch does not grant recipe graduation or claim
-that real install/restart/upgrade/preserve/delete tests passed.
+explicitly exclude NFS. Historical lifecycle results are recorded in
+[recipe-lifecycle-proof.md](recipe-lifecycle-proof.md); they do not certify a
+new engine, app version or release candidate.

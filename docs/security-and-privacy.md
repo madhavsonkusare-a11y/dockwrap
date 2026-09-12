@@ -22,13 +22,13 @@ These actions also involve the network:
 
 | Action | What happens |
 | --- | --- |
-| Installing a reviewed recipe | Docker pulls the pinned image from its registry. Local Store never downloads anything itself. |
+| Installing a reviewed recipe | Docker pulls the pinned image from its registry. The future managed-engine bootstrap is not implemented yet. |
 | Opening a link that leaves an app | The URL is handed to your default browser, which then does whatever it normally does. |
 | Checking an address | A single TCP connection and one plain HTTP request to the address you typed. |
 | Opening an app window | The embedded browser loads that app's page and resources. Third-party app code may contact additional services according to its own behavior and privacy policy. The launcher's network restriction does not apply to those pages. |
 
-Browsing the catalogue of 1,672 projects is entirely offline: the data and 752
-icons are bundled into the binary at build time.
+Browsing the bundled catalog is entirely offline. The integration baseline
+contains 1,678 entries, each with a local icon or generated monogram.
 
 ## What is stored, and where
 
@@ -97,26 +97,29 @@ Each of these is a deliberate boundary with a test behind it.
 
 ## What this does not protect you from
 
-- **Installers are not signed, and there is no automatic updater.** Verify what
-  you download, and watch the repository for releases.
+- **The baseline installers are unsigned and no automatic updater ships yet.**
+  Signed delivery and an updater are now required V1 tasks; verify what you
+  download until that release is actually proven.
 - **The apps you run are not audited.** Local Store gives an app a window; it
   does not review that app's own security, authentication or update practices.
   A self-hosted app on your network is as exposed as you configure it to be.
-- **The three reviewed recipes are install previews.** Their configuration is
-  checked, but a full real-container lifecycle — install, restart, upgrade,
-  preserve, delete — has not yet been verified.
+- **Installation proof is bounded.** Recipes and approved templates carry
+  lifecycle evidence, and Memos has historical upgrade evidence. Generic
+  first-page checks do not prove every meaningful app task or future upgrade.
 - **The address check speaks plain HTTP.** An `https://` address is reported as
   "cannot be checked from here" rather than verified; no certificate is
   validated, because no HTTPS request is made.
-- **Docker lifecycle operations are serialised within a single process only.**
-  Registry changes are serialised across processes, so the launcher and the
-  command-line tool cannot lose each other's saved apps. Two processes running
-  `start` or `stop` on the same app at the same moment are not yet coordinated.
+- **Lifecycle operations take per-app cross-process locks.** The launcher
+  and CLI coordinate install/start/stop/uninstall through `lock_operation`.
+  Registry updates separately hold their own cross-process lock. This is not
+  a security boundary against another process running as the same user.
 - **Native privilege review is incomplete.** The Windows release-image smoke
   test proves denial of four launcher commands from a remote page. It does not
-  cover every navigation boundary; macOS and Linux proof is also pending.
-- **No clean-machine installer test has been run.** Installation has only ever
-  been exercised on development machines.
+  certify the new agent gateway or future V3; macOS and Linux native proof
+  remains outside the Windows release target.
+- **Installer evidence is version-specific.** A clean Windows installer
+  run is recorded in `evidence/windows-installer-2026-09-08.json`. The future
+  V1 engine, V3, agent gateway and updater still need their own release proof.
 
 ## Reporting a vulnerability
 
@@ -131,5 +134,5 @@ response window, and no bounty.
 ## Release procedure
 
 See [`PUBLISH.md`](../PUBLISH.md) for the release checklist, and
-[`docs/upgrade-status.md`](upgrade-status.md) for what is verified and what is
+[V1_TASKS.md](V1_TASKS.md) for what is verified and what is
 still outstanding before a release could honestly be called shippable.

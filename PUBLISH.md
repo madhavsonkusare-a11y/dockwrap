@@ -46,15 +46,13 @@ into one directory, then run `sha256sum --check SHA256SUMS-<target>.txt` (or
 `shasum -a 256 --check ...` on macOS). On Windows, use `Get-FileHash -Algorithm
 SHA256` to compare a downloaded artifact with its listed digest.
 
-## Code signing and updates (task 30, deferred)
+## Code signing and updates (required for V1)
 
-**Deferred by the owner on 8 September 2026, to be done after full deployment.**
-Nothing below is set up yet, and nothing in the build references an updater.
-While that is true there is no update channel: a new version reaches people
-only if they download and reinstall it, and Windows will warn about an unknown
-publisher on every install. Both are worth stating in release notes.
-
-When you pick it up:
+**Required by the owner on September 12, 2026.** This supersedes the earlier
+signing/updater deferral. No signing or updater implementation is claimed yet.
+S01–S04 in [V1_TASKS.md](docs/V1_TASKS.md) define the release acceptance gates.
+Code signing, updater payload signatures and build provenance are distinct.
+A signed artifact is not a guarantee that reputation-based warnings disappear.
 
 This needs credentials nobody but the project owner can create, so it is
 written down rather than done. An agent must not generate these keys: whoever
@@ -89,7 +87,7 @@ cannot be refused is a worse defect than no updater.
    git status --short
    ```
 3. Run the verification suite in [`docs/agent-handoff.md`](docs/agent-handoff.md)
-   and review the remaining gates in [`docs/upgrade-status.md`](docs/upgrade-status.md).
+   and review the required gates in [V1_TASKS.md](docs/V1_TASKS.md).
    Installer/native/container evidence is separate from unit-test success.
 4. Commit the release changes to `main` when publication is authorized. The tag
    must be exactly `v` followed by the configured product version; staging fails

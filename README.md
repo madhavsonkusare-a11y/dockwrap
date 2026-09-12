@@ -30,7 +30,7 @@ See the [refined brand deck](branding/brand-deck.html) and
   and rollback when setup fails.
   Qualification evidence is recorded in `docs/evidence/`. Application-specific
   end-to-end use is not proven for every offering; see the
-  [qualification roadmap](docs/qualification-roadmap.md).
+  [qualification plan](docs/plans/qualification.md).
 - **Connect an app** saves its name and reachable HTTP(S) address. Local Store
   does not seed an example or imply that catalog projects are already installed.
 - **My Apps** opens connections and starts, stops, inspects, or uninstalls apps
@@ -119,8 +119,8 @@ Compatibility (one release): previous registry locations and launch links are im
 - [x] Protocol shortcuts and native CLI opening with stable window IDs
 - [ ] Run clean-machine installer and live-container smoke tests
 
-See the [current 33-task ledger](docs/upgrade-status.md),
-[catalog contribution guide](docs/catalog.md) and [phase record](docs/catalog-phase.md).
+See the [V1 release task list](docs/V1_TASKS.md), [documentation index](docs/README.md),
+and [catalog contribution guide](docs/catalog.md).
 
 ## Security and privacy
 

@@ -9,7 +9,7 @@ branching, never message matching. No error implies that retrying is safe.
 | --- | --- |
 | `invalid_input`, `forbidden` | Input validation or non-launcher caller |
 | `not_found`, `already_exists` | Missing app/recipe or duplicate registry entry |
-| `operation_busy`, `port_in_use` | In-process app lock or install port preflight |
+| `operation_busy`, `port_in_use` | Per-app cross-process lock or install port preflight |
 | `prerequisite_unavailable` | Install requires a ready Docker and Compose |
 | `process_unavailable`, `process_failed` | Missing process, spawn/wait failure, nonzero exit |
 | `rollback_failed` | Setup/registry commit failed and cleanup also failed; inspect files and containers before retrying |

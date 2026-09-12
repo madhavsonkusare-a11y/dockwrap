@@ -1,7 +1,7 @@
 # Raising the qualification bar
 
-Every offered app has passed the same eleven steps (`src/qualification.rs`,
-`qualify_template`): it pulls its pinned digests, installs in one action,
+The shared template harness (`src/qualification.rs`, `qualify_template`)
+records eleven steps: it pulls pinned digests, installs in one action,
 answers on its address, opens to a page with a clear next step, survives a
 restart and a keep-data reinstall with its data and generated credentials
 intact, removes everything it created, and leaves other containers alone —
@@ -18,32 +18,29 @@ This is the ladder from tested to verified, in the order worth climbing.
 
 Worth saying plainly, because the store does not yet say it:
 
-- **No end-to-end task was ever run.** Nobody sent a chat and got a reply, ran
-  a Langflow flow, scraped a page with Maxun or uploaded a file to a LobeHub
+- **Broad end-to-end app coverage is unproven.** Existing per-app evidence does not show that every user can send a chat and get a reply, run
+  a Langflow flow, scrape a page with Maxun or upload a file to a LobeHub
   knowledge base. The second-address probe added for Sim, Maxun and LobeHub
   checks that those addresses answer, not that uploads or scrapes work.
 - **Most AI apps do nothing until a model is configured.** AnythingLLM,
   Big-AGI, SillyTavern, LibreChat, Khoj, Kotaemon, Vane and Open WebUI all
   need an API key or a local Ollama. Their risk notes say so.
 - **Several are open with no login** — Langflow, Khoj, Node-RED, AnythingLLM
-  until a password is set. Harmless because everything is published on
-  loopback only, but they are single-person apps, not something to expose.
-- **Upgrades are not covered.** Each app is pinned to one version; moving to
-  a newer one is unproven.
+  until a password is set. Loopback publication reduces network exposure, but does not protect
+  against other local processes or make an unauthenticated app harmless.
+- **Broad app upgrades are not covered.** Memos has historical upgrade proof;
+  other migration paths need their own evidence.
 - **macOS, Linux hosts and arm64 are unverified**, as is anything
   long-running: backups, data growth, months of uptime.
 
-## State when this was written (September 12, 2026)
+## Current planning context
 
-40 offerings — 3 reviewed recipes and 37 approved templates — with twelve more
-apps mid-proof on `feat/ai-apps`: Jellyfin, Immich, PairDrop, Trilium,
-Docmost, Wekan, changedetection.io, Umami, Gitea, Vikunja, Tandoor and
-Ghostfolio. Calibre-Web is written but blocked: its definition ships a binary
-Calibre database as a seed, and a manifest carries text only.
-
-Finish those before starting anything here: nothing in this plan should land
-while apps are mid-proof, because items 1, 2 and 8 each change what every
-manifest claims.
+The integration baseline has 52 offerings. The old twelve-app batch is finished
+in its manifests; it is not the next task. V1 now requires the bundled engine,
+100 offerings, V3, signed updates and agent access across the release roster.
+Task ownership and dependencies are Q01–Q05/C03/A06 in
+[V1_TASKS.md](../V1_TASKS.md). The detail below explains the proof requirements.
+Historical Memos upgrade evidence exists; it does not prove template upgrades.
 
 ## 1. Assert every container is healthy, not only the main address
 
@@ -140,11 +137,13 @@ passes an upgrade run, and a deliberately incompatible pair fails it.
 **Why.** Keep-data reinstall is proven; copying the managed folder to another
 machine is not, and that is what people need when they move or lose a disk.
 
-**Change.** A step that copies the app's folder, installs fresh from the
-copy, and finds the data and generated credentials.
+**Change.** An app-consistent backup that includes managed bind data, named volumes
+and generated credentials, then restores into a fresh isolated installation.
+Use native database backup or quiesce services; copying live database files is
+not sufficient. Browser-local state is a separate surface.
 
 **Acceptance.** An app with a database (Monica, Joplin, Dify) restores into a
-fresh install from a folder copy alone.
+fresh install from the supported backup, including all required volumes and secrets.
 
 **Effort.** Medium.
 
@@ -152,7 +151,7 @@ fresh install from a folder copy alone.
 
 **Why.** Tags get rebuilt and upstream breaks without anybody touching this
 repository. `check-template-platforms.py` exists for exactly this and runs
-only in CI on pull requests into `main`.
+in CI on pull requests and pushes to main; scheduled qualification is not implemented.
 
 **Change.** A scheduled workflow that re-runs the offered suite and the
 release watch `generate-template.py` already prints, and opens an issue when
@@ -178,7 +177,7 @@ supported by its evidence.
 
 ## Order and dependencies
 
-1. Finish the twelve apps mid-proof, and settle Calibre-Web.
+1. Define the new engine/evidence contract; do not restart the completed twelve-app batch.
 2. Items 1 and 2 — generic, small, and they apply to every app already
    offered. Re-run the whole offered suite afterwards.
 3. Item 4 — the stub provider, which the AI catalogue needs.

@@ -1,0 +1,828 @@
+{
+  "schema_version": 1,
+  "roster_version": 1,
+  "frozen_at": "2026-09-12",
+  "baseline_commit": "720ce23d46a8bcfd7b401b5ef94f840296f74749",
+  "target_count": 100,
+  "policy": "Frozen planning membership, not promotion. Changes require a reviewed roster diff; no automatic replacement by ranking.",
+  "excluded": [
+    {
+      "id": "file-browser",
+      "reason": "Upstream repository archived in the recorded GitHub check."
+    },
+    {
+      "id": "pingvin-share",
+      "reason": "Upstream repository archived in the recorded GitHub check."
+    },
+    {
+      "id": "calibre-web",
+      "reason": "Binary seed gap; Kavita and Komga selected for books without widening seeds solely for this app."
+    },
+    {
+      "id": "shrimply",
+      "reason": "Owner excluded native desktop project without supported Windows web deployment."
+    }
+  ],
+  "apps": [
+    {
+      "id": "adminer",
+      "cohort": "existing_offering",
+      "catalog_id": "adminer",
+      "candidate_id": "adminer",
+      "acceptance_task": "Connect to an isolated database and read a synthetic table.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "anythingllm",
+      "cohort": "existing_offering",
+      "catalog_id": "anythingllm",
+      "candidate_id": "anythingllm",
+      "acceptance_task": "Ingest a synthetic document and receive a controlled model response.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "beszel",
+      "cohort": "existing_offering",
+      "catalog_id": "beszel",
+      "candidate_id": "beszel",
+      "acceptance_task": "Pair an isolated agent and inspect reported host metrics.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "big-agi",
+      "cohort": "existing_offering",
+      "catalog_id": "big-agi",
+      "candidate_id": "big-agi",
+      "acceptance_task": "Send a prompt to a controlled provider and export/reopen a conversation.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "changedetection",
+      "cohort": "existing_offering",
+      "catalog_id": "changedetection-io",
+      "candidate_id": "changedetection",
+      "acceptance_task": "Track a local fixture change and retrieve the detected difference.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "dify",
+      "cohort": "existing_offering",
+      "catalog_id": "dify-ai",
+      "candidate_id": "dify",
+      "acceptance_task": "Create and run a minimal app against a controlled model provider.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "docmost",
+      "cohort": "existing_offering",
+      "catalog_id": "docmost-community-edition",
+      "candidate_id": "docmost",
+      "acceptance_task": "Create, search and reopen a page.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "flatnotes",
+      "cohort": "existing_offering",
+      "catalog_id": "flatnotes",
+      "candidate_id": "flatnotes",
+      "acceptance_task": "Write, tag and search a note after restart.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "flowise",
+      "cohort": "existing_offering",
+      "catalog_id": "flowise-ai",
+      "candidate_id": "flowise",
+      "acceptance_task": "Create and execute a minimal flow against a controlled provider.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "ghostfolio",
+      "cohort": "existing_offering",
+      "catalog_id": "ghostfolio",
+      "candidate_id": "ghostfolio",
+      "acceptance_task": "Record a synthetic portfolio transaction and inspect its resulting position.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "gitea",
+      "cohort": "existing_offering",
+      "catalog_id": "gitea",
+      "candidate_id": "gitea",
+      "acceptance_task": "Create a repository, push a commit and clone it back.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "glance",
+      "cohort": "existing_offering",
+      "catalog_id": "glance",
+      "candidate_id": "glance",
+      "acceptance_task": "Configure a local feed/widget and verify its rendered content.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "grafana",
+      "cohort": "existing_offering",
+      "catalog_id": "grafana",
+      "candidate_id": "grafana",
+      "acceptance_task": "Connect a fixture datasource and save/read a dashboard.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "grocy",
+      "cohort": "existing_offering",
+      "catalog_id": "grocy",
+      "candidate_id": "grocy",
+      "acceptance_task": "Create stock, consume some, and verify the remaining quantity.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "homer",
+      "cohort": "existing_offering",
+      "catalog_id": "homer",
+      "candidate_id": "homer",
+      "acceptance_task": "Configure an app tile and verify its link after restart.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "huginn",
+      "cohort": "existing_offering",
+      "catalog_id": "huginn",
+      "candidate_id": "huginn",
+      "acceptance_task": "Run an agent against a controlled fixture and read its event.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "immich",
+      "cohort": "existing_offering",
+      "catalog_id": "immich",
+      "candidate_id": "immich",
+      "acceptance_task": "Upload a photo, wait for processing and retrieve/search it.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "jellyfin",
+      "cohort": "existing_offering",
+      "catalog_id": "jellyfin",
+      "candidate_id": "jellyfin",
+      "acceptance_task": "Import owned sample media and verify playback.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "joplin",
+      "cohort": "existing_offering",
+      "catalog_id": "joplin",
+      "candidate_id": "joplin",
+      "acceptance_task": "Synchronize a note between isolated clients and verify retained content.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "kanboard",
+      "cohort": "existing_offering",
+      "catalog_id": "kanboard",
+      "candidate_id": "kanboard",
+      "acceptance_task": "Create a project/task, move it and read its new state.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "khoj",
+      "cohort": "existing_offering",
+      "catalog_id": "khoj",
+      "candidate_id": "khoj",
+      "acceptance_task": "Index synthetic content and answer a query using a controlled provider.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "kotaemon",
+      "cohort": "existing_offering",
+      "catalog_id": "kotaemon",
+      "candidate_id": "kotaemon",
+      "acceptance_task": "Ingest a document and answer a retrieval query with a controlled provider.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "langflow",
+      "cohort": "existing_offering",
+      "catalog_id": "langflow",
+      "candidate_id": "langflow",
+      "acceptance_task": "Build and run a minimal flow with controlled dependencies.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "librechat",
+      "cohort": "existing_offering",
+      "catalog_id": "librechat",
+      "candidate_id": "librechat",
+      "acceptance_task": "Create an account and complete a controlled model conversation.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "lobehub",
+      "cohort": "existing_offering",
+      "catalog_id": "lobehub",
+      "candidate_id": "lobehub",
+      "acceptance_task": "Create a conversation and verify an uploaded file in its object storage.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "maxun",
+      "cohort": "existing_offering",
+      "catalog_id": "maxun",
+      "candidate_id": "maxun",
+      "acceptance_task": "Scrape a controlled local page and retrieve structured results.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "memos",
+      "cohort": "existing_offering",
+      "catalog_id": "memos",
+      "candidate_id": "memos",
+      "acceptance_task": "Create an account/note and retrieve the note after restart.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "metabase",
+      "cohort": "existing_offering",
+      "catalog_id": "metabase",
+      "candidate_id": "metabase",
+      "acceptance_task": "Query a fixture database and save/read a question.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "monica",
+      "cohort": "existing_offering",
+      "catalog_id": "monica",
+      "candidate_id": "monica",
+      "acceptance_task": "Create a synthetic contact and retrieve its activity.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "n8n",
+      "cohort": "existing_offering",
+      "catalog_id": "n8n",
+      "candidate_id": "n8n",
+      "acceptance_task": "Run a harmless workflow and read its output after restart.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "navidrome",
+      "cohort": "existing_offering",
+      "catalog_id": "navidrome-music-server",
+      "candidate_id": "navidrome",
+      "acceptance_task": "Import owned sample audio and verify playback/playlist persistence.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "nodered",
+      "cohort": "existing_offering",
+      "catalog_id": "node-red",
+      "candidate_id": "nodered",
+      "acceptance_task": "Deploy and execute a harmless flow and read its output.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "ntfy",
+      "cohort": "existing_offering",
+      "catalog_id": "ntfy",
+      "candidate_id": "ntfy",
+      "acceptance_task": "Publish a synthetic message and receive it through a subscribed client.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "open-webui",
+      "cohort": "existing_offering",
+      "catalog_id": "open-webui",
+      "candidate_id": "open-webui",
+      "acceptance_task": "Create an account and obtain a response from a controlled provider.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "pairdrop",
+      "cohort": "existing_offering",
+      "catalog_id": "pairdrop",
+      "candidate_id": "pairdrop",
+      "acceptance_task": "Transfer a synthetic file between two isolated sessions.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "paperclip",
+      "cohort": "existing_offering",
+      "catalog_id": "paperclip",
+      "candidate_id": "paperclip",
+      "acceptance_task": "Create a test project/task and run a harmless controlled agent action.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "penpot",
+      "cohort": "existing_offering",
+      "catalog_id": "penpot",
+      "candidate_id": "penpot",
+      "acceptance_task": "Create a design file and read/edit it through the approved access method.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "privatebin",
+      "cohort": "existing_offering",
+      "catalog_id": "privatebin",
+      "candidate_id": "privatebin",
+      "acceptance_task": "Create an encrypted paste and reopen it with its client-held key.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "sillytavern",
+      "cohort": "existing_offering",
+      "catalog_id": "sillytavern",
+      "candidate_id": "sillytavern",
+      "acceptance_task": "Send a conversation turn to a controlled provider and preserve the chat.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "sim",
+      "cohort": "existing_offering",
+      "catalog_id": "sim",
+      "candidate_id": "sim",
+      "acceptance_task": "Execute a harmless workflow and verify its recorded result.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "tandoor",
+      "cohort": "existing_offering",
+      "catalog_id": "tandoor-recipes",
+      "candidate_id": "tandoor",
+      "acceptance_task": "Create a recipe and shopping list and retrieve them.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "tautulli",
+      "cohort": "existing_offering",
+      "catalog_id": "tautulli",
+      "candidate_id": "tautulli",
+      "acceptance_task": "Connect a test media-server fixture and read playback/history data.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "trilium",
+      "cohort": "existing_offering",
+      "catalog_id": "triliumnext-notes",
+      "candidate_id": "trilium",
+      "acceptance_task": "Create and search a note after restart.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "umami-analytics",
+      "cohort": "existing_offering",
+      "catalog_id": "umami",
+      "candidate_id": "umami-analytics",
+      "acceptance_task": "Record a synthetic local event and query its report.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "uptime-kuma",
+      "cohort": "existing_offering",
+      "catalog_id": "uptime-kuma",
+      "candidate_id": "uptime-kuma",
+      "acceptance_task": "Create a fixture monitor, change its health and verify reported state.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "vane",
+      "cohort": "existing_offering",
+      "catalog_id": "vane",
+      "candidate_id": "vane",
+      "acceptance_task": "Search controlled sources and produce a controlled model answer.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "vaultwarden",
+      "cohort": "existing_offering",
+      "catalog_id": "vaultwarden",
+      "candidate_id": "vaultwarden",
+      "acceptance_task": "Create/unlock a synthetic vault and retrieve an item through an approved user-authorized path.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "vikunja",
+      "cohort": "existing_offering",
+      "catalog_id": "vikunja",
+      "candidate_id": "vikunja",
+      "acceptance_task": "Create a project/task and retrieve its completion state.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "wallos",
+      "cohort": "existing_offering",
+      "catalog_id": "wallos",
+      "candidate_id": "wallos",
+      "acceptance_task": "Create a synthetic subscription and verify the total.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "wekan",
+      "cohort": "existing_offering",
+      "catalog_id": "wekan",
+      "candidate_id": "wekan",
+      "acceptance_task": "Create a board/card and move/read it after restart.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "whoogle",
+      "cohort": "existing_offering",
+      "catalog_id": "whoogle-search",
+      "candidate_id": "whoogle",
+      "acceptance_task": "Search through a controlled upstream and verify result handling.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "wordpress",
+      "cohort": "existing_offering",
+      "catalog_id": "wordpress",
+      "candidate_id": "wordpress",
+      "acceptance_task": "Create a post and read its published local page.",
+      "selection_reason": "Retain the existing offering; re-prove against V1 requirements."
+    },
+    {
+      "id": "outline",
+      "cohort": "expansion_candidate",
+      "catalog_id": "outline",
+      "candidate_id": "outline",
+      "acceptance_task": "Create a wiki page, search it, and read it after restart.",
+      "selection_reason": "Expand Wikis coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "nextcloud",
+      "cohort": "expansion_candidate",
+      "catalog_id": "nextcloud",
+      "candidate_id": "nextcloud",
+      "acceptance_task": "Upload a file, share it locally, and download it after restart.",
+      "selection_reason": "Expand File Transfer & Synchronization coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "syncthing",
+      "cohort": "expansion_candidate",
+      "catalog_id": "syncthing",
+      "candidate_id": "syncthing",
+      "acceptance_task": "Synchronize a file between two isolated peers and verify its contents.",
+      "selection_reason": "Expand File Transfer & Synchronization coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "ghost",
+      "cohort": "expansion_candidate",
+      "catalog_id": "ghost",
+      "candidate_id": "ghost",
+      "acceptance_task": "Create a draft post and read the published local page.",
+      "selection_reason": "Expand Blogging Platforms coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "ollama",
+      "cohort": "expansion_candidate",
+      "catalog_id": "ollama",
+      "candidate_id": "ollama-cpu",
+      "acceptance_task": "Pull an approved small model and obtain a local inference response.",
+      "selection_reason": "Expand Generative Artificial Intelligence (GenAI) coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "photoprism",
+      "cohort": "expansion_candidate",
+      "catalog_id": "photoprism",
+      "candidate_id": "photoprism",
+      "acceptance_task": "Import a photo, find it by search, and reopen it after restart.",
+      "selection_reason": "Expand Photo Galleries coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "searxng",
+      "cohort": "expansion_candidate",
+      "catalog_id": "searxng",
+      "candidate_id": "searxng",
+      "acceptance_task": "Run a search and verify result handling with a controlled upstream.",
+      "selection_reason": "Expand Search Engines coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "actual",
+      "cohort": "expansion_candidate",
+      "catalog_id": "actual",
+      "candidate_id": "actual",
+      "acceptance_task": "Create an account/category/transaction and verify the balance after restart.",
+      "selection_reason": "Expand Money, Budgeting & Management coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "nocodb",
+      "cohort": "expansion_candidate",
+      "catalog_id": "nocodb",
+      "candidate_id": "nocodb",
+      "acceptance_task": "Create a table and record, query it, and preserve it after restart.",
+      "selection_reason": "Expand Database Management coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "excalidraw",
+      "cohort": "expansion_candidate",
+      "catalog_id": "excalidraw",
+      "candidate_id": "excalidraw",
+      "acceptance_task": "Create a drawing and prove export/import or the declared persistence model.",
+      "selection_reason": "Expand Utilities coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "firefly-iii",
+      "cohort": "expansion_candidate",
+      "catalog_id": "firefly-iii",
+      "candidate_id": "firefly-iii",
+      "acceptance_task": "Create an account and transaction and verify its report after restart.",
+      "selection_reason": "Expand Money, Budgeting & Management coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "file-browser-quantum",
+      "cohort": "expansion_candidate",
+      "catalog_id": "file-browser-quantum",
+      "candidate_id": null,
+      "acceptance_task": "Upload, rename and download a file within an explicitly shared folder.",
+      "selection_reason": "Expand Utilities coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "siyuan",
+      "cohort": "expansion_candidate",
+      "catalog_id": "siyuan",
+      "candidate_id": "siyuan",
+      "acceptance_task": "Create and search a note and reopen it after restart.",
+      "selection_reason": "Expand Knowledge Management Tools coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "appsmith",
+      "cohort": "expansion_candidate",
+      "catalog_id": "appsmith",
+      "candidate_id": "appsmith",
+      "acceptance_task": "Build a minimal page backed by a controlled data source and execute its query.",
+      "selection_reason": "Expand Software Development - Low Code coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "it-tools",
+      "cohort": "expansion_candidate",
+      "catalog_id": "it-tools",
+      "candidate_id": "it-tools",
+      "acceptance_task": "Run a deterministic conversion and verify its result without invented server storage.",
+      "selection_reason": "Expand Software Development - IDE & Tools coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "etherpad",
+      "cohort": "expansion_candidate",
+      "catalog_id": "etherpad",
+      "candidate_id": "etherpad",
+      "acceptance_task": "Edit a pad with two sessions and reopen its content.",
+      "selection_reason": "Expand Office Suites coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "kavita",
+      "cohort": "expansion_candidate",
+      "catalog_id": "kavita",
+      "candidate_id": "kavita",
+      "acceptance_task": "Import an owned sample book and read its pages after restart.",
+      "selection_reason": "Expand Document Management - E-books coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "grist",
+      "cohort": "expansion_candidate",
+      "catalog_id": "grist",
+      "candidate_id": "grist",
+      "acceptance_task": "Create a document/table, edit a cell, and query it after restart.",
+      "selection_reason": "Expand Office Suites coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "linkding",
+      "cohort": "expansion_candidate",
+      "catalog_id": "linkding",
+      "candidate_id": "linkding",
+      "acceptance_task": "Create, tag and search a bookmark after restart.",
+      "selection_reason": "Expand Bookmarks and Link Sharing coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "budibase",
+      "cohort": "expansion_candidate",
+      "catalog_id": "budibase",
+      "candidate_id": "budibase",
+      "acceptance_task": "Build a minimal data-backed app and submit/read a record.",
+      "selection_reason": "Expand Software Development - Low Code coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "docuseal",
+      "cohort": "expansion_candidate",
+      "catalog_id": "docuseal",
+      "candidate_id": "docuseal",
+      "acceptance_task": "Create a synthetic signing request and retrieve its completed document locally.",
+      "selection_reason": "Expand Document Management coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "rss-bridge",
+      "cohort": "expansion_candidate",
+      "catalog_id": "rss-bridge",
+      "candidate_id": "rss-bridge",
+      "acceptance_task": "Generate a feed from a deterministic fixture and parse its items.",
+      "selection_reason": "Expand Feed Readers coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "radicale",
+      "cohort": "expansion_candidate",
+      "catalog_id": "radicale",
+      "candidate_id": "radicale",
+      "acceptance_task": "Create a calendar/contact through DAV and read it from a second client.",
+      "selection_reason": "Expand Calendar & Contacts coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "draw-io",
+      "cohort": "expansion_candidate",
+      "catalog_id": "draw-io",
+      "candidate_id": "drawio",
+      "acceptance_task": "Create a diagram and prove its export/import round trip.",
+      "selection_reason": "Expand Note-taking & Editors coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "libre-translate",
+      "cohort": "expansion_candidate",
+      "catalog_id": "libre-translate",
+      "candidate_id": "libretranslate",
+      "acceptance_task": "Translate a fixed text using installed model resources and inspect the response.",
+      "selection_reason": "Expand Miscellaneous coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "semaphore",
+      "cohort": "expansion_candidate",
+      "catalog_id": "semaphore",
+      "candidate_id": "semaphore",
+      "acceptance_task": "Run a harmless playbook against an isolated test target and inspect its result.",
+      "selection_reason": "Expand Software Development - IDE & Tools coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "rallly",
+      "cohort": "expansion_candidate",
+      "catalog_id": "rallly",
+      "candidate_id": "rallly",
+      "acceptance_task": "Create a poll, submit a vote and reopen the result.",
+      "selection_reason": "Expand Booking and Scheduling coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "audiobookshelf",
+      "cohort": "expansion_candidate",
+      "catalog_id": "audiobookshelf",
+      "candidate_id": "audiobookshelf",
+      "acceptance_task": "Import an owned sample audio book and preserve playback progress.",
+      "selection_reason": "Expand Media Streaming - Audio Streaming coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "owncast",
+      "cohort": "expansion_candidate",
+      "catalog_id": "owncast",
+      "candidate_id": "owncast",
+      "acceptance_task": "Stream a synthetic local feed and verify playback and stream shutdown.",
+      "selection_reason": "Expand Media Streaming - Video Streaming coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "silverbullet",
+      "cohort": "expansion_candidate",
+      "catalog_id": "silverbullet",
+      "candidate_id": "silverbullet",
+      "acceptance_task": "Write and search a page and retrieve it after restart.",
+      "selection_reason": "Expand Note-taking & Editors coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "lychee",
+      "cohort": "expansion_candidate",
+      "catalog_id": "lychee",
+      "candidate_id": "lychee",
+      "acceptance_task": "Upload an image, organize an album and retrieve the image.",
+      "selection_reason": "Expand Photo Galleries coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "limesurvey",
+      "cohort": "expansion_candidate",
+      "catalog_id": "limesurvey",
+      "candidate_id": "limesurvey",
+      "acceptance_task": "Create a survey, submit a response and retrieve its result.",
+      "selection_reason": "Expand Polls and Events coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "dolibarr",
+      "cohort": "expansion_candidate",
+      "catalog_id": "dolibarr",
+      "candidate_id": "dolibarr",
+      "acceptance_task": "Create a synthetic customer and draft invoice and retrieve both.",
+      "selection_reason": "Expand Resource Planning coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "picoshare",
+      "cohort": "expansion_candidate",
+      "catalog_id": "picoshare",
+      "candidate_id": "picoshare",
+      "acceptance_task": "Upload and download a file with scoped sharing and expiration.",
+      "selection_reason": "Expand File Transfer - Single-click & Drag-n-drop Upload coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "koillection",
+      "cohort": "expansion_candidate",
+      "catalog_id": "koillection",
+      "candidate_id": "koillection",
+      "acceptance_task": "Create an inventory item with an image and find it after restart.",
+      "selection_reason": "Expand Miscellaneous coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "papermerge",
+      "cohort": "expansion_candidate",
+      "catalog_id": "papermerge",
+      "candidate_id": "papermerge",
+      "acceptance_task": "Import a synthetic document and verify metadata/search after processing.",
+      "selection_reason": "Expand Document Management coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "jenkins",
+      "cohort": "expansion_candidate",
+      "catalog_id": "jenkins",
+      "candidate_id": "jenkins",
+      "acceptance_task": "Run a harmless isolated job and read its build log/result.",
+      "selection_reason": "Expand Software Development - Testing coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "invoiceplane",
+      "cohort": "expansion_candidate",
+      "catalog_id": "invoiceplane",
+      "candidate_id": "invoiceplane",
+      "acceptance_task": "Create a synthetic client and draft invoice and retrieve its document.",
+      "selection_reason": "Expand Money, Budgeting & Management coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "bookstack",
+      "cohort": "expansion_candidate",
+      "catalog_id": "bookstack",
+      "candidate_id": "bookstack",
+      "acceptance_task": "Create a book/page and search/read it after restart.",
+      "selection_reason": "Expand Wikis coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "freshrss",
+      "cohort": "expansion_candidate",
+      "catalog_id": "freshrss",
+      "candidate_id": "freshrss",
+      "acceptance_task": "Subscribe to a controlled feed and preserve read state.",
+      "selection_reason": "Expand Feed Readers coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "miniflux",
+      "cohort": "expansion_candidate",
+      "catalog_id": "miniflux",
+      "candidate_id": "miniflux",
+      "acceptance_task": "Subscribe to a controlled feed and retrieve/mark an item read.",
+      "selection_reason": "Expand Feed Readers coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "paperless-ngx",
+      "cohort": "expansion_candidate",
+      "catalog_id": "paperless-ngx",
+      "candidate_id": "paperless-ngx",
+      "acceptance_task": "Import a synthetic document, wait for OCR, and retrieve it by search.",
+      "selection_reason": "Expand Document Management coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "mealie",
+      "cohort": "expansion_candidate",
+      "catalog_id": "mealie",
+      "candidate_id": "mealie",
+      "acceptance_task": "Create a recipe and shopping list and reopen both.",
+      "selection_reason": "Expand Recipe Management coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "home-assistant",
+      "cohort": "expansion_candidate",
+      "catalog_id": "home-assistant",
+      "candidate_id": null,
+      "acceptance_task": "Use a simulated integration/entity and run a harmless automation.",
+      "selection_reason": "Expand Internet of Things (IoT) coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "linkwarden",
+      "cohort": "expansion_candidate",
+      "catalog_id": "linkwarden",
+      "candidate_id": "linkwarden",
+      "acceptance_task": "Save a bookmark and verify its declared archive/search behavior.",
+      "selection_reason": "Expand Bookmarks and Link Sharing coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "speedtest-tracker",
+      "cohort": "expansion_candidate",
+      "catalog_id": "speedtest-tracker",
+      "candidate_id": "speedtest-tracker",
+      "acceptance_task": "Record a controlled test result and inspect its historical view.",
+      "selection_reason": "Expand Network Utilities coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "homepage",
+      "cohort": "expansion_candidate",
+      "catalog_id": "homepage",
+      "candidate_id": "homepage",
+      "acceptance_task": "Configure a tile for a local fixture and verify its status/link.",
+      "selection_reason": "Expand Productivity coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    },
+    {
+      "id": "komga",
+      "cohort": "expansion_candidate",
+      "catalog_id": "komga",
+      "candidate_id": "komga",
+      "acceptance_task": "Import an owned sample comic and preserve reading progress.",
+      "selection_reason": "Expand Document Management - E-books coverage with a useful app-level workflow; selected from pinned catalog/reach evidence and live repository screening."
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # Umbrel implementation reference
 
-Expanded September 9: see [the backend coverage plan](backend-app-coverage-plan.md)
+Expanded September 9: see [the backend coverage plan](../backend-app-coverage-plan.md)
 for the repository/dependency/gateway/credential/hook architecture comparison,
 newly pinned app-store sample review, and execution priorities.
 

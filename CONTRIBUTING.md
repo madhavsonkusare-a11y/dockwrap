@@ -27,7 +27,7 @@ cargo tauri build    # release binary + installer in target/release/bundle
 - `cargo fmt --all -- --check`, clippy with warnings denied, and `cargo test --locked`
 - `npm ci` and `npm test` (Windows visual baselines; Linux CI checks interactions/axe)
 - Offline catalog/icon/brand checks described in [the catalog guide](docs/catalog.md)
-- Update the current [task ledger](docs/upgrade-status.md) with actual evidence
+- Update the current [V1 task ledger](docs/V1_TASKS.md) with actual evidence
 
 For the next bounded development batch, start with the
 [agent handoff](docs/agent-handoff.md). It contains scope, acceptance criteria,
@@ -35,7 +35,11 @@ validation commands and current limitations without requiring chat history.
 
 ## Current focus
 
-The v0.5 preview combines discovery, connected instances and three install
-previews. Reuse upstream metadata and deployment instructions, then adapt and
-test recipes individually. Never promote an imported Compose file automatically.
-Runtime reliability, native integration and clean-machine verification are next.
+The integrated baseline has 52 offerings. V1 requires a managed container
+engine, 100 distinct accepted apps, controlled agent access across the roster,
+owner-led V3, signed Windows delivery and an automatic updater. Use the master
+ledger rather than historical phase notes to choose a task. Reuse the existing
+runtime and adapters; do not promote imported definitions automatically.
+
+See the [documentation index](docs/README.md). Keep detailed plans under
+`docs/plans`, unapproved studies under `docs/research`, and the handoff short.

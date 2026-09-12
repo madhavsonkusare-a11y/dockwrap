@@ -4,20 +4,20 @@
 
 The original survey below is useful prioritization, not importer verification.
 Its throwaway scans are not present in this checkout. The reproducible
-[CapRover source-format audit](caprover-source-audit.md) now pins an archive and
+[CapRover source-format audit](../caprover-source-audit.md) now pins an archive and
 checksum in `catalog/import-audit-sources.json`; run
 `python scripts/audit-caprover-source.py` offline. At that revision it measures
 356 definitions, 657 services, 299 apps with validation patterns and 150 apps
 declaring generated hexadecimal variables. These counts differ from the earlier
 scan and do **not** establish 180 installable apps.
 
-The [setup compatibility report](caprover-setup-report.md) additionally runs the
+The [setup compatibility report](../caprover-setup-report.md) additionally runs the
 actual Rust primitives: 1,377 patterns and 222 secret declarations are supported;
 75 apps contain a refused primitive. Complete setup-variable mapping represents
 2,057 variables and refuses 520; the report includes named refusal counts.
 This does not establish deployment support. The refreshed Runtipi report now
 shows 83/250 expressible plans following the owner's port-mapping changes.
-Use the [adapter checklist](caprover-adapter-checklist.md) for the next batch.
+Use the [adapter checklist](../V1_TASKS.md) for the next batch.
 
 Two corrections matter for implementation:
 
@@ -76,7 +76,7 @@ and it applies with equal force here.
 
 This study originally put CapRover at ~180 apps installable today. The real
 adapter, now implemented in `src/importers/caprover.rs` and measured over all
-356 pinned definitions in [the import report](caprover-import-report.md), says
+356 pinned definitions in [the import report](../caprover-import-report.md), says
 **117**. The estimate stands corrected; the ranking does not, and CapRover is
 still the best-fitting source by a wide margin.
 

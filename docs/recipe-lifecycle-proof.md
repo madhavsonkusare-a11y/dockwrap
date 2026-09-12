@@ -50,8 +50,8 @@ Docker prune. Review the private Compose path before any manual cleanup.
 This establishes runtime lifecycle behavior and persistence of a file in the
 app's mounted storage. It does **not** establish application-level document or
 workflow migration, an upgrade between two image versions, clean installer
-behavior, or support on an untested host platform. Recipes remain previews until
-their other graduation gates are met.
+behavior, or support on an untested host platform. Current offering status comes from the reviewed manifests; this dated report
+does not certify a different engine or V1 release candidate.
 
 The first Windows run on September 7 exposed a localhost health defect: only
 the first resolved address was attempted, so IPv6-first localhost could not

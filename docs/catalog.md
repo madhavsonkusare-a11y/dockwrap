@@ -1,9 +1,9 @@
 # Catalog contribution and refresh guide
 
-Local Store ships 1,672 discovery projects from a September 5, 2026 snapshot.
-There are 752 cached SVG/PNG identities; other entries retain a stable monogram.
-The three install previews remain Memos, n8n and Uptime Kuma. Catalog inclusion
-does not establish desktop compatibility or verified automatic installation.
+The integration baseline contains 1,678 discovery entries and local icons or
+monograms for every entry. 52 apps are offered through reviewed recipes and
+templates. Catalog presence is not installation or meaningful-task proof.
+Use [V1_TASKS.md](V1_TASKS.md) for release targets, not discovery totals.
 
 ## Existing sources, adapted as data
 
@@ -47,8 +47,9 @@ python scripts/catalog_pipeline.py --check
 python scripts/cache-catalog-icons.py --check
 ```
 
-The icon refresh reuses the Homarr revision in `catalog/icons.json`; change that
-pin explicitly to update its artwork inventory. Coolify artwork follows its
+The icon refresh reads pinned sources in `catalog/icon-sources.lock.json`;
+change those pins explicitly to update artwork. Per-app choices belong in
+`catalog/icon-overrides.json`. Coolify artwork follows its
 existing pin in `catalog/sources.lock.json`, matched through each project's
 listing provenance. Reviewed Homarr name differences belong in
 `catalog/icon-aliases.json`; a full asset path can select a visually reviewed
@@ -88,7 +89,7 @@ actively maintained or tested by Local Store. `snapshot_only` means retained onl
 from the old catalog. An upstream update date is metadata, not a local test date.
 Architecture filters describe deployment metadata, not desktop installers.
 
-The three install previews have separate [schema-3 recipe requirements](recipe-requirements.md)
+The three original recipes have separate [schema-3 recipe requirements](recipe-requirements.md)
 with cached upstream image-platform evidence. Discovery architecture labels do
 not automatically become install requirements or graduate a catalog entry.
 
@@ -107,7 +108,7 @@ Requests require HTTPS on two explicit GitHub hosts, reject redirects, time out
 after 20 seconds and cap files at 512 KiB. XML validation rejects declarations,
 active elements, event handlers and external references. SVGs that fail validation
 can use the same upstream identity's PNG instead. Pillow verifies and decodes
-PNG files, rejects animation, and bounds dimensions to 2,048 pixels per side.
+PNG files, rejects animation, and bounds dimensions to 4,096 pixels per side.
 SHA-256 binds each committed file to the manifest. Missing/rejected artwork uses
 a monogram; the manifest records the reason. New Homarr matches prefer light
 variants for the dark interface where available.

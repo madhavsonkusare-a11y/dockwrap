@@ -1,0 +1,802 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-12",
+  "method": "GitHub GraphQL public repository fields; no image or application execution",
+  "scope": "48 expansion candidates; repository activity is not image maintenance or task verification",
+  "selected": {
+    "outline": {
+      "nameWithOwner": "outline/outline",
+      "url": "https://github.com/outline/outline",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-12T04:34:46Z",
+      "stargazerCount": 40524,
+      "licenseInfo": {
+        "spdxId": "NOASSERTION"
+      },
+      "latestRelease": {
+        "tagName": "v1.10.1",
+        "publishedAt": "2026-09-09T13:14:41Z",
+        "url": "https://github.com/outline/outline/releases/tag/v1.10.1"
+      }
+    },
+    "nextcloud": {
+      "nameWithOwner": "nextcloud/server",
+      "url": "https://github.com/nextcloud/server",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-12T16:25:05Z",
+      "stargazerCount": 36785,
+      "licenseInfo": {
+        "spdxId": "AGPL-3.0"
+      },
+      "latestRelease": {
+        "tagName": "v32.0.15",
+        "publishedAt": "2026-09-10T13:54:33Z",
+        "url": "https://github.com/nextcloud/server/releases/tag/v32.0.15"
+      }
+    },
+    "syncthing": {
+      "nameWithOwner": "syncthing/syncthing",
+      "url": "https://github.com/syncthing/syncthing",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-12T09:11:35Z",
+      "stargazerCount": 88500,
+      "licenseInfo": {
+        "spdxId": "MPL-2.0"
+      },
+      "latestRelease": {
+        "tagName": "v2.1.5",
+        "publishedAt": "2026-09-08T07:35:00Z",
+        "url": "https://github.com/syncthing/syncthing/releases/tag/v2.1.5"
+      }
+    },
+    "ghost": {
+      "nameWithOwner": "TryGhost/Ghost",
+      "url": "https://github.com/TryGhost/Ghost",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-12T16:27:25Z",
+      "stargazerCount": 55290,
+      "licenseInfo": {
+        "spdxId": "MIT"
+      },
+      "latestRelease": {
+        "tagName": "v6.63.0",
+        "publishedAt": "2026-09-08T20:21:36Z",
+        "url": "https://github.com/TryGhost/Ghost/releases/tag/v6.63.0"
+      }
+    },
+    "ollama": {
+      "nameWithOwner": "ollama/ollama",
+      "url": "https://github.com/ollama/ollama",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-11T21:44:45Z",
+      "stargazerCount": 180737,
+      "licenseInfo": {
+        "spdxId": "MIT"
+      },
+      "latestRelease": {
+        "tagName": "v0.34.0",
+        "publishedAt": "2026-09-05T23:49:00Z",
+        "url": "https://github.com/ollama/ollama/releases/tag/v0.34.0"
+      }
+    },
+    "photoprism": {
+      "nameWithOwner": "photoprism/photoprism",
+      "url": "https://github.com/photoprism/photoprism",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-12T12:11:46Z",
+      "stargazerCount": 40187,
+      "licenseInfo": {
+        "spdxId": "NOASSERTION"
+      },
+      "latestRelease": {
+        "tagName": "260728-bbde8f452",
+        "publishedAt": "2026-07-28T12:45:22Z",
+        "url": "https://github.com/photoprism/photoprism/releases/tag/260728-bbde8f452"
+      }
+    },
+    "searxng": {
+      "nameWithOwner": "searxng/searxng",
+      "url": "https://github.com/searxng/searxng",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-12T16:26:04Z",
+      "stargazerCount": 36810,
+      "licenseInfo": {
+        "spdxId": "AGPL-3.0"
+      },
+      "latestRelease": null
+    },
+    "actual": {
+      "nameWithOwner": "actualbudget/actual",
+      "url": "https://github.com/actualbudget/actual",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-12T09:24:57Z",
+      "stargazerCount": 28716,
+      "licenseInfo": {
+        "spdxId": "MIT"
+      },
+      "latestRelease": {
+        "tagName": "v26.9.0",
+        "publishedAt": "2026-09-01T09:15:56Z",
+        "url": "https://github.com/actualbudget/actual/releases/tag/v26.9.0"
+      }
+    },
+    "nocodb": {
+      "nameWithOwner": "nocodb/nocodb",
+      "url": "https://github.com/nocodb/nocodb",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-12T14:56:28Z",
+      "stargazerCount": 64947,
+      "licenseInfo": {
+        "spdxId": "NOASSERTION"
+      },
+      "latestRelease": {
+        "tagName": "2026.09.0",
+        "publishedAt": "2026-09-10T12:06:46Z",
+        "url": "https://github.com/nocodb/nocodb/releases/tag/2026.09.0"
+      }
+    },
+    "excalidraw": {
+      "nameWithOwner": "excalidraw/excalidraw",
+      "url": "https://github.com/excalidraw/excalidraw",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-11T19:44:54Z",
+      "stargazerCount": 131667,
+      "licenseInfo": {
+        "spdxId": "MIT"
+      },
+      "latestRelease": {
+        "tagName": "v0.18.1",
+        "publishedAt": "2026-04-21T08:43:20Z",
+        "url": "https://github.com/excalidraw/excalidraw/releases/tag/v0.18.1"
+      }
+    },
+    "firefly-iii": {
+      "nameWithOwner": "firefly-iii/firefly-iii",
+      "url": "https://github.com/firefly-iii/firefly-iii",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-12T16:37:55Z",
+      "stargazerCount": 24589,
+      "licenseInfo": {
+        "spdxId": "AGPL-3.0"
+      },
+      "latestRelease": {
+        "tagName": "v6.6.6",
+        "publishedAt": "2026-07-01T19:09:14Z",
+        "url": "https://github.com/firefly-iii/firefly-iii/releases/tag/v6.6.6"
+      }
+    },
+    "siyuan": {
+      "nameWithOwner": "siyuan-note/siyuan",
+      "url": "https://github.com/siyuan-note/siyuan",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-12T13:28:54Z",
+      "stargazerCount": 46317,
+      "licenseInfo": {
+        "spdxId": "AGPL-3.0"
+      },
+      "latestRelease": {
+        "tagName": "v3.8.3",
+        "publishedAt": "2026-09-07T04:11:09Z",
+        "url": "https://github.com/siyuan-note/siyuan/releases/tag/v3.8.3"
+      }
+    },
+    "appsmith": {
+      "nameWithOwner": "appsmithorg/appsmith",
+      "url": "https://github.com/appsmithorg/appsmith",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-11T22:04:07Z",
+      "stargazerCount": 40862,
+      "licenseInfo": {
+        "spdxId": "Apache-2.0"
+      },
+      "latestRelease": {
+        "tagName": "v2.4",
+        "publishedAt": "2026-09-09T17:59:30Z",
+        "url": "https://github.com/appsmithorg/appsmith/releases/tag/v2.4"
+      }
+    },
+    "it-tools": {
+      "nameWithOwner": "CorentinTh/it-tools",
+      "url": "https://github.com/CorentinTh/it-tools",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-10T17:58:40Z",
+      "stargazerCount": 40561,
+      "licenseInfo": {
+        "spdxId": "GPL-3.0"
+      },
+      "latestRelease": {
+        "tagName": "v2024.10.22-7ca5933",
+        "publishedAt": "2024-10-22T09:58:03Z",
+        "url": "https://github.com/CorentinTh/it-tools/releases/tag/v2024.10.22-7ca5933"
+      }
+    },
+    "etherpad": {
+      "nameWithOwner": "ether/etherpad",
+      "url": "https://github.com/ether/etherpad",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-11T15:49:25Z",
+      "stargazerCount": 18545,
+      "licenseInfo": {
+        "spdxId": "Apache-2.0"
+      },
+      "latestRelease": {
+        "tagName": "v3.3.3",
+        "publishedAt": "2026-07-29T11:46:41Z",
+        "url": "https://github.com/ether/etherpad/releases/tag/v3.3.3"
+      }
+    },
+    "kavita": {
+      "nameWithOwner": "Kareadita/Kavita",
+      "url": "https://github.com/Kareadita/Kavita",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-12T15:45:41Z",
+      "stargazerCount": 11665,
+      "licenseInfo": {
+        "spdxId": "GPL-3.0"
+      },
+      "latestRelease": {
+        "tagName": "v0.9.1.4",
+        "publishedAt": "2026-09-02T21:07:38Z",
+        "url": "https://github.com/Kareadita/Kavita/releases/tag/v0.9.1.4"
+      }
+    },
+    "grist": {
+      "nameWithOwner": "gristlabs/grist-core",
+      "url": "https://github.com/gristlabs/grist-core",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-11T18:31:52Z",
+      "stargazerCount": 11765,
+      "licenseInfo": {
+        "spdxId": "Apache-2.0"
+      },
+      "latestRelease": {
+        "tagName": "v1.7.19",
+        "publishedAt": "2026-09-06T03:29:20Z",
+        "url": "https://github.com/gristlabs/grist-core/releases/tag/v1.7.19"
+      }
+    },
+    "linkding": {
+      "nameWithOwner": "sissbruecker/linkding",
+      "url": "https://github.com/sissbruecker/linkding",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-12T14:55:55Z",
+      "stargazerCount": 11163,
+      "licenseInfo": {
+        "spdxId": "MIT"
+      },
+      "latestRelease": {
+        "tagName": "v1.46.2",
+        "publishedAt": "2026-08-18T21:07:05Z",
+        "url": "https://github.com/sissbruecker/linkding/releases/tag/v1.46.2"
+      }
+    },
+    "budibase": {
+      "nameWithOwner": "Budibase/budibase",
+      "url": "https://github.com/Budibase/budibase",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-11T11:45:43Z",
+      "stargazerCount": 28275,
+      "licenseInfo": {
+        "spdxId": "NOASSERTION"
+      },
+      "latestRelease": {
+        "tagName": "v3.44.1",
+        "publishedAt": "2026-09-07T07:38:15Z",
+        "url": "https://github.com/Budibase/budibase/releases/tag/v3.44.1"
+      }
+    },
+    "docuseal": {
+      "nameWithOwner": "docusealco/docuseal",
+      "url": "https://github.com/docusealco/docuseal",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-07T10:02:39Z",
+      "stargazerCount": 18504,
+      "licenseInfo": {
+        "spdxId": "AGPL-3.0"
+      },
+      "latestRelease": {
+        "tagName": "3.2.4",
+        "publishedAt": "2026-09-07T10:02:39Z",
+        "url": "https://github.com/docusealco/docuseal/releases/tag/3.2.4"
+      }
+    },
+    "rss-bridge": {
+      "nameWithOwner": "RSS-Bridge/rss-bridge",
+      "url": "https://github.com/RSS-Bridge/rss-bridge",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-08-28T16:45:53Z",
+      "stargazerCount": 9231,
+      "licenseInfo": {
+        "spdxId": "Unlicense"
+      },
+      "latestRelease": {
+        "tagName": "2025-08-05",
+        "publishedAt": "2025-08-05T17:52:31Z",
+        "url": "https://github.com/RSS-Bridge/rss-bridge/releases/tag/2025-08-05"
+      }
+    },
+    "radicale": {
+      "nameWithOwner": "Kozea/Radicale",
+      "url": "https://github.com/Kozea/Radicale",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-07T19:36:54Z",
+      "stargazerCount": 4993,
+      "licenseInfo": {
+        "spdxId": "GPL-3.0"
+      },
+      "latestRelease": {
+        "tagName": "v3.8.0",
+        "publishedAt": "2026-09-03T05:42:42Z",
+        "url": "https://github.com/Kozea/Radicale/releases/tag/v3.8.0"
+      }
+    },
+    "draw-io": {
+      "nameWithOwner": "jgraph/drawio",
+      "url": "https://github.com/jgraph/drawio",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-11T04:13:07Z",
+      "stargazerCount": 8073,
+      "licenseInfo": {
+        "spdxId": "Apache-2.0"
+      },
+      "latestRelease": {
+        "tagName": "v31.4.5",
+        "publishedAt": "2026-09-08T15:04:34Z",
+        "url": "https://github.com/jgraph/drawio/releases/tag/v31.4.5"
+      }
+    },
+    "libre-translate": {
+      "nameWithOwner": "LibreTranslate/LibreTranslate",
+      "url": "https://github.com/LibreTranslate/LibreTranslate",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-03T17:05:31Z",
+      "stargazerCount": 16357,
+      "licenseInfo": {
+        "spdxId": "AGPL-3.0"
+      },
+      "latestRelease": {
+        "tagName": "v1.9.6",
+        "publishedAt": "2026-05-26T17:45:39Z",
+        "url": "https://github.com/LibreTranslate/LibreTranslate/releases/tag/v1.9.6"
+      }
+    },
+    "semaphore": {
+      "nameWithOwner": "semaphoreui/semaphore",
+      "url": "https://github.com/semaphoreui/semaphore",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-12T12:33:07Z",
+      "stargazerCount": 14135,
+      "licenseInfo": {
+        "spdxId": "MIT"
+      },
+      "latestRelease": {
+        "tagName": "v2.19.12",
+        "publishedAt": "2026-08-30T13:10:59Z",
+        "url": "https://github.com/semaphoreui/semaphore/releases/tag/v2.19.12"
+      }
+    },
+    "rallly": {
+      "nameWithOwner": "lukevella/rallly",
+      "url": "https://github.com/lukevella/rallly",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-12T16:23:19Z",
+      "stargazerCount": 5255,
+      "licenseInfo": {
+        "spdxId": "AGPL-3.0"
+      },
+      "latestRelease": {
+        "tagName": "v4.15.0",
+        "publishedAt": "2026-09-09T16:34:27Z",
+        "url": "https://github.com/lukevella/rallly/releases/tag/v4.15.0"
+      }
+    },
+    "owncast": {
+      "nameWithOwner": "owncast/owncast",
+      "url": "https://github.com/owncast/owncast",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-12T09:11:45Z",
+      "stargazerCount": 11523,
+      "licenseInfo": {
+        "spdxId": "MIT"
+      },
+      "latestRelease": {
+        "tagName": "v0.3.0",
+        "publishedAt": "2026-09-03T16:31:05Z",
+        "url": "https://github.com/owncast/owncast/releases/tag/v0.3.0"
+      }
+    },
+    "silverbullet": {
+      "nameWithOwner": "silverbulletmd/silverbullet",
+      "url": "https://github.com/silverbulletmd/silverbullet",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-12T12:08:23Z",
+      "stargazerCount": 6039,
+      "licenseInfo": {
+        "spdxId": "MIT"
+      },
+      "latestRelease": {
+        "tagName": "2.10.0",
+        "publishedAt": "2026-07-28T12:44:21Z",
+        "url": "https://github.com/silverbulletmd/silverbullet/releases/tag/2.10.0"
+      }
+    },
+    "lychee": {
+      "nameWithOwner": "LycheeOrg/Lychee",
+      "url": "https://github.com/LycheeOrg/Lychee",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-11T20:50:43Z",
+      "stargazerCount": 4289,
+      "licenseInfo": {
+        "spdxId": "MIT"
+      },
+      "latestRelease": {
+        "tagName": "v7.8.3",
+        "publishedAt": "2026-09-01T19:23:48Z",
+        "url": "https://github.com/LycheeOrg/Lychee/releases/tag/v7.8.3"
+      }
+    },
+    "limesurvey": {
+      "nameWithOwner": "LimeSurvey/LimeSurvey",
+      "url": "https://github.com/LimeSurvey/LimeSurvey",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-11T23:52:23Z",
+      "stargazerCount": 3717,
+      "licenseInfo": {
+        "spdxId": "NOASSERTION"
+      },
+      "latestRelease": null
+    },
+    "dolibarr": {
+      "nameWithOwner": "Dolibarr/dolibarr",
+      "url": "https://github.com/Dolibarr/dolibarr",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-12T16:34:56Z",
+      "stargazerCount": 7600,
+      "licenseInfo": {
+        "spdxId": "GPL-3.0"
+      },
+      "latestRelease": {
+        "tagName": "24.0.1",
+        "publishedAt": "2026-09-07T12:58:22Z",
+        "url": "https://github.com/Dolibarr/dolibarr/releases/tag/24.0.1"
+      }
+    },
+    "picoshare": {
+      "nameWithOwner": "mtlynch/picoshare",
+      "url": "https://github.com/mtlynch/picoshare",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-12T13:53:32Z",
+      "stargazerCount": 3031,
+      "licenseInfo": {
+        "spdxId": "NOASSERTION"
+      },
+      "latestRelease": {
+        "tagName": "v1.5.4",
+        "publishedAt": "2026-05-26T17:58:29Z",
+        "url": "https://github.com/mtlynch/picoshare/releases/tag/v1.5.4"
+      }
+    },
+    "koillection": {
+      "nameWithOwner": "benjaminjonard/koillection",
+      "url": "https://github.com/benjaminjonard/koillection",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-08T21:25:25Z",
+      "stargazerCount": 1311,
+      "licenseInfo": {
+        "spdxId": "MIT"
+      },
+      "latestRelease": {
+        "tagName": "1.8.4",
+        "publishedAt": "2026-08-23T13:52:16Z",
+        "url": "https://github.com/benjaminjonard/koillection/releases/tag/1.8.4"
+      }
+    },
+    "papermerge": {
+      "nameWithOwner": "papermerge/papermerge-core",
+      "url": "https://github.com/papermerge/papermerge-core",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-05T07:26:05Z",
+      "stargazerCount": 537,
+      "licenseInfo": {
+        "spdxId": "Apache-2.0"
+      },
+      "latestRelease": {
+        "tagName": "3.5.3",
+        "publishedAt": "2025-08-18T05:40:26Z",
+        "url": "https://github.com/papermerge/papermerge-core/releases/tag/3.5.3"
+      }
+    },
+    "jenkins": {
+      "nameWithOwner": "jenkinsci/jenkins",
+      "url": "https://github.com/jenkinsci/jenkins",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-11T16:46:34Z",
+      "stargazerCount": 26541,
+      "licenseInfo": {
+        "spdxId": "MIT"
+      },
+      "latestRelease": {
+        "tagName": "jenkins-2.581",
+        "publishedAt": "2026-09-08T12:39:16Z",
+        "url": "https://github.com/jenkinsci/jenkins/releases/tag/jenkins-2.581"
+      }
+    },
+    "invoiceplane": {
+      "nameWithOwner": "InvoicePlane/InvoicePlane",
+      "url": "https://github.com/InvoicePlane/InvoicePlane",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-11T05:44:02Z",
+      "stargazerCount": 3139,
+      "licenseInfo": {
+        "spdxId": "NOASSERTION"
+      },
+      "latestRelease": {
+        "tagName": "v1.7.2",
+        "publishedAt": "2026-08-28T09:00:53Z",
+        "url": "https://github.com/InvoicePlane/InvoicePlane/releases/tag/v1.7.2"
+      }
+    },
+    "bookstack": {
+      "nameWithOwner": "BookStackApp/BookStack",
+      "url": "https://github.com/BookStackApp/BookStack",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-11T04:31:10Z",
+      "stargazerCount": 19038,
+      "licenseInfo": {
+        "spdxId": "MIT"
+      },
+      "latestRelease": {
+        "tagName": "v26.05.4",
+        "publishedAt": "2026-08-24T12:49:34Z",
+        "url": "https://github.com/BookStackApp/BookStack/releases/tag/v26.05.4"
+      }
+    },
+    "freshrss": {
+      "nameWithOwner": "FreshRSS/FreshRSS",
+      "url": "https://github.com/FreshRSS/FreshRSS",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-11T06:18:09Z",
+      "stargazerCount": 15997,
+      "licenseInfo": {
+        "spdxId": "AGPL-3.0"
+      },
+      "latestRelease": {
+        "tagName": "1.30.0",
+        "publishedAt": "2026-09-09T14:43:40Z",
+        "url": "https://github.com/FreshRSS/FreshRSS/releases/tag/1.30.0"
+      }
+    },
+    "miniflux": {
+      "nameWithOwner": "miniflux/v2",
+      "url": "https://github.com/miniflux/v2",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-12T02:28:22Z",
+      "stargazerCount": 9681,
+      "licenseInfo": {
+        "spdxId": "Apache-2.0"
+      },
+      "latestRelease": {
+        "tagName": "2.3.3",
+        "publishedAt": "2026-07-24T22:41:57Z",
+        "url": "https://github.com/miniflux/v2/releases/tag/2.3.3"
+      }
+    },
+    "paperless-ngx": {
+      "nameWithOwner": "paperless-ngx/paperless-ngx",
+      "url": "https://github.com/paperless-ngx/paperless-ngx",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-12T12:24:58Z",
+      "stargazerCount": 45034,
+      "licenseInfo": {
+        "spdxId": "GPL-3.0"
+      },
+      "latestRelease": {
+        "tagName": "v3.1.3",
+        "publishedAt": "2026-09-04T03:12:42Z",
+        "url": "https://github.com/paperless-ngx/paperless-ngx/releases/tag/v3.1.3"
+      }
+    },
+    "mealie": {
+      "nameWithOwner": "mealie-recipes/mealie",
+      "url": "https://github.com/mealie-recipes/mealie",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-12T15:36:40Z",
+      "stargazerCount": 13203,
+      "licenseInfo": {
+        "spdxId": "AGPL-3.0"
+      },
+      "latestRelease": {
+        "tagName": "v3.25.1",
+        "publishedAt": "2026-09-04T03:22:44Z",
+        "url": "https://github.com/mealie-recipes/mealie/releases/tag/v3.25.1"
+      }
+    },
+    "home-assistant": {
+      "nameWithOwner": "home-assistant/core",
+      "url": "https://github.com/home-assistant/core",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-12T17:44:30Z",
+      "stargazerCount": 90398,
+      "licenseInfo": {
+        "spdxId": "Apache-2.0"
+      },
+      "latestRelease": {
+        "tagName": "2026.9.2",
+        "publishedAt": "2026-09-11T19:40:36Z",
+        "url": "https://github.com/home-assistant/core/releases/tag/2026.9.2"
+      }
+    },
+    "linkwarden": {
+      "nameWithOwner": "linkwarden/linkwarden",
+      "url": "https://github.com/linkwarden/linkwarden",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-10T18:53:30Z",
+      "stargazerCount": 19730,
+      "licenseInfo": {
+        "spdxId": "AGPL-3.0"
+      },
+      "latestRelease": {
+        "tagName": "v2.16.3",
+        "publishedAt": "2026-09-09T21:34:39Z",
+        "url": "https://github.com/linkwarden/linkwarden/releases/tag/v2.16.3"
+      }
+    },
+    "speedtest-tracker": {
+      "nameWithOwner": "alexjustesen/speedtest-tracker",
+      "url": "https://github.com/alexjustesen/speedtest-tracker",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-08-27T17:57:17Z",
+      "stargazerCount": 5950,
+      "licenseInfo": {
+        "spdxId": "MIT"
+      },
+      "latestRelease": {
+        "tagName": "v1.15.0",
+        "publishedAt": "2026-08-21T19:12:32Z",
+        "url": "https://github.com/alexjustesen/speedtest-tracker/releases/tag/v1.15.0"
+      }
+    },
+    "homepage": {
+      "nameWithOwner": "gethomepage/homepage",
+      "url": "https://github.com/gethomepage/homepage",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-12T12:24:48Z",
+      "stargazerCount": 32533,
+      "licenseInfo": {
+        "spdxId": "GPL-3.0"
+      },
+      "latestRelease": {
+        "tagName": "v2.3.0",
+        "publishedAt": "2026-09-09T21:54:02Z",
+        "url": "https://github.com/gethomepage/homepage/releases/tag/v2.3.0"
+      }
+    },
+    "komga": {
+      "nameWithOwner": "gotson/komga",
+      "url": "https://github.com/gotson/komga",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-11T01:22:55Z",
+      "stargazerCount": 6658,
+      "licenseInfo": {
+        "spdxId": "MIT"
+      },
+      "latestRelease": {
+        "tagName": "1.26.3",
+        "publishedAt": "2026-08-12T10:28:21Z",
+        "url": "https://github.com/gotson/komga/releases/tag/1.26.3"
+      }
+    },
+    "file-browser-quantum": {
+      "nameWithOwner": "gtsteffaniak/filebrowser",
+      "url": "https://github.com/gtsteffaniak/filebrowser",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-12T03:28:49Z",
+      "stargazerCount": 8263,
+      "licenseInfo": {
+        "spdxId": "Apache-2.0"
+      },
+      "latestRelease": {
+        "tagName": "v1.5.6-stable",
+        "publishedAt": "2026-09-04T21:31:13Z",
+        "url": "https://github.com/gtsteffaniak/filebrowser/releases/tag/v1.5.6-stable"
+      }
+    },
+    "audiobookshelf": {
+      "nameWithOwner": "advplyr/audiobookshelf",
+      "url": "https://github.com/advplyr/audiobookshelf",
+      "isArchived": false,
+      "isDisabled": false,
+      "pushedAt": "2026-09-11T21:02:20Z",
+      "stargazerCount": 14303,
+      "licenseInfo": {
+        "spdxId": "GPL-3.0"
+      },
+      "latestRelease": {
+        "tagName": "v2.36.0",
+        "publishedAt": "2026-07-27T22:59:30Z",
+        "url": "https://github.com/advplyr/audiobookshelf/releases/tag/v2.36.0"
+      }
+    }
+  },
+  "excluded_archived": {
+    "file-browser": {
+      "nameWithOwner": "filebrowser/filebrowser",
+      "url": "https://github.com/filebrowser/filebrowser",
+      "isArchived": true,
+      "isDisabled": false,
+      "pushedAt": "2026-07-31T10:06:58Z",
+      "stargazerCount": 35956,
+      "licenseInfo": {
+        "spdxId": "Apache-2.0"
+      },
+      "latestRelease": {
+        "tagName": "v2.63.23",
+        "publishedAt": "2026-07-27T20:03:21Z",
+        "url": "https://github.com/filebrowser/filebrowser/releases/tag/v2.63.23"
+      }
+    },
+    "pingvin-share": {
+      "nameWithOwner": "stonith404/pingvin-share",
+      "url": "https://github.com/stonith404/pingvin-share",
+      "isArchived": true,
+      "isDisabled": false,
+      "pushedAt": "2026-05-18T20:19:06Z",
+      "stargazerCount": 4669,
+      "licenseInfo": {
+        "spdxId": "BSD-2-Clause"
+      },
+      "latestRelease": {
+        "tagName": "v1.13.0",
+        "publishedAt": "2025-05-25T20:21:13Z",
+        "url": "https://github.com/stonith404/pingvin-share/releases/tag/v1.13.0"
+      }
+    }
+  }
+}

@@ -110,7 +110,7 @@ its stable ID, provenance, icon path, capability and optional recipe ID.
 The additional `next_offset` is an integer when another page exists and `null`
 otherwise. Repeat the same search and filters using that offset until it is
 null. The human-readable output also explains which offset to request next.
-Catalog growth never expands the three-recipe install-preview allowlist.
+Catalog growth never automatically expands the reviewed offering allowlist.
 
 ## Implementation and verification
 
@@ -168,3 +168,11 @@ Candidates include intentionally preserved data, so their presence does not
 prove an interrupted installation. Ownership status is reported explicitly.
 The empty result is `[]` in JSON mode. See
 [interrupted installation recovery](interrupted-install-recovery.md).
+
+## Recovery actions
+
+`local-store recover <app-id>` clears an owned retained setup, preserving its
+data. `--delete-data` explicitly requests removal of owned app data.
+`local-store adopt <app-id>` resumes a supported retained setup and registers
+it only after readiness. Both re-check ownership under the operation lock;
+the inventory is never authority for deletion. See the recovery guide.

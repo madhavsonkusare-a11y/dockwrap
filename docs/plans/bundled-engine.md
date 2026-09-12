@@ -1,4 +1,8 @@
-# Running apps without Docker Desktop
+# Managed container engine for V1
+
+Required by the owner September 12, 2026. Status and dependencies are
+E01–E04 in [V1_TASKS.md](../V1_TASKS.md). Moby/Compose in WSL is the proposed
+implementation; packaging and licensing still require fresh verification.
 
 Local Store asks the person to install Docker Desktop before it can install
 anything. That is the largest dependency in the product, it carries a licence
@@ -8,7 +12,8 @@ behaviour underneath a proof. This is how to remove it.
 ## Goal, and what is not the goal
 
 **Goal.** No third-party application to install. Local Store ships and manages
-its own container engine, starts it when needed, and stops it when it exits.
+its own container engine, starts it when needed, and applies an explicit background-app policy. Closing
+the launcher must not silently stop installed applications.
 
 **Not the goal.** Running Linux images without a Linux kernel. On Windows that
 means WSL2 or a virtual machine whatever the engine is called, and WSL2 needs a
@@ -85,7 +90,7 @@ program name is not `docker`.
 
 A distro image containing `dockerd`, `containerd`, `runc`, the CLI and the
 Compose plugin, imported with `wsl --import` under a name Local Store owns.
-Start it on demand, stop it when Local Store exits, and expose it on a socket
+Start it on demand, preserve explicitly allowed background operation, and expose it on a socket
 only Local Store uses. Version pinned by Local Store, so an upstream update
 cannot change behaviour under a proof.
 
@@ -113,7 +118,8 @@ roadmap's items 1 and 2 rather than separately.
 
 - Compact the disk image automatically. The virtual disk grew to 94 GB against
   26 GB of real data on 2026-09-12 and had to be compacted by hand with
-  diskpart; a managed engine can do this on a schedule or when space runs low.
+  diskpart; a managed engine can do this on a schedule or when space runs low, only after an explicit safe maintenance design. Never
+  compact or unregister another product's distro/disk.
 - Report engine health and disk use in the doctor check, instead of "start
   Docker Desktop".
 - Pin the engine version per release, so a proof names the exact stack.
