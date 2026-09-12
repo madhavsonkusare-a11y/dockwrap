@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Local Store V2 — brand mark lab</title>
+  <link rel="stylesheet" href="brand-mark-lab.css">
+</head>
+<body>
+  <main class="lab-shell">
+    <header class="topbar">
+      <div class="wordmark"><img src="assets/brand/mark-small.svg" alt=""><span>Local Store</span></div>
+      <span class="phase-tag">V2 · Phase 04</span>
+    </header>
+
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Brand mark study · approved direction</p>
+        <h1>A warm signal.<br>A crisp promise.</h1>
+        <p class="lede">The familiar mark keeps its exact geometry. Tonally compressed micro-grain sits inside a shaped ember surface, while the cream path stays completely untouched and legible.</p>
+        <p class="approval-line">Satin ember approved for marks 32 px and larger</p>
+      </div>
+      <div class="hero-mark"><img src="assets/brand/mark-grain-approved.svg" alt="Local Store mark with subtle ember grain"></div>
+    </section>
+
+    <section class="section" aria-labelledby="variants-title">
+      <div class="section-head">
+        <div><p class="section-kicker">01 · Material study</p><h2 id="variants-title">Grain should be felt before it is noticed.</h2></div>
+        <p class="section-note">Only the orange square changes. The improved treatments separate surface tone, fine grain, and rim light instead of asking one noise layer to create all the depth.</p>
+      </div>
+      <div class="variant-grid">
+        <article class="variant-card">
+          <div class="variant-stage"><img src="assets/brand/mark-flat.svg" alt="Flat orange mark"></div>
+          <div class="variant-meta"><h3>Flat ember</h3><span class="status">baseline</span></div>
+          <p>Maximum portability, but loses the tactile warmth that distinguishes the V2 direction.</p>
+        </article>
+        <article class="variant-card approved">
+          <div class="variant-stage"><img src="assets/brand/mark-grain-subtle.svg" alt="Subtle grain orange mark"></div>
+          <div class="variant-meta"><h3>Satin ember</h3><span class="status approved">approved</span></div>
+          <p>Compressed monochrome micro-grain, a quiet warm bloom, and a one-unit optical rim create a controlled material.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="surfaces-title">
+      <div class="section-head">
+        <div><p class="section-kicker">02 · Surface proof</p><h2 id="surfaces-title">One mark, two contrast roles.</h2></div>
+        <p class="section-note">Cream is the default on dark and ember surfaces. The light-surface export changes only the path to near-black; the textured tile is unchanged.</p>
+      </div>
+      <div class="surface-grid">
+        <div class="surface base"><img src="assets/brand/mark-grain-approved.svg" alt="Mark on base surface"><span class="surface-label">Base <code>#0c0a09</code></span></div>
+        <div class="surface raised"><img src="assets/brand/mark-grain-approved.svg" alt="Mark on raised surface"><span class="surface-label">Raised <code>#161211</code></span></div>
+        <div class="surface orange"><img src="assets/brand/mark-grain-approved.svg" alt="Mark on deep orange surface"><span class="surface-label">Deep ember <code>#6e2708</code></span></div>
+        <div class="surface light"><img src="assets/brand/mark-grain-approved-light.svg" alt="Dark-path mark on light surface"><span class="surface-label">Light <code>#f7f1e9</code></span></div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="sizes-title">
+      <div class="section-head">
+        <div><p class="section-kicker">03 · Optical sizes</p><h2 id="sizes-title">Texture earns its pixels.</h2></div>
+        <p class="section-note">At 16 and 24 px, a flat tile avoids shimmer and mud. From 32 px upward, the approved filtered mark takes over.</p>
+      </div>
+      <div class="size-strip">
+        <div class="size-cell" style="--mark-size:16px"><img src="assets/brand/mark-small.svg" alt="Mark at 16 pixels"><span class="size-meta">16 px <small>flat</small></span></div>
+        <div class="size-cell" style="--mark-size:24px"><img src="assets/brand/mark-small.svg" alt="Mark at 24 pixels"><span class="size-meta">24 px <small>flat</small></span></div>
+        <div class="size-cell" style="--mark-size:32px"><img src="assets/brand/mark-grain-approved.svg" alt="Mark at 32 pixels"><span class="size-meta">32 px</span></div>
+        <div class="size-cell" style="--mark-size:48px"><img src="assets/brand/mark-grain-approved.svg" alt="Mark at 48 pixels"><span class="size-meta">48 px</span></div>
+        <div class="size-cell" style="--mark-size:64px"><img src="assets/brand/mark-grain-approved.svg" alt="Mark at 64 pixels"><span class="size-meta">64 px</span></div>
+        <div class="size-cell" style="--mark-size:128px"><img src="assets/brand/mark-grain-approved.svg" alt="Mark at 128 pixels"><span class="size-meta">128 px</span></div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="fallback-title">
+      <div class="section-head">
+        <div><p class="section-kicker">04 · Rendering resilience</p><h2 id="fallback-title">A static fallback keeps the same temperature.</h2></div>
+        <p class="section-note">The fallback is a 512 px transparent bake of the approved mark. It is deterministic, offline, and visually identical to the source render—without runtime filter work.</p>
+      </div>
+      <div class="fallback-grid">
+        <article class="fallback-card"><img src="assets/brand/mark-grain-approved.svg" alt="Approved filtered mark"><div><h3>Layered SVG</h3><span class="status approved">primary</span><p>Seeded two-octave micro-grain over independent ember tone and edge-light layers.</p></div></article>
+        <article class="fallback-card"><img src="assets/brand/mark-grain-baked.png" alt="Baked PNG fallback mark"><div><h3>Baked PNG</h3><span class="status">fallback</span><p>A transparent 512 px capture of the approved render—no dots, repeated pattern, or runtime filter.</p></div></article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="review-title">
+      <div class="section-head">
+        <div><p class="section-kicker">05 · Design review</p><h2 id="review-title">The decisions that survived the comparison.</h2></div>
+        <p class="section-note">Review follows the V2 restraint rule: depth can support identity, but cannot reduce recognition or clarity.</p>
+      </div>
+      <table class="decision-table">
+        <thead><tr><th>Before</th><th>After</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>Single noise blend over a gradient</td><td>Separate tone, micro-grain, bloom, and rim layers</td><td>Material depth becomes controlled and directional instead of uniformly noisy.</td></tr>
+          <tr><td>Single reversed mark</td><td>Cream-on-dark and ink-on-light exports</td><td>Preserves clear path contrast across every required surface.</td></tr>
+          <tr><td>One asset at every size</td><td>Flat optical variant at 16 and 24 px</td><td>Removes subpixel noise where texture cannot be read reliably.</td></tr>
+          <tr><td>Visible vector-dot fallback</td><td>Transparent 512 px render bake</td><td>Preserves the exact premium texture without a repeated pattern or runtime filter.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer class="footer"><span>Local Store · Brand mark lab</span><code>64 × 64 master grid · seed 23</code></footer>
+  </main>
+</body>
+</html>
