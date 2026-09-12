@@ -1,4 +1,8 @@
 """Bundle validated SVG/PNG icons from pinned upstreams. No runtime requests."""
+if __name__ == "__main__":
+    from v2_catalog_icons import main as v2_main
+    v2_main()
+    raise SystemExit
 import argparse
 from concurrent.futures import ThreadPoolExecutor
 import hashlib

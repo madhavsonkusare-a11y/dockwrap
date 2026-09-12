@@ -9,6 +9,7 @@ from unittest.mock import patch
 
 import yaml
 import catalog_pipeline as pipeline
+import v2_catalog_icons as v2_icons
 
 spec = importlib.util.spec_from_file_location('icons', Path(__file__).with_name('cache-catalog-icons.py'))
 icons = importlib.util.module_from_spec(spec)
@@ -116,6 +117,44 @@ class CatalogTests(unittest.TestCase):
         self.assertEqual(icons.homarr_candidates('reader', paths, {}), [])
         self.assertEqual(icons.homarr_candidates('actual', paths, {'actual':'svg/actual-budget.svg'}),
                          ['svg/actual-budget.svg'])
+
+    def test_v2_monograms_are_deterministic_safe_and_square(self):
+        entry = {'id': 'missing-app', 'name': 'Missing App'}
+        first = v2_icons.monogram_svg(entry)
+        second = v2_icons.monogram_svg(entry)
+        self.assertEqual(first, second)
+        self.assertNotIn(b'<text', first)
+        self.assertNotIn(b'<image', first)
+        metadata = v2_icons.validate_icon(first, '.svg')
+        v2_icons.validate_catalog_suitability(metadata)
+        self.assertEqual((metadata['width'], metadata['height']), (64, 64))
+
+    def test_icon_overrides_must_name_a_locked_source_and_a_plain_file(self):
+        import json, tempfile
+        from pathlib import Path as P
+        sources = {"paperclip": {}}
+        original = v2_icons.OVERRIDES
+        try:
+            with tempfile.TemporaryDirectory() as folder:
+                v2_icons.OVERRIDES = P(folder) / "overrides.json"
+                for override in ({"source": "unlocked", "path": "logo.svg"},
+                                 {"source": "paperclip", "path": "../escape.svg"},
+                                 {"source": "paperclip", "path": "logo.exe"}):
+                    v2_icons.OVERRIDES.write_text(json.dumps({"app": override}))
+                    with self.assertRaises(ValueError):
+                        v2_icons.load_overrides(sources)
+                v2_icons.OVERRIDES.write_text(json.dumps({"_comment": "x", "app": {"source": "paperclip", "path": "docs/favicon.svg"}}))
+                self.assertEqual(list(v2_icons.load_overrides(sources)), ["app"])
+        finally:
+            v2_icons.OVERRIDES = original
+
+    def test_v2_matching_never_uses_unreviewed_fuzzy_names(self):
+        paths = {'netbird/icon.svg', 'reader/icon.svg', 'readwise-reader/icon.svg'}
+        self.assertEqual(v2_icons.umbrel_candidates('netbird-client', paths, {'netbird-client': 'netbird'}),
+                         [('netbird/icon.svg', 'reviewed-alias')])
+        self.assertEqual(v2_icons.umbrel_candidates('reader', paths, {}),
+                         [('reader/icon.svg', 'exact-id')])
+        self.assertEqual(v2_icons.umbrel_candidates('readwise', paths, {}), [])
 
 
 if __name__ == '__main__':
