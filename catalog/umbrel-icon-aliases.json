@@ -1,0 +1,19 @@
+{
+  "adguard": "adguard-home",
+  "affine-community-edition": "affine",
+  "anythingllm": "anything-llm",
+  "docmost-community-edition": "docmost",
+  "esp-home": "esphome",
+  "flowise-ai": "flowise",
+  "flowise-with-databases": "flowise",
+  "forgejo-with-mariadb": "forgejo",
+  "freshrss-with-mariadb": "freshrss",
+  "gitea-with-mariadb": "gitea",
+  "homebox-sysadminsmedia": "homebox",
+  "navidrome-music-server": "navidrome",
+  "netbird-client": "netbird",
+  "nextcloud-with-mariadb": "nextcloud",
+  "ollama-with-open-webui": "open-webui",
+  "penpot-with-s3": "penpot",
+  "wiki-js": "wikijs"
+}

@@ -1,2 +1,4 @@
 PyYAML==6.0.3
 Pillow==12.1.1
+fonttools==4.62.0
+brotli==1.2.0

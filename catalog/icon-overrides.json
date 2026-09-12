@@ -1,0 +1,7 @@
+{
+  "_comment": "Artwork taken from an app's own repository, for apps no icon source covers. Each names a source in icon-sources.lock.json and a file at its pinned revision.",
+  "paperclip": {
+    "source": "paperclip",
+    "path": "docs/favicon.svg"
+  }
+}
