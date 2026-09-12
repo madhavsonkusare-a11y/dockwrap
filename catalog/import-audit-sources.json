@@ -1,5 +1,12 @@
 {
   "schema_version": 1,
+  "runtipi": {
+    "repository": "runtipi/runtipi-appstore",
+    "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+    "sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+    "license": "GPL-3.0",
+    "checksum_scope": "codeload ZIP; independently downloaded and matched on 2026-09-12"
+  },
   "caprover": {
     "repository": "caprover/one-click-apps",
     "revision": "7f1f329125dde0cb915f47c8b33293eca45f7d0e",

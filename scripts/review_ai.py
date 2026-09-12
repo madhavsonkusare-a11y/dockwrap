@@ -84,10 +84,82 @@ REVIEWS = {
     "joplin": (
         ["Signs in first as admin@localhost with the password admin; change both in its settings, then connect your Joplin apps to its address."],
         "Joplin Server 3.7.1, with its database moved to PostgreSQL 14.24"),
+    "jellyfin": (
+        ["Opens a setup wizard: pick a language and create the first account, which is the administrator.",
+         "Plays what it finds in the folder you choose. Nothing is copied, and it writes only its own database and artwork.",
+         "The user and group numbers you set at setup decide what it may read in that folder; 1000 is right on most machines.",
+         "LinuxServer packages this image; Jellyfin itself is GPL-2.0."],
+        "Jellyfin 12.0, upstream's current release, in LinuxServer's image"),
+    "immich": (
+        ["Asks you to create the first account, which becomes the administrator.",
+         "Photos and videos go in the folder you choose; its database, thumbnails and search index live in the app's own folder.",
+         "Its machine-learning service downloads a model the first time it runs, so searching by face or content works only after that finishes.",
+         "Immich changes quickly: read its release notes before moving to a newer version, because some releases migrate the database."],
+        "Immich 3.2.0, upstream's current release"),
+    "pairdrop": (
+        ["Sends files straight between browsers on this computer's network; nothing is stored on the server.",
+         "Only devices that can reach this address see each other, and this install answers on this computer alone."],
+        "PairDrop 1.11.2, upstream's current release"),
+    "trilium": (
+        ["Asks you to set a password the first time you open it; there is one account.",
+         "Notes live in the app's folder, and its desktop apps can sync with this address."],
+        "Trilium 0.105.0, upstream's current release"),
+    "docmost": (
+        ["Asks you to create the first workspace and account, which becomes the administrator.",
+         "Pages, uploads and attachments live in the app's folder, in PostgreSQL and on disk beside it.",
+         "Docmost is source-available: the code here is AGPL-3.0, and some features belong to a separately licensed edition."],
+        "Docmost 0.96.0, upstream's current release"),
+    "wekan": (
+        ["Asks you to register the first account; anyone who can reach the address can register another.",
+         "Boards live in a MongoDB beside it, in the app's folder.",
+         "The mail settings are optional: without them Wekan works, but it cannot send board invitations."],
+        "Wekan v11.72, upstream's current release"),
+    "changedetection": (
+        ["Watches the pages you add, on the schedule you set, fetching them from this computer.",
+         "Notifications need a service you configure — email, ntfy, and so on — and nothing is sent until you do.",
+         "Pages that only render with a browser need the separate Playwright container upstream suggests, which is not included here."],
+        "changedetection.io 0.60.4, upstream's current release"),
+    "umami-analytics": (
+        ["Signs in first as admin with the password umami; change it the first time you sign in.",
+         "You add a website, then paste its script into your own pages; visits are recorded here and nowhere else.",
+         "Keeps everything in PostgreSQL beside it."],
+        "Umami 3.3.1, upstream's current release"),
+    "gitea": (
+        ["Opens an installer page: check the settings it shows, then create the administrator account.",
+         "Serves git over HTTP on its own address, and over SSH on a second loopback address — both reachable from this computer only.",
+         "Registration is open until you turn it off in its settings."],
+        "Gitea 1.27.3, upstream's current release"),
+    "vikunja": (
+        ["Asks you to register the first account; registration stays open unless you turn it off.",
+         "Tasks, files and its database live in the app's folder."],
+        "Vikunja 2.6.0, upstream's current release"),
+    "tandoor": (
+        ["Asks you to create the first account, which becomes the administrator.",
+         "Importing a recipe fetches the page you paste from this computer.",
+         "Its first start takes several minutes while it prepares its database, which is why it has a longer allowance."],
+        "Tandoor 2.6.15, upstream's current release"),
+    "ghostfolio": (
+        ["Creates your account from a security token rather than a password: save the token it shows, because it is the only way back in.",
+         "Fetches prices and market data from the providers you configure, from this computer.",
+         "Holdings and transactions live in PostgreSQL beside it."],
+        "Ghostfolio 3.69.0, upstream's current release"),
 }
 
 # Written by Local Store, or taken from an app store's definition.
-IMPORTED = {"open-webui": "Runtipi's app store", "joplin": "Runtipi's app store"}
+IMPORTED = {
+    "open-webui": "Runtipi's app store",
+    "joplin": "Runtipi's app store",
+    "immich": "Runtipi's app store",
+    "pairdrop": "Runtipi's app store",
+    "trilium": "Runtipi's app store",
+    "docmost": "Runtipi's app store",
+    "wekan": "Runtipi's app store",
+    "umami-analytics": "Runtipi's app store",
+    "gitea": "Runtipi's app store",
+    "vikunja": "Runtipi's app store",
+    "jellyfin": "CapRover's one-click apps",
+    "changedetection": "CapRover's one-click apps",
+}
 
 def apply(app, extra_note=""):
     p = Path(f"src/templates/{app}.json"); d = json.loads(p.read_text(encoding="utf-8"))

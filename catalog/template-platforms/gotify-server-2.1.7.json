@@ -1,0 +1,32 @@
+{
+  "creator": 2761577,
+  "id": 287980057,
+  "images": [
+    {
+      "architecture": "amd64",
+      "features": "",
+      "variant": null,
+      "digest": "sha256:b58c3ed7195dd3ddc6e1322621e60888334b62bfac82435991a8507b60c6fc90",
+      "os": "linux",
+      "os_features": "",
+      "os_version": null,
+      "size": 43760175,
+      "status": "active",
+      "last_pulled": "2026-09-10T13:27:05.075176663Z",
+      "last_pushed": "2022-09-11T07:36:33Z"
+    }
+  ],
+  "last_updated": "2022-09-11T07:36:33.350511Z",
+  "last_updater": 2761577,
+  "last_updater_username": "gotifyci",
+  "name": "2.1.7",
+  "repository": 4311782,
+  "full_size": 43760175,
+  "v2": true,
+  "tag_status": "active",
+  "tag_last_pulled": "2026-09-10T13:27:05.075176663Z",
+  "tag_last_pushed": "2022-09-11T07:36:33.350511Z",
+  "media_type": "application/vnd.docker.container.image.v1+json",
+  "content_type": "image",
+  "digest": "sha256:b58c3ed7195dd3ddc6e1322621e60888334b62bfac82435991a8507b60c6fc90"
+}

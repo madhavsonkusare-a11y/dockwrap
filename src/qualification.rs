@@ -554,6 +554,21 @@ fn take_qualification_slot(scratch: &Path) -> AppResult<QualificationSlot> {
     Ok(QualificationSlot(file))
 }
 
+/// How long each wait for an answer gets.
+///
+/// A review that found an app starts slowly was giving it that time only on
+/// its very first start. Tandoor runs nginx in front of gunicorn and takes
+/// longer than two minutes to answer again after a restart, so it failed
+/// "survives a restart" while starting perfectly well. An allowance is about
+/// the app, not about which start it is.
+fn health_allowance(first_start: Option<Duration>) -> Duration {
+    const DEFAULT: Duration = Duration::from_secs(120);
+    match first_start {
+        Some(reviewed) if reviewed > DEFAULT => reviewed,
+        _ => DEFAULT,
+    }
+}
+
 pub fn qualify_template(
     about: &Subject,
     template: PlanTemplate,
@@ -567,7 +582,7 @@ pub fn qualify_template(
     let _slot = take_qualification_slot(scratch)?;
     let runner = crate::runtime::SystemProcessRunner;
     let probe = crate::runtime::HttpHealthProbe;
-    let health = Duration::from_secs(120);
+    let health = health_allowance(template.first_start);
     let mut template = template;
     let display_name = app.to_owned();
 
@@ -856,6 +871,22 @@ impl Batch {
 
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn a_reviewed_allowance_covers_every_wait_not_only_the_first_start() {
+        use super::health_allowance;
+        use std::time::Duration;
+        assert_eq!(health_allowance(None), Duration::from_secs(120));
+        // Never shorter than what every app gets.
+        assert_eq!(
+            health_allowance(Some(Duration::from_secs(30))),
+            Duration::from_secs(120)
+        );
+        assert_eq!(
+            health_allowance(Some(Duration::from_secs(600))),
+            Duration::from_secs(600)
+        );
+    }
+
     use super::*;
 
     #[test]

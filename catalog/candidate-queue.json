@@ -7,7 +7,7 @@
     },
     "runtipi": {
       "definitions": 250,
-      "expressible": 113
+      "expressible": 128
     },
     "resolved_project_groups": 233,
     "unresolved_definitions": 365,
@@ -2478,6 +2478,33 @@
       "blockers": [],
       "fields": [],
       "generated_credentials": 0,
+      "id": "owncast",
+      "images": [
+        "owncast/owncast:0.3.0"
+      ],
+      "importable": true,
+      "primary_image": "owncast/owncast:0.3.0",
+      "required_inputs": 0,
+      "service_count": 1,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/owncast/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": "github:owncast/owncast"
+      },
+      "identity": "github:owncast/owncast",
+      "identity_status": "source_declared_repository",
+      "image_family": "owncast/owncast",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": []
+    },
+    {
+      "blockers": [],
+      "fields": [],
+      "generated_credentials": 0,
       "id": "flightlog",
       "images": [
         "perdian/flightlog:v2.1.14"
@@ -3782,6 +3809,33 @@
     },
     {
       "blockers": [],
+      "fields": [],
+      "generated_credentials": 0,
+      "id": "resilio-sync",
+      "images": [
+        "lscr.io/linuxserver/resilio-sync:3.1.2"
+      ],
+      "importable": true,
+      "primary_image": "lscr.io/linuxserver/resilio-sync:3.1.2",
+      "required_inputs": 0,
+      "service_count": 1,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/resilio-sync/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": null
+      },
+      "identity": "unresolved:runtipi:resilio-sync",
+      "identity_status": "unresolved",
+      "image_family": "lscr.io/linuxserver/resilio-sync",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": []
+    },
+    {
+      "blockers": [],
       "fields": [
         {
           "has_default": true,
@@ -4016,6 +4070,40 @@
       "identity": "github:emqx/mqttx",
       "identity_status": "source_declared_repository",
       "image_family": "emqx/mqttx-web",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": []
+    },
+    {
+      "blockers": [],
+      "fields": [
+        {
+          "has_default": true,
+          "key": "TZ",
+          "required": false,
+          "sensitive": false
+        }
+      ],
+      "generated_credentials": 0,
+      "id": "emulatorjs",
+      "images": [
+        "lscr.io/linuxserver/emulatorjs:1.9.2"
+      ],
+      "importable": true,
+      "primary_image": "lscr.io/linuxserver/emulatorjs:1.9.2",
+      "required_inputs": 0,
+      "service_count": 1,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/emulatorjs/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": "github:emulatorjs/emulatorjs"
+      },
+      "identity": "github:emulatorjs/emulatorjs",
+      "identity_status": "source_declared_repository",
+      "image_family": "lscr.io/linuxserver/emulatorjs",
       "maintenance_status": "not_screened",
       "verification_status": "not_qualified_by_this_queue",
       "possible_matches": []
@@ -4996,6 +5084,40 @@
       "identity": "unresolved:caprover:picoshare",
       "identity_status": "unresolved",
       "image_family": "mtlynch/picoshare",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": []
+    },
+    {
+      "blockers": [],
+      "fields": [
+        {
+          "has_default": true,
+          "key": "TZ",
+          "required": false,
+          "sensitive": false
+        }
+      ],
+      "generated_credentials": 0,
+      "id": "write-freely",
+      "images": [
+        "nephatrine/write-freely:0.16"
+      ],
+      "importable": true,
+      "primary_image": "nephatrine/write-freely:0.16",
+      "required_inputs": 0,
+      "service_count": 1,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/write-freely/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": null
+      },
+      "identity": "unresolved:runtipi:write-freely",
+      "identity_status": "unresolved",
+      "image_family": "nephatrine/write-freely",
       "maintenance_status": "not_screened",
       "verification_status": "not_qualified_by_this_queue",
       "possible_matches": []
@@ -6243,7 +6365,9 @@
       "image_family": "nocodb/nocodb",
       "maintenance_status": "not_screened",
       "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
+      "possible_matches": [
+        "runtipi:nocodb"
+      ]
     },
     {
       "blockers": [],
@@ -6472,6 +6596,7 @@
       "maintenance_status": "not_screened",
       "verification_status": "not_qualified_by_this_queue",
       "possible_matches": [
+        "runtipi:n8n-2",
         "caprover:n8n-io"
       ]
     },
@@ -6954,6 +7079,65 @@
     {
       "blockers": [],
       "fields": [],
+      "generated_credentials": 0,
+      "id": "gitea",
+      "images": [
+        "gitea/gitea:1.27.3",
+        "postgres:14"
+      ],
+      "importable": true,
+      "primary_image": "gitea/gitea:1.27.3",
+      "required_inputs": 0,
+      "service_count": 2,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/gitea/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": "github:go-gitea/gitea"
+      },
+      "identity": "github:go-gitea/gitea",
+      "identity_status": "source_declared_repository",
+      "image_family": "gitea/gitea",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": []
+    },
+    {
+      "blockers": [],
+      "fields": [],
+      "generated_credentials": 2,
+      "id": "n8n-2",
+      "images": [
+        "n8nio/n8n:2.38.3",
+        "postgres:18"
+      ],
+      "importable": true,
+      "primary_image": "n8nio/n8n:2.38.3",
+      "required_inputs": 0,
+      "service_count": 2,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/n8n-2/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": "github:n8n-io/n8n"
+      },
+      "identity": "github:n8n-io/n8n",
+      "identity_status": "source_declared_repository",
+      "image_family": "n8nio/n8n",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": [
+        "caprover:n8n-io-sqlite",
+        "caprover:n8n-io"
+      ]
+    },
+    {
+      "blockers": [],
+      "fields": [],
       "generated_credentials": 1,
       "id": "shlink",
       "images": [
@@ -6978,6 +7162,65 @@
       "maintenance_status": "not_screened",
       "verification_status": "not_qualified_by_this_queue",
       "possible_matches": []
+    },
+    {
+      "blockers": [],
+      "fields": [],
+      "generated_credentials": 2,
+      "id": "tandoor",
+      "images": [
+        "ghcr.io/tandoorrecipes/recipes:2.6.13",
+        "postgres:15-alpine"
+      ],
+      "importable": true,
+      "primary_image": "ghcr.io/tandoorrecipes/recipes:2.6.13",
+      "required_inputs": 0,
+      "service_count": 2,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/tandoor/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": "github:tandoorrecipes/recipes"
+      },
+      "identity": "github:tandoorrecipes/recipes",
+      "identity_status": "source_declared_repository",
+      "image_family": "ghcr.io/tandoorrecipes/recipes",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": []
+    },
+    {
+      "blockers": [],
+      "fields": [],
+      "generated_credentials": 2,
+      "id": "umami-analytics",
+      "images": [
+        "ghcr.io/umami-software/umami:3.3.1",
+        "postgres:15-alpine"
+      ],
+      "importable": true,
+      "primary_image": "ghcr.io/umami-software/umami:3.3.1",
+      "required_inputs": 0,
+      "service_count": 2,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/umami-analytics/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": "github:umami-software/umami"
+      },
+      "identity": "github:umami-software/umami",
+      "identity_status": "source_declared_repository",
+      "image_family": "ghcr.io/umami-software/umami",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": [
+        "caprover:umami-only",
+        "caprover:umami-postgresql"
+      ]
     },
     {
       "blockers": [],
@@ -7123,6 +7366,64 @@
       "maintenance_status": "not_screened",
       "verification_status": "not_qualified_by_this_queue",
       "possible_matches": []
+    },
+    {
+      "blockers": [],
+      "fields": [],
+      "generated_credentials": 1,
+      "id": "forgejo",
+      "images": [
+        "codeberg.org/forgejo/forgejo:16.0.3",
+        "postgres:14"
+      ],
+      "importable": true,
+      "primary_image": "codeberg.org/forgejo/forgejo:16.0.3",
+      "required_inputs": 0,
+      "service_count": 2,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/forgejo/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": null
+      },
+      "identity": "unresolved:runtipi:forgejo",
+      "identity_status": "unresolved",
+      "image_family": "codeberg.org/forgejo/forgejo",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": []
+    },
+    {
+      "blockers": [],
+      "fields": [],
+      "generated_credentials": 2,
+      "id": "vikunja",
+      "images": [
+        "vikunja/vikunja:2.6.0",
+        "postgres:14"
+      ],
+      "importable": true,
+      "primary_image": "vikunja/vikunja:2.6.0",
+      "required_inputs": 0,
+      "service_count": 2,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/vikunja/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": null
+      },
+      "identity": "unresolved:runtipi:vikunja",
+      "identity_status": "unresolved",
+      "image_family": "vikunja/vikunja",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": [
+        "caprover:vikunja"
+      ]
     },
     {
       "blockers": [],
@@ -7337,6 +7638,7 @@
       "maintenance_status": "not_screened",
       "verification_status": "not_qualified_by_this_queue",
       "possible_matches": [
+        "runtipi:umami-analytics",
         "caprover:umami-only"
       ]
     },
@@ -8025,7 +8327,9 @@
       "image_family": "vikunja/vikunja",
       "maintenance_status": "not_screened",
       "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
+      "possible_matches": [
+        "runtipi:vikunja"
+      ]
     },
     {
       "blockers": [],
@@ -8330,8 +8634,176 @@
       "maintenance_status": "not_screened",
       "verification_status": "not_qualified_by_this_queue",
       "possible_matches": [
+        "runtipi:n8n-2",
         "caprover:n8n-io-sqlite"
       ]
+    },
+    {
+      "blockers": [],
+      "fields": [
+        {
+          "has_default": true,
+          "key": "LUBELOGGER_LOCALE",
+          "required": false,
+          "sensitive": false
+        },
+        {
+          "has_default": true,
+          "key": "LUBELOGGER_ALLOWED_FILE_EXTENSIONS",
+          "required": false,
+          "sensitive": false
+        },
+        {
+          "has_default": false,
+          "key": "LUBELOGGER_CUSTOM_LOGO_URL",
+          "required": false,
+          "sensitive": false
+        },
+        {
+          "has_default": false,
+          "key": "LUBELOGGER_MOTD",
+          "required": false,
+          "sensitive": false
+        },
+        {
+          "has_default": false,
+          "key": "LUBELOGGER_WEBHOOK_URL",
+          "required": false,
+          "sensitive": false
+        },
+        {
+          "has_default": false,
+          "key": "LUBELOGGER_EMAIL_SERVER",
+          "required": false,
+          "sensitive": false
+        },
+        {
+          "has_default": false,
+          "key": "LUBELOGGER_EMAIL_FROM",
+          "required": false,
+          "sensitive": false
+        },
+        {
+          "has_default": false,
+          "key": "LUBELOGGER_EMAIL_USE_SSL",
+          "required": false,
+          "sensitive": false
+        },
+        {
+          "has_default": true,
+          "key": "LUBELOGGER_EMAIL_PORT",
+          "required": false,
+          "sensitive": false
+        },
+        {
+          "has_default": false,
+          "key": "LUBELOGGER_EMAIL_USERNAME",
+          "required": false,
+          "sensitive": false
+        },
+        {
+          "has_default": false,
+          "key": "LUBELOGGER_EMAIL_PASSWORD",
+          "required": false,
+          "sensitive": false
+        },
+        {
+          "has_default": true,
+          "key": "LUBELOGGER_ENABLE_AUTH",
+          "required": false,
+          "sensitive": false
+        },
+        {
+          "has_default": false,
+          "key": "LUBELOGGER_USERNAME_HASH",
+          "required": false,
+          "sensitive": false
+        },
+        {
+          "has_default": false,
+          "key": "LUBELOGGER_PASSWORD_HASH",
+          "required": false,
+          "sensitive": false
+        },
+        {
+          "has_default": false,
+          "key": "LUBELOGGER_OPENID_NAME",
+          "required": false,
+          "sensitive": false
+        },
+        {
+          "has_default": false,
+          "key": "LUBELOGGER_OPENID_CLIENT_ID",
+          "required": false,
+          "sensitive": false
+        },
+        {
+          "has_default": false,
+          "key": "LUBELOGGER_OPENID_CLIENT_SECRET",
+          "required": false,
+          "sensitive": false
+        },
+        {
+          "has_default": false,
+          "key": "LUBELOGGER_OPENID_AUTH_URL",
+          "required": false,
+          "sensitive": false
+        },
+        {
+          "has_default": false,
+          "key": "LUBELOGGER_OPENID_TOKEN_URL",
+          "required": false,
+          "sensitive": false
+        },
+        {
+          "has_default": false,
+          "key": "LUBELOGGER_OPENID_REDIRECT_URL",
+          "required": false,
+          "sensitive": false
+        },
+        {
+          "has_default": false,
+          "key": "LUBELOGGER_OPENID_SCOPE",
+          "required": false,
+          "sensitive": false
+        },
+        {
+          "has_default": true,
+          "key": "LUBELOGGER_OPENID_VALIDATE_STATE",
+          "required": false,
+          "sensitive": false
+        },
+        {
+          "has_default": true,
+          "key": "TZ",
+          "required": false,
+          "sensitive": false
+        }
+      ],
+      "generated_credentials": 0,
+      "id": "lubelogger",
+      "images": [
+        "ghcr.io/hargata/lubelogger:v1.7.2",
+        "postgres:16.4-alpine"
+      ],
+      "importable": true,
+      "primary_image": "ghcr.io/hargata/lubelogger:v1.7.2",
+      "required_inputs": 0,
+      "service_count": 2,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/lubelogger/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": "github:hargata/lubelog"
+      },
+      "identity": "github:hargata/lubelog",
+      "identity_status": "source_declared_repository",
+      "image_family": "ghcr.io/hargata/lubelogger",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": []
     },
     {
       "blockers": [],
@@ -8451,6 +8923,37 @@
       "maintenance_status": "not_screened",
       "verification_status": "not_qualified_by_this_queue",
       "possible_matches": []
+    },
+    {
+      "blockers": [],
+      "fields": [],
+      "generated_credentials": 3,
+      "id": "nocodb",
+      "images": [
+        "nocodb/nocodb:2026.08.2",
+        "postgres:16",
+        "redis:alpine"
+      ],
+      "importable": true,
+      "primary_image": "nocodb/nocodb:2026.08.2",
+      "required_inputs": 0,
+      "service_count": 3,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/nocodb/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": "github:nocodb/nocodb"
+      },
+      "identity": "github:nocodb/nocodb",
+      "identity_status": "source_declared_repository",
+      "image_family": "nocodb/nocodb",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": [
+        "caprover:nocodb"
+      ]
     },
     {
       "blockers": [],
@@ -10390,6 +10893,43 @@
       "fields": [
         {
           "has_default": false,
+          "key": "FOLDER_IMAGES_IMMICH",
+          "required": true,
+          "sensitive": false
+        }
+      ],
+      "generated_credentials": 2,
+      "id": "immich",
+      "images": [
+        "ghcr.io/immich-app/immich-server:v3.1.0",
+        "ghcr.io/immich-app/immich-machine-learning:v3.1.0",
+        "redis:6.2",
+        "ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0"
+      ],
+      "importable": true,
+      "primary_image": "ghcr.io/immich-app/immich-server:v3.1.0",
+      "required_inputs": 1,
+      "service_count": 4,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/immich/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": "github:immich-app/immich"
+      },
+      "identity": "github:immich-app/immich",
+      "identity_status": "source_declared_repository",
+      "image_family": "ghcr.io/immich-app/immich-server",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": []
+    },
+    {
+      "blockers": [],
+      "fields": [
+        {
+          "has_default": false,
           "key": "MONGO_INITDB_ROOT_USERNAME",
           "required": true,
           "sensitive": false
@@ -10831,6 +11371,53 @@
       "identity": "github:tinyauthapp/tinyauth",
       "identity_status": "source_declared_repository",
       "image_family": "ghcr.io/tinyauthapp/tinyauth",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": []
+    },
+    {
+      "blockers": [],
+      "fields": [
+        {
+          "has_default": false,
+          "key": "MQTT_ADMIN_PASSWORD",
+          "required": true,
+          "sensitive": true
+        },
+        {
+          "has_default": false,
+          "key": "CEDALO_MC_PASSWORD",
+          "required": true,
+          "sensitive": true
+        },
+        {
+          "has_default": true,
+          "key": "TZ",
+          "required": false,
+          "sensitive": false
+        }
+      ],
+      "generated_credentials": 0,
+      "id": "eclipse-mosquitto",
+      "images": [
+        "eclipse-mosquitto:2.0.22",
+        "cedalo/management-center:2"
+      ],
+      "importable": true,
+      "primary_image": "cedalo/management-center:2",
+      "required_inputs": 2,
+      "service_count": 2,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/eclipse-mosquitto/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": "github:eclipse/mosquitto"
+      },
+      "identity": "github:eclipse/mosquitto",
+      "identity_status": "source_declared_repository",
+      "image_family": "cedalo/management-center",
       "maintenance_status": "not_screened",
       "verification_status": "not_qualified_by_this_queue",
       "possible_matches": []
@@ -11308,6 +11895,7 @@
       "maintenance_status": "not_screened",
       "verification_status": "not_qualified_by_this_queue",
       "possible_matches": [
+        "runtipi:umami-analytics",
         "caprover:umami-postgresql"
       ]
     },
@@ -11471,6 +12059,58 @@
       "identity": "github:shaneisrael/fireshare",
       "identity_status": "source_declared_repository",
       "image_family": "shaneisrael/fireshare",
+      "maintenance_status": "not_screened",
+      "verification_status": "not_qualified_by_this_queue",
+      "possible_matches": []
+    },
+    {
+      "blockers": [],
+      "fields": [
+        {
+          "has_default": false,
+          "key": "FOLDER_DOWNLOADS_DEEMIX",
+          "required": true,
+          "sensitive": false
+        },
+        {
+          "has_default": false,
+          "key": "FOLDER_MUSIC",
+          "required": true,
+          "sensitive": false
+        },
+        {
+          "has_default": false,
+          "key": "FOLDER_USENET_COMPLETED",
+          "required": true,
+          "sensitive": false
+        },
+        {
+          "has_default": false,
+          "key": "FOLDER_MEDIA",
+          "required": true,
+          "sensitive": false
+        }
+      ],
+      "generated_credentials": 0,
+      "id": "lidarr-deemix",
+      "images": [
+        "youegraillot/lidarr-on-steroids:1.5.2"
+      ],
+      "importable": true,
+      "primary_image": "youegraillot/lidarr-on-steroids:1.5.2",
+      "required_inputs": 4,
+      "service_count": 1,
+      "source": "runtipi",
+      "provenance": {
+        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+        "path": "apps/lidarr-deemix/docker-compose.json",
+        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
+        "repository": "runtipi/runtipi-appstore",
+        "declared_project": "github:youegraillot/lidarr-on-steroids"
+      },
+      "identity": "github:youegraillot/lidarr-on-steroids",
+      "identity_status": "source_declared_repository",
+      "image_family": "youegraillot/lidarr-on-steroids",
       "maintenance_status": "not_screened",
       "verification_status": "not_qualified_by_this_queue",
       "possible_matches": []
@@ -11732,9 +12372,9 @@
     {
       "blockers": [
         {
-          "category": "not modelled",
-          "detail": "speedtest-tracker-db: Healthcheck variable expansion is not modelled",
-          "feature": "healthCheck"
+          "category": "refused",
+          "detail": "default for \"SPEEDTEST_APP_KEY\" is invalid: Use between 51 and 51 characters.",
+          "feature": "plan policy"
         }
       ],
       "id": "speedtest-tracker",
@@ -11888,13 +12528,8 @@
       "blockers": [
         {
           "category": "not modelled",
-          "detail": "bitmagnet publishes additional ports",
+          "detail": "bitmagnet declares 2 extra ports; one is supported",
           "feature": "addPorts"
-        },
-        {
-          "category": "not modelled",
-          "detail": "bitmagnet-db: Healthcheck variable expansion is not modelled",
-          "feature": "healthCheck"
         }
       ],
       "id": "bitmagnet",
@@ -12243,7 +12878,7 @@
       "blockers": [
         {
           "category": "not modelled",
-          "detail": "windows publishes additional ports",
+          "detail": "windows sets udp on an extra port",
           "feature": "addPorts"
         },
         {
@@ -12288,11 +12923,6 @@
       "blockers": [
         {
           "category": "not modelled",
-          "detail": "sftpgo publishes additional ports",
-          "feature": "addPorts"
-        },
-        {
-          "category": "not modelled",
           "detail": "sftpgo: Healthcheck variable expansion is not modelled",
           "feature": "healthCheck"
         },
@@ -12328,32 +12958,7 @@
       "blockers": [
         {
           "category": "not modelled",
-          "detail": "eclipse-mosquitto publishes additional ports",
-          "feature": "addPorts"
-        }
-      ],
-      "id": "eclipse-mosquitto",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/eclipse-mosquitto/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": "github:eclipse/mosquitto"
-      },
-      "identity": "github:eclipse/mosquitto",
-      "identity_status": "source_declared_repository",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
-          "category": "not modelled",
-          "detail": "emqx publishes additional ports",
+          "detail": "emqx declares 4 extra ports; one is supported",
           "feature": "addPorts"
         }
       ],
@@ -12368,31 +12973,6 @@
         "declared_project": "github:emqx/emqx"
       },
       "identity": "github:emqx/emqx",
-      "identity_status": "source_declared_repository",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
-          "category": "not modelled",
-          "detail": "emulatorjs publishes additional ports",
-          "feature": "addPorts"
-        }
-      ],
-      "id": "emulatorjs",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/emulatorjs/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": "github:emulatorjs/emulatorjs"
-      },
-      "identity": "github:emulatorjs/emulatorjs",
       "identity_status": "source_declared_repository",
       "image_family": null,
       "maintenance_status": "not_screened",
@@ -12608,31 +13188,6 @@
       "blockers": [
         {
           "category": "not modelled",
-          "detail": "gitea publishes additional ports",
-          "feature": "addPorts"
-        }
-      ],
-      "id": "gitea",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/gitea/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": "github:go-gitea/gitea"
-      },
-      "identity": "github:go-gitea/gitea",
-      "identity_status": "source_declared_repository",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
-          "category": "not modelled",
           "detail": "declares architecture-specific overrides",
           "feature": "overrides"
         }
@@ -12673,31 +13228,6 @@
         "declared_project": "github:halo-dev/halo"
       },
       "identity": "github:halo-dev/halo",
-      "identity_status": "source_declared_repository",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
-          "category": "not modelled",
-          "detail": "lubelogger-db: Healthcheck variable expansion is not modelled",
-          "feature": "healthCheck"
-        }
-      ],
-      "id": "lubelogger",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/lubelogger/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": "github:hargata/lubelog"
-      },
-      "identity": "github:hargata/lubelog",
       "identity_status": "source_declared_repository",
       "image_family": null,
       "maintenance_status": "not_screened",
@@ -12913,38 +13443,8 @@
       "blockers": [
         {
           "category": "refused",
-          "detail": "immich mounts a folder over \"/usr/src/app/upload\", which is the container's own system",
-          "feature": "host path"
-        },
-        {
-          "category": "refused",
-          "detail": "immich-machine-learning mounts a folder over \"/usr/src/app/upload\", which is the container's own system",
-          "feature": "host path"
-        }
-      ],
-      "id": "immich",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/immich/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": "github:immich-app/immich"
-      },
-      "identity": "github:immich-app/immich",
-      "identity_status": "source_declared_repository",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
-          "category": "not modelled",
-          "detail": "mixpost-pro-mysql: Healthcheck variable expansion is not modelled",
-          "feature": "healthCheck"
+          "detail": "image \"inovector/mixpost-pro-team:latest\" is not pinned to a fixed tag",
+          "feature": "plan policy"
         }
       ],
       "id": "mixpost-pro",
@@ -12967,9 +13467,9 @@
     {
       "blockers": [
         {
-          "category": "not modelled",
-          "detail": "mixpost-mysql: Healthcheck variable expansion is not modelled",
-          "feature": "healthCheck"
+          "category": "refused",
+          "detail": "image \"redis:latest\" is not pinned to a fixed tag",
+          "feature": "plan policy"
         }
       ],
       "id": "mixpost",
@@ -13080,11 +13580,6 @@
           "category": "refused",
           "detail": "invidious-companion changes Linux capabilities",
           "feature": "capDrop"
-        },
-        {
-          "category": "not modelled",
-          "detail": "invidious-db: Healthcheck variable expansion is not modelled",
-          "feature": "healthCheck"
         },
         {
           "category": "not modelled",
@@ -13252,9 +13747,9 @@
     {
       "blockers": [
         {
-          "category": "not modelled",
-          "detail": "kimai-sqldb: Healthcheck variable expansion is not modelled",
-          "feature": "healthCheck"
+          "category": "refused",
+          "detail": "image \"tobybatch/nginx-fpm-reverse-proxy:latest\" is not pinned to a fixed tag",
+          "feature": "plan policy"
         }
       ],
       "id": "kimai",
@@ -13397,11 +13892,6 @@
     {
       "blockers": [
         {
-          "category": "not modelled",
-          "detail": "librephotos-db: Healthcheck variable expansion is not modelled",
-          "feature": "healthCheck"
-        },
-        {
           "category": "needs input",
           "detail": "CSRF_TRUSTED_ORIGINS expects INTERNAL_IP, which this project does not supply",
           "feature": "platform placeholder"
@@ -13453,7 +13943,7 @@
       "blockers": [
         {
           "category": "not modelled",
-          "detail": "deluge publishes additional ports",
+          "detail": "deluge sets udp on an extra port",
           "feature": "addPorts"
         }
       ],
@@ -13558,7 +14048,7 @@
       "blockers": [
         {
           "category": "not modelled",
-          "detail": "bitcoind publishes additional ports",
+          "detail": "bitcoind declares 3 extra ports; one is supported",
           "feature": "addPorts"
         },
         {
@@ -13618,7 +14108,7 @@
       "blockers": [
         {
           "category": "not modelled",
-          "detail": "lodestone-core publishes additional ports",
+          "detail": "lodestone-core declares no usable hostPort",
           "feature": "addPorts"
         },
         {
@@ -13646,11 +14136,6 @@
     },
     {
       "blockers": [
-        {
-          "category": "not modelled",
-          "detail": "logto publishes additional ports",
-          "feature": "addPorts"
-        },
         {
           "category": "not modelled",
           "detail": "logto sets container labels",
@@ -13732,9 +14217,9 @@
     {
       "blockers": [
         {
-          "category": "not modelled",
-          "detail": "rallly_db: Healthcheck variable expansion is not modelled",
-          "feature": "healthCheck"
+          "category": "refused",
+          "detail": "service name \"rallly_db\" is not a plain name",
+          "feature": "plan policy"
         }
       ],
       "id": "rallly",
@@ -13898,11 +14383,6 @@
       "blockers": [
         {
           "category": "not modelled",
-          "detail": "minio publishes additional ports",
-          "feature": "addPorts"
-        },
-        {
-          "category": "not modelled",
           "detail": "minio sets container labels",
           "feature": "extraLabels"
         }
@@ -13928,32 +14408,7 @@
       "blockers": [
         {
           "category": "not modelled",
-          "detail": "n8n-2-db: Healthcheck variable expansion is not modelled",
-          "feature": "healthCheck"
-        }
-      ],
-      "id": "n8n-2",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/n8n-2/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": "github:n8n-io/n8n"
-      },
-      "identity": "github:n8n-io/n8n",
-      "identity_status": "source_declared_repository",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
-          "category": "not modelled",
-          "detail": "netbootxyz publishes additional ports",
+          "detail": "netbootxyz sets udp on an extra port",
           "feature": "addPorts"
         }
       ],
@@ -14123,31 +14578,6 @@
       "blockers": [
         {
           "category": "not modelled",
-          "detail": "nocodb-db: Healthcheck variable expansion is not modelled",
-          "feature": "healthCheck"
-        }
-      ],
-      "id": "nocodb",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/nocodb/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": "github:nocodb/nocodb"
-      },
-      "identity": "github:nocodb/nocodb",
-      "identity_status": "source_declared_repository",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
-          "category": "not modelled",
           "detail": "odoo allocates a TTY",
           "feature": "tty"
         },
@@ -14258,31 +14688,6 @@
       "blockers": [
         {
           "category": "not modelled",
-          "detail": "owncast publishes additional ports",
-          "feature": "addPorts"
-        }
-      ],
-      "id": "owncast",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/owncast/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": "github:owncast/owncast"
-      },
-      "identity": "github:owncast/owncast",
-      "identity_status": "source_declared_repository",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
-          "category": "not modelled",
           "detail": "owncloud-db: Healthcheck variable expansion is not modelled",
           "feature": "healthCheck"
         }
@@ -14332,9 +14737,9 @@
     {
       "blockers": [
         {
-          "category": "not modelled",
-          "detail": "penpot-postgres sets a stop signal",
-          "feature": "stopSignal"
+          "category": "refused",
+          "detail": "image \"penpotapp/frontend:latest\" is not pinned to a fixed tag",
+          "feature": "plan policy"
         }
       ],
       "id": "penpot",
@@ -14357,9 +14762,9 @@
     {
       "blockers": [
         {
-          "category": "not modelled",
-          "detail": "peppermint publishes additional ports",
-          "feature": "addPorts"
+          "category": "refused",
+          "detail": "image \"pepperlabs/peppermint:latest\" is not pinned to a fixed tag",
+          "feature": "plan policy"
         }
       ],
       "id": "peppermint",
@@ -14413,7 +14818,7 @@
       "blockers": [
         {
           "category": "not modelled",
-          "detail": "pihole publishes additional ports",
+          "detail": "pihole sets interface on an extra port",
           "feature": "addPorts"
         },
         {
@@ -14523,7 +14928,7 @@
       "blockers": [
         {
           "category": "not modelled",
-          "detail": "qbittorrent publishes additional ports",
+          "detail": "qbittorrent sets udp on an extra port",
           "feature": "addPorts"
         },
         {
@@ -14606,11 +15011,6 @@
     },
     {
       "blockers": [
-        {
-          "category": "not modelled",
-          "detail": "electrs publishes additional ports",
-          "feature": "addPorts"
-        },
         {
           "category": "refused",
           "detail": "electrs mounts \"${BITCOIND_DIR:-${APP_DATA_DIR}/../bitcoind/data}\", which is outside the app's own storage",
@@ -14878,31 +15278,6 @@
       "blockers": [
         {
           "category": "not modelled",
-          "detail": "tandoor-db: Healthcheck variable expansion is not modelled",
-          "feature": "healthCheck"
-        }
-      ],
-      "id": "tandoor",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/tandoor/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": "github:tandoorrecipes/recipes"
-      },
-      "identity": "github:tandoorrecipes/recipes",
-      "identity_status": "source_declared_repository",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
-          "category": "not modelled",
           "detail": "tooljet keeps stdin open",
           "feature": "stdinOpen"
         },
@@ -14968,7 +15343,7 @@
       "blockers": [
         {
           "category": "not modelled",
-          "detail": "transmission publishes additional ports",
+          "detail": "transmission sets udp on an extra port",
           "feature": "addPorts"
         }
       ],
@@ -15042,31 +15417,6 @@
     {
       "blockers": [
         {
-          "category": "not modelled",
-          "detail": "umami-analytics-db: Healthcheck variable expansion is not modelled",
-          "feature": "healthCheck"
-        }
-      ],
-      "id": "umami-analytics",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/umami-analytics/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": "github:umami-software/umami"
-      },
-      "identity": "github:umami-software/umami",
-      "identity_status": "source_declared_repository",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
           "category": "needs input",
           "detail": "PGID expects TIPI_GID, which this project does not supply",
           "feature": "platform placeholder"
@@ -15103,7 +15453,7 @@
       "blockers": [
         {
           "category": "not modelled",
-          "detail": "wg-easy publishes additional ports",
+          "detail": "wg-easy sets udp on an extra port",
           "feature": "addPorts"
         },
         {
@@ -15192,11 +15542,6 @@
     {
       "blockers": [
         {
-          "category": "not modelled",
-          "detail": "chatgpt-ui-web-server publishes additional ports",
-          "feature": "addPorts"
-        },
-        {
           "category": "needs input",
           "detail": "APP_DOMAIN expects INTERNAL_IP, which this project does not supply",
           "feature": "platform placeholder"
@@ -15222,11 +15567,6 @@
     {
       "blockers": [
         {
-          "category": "not modelled",
-          "detail": "your-spotify-server publishes additional ports",
-          "feature": "addPorts"
-        },
-        {
           "category": "needs input",
           "detail": "API_ENDPOINT expects INTERNAL_IP, which this project does not supply",
           "feature": "platform placeholder"
@@ -15248,31 +15588,6 @@
         "declared_project": "github:yooooomi/your_spotify"
       },
       "identity": "github:yooooomi/your_spotify",
-      "identity_status": "source_declared_repository",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
-          "category": "not modelled",
-          "detail": "lidarr-deemix publishes additional ports",
-          "feature": "addPorts"
-        }
-      ],
-      "id": "lidarr-deemix",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/lidarr-deemix/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": "github:youegraillot/lidarr-on-steroids"
-      },
-      "identity": "github:youegraillot/lidarr-on-steroids",
       "identity_status": "source_declared_repository",
       "image_family": null,
       "maintenance_status": "not_screened",
@@ -15497,8 +15812,8 @@
           "feature": "environment"
         },
         {
-          "category": "not modelled",
-          "detail": "affine: Unsupported dependency condition",
+          "category": "refused",
+          "detail": "affine waits on a service this definition does not declare",
           "feature": "depends_on"
         },
         {
@@ -16155,11 +16470,6 @@
           "category": "refused",
           "detail": "bugsink publishes ports of its own beside the platform endpoint",
           "feature": "ports"
-        },
-        {
-          "category": "not modelled",
-          "detail": "mysql: Healthcheck variable expansion is not modelled",
-          "feature": "healthcheck"
         },
         {
           "category": "refused",
@@ -24138,7 +24448,7 @@
       "blockers": [
         {
           "category": "not modelled",
-          "detail": "crafty publishes additional ports",
+          "detail": "crafty declares 3 extra ports; one is supported",
           "feature": "addPorts"
         },
         {
@@ -24191,36 +24501,6 @@
     },
     {
       "blockers": [
-        {
-          "category": "not modelled",
-          "detail": "forgejo publishes additional ports",
-          "feature": "addPorts"
-        }
-      ],
-      "id": "forgejo",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/forgejo/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": null
-      },
-      "identity": "unresolved:runtipi:forgejo",
-      "identity_status": "unresolved",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
-          "category": "not modelled",
-          "detail": "kasm-workspaces publishes additional ports",
-          "feature": "addPorts"
-        },
         {
           "category": "not modelled",
           "detail": "kasm-workspaces is the main service but declares no usable port",
@@ -24297,11 +24577,6 @@
     {
       "blockers": [
         {
-          "category": "not modelled",
-          "detail": "onedev publishes additional ports",
-          "feature": "addPorts"
-        },
-        {
           "category": "refused",
           "detail": "onedev mounts \"/var/run/docker.sock\", which is outside the app's own storage",
           "feature": "host path"
@@ -24318,31 +24593,6 @@
         "declared_project": null
       },
       "identity": "unresolved:runtipi:onedev",
-      "identity_status": "unresolved",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
-          "category": "not modelled",
-          "detail": "resilio-sync publishes additional ports",
-          "feature": "addPorts"
-        }
-      ],
-      "id": "resilio-sync",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/resilio-sync/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": null
-      },
-      "identity": "unresolved:runtipi:resilio-sync",
       "identity_status": "unresolved",
       "image_family": null,
       "maintenance_status": "not_screened",
@@ -24378,7 +24628,7 @@
       "blockers": [
         {
           "category": "not modelled",
-          "detail": "stalwart-mail publishes additional ports",
+          "detail": "stalwart-mail declares 6 extra ports; one is supported",
           "feature": "addPorts"
         }
       ],
@@ -24403,7 +24653,7 @@
       "blockers": [
         {
           "category": "not modelled",
-          "detail": "syncthing publishes additional ports",
+          "detail": "syncthing declares 2 extra ports; one is supported",
           "feature": "addPorts"
         },
         {
@@ -24423,56 +24673,6 @@
         "declared_project": null
       },
       "identity": "unresolved:runtipi:syncthing",
-      "identity_status": "unresolved",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
-          "category": "not modelled",
-          "detail": "vikunja-db: Healthcheck variable expansion is not modelled",
-          "feature": "healthCheck"
-        }
-      ],
-      "id": "vikunja",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/vikunja/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": null
-      },
-      "identity": "unresolved:runtipi:vikunja",
-      "identity_status": "unresolved",
-      "image_family": null,
-      "maintenance_status": "not_screened",
-      "verification_status": "not_qualified_by_this_queue",
-      "possible_matches": []
-    },
-    {
-      "blockers": [
-        {
-          "category": "not modelled",
-          "detail": "write-freely publishes additional ports",
-          "feature": "addPorts"
-        }
-      ],
-      "id": "write-freely",
-      "importable": false,
-      "source": "runtipi",
-      "provenance": {
-        "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
-        "path": "apps/write-freely/docker-compose.json",
-        "archive_sha256": "8417791fe20bca057f659d52bc29e2a2b8f3e7eb8c99930e065c11b92e2992ec",
-        "repository": "runtipi/runtipi-appstore",
-        "declared_project": null
-      },
-      "identity": "unresolved:runtipi:write-freely",
       "identity_status": "unresolved",
       "image_family": null,
       "maintenance_status": "not_screened",

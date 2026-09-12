@@ -367,18 +367,24 @@ const ADMINER: &str = include_str!("adminer.json");
 const ANYTHINGLLM: &str = include_str!("anythingllm.json");
 const BESZEL: &str = include_str!("beszel.json");
 const BIG_AGI: &str = include_str!("big-agi.json");
+const CHANGEDETECTION: &str = include_str!("changedetection.json");
 const CODIMD: &str = include_str!("codimd.json");
 const DIFY: &str = include_str!("dify.json");
+const DOCMOST: &str = include_str!("docmost.json");
 const FILESTASH: &str = include_str!("filestash.json");
 const FLATNOTES: &str = include_str!("flatnotes.json");
 const FLOWISE: &str = include_str!("flowise.json");
 const GHOST_DEV: &str = include_str!("ghost-dev.json");
+const GHOSTFOLIO: &str = include_str!("ghostfolio.json");
+const GITEA: &str = include_str!("gitea.json");
 const GLANCE: &str = include_str!("glance.json");
 const GOTIFY: &str = include_str!("gotify.json");
 const GRAFANA: &str = include_str!("grafana.json");
 const GROCY: &str = include_str!("grocy.json");
 const HOMER: &str = include_str!("homer.json");
 const HUGINN: &str = include_str!("huginn.json");
+const IMMICH: &str = include_str!("immich.json");
+const JELLYFIN: &str = include_str!("jellyfin.json");
 const JELLYSEERR: &str = include_str!("jellyseerr.json");
 const JOPLIN: &str = include_str!("joplin.json");
 const KANBOARD: &str = include_str!("kanboard.json");
@@ -395,15 +401,21 @@ const NODERED: &str = include_str!("nodered.json");
 const NTFY: &str = include_str!("ntfy.json");
 const OMBI: &str = include_str!("ombi.json");
 const OPEN_WEBUI: &str = include_str!("open-webui.json");
+const PAIRDROP: &str = include_str!("pairdrop.json");
 const PAPERCLIP: &str = include_str!("paperclip.json");
 const PENPOT: &str = include_str!("penpot.json");
 const PRIVATEBIN: &str = include_str!("privatebin.json");
 const SILLYTAVERN: &str = include_str!("sillytavern.json");
 const SIM: &str = include_str!("sim.json");
+const TANDOOR: &str = include_str!("tandoor.json");
 const TAUTULLI: &str = include_str!("tautulli.json");
+const TRILIUM: &str = include_str!("trilium.json");
+const UMAMI_ANALYTICS: &str = include_str!("umami-analytics.json");
 const VANE: &str = include_str!("vane.json");
 const VAULTWARDEN: &str = include_str!("vaultwarden.json");
+const VIKUNJA: &str = include_str!("vikunja.json");
 const WALLOS: &str = include_str!("wallos.json");
+const WEKAN: &str = include_str!("wekan.json");
 const WHOOGLE: &str = include_str!("whoogle.json");
 const WORDPRESS: &str = include_str!("wordpress.json");
 
@@ -424,18 +436,24 @@ pub fn reviewed_templates() -> Vec<ReviewedTemplate> {
         ANYTHINGLLM,
         BESZEL,
         BIG_AGI,
+        CHANGEDETECTION,
         CODIMD,
         DIFY,
+        DOCMOST,
         FILESTASH,
         FLATNOTES,
         FLOWISE,
         GHOST_DEV,
+        GHOSTFOLIO,
+        GITEA,
         GLANCE,
         GOTIFY,
         GRAFANA,
         GROCY,
         HOMER,
         HUGINN,
+        IMMICH,
+        JELLYFIN,
         JELLYSEERR,
         JOPLIN,
         KANBOARD,
@@ -452,15 +470,21 @@ pub fn reviewed_templates() -> Vec<ReviewedTemplate> {
         NTFY,
         OMBI,
         OPEN_WEBUI,
+        PAIRDROP,
         PAPERCLIP,
         PENPOT,
         PRIVATEBIN,
         SILLYTAVERN,
         SIM,
+        TANDOOR,
         TAUTULLI,
+        TRILIUM,
+        UMAMI_ANALYTICS,
         VANE,
         VAULTWARDEN,
+        VIKUNJA,
         WALLOS,
+        WEKAN,
         WHOOGLE,
         WORDPRESS,
     ]
@@ -642,14 +666,20 @@ mod tests {
         "anythingllm",
         "beszel",
         "big-agi",
+        "changedetection",
         "dify",
+        "docmost",
         "flatnotes",
         "flowise",
+        "ghostfolio",
+        "gitea",
         "glance",
         "grafana",
         "grocy",
         "homer",
         "huginn",
+        "immich",
+        "jellyfin",
         "joplin",
         "kanboard",
         "khoj",
@@ -664,15 +694,21 @@ mod tests {
         "nodered",
         "ntfy",
         "open-webui",
+        "pairdrop",
         "paperclip",
         "penpot",
         "privatebin",
         "sillytavern",
         "sim",
+        "tandoor",
         "tautulli",
+        "trilium",
+        "umami-analytics",
         "vane",
         "vaultwarden",
+        "vikunja",
         "wallos",
+        "wekan",
         "whoogle",
         "wordpress",
     ];

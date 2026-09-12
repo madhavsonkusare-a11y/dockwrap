@@ -23044,6 +23044,12 @@
           "source": "legacy",
           "upstream_id": "Ghostfolio",
           "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/52a36e45fbd403c1c1348f200105d9e31be2bc3c/src/catalog_full.json"
+        },
+        {
+          "revision": "55bad5a64628cea01142ca3af245a9d38425695a",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/ghostfolio",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/55bad5a64628cea01142ca3af245a9d38425695a/definitions/apps/ghostfolio/config.json"
         }
       ],
       "tags": [
@@ -62624,6 +62630,7 @@
       "icon": "assets/catalog/tandoor-recipes.svg",
       "id": "tandoor-recipes",
       "licenses": [
+        "AGPL-3.0",
         "Commons-Clause",
         "MIT"
       ],
@@ -62647,6 +62654,12 @@
           "source": "runtipi",
           "upstream_id": "apps/tandoor/config.json",
           "url": "https://github.com/runtipi/runtipi-appstore/blob/3c878baaf22361a515abc9fc648d0e4821c6d593/apps/tandoor/config.json"
+        },
+        {
+          "revision": "55bad5a64628cea01142ca3af245a9d38425695a",
+          "source": "local-store",
+          "upstream_id": "definitions/apps/tandoor",
+          "url": "https://github.com/madhavsonkusare-a11y/local-store/blob/55bad5a64628cea01142ca3af245a9d38425695a/definitions/apps/tandoor/config.json"
         }
       ],
       "tags": [

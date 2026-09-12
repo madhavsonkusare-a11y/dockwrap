@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "id": "changedetection",
+  "display_name": "changedetection.io",
+  "catalog_name": "changedetection.io",
+  "description": "Stay up-to-date with web-site content changes.",
+  "category": "Automation",
+  "license": "Apache-2.0",
+  "source_url": "https://github.com/dgtlmoon/changedetection.io",
+  "documentation_url": "https://changedetection.io/",
+  "verified_at": "2026-09-12",
+  "lifecycle_proof": "docs/evidence/changedetection-qualification.json",
+  "origin": {
+    "importer": "caprover",
+    "repository": "caprover/one-click-apps",
+    "revision": "7f1f329125dde0cb915f47c8b33293eca45f7d0e",
+    "path": "public/v4/apps/changedetection.yml",
+    "license": "Apache-2.0"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "dgtlmoon/changedetection.io:0.60.4",
+        "source_url": "https://hub.docker.com/v2/repositories/dgtlmoon/changedetection.io/tags/0.60.4",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-09-10",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm/v7",
+          "linux/arm/v8",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:e61f10fbbc635af1d396721bb9179464a38dd6f749b4cfc92a52e94057370a8e",
+          "linux/arm/v7": "sha256:6aaedcadd28800c30b25d3cb089eff8f146da512426a7dd6766bdc1a2fc5a867",
+          "linux/arm/v8": "sha256:dbb81aa2d20ce3bc4e19dd6e58e10ba0aabb6bb9dcd8d3bb51d15d3c6e7e7da2",
+          "linux/arm64": "sha256:3df9408c73977b13180a64aaee646376ed88a62f374e09e0e6b7a01ca37be60b"
+        },
+        "index_digest": "sha256:7bb6963b730df6a1070f7a08a607b0eb7a87fe65abfa4742d876ad33bb1267eb"
+      }
+    ]
+  },
+  "promotion": {
+    "state": "approved",
+    "reason": "Approved by the owner. Qualified as offered on 2026-09-12: a real install of changedetection.io 0.60.4, upstream's current release proved it starts, opens to a first screen with a clear next step, survives a restart and a keep-data reinstall with its data intact, and removes everything it created. The definition comes from CapRover's one-click apps."
+  },
+  "data_storage": "A Docker volume Local Store manages for changedetection",
+  "risk_notes": [
+    "Creates 1 Docker container and publishes one port on this computer's loopback interface only.",
+    "Keeps its data in a Docker volume that Local Store manages for it. A keep-data uninstall leaves the volume; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Watches the pages you add, on the schedule you set, fetching them from this computer.",
+    "Notifications need a service you configure — email, ntfy, and so on — and nothing is sent until you do.",
+    "Pages that only render with a browser need the separate Playwright container upstream suggests, which is not included here."
+  ],
+  "fields": {},
+  "definition": "{\"captainVersion\": 4, \"services\": {\"$$cap_appname\": {\"image\": \"dgtlmoon/changedetection.io:$$cap_version\", \"environment\": {\"BASE_URL\": \"http://$$cap_appname.$$cap_root_domain\"}, \"volumes\": [\"$$cap_appname-data:/datastore\"], \"caproverExtra\": {\"containerHttpPort\": \"5000\"}}}, \"caproverOneClickApp\": {\"variables\": [{\"id\": \"$$cap_version\", \"label\": \"ChangeDetection.io version\", \"defaultValue\": \"0.40.2\", \"description\": \"Check out their docker page for the valid tags https://hub.docker.com/r/dgtlmoon/changedetection.io/tags\"}], \"instructions\": {\"start\": \"Self-hosted website change detection monitoring.  For more info visit https://github.com/dgtlmoon/changedetection.io\", \"end\": \"ChangeDetection.io has been successfully deployed!\\nApp is available as http://$$cap_appname.$$cap_root_domain.\\nDon't forget to use Caprover's HTTP Basic Auth to protect your app.\"}, \"displayName\": \"ChangeDetection.io\", \"isOfficial\": false, \"description\": \"ChangeDetection.io is the self-hosted website change detection monitoring.\", \"documentation\": \"This docker-compose is taken from https://github.com/dgtlmoon/changedetection.io\"}}",
+  "image_pins": [
+    {
+      "definition": "dgtlmoon/changedetection.io:0.40.2",
+      "replacement": "dgtlmoon/changedetection.io:0.60.4",
+      "reason": "CapRover's definition pins 0.40.2, from 2024. This is upstream's current release."
+    }
+  ]
+}

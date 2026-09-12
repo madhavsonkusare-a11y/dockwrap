@@ -149,13 +149,15 @@ mod tests {
                 .unwrap_or_else(|| panic!("searching {name:?} does not find the app it names"));
             assert_eq!(entry.capability, "preview_install");
         }
-        assert!(search_catalog("Immich", "", 0, 48)
+        // The other half: an entry nobody has approved advertises no install.
+        // Derived rather than named, because the app that used to stand here —
+        // Immich — was approved, and the test then failed for being right.
+        let unapproved = search_catalog("", "", 0, 48)
             .entries
             .into_iter()
-            .find(|entry| entry.name == "Immich")
-            .unwrap()
-            .recipe_id
-            .is_none());
+            .find(|entry| entry.recipe_id.is_none())
+            .expect("the catalogue is larger than the allowlist");
+        assert_ne!(unapproved.capability, "preview_install");
     }
 
     #[test]

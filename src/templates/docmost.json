@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "id": "docmost",
+  "display_name": "docmost Community Edition",
+  "catalog_name": "docmost Community Edition",
+  "description": "Collaborative wiki and documentation software (alternative to Confluence, Notion).",
+  "category": "Wikis",
+  "license": "AGPL-3.0",
+  "source_url": "https://github.com/docmost/docmost",
+  "documentation_url": "https://docmost.com/",
+  "verified_at": "2026-09-12",
+  "lifecycle_proof": "docs/evidence/docmost-qualification.json",
+  "origin": {
+    "importer": "runtipi",
+    "repository": "runtipi/runtipi-appstore",
+    "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+    "path": "apps/docmost/docker-compose.json",
+    "license": "GPL-3.0"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "docmost/docmost:0.96.0",
+        "source_url": "https://hub.docker.com/v2/repositories/docmost/docmost/tags/0.96.0",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-09-08",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:17946a58951d8fd31a1b12db03f0d9fff362432c0778e5e19b4c78909b0000d4",
+          "linux/arm64": "sha256:6ed7e3727ef6535818178ecf5c37fc4ada44d8c6d81ac326df0860c1d2a933c2"
+        },
+        "index_digest": "sha256:b56947fcfd08aab8fae12a377e1792784786adbf8b96e4281f14ef4fc072685a"
+      },
+      {
+        "image": "postgres:16-alpine",
+        "source_url": "https://hub.docker.com/v2/repositories/library/postgres/tags/16-alpine",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-08-16",
+        "container_platforms": [
+          "linux/386",
+          "linux/amd64",
+          "linux/arm/v6",
+          "linux/arm/v7",
+          "linux/arm64/v8",
+          "linux/ppc64le",
+          "linux/riscv64",
+          "linux/s390x"
+        ],
+        "digests": {
+          "linux/386": "sha256:484e18dac5a9e7096d0a03f098cb1e1236e1affc1feb7afa3efefc13b506f9ea",
+          "linux/amd64": "sha256:075f7ba66bc9b3ce7d6b8b635208ff61cd7cf1a67d71ec530eec5d7ae0cbe571",
+          "linux/arm/v6": "sha256:b8825b49a67f7e332f48cd92ce1891afd5736188c29d713e472e44d5b7549f00",
+          "linux/arm/v7": "sha256:310c14b4fe147b4e3536ee7ee911ab5f11c965ae555a0b0878313b75c6f475a4",
+          "linux/arm64/v8": "sha256:738d1359df5aa0b6d50a9071e989c49fdd39152a2a805c6ff131bf5e2243e0b3",
+          "linux/ppc64le": "sha256:d4ef0cf6fcb7037a7fd18f953fd1fd72eff7fae3c2763dc9f27e684521a109a3",
+          "linux/riscv64": "sha256:7419592f1f489dac36a00bd9bffcc06027bf4d6fc90e2d662c521f5277883306",
+          "linux/s390x": "sha256:295d76fe6b34663f492302e45c43d90e2306775ab4e94ed0cb1de0677f4ce67b"
+        },
+        "index_digest": "sha256:cf78e76683b9ca8c5733cbbdce6c9262b45b6767934dd0a95e671f9a0fc20685"
+      },
+      {
+        "image": "redis:7.2-alpine",
+        "source_url": "https://hub.docker.com/v2/repositories/library/redis/tags/7.2-alpine",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-08-20",
+        "container_platforms": [
+          "linux/386",
+          "linux/amd64",
+          "linux/arm/v6",
+          "linux/arm/v7",
+          "linux/arm64/v8",
+          "linux/ppc64le",
+          "linux/riscv64",
+          "linux/s390x"
+        ],
+        "digests": {
+          "linux/386": "sha256:527c622b47560027980efcc8517467eb54e1ed39ea9ce1772e355c1e8e49402f",
+          "linux/amd64": "sha256:b5dee736fa6758052556cc97b5d5423177dcd8e26ce9746e6e3d58484a5a4143",
+          "linux/arm/v6": "sha256:8e826f02ad2ebb3f7503e4cfb96d2b7531b5e1e20badfd5da9746b3a786aec16",
+          "linux/arm/v7": "sha256:5bc0653e01dc2c887a9d7263030fbd9b8bcf705812a73495e563ca18263cb91c",
+          "linux/arm64/v8": "sha256:efd8e95c7f61fcb75251940a3d47b3eb3c8e6fdc43c982bf041dc377a729e1d2",
+          "linux/ppc64le": "sha256:ef50e3b67c61f36e07ba7b5816492637ad3b4b7f712d7602ddd532a4ae6cf36b",
+          "linux/riscv64": "sha256:08b049af8b44dca213f58a5e29066c7d8a33c087f69e6d23e48540315269f71e",
+          "linux/s390x": "sha256:19179df4a1e84a97c8a48e695dfd137cde001f31f7a4cab29656154e01de0053"
+        },
+        "index_digest": "sha256:ccd6aa8d45ff3f033d6fa15b8cc1a50579f65c89f38cf9bb607a954c4f2128ed"
+      }
+    ]
+  },
+  "promotion": {
+    "state": "approved",
+    "reason": "Approved by the owner. Qualified as offered on 2026-09-12: a real install of Docmost 0.96.0, upstream's current release proved it starts, opens to a first screen with a clear next step, survives a restart and a keep-data reinstall with its data and generated credentials intact, and removes everything it created. The definition comes from Runtipi's app store."
+  },
+  "data_storage": "Local Store managed folder / docmost",
+  "risk_notes": [
+    "Creates 3 Docker containers and publishes one port on this computer's loopback interface only.",
+    "Generates 2 credentials of its own, keeps them beside the app's data, and reuses them if you reinstall.",
+    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Asks you to create the first workspace and account, which becomes the administrator.",
+    "Pages, uploads and attachments live in the app's folder, in PostgreSQL and on disk beside it.",
+    "Docmost is source-available: the code here is AGPL-3.0, and some features belong to a separately licensed edition."
+  ],
+  "fields": {},
+  "definition": "{\n  \"services\": [\n    {\n      \"name\": \"docmost\",\n      \"image\": \"docmost/docmost:0.95.0\",\n      \"isMain\": true,\n      \"internalPort\": 3000,\n      \"environment\": [\n        {\n          \"key\": \"APP_URL\",\n          \"value\": \"${APP_PROTOCOL:-http}://${APP_DOMAIN}\"\n        },\n        {\n          \"key\": \"APP_SECRET\",\n          \"value\": \"${DOCMOST_APP_SECRET}\"\n        },\n        {\n          \"key\": \"DATABASE_URL\",\n          \"value\": \"postgresql://docmost:${DOCMOST_PG_PASSWORD}@docmost-db:5432/docmost?schema\"\n        },\n        {\n          \"key\": \"REDIS_URL\",\n          \"value\": \"redis://docmost-redis:6379\"\n        }\n      ],\n      \"dependsOn\": [\"docmost-db\", \"docmost-redis\"],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/storage\",\n          \"containerPath\": \"/app/data/storage\"\n        }\n      ]\n    },\n    {\n      \"name\": \"docmost-db\",\n      \"image\": \"postgres:16-alpine\",\n      \"environment\": [\n        {\n          \"key\": \"POSTGRES_DB\",\n          \"value\": \"docmost\"\n        },\n        {\n          \"key\": \"POSTGRES_USER\",\n          \"value\": \"docmost\"\n        },\n        {\n          \"key\": \"POSTGRES_PASSWORD\",\n          \"value\": \"${DOCMOST_PG_PASSWORD}\"\n        }\n      ],\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/postgresql\",\n          \"containerPath\": \"/var/lib/postgresql/data\"\n        }\n      ]\n    },\n    {\n      \"name\": \"docmost-redis\",\n      \"image\": \"redis:7.2-alpine\",\n      \"volumes\": [\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/redis\",\n          \"containerPath\": \"/data\"\n        }\n      ]\n    }\n  ],\n  \"schemaVersion\": 2,\n  \"$schema\": \"https://schemas.runtipi.io/v2/dynamic-compose.json\"\n}\n",
+  "config": {
+    "path": "apps/docmost/config.json",
+    "content": "{\n  \"name\": \"Docmost\",\n  \"id\": \"docmost\",\n  \"available\": true,\n  \"short_desc\": \"An open-source collaborative wiki and documentation software\",\n  \"author\": \"docmost\",\n  \"port\": 9713,\n  \"categories\": [\"data\", \"utilities\"],\n  \"description\": \"Docmost is an open-source alternative to the likes of Notion and Confluence. Whether you're managing a wiki, a knowledge base, or extensive project documentation, Docmost provides the tools you need to create, collaborate, and share knowledge effortlessly.\",\n  \"tipi_version\": 64,\n  \"version\": \"0.95.0\",\n  \"source\": \"https://github.com/docmost/docmost\",\n  \"website\": \"https://docmost.com/\",\n  \"exposable\": true,\n  \"dynamic_config\": true,\n  \"force_expose\": false,\n  \"form_fields\": [\n    {\n      \"type\": \"random\",\n      \"label\": \"App Secret\",\n      \"min\": 64,\n      \"env_variable\": \"DOCMOST_APP_SECRET\"\n    },\n    {\n      \"type\": \"random\",\n      \"label\": \"Postgres database password\",\n      \"min\": 32,\n      \"env_variable\": \"DOCMOST_PG_PASSWORD\"\n    }\n  ],\n  \"supported_architectures\": [\"arm64\", \"amd64\"],\n  \"created_at\": 1691943801422,\n  \"updated_at\": 1783061948427,\n  \"$schema\": \"../app-info-schema.json\",\n  \"min_tipi_version\": \"4.5.0\"\n}\n"
+  },
+  "image_pins": [
+    {
+      "definition": "docmost/docmost:0.95.0",
+      "replacement": "docmost/docmost:0.96.0",
+      "reason": "Runtipi's definition pins 0.95.0. This is upstream's current release."
+    }
+  ]
+}

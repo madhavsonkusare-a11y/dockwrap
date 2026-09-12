@@ -1,0 +1,57 @@
+{
+  "creator": 936126,
+  "id": 157707926,
+  "images": [
+    {
+      "architecture": "amd64",
+      "features": "",
+      "variant": null,
+      "digest": "sha256:52dca412d4f0c1fa7c7113a2e41972108693864353587b565a608d1cba4ebdfb",
+      "os": "linux",
+      "os_features": "",
+      "os_version": null,
+      "size": 116979205,
+      "status": "active",
+      "last_pulled": "2026-09-10T13:24:53.521266523Z",
+      "last_pushed": "2021-07-09T17:11:54Z"
+    },
+    {
+      "architecture": "arm",
+      "features": "",
+      "variant": "v7",
+      "digest": "sha256:b274d5e6f08ea8dcbe720ab72564dc32403a4512a5718ae801a135ed02cff6aa",
+      "os": "linux",
+      "os_features": "",
+      "os_version": null,
+      "size": 110261919,
+      "status": "inactive",
+      "last_pulled": "2026-08-06T15:10:29.055783177Z",
+      "last_pushed": "2021-07-09T17:12:53Z"
+    },
+    {
+      "architecture": "arm64",
+      "features": "",
+      "variant": "v8",
+      "digest": "sha256:c35bb337769510851eba173b22ff3a4fb18b28eddaaf7045f8168d2222f7dc2a",
+      "os": "linux",
+      "os_features": "",
+      "os_version": null,
+      "size": 112812762,
+      "status": "inactive",
+      "last_pulled": "2026-08-06T15:15:04.199440688Z",
+      "last_pushed": "2021-07-09T17:13:56Z"
+    }
+  ],
+  "last_updated": "2021-07-09T17:14:22.322519Z",
+  "last_updater": 936126,
+  "last_updater_username": "linuxserverci",
+  "name": "development-v4.0.1446-ls143",
+  "repository": 1259189,
+  "full_size": 116979205,
+  "v2": true,
+  "tag_status": "active",
+  "tag_last_pulled": "2026-09-10T13:24:53.521266523Z",
+  "tag_last_pushed": "2021-07-09T17:14:22.322519Z",
+  "media_type": "application/vnd.docker.distribution.manifest.list.v2+json",
+  "content_type": "image"
+}

@@ -5318,7 +5318,8 @@
       "sources": [
         "awesome-selfhosted",
         "runtipi",
-        "legacy"
+        "legacy",
+        "local-store"
       ]
     },
     {
@@ -12665,7 +12666,8 @@
       ],
       "sources": [
         "awesome-selfhosted",
-        "runtipi"
+        "runtipi",
+        "local-store"
       ]
     },
     {

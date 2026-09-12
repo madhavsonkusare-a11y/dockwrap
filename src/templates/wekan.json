@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "id": "wekan",
+  "display_name": "Wekan",
+  "catalog_name": "Wekan",
+  "description": "Open-source Trello-like kanban.",
+  "category": "Task Management & To-do Lists",
+  "license": "MIT",
+  "source_url": "https://github.com/wekan/wekan",
+  "documentation_url": "https://wekan.github.io/",
+  "verified_at": "2026-09-12",
+  "lifecycle_proof": "docs/evidence/wekan-qualification.json",
+  "origin": {
+    "importer": "runtipi",
+    "repository": "runtipi/runtipi-appstore",
+    "revision": "3c878baaf22361a515abc9fc648d0e4821c6d593",
+    "path": "apps/wekan/docker-compose.json",
+    "license": "GPL-3.0"
+  },
+  "requirements": {
+    "docker_engine_os": "linux",
+    "compose_major": 2,
+    "local_storage_required": true,
+    "images": [
+      {
+        "image": "ghcr.io/wekan/wekan:v11.72",
+        "source_url": "https://ghcr.io/v2/wekan/wekan/manifests/v11.72",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-09-11",
+        "container_platforms": [
+          "linux/386",
+          "linux/amd64",
+          "linux/arm/v7",
+          "linux/arm64",
+          "linux/ppc64le",
+          "linux/riscv64",
+          "linux/s390x"
+        ],
+        "digests": {
+          "linux/386": "sha256:d84b5fda75f5655813cedb49f884072c34c62a68903a6e0bdb45ab10adaf7dff",
+          "linux/amd64": "sha256:e665ac10a88b4be2515ace2996566cb3219e2789b8f99055b815b335893cebaa",
+          "linux/arm/v7": "sha256:9640bb13123154955b3ae32fcfcb4553847503520400150a306bdc98b0e1af36",
+          "linux/arm64": "sha256:7ee304f95914e1758ad2d738574482420f1ab2f4acb68814f7267765613f48d1",
+          "linux/ppc64le": "sha256:35b0cbc6d68ada4d1c607a32f6cd651c4a0ed13a79acc99970da9250cf6f4414",
+          "linux/riscv64": "sha256:481d4dc053631659bf7c864912fcb188c46085e618b621ba626443539275ef66",
+          "linux/s390x": "sha256:47488c7ae940f402195b9fa3a1031cd77470d7402bdd98ad121e719445447254"
+        },
+        "index_digest": "sha256:c05eab75933d347a95ca31abff33cf471b967519c1ee6a3ccf7f490ed74d3703"
+      },
+      {
+        "image": "mongo:6",
+        "source_url": "https://hub.docker.com/v2/repositories/library/mongo/tags/6",
+        "checked_at": "2026-09-12",
+        "last_updated": "2026-05-15",
+        "container_platforms": [
+          "linux/amd64",
+          "linux/arm64/v8",
+          "windows/amd64"
+        ],
+        "digests": {
+          "linux/amd64": "sha256:268eb517abcb8a1bb4cf5f290ec2ac37185e78bfb62e7111576bbb3d8b092456",
+          "linux/arm64/v8": "sha256:3ed30e2875f51747c16be3807301f5595ea44a29ab339be3668c3eecd115cd89",
+          "windows/amd64": "sha256:5e7aec8c1b9e7c884f8e11fdfb12a5dcffa9db25b503c1a1eda3d67838b2e00c"
+        },
+        "index_digest": "sha256:8b6d8f5bbedb25cb73517b65cf99f13aeb75ad5b157a56c479287a840bbad3ac"
+      }
+    ]
+  },
+  "promotion": {
+    "state": "approved",
+    "reason": "Approved by the owner. Qualified as offered on 2026-09-12: a real install of Wekan v11.72, upstream's current release proved it starts, opens to a first screen with a clear next step, survives a restart and a keep-data reinstall with its data intact, and removes everything it created. The definition comes from Runtipi's app store."
+  },
+  "data_storage": "Local Store managed folder / wekan",
+  "risk_notes": [
+    "Creates 2 Docker containers and publishes one port on this computer's loopback interface only.",
+    "Keeps its data in this app's managed folder. A keep-data uninstall leaves it; deleting data removes it permanently.",
+    "Proven on Windows with Docker's Linux engine. macOS and Linux hosts are unverified.",
+    "Asks you to register the first account; anyone who can reach the address can register another.",
+    "Boards live in a MongoDB beside it, in the app's folder.",
+    "The mail settings are optional: without them Wekan works, but it cannot send board invitations."
+  ],
+  "fields": {
+    "MAIL_ADDRESS": {
+      "label": "Address invitation emails come from (optional)",
+      "sensitive": false
+    },
+    "MAIL_PASSWORD": {
+      "label": "Password for that mail account (optional)",
+      "sensitive": true
+    },
+    "TZ": {
+      "label": "Time zone (for example, Asia/Kolkata)",
+      "sensitive": false
+    }
+  },
+  "definition": "{\n  \"services\": [\n    {\n      \"name\": \"wekan\",\n      \"image\": \"ghcr.io/wekan/wekan:v11.49\",\n      \"isMain\": true,\n      \"internalPort\": 8080,\n      \"environment\": [\n        {\n          \"key\": \"MONGO_URL\",\n          \"value\": \"mongodb://wekan-db:27017/wekan\"\n        },\n        {\n          \"key\": \"ROOT_URL\",\n          \"value\": \"https://${APP_DOMAIN}\"\n        },\n        {\n          \"key\": \"MAIL_URL\",\n          \"value\": \"smtp://${MAIL_ADDRESS}:${MAIL_PASSWORD}@smtp.gmail.com:587\"\n        },\n        {\n          \"key\": \"MAIL_FROM\",\n          \"value\": \"Wekan Notifications <noreply.wekan@${APP_DOMAIN}>\"\n        }\n      ],\n      \"dependsOn\": [\"wekan-db\"],\n      \"volumes\": [\n        {\n          \"hostPath\": \"/etc/localtime\",\n          \"containerPath\": \"/etc/localtime\",\n          \"readOnly\": true\n        },\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/wekan\",\n          \"containerPath\": \"/data\"\n        }\n      ]\n    },\n    {\n      \"name\": \"wekan-db\",\n      \"image\": \"mongo:6\",\n      \"volumes\": [\n        {\n          \"hostPath\": \"/etc/localtime\",\n          \"containerPath\": \"/etc/localtime\",\n          \"readOnly\": true\n        },\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/mongo\",\n          \"containerPath\": \"/data/db\"\n        },\n        {\n          \"hostPath\": \"${APP_DATA_DIR}/data/dump\",\n          \"containerPath\": \"/dump\"\n        }\n      ],\n      \"command\": \"mongod --logpath /dev/null --oplogSize 128 --quiet\"\n    }\n  ],\n  \"schemaVersion\": 2,\n  \"$schema\": \"https://schemas.runtipi.io/v2/dynamic-compose.json\"\n}\n",
+  "seeds": [
+    {
+      "path": "data/wekan/attachments/.gitkeep",
+      "content": ""
+    }
+  ],
+  "config": {
+    "path": "apps/wekan/config.json",
+    "content": "{\n  \"$schema\": \"../app-info-schema.json\",\n  \"name\": \"Wekan\",\n  \"port\": 8678,\n  \"available\": true,\n  \"exposable\": true,\n  \"dynamic_config\": true,\n  \"id\": \"wekan\",\n  \"tipi_version\": 187,\n  \"version\": \"v11.49\",\n  \"categories\": [\"development\"],\n  \"description\": \"Experience efficient task management with WeKan - the Open-Source, customizable, and privacy-focused kanban\",\n  \"short_desc\": \"Open-Source, customizable, and privacy-focused kanban\",\n  \"author\": \"Lauri Ojansivu\",\n  \"source\": \"https://github.com/wekan/wekan\",\n  \"form_fields\": [\n    {\n      \"type\": \"email\",\n      \"label\": \"Email Address\",\n      \"max\": 50,\n      \"min\": 3,\n      \"required\": true,\n      \"env_variable\": \"MAIL_ADDRESS\"\n    },\n    {\n      \"type\": \"password\",\n      \"label\": \"Email Password\",\n      \"required\": true,\n      \"env_variable\": \"MAIL_PASSWORD\"\n    }\n  ],\n  \"supported_architectures\": [\"amd64\"],\n  \"created_at\": 1691943801422,\n  \"updated_at\": 1788597099471,\n  \"force_pull\": false,\n  \"min_tipi_version\": \"4.5.0\"\n}\n"
+  },
+  "image_pins": [
+    {
+      "definition": "ghcr.io/wekan/wekan:v11.49",
+      "replacement": "ghcr.io/wekan/wekan:v11.72",
+      "reason": "Runtipi's definition pins v11.49, twenty-three releases behind. This is upstream's current release."
+    }
+  ]
+}

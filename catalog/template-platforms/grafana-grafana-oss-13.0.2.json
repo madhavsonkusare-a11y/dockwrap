@@ -1,0 +1,58 @@
+{
+  "creator": 35009,
+  "id": 1185140426,
+  "images": [
+    {
+      "architecture": "amd64",
+      "features": "",
+      "variant": null,
+      "digest": "sha256:b8f6abae513b839b2f3487343fa5e44d9c9d7871271fdd17689c4c452cb8098e",
+      "os": "linux",
+      "os_features": "",
+      "os_version": null,
+      "size": 352039151,
+      "status": "active",
+      "last_pulled": "2026-09-10T14:27:47.456905153Z",
+      "last_pushed": "2026-06-02T13:29:59.759329396Z"
+    },
+    {
+      "architecture": "arm64",
+      "features": "",
+      "variant": null,
+      "digest": "sha256:0b35c0b9de28b45b6d07b92c8b09a7b53559c9cacde2a535b0179b7ace673411",
+      "os": "linux",
+      "os_features": "",
+      "os_version": null,
+      "size": 327858080,
+      "status": "active",
+      "last_pulled": "2026-09-10T14:25:22.395364702Z",
+      "last_pushed": "2026-06-02T13:29:59.389255013Z"
+    },
+    {
+      "architecture": "arm",
+      "features": "",
+      "variant": "v7",
+      "digest": "sha256:0ed3b029f600a41a16e821643bb947a0d9df8d1e6024cc33ad61c3b261b560f0",
+      "os": "linux",
+      "os_features": "",
+      "os_version": null,
+      "size": 321078963,
+      "status": "active",
+      "last_pulled": "2026-09-10T14:25:22.689806479Z",
+      "last_pushed": "2026-06-02T13:29:59.527360702Z"
+    }
+  ],
+  "last_updated": "2026-06-02T13:30:00.999795Z",
+  "last_updater": 35009,
+  "last_updater_username": "grafana",
+  "name": "13.0.2",
+  "repository": 14750200,
+  "full_size": 352039151,
+  "v2": true,
+  "tag_status": "active",
+  "tag_last_pulled": "2026-09-10T14:27:47.456905153Z",
+  "tag_last_pushed": "2026-06-02T13:30:00.999795Z",
+  "media_type": "application/vnd.docker.distribution.manifest.list.v2+json",
+  "content_type": "image",
+  "digest": "sha256:5dad0df181cb644a14e13617b913b261a54f7d4fd4510721dba420929f35bea2"
+}
