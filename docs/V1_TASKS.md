@@ -1,6 +1,6 @@
 # Local Store V1 release tasks
 
-Updated September 12, 2026. **This is the only active release task ledger.**
+Updated September 13, 2026. **This is the only active release task ledger.**
 The handoff records the next action; detailed plans explain implementation;
 research documents are proposals, not additional commitments.
 
@@ -69,12 +69,12 @@ Detailed design: [bundled engine](plans/bundled-engine.md) and
 
 | ID | Status | Task and acceptance | Depends on |
 | --- | --- | --- | --- |
-| E01 | PARTIAL | [Upstream/code checkpoint](plans/bundled-engine.md#e01-verification-checkpoint--september-13-2026) recorded; payload selection, pins, notices and supported OS matrix remain open. Verify distribution/licensing and select the engine package. Start from Moby + Compose in a managed WSL distro; reuse maintained packaging where suitable. Record pinned components, notices, security-update responsibility, payload integrity and supported Windows/WSL versions. No eligibility claim based solely on an old research note. | R02 |
+| E01 | PARTIAL | [Development payload](../engine/README.md) built/exported with five checksum-pinned engine packages and an exact 128-package inventory. Finish full dependency locking, signed-index provenance, rootfs notices/source obligations and supported Windows/WSL matrix before release approval. [Recorded checkpoint](plans/bundled-engine.md#e01-verification-checkpoint--september-13-2026). | R02 |
 | E02 | TODO | Introduce engine selection through existing process/runtime seams. All install, doctor, qualification and recovery operations use the same selected engine/context. Existing Docker Desktop path still passes; fake alternate executable tests prove no hard-coded escape. | E01 |
 | E03 | TODO | Build signed/checksummed engine bootstrap with bounded download, disk/virtualization/WSL checks, explicit elevation/restart handling and resumable failure. A clean Windows machine without Docker Desktop reaches a ready engine. | E02 |
 | E04 | TODO | Implement supervision, coexistence, repair and removal. Never stop an unrelated distro/daemon; do not stop background apps merely because the launcher closes. Engine removal and app-data removal are separate, explicit decisions. Test sleep/wake, crash, restart and existing Docker Desktop coexistence. | E03 |
-| Q01 | TODO | Define versioned evidence identity and levels: source, adapter/plan, exact images, OS/architecture, engine/Compose, probe version and steps. Missing/stale evidence cannot retain a stronger claim. Build migration and refusal regressions. | E02 |
-| Q02 | TODO | Inspect every service after install/restart/reinstall, including expected service count. Long-running services must be running and healthy where health is declared; jobs must complete successfully. A broken worker must fail while its web page still loads. Record startup time, image/disk cost and measured memory with measurement limits. | Q01 |
+| Q01 | PARTIAL | Evidence schema 1 and resume refusal for unversioned/future evidence implemented; old JSON remains readable as history. Finish source/adapter/plan, exact images, OS/architecture, engine/Compose and probe identity, evidence levels and freshness comparisons. Stale evidence must not retain stronger claims. | E02 |
+| Q02 | PARTIAL | All-service count, running/health and successful-job checks now run after install/restart/reinstall; uncertain cleanup inventory fails qualification. [Real Docker stopped-worker regression](evidence/service-health-regression-2026-09-13.json) passes. Finish startup, image/disk and memory measurements with their limits, then prove on the managed engine. | Q01 |
 | Q03 | TODO | Requalify all current offerings sequentially against the managed engine and stronger checks. Record failures/demotions, ownership-safe cleanup and engine identity. Do not inherit Docker Desktop proof across the engine swap. | E04, Q02 |
 | Q04 | TODO | Build application-level probes for account creation/login and representative content. For AI apps, reuse a maintained mock HTTP server or fixture framework for deterministic model responses; distinguish stub integration from real-provider compatibility. Prove persistence of content, not merely a marker file. | Q02 |
 | Q05 | TODO | Establish consistent backup/restore primitives for the app types V1 exposes to agent writes or updates. Include bind data, named volumes and credentials; quiesce the app or use its native backup. Restore into a fresh isolated install and read the content. Live folder copies are not database backup proof. | E04, Q04 |

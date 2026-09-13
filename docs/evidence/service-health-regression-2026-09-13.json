@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-09-13",
+  "scope": "Docker Desktop regression fixture; not managed-engine or application-task qualification",
+  "host": {
+    "os": "Windows",
+    "build": "26200.9445",
+    "wsl": "2.6.3.0",
+    "engine": "29.3.1",
+    "compose": "5.1.1"
+  },
+  "fixture_image": "ubuntu:24.04@sha256:a61567bd31828687156d735ea8eb01ba4e37636e225dd6a48ba94136a70d9d61",
+  "test": "qualification::service_health::tests::real_docker_inspection_detects_a_stopped_worker",
+  "result": "passed",
+  "assertions": [
+    "all expected running service containers pass inspection",
+    "stopping one worker fails inspection",
+    "owned fixture containers removed",
+    "pre-existing containers survive"
+  ],
+  "source_sha256": {
+    "src/qualification.rs": "2d5cbfcb61d1fa3a66225f251016ce3c9c94241959fb0203d85805155ad75b4c",
+    "src/qualification/service_health.rs": "33ff2007b01f551794e160fcc454c3f5b0a2623d8f420a6ea1f78dd4cdba983c"
+  },
+  "limits": [
+    "No HTTP useful-task probe in this isolated process fixture",
+    "No WSL boot or engine migration proof",
+    "No resource measurement or V1 certification"
+  ]
+}

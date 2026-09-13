@@ -24,6 +24,8 @@ use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
 use std::time::Duration;
 
+mod service_health;
+
 /// Where in an app's life a first-use check is being run.
 ///
 /// The same check runs at all three points on purpose: passing once proves the
@@ -182,6 +184,10 @@ pub struct StepResult {
 /// from a re-run.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Evidence {
+    /// Version 0 is historical unversioned evidence. Version 1 adds mandatory
+    /// all-service checks; neither version certifies the future managed engine.
+    #[serde(default)]
+    pub schema_version: u32,
     pub app: String,
     pub passed: bool,
     pub scope: String,
@@ -306,7 +312,7 @@ fn all_containers(runner: &dyn ProcessRunner) -> AppResult<Vec<String>> {
             DIAGNOSTIC_TIMEOUT,
         ))
         .map_err(AppError::from)?;
-    if !output.success {
+    if !output.success || output.truncated {
         return Err(AppError::invalid("Docker container inspection failed."));
     }
     Ok(output
@@ -335,15 +341,15 @@ impl<'a> OwnedResources<'a> {
     }
 
     /// What this project still owns, by resource kind.
-    pub fn remaining(&self) -> BTreeMap<String, usize> {
+    pub fn remaining(&self) -> Result<BTreeMap<String, usize>, String> {
         let mut counts = BTreeMap::new();
         for (kind, list) in [("container", "-aq"), ("network", "-q"), ("volume", "-q")] {
-            counts.insert(kind.to_owned(), self.ids(kind, list).len());
+            counts.insert(kind.to_owned(), self.ids(kind, list)?.len());
         }
-        counts
+        Ok(counts)
     }
 
-    fn ids(&self, kind: &str, list: &str) -> Vec<String> {
+    fn ids(&self, kind: &str, list: &str) -> Result<Vec<String>, String> {
         let spec = CommandSpec::new(
             "docker",
             vec![
@@ -357,19 +363,19 @@ impl<'a> OwnedResources<'a> {
             DIAGNOSTIC_TIMEOUT,
         );
         match self.runner.run(&spec) {
-            Ok(output) if output.success => output
+            Ok(output) if output.success && !output.truncated => Ok(output
                 .stdout
                 .split_whitespace()
                 .map(str::to_owned)
-                .collect(),
-            _ => Vec::new(),
+                .collect()),
+            _ => Err(format!("could not verify this run's {kind} resources")),
         }
     }
 
     /// Nothing owned by this run is left.
     pub fn all_removed(&self) -> Result<(), String> {
         let left: Vec<String> = self
-            .remaining()
+            .remaining()?
             .into_iter()
             .filter(|(_, count)| *count > 0)
             .map(|(kind, count)| format!("{count} {kind}(s)"))
@@ -387,7 +393,9 @@ impl Drop for OwnedResources<'_> {
         // Scoped to this run's own Compose project label, which is unique per
         // run, so this can never reach anything else.
         for (kind, list) in [("container", "-aq"), ("network", "-q"), ("volume", "-q")] {
-            for id in self.ids(kind, list) {
+            // Drop cannot report failure. It must not remove resources based
+            // on incomplete inspection; all_removed reports that uncertainty.
+            for id in self.ids(kind, list).unwrap_or_default() {
                 let mut args = vec![kind.to_owned(), "rm".to_owned()];
                 if kind == "container" {
                     args.push("-f".to_owned());
@@ -635,6 +643,9 @@ pub fn qualify_template(
     steps.run("answers on its address", || {
         answered(&probe, &installed.launch_url, health)
     });
+    steps.run("all services are ready after install", || {
+        service_health::wait(&runner, &template.plan, &isolation.project, health)
+    });
     steps.run(format!("is usable {}", Phase::FirstInstall.label()), || {
         first_use.exercise(Phase::FirstInstall, &installed.launch_url)
     });
@@ -652,6 +663,9 @@ pub fn qualify_template(
     });
     steps.run(format!("is usable {}", Phase::AfterRestart.label()), || {
         first_use.exercise(Phase::AfterRestart, &installed.launch_url)
+    });
+    steps.run("all services are ready after restart", || {
+        service_health::wait(&runner, &template.plan, &isolation.project, health)
     });
 
     let again = steps.run("reinstalls over data it kept", || {
@@ -687,6 +701,9 @@ pub fn qualify_template(
     });
 
     if let Some(again) = &again {
+        steps.run("all services are ready after reinstall", || {
+            service_health::wait(&runner, &template.plan, &isolation.project, health)
+        });
         steps.run(
             format!("is usable {}", Phase::AfterReinstall.label()),
             || first_use.exercise(Phase::AfterReinstall, &again.launch_url),
@@ -765,6 +782,7 @@ fn finish(
 ) -> Evidence {
     let results = steps.into_results();
     Evidence {
+        schema_version: 1,
         app: about.app.clone(),
         passed: results.iter().all(|step| step.passed),
         scope: format!(
@@ -823,7 +841,11 @@ impl Batch {
     /// run killed mid-write should be redone, not block the batch forever.
     pub fn recorded(&self, app: &str) -> Option<Evidence> {
         let text = std::fs::read_to_string(self.path(app)).ok()?;
-        serde_json::from_str(&text).ok()
+        let evidence: Evidence = serde_json::from_str(&text).ok()?;
+        // Keep old JSON readable for history, but never resume a stronger
+        // harness from evidence that did not run its checks. Unknown future
+        // versions also require an explicit migration instead of a guess.
+        (evidence.schema_version == 1 && evidence.app == app).then_some(evidence)
     }
 
     /// Write a result, atomically, so an interruption cannot leave a half file
@@ -936,6 +958,7 @@ mod tests {
     #[test]
     fn evidence_is_deterministic_and_names_its_failing_step() {
         let evidence = Evidence {
+            schema_version: 1,
             app: "example".into(),
             passed: false,
             scope: "one host".into(),
@@ -1092,6 +1115,40 @@ ccc",
         assert!(error.contains("network"), "{error}");
     }
 
+    #[test]
+    fn unavailable_or_partial_inventory_never_proves_cleanup() {
+        struct Unavailable(u8);
+        impl ProcessRunner for Unavailable {
+            fn run_cancellable(
+                &self,
+                _: &CommandSpec,
+                _: &crate::runtime::CancelToken,
+            ) -> Result<crate::runtime::ProcessOutput, crate::runtime::ProcessError> {
+                if self.0 == 0 {
+                    return Err(crate::runtime::ProcessError::new(
+                        crate::runtime::ProcessErrorCode::TimedOut,
+                        "inspection timed out",
+                    ));
+                }
+                Ok(crate::runtime::ProcessOutput {
+                    success: self.0 != 1,
+                    stdout: String::new(),
+                    stderr: String::new(),
+                    truncated: self.0 == 2,
+                })
+            }
+        }
+        for failure in 0..3 {
+            let runner = Unavailable(failure);
+            let owned = OwnedResources::new(&runner, "local-store-example-qualify");
+            assert!(owned
+                .all_removed()
+                .unwrap_err()
+                .contains("could not verify"));
+            assert!(Bystanders::note(&runner).is_err());
+        }
+    }
+
     /// The case that matters: a run that fails half way still has to clean up
     /// after itself, because that is the run most likely to leave something
     /// behind on a machine that is not a test machine.
@@ -1143,6 +1200,7 @@ ccc",
 
     fn evidence_for(app: &str, passed: bool) -> Evidence {
         Evidence {
+            schema_version: 1,
             app: app.into(),
             passed,
             scope: "one host".into(),
@@ -1170,6 +1228,29 @@ ccc",
         ));
         std::fs::create_dir_all(&dir).unwrap();
         dir
+    }
+
+    #[test]
+    fn old_or_future_evidence_cannot_skip_the_current_harness() {
+        let dir = scratch("evidence-version");
+        let batch = Batch::open(&dir).unwrap();
+        let mut evidence = evidence_for("example", true);
+        for version in [0, 2] {
+            evidence.schema_version = version;
+            batch.record(&evidence).unwrap();
+            assert!(batch.recorded("example").is_none());
+        }
+        let mut legacy = serde_json::to_value(&evidence).unwrap();
+        legacy.as_object_mut().unwrap().remove("schema_version");
+        std::fs::write(batch.path("example"), legacy.to_string()).unwrap();
+        assert_eq!(
+            serde_json::from_value::<Evidence>(legacy)
+                .unwrap()
+                .schema_version,
+            0
+        );
+        assert!(batch.recorded("example").is_none());
+        std::fs::remove_dir_all(dir).unwrap();
     }
 
     /// Qualifying a shortlist is hours of real Docker time and the run will be

@@ -14,7 +14,6 @@ fn shipping_files(root: &Path) -> Vec<PathBuf> {
         root.join(".github/workflows/build.yml"),
         root.join("README.md"),
         root.join("CONTRIBUTING.md"),
-        root.join("00_Design_Notes.md"),
         root.join("scripts/catalog_pipeline.py"),
     ];
     let publish = root.join("PUBLISH.md");

@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "status": "development_build_only",
+  "component_lock_sha256": "b4fbed132ca7ffaa362ee31fa88c9dda53f1cc1a3f5da2c527986877b2703cb4",
+  "image_id": "sha256:ee4c53fb7f0ab82ec01f340ff798b2d987dd5bf40fb3278039b26eb5efcbc658",
+  "platform": "linux/amd64",
+  "versions": {
+    "engine": "Docker version 29.8.0, build 3ce5872",
+    "cli": "Docker version 29.8.0, build 88096ef",
+    "compose": "5.5.1",
+    "containerd": "containerd containerd v2.3.5 1294c24a7da8e5a793ed378161673abe94118892",
+    "runc": "runc version 1.5.1\ncommit: v1.5.1-0-g8f2685a4\nspec: 1.3.0\ngo: go1.26.8\nlibseccomp: 2.5.5"
+  },
+  "rootfs_sha256": "4f00c037c3fc34c8cb1a26782f376bbde7b848924e6e9f47bd266fc948ae45eb",
+  "rootfs_bytes": 464494592,
+  "packages_sha256": "1f0011d3aadb90d950c3125fdaba92327f38195c19fab44acf57e5844fb430db",
+  "notices_sha256": "cea46da1dcca423397bddb1edd480354b4aea864f7277fec82d5f41d1b4b8a7c",
+  "package_count": 128,
+  "wsl_boot_tested": false,
+  "daemon_started": false,
+  "signed": false,
+  "limitations": [
+    "Ubuntu transitive dependencies resolve from signed apt metadata at build time; inventory records exact result but this is not a reproducible full dependency lock.",
+    "Rootfs notices are retained; redistribution/source obligations need release review.",
+    "No WSL bootstrap or clean-machine qualification is implied."
+  ],
+  "build_inputs_sha256": {
+    "Dockerfile": "821021c1e5dd989f4b0875875baad08863dbe7516763a96ce92526c5b663e46c",
+    "wsl.conf": "717d0f950a9b81f57ac82e7823b82481ed2e77b6a72210c206d75ceb6413b3aa",
+    "daemon.json": "8982465b14523f0c0e6be0c6ce1fb3e02097b2db3c2cb7854db779a216207538",
+    "components.lock.json": "b4fbed132ca7ffaa362ee31fa88c9dda53f1cc1a3f5da2c527986877b2703cb4"
+  }
+}

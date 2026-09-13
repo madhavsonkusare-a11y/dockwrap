@@ -38,23 +38,49 @@ Source-available apps remain allowed with accurate notices. The eight Umbrel
 icons remain under the owner's existing retain-with-NOASSERTION decision;
 that does not settle broad distribution rights. Shrimply remains excluded.
 
+## Phase 1 implementation checkpoint
+
+- E01: [development engine payload](../engine/README.md), exact Docker component
+  pins, isolated builder/exporter and offline refusal tests. Export evidence and
+  128-package inventory are in `docs/evidence/engine-*-development-2026-09-13.*`.
+  Local artifacts: `.cache/engine/build-4c6cb9c7590146799bcec6e000d231bf/`.
+  The rootfs is unsigned and has never booted in WSL. No app uses this engine yet.
+- Q01: evidence schema 1 distinguishes the stronger harness. Historical missing
+  versions deserialize as 0; batch resume reruns old/unknown versions. Full
+  source/plan/engine/probe identity is still required; schema alone is not proof.
+- Q02: `src/qualification/service_health.rs` checks every expected service at
+  three lifecycle points. Missing/duplicate/foreign services, unhealthy or dead
+  workers, missing declared health, and failed jobs refuse qualification.
+  Failed/truncated cleanup inventory no longer reads as successful cleanup.
+- Validation: full `cargo test --locked`, strict all-target/all-feature Clippy,
+  offline payload refusal tests and an opt-in real Docker stopped-worker fixture
+  passed. The full suite required normal filesystem access for its home-folder
+  test; the restricted sandbox cannot read that directory. The first real run
+  exposed Docker's absent `State.Health` field; the format now uses optional
+  lookup. Keep that real regression when changing the inspection format.
+- The previous main CI failure was a stale mandatory `00_Design_Notes.md` path
+  in `tests/brand_strings.rs`; the current docs remain recursively scanned.
+- A separate local `CHANGELOG.md` edit was present and excluded from this batch.
+- No historical app evidence or promotion was rewritten. Schema 1 still does
+  not mean V1 qualified, resource-measured, or agent-accessible.
+
 ## Next bounded implementation batch
 
-E01 now has an upstream/code checkpoint in the engine plan. Finish package
-selection, pins/notices and supported Windows/WSL requirements before E02.
-Persist engine identity per installation, including recovery; never silently
-follow a changed default context. This checkpoint changes documentation only.
+Finish E01's complete dependency lock/signed-index provenance and rootfs notice/
+source review. Then E02 must persist engine identity per install and retained
+project, including interrupted recovery. Qualification has direct Docker calls
+in addition to the runtime constructor: all must use the selected engine.
+A new default context must never silently relocate existing apps.
 
-Next: E01/E02 and Q01/Q02 from the master ledger. Verify a maintained
-Moby/Compose WSL packaging approach, define the engine seam and evidence
-identity, then add all-service health checks. Define A01's app-access matrix in
-that batch so app qualification and agent capability evidence can share identity.
-Do not start another large app batch against Docker Desktop before planning
-how those results will be re-proven on the managed engine.
+Use the development payload for the E03 boot experiment only after defining the
+owned distro/data layout and path translation. Systemd alone does not keep WSL
+alive; E04 must prove background operation and coexistence. Never shut down all
+WSL distros or remove a distro owned by another product.
 
-V3 approval and owner/provider signing credentials are external inputs.
-Backend work can proceed independently. No keys, accounts, spending, release
-publication or third-party messaging is authorized by these documents.
+Complete Q01 identity/freshness and Q02 RAM/disk/startup measurements before Q03's
+52-app requalification. Do not call Docker Desktop fixtures managed-engine proof.
+V3 and owner/provider signing credentials remain external inputs. No signing key,
+account, spending or release publication was created by this batch.
 
 ## Baseline and limitations
 

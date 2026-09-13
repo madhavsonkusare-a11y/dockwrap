@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "selected_at": "2026-09-13",
+  "status": "development_payload_not_release_approved",
+  "platform": "linux/amd64",
+  "base_image": "ubuntu:24.04@sha256:a61567bd31828687156d735ea8eb01ba4e37636e225dd6a48ba94136a70d9d61",
+  "package_index_url": "https://download.docker.com/linux/ubuntu/dists/noble/stable/binary-amd64/Packages.gz",
+  "packages": [
+    {
+      "name": "containerd.io",
+      "version": "2.3.5-1~ubuntu.24.04~noble",
+      "architecture": "amd64",
+      "url": "https://download.docker.com/linux/ubuntu/dists/noble/pool/stable/amd64/containerd.io_2.3.5-1~ubuntu.24.04~noble_amd64.deb",
+      "sha256": "8213cc138b7035c23714447038c6cf5864e6e6a4c9db33f76cf987c4be54b188",
+      "size_bytes": 22410640
+    },
+    {
+      "name": "docker-buildx-plugin",
+      "version": "0.37.1-1~ubuntu.24.04~noble",
+      "architecture": "amd64",
+      "url": "https://download.docker.com/linux/ubuntu/dists/noble/pool/stable/amd64/docker-buildx-plugin_0.37.1-1~ubuntu.24.04~noble_amd64.deb",
+      "sha256": "3c398af6eea280ddb57f32334d83867efd2bf07c4bc1be75fbd0a61c490ea925",
+      "size_bytes": 17272004
+    },
+    {
+      "name": "docker-ce",
+      "version": "5:29.8.0-1~ubuntu.24.04~noble",
+      "architecture": "amd64",
+      "url": "https://download.docker.com/linux/ubuntu/dists/noble/pool/stable/amd64/docker-ce_29.8.0-1~ubuntu.24.04~noble_amd64.deb",
+      "sha256": "0cd9936d80aade3f6a12c811b83f0f8e626d98821ae7f51418eec4c320632780",
+      "size_bytes": 24326496
+    },
+    {
+      "name": "docker-ce-cli",
+      "version": "5:29.8.0-1~ubuntu.24.04~noble",
+      "architecture": "amd64",
+      "url": "https://download.docker.com/linux/ubuntu/dists/noble/pool/stable/amd64/docker-ce-cli_29.8.0-1~ubuntu.24.04~noble_amd64.deb",
+      "sha256": "2b7468415014fecb1aef1250f5f493293d999593d6862af93e66412e891c7ac7",
+      "size_bytes": 17554044
+    },
+    {
+      "name": "docker-compose-plugin",
+      "version": "5.5.1-1~ubuntu.24.04~noble",
+      "architecture": "amd64",
+      "url": "https://download.docker.com/linux/ubuntu/dists/noble/pool/stable/amd64/docker-compose-plugin_5.5.1-1~ubuntu.24.04~noble_amd64.deb",
+      "sha256": "82ff966149ca2c62e1a4e1fdebdf65fda8c3a8bea80b32deda6903b40afc2347",
+      "size_bytes": 8012228
+    }
+  ],
+  "limitations": [
+    "Ubuntu transitive dependencies resolve from signed apt metadata at build time; inventory records exact result but this is not a reproducible full dependency lock.",
+    "Rootfs notices are retained; redistribution/source obligations need release review.",
+    "No WSL bootstrap or clean-machine qualification is implied."
+  ]
+}

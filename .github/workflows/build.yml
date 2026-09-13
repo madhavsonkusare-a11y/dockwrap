@@ -47,6 +47,8 @@ jobs:
           python scripts/check-recipe-platforms.py
           python scripts/check-template-platforms.py
           python scripts/test_release.py
+          python scripts/test_engine_payload.py
+          python scripts/build-engine-payload.py
           python scripts/catalog_pipeline.py --check
           python scripts/cache-catalog-icons.py --check
           node scripts/generate-brand.mjs --check

@@ -1,203 +1,99 @@
 # Managed container engine for V1
 
-Required by the owner September 12, 2026. Status and dependencies are
-E01–E04 in [V1_TASKS.md](../V1_TASKS.md). Moby/Compose in WSL is the proposed
-implementation; packaging and licensing still require fresh verification.
+Updated September 13, 2026. Required by the owner; task status belongs to
+E01–E04 in [V1_TASKS.md](../V1_TASKS.md).
 
-Local Store asks the person to install Docker Desktop before it can install
-anything. That is the largest dependency in the product, it carries a licence
-that costs money for larger companies, and an upstream update to it can change
-behaviour underneath a proof. This is how to remove it.
+## Selected development architecture
 
-## Goal, and what is not the goal
+Build a Linux/amd64 Ubuntu 24.04 rootfs containing Docker Engine, CLI and the
+maintained Compose plugin, then import it into a Local Store-owned WSL2 distro.
+Reuse upstream packages, Compose semantics and our bounded process runner.
+The [development payload](../../engine/README.md) now builds and exports with
+five checksum-pinned Docker packages, a full installed-package inventory and
+retained notices. That page records exact versions, provenance and build limits.
 
-**Goal.** No third-party application to install. Local Store ships and manages
-its own container engine, starts it when needed, and applies an explicit background-app policy. Closing
-the launcher must not silently stop installed applications.
+WSL2 still requires virtualization and Windows prerequisites, potentially with
+administrator consent and a restart. The managed-engine promise removes a
+separate Docker Desktop installation; it does not remove platform prerequisites.
+Keep the existing Docker Desktop path available without silently migrating apps.
 
-**Not the goal.** Running Linux images without a Linux kernel. On Windows that
-means WSL2 or a virtual machine whatever the engine is called, and WSL2 needs a
-Windows feature enabled once, with admin. The honest claim is "nothing else to
-install", never "no dependencies".
-
-**Also not the goal.** Forcing anybody to migrate. An existing Docker Desktop
-should still be detected and used.
-
-## What an engine has to satisfy
-
-Everything goes through one function — `CommandSpec::docker` in
-`src/runtime/process.rs:96` — which hardcodes the program name. Everything else
-is arguments, and the surface is small:
-
-| Used for | Commands |
-| --- | --- |
-| Readiness | `version --format`, `compose version --short` |
-| Lifecycle | `compose -f … -p … up -d / stop / down / ps [--status running --quiet\|--all] / logs --tail --no-color / config --quiet` |
-| Images | `pull`, `inspect --format {{.Image}}` |
-| Ownership, cleanup | `container inspect --format {{json .Config.Labels}}`, `ps -aq` / `network ls -q` / `volume ls -q` with filters, `container rm -f`, `network rm`, `volume rm` |
-| Probes | `ps --filter publish=… --format …`, `exec` |
-
-Harder than the commands are the Compose semantics the plan renderer emits
-(`src/plan.rs`, `to_compose`): `depends_on` with all three conditions including
-`service_completed_successfully`, healthchecks with `start_period`, long-syntax
-ports with `host_ip`, `stop_signal`, `restart: "no"`, named volumes, and
-`internal: true` networks. Dify needs nearly all of them at once.
-
-One user-facing string mentions Docker Desktop by name (`src/js/app.js:217`).
-
-## Options considered
-
-**A. Bundle Docker Engine (moby) and the Compose v2 plugin in a WSL distro
-Local Store manages.** Both are Apache-2.0; the licence that costs money covers
-Docker *Desktop*, not the engine. Compatibility is exact, so the plan model,
-importers, evidence and probes do not change. Rancher Desktop and Podman
-Desktop do this, minus the desktop application.
-
-**B. containerd and nerdctl.** Leaner, fully CNCF, but `nerdctl compose`
-implements a subset of Compose and the gaps are in the features this project
-just added. The risk is not that it fails; it is that it differs quietly, which
-for a product whose claim is *proven* is the expensive kind of risk.
-
-**C. Podman, rootless.** Better isolation and a Docker-compatible API socket,
-but compose support is either podman-compose (less complete) or the API path,
-and `podman machine` on Windows is WSL2 anyway. Rootless changes bind-mount
-ownership, which is where several past failures already lived.
-
-**D. Drop Compose and drive the engine API from Rust.** Local Store already
-owns a structured plan, so this would give exact control — including the
-container-health assertion the qualification roadmap wants. But it means
-re-implementing dependency ordering, health waiting, restart policies and
-cleanup, and the retained `compose.yaml` is a real recovery artifact:
-`src/recovery.rs` reads the published port back out of it.
-
-**Chosen: A, behind a seam that leaves B, C and D open.**
-
-## Phases
-
-### Phase 1 — the seam
-
-Replace direct `CommandSpec::docker` calls with a `ContainerEngine`
-abstraction: which program to run, and any argument differences. Detection
-order: an engine Local Store manages, else whatever is already installed.
-
-*Acceptance.* The existing suite passes unchanged against Docker Desktop, with
-the engine chosen through the abstraction; a test drives a fake engine whose
-program name is not `docker`.
-
-*Effort.* Small, mechanical, covered by the existing fake process runner.
-
-### Phase 2 — the managed engine
-
-A distro image containing `dockerd`, `containerd`, `runc`, the CLI and the
-Compose plugin, imported with `wsl --import` under a name Local Store owns.
-Start it on demand, preserve explicitly allowed background operation, and expose it on a socket
-only Local Store uses. Version pinned by Local Store, so an upstream update
-cannot change behaviour under a proof.
-
-*Acceptance.* On a machine with no Docker Desktop installed, an app installs,
-opens, restarts and uninstalls.
-
-*Effort.* The bulk of the work, most of it packaging and lifecycle supervision
-rather than Local Store's own code.
-
-### Phase 3 — prove the swap with the suite that already exists
-
-Re-run the offered qualification suite against the bundled engine. This is a
-real conformance test that almost nobody else has: it answers "is this engine
-compatible?" with a whole catalogue's worth of facts instead of release notes.
-The same run is how B or C would be evaluated later, if ever.
-
-*Acceptance.* Every offered app passes against the bundled engine, and the
-evidence records which engine and version proved it.
-
-*Note.* Evidence should gain an engine field; that is a manifest-visible change
-and needs a full re-proof, so land it together with the qualification
-roadmap's items 1 and 2 rather than separately.
-
-### Phase 4 — the things owning the engine makes possible
-
-- Compact the disk image automatically. The virtual disk grew to 94 GB against
-  26 GB of real data on 2026-09-12 and had to be compacted by hand with
-  diskpart; a managed engine can do this on a schedule or when space runs low, only after an explicit safe maintenance design. Never
-  compact or unregister another product's distro/disk.
-- Report engine health and disk use in the doctor check, instead of "start
-  Docker Desktop".
-- Pin the engine version per release, so a proof names the exact stack.
-
-## Costs and risks
-
-- **WSL2 is still required**: a Windows feature, enabled once with admin, and
-  occasionally a BIOS virtualization toggle. Say so plainly in the first-run
-  screen.
-- **Installer size**: a rootfs with the engine is roughly 150–250 MB
-  compressed, which probably wants to be a first-run download rather than part
-  of the installer.
-- **Security updates become ours.** Pinning the engine means owning the
-  responsibility to move the pin.
-- **Support burden** when WSL itself misbehaves — today that is Docker
-  Desktop's problem.
-- **Trademark**: shipping the binaries is fine under Apache-2.0, but call it a
-  container engine, or moby, and do not imply Docker endorsement.
-- Bind-mount behaviour does not improve: a self-managed distro sees Windows
-  paths through the same `/mnt/<drive>` translation, so the MySQL 8
-  `lower_case_table_names` refusal and Nextcloud's 18-minute first start stay
-  exactly as they are.
+Rancher Desktop's rootfs construction and checksum verification are useful
+references. Its complete Alpine/OpenRC/Kubernetes service stack is not our
+payload. containerd/nerdctl and Podman remain possible future backends, but they
+would need independent Compose and storage conformance proof. Driving the engine
+API directly would require recreating dependency ordering and recovery behavior
+that Compose already supplies.
 
 ## E01 verification checkpoint — September 13, 2026
 
-E01 remains partial: Moby plus Compose in an owned WSL2 distro is the direction,
-but a redistributable payload and exact version set have not been selected.
+A development rootfs was built and exported; its binaries report the locked
+versions. [Evidence](../evidence/engine-payload-development-2026-09-13.json) is
+explicitly unsigned and not WSL-boot-tested. The 128-package inventory is exact
+for that build, but Ubuntu transitive dependencies still resolve at build time.
+Finish the full dependency lock, signed-index provenance and package source/
+notice obligations before approving a distributable payload.
 
-### Verified upstream guidance
+Microsoft documents custom distro imports and systemd support. Docker recommends
+maintained packages over static binaries for production updates. Moby/Compose
+project licenses alone do not cover the complete distro's distribution duties.
 
-Microsoft supports importing a Linux rootfs tar into a named WSL distro and
-selecting WSL version 2. Imported distros start as root by default; bootstrap
-must explicitly configure execution identity.
-[Microsoft import documentation](https://learn.microsoft.com/en-us/windows/wsl/use-custom-distro).
+- [WSL import](https://learn.microsoft.com/en-us/windows/wsl/use-custom-distro)
+- [WSL systemd](https://learn.microsoft.com/en-us/windows/wsl/systemd)
+- [Docker package installation](https://docs.docker.com/engine/install/ubuntu/)
+- [Static binary update limits](https://docs.docker.com/engine/install/binaries/)
+- [Moby license](https://github.com/moby/moby/blob/master/LICENSE)
+- [Compose license](https://github.com/docker/compose/blob/main/LICENSE)
 
-Docker recommends distribution packages over static binaries for production.
-Static binaries lack automatic security updates and may omit functionality;
-statically linked dependencies require explicit replacement. Prefer a repeatable
-rootfs package build with a Local Store update policy over an arbitrary tarball.
-[Docker binary installation guidance](https://docs.docker.com/engine/install/binaries/).
+## E02 — One selected engine for every operation
 
-Moby and Compose publish Apache-2.0 project licenses. This does not settle the
-complete payload: the distro, CLI, containerd, runc and included packages need
-separate notices and applicable source obligations checked.
-[Moby license](https://github.com/moby/moby/blob/master/LICENSE),
-[Compose license](https://github.com/docker/compose/blob/main/LICENSE).
+`CommandSpec::docker` in `src/runtime/process.rs` is a useful constructor seam,
+but qualification also constructs Docker commands directly, and recovery has
+independent calls. Audit every caller before declaring the seam complete.
 
-Inspect Rancher Desktop's maintained packaging before building our bootstrap;
-its architecture is a reference, not approval to redistribute its whole artifact.
-[Rancher Desktop architecture](https://docs.rancherdesktop.io/references/architecture/).
+Persist engine identity with each installation and its retained project, so a
+restart, reinstall or interrupted-install recovery cannot follow a changed Docker
+context. Define explicit adoption for old records whose engine is unknown.
+Discovery of an available engine is separate from selecting or migrating to it.
 
-### Code audit and corrections
+A WSL program prefix alone is insufficient: define distro and user selection,
+working directory, Compose file translation and bind paths. Preserve argument
+arrays, cancellation, deadlines and bounded output. Use the selected backend for
+install, doctor, qualification, probes, rollback, recovery and resource cleanup.
+Tests must use a different executable/context and detect every fallback to the
+ambient Docker context. No engine selector is wired into production yet.
 
-`CommandSpec::docker` in `src/runtime/process.rs` is the constructor seam.
-Both `src/runtime/mod.rs` and `src/recovery.rs` call it independently. Engine
-selection must reach both paths. Persist engine identity per installation:
-recovery cannot silently switch engines when a managed engine appears or the
-user changes Docker's active context. Discovery and selection are distinct.
+## E03 — Bootstrap and payload integrity
 
-A WSL executable prefix alone is insufficient. Define distro/user selection,
-working directory, Compose file translation and bind-path handling. Preserve
-argument arrays rather than interpolating shell commands. Verify localhost
-forwarding, filesystem permissions and Docker Desktop coexistence in practice.
-The older exact-compatibility and unchanged-bind-behavior claims above are
-expectations, not evidence. Do not use them as product promises.
+Define an owned distro/data-disk layout and explicit Windows/WSL support matrix.
+Verify available disk, virtualization and WSL before downloading. Verify an
+authenticated manifest and payload digest before import; checksum equality alone
+does not authenticate a remotely supplied manifest. Downloads and imports need
+bounded execution, progress, cancellation and resumable failures.
 
-### Next bounded task to finish E01
+An existing WSL installation is not a clean-machine test. Prove bootstrap on a
+Windows x64 host without Docker Desktop, including consent/restart cases. Check
+loopback forwarding, bind permissions, all Compose dependency conditions and
+coexistence with an existing Docker Desktop installation.
 
-1. Compare a maintained distro package build with Rancher's rootfs recipe;
-   select distro/release, package provenance and update mechanism.
-2. Lock component versions, artifact digests, notices and provenance for the
-   complete rootfs plus Compose plugin. Do not invent pins before fetching them.
-3. Define supported Windows/WSL versions from current requirements and testing;
-   measure payload size rather than retaining the old estimate.
-4. Define authenticated payload delivery, security-update ownership and rollback
-   after failed engine updates. A fixed version alone is not an update policy.
-5. Implement E02 only after this selection: shared persisted engine identity,
-   alternate-backend tests and refusal of silent cross-engine fallback.
+## E04 — Background apps, repair and updates
 
-No payload was downloaded, distro imported, runtime changed or app qualified in
-this checkpoint. The managed engine remains unimplemented.
+Systemd services alone do not keep a WSL instance alive. Design and test an owned
+supervisor that preserves background apps after the launcher closes. Exercise
+sleep/wake, crash, restart and failed engine upgrade. Never use global WSL shutdown
+or unregister another product's distro. Removing the engine and deleting app data
+must remain separate, explicit actions.
+
+Local Store maintainers own engine security updates: review upstream advisories,
+refresh locks, rebuild and requalify, then sign and deliver the payload through
+the updater. Keep replaceable engine binaries separate from durable app data.
+Live restore is configured in the development daemon but is not evidence of a
+working update/rollback system. Disk compaction needs an explicit offline
+maintenance design and must target only the owned disk.
+
+## Proof boundary
+
+Requalify current offerings on the managed engine after E04 and Q01/Q02. Existing
+Docker Desktop evidence cannot establish compatibility with the new daemon,
+filesystem or network. All-service health checks now exist in qualification;
+full engine identity, resource measurements and useful app tasks remain required.
+V3 integration, signing credentials and release publication are separate gates.
