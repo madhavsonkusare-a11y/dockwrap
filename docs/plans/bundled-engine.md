@@ -143,16 +143,61 @@ roadmap's items 1 and 2 rather than separately.
   `lower_case_table_names` refusal and Nextcloud's 18-minute first start stay
   exactly as they are.
 
-## Open questions to settle before committing
+## E01 verification checkpoint — September 13, 2026
 
-1. **The licence.** Does Docker Desktop's current licence make distributing
-   Local Store with an "install Docker Desktop first" step a problem for the
-   people likely to use it? This decides whether this plan is polish or a
-   blocker. Settle it first.
-2. Current feature coverage of `nerdctl compose` and podman-compose against the
-   Compose features listed above — only matters if A is rejected.
-3. WSL distro packaging mechanics: rootfs construction, registration under a
-   private name, upgrade path when the engine pin moves, and what happens when
-   the person also runs Docker Desktop at the same time.
+E01 remains partial: Moby plus Compose in an owned WSL2 distro is the direction,
+but a redistributable payload and exact version set have not been selected.
 
-None of these was checked when this plan was written. Verify before building.
+### Verified upstream guidance
+
+Microsoft supports importing a Linux rootfs tar into a named WSL distro and
+selecting WSL version 2. Imported distros start as root by default; bootstrap
+must explicitly configure execution identity.
+[Microsoft import documentation](https://learn.microsoft.com/en-us/windows/wsl/use-custom-distro).
+
+Docker recommends distribution packages over static binaries for production.
+Static binaries lack automatic security updates and may omit functionality;
+statically linked dependencies require explicit replacement. Prefer a repeatable
+rootfs package build with a Local Store update policy over an arbitrary tarball.
+[Docker binary installation guidance](https://docs.docker.com/engine/install/binaries/).
+
+Moby and Compose publish Apache-2.0 project licenses. This does not settle the
+complete payload: the distro, CLI, containerd, runc and included packages need
+separate notices and applicable source obligations checked.
+[Moby license](https://github.com/moby/moby/blob/master/LICENSE),
+[Compose license](https://github.com/docker/compose/blob/main/LICENSE).
+
+Inspect Rancher Desktop's maintained packaging before building our bootstrap;
+its architecture is a reference, not approval to redistribute its whole artifact.
+[Rancher Desktop architecture](https://docs.rancherdesktop.io/references/architecture/).
+
+### Code audit and corrections
+
+`CommandSpec::docker` in `src/runtime/process.rs` is the constructor seam.
+Both `src/runtime/mod.rs` and `src/recovery.rs` call it independently. Engine
+selection must reach both paths. Persist engine identity per installation:
+recovery cannot silently switch engines when a managed engine appears or the
+user changes Docker's active context. Discovery and selection are distinct.
+
+A WSL executable prefix alone is insufficient. Define distro/user selection,
+working directory, Compose file translation and bind-path handling. Preserve
+argument arrays rather than interpolating shell commands. Verify localhost
+forwarding, filesystem permissions and Docker Desktop coexistence in practice.
+The older exact-compatibility and unchanged-bind-behavior claims above are
+expectations, not evidence. Do not use them as product promises.
+
+### Next bounded task to finish E01
+
+1. Compare a maintained distro package build with Rancher's rootfs recipe;
+   select distro/release, package provenance and update mechanism.
+2. Lock component versions, artifact digests, notices and provenance for the
+   complete rootfs plus Compose plugin. Do not invent pins before fetching them.
+3. Define supported Windows/WSL versions from current requirements and testing;
+   measure payload size rather than retaining the old estimate.
+4. Define authenticated payload delivery, security-update ownership and rollback
+   after failed engine updates. A fixed version alone is not an update policy.
+5. Implement E02 only after this selection: shared persisted engine identity,
+   alternate-backend tests and refusal of silent cross-engine fallback.
+
+No payload was downloaded, distro imported, runtime changed or app qualified in
+this checkpoint. The managed engine remains unimplemented.

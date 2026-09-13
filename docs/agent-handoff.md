@@ -1,6 +1,6 @@
 # Agent handoff
 
-Updated September 12, 2026. Start with [V1_TASKS.md](V1_TASKS.md); it is the
+Updated September 13, 2026. Start with [V1_TASKS.md](V1_TASKS.md); it is the
 only release ledger. [Documentation index](README.md) explains the rest.
 
 ## Current work and checkout
@@ -13,7 +13,7 @@ consolidated V1 documentation plus the frozen 100-app planning roster.
   Quality, minimum-Rust, Windows, macOS and Linux passed
   [run 34695407242](https://github.com/madhavsonkusare-a11y/local-store/actions/runs/34695407242).
 - Merged feature/design branches were removed after ancestry checks. The
-  temporary documentation integration branch can be removed after publication.
+  temporary documentation integration branch and worktree were also removed.
 - Keep the stash `pre-consolidation-local-documents-2026-09-12`: its 335 V2
   files match integrated content; its three extra drafts are preserved in
   research/screening documents. Keep unrelated detached worktrees intact.
@@ -39,6 +39,11 @@ icons remain under the owner's existing retain-with-NOASSERTION decision;
 that does not settle broad distribution rights. Shrimply remains excluded.
 
 ## Next bounded implementation batch
+
+E01 now has an upstream/code checkpoint in the engine plan. Finish package
+selection, pins/notices and supported Windows/WSL requirements before E02.
+Persist engine identity per installation, including recovery; never silently
+follow a changed default context. This checkpoint changes documentation only.
 
 Next: E01/E02 and Q01/Q02 from the master ledger. Verify a maintained
 Moby/Compose WSL packaging approach, define the engine seam and evidence
